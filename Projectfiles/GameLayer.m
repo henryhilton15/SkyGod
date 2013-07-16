@@ -30,15 +30,15 @@
     int actualX = arc4random() % rangeX;
     
     // Determine speed of the monster
-    int minDuration = 3.5;
-    int maxDuration = 6.0;
+    minDuration = 3.5;
+     maxDuration = 6.0;
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
     
     // Create the monster slightly off-screen along the right edge,
     // and along a random position along the Y axis as calculated above
-    CCSprite * enemy = [CCSprite spriteWithFile:@"monster2.png"];
+     enemy = [CCSprite spriteWithFile:@"monster2.png"];
     enemy.scale=.15;
     enemy.position = ccp(actualX, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:enemy];
@@ -485,7 +485,6 @@
             {
                 [goodGuys removeObject:goodGuy];
                 [self removeChild:goodGuy cleanup:YES];
-                [self removeChild:badGuy cleanup:YES];
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
                 bar += 50;
             }
