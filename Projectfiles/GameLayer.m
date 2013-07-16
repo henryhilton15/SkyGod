@@ -31,7 +31,9 @@
     
     // Determine speed of the monster
     minDuration = 3.5;
-    maxDuration = 6.0;
+
+     maxDuration = 6.0;
+
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
@@ -39,8 +41,9 @@
     // Create the monster slightly off-screen along the right edge,
     // and along a random position along the Y axis as calculated above
 
-    CCSprite * enemy = [CCSprite spriteWithFile:@"cat4.png"];
+    enemy = [CCSprite spriteWithFile:@"cat4.png"];
     enemy.scale=.5;
+
     enemy.position = ccp(actualX, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:enemy];
     [goodGuys addObject:enemy];
@@ -110,112 +113,26 @@
         badGuyFramecount = 150;
         monstercount = 0;
         numberOfEnemies = 10;
+
         level = 3;
         deaths = 0;
-
         enemiesKilled = 0;
         bar = 240;
         
+        [self changeLevel];
+        
         //Background and placeholders -Henry
         
-        [self setIsTouchEnabled:YES];
-        if (level==0)
-        {
-            CCSprite *sprite = [CCSprite spriteWithFile:@"background_desert-topdown.png"];
-            sprite.scale = .5;
-            sprite.anchorPoint = CGPointZero;
-            [self addChild:sprite z:-1];
-        
-
-            sprite = [CCSprite spriteWithFile:@"monster4.png"];
-            sprite.anchorPoint = CGPointZero;
-            sprite.position = CGPointMake(180.0f, 10.0f);
-            [self addChild:sprite z:0];
-        }
-
-        
-        if (level ==1)
-        {
-            CCSprite *sprite = [CCSprite spriteWithFile:@"background_grass-top.png"];
-            sprite.scale = .5;
-            sprite.anchorPoint = CGPointZero;
-            [self addChild:sprite z:-1];
-            
-            sprite = [CCSprite spriteWithFile:@"monster8.png"];
-            sprite.anchorPoint = CGPointZero;
-            sprite.position = CGPointMake(180.0f, 10.0f);
-            sprite.scale=.5;
-            [self addChild:sprite z:0];
-        }
-        if (level ==2)
-        {
-            CCSprite *sprite = [CCSprite spriteWithFile:@"background_grid.png"];
-            sprite.anchorPoint = CGPointZero;
-            [self addChild:sprite z:-1];
-            
-            sprite = [CCSprite spriteWithFile:@"monster9.png"];
-            sprite.anchorPoint = CGPointZero;
-            sprite.scale=.5;
-            sprite.position = CGPointMake(180.0f, 10.0f);
-            [self addChild:sprite z:0];
-        }
-        if (level ==3)
-        {
-            CCSprite *sprite = [CCSprite spriteWithFile:@"background_grass-topdown.png"];
-            sprite.anchorPoint = CGPointZero;
-            [self addChild:sprite z:-1];
-            
-            sprite = [CCSprite spriteWithFile:@"animation_knight-1.png"];
-            sprite.anchorPoint = CGPointZero;
-            sprite.scale=.5;
-            sprite.position = CGPointMake(180.0f, 10.0f);
-            [self addChild:sprite z:0];
-
-        }
-        if (level ==4)
-        {
-            CCSprite *sprite = [CCSprite spriteWithFile:@"city-back.png"];
-            sprite.anchorPoint = CGPointZero;
-            [self addChild:sprite z:-1];
-            
-            sprite = [CCSprite spriteWithFile:@"cat-main.png"];
-            sprite.anchorPoint = CGPointZero;
-            sprite.scale=.5;
-            sprite.position = CGPointMake(180.0f, 10.0f);
-            [self addChild:sprite z:0];
-        }
-        if (level ==5)
-        {
-            CCSprite *sprite = [CCSprite spriteWithFile:@"city-front.png"];
-            sprite.anchorPoint = CGPointZero;
-            [self addChild:sprite z:-1];
-            
-            sprite = [CCSprite spriteWithFile:@"cat3.png"];
-            sprite.anchorPoint = CGPointZero;
-            sprite.scale=.5;
-            sprite.position = CGPointMake(180.0f, 10.0f);
-            [self addChild:sprite z:0];
-        }
-        if (level==6)
-        {
-            CCSprite *sprite = [CCSprite spriteWithFile:@"background_topofcastle.png"];
-            sprite.anchorPoint = CGPointZero;
-            [self addChild:sprite z:-1];
-        
-            sprite = [CCSprite spriteWithFile:@"cat1.png"];
-            sprite.anchorPoint = CGPointZero;
-            sprite.scale=.5;
-            sprite.position = CGPointMake(180.0f, 10.0f);
-            [self addChild:sprite z:0];
-        }
+       
        
         
             enemiesKilledLabel = [CCLabelTTF labelWithString:@"Enemies Killed:0" fontName:@"Marker Felt" fontSize:18];
         enemiesKilledLabel.position = ccp(360, 300);
         enemiesKilledLabel.color = ccBLUE;
         [self addChild:enemiesKilledLabel z:4];
+
         
-        LevelLabel = [CCLabelTTF labelWithString:@"Level:3" fontName:@"Marker Felt" fontSize:18];
+        LevelLabel = [CCLabelTTF labelWithString:@"Level:0" fontName:@"Marker Felt" fontSize:18];
         LevelLabel.position = ccp(360, 280);
         LevelLabel.color = ccBLUE;
         [self addChild:LevelLabel z:4];
@@ -247,6 +164,7 @@
 
 -(void) update:(ccTime)delta
 {
+   
     if(bar >= 480)
     {
         if(level >=3)
@@ -254,6 +172,7 @@
             [self addLevel];
             NSLog(@"Starting level %d", level);
             bar =240;
+            [self changeLevel];
         }
         else
         {
@@ -269,6 +188,7 @@
             [self subtractLevel];
             NSLog(@"Starting level %d", level);
             bar = 240;
+            [self changeLevel];
         }
         else
         {
@@ -308,6 +228,7 @@
     }
     
 }
+
 
 -(void) draw
 {
@@ -516,13 +437,11 @@
         {
             badGuy = [badGuys objectAtIndex:i];
 
-           
-            if(badGuy.position.y <= FLOOR_HEIGHT)
-
             if(badGuy.position.y <= FLOOR_HEIGHT)
 
             {
                 [badGuys removeObject:badGuy];
+
                 [self removeChild:badGuy cleanup:YES];
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
                 if(level>3)
@@ -539,22 +458,27 @@
 
 
 
+
 -(void) enemiesKilledTotal
 {
     enemiesKilled++;
     [enemiesKilledLabel setString:[NSString stringWithFormat:@"Enemies Killed:%d", enemiesKilled]];
 }
 
+
+
 -(void) addLevel
 {
     
     level++;
-    [LevelLabel setString:[NSString stringWithFormat:@"Level:%d", level]];
+    [LevelLabel setString:[NSString stringWithFormat:@"Level:%d", level - 3]];
 }
+
+
 -(void) subtractLevel
 {
     level--;
-    [LevelLabel setString:[NSString stringWithFormat:@"Level:%d", level]];
+    [LevelLabel setString:[NSString stringWithFormat:@"Level:%d", level - 3]];
 }
 
 
@@ -562,4 +486,86 @@
 {
     [[CCDirector sharedDirector] pushScene: (CCScene *)[[PauseMenuLayer alloc]  init]];
 }
+
+
+
+-(void) changeLevel
+{
+    if (level==0)
+    {
+        [self removeChild:background];
+        [self removeChild:player];
+        background = [CCSprite spriteWithFile:@"background_desert-topdown.png"];
+        
+        player = [CCSprite spriteWithFile:@"monster4.png"];
+       
+    }
+    
+    if (level ==1)
+    {
+        [self removeChild:background];
+        [self removeChild:player];
+        background = [CCSprite spriteWithFile:@"background_grass-top.png"];
+        
+        player = [CCSprite spriteWithFile:@"monster8.png"];
+    }
+    
+    if (level ==2)
+    {
+        [self removeChild:background];
+        [self removeChild:player];
+        background = [CCSprite spriteWithFile:@"background_grid.png"];
+                      
+        player = [CCSprite spriteWithFile:@"monster9.png"];
+   
+    }
+    if (level ==3)
+    {
+        [self removeChild:background];
+        [self removeChild:player];
+        background = [CCSprite spriteWithFile:@"background_grass-topdown.png"];
+        
+        player = [CCSprite spriteWithFile:@"animation_knight-1.png"];
+   
+        
+    }
+    if (level ==4)
+    {
+        [self removeChild:background];
+        [self removeChild:player];
+        
+        background = [CCSprite spriteWithFile:@"city-back.png"];
+        
+        player = [CCSprite spriteWithFile:@"cat-main.png"];
+
+    }
+    if (level ==5)
+    {
+        [self removeChild:background];
+        [self removeChild:player];
+        background = [CCSprite spriteWithFile:@"city-front.png"];
+        
+        player = [CCSprite spriteWithFile:@"cat3.png"];
+        
+    }
+    if (level==6)
+    {
+        [self removeChild:background];
+        [self removeChild:player];
+        background = [CCSprite spriteWithFile:@"background_topofcastle.png"];
+        
+        player = [CCSprite spriteWithFile:@"cat1.png"];
+     
+    }
+
+    background.scale = .5;
+    background.anchorPoint = CGPointZero;
+    [self addChild:background z:-1];
+    
+    player.anchorPoint = CGPointZero;
+    player.position = CGPointMake(180.0f, 10.0f);
+    [self addChild:player z:0];
+}
+
+
 @end
