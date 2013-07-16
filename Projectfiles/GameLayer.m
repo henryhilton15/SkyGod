@@ -283,7 +283,7 @@
             [self addGoodGuy];
         }
     
-        if(framecount % badGuyFramecount == 0)
+        if((framecount - 50) % badGuyFramecount == 0)
         {
             [self addBadGuy];
         }
@@ -499,17 +499,11 @@
             if(goodGuy.position.y <= FLOOR_HEIGHT)
             {
                 [goodGuys removeObject:goodGuy];
-
-    
-                [self removeChild:badGuy cleanup:YES];
-              
-
                 [self removeChild:goodGuy cleanup:YES];
-
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
                 if(level<3)
                 {
-                    bar+=100 + ((3 - level) * 10) ;
+                    bar+=100 + ((3 - level) * 5) ;
                 }
                 bar += 50;
             }
@@ -523,22 +517,17 @@
             badGuy = [badGuys objectAtIndex:i];
 
            
-            if(badGuy.position.y <= FLOOR_HEIGHT + 10)
+            if(badGuy.position.y <= FLOOR_HEIGHT)
 
             if(badGuy.position.y <= FLOOR_HEIGHT)
 
             {
                 [badGuys removeObject:badGuy];
-
-            
-                [self removeChild:badGuy cleanup:YES];
-              
-
                 [self removeChild:badGuy cleanup:YES];
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
                 if(level>3)
                 {
-                    bar -= 100 + ((level - 3) * 10);
+                    bar -= 100 + ((level - 3) * 5);
                 }
                 bar -=50;
             }
