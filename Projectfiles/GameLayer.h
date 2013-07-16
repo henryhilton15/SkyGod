@@ -20,9 +20,10 @@
     int maxDuration;
     int enemiesKilled;
     int deaths;
+    int bar;
     //int levelFramecount;
-    int singleMonsterFramecount;
-    int doubleMonsterFramecount;
+    int goodGuyFramecount;
+    int badGuyFramecount;
     NSMutableArray *bananaArray;
     NSMutableArray *goodGuys;
     NSMutableArray *princesses;

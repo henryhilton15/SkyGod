@@ -94,8 +94,6 @@
 {
 	if ((self = [super init]))
 	{
-        
-        
         [self setIsTouchEnabled:YES];
         
         bananasToDelete = [[NSMutableArray alloc] init];
@@ -107,13 +105,14 @@
         badGuys = [[NSMutableArray alloc] init];
         
         framecount = 0;
-        singleMonsterFramecount = 120;
-        doubleMonsterFramecount = 200;
+        goodGuyFramecount = 150;
+        badGuyFramecount = 150;
         monstercount = 0;
         numberOfEnemies = 10;
         level = 1;
         deaths = 0;
         enemiesKilled = 0;
+        bar = 240;
         
         //Background and placeholders -Henry
         
@@ -202,38 +201,38 @@
 {
     framecount++;
     {
-        if(framecount % singleMonsterFramecount == 0)
+        if(framecount % goodGuyFramecount == 0)
         {
             [self addGoodGuy];
             monstercount++;
             if(monstercount == numberOfEnemies)
             {
                 [self currentLevel];
-                singleMonsterFramecount -=20;
+                goodGuyFramecount -=20;
                 monstercount = 0;
                 numberOfEnemies += 5;
                 minDuration -= .3;
                 maxDuration -= .3;
                 NSLog(@"Starting level %d", level);
-                [[SimpleAudioEngine sharedEngine] playEffect:@"thatWasEasy.wav"];
+                //[[SimpleAudioEngine sharedEngine] playEffect:@"thatWasEasy.wav"];
             }
             
         }
     
-        if(framecount % doubleMonsterFramecount == 0)
+        if(framecount % badGuyFramecount == 0)
         {
             [self addBadGuy];
             monstercount++;
             if(monstercount == numberOfEnemies)
             {
                 [self currentLevel];
-                doubleMonsterFramecount -=20;
+                badGuyFramecount -=20;
                 monstercount = 0;
                 numberOfEnemies += 5;
                 minDuration -= .4;
                 maxDuration -= .4;
                 NSLog(@"Starting level %d", level);
-                [[SimpleAudioEngine sharedEngine] playEffect:@"thatWasEasy.wav"];
+                //[[SimpleAudioEngine sharedEngine] playEffect:@"thatWasEasy.wav"];
             }
         }
 
@@ -263,7 +262,7 @@
     ccColor4F red = ccc4f(255, 0, 0, 1);
     ccDrawSolidRect(CGPointMake(0,0), CGPointMake(480,40), red);
     ccColor4F green = ccc4f(0, 255, 0, 1);
-    ccDrawSolidRect(CGPointMake(0,0), CGPointMake(240, 40), green);
+    ccDrawSolidRect(CGPointMake(0,0), CGPointMake(bar, 40), green);
 }
 
 
@@ -370,16 +369,16 @@
                 {
                     
                 goodGuy = [goodGuys objectAtIndex:j];
-                CGRect badGuyRect = [goodGuy boundingBox];
+                CGRect goodGuyRect = [goodGuy boundingBox];
                 projectile = [bananaArray objectAtIndex:i];
                 CGRect projectileBox = [projectile boundingBox];
-                if(CGRectIntersectsRect(badGuyRect,projectileBox))
+                if(CGRectIntersectsRect(goodGuyRect,projectileBox))
                 {
                     if (projectile.position.y<305)
                     {
                     [goodGuys removeObjectAtIndex:j];
                     [bananaArray removeObjectAtIndex:i];
-                    [self removeChild:badGuy cleanup:YES];
+                    [self removeChild:goodGuy cleanup:YES];
                     [self removeChild:projectile cleanup:YES];
                     [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
                     
@@ -446,19 +445,12 @@
         if([goodGuys count] > 0)
         {
             goodGuy = [goodGuys objectAtIndex:i];
-            princess = [princesses objectAtIndex:0];
-            if(goodGuy.position.y <= FLOOR_HEIGHT + 10)
+            if(goodGuy.position.y <= FLOOR_HEIGHT)
             {
-                deaths++;
                 [goodGuys removeObject:goodGuy];
-                [princesses removeObject:princess];
-                [self removeChild:badGuy cleanup:YES];
-                [self removeChild:princess cleanup:YES];
+                [self removeChild:goodGuy cleanup:YES];
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
-                if(deaths == 4)
-                {
-                    [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
-                }
+                bar += 50;
             }
         }
     }
@@ -469,19 +461,12 @@
         if([badGuys count] > 0)
         {
             badGuy = [badGuys objectAtIndex:i];
-            princess = [princesses objectAtIndex:0];
-            if(badGuy.position.y <= FLOOR_HEIGHT + 10)
+            if(badGuy.position.y <= FLOOR_HEIGHT)
             {
-                deaths++;
                 [badGuys removeObject:badGuy];
-                [princesses removeObject:princess];
                 [self removeChild:badGuy cleanup:YES];
-                [self removeChild:princess cleanup:YES];
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
-                if(deaths == 4)
-                {
-                    [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
-                }
+                bar -=100;
             }
         }
     }

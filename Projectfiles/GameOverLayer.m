@@ -41,11 +41,11 @@
         CCSprite *background = [CCSprite spriteWithFile:@"city-front.png"];
         background.position = CGPointMake(240,160);
         [self addChild:background z:-1];
-        
+        /*
         [[SimpleAudioEngine sharedEngine] preloadEffect:@"gameOverLaugh.wav"];
     
         [[SimpleAudioEngine sharedEngine] playEffect:@"gameOverLaugh.wav"];
-        
+        */
         GameOverLabel = [CCLabelTTF labelWithString:@"You suck!" fontName:@"Marker Felt" fontSize:36];
         GameOverLabel.position = ccp(240,300);
         [self addChild:GameOverLabel z:4];
