@@ -35,6 +35,8 @@
     CCSprite *goodGuy;
     CCSprite *droppingEnemy;
     CCSprite *princess;
+    CCSprite *background;
+    CCSprite *player;
     CCAction *rotateBanana;
     CCLabelTTF *LevelLabel;
     CCLabelTTF *enemiesKilledLabel;
@@ -60,6 +62,7 @@
 -(void) addBadGuy;
 -(void) pauseMenu: (CCMenuItemImage *)pauseButton;
 -(void) enemiesKilledTotal;
+
 -(void) addLevel;
 -(void) subtractLevel;
 - (void) changeLevel;
