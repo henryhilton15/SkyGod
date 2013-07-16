@@ -496,7 +496,7 @@
         [self removeChild:background];
         [self removeChild:player];
         background = [CCSprite spriteWithFile:@"background_desert-topdown.png"];
-        
+
         player = [CCSprite spriteWithFile:@"monster4.png"];
        
     }
@@ -506,7 +506,7 @@
         [self removeChild:background];
         [self removeChild:player];
         background = [CCSprite spriteWithFile:@"background_grass-top.png"];
-        
+
         player = [CCSprite spriteWithFile:@"monster8.png"];
     }
     
@@ -515,7 +515,7 @@
         [self removeChild:background];
         [self removeChild:player];
         background = [CCSprite spriteWithFile:@"background_grid.png"];
-                      
+         
         player = [CCSprite spriteWithFile:@"monster9.png"];
    
     }
@@ -524,7 +524,7 @@
         [self removeChild:background];
         [self removeChild:player];
         background = [CCSprite spriteWithFile:@"background_grass-topdown.png"];
-        
+
         player = [CCSprite spriteWithFile:@"animation_knight-1.png"];
    
         
@@ -533,9 +533,8 @@
     {
         [self removeChild:background];
         [self removeChild:player];
-        
         background = [CCSprite spriteWithFile:@"city-back.png"];
-        
+
         player = [CCSprite spriteWithFile:@"cat-main.png"];
 
     }
@@ -544,7 +543,6 @@
         [self removeChild:background];
         [self removeChild:player];
         background = [CCSprite spriteWithFile:@"city-front.png"];
-        
         player = [CCSprite spriteWithFile:@"cat3.png"];
         
     }
@@ -553,17 +551,18 @@
         [self removeChild:background];
         [self removeChild:player];
         background = [CCSprite spriteWithFile:@"background_topofcastle.png"];
-        
+       
         player = [CCSprite spriteWithFile:@"cat1.png"];
      
     }
 
-    background.scale = .5;
+    background.scale = 1;
     background.anchorPoint = CGPointZero;
     [self addChild:background z:-1];
     
     player.anchorPoint = CGPointZero;
     player.position = CGPointMake(180.0f, 10.0f);
+    player.scale = .3;
     [self addChild:player z:0];
 }
 
