@@ -1,18 +1,20 @@
 //
 //  GameOverLayer.h
-//  Gorilla Game
+//  Gorilla
 //
-//  Created by Ajay Shah on 7/3/13. 
+//  Created by maria hilton on 7/5/13.
 //
 //
 
 #import "CCLayer.h"
 
 @interface GameOverLayer : CCLayer
-{CCLabelTTF *GameOverLabel;
+{
+    CCLabelTTF *GameOverLabel;
 }
+
 -(id) init;
--(void) restartGame:(CCMenuItem *)menuItem;
--(void) endGame:(CCMenuItem *)menuItem;
--(void) GameOver;
+-(void)restartGame: (CCMenuItem *)menuItem;
+-(void)endGame:(CCMenuItem *)menuItem;
+
 @end

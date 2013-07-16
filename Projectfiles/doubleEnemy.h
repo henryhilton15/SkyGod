@@ -1,17 +1,14 @@
 //
 //  doubleEnemy.h
-//  Gorilla Game
+//  Gorilla
 //
-//  Created by Ajay Shah on 7/12/13.
+//  Created by maria hilton on 7/12/13.
 //
 //
 
 #import "CCSprite.h"
 
 @interface doubleEnemy : CCSprite
-
 @property int health;
-
 -(id) initWithDoubleEnemyImage;
-
 @end

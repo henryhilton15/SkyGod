@@ -1,15 +1,18 @@
 //
 //  MainMenuLayer.m
-//  Gorilla Game
+//  Gorilla
 //
-//  Created by Ajay Shah on 7/3/13.
+//  Created by maria hilton on 7/5/13.
 //
 //
+
 
 #import "MainMenuLayer.h"
-# import "GameLayer.h"
-@implementation MainMenuLayer
+#import "GameLayer.h"
 
+
+
+@implementation MainMenuLayer
 
 -(id) init
 {
@@ -31,10 +34,10 @@
         CCSprite *background = [CCSprite spriteWithFile:@"background_grass-top.png"];
         background.position = CGPointMake(240,160);
         [self addChild:background z:-1];
+        
         TitleLabel = [CCLabelTTF labelWithString:@"Banana Bonanza" fontName:@"Marker Felt" fontSize:40];
-        TitleLabel.position = ccp(240, 240);
-        TitleLabel.color=ccBLUE;
-    
+        TitleLabel.position = ccp(240,240);
+        TitleLabel.color = ccBLUE;
         [self addChild:TitleLabel z:4];
     }
     return self;
@@ -47,4 +50,10 @@
     
 }
 
+
+
+
 @end
+
+
+

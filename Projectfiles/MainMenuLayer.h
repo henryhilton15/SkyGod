@@ -1,8 +1,8 @@
 //
 //  MainMenuLayer.h
-//  Gorilla Game
+//  Gorilla
 //
-//  Created by Ajay Shah on 7/3/13.
+//  Created by maria hilton on 7/5/13.
 //
 //
 
@@ -12,5 +12,8 @@
 {
     CCLabelTTF *TitleLabel;
 }
-    -(void) startGame;
+
+-(id) init;
+-(void) startGame;
+
 @end

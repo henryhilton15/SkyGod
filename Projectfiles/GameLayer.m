@@ -1,72 +1,48 @@
-#import "GameLayer.h"
-#import "PauseMenuLayer.h"
-#import "GameOverLayer.h"
+//
+//  GameLayer.m
+//  Gorilla
+//
+//  Created by henry hilton on 7/3/13.
+//
+//
+
+ 
+ #import "GameLayer.h"
+ #import "PauseMenuLayer.h"
+ #import "GameOverLayer.h"
 #import "SimpleAudioEngine.h"
 #import "doubleEnemy.h"
 
-#define FLOOR_HEIGHT 35.0f
+ #define FLOOR_HEIGHT 20.0f
+ 
+
+ 
+ @implementation GameLayer
 
 
-
-@implementation GameLayer
-
--(void) addMonster
+-(void) addGoodGuy
 {
     // Determine where to spawn the monster along the X axis
     CGSize winSize = [CCDirector sharedDirector].winSize;
-    int minX = 2;
-    int maxX = winSize.width - 2;
+    int minX = 3;
+    int maxX = winSize.width - 3;
     int rangeX = maxX - minX;
     int actualX = arc4random() % rangeX;
     
     // Determine speed of the monster
-     minDuration = 3.0;
-     maxDuration = 7.0;
-    int rangeDuration = maxDuration - minDuration;
-    int actualDuration = (arc4random() % rangeDuration) + minDuration;
-    
-   
-        // Create the monster slightly off-screen along the right edge,
-        // and along a random position along the Y axis as calculated above
-        CCSprite * enemy = [CCSprite spriteWithFile:@"monster2.png"];
-        enemy.scale=.1;
-    enemy.position = ccp(actualX, winSize.height); //+ enemy.contentSize.height/2);
-        [self addChild:enemy];
-        [enemies addObject:enemy];
-        
-        // Create the actions
-        CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
-                                                    position:ccp(actualX, -enemy.contentSize.height/2)];
-//        CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
-//            [node removeFromParentAndCleanup:YES];
-//        }];
-    [enemy runAction:actionMove];//[CCSequence actions:actionMove, actionMoveDone, nil]];
-                                         
-}
-
--(void) addDoubleMonster
-{
-    // Determine where to spawn the monster along the X axis
-    CGSize winSize = [CCDirector sharedDirector].winSize;
-    int minX = 2;
-    int maxX = winSize.width - 2;
-    int rangeX = maxX - minX;
-    int actualX = arc4random() % rangeX;
-    
-    // Determine speed of the monster
-    int minDuration = 3.0;
-    int maxDuration = 7.0;
+    int minDuration = 3.5;
+    int maxDuration = 6.0;
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
     
     // Create the monster slightly off-screen along the right edge,
     // and along a random position along the Y axis as calculated above
-    doubleEnemy *enemy= [[doubleEnemy alloc] initWithDoubleEnemyImage];
-    enemy.scale=.1;
-    enemy.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
+    CCSprite * enemy = [CCSprite spriteWithFile:@"monster2.png"];
+    enemy.scale=.15;
+    enemy.position = ccp(actualX, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:enemy];
-    [doubleEnemies addObject:enemy];
+    [goodGuys addObject:enemy];
     
     // Create the actions
     CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
@@ -78,76 +54,125 @@
     
 }
 
+
+-(void) addBadGuy
+{
+    // Determine where to spawn the monster along the X axis
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    int minX = 3;
+    int maxX = winSize.width - 3;
+    int rangeX = maxX - minX;
+    int actualX = arc4random() % rangeX;
+    
+    // Determine speed of the monster
+    int minDuration = 3.5;
+    int maxDuration = 6.0;
+    int rangeDuration = maxDuration - minDuration;
+    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    
+    
+    // Create the monster slightly off-screen along the right edge,
+    // and along a random position along the Y axis as calculated above
+    doubleEnemy *enemy= [[doubleEnemy alloc] initWithDoubleEnemyImage];
+    enemy.scale=.15;
+    enemy.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
+    [self addChild:enemy];
+    [badGuys addObject:enemy];
+    
+    // Create the actions
+    CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
+                                                position:ccp(actualX, -enemy.contentSize.height/2)];
+    //        CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
+    //            [node removeFromParentAndCleanup:YES];
+    //        }];
+    [enemy runAction:actionMove];//[CCSequence actions:actionMove, actionMoveDone, nil]];
+    
+}
+
+
 -(id) init
 {
 	if ((self = [super init]))
 	{
-      [self setIsTouchEnabled:YES];
-    
-    bananasToDelete = [[NSMutableArray alloc] init];
-    enemiesToDelete= [[NSMutableArray alloc] init];
-    princessesToDelete= [[NSMutableArray alloc] init];
-    bananaArray = [[NSMutableArray alloc] init];
-    enemies = [[NSMutableArray alloc] init];
-    princesses = [[NSMutableArray alloc] init];
-    doubleEnemies=[[NSMutableArray alloc] init];
-    
-    framecount = 0;
-    singleMonsterFramecount = 150;
-    doubleMonsterFramecount = 250;
-    monstercount = 0;
-    numberOfEnemies = 10;
-    level = 1;
-    deaths = 0;
-    enemiesKilled=0;
-    
-        //Background and placeholders -Henry
-    
+        
+        
         [self setIsTouchEnabled:YES];
-    
+        
+        bananasToDelete = [[NSMutableArray alloc] init];
+        enemiesToDelete= [[NSMutableArray alloc] init];
+        princessesToDelete= [[NSMutableArray alloc] init];
+        bananaArray = [[NSMutableArray alloc] init];
+        goodGuys = [[NSMutableArray alloc] init];
+        princesses = [[NSMutableArray alloc] init];
+        badGuys = [[NSMutableArray alloc] init];
+        
+        framecount = 0;
+        singleMonsterFramecount = 120;
+        doubleMonsterFramecount = 200;
+        monstercount = 0;
+        numberOfEnemies = 10;
+        level = 1;
+        deaths = 0;
+        enemiesKilled = 0;
+        
+        //Background and placeholders -Henry
+        
+        [self setIsTouchEnabled:YES];
+        
         CCSprite *sprite = [CCSprite spriteWithFile:@"city-back.png"];
         sprite.anchorPoint = CGPointZero;
         [self addChild:sprite z:-1];
         
         sprite = [CCSprite spriteWithFile:@"gorilla.png"];
         sprite.anchorPoint = CGPointZero;
-         sprite.scale=.2;
-        sprite.position = CGPointMake(180.0f, FLOOR_HEIGHT + 21.5);
+        sprite.scale=.5;
+        sprite.position = CGPointMake(180.0f, 10.0f);
         [self addChild:sprite z:0];
         
-        sprite = [CCSprite spriteWithFile:@"Princess.png"];
-        sprite.anchorPoint = CGPointZero;
-       sprite.scale=.2;
-        sprite.position = CGPointMake(0.0f, FLOOR_HEIGHT);
-        [self addChild:sprite z:0];
-        [princesses addObject:sprite];
-        
-        sprite = [CCSprite spriteWithFile:@"Princess.png"];
+        sprite = [CCSprite spriteWithFile:@"princess.png"];
         sprite.anchorPoint = CGPointZero;
         sprite.scale=.2;
-        sprite.position = CGPointMake(80.0f, FLOOR_HEIGHT);
+        sprite.position = CGPointMake(20.0f, FLOOR_HEIGHT);
         [self addChild:sprite z:0];
         [princesses addObject:sprite];
         
-        sprite = [CCSprite spriteWithFile:@"Princess.png"];
+        sprite = [CCSprite spriteWithFile:@"princess.png"];
+        sprite.anchorPoint = CGPointZero;
+        sprite.scale=.2;
+        sprite.position = CGPointMake(100.0f, FLOOR_HEIGHT);
+        [self addChild:sprite z:0];
+        [princesses addObject:sprite];
+        
+        sprite = [CCSprite spriteWithFile:@"princess.png"];
         sprite.anchorPoint = CGPointZero;
         sprite.scale=.2;
         sprite.position = CGPointMake(320.0f, FLOOR_HEIGHT);
         [self addChild:sprite z:0];
         [princesses addObject:sprite];
         
-        sprite = [CCSprite spriteWithFile:@"Princess.png"];
+        sprite = [CCSprite spriteWithFile:@"princess.png"];
         sprite.anchorPoint = CGPointZero;
-         sprite.scale=.2;
+        sprite.scale=.2;
         sprite.position = CGPointMake(400.0f, FLOOR_HEIGHT);
         [self addChild:sprite z:0];
         [princesses addObject:sprite];
+//        
+//        sprite = [CCSprite spriteWithFile:@"bananas.png"];
+//        sprite.anchorPoint = CGPointZero;
+//        sprite.scale=.4;
+//        sprite.position = CGPointMake(190.0f, FLOOR_HEIGHT);
+//        [self addChild:sprite z:0];
+//        
         
-        sprite = [CCSprite spriteWithFile:@"bananas.png"];
-        sprite.anchorPoint = CGPointZero;
-        sprite.scale=.2;
-        sprite.position = CGPointMake(175.0f, FLOOR_HEIGHT);
-        [self addChild:sprite z:0];
+
+        enemiesKilledLabel = [CCLabelTTF labelWithString:@"Enemies Killed:0" fontName:@"Marker Felt" fontSize:18];
+        enemiesKilledLabel.position = ccp(360, 300);
+        [self addChild:enemiesKilledLabel z:4];
+        
+        LevelLabel = [CCLabelTTF labelWithString:@"Level:1" fontName:@"Marker Felt" fontSize:18];
+        LevelLabel.position = ccp(360, 280);
+        [self addChild:LevelLabel z:4];
+
         
         CCMenuItemImage *pauseButton = [CCMenuItemImage itemWithNormalImage:@"button_pausebutton.png"
                                                               selectedImage: @"button_pausebutton.png"
@@ -155,22 +180,23 @@
                                                                    selector:@selector(pauseMenu:)];
         pauseButton.position = CGPointMake(225, 145);
         pauseButton.scale = 0.15f;
+        
         //  [self addChild:pauseButton z:100];
         
         CCMenu *myMenu = [CCMenu menuWithItems:pauseButton, nil];
         [self addChild: myMenu z:100];
         
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"explo2.wav"];
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"Pow.caf"];
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"thatWasEasy.wav"];
+        
         [self scheduleUpdate];
-        enemiesKilledLabel = [CCLabelTTF labelWithString:@"Enemies Killed:0" fontName:@"Marker Felt" fontSize:18];
-        enemiesKilledLabel.position = ccp(360, 300);
-        [self addChild:enemiesKilledLabel z:4];
-    
-        LevelLabel = [CCLabelTTF labelWithString:@"Level:1" fontName:@"Marker Felt" fontSize:18];
-        LevelLabel.position = ccp(360, 280);
-        [self addChild:LevelLabel z:4];
     }
     return self;
 }
+
+
+ 
 
 -(void) update:(ccTime)delta
 {
@@ -178,52 +204,66 @@
     {
         if(framecount % singleMonsterFramecount == 0)
         {
-            [self addMonster];
+            [self addGoodGuy];
             monstercount++;
             if(monstercount == numberOfEnemies)
             {
                 [self currentLevel];
-                singleMonsterFramecount -=10;
+                singleMonsterFramecount -=20;
                 monstercount = 0;
                 numberOfEnemies += 5;
-                minDuration -= .2;
-                maxDuration -= .2;
+                minDuration -= .3;
+                maxDuration -= .3;
                 NSLog(@"Starting level %d", level);
+                [[SimpleAudioEngine sharedEngine] playEffect:@"thatWasEasy.wav"];
             }
+            
         }
+    
         if(framecount % doubleMonsterFramecount == 0)
         {
-            [self addDoubleMonster];
+            [self addBadGuy];
             monstercount++;
             if(monstercount == numberOfEnemies)
             {
                 [self currentLevel];
-                doubleMonsterFramecount -=10;
+                doubleMonsterFramecount -=20;
                 monstercount = 0;
                 numberOfEnemies += 5;
-                minDuration -= .2;
-                maxDuration -= .2;
+                minDuration -= .4;
+                maxDuration -= .4;
                 NSLog(@"Starting level %d", level);
+                [[SimpleAudioEngine sharedEngine] playEffect:@"thatWasEasy.wav"];
             }
         }
 
-    }
-
-    if([enemies count] > 0)
-    {
-        
-        [self detectEnemyPrincessCollisions];
-    }
-    if([bananaArray count] > 0 && [enemies count] > 0)
-    {
-        [self detectBananaEnemyCollisions];
         
     }
-    if([bananaArray count] > 0 && [doubleEnemies count] > 0)
+    
+    if([goodGuys count] > 0 || [badGuys count] > 0)
     {
-        [self detectBananaDoubleEnemyCollisions];
+        
+        [self detectReachBottom];
     }
+    
+    if([bananaArray count] > 0 && [goodGuys count] > 0)
+    {
+        [self detectBananaGoodGuyCollisions];
+        
+    }
+    if([bananaArray count] > 0 && [badGuys count] > 0)
+    {
+        [self detectBananaBadGuyCollisions];
+    }
+    
+}
 
+-(void) draw
+{
+    ccColor4F red = ccc4f(255, 0, 0, 1);
+    ccDrawSolidRect(CGPointMake(0,0), CGPointMake(480,40), red);
+    ccColor4F green = ccc4f(0, 255, 0, 1);
+    ccDrawSolidRect(CGPointMake(0,0), CGPointMake(240, 40), green);
 }
 
 
@@ -235,7 +275,7 @@
     CGPoint location = [self convertTouchToNodeSpace:touch];
     
     CGSize winSize = [[CCDirector sharedDirector] winSize];
-
+    
     // Set up initial location of projectile
     
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile: @"bananaFrames.plist"];
@@ -250,30 +290,30 @@
     {
         [bananaFrames addObject:
          [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"banana%d.png", i]]];
-    
+        
         projectile = [CCSprite spriteWithSpriteFrameName:@"banana1.png"];
         
         projectile.anchorPoint = CGPointZero;
         projectile.position = CGPointMake(220.0f, FLOOR_HEIGHT);
         projectile.scale=.05;
     }
-        //Create an animation from the set of frames you created earlier
-        
-        CCAnimation *rotating = [CCAnimation animationWithFrames: bananaFrames delay:0.15f];
-        
-        //Create an action with the animation that can then be assigned to a sprite
-        
-        rotateBanana = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:rotating restoreOriginalFrame:NO]];
-        
-        //tell the banana to rotate
-        [projectile runAction:rotateBanana];
-        
-        
+    //Create an animation from the set of frames you created earlier
     
-        
-//    projectile = [CCSprite spriteWithFile:@"banana.png"];
-//    projectile.position = ccp(220, FLOOR_HEIGHT);
-//    projectile.scale = .05;
+    CCAnimation *rotating = [CCAnimation animationWithFrames: bananaFrames delay:0.1f];
+    
+    //Create an action with the animation that can then be assigned to a sprite
+    
+    rotateBanana = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:rotating restoreOriginalFrame:NO]];
+    
+    //tell the banana to rotate
+    [projectile runAction:rotateBanana];
+    
+    
+    
+    
+    //    projectile = [CCSprite spriteWithFile:@"banana.png"];
+    //    projectile.position = ccp(220, FLOOR_HEIGHT);
+    //    projectile.scale = .05;
     
     
     [bananaArray addObject:projectile];
@@ -307,63 +347,70 @@
      [CCSequence actions:
       [CCMoveTo actionWithDuration:realMoveDuration position:newlocation],
       [CCCallBlockN actionWithBlock:^(CCNode *node)
-        {
-         [node removeFromParentAndCleanup:YES];
-     }],
+       {
+           [node removeFromParentAndCleanup:YES];
+       }],
       nil]];
     
     
     
- 
-}
-
--(void) detectBananaEnemyCollisions
-{
-    for(int j = 0; j < [enemies count]; j++)
-    {
-        for(int i = 0; i < [bananaArray count]; i++)
-        {
-            if ([bananaArray count] > 0 && [enemies count] > 0)
-            {
-            badGuy = [enemies objectAtIndex:j];
-            CGRect badGuyRect = [badGuy boundingBox];
-            projectile = [bananaArray objectAtIndex:i];
-            CGRect projectileBox = [projectile boundingBox];
-           
-            if(CGRectIntersectsRect(badGuyRect,projectileBox))
-            {
-                if (projectile.position.y<305)
-                {
-                [enemies removeObjectAtIndex:j];
-                [bananaArray removeObjectAtIndex:i];
-                [self removeChild:badGuy cleanup:YES];
-                [self removeChild:projectile cleanup:YES];
-                
-                [self enemiesKilledTotal];
-                //[enemiesToDelete addObject:badGuy];
-                //[bananasToDelete addObject:projectile];
-                }
-            }
-                
-            }
-                
-        }
-            
-    }
-    //[enemiesToDelete removeAllObjects];
-    //[bananasToDelete removeAllObjects];
     
 }
 
--(void) detectBananaDoubleEnemyCollisions
+
+
+
+-(void) detectBananaGoodGuyCollisions
 {
-    for(int j = 0; j < [doubleEnemies count]; j++)
+    for(int j = 0; j < [goodGuys count]; j++)
     {
         for(int i = 0; i < [bananaArray count]; i++)
         {
-            if ([bananaArray count] > 0 && [doubleEnemies count] > 0)
+                if([bananaArray count] > 0 && [goodGuys count] > 0)
+                {
+                    
+                goodGuy = [goodGuys objectAtIndex:j];
+                CGRect badGuyRect = [goodGuy boundingBox];
+                projectile = [bananaArray objectAtIndex:i];
+                CGRect projectileBox = [projectile boundingBox];
+                if(CGRectIntersectsRect(badGuyRect,projectileBox))
+                {
+                    if (projectile.position.y<305)
+                    {
+                    [goodGuys removeObjectAtIndex:j];
+                    [bananaArray removeObjectAtIndex:i];
+                    [self removeChild:badGuy cleanup:YES];
+                    [self removeChild:projectile cleanup:YES];
+                    [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                    
+                    [self enemiesKilledTotal];
+                    //[enemiesToDelete addObject:badGuy];
+                    //[bananasToDelete addObject:projectile];
+                        
+                        
+                        
+                    }
+                    
+                }
+                
+                }
+            }
+            
+        }
+        
+    }
+    //[enemiesToDelete removeAllObjects];
+    //[bananasToDelete removeAllObjects];
+
+-(void) detectBananaBadGuyCollisions
+{
+    for(int j = 0; j < [badGuys count]; j++)
+    {
+        for(int i = 0; i < [bananaArray count]; i++)
+        {
+            if ([bananaArray count] > 0 && [badGuys count] > 0)
             {
-                badGuy = [doubleEnemies objectAtIndex:j];
+                badGuy = [badGuys objectAtIndex:j];
                 CGRect badGuyRect = [badGuy boundingBox];
                 projectile = [bananaArray objectAtIndex:i];
                 CGRect projectileBox = [projectile boundingBox];
@@ -372,22 +419,14 @@
                 {
                     if (projectile.position.y < 305)
                     {
-                        if(((doubleEnemy*)badGuy).health == 1)
-                        {
-                            [doubleEnemies removeObjectAtIndex:j];
-                            [bananaArray removeObjectAtIndex:i];
-                            [self removeChild:badGuy cleanup:YES];
-                            [self removeChild:projectile cleanup:YES];
-                            [self enemiesKilledTotal];
+                        [badGuys removeObjectAtIndex:j];
+                        [bananaArray removeObjectAtIndex:i];
+                        [self removeChild:badGuy cleanup:YES];
+                        [self removeChild:projectile cleanup:YES];
+                        [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                        [self enemiesKilledTotal];
                             //[enemiesToDelete addObject:badGuy];
                             //[bananasToDelete addObject:projectile];
-                        }
-                        else
-                        {
-                            ((doubleEnemy*)badGuy).health--;
-                            [self removeChild:projectile cleanup:YES];
-                            [bananaArray removeObjectAtIndex:i];
-                        }
                     }
                 }
                 
@@ -396,45 +435,26 @@
         }
         
     }
-
+    
 }
 
--(void)detectEnemyPrincessCollisions
+
+-(void)detectReachBottom
 {
-    for(int i = 0; i < [enemies count]; i++)
+    for(int i = 0; i < [goodGuys count]; i++)
     {
-        if([enemies count] > 0)
+        if([goodGuys count] > 0)
         {
-            badGuy = [enemies objectAtIndex:i];
+            goodGuy = [goodGuys objectAtIndex:i];
             princess = [princesses objectAtIndex:0];
-            if(badGuy.position.y <= FLOOR_HEIGHT + 10)
+            if(goodGuy.position.y <= FLOOR_HEIGHT + 10)
             {
                 deaths++;
-                [enemies removeObject:badGuy];
+                [goodGuys removeObject:goodGuy];
                 [princesses removeObject:princess];
                 [self removeChild:badGuy cleanup:YES];
                 [self removeChild:princess cleanup:YES];
-                if(deaths == 4)
-                {
-                    [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
-                }
-            }
-        }
-     }
-    
-    for(int i = 0; i < [doubleEnemies count]; i++)
-    {
-        if([doubleEnemies count] > 0)
-        {
-            badGuy = [doubleEnemies objectAtIndex:i];
-            princess = [princesses objectAtIndex:0];
-            if(badGuy.position.y <= FLOOR_HEIGHT + 10)
-            {
-                deaths++;
-                [doubleEnemies removeObject:badGuy];
-                [princesses removeObject:princess];
-                [self removeChild:badGuy cleanup:YES];
-                [self removeChild:princess cleanup:YES];
+                [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
                 if(deaths == 4)
                 {
                     [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
@@ -442,14 +462,35 @@
             }
         }
     }
-  }
-
-
-
--(void) pauseMenu: (CCMenuItemImage *)pauseButton
-{
-    [[CCDirector sharedDirector] pushScene: (CCScene *)[[PauseMenuLayer alloc]  init]];
+    
+    
+    for(int i = 0; i < [badGuys count]; i++)
+    {
+        if([badGuys count] > 0)
+        {
+            badGuy = [badGuys objectAtIndex:i];
+            princess = [princesses objectAtIndex:0];
+            if(badGuy.position.y <= FLOOR_HEIGHT + 10)
+            {
+                deaths++;
+                [badGuys removeObject:badGuy];
+                [princesses removeObject:princess];
+                [self removeChild:badGuy cleanup:YES];
+                [self removeChild:princess cleanup:YES];
+                [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
+                if(deaths == 4)
+                {
+                    [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
+                }
+            }
+        }
+    }
 }
+
+
+
+
+
 -(void) enemiesKilledTotal
 {
     enemiesKilled++;
@@ -460,5 +501,11 @@
 {
     level++;
     [LevelLabel setString:[NSString stringWithFormat:@"Level:%d", level]];
+}
+
+
+-(void) pauseMenu: (CCMenuItemImage *)pauseButton
+{
+    [[CCDirector sharedDirector] pushScene: (CCScene *)[[PauseMenuLayer alloc]  init]];
 }
 @end

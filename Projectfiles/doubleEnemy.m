@@ -1,8 +1,8 @@
 //
 //  doubleEnemy.m
-//  Gorilla Game
+//  Gorilla
 //
-//  Created by Ajay Shah on 7/12/13.
+//  Created by maria hilton on 7/12/13.
 //
 //
 
@@ -14,11 +14,10 @@
 
 -(id) initWithDoubleEnemyImage
 {
-    if ((self = [super initWithFile:@"monster1.png"]))
+    if((self = [super initWithFile:@"monster1.png"]))
     {
         health = 2;
     }
     return self;
 }
-
 @end

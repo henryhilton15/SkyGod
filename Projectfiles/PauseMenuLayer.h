@@ -1,8 +1,8 @@
 //
 //  PauseMenuLayer.h
-//  Gorilla Game
+//  Gorilla
 //
-//  Created by Ajay Shah on 7/11/13.
+//  Created by maria hilton on 7/4/13.
 //
 //
 
