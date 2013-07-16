@@ -60,8 +60,9 @@
 -(void) addBadGuy;
 -(void) pauseMenu: (CCMenuItemImage *)pauseButton;
 -(void) enemiesKilledTotal;
--(void) currentLevel;
--(void) addDoubleMonster;
+-(void) addLevel;
+-(void) subtractLevel;
+
 
 
 

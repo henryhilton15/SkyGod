@@ -30,15 +30,15 @@
     int actualX = arc4random() % rangeX;
     
     // Determine speed of the monster
-    int minDuration = 3.5;
-    int maxDuration = 6.0;
+    minDuration = 3.5;
+    maxDuration = 6.0;
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
     
     // Create the monster slightly off-screen along the right edge,
     // and along a random position along the Y axis as calculated above
-    CCSprite * enemy = [CCSprite spriteWithFile:@"monster2.png"];
+    enemy = [CCSprite spriteWithFile:@"monster2.png"];
     enemy.scale=.15;
     enemy.position = ccp(actualX, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:enemy];
@@ -109,28 +109,30 @@
         badGuyFramecount = 150;
         monstercount = 0;
         numberOfEnemies = 10;
-        level = 1;
-        deaths = 0;
+        level = 3;
         enemiesKilled = 0;
         bar = 240;
         
         //Background and placeholders -Henry
         
         [self setIsTouchEnabled:YES];
-       if (level==0)
-       {CCSprite *sprite = [CCSprite spriteWithFile:@"background_desert-topdown.png"];
-        sprite.anchorPoint = CGPointZero;
-        [self addChild:sprite z:-1];
+        if (level==0)
+        {
+            CCSprite *sprite = [CCSprite spriteWithFile:@"background_desert-topdown.png"];
+            sprite.scale = .5;
+            sprite.anchorPoint = CGPointZero;
+            [self addChild:sprite z:-1];
         
-        sprite = [CCSprite spriteWithFile:@"monster4.png"];
-        sprite.anchorPoint = CGPointZero;
-        sprite.position = CGPointMake(180.0f, 10.0f);
-        [self addChild:sprite z:0];
+            sprite = [CCSprite spriteWithFile:@"monster4.png"];
+            sprite.anchorPoint = CGPointZero;
+            sprite.position = CGPointMake(180.0f, 10.0f);
+            [self addChild:sprite z:0];
+        }
         
-       }
         if (level ==1)
         {
             CCSprite *sprite = [CCSprite spriteWithFile:@"background_grass-top.png"];
+            sprite.scale = .5;
             sprite.anchorPoint = CGPointZero;
             [self addChild:sprite z:-1];
             
@@ -162,6 +164,7 @@
             sprite.scale=.5;
             sprite.position = CGPointMake(180.0f, 10.0f);
             [self addChild:sprite z:0];
+
         }
         if (level ==4)
         {
@@ -188,24 +191,27 @@
             [self addChild:sprite z:0];
         }
         if (level==6)
-        {   CCSprite *sprite = [CCSprite spriteWithFile:@"background_topofcastle.png"];
-        sprite.anchorPoint = CGPointZero;
-        [self addChild:sprite z:-1];
+        {
+            CCSprite *sprite = [CCSprite spriteWithFile:@"background_topofcastle.png"];
+            sprite.anchorPoint = CGPointZero;
+            [self addChild:sprite z:-1];
         
-        sprite = [CCSprite spriteWithFile:@"cat1.png"];
-        sprite.anchorPoint = CGPointZero;
-        sprite.scale=.5;
-        sprite.position = CGPointMake(180.0f, 10.0f);
-        [self addChild:sprite z:0];
+            sprite = [CCSprite spriteWithFile:@"cat1.png"];
+            sprite.anchorPoint = CGPointZero;
+            sprite.scale=.5;
+            sprite.position = CGPointMake(180.0f, 10.0f);
+            [self addChild:sprite z:0];
         }
        
         
             enemiesKilledLabel = [CCLabelTTF labelWithString:@"Enemies Killed:0" fontName:@"Marker Felt" fontSize:18];
         enemiesKilledLabel.position = ccp(360, 300);
+        enemiesKilledLabel.color = ccBLUE;
         [self addChild:enemiesKilledLabel z:4];
         
         LevelLabel = [CCLabelTTF labelWithString:@"Level:1" fontName:@"Marker Felt" fontSize:18];
         LevelLabel.position = ccp(360, 280);
+        LevelLabel.color = ccBLUE;
         [self addChild:LevelLabel z:4];
 
         
@@ -235,41 +241,30 @@
 
 -(void) update:(ccTime)delta
 {
+    if(bar >= 480)
+    {
+        [self addLevel];
+        NSLog(@"Starting level %d", level);
+        bar =240;
+        //[[SimpleAudioEngine sharedEngine] playEffect:@"thatWasEasy.wav"];
+    }
+    if(bar<=0)
+    {
+        [self subtractLevel];
+        NSLog(@"Starting level %d", level);
+        bar = 240;
+    }
+
     framecount++;
     {
         if(framecount % goodGuyFramecount == 0)
         {
             [self addGoodGuy];
-            monstercount++;
-            if(monstercount == numberOfEnemies)
-            {
-                [self currentLevel];
-                goodGuyFramecount -=20;
-                monstercount = 0;
-                numberOfEnemies += 5;
-                minDuration -= .3;
-                maxDuration -= .3;
-                NSLog(@"Starting level %d", level);
-                //[[SimpleAudioEngine sharedEngine] playEffect:@"thatWasEasy.wav"];
-            }
-            
         }
     
         if(framecount % badGuyFramecount == 0)
         {
             [self addBadGuy];
-            monstercount++;
-            if(monstercount == numberOfEnemies)
-            {
-                [self currentLevel];
-                badGuyFramecount -=20;
-                monstercount = 0;
-                numberOfEnemies += 5;
-                minDuration -= .4;
-                maxDuration -= .4;
-                NSLog(@"Starting level %d", level);
-                //[[SimpleAudioEngine sharedEngine] playEffect:@"thatWasEasy.wav"];
-            }
         }
 
         
@@ -418,7 +413,6 @@
                     [self removeChild:projectile cleanup:YES];
                     [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
                     
-                    [self enemiesKilledTotal];
                     //[enemiesToDelete addObject:badGuy];
                     //[bananasToDelete addObject:projectile];
                         
@@ -485,7 +479,6 @@
             {
                 [goodGuys removeObject:goodGuy];
                 [self removeChild:goodGuy cleanup:YES];
-                [self removeChild:badGuy cleanup:YES];
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
                 bar += 50;
             }
@@ -519,9 +512,14 @@
     [enemiesKilledLabel setString:[NSString stringWithFormat:@"Enemies Killed:%d", enemiesKilled]];
 }
 
--(void) currentLevel
+-(void) addLevel
 {
     level++;
+    [LevelLabel setString:[NSString stringWithFormat:@"Level:%d", level]];
+}
+-(void) subtractLevel
+{
+    level--;
     [LevelLabel setString:[NSString stringWithFormat:@"Level:%d", level]];
 }
 
