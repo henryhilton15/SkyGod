@@ -41,9 +41,9 @@
     // Create the monster slightly off-screen along the right edge,
     // and along a random position along the Y axis as calculated above
 
-    enemy = [CCSprite spriteWithFile:@"monster2.png"];
+    enemy = [CCSprite spriteWithFile:@"cat4.png"];
+    enemy.scale=.5;
 
-    enemy.scale=.15;
     enemy.position = ccp(actualX, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:enemy];
     [goodGuys addObject:enemy];
@@ -102,10 +102,10 @@
         
         bananasToDelete = [[NSMutableArray alloc] init];
         enemiesToDelete= [[NSMutableArray alloc] init];
-        princessesToDelete= [[NSMutableArray alloc] init];
+       
         bananaArray = [[NSMutableArray alloc] init];
         goodGuys = [[NSMutableArray alloc] init];
-        princesses = [[NSMutableArray alloc] init];
+      
         badGuys = [[NSMutableArray alloc] init];
         
         framecount = 0;
@@ -113,7 +113,9 @@
         badGuyFramecount = 150;
         monstercount = 0;
         numberOfEnemies = 10;
-        level = 2;
+
+        level = 3;
+        deaths = 0;
         enemiesKilled = 0;
         bar = 240;
         
@@ -212,6 +214,7 @@
         enemiesKilledLabel.position = ccp(360, 300);
         enemiesKilledLabel.color = ccBLUE;
         [self addChild:enemiesKilledLabel z:4];
+
 //        
 //        LevelLabel = [CCLabelTTF labelWithString:@"Level:1" fontName:@"Marker Felt" fontSize:18];
 //        LevelLabel.position = ccp(360, 280);
@@ -248,17 +251,31 @@
    
     if(bar >= 480)
     {
-        [self addLevel];
-        NSLog(@"Starting level %d", level);
-        bar =240;
-       
+        if(level >=3)
+        {
+            [self addLevel];
+            NSLog(@"Starting level %d", level);
+            bar =240;
+        }
+        else
+        {
+            [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
+        }
+        
         //[[SimpleAudioEngine sharedEngine] playEffect:@"thatWasEasy.wav"];
     }
     if(bar<=0)
     {
-        [self subtractLevel];
-        NSLog(@"Starting level %d", level);
-        bar = 240;
+        if(level<=3)
+        {
+            [self subtractLevel];
+            NSLog(@"Starting level %d", level);
+            bar = 240;
+        }
+        else
+        {
+            [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
+        }
     }
 
     framecount++;
@@ -485,25 +502,48 @@
             if(goodGuy.position.y <= FLOOR_HEIGHT)
             {
                 [goodGuys removeObject:goodGuy];
+
+    
+                [self removeChild:badGuy cleanup:YES];
+              
+
                 [self removeChild:goodGuy cleanup:YES];
+
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
+                if(level<3)
+                {
+                    bar+=100 + ((3 - level) * 10) ;
+                }
                 bar += 50;
             }
         }
     }
-    
     
     for(int i = 0; i < [badGuys count]; i++)
     {
         if([badGuys count] > 0)
         {
             badGuy = [badGuys objectAtIndex:i];
+
+           
+            if(badGuy.position.y <= FLOOR_HEIGHT + 10)
+
             if(badGuy.position.y <= FLOOR_HEIGHT)
+
             {
                 [badGuys removeObject:badGuy];
+
+            
+                [self removeChild:badGuy cleanup:YES];
+              
+
                 [self removeChild:badGuy cleanup:YES];
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
-                bar -=100;
+                if(level>3)
+                {
+                    bar -= 100 + ((level - 3) * 10);
+                }
+                bar -=50;
             }
         }
     }
@@ -522,6 +562,7 @@
 
 -(void) addLevel
 {
+    
     level++;
     [LevelLabel setString:[NSString stringWithFormat:@"Level:%d", level]];
 }
