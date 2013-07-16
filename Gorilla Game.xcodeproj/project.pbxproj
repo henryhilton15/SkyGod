@@ -700,7 +700,7 @@
 		FE97A20C1795CCD400017A1D /* cat1-topdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cat1-topdown.png"; sourceTree = "<group>"; };
 		FE97A20D1795CCD400017A1D /* cat1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat1.png; sourceTree = "<group>"; };
 		FE97A20E1795CCD400017A1D /* cat2-topdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cat2-topdown.png"; sourceTree = "<group>"; };
-		FE97A20F1795CCD400017A1D /* cat2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat2.png; sourceTree = "<group>"; };
+		FE97A20F1795CCD400017A1D /* cat2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cat2.png; path = "../../../../../Downloads/Placeholder Art Monsters vs Kittens/kittens/regular/cat2.png"; sourceTree = "<group>"; };
 		FE97A2101795CCD400017A1D /* cat3-topdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cat3-topdown.png"; sourceTree = "<group>"; };
 		FE97A2111795CCD400017A1D /* cat3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat3.png; sourceTree = "<group>"; };
 		FE97A2121795CCD400017A1D /* cat4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat4.png; sourceTree = "<group>"; };
@@ -962,6 +962,7 @@
 				2DA3EB4B1795D4FD007D73B5 /* city-front.png */,
 				2DA3EB4C1795D4FD007D73B5 /* monster1.png */,
 				2DA3EB4D1795D4FD007D73B5 /* monster2.png */,
+				FE97A20F1795CCD400017A1D /* cat2.png */,
 				2DA3EB4E1795D4FD007D73B5 /* monster4.png */,
 				2DA3EB4F1795D4FD007D73B5 /* monster8.png */,
 				2DA3EB501795D4FD007D73B5 /* monster9.png */,
@@ -1351,7 +1352,6 @@
 				FE97A20C1795CCD400017A1D /* cat1-topdown.png */,
 				FE97A20D1795CCD400017A1D /* cat1.png */,
 				FE97A20E1795CCD400017A1D /* cat2-topdown.png */,
-				FE97A20F1795CCD400017A1D /* cat2.png */,
 				FE97A2101795CCD400017A1D /* cat3-topdown.png */,
 				FE97A2111795CCD400017A1D /* cat3.png */,
 				FE97A2121795CCD400017A1D /* cat4.png */,
