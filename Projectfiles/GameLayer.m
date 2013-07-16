@@ -30,16 +30,20 @@
     int actualX = arc4random() % rangeX;
     
     // Determine speed of the monster
-    int minDuration = 3.5;
-    int maxDuration = 6.0;
+    minDuration = 3.5;
+    maxDuration = 6.0;
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
     
     // Create the monster slightly off-screen along the right edge,
     // and along a random position along the Y axis as calculated above
+
     CCSprite * enemy = [CCSprite spriteWithFile:@"cat4.png"];
     enemy.scale=.5;
+    enemy = [CCSprite spriteWithFile:@"monster2.png"];
+    enemy.scale=.15;
+
     enemy.position = ccp(actualX, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:enemy];
     [goodGuys addObject:enemy];
@@ -94,8 +98,6 @@
 {
 	if ((self = [super init]))
 	{
-        
-        
         [self setIsTouchEnabled:YES];
         
         bananasToDelete = [[NSMutableArray alloc] init];
@@ -107,32 +109,38 @@
         badGuys = [[NSMutableArray alloc] init];
         
         framecount = 0;
-        singleMonsterFramecount = 120;
-        doubleMonsterFramecount = 200;
+        goodGuyFramecount = 150;
+        badGuyFramecount = 150;
         monstercount = 0;
         numberOfEnemies = 10;
         level = 3;
         deaths = 0;
+
         enemiesKilled = 0;
+        bar = 240;
         
         //Background and placeholders -Henry
         
         [self setIsTouchEnabled:YES];
-       if (level==0)
-       {CCSprite *sprite = [CCSprite spriteWithFile:@"background_desert-topdown.png"];
-        sprite.anchorPoint = CGPointZero;
-        [self addChild:sprite z:-1];
+        if (level==0)
+        {
+            CCSprite *sprite = [CCSprite spriteWithFile:@"background_desert-topdown.png"];
+            sprite.scale = .5;
+            sprite.anchorPoint = CGPointZero;
+            [self addChild:sprite z:-1];
         
-        sprite = [CCSprite spriteWithFile:@"monster4.png"];
-        sprite.anchorPoint = CGPointZero;
-        sprite.position = CGPointMake(180.0f, 10.0f);
-           sprite.scale=.5;
-           [self addChild:sprite z:0];
+
+            sprite = [CCSprite spriteWithFile:@"monster4.png"];
+            sprite.anchorPoint = CGPointZero;
+            sprite.position = CGPointMake(180.0f, 10.0f);
+            [self addChild:sprite z:0];
+        }
+
         
-       }
         if (level ==1)
         {
             CCSprite *sprite = [CCSprite spriteWithFile:@"background_grass-top.png"];
+            sprite.scale = .5;
             sprite.anchorPoint = CGPointZero;
             [self addChild:sprite z:-1];
             
@@ -165,6 +173,7 @@
             sprite.scale=.5;
             sprite.position = CGPointMake(180.0f, 10.0f);
             [self addChild:sprite z:0];
+
         }
         if (level ==4)
         {
@@ -191,24 +200,27 @@
             [self addChild:sprite z:0];
         }
         if (level==6)
-        {   CCSprite *sprite = [CCSprite spriteWithFile:@"background_topofcastle.png"];
-        sprite.anchorPoint = CGPointZero;
-        [self addChild:sprite z:-1];
+        {
+            CCSprite *sprite = [CCSprite spriteWithFile:@"background_topofcastle.png"];
+            sprite.anchorPoint = CGPointZero;
+            [self addChild:sprite z:-1];
         
-        sprite = [CCSprite spriteWithFile:@"cat1.png"];
-        sprite.anchorPoint = CGPointZero;
-        sprite.scale=.5;
-        sprite.position = CGPointMake(180.0f, 10.0f);
-        [self addChild:sprite z:0];
+            sprite = [CCSprite spriteWithFile:@"cat1.png"];
+            sprite.anchorPoint = CGPointZero;
+            sprite.scale=.5;
+            sprite.position = CGPointMake(180.0f, 10.0f);
+            [self addChild:sprite z:0];
         }
        
         
             enemiesKilledLabel = [CCLabelTTF labelWithString:@"Enemies Killed:0" fontName:@"Marker Felt" fontSize:18];
         enemiesKilledLabel.position = ccp(360, 300);
+        enemiesKilledLabel.color = ccBLUE;
         [self addChild:enemiesKilledLabel z:4];
         
         LevelLabel = [CCLabelTTF labelWithString:@"Level:1" fontName:@"Marker Felt" fontSize:18];
         LevelLabel.position = ccp(360, 280);
+        LevelLabel.color = ccBLUE;
         [self addChild:LevelLabel z:4];
 
         
@@ -238,41 +250,30 @@
 
 -(void) update:(ccTime)delta
 {
+    if(bar >= 480)
+    {
+        [self addLevel];
+        NSLog(@"Starting level %d", level);
+        bar =240;
+        //[[SimpleAudioEngine sharedEngine] playEffect:@"thatWasEasy.wav"];
+    }
+    if(bar<=0)
+    {
+        [self subtractLevel];
+        NSLog(@"Starting level %d", level);
+        bar = 240;
+    }
+
     framecount++;
     {
-        if(framecount % singleMonsterFramecount == 0)
+        if(framecount % goodGuyFramecount == 0)
         {
             [self addGoodGuy];
-            monstercount++;
-            if(monstercount == numberOfEnemies)
-            {
-                [self currentLevel];
-                singleMonsterFramecount -=20;
-                monstercount = 0;
-                numberOfEnemies += 5;
-                minDuration -= .3;
-                maxDuration -= .3;
-                NSLog(@"Starting level %d", level);
-                [[SimpleAudioEngine sharedEngine] playEffect:@"thatWasEasy.wav"];
-            }
-            
         }
     
-        if(framecount % doubleMonsterFramecount == 0)
+        if(framecount % badGuyFramecount == 0)
         {
             [self addBadGuy];
-            monstercount++;
-            if(monstercount == numberOfEnemies)
-            {
-                [self currentLevel];
-                doubleMonsterFramecount -=20;
-                monstercount = 0;
-                numberOfEnemies += 5;
-                minDuration -= .4;
-                maxDuration -= .4;
-                NSLog(@"Starting level %d", level);
-                [[SimpleAudioEngine sharedEngine] playEffect:@"thatWasEasy.wav"];
-            }
         }
 
         
@@ -301,7 +302,7 @@
     ccColor4F red = ccc4f(255, 0, 0, 1);
     ccDrawSolidRect(CGPointMake(0,0), CGPointMake(480,40), red);
     ccColor4F green = ccc4f(0, 255, 0, 1);
-    ccDrawSolidRect(CGPointMake(0,0), CGPointMake(240, 40), green);
+    ccDrawSolidRect(CGPointMake(0,0), CGPointMake(bar, 40), green);
 }
 
 
@@ -408,20 +409,19 @@
                 {
                     
                 goodGuy = [goodGuys objectAtIndex:j];
-                CGRect badGuyRect = [goodGuy boundingBox];
+                CGRect goodGuyRect = [goodGuy boundingBox];
                 projectile = [bananaArray objectAtIndex:i];
                 CGRect projectileBox = [projectile boundingBox];
-                if(CGRectIntersectsRect(badGuyRect,projectileBox))
+                if(CGRectIntersectsRect(goodGuyRect,projectileBox))
                 {
                     if (projectile.position.y<305)
                     {
                     [goodGuys removeObjectAtIndex:j];
                     [bananaArray removeObjectAtIndex:i];
-                    [self removeChild:badGuy cleanup:YES];
+                    [self removeChild:goodGuy cleanup:YES];
                     [self removeChild:projectile cleanup:YES];
                     [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
                     
-                    [self enemiesKilledTotal];
                     //[enemiesToDelete addObject:badGuy];
                     //[bananasToDelete addObject:projectile];
                         
@@ -484,20 +484,18 @@
         if([goodGuys count] > 0)
         {
             goodGuy = [goodGuys objectAtIndex:i];
-        
-            if(goodGuy.position.y <= FLOOR_HEIGHT + 10)
+            if(goodGuy.position.y <= FLOOR_HEIGHT)
             {
-                deaths++;
                 [goodGuys removeObject:goodGuy];
+
     
                 [self removeChild:badGuy cleanup:YES];
               
-                
+
+                [self removeChild:goodGuy cleanup:YES];
+
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
-                if(deaths == 4)
-                {
-                    [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
-                }
+                bar += 50;
             }
         }
     }
@@ -508,19 +506,22 @@
         if([badGuys count] > 0)
         {
             badGuy = [badGuys objectAtIndex:i];
+
            
             if(badGuy.position.y <= FLOOR_HEIGHT + 10)
+
+            if(badGuy.position.y <= FLOOR_HEIGHT)
+
             {
-                deaths++;
                 [badGuys removeObject:badGuy];
+
             
                 [self removeChild:badGuy cleanup:YES];
               
+
+                [self removeChild:badGuy cleanup:YES];
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
-                if(deaths == 4)
-                {
-                    [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
-                }
+                bar -=100;
             }
         }
     }
@@ -536,9 +537,14 @@
     [enemiesKilledLabel setString:[NSString stringWithFormat:@"Enemies Killed:%d", enemiesKilled]];
 }
 
--(void) currentLevel
+-(void) addLevel
 {
     level++;
+    [LevelLabel setString:[NSString stringWithFormat:@"Level:%d", level]];
+}
+-(void) subtractLevel
+{
+    level--;
     [LevelLabel setString:[NSString stringWithFormat:@"Level:%d", level]];
 }
 
