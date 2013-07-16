@@ -38,8 +38,8 @@
     
     // Create the monster slightly off-screen along the right edge,
     // and along a random position along the Y axis as calculated above
-    CCSprite * enemy = [CCSprite spriteWithFile:@"monster2.png"];
-    enemy.scale=.15;
+    CCSprite * enemy = [CCSprite spriteWithFile:@"cat4.png"];
+    enemy.scale=.5;
     enemy.position = ccp(actualX, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:enemy];
     [goodGuys addObject:enemy];
@@ -100,10 +100,10 @@
         
         bananasToDelete = [[NSMutableArray alloc] init];
         enemiesToDelete= [[NSMutableArray alloc] init];
-        princessesToDelete= [[NSMutableArray alloc] init];
+       
         bananaArray = [[NSMutableArray alloc] init];
         goodGuys = [[NSMutableArray alloc] init];
-        princesses = [[NSMutableArray alloc] init];
+      
         badGuys = [[NSMutableArray alloc] init];
         
         framecount = 0;
@@ -111,7 +111,7 @@
         doubleMonsterFramecount = 200;
         monstercount = 0;
         numberOfEnemies = 10;
-        level = 1;
+        level = 3;
         deaths = 0;
         enemiesKilled = 0;
         
@@ -126,7 +126,8 @@
         sprite = [CCSprite spriteWithFile:@"monster4.png"];
         sprite.anchorPoint = CGPointZero;
         sprite.position = CGPointMake(180.0f, 10.0f);
-        [self addChild:sprite z:0];
+           sprite.scale=.5;
+           [self addChild:sprite z:0];
         
        }
         if (level ==1)
@@ -138,6 +139,7 @@
             sprite = [CCSprite spriteWithFile:@"monster8.png"];
             sprite.anchorPoint = CGPointZero;
             sprite.position = CGPointMake(180.0f, 10.0f);
+            sprite.scale=.5;
             [self addChild:sprite z:0];
         }
         if (level ==2)
@@ -489,7 +491,8 @@
                 [goodGuys removeObject:goodGuy];
     
                 [self removeChild:badGuy cleanup:YES];
-                [self removeChild:princess cleanup:YES];
+              
+                
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
                 if(deaths == 4)
                 {
@@ -505,14 +508,14 @@
         if([badGuys count] > 0)
         {
             badGuy = [badGuys objectAtIndex:i];
-            princess = [princesses objectAtIndex:0];
+           
             if(badGuy.position.y <= FLOOR_HEIGHT + 10)
             {
                 deaths++;
                 [badGuys removeObject:badGuy];
-                [princesses removeObject:princess];
+            
                 [self removeChild:badGuy cleanup:YES];
-                [self removeChild:princess cleanup:YES];
+              
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
                 if(deaths == 4)
                 {
