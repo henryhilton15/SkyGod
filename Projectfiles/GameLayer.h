@@ -60,8 +60,17 @@
 -(void) addBadGuy;
 -(void) pauseMenu: (CCMenuItemImage *)pauseButton;
 -(void) enemiesKilledTotal;
--(void) currentLevel;
--(void) addDoubleMonster;
+-(void) addLevel;
+-(void) subtractLevel;
+- (void) changeLevel;
+
+-(void) drawLevel0;
+-(void) drawLevel1;
+-(void) drawLevel2;
+-(void) drawLevel3;
+-(void) drawLevel4;
+-(void) drawLevel5;
+-(void) drawLevel6;
 
 
 
