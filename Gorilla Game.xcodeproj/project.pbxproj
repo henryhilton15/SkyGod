@@ -13,6 +13,22 @@
 		2D37059D1784D99D0057EB8E /* GameOverLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D37059C1784D99D0057EB8E /* GameOverLayer.m */; };
 		2DA3EB3317907425007D73B5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA3EB3217907425007D73B5 /* AudioToolbox.framework */; };
 		2DA3EB3B179086BA007D73B5 /* doubleEnemy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA3EB3A179086BA007D73B5 /* doubleEnemy.m */; };
+		2DA3EB511795D4FD007D73B5 /* animation_knight-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA3EB441795D4FD007D73B5 /* animation_knight-1.png */; };
+		2DA3EB521795D4FD007D73B5 /* background_desert-topdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA3EB451795D4FD007D73B5 /* background_desert-topdown.png */; };
+		2DA3EB531795D4FD007D73B5 /* background_grass-top.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA3EB461795D4FD007D73B5 /* background_grass-top.png */; };
+		2DA3EB541795D4FD007D73B5 /* background_grass-topdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA3EB471795D4FD007D73B5 /* background_grass-topdown.png */; };
+		2DA3EB551795D4FD007D73B5 /* cat-main.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA3EB481795D4FD007D73B5 /* cat-main.png */; };
+		2DA3EB561795D4FD007D73B5 /* cat3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA3EB491795D4FD007D73B5 /* cat3.png */; };
+		2DA3EB571795D4FD007D73B5 /* city-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA3EB4A1795D4FD007D73B5 /* city-back.png */; };
+		2DA3EB581795D4FD007D73B5 /* city-front.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA3EB4B1795D4FD007D73B5 /* city-front.png */; };
+		2DA3EB591795D4FD007D73B5 /* monster1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA3EB4C1795D4FD007D73B5 /* monster1.png */; };
+		2DA3EB5A1795D4FD007D73B5 /* monster2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA3EB4D1795D4FD007D73B5 /* monster2.png */; };
+		2DA3EB5B1795D4FD007D73B5 /* monster4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA3EB4E1795D4FD007D73B5 /* monster4.png */; };
+		2DA3EB5C1795D4FD007D73B5 /* monster8.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA3EB4F1795D4FD007D73B5 /* monster8.png */; };
+		2DA3EB5D1795D4FD007D73B5 /* monster9.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA3EB501795D4FD007D73B5 /* monster9.png */; };
+		2DA3EB5F1795D510007D73B5 /* background_grid.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA3EB5E1795D510007D73B5 /* background_grid.png */; };
+		2DA3EB611795D518007D73B5 /* background_topofcastle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA3EB601795D518007D73B5 /* background_topofcastle.png */; };
+		2DA3EB631795D56B007D73B5 /* cat1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DA3EB621795D56B007D73B5 /* cat1.png */; };
 		2DD0C65F178F77BA008AE39F /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DD0C65E178F77BA008AE39F /* images.png */; };
 		2DD0C661178F783F008AE39F /* disasteralert_icon_114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DD0C660178F783F008AE39F /* disasteralert_icon_114x114.png */; };
 		C3EB55091795D54D007B22A3 /* bananaFrames.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3EB55081795D54D007B22A3 /* bananaFrames.plist */; };
@@ -378,6 +394,22 @@
 		2DA3EB3217907425007D73B5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		2DA3EB39179086BA007D73B5 /* doubleEnemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = doubleEnemy.h; sourceTree = "<group>"; };
 		2DA3EB3A179086BA007D73B5 /* doubleEnemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = doubleEnemy.m; sourceTree = "<group>"; };
+		2DA3EB441795D4FD007D73B5 /* animation_knight-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "animation_knight-1.png"; sourceTree = "<group>"; };
+		2DA3EB451795D4FD007D73B5 /* background_desert-topdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_desert-topdown.png"; sourceTree = "<group>"; };
+		2DA3EB461795D4FD007D73B5 /* background_grass-top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_grass-top.png"; sourceTree = "<group>"; };
+		2DA3EB471795D4FD007D73B5 /* background_grass-topdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_grass-topdown.png"; sourceTree = "<group>"; };
+		2DA3EB481795D4FD007D73B5 /* cat-main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cat-main.png"; sourceTree = "<group>"; };
+		2DA3EB491795D4FD007D73B5 /* cat3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat3.png; sourceTree = "<group>"; };
+		2DA3EB4A1795D4FD007D73B5 /* city-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "city-back.png"; sourceTree = "<group>"; };
+		2DA3EB4B1795D4FD007D73B5 /* city-front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "city-front.png"; sourceTree = "<group>"; };
+		2DA3EB4C1795D4FD007D73B5 /* monster1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster1.png; sourceTree = "<group>"; };
+		2DA3EB4D1795D4FD007D73B5 /* monster2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster2.png; sourceTree = "<group>"; };
+		2DA3EB4E1795D4FD007D73B5 /* monster4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster4.png; sourceTree = "<group>"; };
+		2DA3EB4F1795D4FD007D73B5 /* monster8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster8.png; sourceTree = "<group>"; };
+		2DA3EB501795D4FD007D73B5 /* monster9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster9.png; sourceTree = "<group>"; };
+		2DA3EB5E1795D510007D73B5 /* background_grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_grid.png; sourceTree = "<group>"; };
+		2DA3EB601795D518007D73B5 /* background_topofcastle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_topofcastle.png; sourceTree = "<group>"; };
+		2DA3EB621795D56B007D73B5 /* cat1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat1.png; sourceTree = "<group>"; };
 		2DD0C65E178F77BA008AE39F /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
 		2DD0C660178F783F008AE39F /* disasteralert_icon_114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disasteralert_icon_114x114.png; sourceTree = "<group>"; };
 		C3EB55081795D54D007B22A3 /* bananaFrames.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bananaFrames.plist; sourceTree = "<group>"; };
@@ -915,6 +947,26 @@
 			children = (
 				C3EB55081795D54D007B22A3 /* bananaFrames.plist */,
 				C3EB550A1795D566007B22A3 /* bananaFrames.png */,
+				2DA3EB621795D56B007D73B5 /* cat1.png */,
+				2DA3EB601795D518007D73B5 /* background_topofcastle.png */,
+				2DA3EB5E1795D510007D73B5 /* background_grid.png */,
+				DCC1A39513A94F1A005BD75D /* config.lua */,
+				DC275D2A13B27DBF009C5098 /* Pow.caf */,
+				2DA3EB441795D4FD007D73B5 /* animation_knight-1.png */,
+				2DA3EB451795D4FD007D73B5 /* background_desert-topdown.png */,
+				2DA3EB461795D4FD007D73B5 /* background_grass-top.png */,
+				2DA3EB471795D4FD007D73B5 /* background_grass-topdown.png */,
+				2DA3EB481795D4FD007D73B5 /* cat-main.png */,
+				2DA3EB491795D4FD007D73B5 /* cat3.png */,
+				2DA3EB4A1795D4FD007D73B5 /* city-back.png */,
+				2DA3EB4B1795D4FD007D73B5 /* city-front.png */,
+				2DA3EB4C1795D4FD007D73B5 /* monster1.png */,
+				2DA3EB4D1795D4FD007D73B5 /* monster2.png */,
+				2DA3EB4E1795D4FD007D73B5 /* monster4.png */,
+				2DA3EB4F1795D4FD007D73B5 /* monster8.png */,
+				2DA3EB501795D4FD007D73B5 /* monster9.png */,
+				FE97A3831795CD2700017A1D /* bananaFrames.plist */,
+				FE97A3811795CD1A00017A1D /* bananaFrames.png */,
 				FE97A37F1795CD0E00017A1D /* princess.png */,
 				FE97A37D1795CD0400017A1D /* gorilla.png */,
 				FE97A1231795CCD300017A1D /* Placeholder Art Monsters vs Kittens */,
@@ -1541,6 +1593,25 @@
 				DC2721AA160CAFC700D88944 /* iTunesArtwork in Resources */,
 				2DD0C65F178F77BA008AE39F /* images.png in Resources */,
 				2DD0C661178F783F008AE39F /* disasteralert_icon_114x114.png in Resources */,
+				2DA3EB511795D4FD007D73B5 /* animation_knight-1.png in Resources */,
+				2DA3EB521795D4FD007D73B5 /* background_desert-topdown.png in Resources */,
+				2DA3EB531795D4FD007D73B5 /* background_grass-top.png in Resources */,
+				2DA3EB541795D4FD007D73B5 /* background_grass-topdown.png in Resources */,
+				2DA3EB551795D4FD007D73B5 /* cat-main.png in Resources */,
+				2DA3EB561795D4FD007D73B5 /* cat3.png in Resources */,
+				2DA3EB571795D4FD007D73B5 /* city-back.png in Resources */,
+				2DA3EB581795D4FD007D73B5 /* city-front.png in Resources */,
+				2DA3EB591795D4FD007D73B5 /* monster1.png in Resources */,
+				2DA3EB5A1795D4FD007D73B5 /* monster2.png in Resources */,
+				2DA3EB5B1795D4FD007D73B5 /* monster4.png in Resources */,
+				2DA3EB5C1795D4FD007D73B5 /* monster8.png in Resources */,
+				2DA3EB5D1795D4FD007D73B5 /* monster9.png in Resources */,
+				2DA3EB5F1795D510007D73B5 /* background_grid.png in Resources */,
+				2DA3EB611795D518007D73B5 /* background_topofcastle.png in Resources */,
+				2DA3EB631795D56B007D73B5 /* cat1.png in Resources */,
+				FE97A11B1795CC6A00017A1D /* thatWasEasy.wav in Resources */,
+				FE97A11C1795CC6A00017A1D /* gameOverLaugh.wav in Resources */,
+				FE97A1221795CCB200017A1D /* explo2.wav in Resources */,
 				FE97A25D1795CCD400017A1D /* background_belowground-hd.png in Resources */,
 				FE97A25E1795CCD400017A1D /* background_desert-hd.png in Resources */,
 				FE97A25F1795CCD400017A1D /* background_desert-topdown-hd.png in Resources */,
