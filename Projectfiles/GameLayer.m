@@ -118,54 +118,90 @@
         //Background and placeholders -Henry
         
         [self setIsTouchEnabled:YES];
-        
-        CCSprite *sprite = [CCSprite spriteWithFile:@"city-back.png"];
+       if (level==0)
+       {CCSprite *sprite = [CCSprite spriteWithFile:@"background_desert-topdown.png"];
         sprite.anchorPoint = CGPointZero;
         [self addChild:sprite z:-1];
         
-        sprite = [CCSprite spriteWithFile:@"gorilla.png"];
+        sprite = [CCSprite spriteWithFile:@"monster4.png"];
+        sprite.anchorPoint = CGPointZero;
+        sprite.position = CGPointMake(180.0f, 10.0f);
+        [self addChild:sprite z:0];
+        
+       }
+        if (level ==1)
+        {
+            CCSprite *sprite = [CCSprite spriteWithFile:@"background_grass-top.png"];
+            sprite.anchorPoint = CGPointZero;
+            [self addChild:sprite z:-1];
+            
+            sprite = [CCSprite spriteWithFile:@"monster8.png"];
+            sprite.anchorPoint = CGPointZero;
+            sprite.position = CGPointMake(180.0f, 10.0f);
+            [self addChild:sprite z:0];
+        }
+        if (level ==2)
+        {
+            CCSprite *sprite = [CCSprite spriteWithFile:@"background_grid.png"];
+            sprite.anchorPoint = CGPointZero;
+            [self addChild:sprite z:-1];
+            
+            sprite = [CCSprite spriteWithFile:@"monster9.png"];
+            sprite.anchorPoint = CGPointZero;
+            sprite.scale=.5;
+            sprite.position = CGPointMake(180.0f, 10.0f);
+            [self addChild:sprite z:0];
+        }
+        if (level ==3)
+        {
+            CCSprite *sprite = [CCSprite spriteWithFile:@"background_grass-topdown.png"];
+            sprite.anchorPoint = CGPointZero;
+            [self addChild:sprite z:-1];
+            
+            sprite = [CCSprite spriteWithFile:@"animation_knight-1.png"];
+            sprite.anchorPoint = CGPointZero;
+            sprite.scale=.5;
+            sprite.position = CGPointMake(180.0f, 10.0f);
+            [self addChild:sprite z:0];
+        }
+        if (level ==4)
+        {
+            CCSprite *sprite = [CCSprite spriteWithFile:@"city-back.png"];
+            sprite.anchorPoint = CGPointZero;
+            [self addChild:sprite z:-1];
+            
+            sprite = [CCSprite spriteWithFile:@"cat-main.png"];
+            sprite.anchorPoint = CGPointZero;
+            sprite.scale=.5;
+            sprite.position = CGPointMake(180.0f, 10.0f);
+            [self addChild:sprite z:0];
+        }
+        if (level ==5)
+        {
+            CCSprite *sprite = [CCSprite spriteWithFile:@"city-front.png"];
+            sprite.anchorPoint = CGPointZero;
+            [self addChild:sprite z:-1];
+            
+            sprite = [CCSprite spriteWithFile:@"cat3.png"];
+            sprite.anchorPoint = CGPointZero;
+            sprite.scale=.5;
+            sprite.position = CGPointMake(180.0f, 10.0f);
+            [self addChild:sprite z:0];
+        }
+        if (level==6)
+        {   CCSprite *sprite = [CCSprite spriteWithFile:@"background_topofcastle.png"];
+        sprite.anchorPoint = CGPointZero;
+        [self addChild:sprite z:-1];
+        
+        sprite = [CCSprite spriteWithFile:@"cat1.png"];
         sprite.anchorPoint = CGPointZero;
         sprite.scale=.5;
         sprite.position = CGPointMake(180.0f, 10.0f);
         [self addChild:sprite z:0];
+        }
+       
         
-        sprite = [CCSprite spriteWithFile:@"princess.png"];
-        sprite.anchorPoint = CGPointZero;
-        sprite.scale=.2;
-        sprite.position = CGPointMake(20.0f, FLOOR_HEIGHT);
-        [self addChild:sprite z:0];
-        [princesses addObject:sprite];
-        
-        sprite = [CCSprite spriteWithFile:@"princess.png"];
-        sprite.anchorPoint = CGPointZero;
-        sprite.scale=.2;
-        sprite.position = CGPointMake(100.0f, FLOOR_HEIGHT);
-        [self addChild:sprite z:0];
-        [princesses addObject:sprite];
-        
-        sprite = [CCSprite spriteWithFile:@"princess.png"];
-        sprite.anchorPoint = CGPointZero;
-        sprite.scale=.2;
-        sprite.position = CGPointMake(320.0f, FLOOR_HEIGHT);
-        [self addChild:sprite z:0];
-        [princesses addObject:sprite];
-        
-        sprite = [CCSprite spriteWithFile:@"princess.png"];
-        sprite.anchorPoint = CGPointZero;
-        sprite.scale=.2;
-        sprite.position = CGPointMake(400.0f, FLOOR_HEIGHT);
-        [self addChild:sprite z:0];
-        [princesses addObject:sprite];
-//        
-//        sprite = [CCSprite spriteWithFile:@"bananas.png"];
-//        sprite.anchorPoint = CGPointZero;
-//        sprite.scale=.4;
-//        sprite.position = CGPointMake(190.0f, FLOOR_HEIGHT);
-//        [self addChild:sprite z:0];
-//        
-        
-
-        enemiesKilledLabel = [CCLabelTTF labelWithString:@"Enemies Killed:0" fontName:@"Marker Felt" fontSize:18];
+            enemiesKilledLabel = [CCLabelTTF labelWithString:@"Enemies Killed:0" fontName:@"Marker Felt" fontSize:18];
         enemiesKilledLabel.position = ccp(360, 300);
         [self addChild:enemiesKilledLabel z:4];
         
@@ -446,12 +482,12 @@
         if([goodGuys count] > 0)
         {
             goodGuy = [goodGuys objectAtIndex:i];
-            princess = [princesses objectAtIndex:0];
+        
             if(goodGuy.position.y <= FLOOR_HEIGHT + 10)
             {
                 deaths++;
                 [goodGuys removeObject:goodGuy];
-                [princesses removeObject:princess];
+    
                 [self removeChild:badGuy cleanup:YES];
                 [self removeChild:princess cleanup:YES];
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
