@@ -22,6 +22,8 @@
     int deaths;
     int bar;
     int KmonsterFramecount;
+    int helicopterBombFramecount;
+    int helicopterFramecount;
     //int levelFramecount;
     int goodGuyFramecount;
     int badGuyFramecount;
@@ -34,10 +36,12 @@
     CCSprite *badGuy;
     CCSprite *enemy;
     CCSprite *goodGuy;
+    CCSprite *bomb;
     CCSprite *droppingEnemy;
     CCSprite *princess;
     CCSprite *background;
     CCSprite *Kamikaze;
+    CCSprite *helicopter;
     CCSprite *player;
     CCAction *rotateBanana;
     CCLabelTTF *LevelLabel;
@@ -49,6 +53,7 @@
     NSMutableArray *enemiesToDelete;
     NSMutableArray *Kmonsters;
     NSMutableArray *princessesToDelete;
+    NSMutableArray *helicopters;
     NSString *levelString;
     NSString *enemiesKilledString;
     CGRect badGuyRect;
@@ -68,7 +73,7 @@
 -(void) addBadGuy;
 -(void) pauseMenu: (CCMenuItemImage *)pauseButton;
 -(void) enemiesKilledTotal;
-
+-(void) addHelicopter;
 -(void) addLevel;
 -(void) subtractLevel;
 - (void) changeLevel;
