@@ -19,7 +19,8 @@
  
  @implementation GameLayer
 
-- (void) addKmonster {
+- (void) addKmonster
+{
     
     CCSprite * Kmonster = [CCSprite spriteWithFile:@"dragon-top.png"];
     Kmonster.scale=.25;
@@ -167,11 +168,61 @@
     
 }
 
-
 -(id) init
 {
 	if ((self = [super init]))
 	{
+        //bear animations
+        //Load the plist which tells Kobold2D how to properly parse your spritesheet. If on a retina device Kobold2D will automatically use bearframes-hd.plist
+        
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile: @"bearFrames.plist"];
+        
+        //Load in the spritesheet, if retina Kobold2D will automatically use bearframes-hd.png
+        
+        CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"bearFrames.png"];
+        
+        [self addChild:spriteSheet];
+        
+        //Define the frames based on the plist - note that for this to work, the original files must be in the format bear1, bear2, bear3 etc...
+        
+        //When it comes time to get art for your own original game, makegameswith.us will give you spritesheets that follow this convention, <spritename>1 <spritename>2 <spritename>3 etc...
+        
+        tauntingFrames = [NSMutableArray array];
+        
+        for(int i = 1; i <= 7; ++i)
+        {
+            [tauntingFrames addObject:
+             [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"bear%d.png", i]]];
+            
+        }
+        
+        //knight animations
+        //Load the plist which tells Kobold2D how to properly parse your spritesheet. If on a retina device Kobold2D will automatically use bearframes-hd.plist
+        
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile: @"knightframesflipped.plist"];
+        
+        //Load in the spritesheet, if retina Kobold2D will automatically use bearframes-hd.png
+        
+        spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"knightFramesFlipped.png"];
+        
+        [self addChild:spriteSheet];
+        
+        //Define the frames based on the plist - note that for this to work, the original files must be in the format bear1, bear2, bear3 etc...
+        
+        //When it comes time to get art for your own original game, makegameswith.us will give you spritesheets that follow this convention, <spritename>1 <spritename>2 <spritename>3 etc...
+        
+        knightAttackFrames = [NSMutableArray array];
+        
+        for(int i = 1; i <= 5; ++i)
+        {
+            [knightAttackFrames addObject:
+             [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"animation_knight-%dFlipped.png", i]]];
+            
+        }
+        
+        
+
+        
         [self setIsTouchEnabled:YES];
         
         bananasToDelete = [[NSMutableArray alloc] init];
@@ -193,13 +244,43 @@
         deaths = 0;
         enemiesKilled = 0;
         bar = 240;
+        //Animating bear
+        goodTeamCounter = [CCSprite spriteWithSpriteFrameName:@"bear1.png"];
+        goodTeamCounter.anchorPoint = CGPointZero;
+        goodTeamCounter.position = CGPointMake(bar - 40, goodTeamCounter.contentSize.height/2 - 35);
+        goodTeamCounter.scale = .5;
+        //Create an animation from the set of frames you created earlier
         
-        [self changeLevel];
+        CCAnimation *taunting = [CCAnimation animationWithFrames: tauntingFrames delay:0.2f];
+        
+        //Create an action with the animation that can then be assigned to a sprite
+        
+        taunt = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:taunting restoreOriginalFrame:NO]];
+        
+        //tell the bear to run the taunting action
+        [goodTeamCounter runAction:taunt];
+        [self addChild:goodTeamCounter z:1];
+        
+        
+        //Animating knight
+        badTeamCounter = [CCSprite spriteWithSpriteFrameName:@"animation_knight-1Flipped.png"];
+        badTeamCounter.anchorPoint = CGPointZero;
+        badTeamCounter.position = CGPointMake(bar + 40, badTeamCounter.contentSize.height/2 - 35);
+        badTeamCounter.scale = .2;
+        //Create an animation from the set of frames you created earlier
+        
+        CCAnimation *attacking = [CCAnimation animationWithFrames: knightAttackFrames delay:0.2f];
+        
+        //Create an action with the animation that can then be assigned to a sprite
+        
+        knightAttack = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:attacking restoreOriginalFrame:NO]];
+        
+        //tell the bear to run the taunting action
+        [badTeamCounter runAction:knightAttack];
+        [self addChild:badTeamCounter z:1];
+   
         
         //Background and placeholders -Henry
-        
-       
-       
         
             enemiesKilledLabel = [CCLabelTTF labelWithString:@"Enemies Killed:0" fontName:@"Marker Felt" fontSize:18];
         enemiesKilledLabel.position = ccp(360, 300);
@@ -234,12 +315,11 @@
     return self;
 }
 
-
- 
-
 -(void) update:(ccTime)delta
 {
-   
+    goodTeamCounter.position = CGPointMake(bar - 40, goodTeamCounter.contentSize.height/2 - 35);
+    badTeamCounter.position = CGPointMake(bar + 5, badTeamCounter.contentSize.height/2 - 105);
+    
     if(bar >= 480)
     {
         if(level >=3)
@@ -627,7 +707,10 @@
                 {
                     bar+=100 + ((3 - level) * 5) ;
                 }
-                bar += 50;
+                else
+                {
+                    bar += 50;
+                }
             }
         }
     }
@@ -762,7 +845,7 @@
     [self addChild:background z:-1];
     
     player.anchorPoint = CGPointZero;
-    player.position = CGPointMake(180.0f, 10.0f);
+    player.position = CGPointMake(180.0f, 20.0f);
     player.scale = .3;
     [self addChild:player z:0];
 }

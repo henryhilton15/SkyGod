@@ -46,6 +46,8 @@
     CCAction *rotateBanana;
     CCLabelTTF *LevelLabel;
     CCLabelTTF *enemiesKilledLabel;
+    CCSprite *goodTeamCounter;
+    CCSprite *badTeamCounter;
     Rect goodRect;
     Rect badRect;
     NSMutableArray *bananaFrames;
@@ -59,9 +61,12 @@
     CGRect badGuyRect;
     CGRect KamikazeBox;
     CGRect goodGuyRect;
-
-
+    CCAction *taunt;
+    NSMutableArray *tauntingFrames;
+    CCAction *knightAttack;
+    NSMutableArray *knightAttackFrames;
 }
+
 -(id) init;
 -(void) update:(ccTime)delta;
 -(void) draw;
@@ -76,7 +81,7 @@
 -(void) addHelicopter;
 -(void) addLevel;
 -(void) subtractLevel;
-- (void) changeLevel;
+-(void) changeLevel;
 
 -(void) drawLevel0;
 -(void) drawLevel1;
