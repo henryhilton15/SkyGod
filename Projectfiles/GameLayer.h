@@ -21,6 +21,7 @@
     int enemiesKilled;
     int deaths;
     int bar;
+    int KmonsterFramecount;
     //int levelFramecount;
     int goodGuyFramecount;
     int badGuyFramecount;
@@ -36,6 +37,7 @@
     CCSprite *droppingEnemy;
     CCSprite *princess;
     CCSprite *background;
+    CCSprite *Kamikaze;
     CCSprite *player;
     CCAction *rotateBanana;
     CCLabelTTF *LevelLabel;
@@ -45,9 +47,13 @@
     NSMutableArray *bananaFrames;
     NSMutableArray *bananasToDelete;
     NSMutableArray *enemiesToDelete;
+    NSMutableArray *Kmonsters;
     NSMutableArray *princessesToDelete;
     NSString *levelString;
     NSString *enemiesKilledString;
+    CGRect badGuyRect;
+    CGRect KamikazeBox;
+    CGRect goodGuyRect;
 
 
 }
@@ -74,6 +80,7 @@
 -(void) drawLevel4;
 -(void) drawLevel5;
 -(void) drawLevel6;
+-(void) detectKmonsterWrongGuyCollisions;
 
 
 

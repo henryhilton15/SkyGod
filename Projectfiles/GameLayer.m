@@ -19,6 +19,37 @@
  
  @implementation GameLayer
 
+- (void) addKmonster {
+    
+    CCSprite * Kmonster = [CCSprite spriteWithFile:@"dragon-top.png"];
+    Kmonster.scale=.25;
+    // Determine where to spawn the monster along the Y axis
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    int minY = Kmonster.contentSize.height / 2;
+    int maxY = winSize.height - Kmonster.contentSize.height/2;
+    int rangeY = maxY - minY;
+    int actualY = arc4random() % rangeY;
+    
+    // Create the monster slightly off-screen along the right edge,
+    // and along a random position along the Y axis as calculated above
+    Kmonster.position = ccp(winSize.width + Kmonster.contentSize.width/2, actualY);
+    [self addChild:Kmonster];
+    [Kmonsters addObject:Kmonster];
+    
+    // Determine speed of the monster
+    int minDuration2 =3.0;
+    int maxDuration2 = 5.0;
+    int rangeDuration2 = maxDuration2 - minDuration2;
+    int actualDuration2 = (arc4random() % rangeDuration2) + minDuration2;
+    
+    // Create the actions
+    CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration2
+                                                position:ccp(-Kmonster.contentSize.width/2, actualY)];
+    CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
+        [node removeFromParentAndCleanup:YES];
+    }];
+    [Kmonster runAction:[CCSequence actions:actionMove, actionMoveDone, nil]];
+}
 
 -(void) addGoodGuy
 {
@@ -107,12 +138,13 @@
         goodGuys = [[NSMutableArray alloc] init];
       
         badGuys = [[NSMutableArray alloc] init];
-        
+        Kmonsters = [[NSMutableArray alloc] init];
         framecount = 0;
         goodGuyFramecount = 150;
         badGuyFramecount = 150;
         monstercount = 0;
         numberOfEnemies = 10;
+        KmonsterFramecount=250;
 
         level = 3;
         deaths = 0;
@@ -227,8 +259,25 @@
         [self detectBananaBadGuyCollisions];
     }
     
-}
+    if(level<=2 || level>=4)
+    {
+        if(framecount % KmonsterFramecount == 0)
+        {
+    
+      [self addKmonster];
+        }
+    }
+    if ([goodGuys count] > 0 && [Kmonsters count] > 0)
+     {
+        [self detectKmonsterWrongGuyCollisions];
 
+     }
+    if ([badGuys count] > 0 && [Kmonsters count] > 0)
+    {
+        [self detectKmonsterWrongGuyCollisions];
+        
+    }
+}
 
 -(void) draw
 {
@@ -373,6 +422,71 @@
     //[enemiesToDelete removeAllObjects];
     //[bananasToDelete removeAllObjects];
 
+-(void) detectKmonsterWrongGuyCollisions
+{
+    if(level<=2)
+    {
+        for(int j=0; j < [badGuys count]; j++)
+        {
+            for (int i = 0; i < [Kmonsters count]; i++)
+            {
+                    if ([Kmonsters count ] > 0 && [badGuys count] > 0)
+            
+                    {
+                        badGuy = [badGuys objectAtIndex:j];
+                        CGRect badGuyRect = [badGuy boundingBox];
+                        Kamikaze= [Kmonsters objectAtIndex:i];
+                        CGRect KamikazeBox = [Kamikaze boundingBox];
+                    }
+                if(CGRectIntersectsRect(badGuyRect,KamikazeBox))
+                {
+                    if (Kamikaze.position.y < 315)
+                    {
+                        [badGuys removeObjectAtIndex:j];
+                        [Kmonsters removeObjectAtIndex:i];
+                        [self removeChild:badGuy cleanup:YES];
+                        [self removeChild:Kamikaze cleanup:YES];
+
+                    }
+                }
+            }
+        }
+    }
+
+
+    if(level>=4)
+    {
+        for(int j=0; j < [goodGuys count]; j++)
+        {
+            for (int i = 0; i < [Kmonsters count]; i++)
+            {
+                if ([Kmonsters count ] > 0 && [goodGuys count] > 0)
+                    
+                {
+                    goodGuy = [goodGuys objectAtIndex:j];
+                    CGRect goodGuyRect = [goodGuy boundingBox];
+                    Kamikaze= [Kmonsters objectAtIndex:i];
+                    CGRect KamikazeBox = [Kamikaze boundingBox];
+                }
+                if(CGRectIntersectsRect(goodGuyRect,KamikazeBox))
+                {
+                    if (Kamikaze.position.y < 315)
+                    {
+                        [goodGuys removeObjectAtIndex:j];
+                        [Kmonsters removeObjectAtIndex:i];
+                        [self removeChild:goodGuy cleanup:YES];
+                        [self removeChild:Kamikaze cleanup:YES];
+                        
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+}
 -(void) detectBananaBadGuyCollisions
 {
     for(int j = 0; j < [badGuys count]; j++)
