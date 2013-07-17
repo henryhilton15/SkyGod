@@ -23,6 +23,9 @@
     int bar;
     int distance;
     int moves;
+    int KmonsterFramecount;
+    int helicopterBombFramecount;
+    int helicopterFramecount;
     //int levelFramecount;
     int goodGuyFramecount;
     int badGuyFramecount;
@@ -36,9 +39,12 @@
     CCSprite *badGuy;
     CCSprite *enemy;
     CCSprite *goodGuy;
+    CCSprite *bomb;
     CCSprite *droppingEnemy;
     CCSprite *princess;
     CCSprite *background;
+    CCSprite *Kamikaze;
+    CCSprite *helicopter;
     CCSprite *player;
     CCSprite *zenemy;
     CCAction *rotateBanana;
@@ -49,9 +55,14 @@
     NSMutableArray *bananaFrames;
     NSMutableArray *bananasToDelete;
     NSMutableArray *enemiesToDelete;
+    NSMutableArray *Kmonsters;
     NSMutableArray *princessesToDelete;
+    NSMutableArray *helicopters;
     NSString *levelString;
     NSString *enemiesKilledString;
+    CGRect badGuyRect;
+    CGRect KamikazeBox;
+    CGRect goodGuyRect;
 
 
 }
@@ -68,11 +79,15 @@
 -(void) enemiesKilledTotal;
 -(void) addZigZagBadGuy;
 
+-(void) addHelicopter;
 -(void) addLevel;
 -(void) subtractLevel;
 - (void) changeLevel;
 
+-(void) detectKmonsterWrongGuyCollisions;
 
+-(void) zigLeft;
+-(void) zagRight;
 
 
 
