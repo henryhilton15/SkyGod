@@ -69,15 +69,15 @@
     int actualX = arc4random() % rangeX;
     
     // Determine speed of the monster
-    int minDuration = 3.5;
-    int maxDuration = 6.0;
+    minDuration = 3.5;
+    maxDuration = 6.0;
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
     
     // Create the monster slightly off-screen along the right edge,
     // and along a random position along the Y axis as calculated above
-    doubleEnemy *enemy= [[doubleEnemy alloc] initWithDoubleEnemyImage];
+    enemy= [[doubleEnemy alloc] initWithDoubleEnemyImage];
     enemy.scale=.15;
     enemy.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:enemy];
@@ -93,7 +93,70 @@
     
 }
 
+- (void) addZigZagBadGuy
+{
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    int minX = 3;
+    int maxX = winSize.width - 3;
+    int rangeX = maxX - minX;
+    int actualX = arc4random() % rangeX;
 
+//    minDuration = 3.5;
+//    maxDuration = 6.0;
+//    
+//    int rangeDuration = maxDuration - minDuration;
+//    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    
+
+    
+    zenemy= [CCSprite spriteWithFile:@"monster4.png"];
+    zenemy.scale=.15;
+    zenemy.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
+    [self addChild:zenemy];
+    [badGuys addObject:zenemy];
+    //float myDelay = 1.0;
+    //moves = 0;
+    for(int i = 0; i < 8; i++)
+    {
+        //[self performSelector:@selector(zigZag) withObject:nil afterDelay:myDelay];
+        //moves++;
+        CGPoint lastZagPoint = ccp(zenemy.position.x, zenemy.position.y);
+        if(i%2 == 0)
+        {
+            distance = 50;
+        }
+        if(i%2 == 1)
+        {
+            distance = -50;
+        }
+        
+        CCMoveTo *zigZag = [CCMoveTo actionWithDuration:2
+                                               position:ccp(lastZagPoint.x + distance, lastZagPoint.y - 40)];
+        [zenemy runAction:zigZag];
+        NSLog(@"move");
+    }
+   //[zenemy removeFromParentAndCleanup:YES];
+}
+/*
+-(void) zigZag
+{
+    CGPoint lastZagPoint = ccp(zenemy.position.x, zenemy.position.y);
+    if(moves%2 == 0)
+    {
+        distance = 50;
+    }
+    if(moves%2 == 1)
+    {
+        distance = -50;
+    }
+    
+    CCMoveTo *zigZag = [CCMoveTo actionWithDuration:1
+                                           position:ccp(lastZagPoint.x + distance, lastZagPoint.y - 40)];
+    [zenemy runAction:zigZag];
+    NSLog(@"move");
+}
+*/
+ 
 -(id) init
 {
 	if ((self = [super init]))
@@ -205,7 +268,14 @@
     
         if((framecount - 50) % badGuyFramecount == 0)
         {
-            [self addBadGuy];
+            if(random() % 2 == 0)
+            {
+                [self addBadGuy];
+            }
+            else
+            {
+                [self addZigZagBadGuy];
+            }
         }
 
         

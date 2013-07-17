@@ -21,6 +21,8 @@
     int enemiesKilled;
     int deaths;
     int bar;
+    int distance;
+    int moves;
     //int levelFramecount;
     int goodGuyFramecount;
     int badGuyFramecount;
@@ -28,6 +30,7 @@
     NSMutableArray *goodGuys;
     NSMutableArray *princesses;
     NSMutableArray *badGuys;
+    //NSMutableArray *zenemies;
     CGPoint loc;
     CCSprite *projectile;
     CCSprite *badGuy;
@@ -37,6 +40,7 @@
     CCSprite *princess;
     CCSprite *background;
     CCSprite *player;
+    CCSprite *zenemy;
     CCAction *rotateBanana;
     CCLabelTTF *LevelLabel;
     CCLabelTTF *enemiesKilledLabel;
@@ -62,18 +66,12 @@
 -(void) addBadGuy;
 -(void) pauseMenu: (CCMenuItemImage *)pauseButton;
 -(void) enemiesKilledTotal;
+-(void) addZigZagBadGuy;
 
 -(void) addLevel;
 -(void) subtractLevel;
 - (void) changeLevel;
 
--(void) drawLevel0;
--(void) drawLevel1;
--(void) drawLevel2;
--(void) drawLevel3;
--(void) drawLevel4;
--(void) drawLevel5;
--(void) drawLevel6;
 
 
 
