@@ -93,6 +93,49 @@
     
 }
 
+-(void) addHelicopter
+{
+    // Determine where to spawn the monster along the X axis
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    int minY = 250;
+    int maxY = 310;
+    int rangeY = maxY - minY;
+    int actualY = (arc4random() % rangeY) + minY;
+    
+    // Determine speed of the monster
+    minDuration = 6.0;
+    maxDuration = 8.0;
+    
+    int rangeDuration = maxDuration - minDuration;
+    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    
+    
+    // Create the monster slightly off-screen along the right edge,
+    // and along a random position along the Y axis as calculated above
+    if(level < 3)
+    {
+        enemy = [CCSprite spriteWithFile:@"planet.png"];
+    }
+    if(level > 3)
+    {
+        enemy = [CCSprite spriteWithFile:@"barrell.png"];
+    }
+    enemy.scale=.5;
+    
+    enemy.position = ccp(-enemy.contentSize.width, actualY); //+ enemy.contentSize.height/2);
+    [self addChild:enemy];
+    [helicopters addObject:enemy];
+    
+    // Create the actions
+    CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
+                                                position:ccp(winSize.width + enemy.contentSize.width/2, actualY)];
+    //        CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
+    //            [node removeFromParentAndCleanup:YES];
+    //        }];
+    [enemy runAction:actionMove];//[CCSequence actions:actionMove, actionMoveDone, nil]];
+    
+}
+
 
 -(id) init
 {
@@ -102,17 +145,18 @@
         
         bananasToDelete = [[NSMutableArray alloc] init];
         enemiesToDelete= [[NSMutableArray alloc] init];
-       
+        helicopters = [[NSMutableArray alloc] init];
         bananaArray = [[NSMutableArray alloc] init];
         goodGuys = [[NSMutableArray alloc] init];
-      
         badGuys = [[NSMutableArray alloc] init];
         
         framecount = 0;
         goodGuyFramecount = 150;
         badGuyFramecount = 150;
+        helicopterBombFramecount = 75;
         monstercount = 0;
         numberOfEnemies = 10;
+        helicopterFramecount = 200;
 
         level = 3;
         deaths = 0;
@@ -171,7 +215,7 @@
         {
             [self addLevel];
             NSLog(@"Starting level %d", level);
-            bar =240;
+            bar = 240;
             [self changeLevel];
         }
         else
@@ -197,23 +241,74 @@
     }
 
     framecount++;
+    if(framecount % goodGuyFramecount == 0)
     {
-        if(framecount % goodGuyFramecount == 0)
-        {
-            [self addGoodGuy];
-        }
+        [self addGoodGuy];
+    }
     
-        if((framecount - 50) % badGuyFramecount == 0)
+    if((framecount - (int)(.5 * goodGuyFramecount)) % badGuyFramecount == 0)
+    {
+        [self addBadGuy];
+    }
+    if(framecount % helicopterFramecount && level !=3 && [helicopters count] == 0)
+    {
+        [self addHelicopter];
+    }
+    
+    if([helicopters count] > 0)
+    {
+        for(int i = 0; i < [helicopters count]; i++)
         {
-            [self addBadGuy];
-        }
-
+            if(framecount%helicopterBombFramecount == 0)
+            {
+                helicopter = [helicopters objectAtIndex:i];
+                CGPoint helicopterPosition = ccp(helicopter.position.x, helicopter.position.y);
+                // Determine speed of the monster
+                int minDuration = 4.0;
+                int maxDuration = 6.0;
+                int rangeDuration = maxDuration - minDuration;
+                int actualDuration = (arc4random() % rangeDuration) + minDuration;
+                
+                // Create the monster slightly off-screen along the right edge,
+                // and along a random position along the Y axis as calculated above
+                if(level > 3)
+                {
+                    bomb = [CCSprite spriteWithFile:@"basicbarrell.png"];
+                    bomb.scale=.15;
+                    bomb.position = helicopterPosition; //+ enemy.contentSize.height/2);
+                    [self addChild:bomb];
+                    [badGuys addObject:bomb];
+                }
+                if(level < 3)
+                {
+                    bomb = [CCSprite spriteWithFile:@"block.png"];
+                    bomb.scale=.15;
+                    bomb.position = helicopterPosition; //+ enemy.contentSize.height/2);
+                    [self addChild:bomb];
+                    [goodGuys addObject:bomb];
+                }
+               
+                
+                // Create the actions
+                CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
+                                                            position:ccp(helicopterPosition.x, -bomb.contentSize.height/2)];
+                    //        CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
+                //            [node removeFromParentAndCleanup:YES];
+                //        }];
+                [bomb runAction:actionMove];
+            }
+            if(helicopter.position.x == 480 + helicopter.contentSize.width/2)
+            {
+                [helicopters removeObject:helicopter];
+                [self removeChild:helicopter cleanup:YES];
+                NSLog(@"removed helicopter");
+            }
         
+        }
     }
     
     if([goodGuys count] > 0 || [badGuys count] > 0)
     {
-        
         [self detectReachBottom];
     }
     
@@ -323,14 +418,7 @@
            [node removeFromParentAndCleanup:YES];
        }],
       nil]];
-    
-    
-    
-    
 }
-
-
-
 
 -(void) detectBananaGoodGuyCollisions
 {
@@ -422,7 +510,7 @@
                 [goodGuys removeObject:goodGuy];
                 [self removeChild:goodGuy cleanup:YES];
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
-                if(level<3)
+                if(level>3)
                 {
                     bar+=100 + ((3 - level) * 5) ;
                 }
@@ -444,7 +532,7 @@
 
                 [self removeChild:badGuy cleanup:YES];
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
-                if(level>3)
+                if(level<3)
                 {
                     bar -= 100 + ((level - 3) * 5);
                 }

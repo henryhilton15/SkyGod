@@ -485,7 +485,7 @@
 		2D808AE31795F5BA006EADF5 /* tree2-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tree2-hd.png"; sourceTree = "<group>"; };
 		2D808AE41795F5BA006EADF5 /* trees-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trees-hd.png"; sourceTree = "<group>"; };
 		2D808AE61795F5BA006EADF5 /* barrell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barrell.png; sourceTree = "<group>"; };
-		2D808AE71795F5BA006EADF5 /* basicbarrell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basicbarrell.png; sourceTree = "<group>"; };
+		2D808AE71795F5BA006EADF5 /* basicbarrell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = basicbarrell.png; path = "Placeholder Art Monsters vs Kittens/environment/regular/basicbarrell.png"; sourceTree = "<group>"; };
 		2D808AE81795F5BA006EADF5 /* block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block.png; sourceTree = "<group>"; };
 		2D808AE91795F5BA006EADF5 /* bush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bush.png; sourceTree = "<group>"; };
 		2D808AEA1795F5BA006EADF5 /* chest-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chest-open.png"; sourceTree = "<group>"; };
@@ -497,7 +497,7 @@
 		2D808AF01795F5BA006EADF5 /* mailbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mailbox.png; sourceTree = "<group>"; };
 		2D808AF11795F5BA006EADF5 /* moon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moon.png; sourceTree = "<group>"; };
 		2D808AF21795F5BA006EADF5 /* palmtree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = palmtree.png; sourceTree = "<group>"; };
-		2D808AF31795F5BA006EADF5 /* planet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planet.png; sourceTree = "<group>"; };
+		2D808AF31795F5BA006EADF5 /* planet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = planet.png; path = "Placeholder Art Monsters vs Kittens/environment/regular/planet.png"; sourceTree = "<group>"; };
 		2D808AF41795F5BA006EADF5 /* platform.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = platform.png; sourceTree = "<group>"; };
 		2D808AF51795F5BA006EADF5 /* ramp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ramp.png; sourceTree = "<group>"; };
 		2D808AF61795F5BA006EADF5 /* rocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rocks.png; sourceTree = "<group>"; };
@@ -828,6 +828,8 @@
 				2D808A8B1795F5BA006EADF5 /* monster1.png */,
 				2D808A8C1795F5BA006EADF5 /* monster2.png */,
 				2D808A8D1795F5BA006EADF5 /* monster4.png */,
+				2D808AF31795F5BA006EADF5 /* planet.png */,
+				2D808AE71795F5BA006EADF5 /* basicbarrell.png */,
 				2D808A8E1795F5BA006EADF5 /* monster8.png */,
 				2D808A8F1795F5BA006EADF5 /* monster9.png */,
 				2D808A901795F5BA006EADF5 /* Placeholder Art Monsters vs Kittens */,
@@ -1004,7 +1006,6 @@
 			isa = PBXGroup;
 			children = (
 				2D808AE61795F5BA006EADF5 /* barrell.png */,
-				2D808AE71795F5BA006EADF5 /* basicbarrell.png */,
 				2D808AE81795F5BA006EADF5 /* block.png */,
 				2D808AE91795F5BA006EADF5 /* bush.png */,
 				2D808AEA1795F5BA006EADF5 /* chest-open.png */,
@@ -1016,7 +1017,6 @@
 				2D808AF01795F5BA006EADF5 /* mailbox.png */,
 				2D808AF11795F5BA006EADF5 /* moon.png */,
 				2D808AF21795F5BA006EADF5 /* palmtree.png */,
-				2D808AF31795F5BA006EADF5 /* planet.png */,
 				2D808AF41795F5BA006EADF5 /* platform.png */,
 				2D808AF51795F5BA006EADF5 /* ramp.png */,
 				2D808AF61795F5BA006EADF5 /* rocks.png */,
