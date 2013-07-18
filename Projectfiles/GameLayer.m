@@ -104,15 +104,15 @@
     int actualX = arc4random() % rangeX;
     
     // Determine speed of the monster
-    int minDuration = 3.5;
-    int maxDuration = 6.0;
+    minDuration = 3.5;
+    maxDuration = 6.0;
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
     
     // Create the monster slightly off-screen along the right edge,
     // and along a random position along the Y axis as calculated above
-    doubleEnemy *enemy= [[doubleEnemy alloc] initWithDoubleEnemyImage];
+    enemy= [[doubleEnemy alloc] initWithDoubleEnemyImage];
     enemy.scale=.15;
     enemy.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:enemy];
@@ -127,7 +127,6 @@
     [enemy runAction:actionMove];//[CCSequence actions:actionMove, actionMoveDone, nil]];
     
 }
-
 -(void) addHelicopter
 {
     // Determine where to spawn the monster along the X axis
@@ -170,6 +169,98 @@
     [enemy runAction:actionMove];//[CCSequence actions:actionMove, actionMoveDone, nil]];
     
 }
+
+- (void) addZigZagBadGuy
+{
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    int minX = 3;
+    int maxX = winSize.width - 3;
+    int rangeX = maxX - minX;
+    int actualX = arc4random() % rangeX;
+
+
+//    minDuration = 3.5;
+//    maxDuration = 6.0;
+//    
+//    int rangeDuration = maxDuration - minDuration;
+//    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    
+
+    
+    zenemy= [CCSprite spriteWithFile:@"monster4.png"];
+    zenemy.scale=.15;
+    zenemy.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
+    [self addChild:zenemy];
+    [badGuys addObject:zenemy];
+
+    
+    int x = zenemy.position.x;
+    int y = zenemy.position.y;
+    
+    float timeInterval = 2.0f;
+
+    
+//    id delay = [CCDelayTime actionWithDuration:timeInterval];
+    
+    id leftTop = [CCMoveTo actionWithDuration:1.0
+            position:ccp(x - 80, y - 60)];
+
+    
+    id rightTop = [CCMoveTo actionWithDuration:1.0
+            position:ccp(x + 80, y - 120)];
+    
+    id leftMid = [CCMoveTo actionWithDuration:1.0
+            position:ccp(x - 80, y - 180)];
+    
+    id rightMid = [CCMoveTo actionWithDuration:1.0
+            position:ccp(x + 80, y - 240)];
+    
+ 
+    
+    id leftLow = [CCMoveTo actionWithDuration:1.0
+            position:ccp(x - 80, y - 300)];
+    
+    
+    id rightLow = [CCMoveTo actionWithDuration:1.0
+            position:ccp(x + 80, y - 360)];
+    
+ 
+    
+    [zenemy runAction:[CCSequence actions:leftTop, rightTop, leftMid, rightMid, leftLow, rightLow, nil]];
+
+}
+
+
+
+//-(void) zigLeft
+//{
+//    int x = zenemy.position.x;
+//    int y = zenemy.position.y;
+//    distance = -50;
+//    
+//    CCMoveTo *zLeft = [CCMoveTo actionWithDuration:2.0
+//    position:ccp(x + distance, y - 40)];
+//    [zenemy runAction:zLeft];
+//    NSLog(@"zLeft");
+//
+//}
+//
+//
+//-(void) zagRight
+//{
+//    int x = zenemy.position.x;
+//    int y = zenemy.position.y;
+//    distance = 50;
+//
+//    
+//    CCMoveTo *zRight = [CCMoveTo actionWithDuration:2
+//    position:ccp(x + distance, y - 40)];
+//    [zenemy runAction:zRight];
+//    NSLog(@"zRight");
+//}
+
+
+
 
 
 -(id) init
@@ -293,25 +384,43 @@
             [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
         }
     }
+    if (level != 3)
+    {
+        [self ScenarioGenerator];
+        [self CreateScenario];
+    }
 
     framecount++;
-    if(framecount % goodGuyFramecount == 0)
+    if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true)
     {
-        if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true) {
+        
+        if(framecount % goodGuyFramecount == 0)
+        {
+       
         [self addGoodGuy];
+        
+        
         }
     }
-    
-    if((framecount - (int)(.5 * goodGuyFramecount)) % badGuyFramecount == 0)
+    if(Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true)
     {
-       if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true) {
-        [self addBadGuy];
-       }
+        if((framecount - (int)(.5 * goodGuyFramecount)) % badGuyFramecount == 0)
+        {
+            [self addBadGuy];
+        
+       
+                if(random() % 2 == 0)
+                {
+                    [self addBadGuy];
+                }
+            else
+                {
+                [self addZigZagBadGuy];
+                    }
+        }
+
     }
-    if(framecount % helicopterFramecount && level !=3 && [helicopters count] == 0)
-    {
-        [self addHelicopter];
-    }
+
     
     if([helicopters count] > 0)
     {
@@ -398,7 +507,10 @@
         [self detectKmonsterWrongGuyCollisions];
         
     }
-}
+    
+    }
+
+
 
 -(void) draw
 {
@@ -544,26 +656,24 @@
         {
             for (int i = 0; i < [Kmonsters count]; i++)
             {
-                    if ([Kmonsters count ] > 0 && [badGuys count] > 0)
-            
-                    {
+                if ([Kmonsters count ] > 0 && [badGuys count] > 0)
+                {
                         badGuy = [badGuys objectAtIndex:j];
                         CGRect badGuyRect = [badGuy boundingBox];
                         Kamikaze= [Kmonsters objectAtIndex:i];
                         CGRect KamikazeBox = [Kamikaze boundingBox];
-                    }
+                }
                 if(CGRectIntersectsRect(badGuyRect,KamikazeBox))
-                
-                    {
+                {
                         [badGuys removeObjectAtIndex:j];
                         [Kmonsters removeObjectAtIndex:i];
                         [self removeChild:badGuy cleanup:YES];
                         [self removeChild:Kamikaze cleanup:YES];
 
-                    }
                 }
             }
         }
+    }
 
 
 
@@ -595,11 +705,8 @@
             }
         }
     }
-
-
-
-
 }
+    
 -(void) detectBananaBadGuyCollisions
 {
     for(int j = 0; j < [badGuys count]; j++)
@@ -623,7 +730,7 @@
                         [self removeChild:projectile cleanup:YES];
                         [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
                         [self enemiesKilledTotal];
-                        [self ScenarioGenerator];
+                        //[self ScenarioGenerator];
                             //[enemiesToDelete addObject:badGuy];
                             //[bananasToDelete addObject:projectile];
                     }
@@ -790,7 +897,7 @@
     
     player.anchorPoint = CGPointZero;
     player.position = CGPointMake(180.0f, 10.0f);
-    player.scale = .3;
+    player.scale = .2;
     [self addChild:player z:0];
 }
 
@@ -798,13 +905,15 @@
 {
     if (enemiesKilled >=10)
     {
-        scenarioNumber = arc4random() % 4;
-        {
+        //if (level >=4 || level <= 2)
+        //{
+            scenarioNumber = arc4random() % 4;
+            
             if (scenarioNumber == 1)
             {
                 Scenario1 = true;
             }
-            if (scenarioNumber == 2)  
+            if (scenarioNumber == 2)
             {
                 Scenario2 = true;
             }
@@ -816,17 +925,20 @@
             {
                 Scenario4 = true;
             }
+        }
     }
+//}
 
-  }
-
-}
 
 -(void)CreateScenario
 {
     if(Scenario1 == true)
     {
-        
+        if(framecount % helicopterFramecount == 0)
+        {
+            NSLog(@"adding helicopter");
+            [self addHelicopter];
+        }
     }
     if(Scenario2 == true)
     {
@@ -840,6 +952,6 @@
     {
         
     }
-    
 }
+    
 @end
