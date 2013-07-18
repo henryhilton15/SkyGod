@@ -21,6 +21,8 @@
     int enemiesKilled;
     int deaths;
     int bar;
+    int distance;
+    int moves;
     int KmonsterFramecount;
     int helicopterBombFramecount;
     int helicopterFramecount;
@@ -31,6 +33,7 @@
     NSMutableArray *goodGuys;
     NSMutableArray *princesses;
     NSMutableArray *badGuys;
+    //NSMutableArray *zenemies;
     CGPoint loc;
     CCSprite *projectile;
     CCSprite *badGuy;
@@ -43,6 +46,7 @@
     CCSprite *Kamikaze;
     CCSprite *helicopter;
     CCSprite *player;
+    CCSprite *zenemy;
     CCAction *rotateBanana;
     CCLabelTTF *LevelLabel;
     CCLabelTTF *enemiesKilledLabel;
@@ -78,20 +82,17 @@
 -(void) addBadGuy;
 -(void) pauseMenu: (CCMenuItemImage *)pauseButton;
 -(void) enemiesKilledTotal;
+-(void) addZigZagBadGuy;
+
 -(void) addHelicopter;
 -(void) addLevel;
 -(void) subtractLevel;
 -(void) changeLevel;
 
--(void) drawLevel0;
--(void) drawLevel1;
--(void) drawLevel2;
--(void) drawLevel3;
--(void) drawLevel4;
--(void) drawLevel5;
--(void) drawLevel6;
 -(void) detectKmonsterWrongGuyCollisions;
 
+-(void) zigLeft;
+-(void) zagRight;
 
 
 

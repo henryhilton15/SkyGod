@@ -101,15 +101,15 @@
     int actualX = arc4random() % rangeX;
     
     // Determine speed of the monster
-    int minDuration = 3.5;
-    int maxDuration = 6.0;
+    minDuration = 3.5;
+    maxDuration = 6.0;
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
     
     // Create the monster slightly off-screen along the right edge,
     // and along a random position along the Y axis as calculated above
-    doubleEnemy *enemy= [[doubleEnemy alloc] initWithDoubleEnemyImage];
+    enemy= [[doubleEnemy alloc] initWithDoubleEnemyImage];
     enemy.scale=.15;
     enemy.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:enemy];
@@ -124,7 +124,6 @@
     [enemy runAction:actionMove];//[CCSequence actions:actionMove, actionMoveDone, nil]];
     
 }
-
 -(void) addHelicopter
 {
     // Determine where to spawn the monster along the X axis
@@ -167,6 +166,97 @@
     [enemy runAction:actionMove];//[CCSequence actions:actionMove, actionMoveDone, nil]];
     
 }
+
+
+- (void) addZigZagBadGuy
+{
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    int minX = 3;
+    int maxX = winSize.width - 3;
+    int rangeX = maxX - minX;
+    int actualX = arc4random() % rangeX;
+
+
+//    minDuration = 3.5;
+//    maxDuration = 6.0;
+//    
+//    int rangeDuration = maxDuration - minDuration;
+//    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    
+
+    
+    zenemy= [CCSprite spriteWithFile:@"monster4.png"];
+    zenemy.scale=.15;
+    zenemy.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
+    [self addChild:zenemy];
+    [badGuys addObject:zenemy];
+
+    
+    int x = zenemy.position.x;
+    int y = zenemy.position.y;
+    
+    float timeInterval = 2.0f;
+
+    
+//    id delay = [CCDelayTime actionWithDuration:timeInterval];
+    
+    id leftTop = [CCMoveTo actionWithDuration:1.0
+            position:ccp(x - 80, y - 60)];
+
+    
+    id rightTop = [CCMoveTo actionWithDuration:1.0
+            position:ccp(x + 80, y - 120)];
+    
+    id leftMid = [CCMoveTo actionWithDuration:1.0
+            position:ccp(x - 80, y - 180)];
+    
+    id rightMid = [CCMoveTo actionWithDuration:1.0
+            position:ccp(x + 80, y - 240)];
+    
+ 
+    
+    id leftLow = [CCMoveTo actionWithDuration:1.0
+            position:ccp(x - 80, y - 300)];
+    
+    
+    id rightLow = [CCMoveTo actionWithDuration:1.0
+            position:ccp(x + 80, y - 360)];
+    
+ 
+    
+    [zenemy runAction:[CCSequence actions:leftTop, rightTop, leftMid, rightMid, leftLow, rightLow, nil]];
+
+}
+
+
+
+//-(void) zigLeft
+//{
+//    int x = zenemy.position.x;
+//    int y = zenemy.position.y;
+//    distance = -50;
+//    
+//    CCMoveTo *zLeft = [CCMoveTo actionWithDuration:2.0
+//    position:ccp(x + distance, y - 40)];
+//    [zenemy runAction:zLeft];
+//    NSLog(@"zLeft");
+//
+//}
+//
+//
+//-(void) zagRight
+//{
+//    int x = zenemy.position.x;
+//    int y = zenemy.position.y;
+//    distance = 50;
+//
+//    
+//    CCMoveTo *zRight = [CCMoveTo actionWithDuration:2
+//    position:ccp(x + distance, y - 40)];
+//    [zenemy runAction:zRight];
+//    NSLog(@"zRight");
+//}
+
 
 -(id) init
 {
@@ -359,7 +449,15 @@
     
     if((framecount - (int)(.5 * goodGuyFramecount)) % badGuyFramecount == 0)
     {
-        [self addBadGuy];
+        if(random() % 2 == 0)
+        {
+            [self addBadGuy];
+        }
+        else
+        {
+            [self addZigZagBadGuy];
+        }
+
     }
     if(framecount % helicopterFramecount && level !=3 && [helicopters count] == 0)
     {
@@ -451,7 +549,10 @@
         [self detectKmonsterWrongGuyCollisions];
         
     }
-}
+    
+    }
+
+
 
 -(void) draw
 {
@@ -845,8 +946,10 @@
     [self addChild:background z:-1];
     
     player.anchorPoint = CGPointZero;
+    
     player.position = CGPointMake(180.0f, 20.0f);
     player.scale = .3;
+
     [self addChild:player z:0];
 }
 
