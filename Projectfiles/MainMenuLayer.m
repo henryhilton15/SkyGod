@@ -9,6 +9,7 @@
 
 #import "MainMenuLayer.h"
 #import "GameLayer.h"
+#import "Store.h"
 
 
 
@@ -26,10 +27,17 @@
         startButton.scale=0.5;
         startButton.position = CGPointMake(0, 10);
         
+        CCMenuItemImage *StoreButton = [CCMenuItemImage itemWithNormalImage:@"shop-button.png"
+                                        
+                                                              selectedImage: @"shop-button.png"
+                                                                 target:self
+                                                                   selector:@selector(enterStore:)];
+        StoreButton.scale=0.5;
+        StoreButton.position = CGPointMake(0, -100);
         
-        
-        CCMenu *myMenu = [CCMenu menuWithItems:startButton, nil];
+        CCMenu *myMenu = [CCMenu menuWithItems:StoreButton,startButton, nil];
         [self addChild:myMenu];
+        
         
         CCSprite *background = [CCSprite spriteWithFile:@"background_grass-top.png"];
         background.position = CGPointMake(240,160);
@@ -50,9 +58,10 @@
     
 }
 
-
-
-
+-(void) enterStore: (CCMenuItemImage *) menuItem
+{
+[[CCDirector sharedDirector] replaceScene: (CCScene*)[[Store alloc] init]];
+}
 @end
 
 

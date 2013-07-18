@@ -26,9 +26,11 @@
     int KmonsterFramecount;
     int helicopterBombFramecount;
     int helicopterFramecount;
+    int zigZagFramecount;
     //int levelFramecount;
     int goodGuyFramecount;
     int badGuyFramecount;
+    int scenarioNumber;
     NSMutableArray *bananaArray;
     NSMutableArray *goodGuys;
     NSMutableArray *princesses;
@@ -68,7 +70,11 @@
     CGRect KamikazeBox;
     CGRect goodGuyRect;
     CGSize winSize;
-
+    BOOL Scenario1;
+    BOOL Scenario2;
+    BOOL Scenario3;
+    BOOL Scenario4;
+    
 
 }
 -(id) init;
@@ -78,21 +84,21 @@
 -(void) detectBananaBadGuyCollisions;
 -(void) detectReachBottom;
 -(void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
-- (void) addGoodGuy;
+-(void) addGoodGuy;
 -(void) addBadGuy;
 -(void) pauseMenu: (CCMenuItemImage *)pauseButton;
 -(void) enemiesKilledTotal;
 -(void) addZigZagBadGuy;
-
 -(void) addHelicopter;
 -(void) addLevel;
 -(void) subtractLevel;
-- (void) changeLevel;
-
+-(void) changeLevel;
+-(void) ScenarioGenerator;
+-(void) changeLevel;
 -(void) detectKmonsterWrongGuyCollisions;
+-(void) CreateScenario;
+-(void) zigZagScenario;
 
--(void) zigLeft;
--(void) zagRight;
 
 
 
