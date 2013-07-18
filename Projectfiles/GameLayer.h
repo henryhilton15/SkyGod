@@ -78,23 +78,18 @@
 -(void) detectBananaBadGuyCollisions;
 -(void) detectReachBottom;
 -(void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
-- (void) addGoodGuy;
+-(void) addGoodGuy;
 -(void) addBadGuy;
 -(void) pauseMenu: (CCMenuItemImage *)pauseButton;
 -(void) enemiesKilledTotal;
 -(void) addZigZagBadGuy;
-
+-(void) addBigMonster;
 -(void) addHelicopter;
 -(void) addLevel;
 -(void) subtractLevel;
 -(void) changeLevel;
-
 -(void) detectKmonsterWrongGuyCollisions;
-
 -(void) zigLeft;
 -(void) zagRight;
-
-
-
 
 @end

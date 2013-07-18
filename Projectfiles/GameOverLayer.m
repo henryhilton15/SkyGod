@@ -32,7 +32,7 @@
                                                                    target:self
                                                                  selector:@selector(endGame:)];
         
-        CCMenu *myMenu = [CCMenu menuWithItems:endbutton, nil];
+        CCMenu *myMenu = [CCMenu menuWithItems:endbutton, restartButton, nil];
         [self addChild:myMenu];
         
         

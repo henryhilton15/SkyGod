@@ -6,22 +6,18 @@
 //
 //
 
- 
- #import "GameLayer.h"
- #import "PauseMenuLayer.h"
- #import "GameOverLayer.h"
+#import "GameLayer.h"
+#import "PauseMenuLayer.h"
+#import "GameOverLayer.h"
 #import "SimpleAudioEngine.h"
-#import "doubleEnemy.h"
+#import "Character.h"
 
- #define FLOOR_HEIGHT 20.0f
+#define FLOOR_HEIGHT 20.0f
  
-
- 
- @implementation GameLayer
+@implementation GameLayer
 
 - (void) addKmonster
 {
-    
     CCSprite * Kmonster = [CCSprite spriteWithFile:@"dragon-top.png"];
     Kmonster.scale=.25;
     // Determine where to spawn the monster along the Y axis
@@ -38,7 +34,7 @@
     [Kmonsters addObject:Kmonster];
     
     // Determine speed of the monster
-    int minDuration2 =3.0;
+    int minDuration2 = 3.0;
     int maxDuration2 = 5.0;
     int rangeDuration2 = maxDuration2 - minDuration2;
     int actualDuration2 = (arc4random() % rangeDuration2) + minDuration2;
@@ -73,7 +69,7 @@
     // Create the monster slightly off-screen along the right edge,
     // and along a random position along the Y axis as calculated above
 
-    enemy = [CCSprite spriteWithFile:@"cat4.png"];
+    enemy = [[Character alloc] initWithGoodGuyImage];
     enemy.scale=.5;
 
     enemy.position = ccp(actualX, winSize.height); //+ enemy.contentSize.height/2);
@@ -86,10 +82,8 @@
     //        CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
     //            [node removeFromParentAndCleanup:YES];
     //        }];
-    [enemy runAction:actionMove];//[CCSequence actions:actionMove, actionMoveDone, nil]];
-    
+    [enemy runAction:actionMove];//[CCSequence actions:actionMove, actionMoveDone, nil]];    
 }
-
 
 -(void) addBadGuy
 {
@@ -109,7 +103,7 @@
     
     // Create the monster slightly off-screen along the right edge,
     // and along a random position along the Y axis as calculated above
-    enemy= [[doubleEnemy alloc] initWithDoubleEnemyImage];
+    enemy= [[Character alloc] initWithBadGuyImage];
     enemy.scale=.15;
     enemy.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:enemy];
@@ -145,17 +139,18 @@
     // and along a random position along the Y axis as calculated above
     if(level < 3)
     {
-        enemy = [CCSprite spriteWithFile:@"planet.png"];
+        enemy = [[Character alloc] initWithGoodHelicopterImage];
     }
     if(level > 3)
     {
-        enemy = [CCSprite spriteWithFile:@"barrell.png"];
+        enemy = [[Character alloc] initWithBadHelicopterImage];
     }
     enemy.scale=.5;
     
     enemy.position = ccp(-enemy.contentSize.width, actualY); //+ enemy.contentSize.height/2);
     [self addChild:enemy];
     [helicopters addObject:enemy];
+    [badGuys addObject: enemy];
     
     // Create the actions
     CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
@@ -171,7 +166,7 @@
 - (void) addZigZagBadGuy
 {
     CGSize winSize = [CCDirector sharedDirector].winSize;
-    int minX = 3;
+    int minX = 83;
     int maxX = winSize.width - 3;
     int rangeX = maxX - minX;
     int actualX = arc4random() % rangeX;
@@ -185,7 +180,7 @@
     
 
     
-    zenemy= [CCSprite spriteWithFile:@"monster4.png"];
+    zenemy = [[Character alloc] initWithZigZagImage];
     zenemy.scale=.15;
     zenemy.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:zenemy];
@@ -222,10 +217,7 @@
     id rightLow = [CCMoveTo actionWithDuration:1.0
             position:ccp(x + 80, y - 360)];
     
- 
-    
     [zenemy runAction:[CCSequence actions:leftTop, rightTop, leftMid, rightMid, leftLow, rightLow, nil]];
-
 }
 
 
@@ -256,6 +248,63 @@
 //    [zenemy runAction:zRight];
 //    NSLog(@"zRight");
 //}
+
+-(void) addBigGoodGuy
+{
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    int minX = 200;
+    int maxX = 280;
+    int rangeX = maxX - minX;
+    int actualX = arc4random() % rangeX + minX;
+    
+    minDuration = 8.0;
+    maxDuration = 10.0;
+    int rangeDuration = maxDuration - minDuration;
+    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    
+    enemy = [[Character alloc] initWithBigGoodGuyImage];
+    enemy.scale=.5;
+    enemy.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
+    [self addChild:enemy];
+    [goodGuys addObject:enemy];
+    
+    CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
+                                               position:ccp(actualX, -enemy.contentSize.height/2)];
+    [enemy runAction:actionMove];
+}
+
+-(void) addBigMonster
+{
+    // Determine where to spawn the monster along the X axis
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    int minX = 100;
+    int maxX = 380;
+    int rangeX = maxX - minX;
+    int actualX = arc4random() % rangeX + minX;
+    
+    // Determine speed of the monster
+    minDuration = 6.0;
+    maxDuration = 18.0;
+    int rangeDuration = maxDuration - minDuration;
+    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    
+    
+    // Create the monster slightly off-screen along the right edge,
+    // and along a random position along the Y axis as calculated above
+    enemy= [[Character alloc] initWithBigMonsterImage];
+    enemy.scale=.5;
+    enemy.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
+    [self addChild:enemy];
+    [badGuys addObject:enemy];
+    
+    // Create the actions
+    CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
+                                                position:ccp(actualX, -enemy.contentSize.height/2)];
+    //        CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
+    //            [node removeFromParentAndCleanup:YES];
+    //        }];
+    [enemy runAction:actionMove];//[CCSequence actions:actionMove, actionMoveDone, nil]];
+}
 
 
 -(id) init
@@ -310,9 +359,6 @@
             
         }
         
-        
-
-        
         [self setIsTouchEnabled:YES];
         
         bananasToDelete = [[NSMutableArray alloc] init];
@@ -355,7 +401,7 @@
         //Animating knight
         badTeamCounter = [CCSprite spriteWithSpriteFrameName:@"animation_knight-1Flipped.png"];
         badTeamCounter.anchorPoint = CGPointZero;
-        badTeamCounter.position = CGPointMake(bar + 40, badTeamCounter.contentSize.height/2 - 35);
+        badTeamCounter.position = CGPointMake(bar + 35, badTeamCounter.contentSize.height/2 - 105);
         badTeamCounter.scale = .2;
         //Create an animation from the set of frames you created earlier
         
@@ -408,8 +454,7 @@
 -(void) update:(ccTime)delta
 {
     goodTeamCounter.position = CGPointMake(bar - 40, goodTeamCounter.contentSize.height/2 - 35);
-    badTeamCounter.position = CGPointMake(bar + 5, badTeamCounter.contentSize.height/2 - 105);
-    
+    badTeamCounter.position = CGPointMake(bar, badTeamCounter.contentSize.height/2 - 115);
     if(bar >= 480)
     {
         if(level >=3)
@@ -440,10 +485,11 @@
             [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
         }
     }
-
     framecount++;
     if(framecount % goodGuyFramecount == 0)
     {
+        //[self addBigGoodGuy];
+        [self addBigMonster];
         [self addGoodGuy];
     }
     
@@ -482,7 +528,7 @@
                 // and along a random position along the Y axis as calculated above
                 if(level > 3)
                 {
-                    bomb = [CCSprite spriteWithFile:@"basicbarrell.png"];
+                    bomb = [[Character alloc] initWithBadHelicopterBombImage];
                     bomb.scale=.15;
                     bomb.position = helicopterPosition; //+ enemy.contentSize.height/2);
                     [self addChild:bomb];
@@ -490,14 +536,12 @@
                 }
                 if(level < 3)
                 {
-                    bomb = [CCSprite spriteWithFile:@"block.png"];
+                    bomb = [[Character alloc] initWithGoodHelicopterBombImage];
                     bomb.scale=.15;
                     bomb.position = helicopterPosition; //+ enemy.contentSize.height/2);
                     [self addChild:bomb];
-                    [goodGuys addObject:bomb];
+                    [badGuys addObject:bomb];
                 }
-               
-                
                 // Create the actions
                 CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
                                                             position:ccp(helicopterPosition.x, -bomb.contentSize.height/2)];
@@ -512,15 +556,12 @@
                 [self removeChild:helicopter cleanup:YES];
                 NSLog(@"removed helicopter");
             }
-        
         }
     }
-    
     if([goodGuys count] > 0 || [badGuys count] > 0)
     {
         [self detectReachBottom];
     }
-    
     if([bananaArray count] > 0 && [goodGuys count] > 0)
     {
         [self detectBananaGoodGuyCollisions];
@@ -530,29 +571,25 @@
     {
         [self detectBananaBadGuyCollisions];
     }
-    
     if(level<=2 || level>=4)
     {
         if(framecount % KmonsterFramecount == 0)
         {
-    
-      [self addKmonster];
+            [self addKmonster];
         }
     }
     if ([goodGuys count] > 0 && [Kmonsters count] > 0)
-     {
+    {
         [self detectKmonsterWrongGuyCollisions];
 
-     }
+    }
     if ([badGuys count] > 0 && [Kmonsters count] > 0)
     {
         [self detectKmonsterWrongGuyCollisions];
         
     }
     
-    }
-
-
+}
 
 -(void) draw
 {
@@ -562,10 +599,8 @@
     ccDrawSolidRect(CGPointMake(0,0), CGPointMake(bar, 40), green);
 }
 
-
-- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+-(void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
     // Choose one of the touches to work with
     UITouch *touch = [touches anyObject];
     CGPoint location = [self convertTouchToNodeSpace:touch];
@@ -657,38 +692,51 @@
         {
                 if([bananaArray count] > 0 && [goodGuys count] > 0)
                 {
+                    goodGuy = [goodGuys objectAtIndex:j];
+                    CGRect badGuyRect = [goodGuy boundingBox];
+                    projectile = [bananaArray objectAtIndex:i];
+                    CGRect projectileBox = [projectile boundingBox];
                     
-                goodGuy = [goodGuys objectAtIndex:j];
-                CGRect goodGuyRect = [goodGuy boundingBox];
-                projectile = [bananaArray objectAtIndex:i];
-                CGRect projectileBox = [projectile boundingBox];
-                if(CGRectIntersectsRect(goodGuyRect,projectileBox))
-                {
-                    if (projectile.position.y<305)
+                    if(CGRectIntersectsRect(badGuyRect,projectileBox))
                     {
-                    [goodGuys removeObjectAtIndex:j];
-                    [bananaArray removeObjectAtIndex:i];
-                    [self removeChild:goodGuy cleanup:YES];
-                    [self removeChild:projectile cleanup:YES];
-                    [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
-                    
-                    //[enemiesToDelete addObject:badGuy];
-                    //[bananasToDelete addObject:projectile];
-                        
-                        
-                        
+                        if (projectile.position.y < 305)
+                        {
+                            if([goodGuy isKindOfClass:[Character class]])
+                            {
+                                if(((Character*)goodGuy).health == 1)
+                                {
+                                    [goodGuys removeObjectAtIndex:j];
+                                    [bananaArray removeObjectAtIndex:i];
+                                    [self removeChild:goodGuy cleanup:YES];
+                                    [self removeChild:projectile cleanup:YES];
+                                    [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                                    [self enemiesKilledTotal];
+                                }
+                                else
+                                {
+                                    ((Character*)goodGuy).health--;
+                                    [bananaArray removeObjectAtIndex:i];
+                                    [self removeChild:projectile cleanup:YES];
+                                }
+                            }
+                            else
+                            {
+                                [goodGuys removeObjectAtIndex:j];
+                                [bananaArray removeObjectAtIndex:i];
+                                [self removeChild:goodGuy cleanup:YES];
+                                [self removeChild:projectile cleanup:YES];
+                                [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                                //[enemiesToDelete addObject:badGuy];
+                                //[bananasToDelete addObject:projectile];
+                            }
+                            //[enemiesToDelete removeAllObjects];
+                            //[bananasToDelete removeAllObjects];
+                        }
                     }
-                    
                 }
-                
-                }
-            }
-            
         }
-        
     }
-    //[enemiesToDelete removeAllObjects];
-    //[bananasToDelete removeAllObjects];
+}
 
 -(void) detectKmonsterWrongGuyCollisions
 {
@@ -751,10 +799,8 @@
         }
     }
 
-
-
-
 }
+
 -(void) detectBananaBadGuyCollisions
 {
     for(int j = 0; j < [badGuys count]; j++)
@@ -772,25 +818,41 @@
                 {
                     if (projectile.position.y < 305)
                     {
-                        [badGuys removeObjectAtIndex:j];
-                        [bananaArray removeObjectAtIndex:i];
-                        [self removeChild:badGuy cleanup:YES];
-                        [self removeChild:projectile cleanup:YES];
-                        [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
-                        [self enemiesKilledTotal];
+                        if([badGuy isKindOfClass:[Character class]])
+                        {
+                            if(((Character*)badGuy).health == 1)
+                            {
+                                [badGuys removeObjectAtIndex:j];
+                                [bananaArray removeObjectAtIndex:i];
+                                [self removeChild:badGuy cleanup:YES];
+                                [self removeChild:projectile cleanup:YES];
+                                [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                                [self enemiesKilledTotal];
+                            }
+                            else
+                            {
+                                ((Character*)badGuy).health--;
+                                [bananaArray removeObjectAtIndex:i];
+                                [self removeChild:projectile cleanup:YES];
+                            }
+                        }
+                        else
+                        {
+                            [badGuys removeObjectAtIndex:j];
+                            [bananaArray removeObjectAtIndex:i];
+                            [self removeChild:badGuy cleanup:YES];
+                            [self removeChild:projectile cleanup:YES];
+                            [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                            [self enemiesKilledTotal];
                             //[enemiesToDelete addObject:badGuy];
                             //[bananasToDelete addObject:projectile];
+                        }
                     }
                 }
-                
             }
-            
         }
-        
     }
-    
 }
-
 
 -(void)detectReachBottom
 {
@@ -806,11 +868,11 @@
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
                 if(level>3)
                 {
-                    bar+=100 + ((3 - level) * 5) ;
+                    bar += ((Character*)goodGuy).worth;
                 }
-                else
+                else 
                 {
-                    bar += 50;
+                    bar += ((Character*)goodGuy).worth;
                 }
             }
         }
@@ -831,26 +893,19 @@
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
                 if(level<3)
                 {
-                    bar -= 100 + ((level - 3) * 5);
+                    bar -= ((Character*)badGuy).worth;
                 }
-                bar -=50;
+                bar -= ((Character*)badGuy).worth;
             }
         }
     }
 }
-
-
-
-
-
 
 -(void) enemiesKilledTotal
 {
     enemiesKilled++;
     [enemiesKilledLabel setString:[NSString stringWithFormat:@"Enemies Killed:%d", enemiesKilled]];
 }
-
-
 
 -(void) addLevel
 {
@@ -872,8 +927,6 @@
     [[CCDirector sharedDirector] pushScene: (CCScene *)[[PauseMenuLayer alloc]  init]];
 }
 
-
-
 -(void) changeLevel
 {
     if (level==0)
@@ -883,7 +936,6 @@
         background = [CCSprite spriteWithFile:@"background_desert-topdown.png"];
 
         player = [CCSprite spriteWithFile:@"monster4.png"];
-       
     }
     
     if (level ==1)
@@ -906,12 +958,14 @@
     }
     if (level ==3)
     {
-        [self removeChild:background];
-        [self removeChild:player];
+        //[self removeChild:background];
+        //[self removeChild:player];
+        
         background = [CCSprite spriteWithFile:@"background_grass-topdown.png"];
-
+        
         player = [CCSprite spriteWithFile:@"animation_knight-1.png"];
-   
+        
+       
         
     }
     if (level ==4)
@@ -946,11 +1000,10 @@
     [self addChild:background z:-1];
     
     player.anchorPoint = CGPointZero;
-    
     player.position = CGPointMake(180.0f, 20.0f);
     player.scale = .3;
 
-    [self addChild:player z:0];
+    [self addChild:player z:1];
 }
 
 
