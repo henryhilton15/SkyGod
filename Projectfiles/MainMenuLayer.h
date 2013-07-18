@@ -15,5 +15,5 @@
 
 -(id) init;
 -(void) startGame;
-
+-(void) enterStore;
 @end

@@ -48,7 +48,10 @@
     CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
         [node removeFromParentAndCleanup:YES];
     }];
-    [Kmonster runAction:[CCSequence actions:actionMove, actionMoveDone, nil]];
+    
+        [Kmonster runAction:[CCSequence actions:actionMove, actionMoveDone, nil]];
+ 
+
 }
 
 -(void) addGoodGuy
@@ -85,9 +88,10 @@
     //        CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
     //            [node removeFromParentAndCleanup:YES];
     //        }];
-    [enemy runAction:actionMove];//[CCSequence actions:actionMove, actionMoveDone, nil]];
     
-}
+    [enemy runAction:actionMove];//[CCSequence actions:actionMove, actionMoveDone, nil]];
+    }
+       
 
 
 -(void) addBadGuy
@@ -219,7 +223,26 @@
                                                                    selector:@selector(pauseMenu:)];
         pauseButton.position = CGPointMake(225, 145);
         pauseButton.scale = 0.15f;
+    
+        CCMenuItemImage *PowerUpButton1 = [CCMenuItemImage itemWithNormalImage:@"button-top.png" selectedImage:@"button-top.png"];
+        PowerUpButton1.position= CGPointMake (25, 300);
+        PowerUpButton1.scale = 0.25f;
+        [self addChild:PowerUpButton1 z:50];
+        PowerUpButton1.color = ccBLUE;
         
+        CCMenuItemImage *PowerUpButton2 = [CCMenuItemImage itemWithNormalImage:@"button-top.png" selectedImage:@"button-top.png"];
+        PowerUpButton2.position= CGPointMake (65, 300);
+        PowerUpButton2.scale = 0.25f;
+        [self addChild:PowerUpButton2 z:50];
+        PowerUpButton2.color = ccGREEN;
+        
+        CCMenuItemImage *PowerUpButton3 = [CCMenuItemImage itemWithNormalImage:@"button-top.png" selectedImage:@"button-top.png"];
+        PowerUpButton3.position= CGPointMake (105, 300);
+        PowerUpButton3.scale = 0.25f;
+        [self addChild:PowerUpButton3 z:50];
+        PowerUpButton3.color = ccRED;
+        
+     
         //  [self addChild:pauseButton z:100];
         
         CCMenu *myMenu = [CCMenu menuWithItems:pauseButton, nil];
@@ -274,12 +297,16 @@
     framecount++;
     if(framecount % goodGuyFramecount == 0)
     {
+        if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true) {
         [self addGoodGuy];
+        }
     }
     
     if((framecount - (int)(.5 * goodGuyFramecount)) % badGuyFramecount == 0)
     {
+       if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true) {
         [self addBadGuy];
+       }
     }
     if(framecount % helicopterFramecount && level !=3 && [helicopters count] == 0)
     {
@@ -526,8 +553,7 @@
                         CGRect KamikazeBox = [Kamikaze boundingBox];
                     }
                 if(CGRectIntersectsRect(badGuyRect,KamikazeBox))
-                {
-                    if (Kamikaze.position.y < 315)
+                
                     {
                         [badGuys removeObjectAtIndex:j];
                         [Kmonsters removeObjectAtIndex:i];
@@ -538,7 +564,7 @@
                 }
             }
         }
-    }
+
 
 
     if(level>=4)
@@ -597,6 +623,7 @@
                         [self removeChild:projectile cleanup:YES];
                         [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
                         [self enemiesKilledTotal];
+                        [self ScenarioGenerator];
                             //[enemiesToDelete addObject:badGuy];
                             //[bananasToDelete addObject:projectile];
                     }
@@ -767,5 +794,52 @@
     [self addChild:player z:0];
 }
 
+-(void)ScenarioGenerator
+{
+    if (enemiesKilled >=10)
+    {
+        scenarioNumber = arc4random() % 4;
+        {
+            if (scenarioNumber == 1)
+            {
+                Scenario1 = true;
+            }
+            if (scenarioNumber == 2)  
+            {
+                Scenario2 = true;
+            }
+            if (scenarioNumber == 3)
+            {
+                Scenario3 = true;
+            }
+            if (scenarioNumber == 4)
+            {
+                Scenario4 = true;
+            }
+    }
 
+  }
+
+}
+
+-(void)CreateScenario
+{
+    if(Scenario1 == true)
+    {
+        
+    }
+    if(Scenario2 == true)
+    {
+        
+    }
+    if(Scenario3 == true)
+    {
+        
+    }
+    if(Scenario4 ==true)
+    {
+        
+    }
+    
+}
 @end

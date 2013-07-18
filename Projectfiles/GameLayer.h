@@ -27,6 +27,7 @@
     //int levelFramecount;
     int goodGuyFramecount;
     int badGuyFramecount;
+    int scenarioNumber;
     NSMutableArray *bananaArray;
     NSMutableArray *goodGuys;
     NSMutableArray *princesses;
@@ -59,6 +60,11 @@
     CGRect badGuyRect;
     CGRect KamikazeBox;
     CGRect goodGuyRect;
+    BOOL Scenario1;
+    BOOL Scenario2;
+    BOOL Scenario3;
+    BOOL Scenario4;
+    
 
 
 }
@@ -76,8 +82,8 @@
 -(void) addHelicopter;
 -(void) addLevel;
 -(void) subtractLevel;
-- (void) changeLevel;
-
+-(void) changeLevel;
+-(void) ScenarioGenerator;
 -(void) drawLevel0;
 -(void) drawLevel1;
 -(void) drawLevel2;
@@ -86,6 +92,7 @@
 -(void) drawLevel5;
 -(void) drawLevel6;
 -(void) detectKmonsterWrongGuyCollisions;
+-(void) CreateScenario;
 
 
 
