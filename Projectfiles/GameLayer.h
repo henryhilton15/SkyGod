@@ -47,6 +47,10 @@
     CCSprite *helicopter;
     CCSprite *player;
     CCSprite *zenemy;
+    CCSprite *zFriendly1;
+    CCSprite *zFriendly2;
+    CCSprite *zFriendly3;
+    CCSprite *zFriendly4;
     CCAction *rotateBanana;
     CCLabelTTF *LevelLabel;
     CCLabelTTF *enemiesKilledLabel;
@@ -63,6 +67,7 @@
     CGRect badGuyRect;
     CGRect KamikazeBox;
     CGRect goodGuyRect;
+    CGSize winSize;
 
 
 }

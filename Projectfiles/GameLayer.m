@@ -193,7 +193,7 @@
     int x = zenemy.position.x;
     int y = zenemy.position.y;
     
-    float timeInterval = 2.0f;
+  //  float timeInterval = 2.0f;
 
     
 //    id delay = [CCDelayTime actionWithDuration:timeInterval];
@@ -330,7 +330,7 @@
 
 -(void) update:(ccTime)delta
 {
-   
+        
     if(bar >= 480)
     {
         if(level >=3)
@@ -758,7 +758,87 @@
 }
 
 
+-(void) zigZagChallengePack
+{
+   
+    
+    zFriendly1= [CCSprite spriteWithFile:@"cat1-topdown.png"];
+    zFriendly1.scale=.15;
+    zFriendly1.position = CGPointMake(winSize.width/2, winSize.height);
+    [self addChild:zFriendly1];
+    [goodGuys addObject:zFriendly1];
+    
+    zFriendly2= [CCSprite spriteWithFile:@"cat1-topdown.png"];
+    zFriendly2.scale=.15;
+    zFriendly2.position = CGPointMake(winSize.width/2, winSize.height);
+    [self addChild:zFriendly2];
+    [goodGuys addObject:zFriendly2];
 
+    zFriendly3= [CCSprite spriteWithFile:@"cat1-topdown.png"];
+    zFriendly3.scale=.15;
+    zFriendly3.position = CGPointMake(winSize.width/2, winSize.height);
+    [self addChild:zFriendly3];
+    [goodGuys addObject:zFriendly3];
+
+    zFriendly4= [CCSprite spriteWithFile:@"cat1-topdown.png"];
+    zFriendly4.scale=.15;
+    zFriendly4.position = CGPointMake(winSize.width/2, winSize.height);
+    [self addChild:zFriendly4];
+    [goodGuys addObject:zFriendly4];
+
+    
+    float timeInterval1 = 0.5f;
+    id delay1 = [CCDelayTime actionWithDuration:timeInterval1];
+    
+    float timeInterval2 = 2.0f;
+    id delay2 = [CCDelayTime actionWithDuration:timeInterval2];
+    
+    float timeInterval3 = 3.5f;
+    id delay3 = [CCDelayTime actionWithDuration:timeInterval3];
+    
+    float timeInterval4 = 5.0f;
+    id delay4 = [CCDelayTime actionWithDuration:timeInterval4];
+    
+    
+
+    
+        
+        id leftTop = [CCMoveTo actionWithDuration:1.0
+                                         position:ccp (50, 300)];
+        
+        
+        id rightTop = [CCMoveTo actionWithDuration:1.0
+                                          position:ccp(430, 240)];
+        
+        id leftMid = [CCMoveTo actionWithDuration:1.0
+                                         position:ccp(50, 180)];
+        
+        id rightMid = [CCMoveTo actionWithDuration:1.0
+                                          position:ccp(430, 120)];
+        
+        
+        
+        id leftLow = [CCMoveTo actionWithDuration:1.0
+                                         position:ccp(50, 60)];
+        
+        
+        id rightLow = [CCMoveTo actionWithDuration:1.0
+                                          position:ccp(430, 0)];
+        
+        
+        
+            [zFriendly1 runAction:[CCSequence actions:delay1, leftTop, rightTop, leftMid, rightMid, leftLow, rightLow, nil]];
+
+            [zFriendly2 runAction:[CCSequence actions:delay2, leftTop, rightTop, leftMid, rightMid, leftLow, rightLow, nil]];
+    
+            [zFriendly3 runAction:[CCSequence actions:delay3, leftTop, rightTop, leftMid, rightMid, leftLow, rightLow, nil]];
+    
+            [zFriendly4 runAction:[CCSequence actions:delay4, leftTop, rightTop, leftMid, rightMid, leftLow, rightLow, nil]];
+    
+    
+    
+    
+}
 
 
 
