@@ -27,6 +27,7 @@
     int helicopterBombFramecount;
     int helicopterFramecount;
     int zigZagFramecount;
+    int helicoptersRemoved;
     //int levelFramecount;
     int goodGuyFramecount;
     int badGuyFramecount;
@@ -56,6 +57,8 @@
     CCAction *rotateBanana;
     CCLabelTTF *LevelLabel;
     CCLabelTTF *enemiesKilledLabel;
+    CCSprite *goodTeamCounter;
+    CCSprite *badTeamCounter;
     Rect goodRect;
     Rect badRect;
     NSMutableArray *bananaFrames;
@@ -64,12 +67,19 @@
     NSMutableArray *Kmonsters;
     NSMutableArray *princessesToDelete;
     NSMutableArray *helicopters;
+    NSMutableArray *bigGoodGuys;
     NSString *levelString;
     NSString *enemiesKilledString;
     CGRect badGuyRect;
     CGRect KamikazeBox;
     CGRect goodGuyRect;
-  
+
+    CCAction *taunt;
+    NSMutableArray *tauntingFrames;
+    CCAction *knightAttack;
+    NSMutableArray *knightAttackFrames;
+
+
     BOOL Scenario1;
     BOOL Scenario2;
     BOOL Scenario3;
@@ -77,6 +87,7 @@
     
 
 }
+
 -(id) init;
 -(void) update:(ccTime)delta;
 -(void) draw;
@@ -89,18 +100,18 @@
 -(void) pauseMenu: (CCMenuItemImage *)pauseButton;
 -(void) enemiesKilledTotal;
 -(void) addZigZagBadGuy;
+-(void) addBigMonster;
+-(void) addBigGoodGuy;
 -(void) addHelicopter;
 -(void) addLevel;
 -(void) subtractLevel;
 -(void) changeLevel;
+-(void) detectKmonsterWrongGuyCollisions;
 -(void) ScenarioGenerator;
 -(void) changeLevel;
--(void) detectKmonsterWrongGuyCollisions;
+-(void) detectKmonsterCollisions;
 -(void) CreateScenario;
 -(void) zigZagScenario;
-
-
-
 
 
 @end
