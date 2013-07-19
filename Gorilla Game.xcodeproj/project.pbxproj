@@ -321,6 +321,7 @@
 		2D808D021795F5BA006EADF5 /* Pow.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2D808BCC1795F5BA006EADF5 /* Pow.caf */; };
 		2D808D031795F5BA006EADF5 /* ship-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808BCD1795F5BA006EADF5 /* ship-hd.png */; };
 		2D808D041795F5BA006EADF5 /* ship.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808BCE1795F5BA006EADF5 /* ship.png */; };
+		2D808D0717973A58006EADF5 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D808D0617973A57006EADF5 /* Store.m */; };
 		2DA3EB3317907425007D73B5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA3EB3217907425007D73B5 /* AudioToolbox.framework */; };
 		2DD0C65F178F77BA008AE39F /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DD0C65E178F77BA008AE39F /* images.png */; };
 		2DD0C661178F783F008AE39F /* disasteralert_icon_114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DD0C660178F783F008AE39F /* disasteralert_icon_114x114.png */; };
@@ -703,6 +704,8 @@
 		2D808BCC1795F5BA006EADF5 /* Pow.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pow.caf; sourceTree = "<group>"; };
 		2D808BCD1795F5BA006EADF5 /* ship-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ship-hd.png"; sourceTree = "<group>"; };
 		2D808BCE1795F5BA006EADF5 /* ship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ship.png; sourceTree = "<group>"; };
+		2D808D0517973A56006EADF5 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
+		2D808D0617973A57006EADF5 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Store.m; sourceTree = "<group>"; };
 		2DA3EB3217907425007D73B5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		2DD0C65E178F77BA008AE39F /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
 		2DD0C660178F783F008AE39F /* disasteralert_icon_114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disasteralert_icon_114x114.png; sourceTree = "<group>"; };
@@ -1490,6 +1493,8 @@
 				DCC1A38D13A94F1A005BD75D /* AppDelegate.h */,
 				DCC1A38E13A94F1A005BD75D /* AppDelegate.m */,
 				2D13AA86178F406500945F54 /* PauseMenuLayer.h */,
+				2D808D0517973A56006EADF5 /* Store.h */,
+				2D808D0617973A57006EADF5 /* Store.m */,
 				2D13AA87178F406500945F54 /* PauseMenuLayer.m */,
 				2D3705931784D2850057EB8E /* MainMenuLayer.h */,
 				2D3705941784D2850057EB8E /* MainMenuLayer.m */,
@@ -1964,6 +1969,8 @@
 				2D37059D1784D99D0057EB8E /* GameOverLayer.m in Sources */,
 				2D13AA88178F406500945F54 /* PauseMenuLayer.m in Sources */,
 				C3367E14179862CA00D321C5 /* Character.m in Sources */,
+				2DA3EB3B179086BA007D73B5 /* doubleEnemy.m in Sources */,
+				2D808D0717973A58006EADF5 /* Store.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

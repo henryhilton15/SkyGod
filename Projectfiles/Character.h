@@ -20,5 +20,6 @@
 -(id) initWithBadHelicopterImage;
 -(id) initWithGoodHelicopterBombImage;
 -(id) initWithBadHelicopterBombImage;
+-(id) initWithKamikazeImage;
 
 @end

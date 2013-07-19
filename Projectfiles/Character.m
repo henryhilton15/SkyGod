@@ -37,6 +37,7 @@
     if((self = [super initWithFile:@"cat4.png"]))
     {
         worth = 50;
+        health = 1;
     }
     return self;
 }
@@ -46,6 +47,7 @@
     if((self = [super initWithFile:@"monster1.png"]))
     {
         worth = 50;
+        health = 1;
     }
     return self;
 }
@@ -54,6 +56,7 @@
     if((self = [super initWithFile:@"monster4.png"]))
     {
         worth = 50;
+        health = 1;
     }
     return self;
 }
@@ -78,6 +81,7 @@
     if((self = [super initWithFile:@"basicbarrell.png"]))
     {
         worth = 50;
+        health = 1;
     }
     return self;
 }
@@ -86,6 +90,15 @@
     if((self = [super initWithFile:@"block.png"]))
     {
         worth = 50;
+        health = 1;
+    }
+    return self;
+}
+-(id) initWithKamikazeImage
+{
+    if((self = [super initWithFile:@"dragon-top.png"]))
+    {
+        health = 1;
     }
     return self;
 }

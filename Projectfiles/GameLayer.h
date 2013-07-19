@@ -29,6 +29,7 @@
     //int levelFramecount;
     int goodGuyFramecount;
     int badGuyFramecount;
+    int scenarioNumber;
     NSMutableArray *bananaArray;
     NSMutableArray *goodGuys;
     NSMutableArray *princesses;
@@ -60,6 +61,7 @@
     NSMutableArray *Kmonsters;
     NSMutableArray *princessesToDelete;
     NSMutableArray *helicopters;
+    NSMutableArray *bigGoodGuys;
     NSString *levelString;
     NSString *enemiesKilledString;
     CGRect badGuyRect;
@@ -69,6 +71,12 @@
     NSMutableArray *tauntingFrames;
     CCAction *knightAttack;
     NSMutableArray *knightAttackFrames;
+
+    BOOL Scenario1;
+    BOOL Scenario2;
+    BOOL Scenario3;
+    BOOL Scenario4;
+    
 }
 
 -(id) init;
@@ -84,11 +92,23 @@
 -(void) enemiesKilledTotal;
 -(void) addZigZagBadGuy;
 -(void) addBigMonster;
+-(void) addBigGoodGuy;
 -(void) addHelicopter;
 -(void) addLevel;
 -(void) subtractLevel;
 -(void) changeLevel;
 -(void) detectKmonsterWrongGuyCollisions;
+-(void) ScenarioGenerator;
+-(void) drawLevel0;
+-(void) drawLevel1;
+-(void) drawLevel2;
+-(void) drawLevel3;
+-(void) drawLevel4;
+-(void) drawLevel5;
+-(void) drawLevel6;
+-(void) changeLevel;
+-(void) detectKmonsterCollisions;
+-(void) CreateScenario;
 -(void) zigLeft;
 -(void) zagRight;
 
