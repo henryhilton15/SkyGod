@@ -146,14 +146,8 @@
     
     // Create the monster slightly off-screen along the right edge,
     // and along a random position along the Y axis as calculated above
-    if(level < 3)
-    {
-        enemy = [CCSprite spriteWithFile:@"planet.png"];
-    }
-    if(level > 3)
-    {
-        enemy = [CCSprite spriteWithFile:@"barrell.png"];
-    }
+    
+    enemy = [CCSprite spriteWithFile:@"planet.png"];
     enemy.scale=.5;
     
     enemy.position = ccp(-enemy.contentSize.width, actualY); //+ enemy.contentSize.height/2);
@@ -287,7 +281,12 @@
         level = 3;
         deaths = 0;
         enemiesKilled = 0;
+        enemiesKilledCounter = 0;
         bar = 240;
+        Scenario1 = false;
+        Scenario2 = false;
+        Scenario3 = false;
+        Scenario4 = false;
         
         [self changeLevel];
         
@@ -384,22 +383,20 @@
             [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
         }
     }
-    if (level != 3)
-    {
-        [self ScenarioGenerator];
-        [self CreateScenario];
-    }
-
+    
+    
+    [self ScenarioGenerator];
+    [self CreateScenario];
+    
     framecount++;
+    
     if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true)
     {
         
         if(framecount % goodGuyFramecount == 0)
         {
-       
-        [self addGoodGuy];
-        
-        
+            [self addGoodGuy];
+            
         }
     }
     if(Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true)
@@ -407,16 +404,15 @@
         if((framecount - (int)(.5 * goodGuyFramecount)) % badGuyFramecount == 0)
         {
             [self addBadGuy];
-        
-       
+            
                 if(random() % 2 == 0)
                 {
                     [self addBadGuy];
                 }
-            else
+                else
                 {
-                [self addZigZagBadGuy];
-                    }
+                    [self addZigZagBadGuy];
+                }
         }
 
     }
@@ -438,22 +434,19 @@
                 
                 // Create the monster slightly off-screen along the right edge,
                 // and along a random position along the Y axis as calculated above
-                if(level > 3)
-                {
+               
+                
                     bomb = [CCSprite spriteWithFile:@"basicbarrell.png"];
                     bomb.scale=.15;
                     bomb.position = helicopterPosition; //+ enemy.contentSize.height/2);
                     [self addChild:bomb];
                     [badGuys addObject:bomb];
-                }
-                if(level < 3)
-                {
-                    bomb = [CCSprite spriteWithFile:@"block.png"];
-                    bomb.scale=.15;
-                    bomb.position = helicopterPosition; //+ enemy.contentSize.height/2);
-                    [self addChild:bomb];
-                    [goodGuys addObject:bomb];
-                }
+//                   bomb = [CCSprite spriteWithFile:@"block.png"];
+//                    bomb.scale=.15;
+//                    bomb.position = helicopterPosition; //+ enemy.contentSize.height/2);
+//                    [self addChild:bomb];
+//                    [goodGuys addObject:bomb];
+                
                
                 
                 // Create the actions
@@ -464,11 +457,13 @@
                 //        }];
                 [bomb runAction:actionMove];
             }
-            if(helicopter.position.x == 480 + helicopter.contentSize.width/2)
+            if(helicopter.position.x == 480)
             {
                 [helicopters removeObject:helicopter];
                 [self removeChild:helicopter cleanup:YES];
                 NSLog(@"removed helicopter");
+                Scenario1 = FALSE;
+                spawnedHelicopters = 0;
             }
         
         }
@@ -628,6 +623,7 @@
                     [bananaArray removeObjectAtIndex:i];
                     [self removeChild:goodGuy cleanup:YES];
                     [self removeChild:projectile cleanup:YES];
+                    enemiesKilledCounter++;
                     [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
                     
                     //[enemiesToDelete addObject:badGuy];
@@ -730,6 +726,7 @@
                         [self removeChild:projectile cleanup:YES];
                         [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
                         [self enemiesKilledTotal];
+                        enemiesKilledCounter ++;
                         //[self ScenarioGenerator];
                             //[enemiesToDelete addObject:badGuy];
                             //[bananasToDelete addObject:projectile];
@@ -828,7 +825,7 @@
 {
     if (level==0)
     {
-        [self removeChild:background];
+        [self removeChild:background cleanup: YES];
         [self removeChild:player];
         background = [CCSprite spriteWithFile:@"background_desert-topdown.png"];
 
@@ -838,7 +835,7 @@
     
     if (level ==1)
     {
-        [self removeChild:background];
+        [self removeChild:background cleanup: YES];
         [self removeChild:player];
         background = [CCSprite spriteWithFile:@"background_grass-top.png"];
 
@@ -847,7 +844,7 @@
     
     if (level ==2)
     {
-        [self removeChild:background];
+        [self removeChild:background cleanup: YES];
         [self removeChild:player];
         background = [CCSprite spriteWithFile:@"background_grid.png"];
          
@@ -856,7 +853,7 @@
     }
     if (level ==3)
     {
-        [self removeChild:background];
+        [self removeChild:background cleanup: YES];
         [self removeChild:player];
         background = [CCSprite spriteWithFile:@"background_grass-topdown.png"];
 
@@ -866,7 +863,7 @@
     }
     if (level ==4)
     {
-        [self removeChild:background];
+        [self removeChild:background cleanup:YES];
         [self removeChild:player];
         background = [CCSprite spriteWithFile:@"city-back.png"];
 
@@ -875,7 +872,7 @@
     }
     if (level ==5)
     {
-        [self removeChild:background];
+        [self removeChild:background cleanup: YES];
         [self removeChild:player];
         background = [CCSprite spriteWithFile:@"city-front.png"];
         player = [CCSprite spriteWithFile:@"cat3.png"];
@@ -883,7 +880,7 @@
     }
     if (level==6)
     {
-        [self removeChild:background];
+        [self removeChild:background cleanup: YES];
         [self removeChild:player];
         background = [CCSprite spriteWithFile:@"background_topofcastle.png"];
        
@@ -903,41 +900,55 @@
 
 -(void)ScenarioGenerator
 {
-    if (enemiesKilled >=10)
+    if (enemiesKilledCounter >= 5)
     {
-        //if (level >=4 || level <= 2)
-        //{
-            scenarioNumber = arc4random() % 4;
+        NSLog(@"Killed 5");
+        randNum++;
+        if(randNum == 1){
+        [self generateRandomNumber];
+        }
+        3
+        //scenarioNumber = 1;
             
-            if (scenarioNumber == 1)
-            {
-                Scenario1 = true;
-            }
+        if (scenarioNumber == 1)
+        {
+            NSLog(@"scenariobegins");
+            Scenario1 = true;
+        }
             if (scenarioNumber == 2)
             {
+                NSLog(@"scenario2begins");
                 Scenario2 = true;
             }
             if (scenarioNumber == 3)
             {
+                NSLog(@"scenario3begins");
                 Scenario3 = true;
             }
             if (scenarioNumber == 4)
             {
+                NSLog(@"scenario4begins");
                 Scenario4 = true;
             }
+            enemiesKilledCounter = 0;
         }
     }
-//}
 
 
 -(void)CreateScenario
 {
     if(Scenario1 == true)
     {
+        NSLog(@"Scenario1 == TRUE");
         if(framecount % helicopterFramecount == 0)
         {
+            spawnedHelicopters++;
             NSLog(@"adding helicopter");
+            if(spawnedHelicopters == 1){
             [self addHelicopter];
+            
+            }
+            randNum = 0;
         }
     }
     if(Scenario2 == true)
@@ -953,5 +964,10 @@
         
     }
 }
-    
+-(void)generateRandomNumber
+{
+    scenarioNumber = (arc4random() % 4) + 1;
+    //randNum = 0;
+}
+
 @end

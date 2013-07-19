@@ -30,6 +30,7 @@
     int goodGuyFramecount;
     int badGuyFramecount;
     int scenarioNumber;
+    int enemiesKilledCounter;
     NSMutableArray *bananaArray;
     NSMutableArray *goodGuys;
     NSMutableArray *princesses;
@@ -68,8 +69,8 @@
     BOOL Scenario2;
     BOOL Scenario3;
     BOOL Scenario4;
-    
-
+    int spawnedHelicopters;
+    int randNum;
 
 }
 -(id) init;
