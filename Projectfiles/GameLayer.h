@@ -26,6 +26,8 @@
     int KmonsterFramecount;
     int helicopterBombFramecount;
     int helicopterFramecount;
+    int zigZagFramecount;
+    int helicoptersRemoved;
     //int levelFramecount;
     int goodGuyFramecount;
     int badGuyFramecount;
@@ -48,6 +50,10 @@
     CCSprite *helicopter;
     CCSprite *player;
     CCSprite *zenemy;
+    CCSprite *zFriendly1;
+    CCSprite *zFriendly2;
+    CCSprite *zFriendly3;
+    CCSprite *zFriendly4;
     CCAction *rotateBanana;
     CCLabelTTF *LevelLabel;
     CCLabelTTF *enemiesKilledLabel;
@@ -67,16 +73,19 @@
     CGRect badGuyRect;
     CGRect KamikazeBox;
     CGRect goodGuyRect;
+
     CCAction *taunt;
     NSMutableArray *tauntingFrames;
     CCAction *knightAttack;
     NSMutableArray *knightAttackFrames;
+
 
     BOOL Scenario1;
     BOOL Scenario2;
     BOOL Scenario3;
     BOOL Scenario4;
     
+
 }
 
 -(id) init;
@@ -99,17 +108,10 @@
 -(void) changeLevel;
 -(void) detectKmonsterWrongGuyCollisions;
 -(void) ScenarioGenerator;
--(void) drawLevel0;
--(void) drawLevel1;
--(void) drawLevel2;
--(void) drawLevel3;
--(void) drawLevel4;
--(void) drawLevel5;
--(void) drawLevel6;
 -(void) changeLevel;
 -(void) detectKmonsterCollisions;
 -(void) CreateScenario;
--(void) zigLeft;
--(void) zagRight;
+-(void) zigZagScenario;
+
 
 @end

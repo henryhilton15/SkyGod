@@ -102,5 +102,13 @@
     }
     return self;
 }
+-(id) initWithDoubleEnemyImage
+{
+    if((self = [super initWithFile:@"monster1.png"]))
+    {
+        worth = 50;
+        health = 1;
+    }
+}
 
 @end
