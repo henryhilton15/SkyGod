@@ -284,7 +284,7 @@
         numberOfEnemies = 10;
         KmonsterFramecount=250;
         helicopterFramecount = 200;
-        zigZagFramecount = 200;
+        zigZagFramecount = 300;
         level = 3;
         deaths = 0;
         enemiesKilled = 0;
@@ -385,11 +385,11 @@
             [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
         }
     }
-    if (level != 3)
-    {
+    //if (level != 3)
+    //{
         [self ScenarioGenerator];
         [self CreateScenario];
-    }
+    //{
 
     framecount++;
     if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true)
@@ -793,34 +793,34 @@
 
 -(void) zigZagScenario
 {
-
+    CGSize winSize = [CCDirector sharedDirector].winSize;
     zFriendly1= [CCSprite spriteWithFile:@"cat1-topdown.png"];
-    zFriendly1.scale=.15;
+    zFriendly1.scale=.2;
     zFriendly1.position = CGPointMake(winSize.width/2, winSize.height);
     [self addChild:zFriendly1];
     [goodGuys addObject:zFriendly1];
     
     CCSprite *enemy1= [[doubleEnemy alloc] initWithDoubleEnemyImage];
     enemy1.scale=.15;
-    enemy1.position = CGPointMake(80, winSize.height); //+ enemy.contentSize.height/2);
+    enemy1.position = CGPointMake(50, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:enemy1];
     [badGuys addObject:enemy1];
     
     CCSprite *enemy2= [[doubleEnemy alloc] initWithDoubleEnemyImage];
     enemy2.scale=.15;
-    enemy2.position = CGPointMake(180, winSize.height); //+ enemy.contentSize.height/2);
+    enemy2.position = CGPointMake(170, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:enemy2];
     [badGuys addObject:enemy2];
 
     CCSprite *enemy3= [[doubleEnemy alloc] initWithDoubleEnemyImage];
     enemy3.scale=.15;
-    enemy3.position = CGPointMake(280, winSize.height); //+ enemy.contentSize.height/2);
+    enemy3.position = CGPointMake(290, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:enemy3];
     [badGuys addObject:enemy3];
 
     CCSprite *enemy4= [[doubleEnemy alloc] initWithDoubleEnemyImage];
     enemy4.scale=.15;
-    enemy4.position = CGPointMake(380, winSize.height); //+ enemy.contentSize.height/2);
+    enemy4.position = CGPointMake(410, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:enemy4];
     [badGuys addObject:enemy4];
 
@@ -858,16 +858,16 @@
     
     
     
-    CCMoveTo *actionMove1 = [CCMoveTo actionWithDuration:2.0 position:ccp(enemy1.position.x, -enemy1.contentSize.height/2)];
+    CCMoveTo *actionMove1 = [CCMoveTo actionWithDuration:10.0 position:ccp(enemy1.position.x, -enemy1.contentSize.height/2)];
     [enemy1 runAction:actionMove1];
     
-    CCMoveTo *actionMove2 = [CCMoveTo actionWithDuration:2.0 position:ccp(enemy2.position.x, -enemy2.contentSize.height/2)];
+    CCMoveTo *actionMove2 = [CCMoveTo actionWithDuration:10.0 position:ccp(enemy2.position.x, -enemy2.contentSize.height/2)];
     [enemy2 runAction:actionMove2];
     
-    CCMoveTo *actionMove3 = [CCMoveTo actionWithDuration:2.0 position:ccp(enemy3.position.x, -enemy3.contentSize.height/2)];
+    CCMoveTo *actionMove3 = [CCMoveTo actionWithDuration:10.0 position:ccp(enemy3.position.x, -enemy3.contentSize.height/2)];
     [enemy3 runAction:actionMove3];
     
-    CCMoveTo *actionMove4 = [CCMoveTo actionWithDuration:2.0 position:ccp(enemy4.position.x, -enemy4.contentSize.height/2)];
+    CCMoveTo *actionMove4 = [CCMoveTo actionWithDuration:10.0 position:ccp(enemy4.position.x, -enemy4.contentSize.height/2)];
     [enemy4 runAction:actionMove4];
     
         
@@ -892,7 +892,7 @@
         
         id rightLow = [CCMoveTo actionWithDuration:1.0
                                           position:ccp(430, 0)];
-        
+    
         
         
             [zFriendly1 runAction:[CCSequence actions: leftTop, rightTop, leftMid, rightMid, leftLow, rightLow, nil]];
@@ -904,8 +904,9 @@
 //            [zFriendly4 runAction:[CCSequence actions:delay4, leftTop, rightTop, leftMid, rightMid, leftLow, rightLow, nil]];
     
     
-    
 }
+
+
 
 
 
@@ -1022,9 +1023,9 @@
     {
         //if (level >=4 || level <= 2)
         //{
-           // scenarioNumber = arc4random() % 4;
         
-        scenarioNumber = 2;
+        scenarioNumber = arc4random() % 4;
+        
             
             if (scenarioNumber == 1)
             {
@@ -1059,15 +1060,15 @@
     }
     if(Scenario2 == true)
     {
-        if(framecount % zigZagFramecount == 0)
-        {
-        NSLog(@"zig zag scenario");
-        [self zigZagScenario];
-        }
+
     }
     if(Scenario3 == true)
     {
-        
+        if(framecount % zigZagFramecount == 0)
+        {
+            NSLog(@"zig zag scenario");
+            [self zigZagScenario];
+        }
     }
     if(Scenario4 ==true)
     {

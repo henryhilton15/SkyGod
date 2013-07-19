@@ -69,7 +69,7 @@
     CGRect badGuyRect;
     CGRect KamikazeBox;
     CGRect goodGuyRect;
-    CGSize winSize;
+  
     BOOL Scenario1;
     BOOL Scenario2;
     BOOL Scenario3;
