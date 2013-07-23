@@ -121,4 +121,25 @@
     return self;
 }
 
+-(id) initWithGoodBottomImage
+{
+    if((self = [super initWithFile:@"cat4.png"]))
+    {
+       
+        health = 1;
+    }
+    return self;
+}
+
+-(id) initWithBadBottomImage
+{
+    if((self = [super initWithFile:@"monster1.png"]))
+    {
+        
+        health = 1;
+    }
+    return self;
+}
+
+
 @end
