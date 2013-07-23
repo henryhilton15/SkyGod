@@ -19,11 +19,12 @@
 	if ((self = [super init]))
 	{
         
-        CCMenuItemImage *restartButton = [CCMenuItemImage itemWithNormalImage:@"restart.png"
-                                                                selectedImage: @"restart.png"
-                                                                       target:self
-                                                                     selector:@selector(restartGame:)];
-        restartButton.position = CGPointMake(100, 0);
+//        CCMenuItemImage *restartButton = [CCMenuItemImage itemWithNormalImage:@"restart.png"
+//                                                                selectedImage: @"restart.png"
+//                                                                       target:self
+//                                                                     selector:@selector(restartGame:)];
+//        restartButton.position = CGPointMake(0,100);
+
         
         //startButton.tag = 1;
         
@@ -31,9 +32,9 @@
                                                             selectedImage: @"button_backbutton.png"
                                                                    target:self
                                                                  selector:@selector(endGame:)];
-        endbutton.position = CGPointMake(-100, 0);
+        endbutton.position = CGPointMake(0, 0);
         
-        CCMenu *myMenu = [CCMenu menuWithItems:endbutton, restartButton, nil];
+        CCMenu *myMenu = [CCMenu menuWithItems:endbutton, /* restartButton, */  nil];
         [self addChild:myMenu];
         
         

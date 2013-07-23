@@ -36,6 +36,7 @@
     int KmonsterMaxY;
     int zigZagDelayCounter;
     int zigZagScenarioCounter;
+    int bigGoodGuysScenarioDelayCounter;
     //int levelFramecount;
     int goodGuyFramecount;
     int badGuyFramecount;
@@ -60,9 +61,8 @@
     CCSprite *player;
     CCSprite *zenemy;
     CCSprite *zFriendly1;
-    CCSprite *zFriendly2;
-    CCSprite *zFriendly3;
-    CCSprite *zFriendly4;
+    CCSprite *goodBottom;
+    CCSprite *badBottom;
     CCAction *rotateBanana;
     CCLabelTTF *LevelLabel;
     CCLabelTTF *enemiesKilledLabel;
@@ -76,6 +76,8 @@
     NSMutableArray *Kmonsters;
     NSMutableArray *helicopters;
     NSMutableArray *bigGoodGuys;
+    NSMutableArray *goodGuysBottom;
+    NSMutableArray *badGuysBottom;
     NSString *levelString;
     NSString *enemiesKilledString;
     CGRect badGuyRect;
@@ -91,6 +93,7 @@
     BOOL Scenario3;
     BOOL Scenario4;
     int spawnedHelicopters;
+    BOOL isWalking;
     BOOL firstHeli;
     BOOL firstBigGoodGuy;
     BOOL firstZigZag;
@@ -121,6 +124,9 @@
 -(void) detectKmonsterCollisions;
 -(void) CreateScenario;
 -(void) zigZagScenario;
+-(void) spawnGoodGuyBottom;
+-(void) spawnBadGuyBottom;
+
 -(void) randomNumberGenerator;
 
 @end
