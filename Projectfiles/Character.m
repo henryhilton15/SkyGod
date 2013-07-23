@@ -13,6 +13,7 @@
 
 @synthesize health;
 @synthesize worth;
+@synthesize direction;
 @synthesize type;
 
 -(id) initWithBigMonsterImage
@@ -138,8 +139,17 @@
 {
     if((self = [super initWithFile:@"cat4.png"]))
     {
-       
         health = 1;
+
+        if(random() % 2 == 0)
+        {
+            direction = 1;
+        }
+        else
+        {
+            direction = 0;
+        }
+        
         type = GOOD_BOTTOM;
     }
     return self;
@@ -150,6 +160,15 @@
     if((self = [super initWithFile:@"monster1.png"]))
     {
         health = 1;
+        
+        if(random() % 2 == 0)
+        {
+            direction = 1;
+        }
+        else
+        {
+            direction = 0;
+        }
         type = BAD_BOTTOM;
     }
     return self;
