@@ -67,7 +67,7 @@
     // and along a random position along the Y axis as calculated above
 
     enemy = [[Character alloc] initWithGoodGuyImage];
-    enemy.scale=.5;
+    enemy.scale=.3;
 
     enemy.position = ccp(actualX, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:enemy];
@@ -296,7 +296,6 @@
     [enemy runAction:actionMove];//[CCSequence actions:actionMove, actionMoveDone, nil]];
 }
 
-
 -(id) init
 {
 	if ((self = [super init]))
@@ -517,7 +516,7 @@
     framecount++;
     if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true)
     {
-        if((firstHeli == true || helicopterDelayCounter % 200 == 0) && (firstZigZag == true || zigZagDelayCounter % 250))
+        if((firstHeli == true || helicopterDelayCounter % 200 == 0) && (firstZigZag == true || zigZagDelayCounter % 250 == 0))
         {
             //[self addBigGoodGuy];
                 //[self addBigMonster];
@@ -617,14 +616,14 @@
             }
         }
     }
-    if([zFriendlyArray count] > 0)
+    if(zigZagScenarioCounter > 0)
     {
         zigZagDelayCounter++;
         firstZigZag = false;
         if(zigZagDelayCounter % 250 == 0)
         {
             Scenario3 = false;
-            [zFriendlyArray removeAllObjects];
+            zigZagScenarioCounter = 0;
         }
     }
     if([goodGuys count] > 0 || [badGuys count] > 0)
@@ -643,19 +642,21 @@
     {
         [self detectKmonsterCollisions];
     }
+    /*
     if ([goodGuysBottom count] > 0)
     {
-        
         [self goodGuysWalk];
     }
     if ([badGuysBottom count] > 0)
     {
         [self badGuysWalk];
     }
+     
     if([goodGuysBottom count] > 0 && [badGuysBottom count] > 0)
     {
         [self fight];
     }
+     */
 }
 
 -(void) draw
@@ -952,21 +953,19 @@
         if([goodGuys count] > 0)
         {
             goodGuy = [goodGuys objectAtIndex:i];
-            if(goodGuy.position.y <= FLOOR_HEIGHT)
+            if(goodGuy.position.y <= 20)
             {
+                [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
+                goodBottom = [[Character alloc] initWithGoodBottomImage];
+                goodBottom.anchorPoint = CGPointZero;
+                goodBottom.position = ccp(goodGuy.position.x - 15, goodGuy.position.y - 20);
+                goodBottom.scale=.3;
+                [self addChild:goodBottom z:1];
+                [goodGuysBottom addObject:goodBottom];
                 [goodGuys removeObject:goodGuy];
                 [self removeChild:goodGuy cleanup:YES];
-                [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
-                [self spawnGoodGuyBottom];
-            
-                if(level>3)
-                {
-                    bar += ((Character*)goodGuy).worth;
-                }
-                else 
-                {
-                    bar += ((Character*)goodGuy).worth;
-                }
+                bar += ((Character*)goodGuy).worth;
+                NSLog(@"added to bottom array");
             }
         }
     }
@@ -977,17 +976,24 @@
         {
             badGuy = [badGuys objectAtIndex:i];
 
-            if(badGuy.position.y <= FLOOR_HEIGHT)
+            if(badGuy.position.y <= 20)
             {
-                [badGuys removeObject:badGuy];
-
-                [self removeChild:badGuy cleanup:YES];
+                //if(((Character*)badGuy) isEqual:([[Character alloc] initWithBadGuyImage]))
+                //{
+                    badBottom = [[Character alloc] initWithBadGuyImage];
+                //}
+                //if(((Character*)badGuy) isEqual:([[Character alloc] initWithZigZagImage]))
+                //{
+                  //  badBottom = [[Character alloc] initWithZigZagImage];
+                //}
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
-                [self spawnBadGuyBottom];
-                if(level<3)
-                {
-                    bar -= ((Character*)badGuy).worth;
-                }
+                badBottom.anchorPoint = CGPointZero;
+                badBottom.scale=.15;
+                badBottom.position = ccp(badGuy.position.x - 15, badGuy.position.y - 20);
+                [self addChild:badBottom z:1];
+                [badGuysBottom addObject:badBottom];
+                [badGuys removeObject:badGuy];
+                [self removeChild:badGuy cleanup:YES];
                 bar -= ((Character*)badGuy).worth;
             }
         }
@@ -1392,10 +1398,5 @@
             }
         }
 }
-
-
-
-
-
 
 @end
