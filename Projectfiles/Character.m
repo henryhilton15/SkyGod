@@ -10,8 +10,10 @@
 
 @implementation Character
 
+
 @synthesize health;
 @synthesize worth;
+@synthesize type;
 
 -(id) initWithBigMonsterImage
 {
@@ -19,6 +21,7 @@
     {
         health = 10;
         worth = 100;
+        type = BIG_MONSTER;
     }
     return self;
 }
@@ -29,6 +32,7 @@
     {
         health = 1;
         worth = 100;
+        type = BIG_GOOD_GUY;
     }
     return self;
 }
@@ -38,6 +42,7 @@
     {
         worth = 50;
         health = 1;
+        type = GOOD_GUY;
     }
     return self;
 }
@@ -48,6 +53,7 @@
     {
         worth = 50;
         health = 1;
+        type = BAD_GUY;
     }
     return self;
 }
@@ -57,6 +63,7 @@
     {
         worth = 50;
         health = 1;
+        type = ZIG_ZAG;
     }
     return self;
 }
@@ -65,6 +72,7 @@
     if((self = [super initWithFile:@"planet.png"]))
     {
         health = 5;
+        type = GOOD_HELICOPTER;
     }
     return self;
 }
@@ -73,6 +81,7 @@
     if((self = [super initWithFile:@"barrell.png"]))
     {
         health = 1;
+        type = BAD_HELICOPTER;
     }
     return self;
 }
@@ -82,6 +91,7 @@
     {
         worth = 50;
         health = 1;
+        type = GOOD_HELICOPTER_BOMB;
     }
     return self;
 }
@@ -91,6 +101,7 @@
     {
         worth = 50;
         health = 1;
+        type = BAD_HELICOPTER_BOMB;
     }
     return self;
 }
@@ -99,6 +110,7 @@
     if((self = [super initWithFile:@"dragon-top.png"]))
     {
         health = 1;
+        type = KAMIKAZE;
     }
     return self;
 }
@@ -117,6 +129,7 @@
     {
         worth = 1;
         health = 1;
+        type = SUPER_ZIG_ZAG_GUY;
     }
     return self;
 }
@@ -127,6 +140,7 @@
     {
        
         health = 1;
+        type = GOOD_BOTTOM;
     }
     return self;
 }
@@ -135,11 +149,10 @@
 {
     if((self = [super initWithFile:@"monster1.png"]))
     {
-        
         health = 1;
+        type = BAD_BOTTOM;
     }
     return self;
 }
-
 
 @end

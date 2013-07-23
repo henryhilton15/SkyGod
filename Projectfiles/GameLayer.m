@@ -367,7 +367,7 @@
         helicopterBombFramecount = 75;
         monstercount = 0;
         numberOfEnemies = 10;
-        KmonsterFramecount = 40;
+        KmonsterFramecount = 20;
         helicopterFramecount = 200;
         zigZagFramecount = 200;
         helicopterDelayCounter = 0;
@@ -599,17 +599,16 @@
     }
     if(bigGoodGuysCounter > 0)
     {
+        bigGoodGuysScenarioDelayCounter++;
         if(framecount % KmonsterFramecount == 0 || firstBigGoodGuy == true)
         {
             [self addKmonster];
             firstBigGoodGuy = false;
-            KmonsterMaxY -= 80;
-            KmonsterMinY -= 80;
-            bigGoodGuysCounter++;
-            if(bigGoodGuysCounter == 5)
+            KmonsterMaxY -= 40;
+            KmonsterMinY -= 40;
+            if(bigGoodGuysScenarioDelayCounter % 200 == 0)
             {
                 Scenario2 = false;
-                //KmonsterCounter = 0;
                 bigGoodGuysCounter = 0;
                 KmonsterMaxY = 310;
                 KmonsterMinY = 250;
@@ -780,7 +779,6 @@
                                     [self removeChild:goodGuy cleanup:YES];
                                     [self removeChild:projectile cleanup:YES];
                                     [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
-                                    [self enemiesKilledTotal];
                                 }
                                 else
                                 {
@@ -835,7 +833,6 @@
                             [self removeChild:badGuy cleanup:YES];
                             [self removeChild:projectile cleanup:YES];
                             [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
-                            [self enemiesKilledTotal];
                         }
                         else
                         {
@@ -918,7 +915,10 @@
                                 [self removeChild:badGuy cleanup:YES];
                                 [self removeChild:projectile cleanup:YES];
                                 [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
-                                [self enemiesKilledTotal];
+                                if(((Character*)badGuy).type == BAD_GUY || ((Character*)badGuy).type == ZIG_ZAG)
+                                {
+                                    [self enemiesKilledTotal];
+                                }
                             }
                             else
                             {
@@ -934,7 +934,10 @@
                             [self removeChild:badGuy cleanup:YES];
                             [self removeChild:projectile cleanup:YES];
                             [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
-                            [self enemiesKilledTotal];
+                            if(((Character*)badGuy).type == BAD_GUY || ((Character*)badGuy).type == ZIG_ZAG)
+                            {
+                                [self enemiesKilledTotal];
+                            }
                             //[self ScenarioGenerator];
                             //[enemiesToDelete addObject:badGuy];
                             //[bananasToDelete addObject:projectile];
@@ -978,14 +981,14 @@
 
             if(badGuy.position.y <= 20)
             {
-                //if(((Character*)badGuy) isEqual:([[Character alloc] initWithBadGuyImage]))
-                //{
+                if(((Character*)badGuy).type == BAD_GUY)
+                {
                     badBottom = [[Character alloc] initWithBadGuyImage];
-                //}
-                //if(((Character*)badGuy) isEqual:([[Character alloc] initWithZigZagImage]))
-                //{
-                  //  badBottom = [[Character alloc] initWithZigZagImage];
-                //}
+                }
+                if(((Character*)badGuy).type == ZIG_ZAG)
+                {
+                    badBottom = [[Character alloc] initWithZigZagImage];
+                }
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
                 badBottom.anchorPoint = CGPointZero;
                 badBottom.scale=.15;
@@ -1391,8 +1394,6 @@
                                 
                                 // put in fight part and use for both good and bad
                             }
-                        
-   
                     }
                 }
             }
