@@ -371,6 +371,8 @@
         goodGuys = [[NSMutableArray alloc] init];
         badGuys = [[NSMutableArray alloc] init];
         Kmonsters = [[NSMutableArray alloc] init];
+        goodGuysBottom = [[NSMutableArray alloc] init];
+        badGuysBottom = [[NSMutableArray alloc] init];
         framecount = 0;
         goodGuyFramecount = 150;
         badGuyFramecount = 150;
@@ -389,6 +391,7 @@
         Scenario2 = false;
         Scenario3 = false;
         Scenario4 = false;
+        isWalking = true;
         
         //Animating bear
         goodTeamCounter = [CCSprite spriteWithSpriteFrameName:@"bear1.png"];
@@ -470,6 +473,9 @@
         
         CCMenu *myMenu = [CCMenu menuWithItems:pauseButton, nil];
         [self addChild: myMenu z:100];
+        
+        [self changeLevel];
+        
         
         [[SimpleAudioEngine sharedEngine] preloadEffect:@"explo2.wav"];
         [[SimpleAudioEngine sharedEngine] preloadEffect:@"Pow.caf"];
@@ -636,6 +642,19 @@
     {
         [self detectKmonsterCollisions];
     }
+    if ([goodGuysBottom count] > 0)
+    {
+        
+        [self goodGuysWalk];
+    }
+    if ([badGuysBottom count] > 0)
+    {
+        [self badGuysWalk];
+    }
+    if([goodGuysBottom count] > 0 && [badGuysBottom count] > 0)
+    {
+        [self fight];
+    }
 }
 
 -(void) draw
@@ -672,7 +691,7 @@
         projectile = [CCSprite spriteWithSpriteFrameName:@"banana1.png"];
         
         projectile.anchorPoint = CGPointZero;
-        projectile.position = CGPointMake(220.0f, FLOOR_HEIGHT);
+        projectile.position = CGPointMake(player.position.x, player.position.y);
         projectile.scale=.05;
     }
     //Create an animation from the set of frames you created earlier
@@ -700,8 +719,13 @@
     // Determine offset of location to projectile
     CGPoint offset = ccpSub(location, projectile.position);
     
-    // Bail out if you are shooting down or backwards
-    if (offset.y <= 0) return;
+    // Bail out if you are shooting down
+    if (offset.y <= FLOOR_HEIGHT)
+    {
+        CCMoveTo *movePlayer = [CCMoveTo actionWithDuration:.5 position:ccp(location.x, FLOOR_HEIGHT)];
+        [player runAction:movePlayer];
+        return;
+    }
     
     // Ok to add now - we've double checked position
     [self addChild:projectile];
@@ -829,7 +853,6 @@
                     [Kmonsters removeObjectAtIndex:i];
                     [self removeChild:badGuy cleanup:YES];
                     [self removeChild:Kamikaze cleanup:YES];
-                    
                 }
             }
         }
@@ -978,6 +1001,8 @@
                 [goodGuys removeObject:goodGuy];
                 [self removeChild:goodGuy cleanup:YES];
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
+                [self spawnGoodGuyBottom];
+            
                 if(level>3)
                 {
                     bar += ((Character*)goodGuy).worth;
@@ -1002,6 +1027,7 @@
 
                 [self removeChild:badGuy cleanup:YES];
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
+                [self spawnBadGuyBottom];
                 if(level<3)
                 {
                     bar -= ((Character*)badGuy).worth;
@@ -1230,14 +1256,24 @@
 
 -(void)ScenarioGenerator
 {
-    if (enemiesKilled >= 5)
+    if (enemiesKilled >= 20)
     {
         //if (level >=4 || level <= 2)
         //{
         
-        scenarioNumber = arc4random() % 4;
-
-            
+       // scenarioNumber = arc4random() % 4;
+       // scenarioNumber = 1;
+        
+//        if(random() % 2 == 0)
+//        {
+//            scenarioNumber = 1;
+//        }
+//        if(random() % 2 == 1)
+//        {
+//            scenarioNumber = 3;
+//        }
+        scenarioNumber = 3;
+        
             if (scenarioNumber == 1)
             {
                 Scenario1 = true;
@@ -1283,16 +1319,133 @@
     }
     if(Scenario3 == true)
     {
-        if(framecount % zigZagFramecount == 0)
-        {
-            NSLog(@"zig zag scenario");
-            [self zigZagScenario];
-        }
+//        if(framecount % zigZagFramecount == 0)
+//        {
+//
+//            for (int x = 0; x < 3; x++)
+//            {
+//        
+                if(framecount % zigZagFramecount == 0)
+                {
+                    NSLog(@"zig zag scenario");
+                    [self zigZagScenario];
+                }
+//            }
+//        }
     }
     if(Scenario4 ==true)
     {
         
     }
 }
-    
+
+-(void) spawnGoodGuyBottom
+{
+  //  CGSize winSize = [CCDirector sharedDirector].winSize;
+    goodBottom = [[Character alloc] initWithGoodBottomImage];
+     goodBottom.anchorPoint = CGPointZero;
+    goodBottom.position = ccp(0,0);
+    goodBottom.scale=.3;
+    [self addChild:goodBottom z:1];
+    [goodGuysBottom addObject:goodBottom];
+}
+
+-(void) spawnBadGuyBottom
+{
+   // CGSize winSize = [CCDirector sharedDirector].winSize;
+    badBottom = [[Character alloc] initWithBadBottomImage];
+    badBottom.anchorPoint = CGPointZero;
+    badBottom.scale=.15;
+    badBottom.position = ccp(460, 0);
+    [self addChild:badBottom z:1];
+    [badGuysBottom addObject:badBottom];
+}
+
+-(void) goodGuysWalk
+{
+    for(int q=0; q<[goodGuysBottom count]; q++)
+    {
+        goodBottom = (CCSprite *)[goodGuysBottom objectAtIndex:q];
+        
+        //CCMoveTo * gBmove = [CCMoveTo actionWithDuration:0.1
+        //                    position:ccp(goodBottom.position.x + 1, goodBottom.position.y)];
+        
+        //[goodBottom runAction:gBmove];
+        goodBottom.position = ccp(goodBottom.position.x + .5,goodBottom.position.y);
+
+    }
+}
+
+-(void) badGuysWalk
+{
+    for(int q=0; q<[badGuysBottom count]; q++)
+    {
+        badBottom = (CCSprite *)[badGuysBottom objectAtIndex:q];
+        //badBottom.position = ccp(badBottom.position.x - 0.1, badBottom.position.y);
+        //CCMoveTo * bBmove = [CCMoveTo actionWithDuration:0.1
+                                   //     position:ccp(badBottom.position.x - 1, badBottom.position.y)];
+        badBottom.position = ccp(badBottom.position.x - .5,badBottom.position.y);
+        //[badBottom runAction:bBmove];
+        
+        if (badBottom.position.x < 0)
+        {
+            [[CCDirector sharedDirector] replaceScene: (CCScene *)[[GameOverLayer alloc]  init]];
+
+        }
+    }
+}
+
+
+
+-(void) fight
+{
+//    CGRect goodBottomRect = [goodGuy boundingBox];
+//    CGRect badBottomRect = [goodGuy boundingBox];
+    for(int j = 0; j < [goodGuysBottom count]; j++)
+    {
+        for(int i = 0; i < [badGuysBottom count]; i++)
+        {
+            if([goodGuysBottom count] > 0 && [badGuysBottom count] > 0)
+            {
+                goodBottom = [goodGuysBottom objectAtIndex:j];
+                CGRect goodBottomRect = [goodBottom boundingBox];
+                badBottom = [badGuysBottom objectAtIndex:i];
+                CGRect badBottomRect = [badBottom boundingBox];
+                
+                if(CGRectIntersectsRect(badBottomRect,goodBottomRect))
+                {
+                    
+                            if(((Character*)goodBottom).health == 1)
+                            {
+                                [goodGuysBottom removeObjectAtIndex:j];
+                                [self removeChild:goodBottom cleanup:YES];
+                                
+                            }
+                    
+                            if(((Character*)goodBottom).health == 1)
+                            {
+                                    [badGuysBottom removeObjectAtIndex:i];
+                                    [self removeChild:badBottom cleanup:YES];
+                            }
+                            else
+                            {
+                                ((Character*)goodBottom).health--;
+                                
+                                
+                                
+                                // put in fight part and use for both good and bad
+                            }
+                        
+   
+                    }
+                }
+            }
+        }
+}
+
+
+
+
+
+
 @end
