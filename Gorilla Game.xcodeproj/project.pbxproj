@@ -323,9 +323,13 @@
 		2D808D041795F5BA006EADF5 /* ship.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808BCE1795F5BA006EADF5 /* ship.png */; };
 		2D808D0717973A58006EADF5 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D808D0617973A57006EADF5 /* Store.m */; };
 		2DA3EB3317907425007D73B5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA3EB3217907425007D73B5 /* AudioToolbox.framework */; };
-		2DA3EB3B179086BA007D73B5 /* doubleEnemy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA3EB3A179086BA007D73B5 /* doubleEnemy.m */; };
 		2DD0C65F178F77BA008AE39F /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DD0C65E178F77BA008AE39F /* images.png */; };
 		2DD0C661178F783F008AE39F /* disasteralert_icon_114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DD0C660178F783F008AE39F /* disasteralert_icon_114x114.png */; };
+		C3297C0517975CC600A09343 /* knightFramesFlipped.png in Resources */ = {isa = PBXBuildFile; fileRef = C3297C0417975CC600A09343 /* knightFramesFlipped.png */; };
+		C3297C0717975CDA00A09343 /* knightframesflipped.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3297C0617975CDA00A09343 /* knightframesflipped.plist */; };
+		C3367E14179862CA00D321C5 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = C3367E13179862CA00D321C5 /* Character.m */; };
+		C3EFA0A317974B64000E23A6 /* bearFrames.png in Resources */ = {isa = PBXBuildFile; fileRef = C3EFA0A217974B61000E23A6 /* bearFrames.png */; };
+		C3EFA0A517974B70000E23A6 /* bearFrames.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3EFA0A417974B6F000E23A6 /* bearFrames.plist */; };
 		DC1BE6A014F417CC00F49D25 /* Ubuntu-B.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC1BE68C14F417CC00F49D25 /* Ubuntu-B.ttf */; };
 		DC1BE6A114F417CC00F49D25 /* Ubuntu-BI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC1BE68D14F417CC00F49D25 /* Ubuntu-BI.ttf */; };
 		DC1BE6A214F417CC00F49D25 /* Ubuntu-C.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC1BE68E14F417CC00F49D25 /* Ubuntu-C.ttf */; };
@@ -703,10 +707,14 @@
 		2D808D0517973A56006EADF5 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
 		2D808D0617973A57006EADF5 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Store.m; sourceTree = "<group>"; };
 		2DA3EB3217907425007D73B5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
-		2DA3EB39179086BA007D73B5 /* doubleEnemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = doubleEnemy.h; sourceTree = "<group>"; };
-		2DA3EB3A179086BA007D73B5 /* doubleEnemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = doubleEnemy.m; sourceTree = "<group>"; };
 		2DD0C65E178F77BA008AE39F /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
 		2DD0C660178F783F008AE39F /* disasteralert_icon_114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disasteralert_icon_114x114.png; sourceTree = "<group>"; };
+		C3297C0417975CC600A09343 /* knightFramesFlipped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knightFramesFlipped.png; sourceTree = "<group>"; };
+		C3297C0617975CDA00A09343 /* knightframesflipped.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = knightframesflipped.plist; sourceTree = "<group>"; };
+		C3367E12179862CA00D321C5 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
+		C3367E13179862CA00D321C5 /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Character.m; sourceTree = "<group>"; };
+		C3EFA0A217974B61000E23A6 /* bearFrames.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bearFrames.png; sourceTree = "<group>"; };
+		C3EFA0A417974B6F000E23A6 /* bearFrames.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bearFrames.plist; sourceTree = "<group>"; };
 		DC1BE68614F417CC00F49D25 /* copyright.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = copyright.txt; sourceTree = "<group>"; };
 		DC1BE68914F417CC00F49D25 /* LICENCE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENCE.txt; sourceTree = "<group>"; };
 		DC1BE68C14F417CC00F49D25 /* Ubuntu-B.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-B.ttf"; sourceTree = "<group>"; };
@@ -813,6 +821,10 @@
 		2D808A7B1795F5BA006EADF5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C3297C0617975CDA00A09343 /* knightframesflipped.plist */,
+				C3297C0417975CC600A09343 /* knightFramesFlipped.png */,
+				C3EFA0A217974B61000E23A6 /* bearFrames.png */,
+				C3EFA0A417974B6F000E23A6 /* bearFrames.plist */,
 				2D808A7C1795F5BA006EADF5 /* animation_knight-1.png */,
 				2D808A7D1795F5BA006EADF5 /* background_desert-topdown.png */,
 				2D808A7E1795F5BA006EADF5 /* background_grass-top.png */,
@@ -1476,8 +1488,8 @@
 				DCC1A39013A94F1A005BD75D /* HelloWorldLayer.m */,
 				2D37059B1784D99C0057EB8E /* GameOverLayer.h */,
 				2D37059C1784D99D0057EB8E /* GameOverLayer.m */,
-				2DA3EB39179086BA007D73B5 /* doubleEnemy.h */,
-				2DA3EB3A179086BA007D73B5 /* doubleEnemy.m */,
+				C3367E12179862CA00D321C5 /* Character.h */,
+				C3367E13179862CA00D321C5 /* Character.m */,
 				DCC1A38D13A94F1A005BD75D /* AppDelegate.h */,
 				DCC1A38E13A94F1A005BD75D /* AppDelegate.m */,
 				2D13AA86178F406500945F54 /* PauseMenuLayer.h */,
@@ -1923,6 +1935,10 @@
 				2D808D021795F5BA006EADF5 /* Pow.caf in Resources */,
 				2D808D031795F5BA006EADF5 /* ship-hd.png in Resources */,
 				2D808D041795F5BA006EADF5 /* ship.png in Resources */,
+				C3EFA0A317974B64000E23A6 /* bearFrames.png in Resources */,
+				C3EFA0A517974B70000E23A6 /* bearFrames.plist in Resources */,
+				C3297C0517975CC600A09343 /* knightFramesFlipped.png in Resources */,
+				C3297C0717975CDA00A09343 /* knightframesflipped.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1952,6 +1968,7 @@
 				2D37059A1784D6DA0057EB8E /* GameLayer.m in Sources */,
 				2D37059D1784D99D0057EB8E /* GameOverLayer.m in Sources */,
 				2D13AA88178F406500945F54 /* PauseMenuLayer.m in Sources */,
+				C3367E14179862CA00D321C5 /* Character.m in Sources */,
 				2DA3EB3B179086BA007D73B5 /* doubleEnemy.m in Sources */,
 				2D808D0717973A58006EADF5 /* Store.m in Sources */,
 			);
