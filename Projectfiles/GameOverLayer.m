@@ -23,7 +23,7 @@
                                                                 selectedImage: @"restart.png"
                                                                        target:self
                                                                      selector:@selector(restartGame:)];
-        restartButton.position = CGPointMake(0,100);
+        restartButton.position = CGPointMake(100, 0);
         
         //startButton.tag = 1;
         
@@ -31,7 +31,7 @@
                                                             selectedImage: @"button_backbutton.png"
                                                                    target:self
                                                                  selector:@selector(endGame:)];
-        endbutton.position = CGPointMake(0, -100);
+        endbutton.position = CGPointMake(-100, 0);
         
         CCMenu *myMenu = [CCMenu menuWithItems:endbutton, restartButton, nil];
         [self addChild:myMenu];

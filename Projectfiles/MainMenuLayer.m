@@ -60,7 +60,7 @@
 
 -(void) enterStore: (CCMenuItemImage *) menuItem
 {
-[[CCDirector sharedDirector] replaceScene: (CCScene*)[[Store alloc] init]];
+    [[CCDirector sharedDirector] replaceScene: (CCScene*)[[Store alloc] init]];
 }
 @end
 
