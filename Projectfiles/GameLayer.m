@@ -45,8 +45,6 @@
     //}];
     
         [Kmonster runAction:[CCSequence actions:actionMove, nil]];
- 
-
 }
 
 -(void) addGoodGuy
@@ -69,7 +67,7 @@
     // and along a random position along the Y axis as calculated above
 
     enemy = [[Character alloc] initWithGoodGuyImage];
-    enemy.scale=.5;
+    enemy.scale=.3;
 
     enemy.position = ccp(actualX, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:enemy];
@@ -135,17 +133,7 @@
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
-    
-    // Create the monster slightly off-screen along the right edge,
-    // and along a random position along the Y axis as calculated above
-    //if(level < 3)
-    //{
-        enemy = [[Character alloc] initWithGoodHelicopterImage];
-    //}
-    //if(level > 3)
-    //{
-       enemy = [[Character alloc] initWithBadHelicopterImage];
-    //}
+    enemy = [[Character alloc] initWithBadHelicopterImage];
     enemy.scale=.5; 
     
     enemy.position = ccp(-enemy.contentSize.width, actualY); //+ enemy.contentSize.height/2);
@@ -162,7 +150,6 @@
     [enemy runAction:actionMove];//[CCSequence actions:actionMove, actionMoveDone, nil]];
     
 }
-
 
 - (void) addZigZagBadGuy
 {
@@ -309,7 +296,6 @@
     [enemy runAction:actionMove];//[CCSequence actions:actionMove, actionMoveDone, nil]];
 }
 
-
 -(id) init
 {
 	if ((self = [super init]))
@@ -383,7 +369,7 @@
         helicopterBombFramecount = 75;
         monstercount = 0;
         numberOfEnemies = 10;
-        KmonsterFramecount = 40;
+        KmonsterFramecount = 20;
         helicopterFramecount = 200;
         zigZagFramecount = 200;
         helicopterDelayCounter = 0;
@@ -532,7 +518,7 @@
     framecount++;
     if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true)
     {
-        if((firstHeli == true || helicopterDelayCounter % 200 == 0) && (firstZigZag == true || zigZagDelayCounter % 250))
+        if((firstHeli == true || helicopterDelayCounter % 200 == 0) && (firstZigZag == true || zigZagDelayCounter % 250 == 0))
         {
             //[self addBigGoodGuy];
                 //[self addBigMonster];
@@ -615,31 +601,30 @@
     }
     if(bigGoodGuysCounter > 0)
     {
+        bigGoodGuysScenarioDelayCounter++;
         if(framecount % KmonsterFramecount == 0 || firstBigGoodGuy == true)
         {
             [self addKmonster];
             firstBigGoodGuy = false;
-            KmonsterMaxY -= 80;
-            KmonsterMinY -= 80;
-            bigGoodGuysCounter++;
-            if(bigGoodGuysCounter == 5)
+            KmonsterMaxY -= 40;
+            KmonsterMinY -= 40;
+            if(bigGoodGuysScenarioDelayCounter % 200 == 0)
             {
                 Scenario2 = false;
-                //KmonsterCounter = 0;
                 bigGoodGuysCounter = 0;
                 KmonsterMaxY = 310;
                 KmonsterMinY = 250;
             }
         }
     }
-    if([zFriendlyArray count] > 0)
+    if(zigZagScenarioCounter > 0)
     {
         zigZagDelayCounter++;
         firstZigZag = false;
         if(zigZagDelayCounter % 250 == 0)
         {
             Scenario3 = false;
-            [zFriendlyArray removeAllObjects];
+            zigZagScenarioCounter = 0;
         }
     }
     if([goodGuys count] > 0 || [badGuys count] > 0)
@@ -658,6 +643,7 @@
     {
         [self detectKmonsterCollisions];
     }
+    /*
     if ([goodGuysBottom count] > 0)
     {
         [self goodGuysWalk];
@@ -666,19 +652,19 @@
     {
         [self badGuysWalk];
     }
-
     if (([goodGuysBottom count] > 0 || [badGuysBottom count] > 0) && framecount % 100 == 0)
     {
         [self shoot];
     }
 
     if ([goodGuysBottom count] > 0 && [badGuysBottom count] > 0)
+     
+    if([goodGuysBottom count] > 0 && [badGuysBottom count] > 0)
     {
         [self detectBulletSoldierCollisions];
     }
-    
-
-    
+        
+     */
 }
 
 -(void) draw
@@ -802,7 +788,6 @@
                                     [self removeChild:goodGuy cleanup:YES];
                                     [self removeChild:projectile cleanup:YES];
                                     [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
-                                    [self enemiesKilledTotal];
                                 }
                                 else
                                 {
@@ -857,7 +842,6 @@
                             [self removeChild:badGuy cleanup:YES];
                             [self removeChild:projectile cleanup:YES];
                             [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
-                            [self enemiesKilledTotal];
                         }
                         else
                         {
@@ -940,7 +924,10 @@
                                 [self removeChild:badGuy cleanup:YES];
                                 [self removeChild:projectile cleanup:YES];
                                 [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
-                                [self enemiesKilledTotal];
+                                if(((Character*)badGuy).type == BAD_GUY || ((Character*)badGuy).type == ZIG_ZAG)
+                                {
+                                    [self enemiesKilledTotal];
+                                }
                             }
                             else
                             {
@@ -956,7 +943,10 @@
                             [self removeChild:badGuy cleanup:YES];
                             [self removeChild:projectile cleanup:YES];
                             [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
-                            [self enemiesKilledTotal];
+                            if(((Character*)badGuy).type == BAD_GUY || ((Character*)badGuy).type == ZIG_ZAG)
+                            {
+                                [self enemiesKilledTotal];
+                            }
                             //[self ScenarioGenerator];
                             //[enemiesToDelete addObject:badGuy];
                             //[bananasToDelete addObject:projectile];
@@ -975,21 +965,19 @@
         if([goodGuys count] > 0)
         {
             goodGuy = [goodGuys objectAtIndex:i];
-            if(goodGuy.position.y <= FLOOR_HEIGHT)
+            if(goodGuy.position.y <= 20)
             {
+                [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
+                goodBottom = [[Character alloc] initWithGoodBottomImage];
+                goodBottom.anchorPoint = CGPointZero;
+                goodBottom.position = ccp(goodGuy.position.x - 15, goodGuy.position.y - 20);
+                goodBottom.scale=.3;
+                [self addChild:goodBottom z:1];
+                [goodGuysBottom addObject:goodBottom];
                 [goodGuys removeObject:goodGuy];
                 [self removeChild:goodGuy cleanup:YES];
-                [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
-                [self spawnGoodGuyBottom];
-            
-                if(level>3)
-                {
-                    bar += ((Character*)goodGuy).worth;
-                }
-                else 
-                {
-                    bar += ((Character*)goodGuy).worth;
-                }
+                bar += ((Character*)goodGuy).worth;
+                NSLog(@"added to bottom array");
             }
         }
     }
@@ -1000,17 +988,24 @@
         {
             badGuy = [badGuys objectAtIndex:i];
 
-            if(badGuy.position.y <= FLOOR_HEIGHT)
+            if(badGuy.position.y <= 20)
             {
-                [badGuys removeObject:badGuy];
-
-                [self removeChild:badGuy cleanup:YES];
-                [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
-                [self spawnBadGuyBottom];
-                if(level<3)
+                if(((Character*)badGuy).type == BAD_GUY)
                 {
-                    bar -= ((Character*)badGuy).worth;
+                    badBottom = [[Character alloc] initWithBadGuyImage];
                 }
+                if(((Character*)badGuy).type == ZIG_ZAG)
+                {
+                    badBottom = [[Character alloc] initWithZigZagImage];
+                }
+                [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
+                badBottom.anchorPoint = CGPointZero;
+                badBottom.scale=.15;
+                badBottom.position = ccp(badGuy.position.x - 15, badGuy.position.y - 20);
+                [self addChild:badBottom z:1];
+                [badGuysBottom addObject:badBottom];
+                [badGuys removeObject:badGuy];
+                [self removeChild:badGuy cleanup:YES];
                 bar -= ((Character*)badGuy).worth;
             }
         }
@@ -1161,7 +1156,7 @@
 
 -(void) changeLevel
 {
-    if (level==0)
+    if (level ==0)
     {
         [self removeChild:background cleanup:YES];
         [self removeChild:player cleanup:YES];
@@ -1196,7 +1191,6 @@
         background = [CCSprite spriteWithFile:@"background_grass-topdown.png"];
         
         player = [CCSprite spriteWithFile:@"animation_knight-1.png"];
-        
     }
     if (level ==4)
     {
@@ -1205,7 +1199,6 @@
         background = [CCSprite spriteWithFile:@"city-back.png"];
 
         player = [CCSprite spriteWithFile:@"cat-main.png"];
-
     }
     if (level ==5)
     {
@@ -1537,11 +1530,6 @@ for(int i = 0; i < [badGuysBottom count]; i++)
     
     
 }
-
-
-
-
-
 
 
 

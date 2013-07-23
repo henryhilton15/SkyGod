@@ -36,6 +36,7 @@
     int KmonsterMaxY;
     int zigZagDelayCounter;
     int zigZagScenarioCounter;
+    int bigGoodGuysScenarioDelayCounter;
     //int levelFramecount;
     int goodGuyFramecount;
     int badGuyFramecount;
