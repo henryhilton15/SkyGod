@@ -519,9 +519,11 @@
         
     }
 
+
     [self ScenarioGenerator];
     [self CreateScenario];
     
+
     framecount++;
     if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true)
     {
@@ -1048,6 +1050,7 @@
     
     
     
+
     CCMoveTo *actionMove1 = [CCMoveTo actionWithDuration:7.0 position:ccp(enemy1.position.x, -enemy1.contentSize.height/2)];
     [enemy1 runAction:actionMove1];
     
@@ -1078,7 +1081,7 @@
         
         id rightLow = [CCMoveTo actionWithDuration:1.0
                                           position:ccp(430, 0)];
-        
+    
         
         
             [zFriendly1 runAction:[CCSequence actions: leftTop, rightTop, leftMid, rightMid, leftLow, rightLow, nil]];
@@ -1095,7 +1098,7 @@
        [enemy2 removeFromParentAndCleanup:YES];
        [enemy3 removeFromParentAndCleanup:YES];
        [enemy4 removeFromParentAndCleanup:YES];
-   }    
+   }
 }
 
 -(void) enemiesKilledTotal
@@ -1206,25 +1209,25 @@
             {
                 [self randomNumberGenerator];
             }
-            if (scenarioNumber == 2)
+            if (scenarioNumber == 1)
             {
                 Scenario1 = true;
                 enemiesKilled = 0;
                 randNum = 0;
             }
-            if (scenarioNumber == 3)
+            if (scenarioNumber == 2)
             {
                 Scenario2 = true;
                 enemiesKilled = 0;
                 randNum = 0;
             }
-            if (scenarioNumber == 4)
+            if (scenarioNumber == 3)
             {
                 Scenario3 = true;
                 enemiesKilled = 0;
                 randNum = 0;
             }
-            if (scenarioNumber == 5)
+            if (scenarioNumber == 4)
             {
                 Scenario4 = true;
                 enemiesKilled = 0;
