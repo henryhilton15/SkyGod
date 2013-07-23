@@ -45,8 +45,6 @@
     //}];
     
         [Kmonster runAction:[CCSequence actions:actionMove, nil]];
- 
-
 }
 
 -(void) addGoodGuy
@@ -135,17 +133,7 @@
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
-    
-    // Create the monster slightly off-screen along the right edge,
-    // and along a random position along the Y axis as calculated above
-    //if(level < 3)
-    //{
-        enemy = [[Character alloc] initWithGoodHelicopterImage];
-    //}
-    //if(level > 3)
-    //{
-       enemy = [[Character alloc] initWithBadHelicopterImage];
-    //}
+    enemy = [[Character alloc] initWithBadHelicopterImage];
     enemy.scale=.5; 
     
     enemy.position = ccp(-enemy.contentSize.width, actualY); //+ enemy.contentSize.height/2);
@@ -162,7 +150,6 @@
     [enemy runAction:actionMove];//[CCSequence actions:actionMove, actionMoveDone, nil]];
     
 }
-
 
 - (void) addZigZagBadGuy
 {
@@ -1126,7 +1113,7 @@
 
 -(void) changeLevel
 {
-    if (level==0)
+    if (level ==0)
     {
         [self removeChild:background cleanup:YES];
         [self removeChild:player cleanup:YES];
@@ -1161,7 +1148,6 @@
         background = [CCSprite spriteWithFile:@"background_grass-topdown.png"];
         
         player = [CCSprite spriteWithFile:@"animation_knight-1.png"];
-        
     }
     if (level ==4)
     {
@@ -1170,7 +1156,6 @@
         background = [CCSprite spriteWithFile:@"city-back.png"];
 
         player = [CCSprite spriteWithFile:@"cat-main.png"];
-
     }
     if (level ==5)
     {
