@@ -22,5 +22,5 @@
 -(id) initWithBadHelicopterBombImage;
 -(id) initWithKamikazeImage;
 -(id) initWithDoubleEnemyImage;
-
+-(id) initWithSuperZigZagGuyImage;
 @end
