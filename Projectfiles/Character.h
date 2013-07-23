@@ -26,7 +26,5 @@
 -(id) initWithBadBottomImage;
 
 
-
-
-
+-(id) initWithSuperZigZagGuyImage;
 @end

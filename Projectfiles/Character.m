@@ -27,7 +27,7 @@
 {
     if((self = [super initWithFile:@"chest.png"]))
     {
-        health = 3;
+        health = 1;
         worth = 100;
     }
     return self;
@@ -72,7 +72,7 @@
 {
     if((self = [super initWithFile:@"barrell.png"]))
     {
-        health = 5;
+        health = 1;
     }
     return self;
 }
@@ -109,6 +109,16 @@
         worth = 50;
         health = 1;
     }
+    return self;
+}
+-(id) initWithSuperZigZagGuyImage
+{
+    if(self = [super initWithFile:@"cat1-topdown.png"])
+    {
+        worth = 1;
+        health = 1;
+    }
+    return self;
 }
 
 -(id) initWithGoodBottomImage

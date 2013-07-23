@@ -24,6 +24,7 @@
 //                                                                       target:self
 //                                                                     selector:@selector(restartGame:)];
 //        restartButton.position = CGPointMake(0,100);
+
         
         //startButton.tag = 1;
         

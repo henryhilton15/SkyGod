@@ -28,14 +28,22 @@
     int helicopterFramecount;
     int zigZagFramecount;
     int helicoptersRemoved;
+    int helicopterDelayCounter;
+    int randNum;
+    int KmonsterCounter;
+    int bigGoodGuysCounter;
+    int KmonsterMinY;
+    int KmonsterMaxY;
+    int zigZagDelayCounter;
+    int zigZagScenarioCounter;
     //int levelFramecount;
     int goodGuyFramecount;
     int badGuyFramecount;
     int scenarioNumber;
     NSMutableArray *bananaArray;
     NSMutableArray *goodGuys;
-    NSMutableArray *princesses;
     NSMutableArray *badGuys;
+    NSMutableArray *zFriendlyArray;
     //NSMutableArray *zenemies;
     CGPoint loc;
     CCSprite *projectile;
@@ -64,7 +72,6 @@
     NSMutableArray *bananasToDelete;
     NSMutableArray *enemiesToDelete;
     NSMutableArray *Kmonsters;
-    NSMutableArray *princessesToDelete;
     NSMutableArray *helicopters;
     NSMutableArray *bigGoodGuys;
     NSMutableArray *goodGuysBottom;
@@ -85,9 +92,13 @@
     BOOL Scenario2;
     BOOL Scenario3;
     BOOL Scenario4;
+
     
     BOOL isWalking;
     
+    BOOL firstHeli;
+    BOOL firstBigGoodGuy;
+    BOOL firstZigZag;
 
 }
 
@@ -118,5 +129,6 @@
 -(void) spawnGoodGuyBottom;
 -(void) spawnBadGuyBottom;
 
+-(void) randomNumberGenerator;
 
 @end
