@@ -11,6 +11,7 @@
 @interface Character : CCSprite
 @property int health;
 @property int worth;
+@property int direction;
 -(id) initWithBigMonsterImage;
 -(id) initWithBigGoodGuyImage;
 -(id) initWithGoodGuyImage;
@@ -24,7 +25,5 @@
 -(id) initWithDoubleEnemyImage;
 -(id) initWithGoodBottomImage;
 -(id) initWithBadBottomImage;
-
-
 -(id) initWithSuperZigZagGuyImage;
 @end

@@ -66,8 +66,12 @@
     CCLabelTTF *enemiesKilledLabel;
     CCSprite *goodTeamCounter;
     CCSprite *badTeamCounter;
+    CCSprite *bullet;
     Rect goodRect;
     Rect badRect;
+    CGRect goodBottomRect;
+    CGRect badBottomRect;
+    CGRect bulletBox;
     NSMutableArray *bananaFrames;
     NSMutableArray *bananasToDelete;
     NSMutableArray *enemiesToDelete;
@@ -76,6 +80,8 @@
     NSMutableArray *bigGoodGuys;
     NSMutableArray *goodGuysBottom;
     NSMutableArray *badGuysBottom;
+    NSMutableArray *goodBulletArray;
+    NSMutableArray *badBulletArray;
     NSString *levelString;
     NSString *enemiesKilledString;
     CGRect badGuyRect;
@@ -128,7 +134,9 @@
 -(void) zigZagScenario;
 -(void) spawnGoodGuyBottom;
 -(void) spawnBadGuyBottom;
-
 -(void) randomNumberGenerator;
+-(void) shoot;
+-(void) detectBulletSoldierCollisions;
+
 
 @end

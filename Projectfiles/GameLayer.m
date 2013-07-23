@@ -12,7 +12,7 @@
 #import "SimpleAudioEngine.h"
 #import "Character.h"
 
-#define FLOOR_HEIGHT 40.0f
+#define FLOOR_HEIGHT 25.0f
  
 @implementation GameLayer
 
@@ -375,6 +375,8 @@
         goodGuysBottom = [[NSMutableArray alloc] init];
         badGuysBottom = [[NSMutableArray alloc] init];
         zFriendlyArray = [[NSMutableArray alloc] init];
+        goodBulletArray = [[NSMutableArray alloc] init];
+        badBulletArray = [[NSMutableArray alloc] init];
         framecount = 0;
         goodGuyFramecount = 150;
         badGuyFramecount = 150;
@@ -658,17 +660,25 @@
     }
     if ([goodGuysBottom count] > 0)
     {
-        
         [self goodGuysWalk];
     }
     if ([badGuysBottom count] > 0)
     {
         [self badGuysWalk];
     }
-    if([goodGuysBottom count] > 0 && [badGuysBottom count] > 0)
+
+    if (([goodGuysBottom count] > 0 || [badGuysBottom count] > 0) && framecount % 100 == 0)
     {
-        [self fight];
+        [self shoot];
     }
+
+    if ([goodGuysBottom count] > 0 && [badGuysBottom count] > 0)
+    {
+        [self detectBulletSoldierCollisions];
+    }
+    
+
+    
 }
 
 -(void) draw
@@ -733,7 +743,7 @@
     // Bail out if you are shooting down
     if (offset.y <= FLOOR_HEIGHT)
     {
-        CCMoveTo *movePlayer = [CCMoveTo actionWithDuration:.5 position:ccp(location.x, FLOOR_HEIGHT)];
+        CCMoveTo *movePlayer = [CCMoveTo actionWithDuration:.5 position:ccp(location.x, player.position.y)];
         [player runAction:movePlayer];
         return;
     }
@@ -1217,7 +1227,7 @@
     [self addChild:background z:-1];
     
     player.anchorPoint = CGPointZero;
-    player.position = CGPointMake(180.0f, FLOOR_HEIGHT);
+    player.position = CGPointMake(180.0f, FLOOR_HEIGHT + 15);
     player.scale = .2;
 
     [self addChild:player z:1];
@@ -1308,7 +1318,7 @@
 {
   //  CGSize winSize = [CCDirector sharedDirector].winSize;
     goodBottom = [[Character alloc] initWithGoodBottomImage];
-     goodBottom.anchorPoint = CGPointZero;
+    goodBottom.anchorPoint = CGPointZero;
     goodBottom.position = ccp(0,0);
     goodBottom.scale=.3;
     [self addChild:goodBottom z:1];
@@ -1360,53 +1370,176 @@
     }
 }
 
-
-
--(void) fight
+-(void) shoot
 {
-//    CGRect goodBottomRect = [goodGuy boundingBox];
-//    CGRect badBottomRect = [goodGuy boundingBox];
-    for(int j = 0; j < [goodGuysBottom count]; j++)
+
+    for (int f = 0; f < [goodGuysBottom count]; f++)
     {
-        for(int i = 0; i < [badGuysBottom count]; i++)
+        goodBottom = [goodGuysBottom objectAtIndex:f];
+        float goodX = goodBottom.position.x;
+        float goodY = goodBottom.position.y;
+        
+        bullet = [CCSprite spriteWithFile:@"cat1.png"];
+        bullet.anchorPoint = CGPointZero;
+        bullet.position = ccp(goodX, goodY + 12);
+        bullet.scale=.1;
+        [self addChild:bullet z:1];
+        [goodBulletArray addObject:bullet];
+
+        if (((Character*)goodBottom).direction == 1)
         {
-            if([goodGuysBottom count] > 0 && [badGuysBottom count] > 0)
+            CCMoveTo *shootRight = [CCMoveTo actionWithDuration:20
+                            position:ccp(2000, bullet.position.y)];
+            
+            [bullet runAction:shootRight];
+    
+        }
+        if (((Character*)goodBottom).direction == 0)
+        {
+            CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:20
+                                                       position:ccp(-2000, bullet.position.y)];
+            
+            [bullet runAction:shootLeft];
+            
+        }
+    
+    }
+    
+    for (int f = 0; f < [badGuysBottom count]; f++)
+    {
+        badBottom = [badGuysBottom objectAtIndex:f];
+        float badX = badBottom.position.x;
+        float badY = badBottom.position.y;
+        
+        bullet = [CCSprite spriteWithFile:@"cat1.png"];
+        bullet.anchorPoint = CGPointZero;
+        bullet.position = ccp(badX, badY + 12);
+        bullet.scale=.1;
+        [self addChild:bullet z:1];
+        [badBulletArray addObject:bullet];
+        
+        if (((Character*)badBottom).direction == 1)
+        {
+            CCMoveTo *shootRight = [CCMoveTo actionWithDuration:20
+                                                       position:ccp(2000, bullet.position.y)];
+        
+                [bullet runAction:shootRight];
+            
+        }
+        if (((Character*)goodBottom).direction == 0)
+        {
+            CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:20
+                                                      position:ccp(-2000, bullet.position.y)];
+            
+            [bullet runAction:shootLeft];
+
+            
+        }
+    }
+}
+
+- (void) detectBulletSoldierCollisions
+{
+ 
+    for (int b = 0; b < [goodBulletArray count]; b++)
+    {
+        bullet = [goodBulletArray objectAtIndex:b];
+            
+        if(bullet.position.x > 480 || bullet.position.x < 0)
+        {
+            [goodBulletArray removeObjectAtIndex:b];
+            [self removeChild:bullet cleanup:YES];
+            
+        }
+        
+    }
+    
+    for (int a = 0; a < [badBulletArray count]; a++)
+    {
+ 
+        bullet = [badBulletArray objectAtIndex:a];
+ 
+        if(bullet.position.x > 480 || bullet.position.x < 0)
+        {
+            [badBulletArray removeObjectAtIndex:a];
+            [self removeChild:bullet cleanup:YES];
+        }
+
+    }
+    
+    
+    
+    for(int i = 0; i < [goodGuysBottom count]; i++)
+    {
+            for(int j = 0; j < [badBulletArray count]; j++)
             {
-                goodBottom = [goodGuysBottom objectAtIndex:j];
-                CGRect goodBottomRect = [goodBottom boundingBox];
-                badBottom = [badGuysBottom objectAtIndex:i];
-                CGRect badBottomRect = [badBottom boundingBox];
-                
-                if(CGRectIntersectsRect(badBottomRect,goodBottomRect))
+                if([badBulletArray count] > 0 && [goodGuysBottom count] > 0)
                 {
+                    goodBottom = [goodGuysBottom objectAtIndex:i];
+                    goodBottomRect = [goodGuy boundingBox];
+                    bullet = [badBulletArray objectAtIndex:j];
+                    bulletBox = [bullet boundingBox];
                     
-                            if(((Character*)goodBottom).health == 1)
-                            {
-                                [goodGuysBottom removeObjectAtIndex:j];
-                                [self removeChild:goodBottom cleanup:YES];
-                                
-                            }
-                    
-                            if(((Character*)goodBottom).health == 1)
-                            {
-                                    [badGuysBottom removeObjectAtIndex:i];
-                                    [self removeChild:badBottom cleanup:YES];
-                            }
-                            else
-                            {
-                                ((Character*)goodBottom).health--;
-                                
-                                
-                                
-                                // put in fight part and use for both good and bad
-                            }
-                        
-   
-                    }
+                    if(CGRectIntersectsRect(goodBottomRect,bulletBox))
+                    {
+                        NSLog(@"detected collision");
+                                if(((Character*)goodBottom).health == 1)
+                                {
+                                    [goodGuysBottom removeObjectAtIndex:i];
+                                    [badBulletArray removeObjectAtIndex:j];
+                                    [self removeChild:goodBottom cleanup:YES];
+                                    [self removeChild:bullet cleanup:YES];
+                                }
+                                else
+                                {
+                                    ((Character*)goodBottom).health--;
+                                    [badBulletArray removeObjectAtIndex:j];
+                                    [self removeChild:bullet cleanup:YES];
+                                }
+                    } 
                 }
             }
+    }
+
+
+for(int i = 0; i < [badGuysBottom count]; i++)
+{
+    for(int j = 0; j < [goodBulletArray count]; j++)
+    {
+        if([goodBulletArray count] > 0 && [badGuysBottom count] > 0)
+        {
+            badBottom = [badGuysBottom objectAtIndex:i];
+            badBottomRect = [badGuy boundingBox];
+            bullet = [goodBulletArray objectAtIndex:j];
+            bulletBox = [bullet boundingBox];
+            
+            if(CGRectIntersectsRect(badBottomRect,bulletBox))
+            {
+                if(((Character*)goodBottom).health == 1)
+                {
+                    [badGuysBottom removeObjectAtIndex:i];
+                    [goodBulletArray removeObjectAtIndex:j];
+                    [self removeChild:goodBottom cleanup:YES];
+                    [self removeChild:bullet cleanup:YES];
+                }
+                else
+                {
+                    ((Character*)badBottom).health--;
+                    [goodBulletArray removeObjectAtIndex:j];
+                    [self removeChild:bullet cleanup:YES];
+                }
+            }
+            
+            
         }
+    }
 }
+    
+    
+}
+
+
+
 
 
 
