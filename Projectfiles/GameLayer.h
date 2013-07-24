@@ -70,6 +70,7 @@
     CCSprite *goodTeamCounter;
     CCSprite *badTeamCounter;
     CCSprite *bullet;
+    CCSprite *bomber;
     Rect goodRect;
     Rect badRect;
     CGRect goodBottomRect;
@@ -85,6 +86,7 @@
     NSMutableArray *badGuysBottom;
     NSMutableArray *goodBulletArray;
     NSMutableArray *badBulletArray;
+    NSMutableArray *bombers;
     NSString *levelString;
     NSString *enemiesKilledString;
     CGRect badGuyRect;
@@ -136,6 +138,7 @@
 -(void) randomNumberGenerator;
 -(void) shoot;
 -(void) detectBulletSoldierCollisions;
+-(void) airstrike;
 
 
 @end

@@ -365,6 +365,7 @@
         zFriendlyArray = [[NSMutableArray alloc] init];
         goodBulletArray = [[NSMutableArray alloc] init];
         badBulletArray = [[NSMutableArray alloc] init];
+        bombers = [[NSMutableArray alloc] init];
         framecount = 0;
         goodGuyFramecount = 150;
         badGuyFramecount = 150;
@@ -454,29 +455,29 @@
                                                                    selector:@selector(pauseMenu:)];
         pauseButton.position = CGPointMake(225, 145);
         pauseButton.scale = 0.15f;
+        
     
         CCMenuItemImage *PowerUpButton1 = [CCMenuItemImage itemWithNormalImage:@"button-top.png" selectedImage:@"button-top.png"];
-        PowerUpButton1.position= CGPointMake (25, 300);
-        PowerUpButton1.scale = 0.25f;
-        [self addChild:PowerUpButton1 z:50];
+        PowerUpButton1.position= CGPointMake (-220, 142);
+        PowerUpButton1.scale = 0.2f;
         PowerUpButton1.color = ccBLUE;
         
         CCMenuItemImage *PowerUpButton2 = [CCMenuItemImage itemWithNormalImage:@"button-top.png" selectedImage:@"button-top.png"];
-        PowerUpButton2.position= CGPointMake (65, 300);
-        PowerUpButton2.scale = 0.25f;
-        [self addChild:PowerUpButton2 z:50];
+        PowerUpButton2.position= CGPointMake (-185, 142);
+        PowerUpButton2.scale = 0.2f;
         PowerUpButton2.color = ccGREEN;
         
-        CCMenuItemImage *PowerUpButton3 = [CCMenuItemImage itemWithNormalImage:@"button-top.png" selectedImage:@"button-top.png"];
-        PowerUpButton3.position= CGPointMake (105, 300);
-        PowerUpButton3.scale = 0.25f;
-        [self addChild:PowerUpButton3 z:50];
+        
+        CCMenuItemImage *PowerUpButton3 = [CCMenuItemImage itemWithNormalImage:@"button-top.png" selectedImage:@"button-top.png"
+                                                                        target: self
+                                                                    selector:@selector(airstrike:)];
+        PowerUpButton3.position= CGPointMake (-150, 142);
+        PowerUpButton3.scale = 0.2f;
         PowerUpButton3.color = ccRED;
         
-     
-        //  [self addChild:pauseButton z:100];
+    
         
-        CCMenu *myMenu = [CCMenu menuWithItems:pauseButton, nil];
+        CCMenu *myMenu = [CCMenu menuWithItems:pauseButton, PowerUpButton1, PowerUpButton2, PowerUpButton3, nil];
         [self addChild: myMenu z:100];
         
         [self changeLevel];
@@ -617,6 +618,43 @@
             }
         }
     }
+    
+    if ([bombers count] > 0)
+    {
+        for(int i = 0; i < [bombers count]; i++)
+        {
+            bomber = [bombers objectAtIndex:i];
+            if(framecount%10 == 0 && bomber.position.x > 5 && bomber.position.x < 475)
+            {
+                CGPoint bomberPosition = ccp(bomber.position.x, bomber.position.y);
+
+                bomb = [CCSprite spriteWithFile:@"bomb.png"];
+                bomb.scale=.15;
+                bomb.position = bomberPosition; //+ enemy.contentSize.height/2);
+                [self addChild:bomb z:2];
+                [goodBulletArray addObject:bomb];
+                
+                CCMoveTo * actionMove = [CCMoveTo actionWithDuration:3
+                                                            position:ccp(bomb.position.x, -bomb.contentSize.height/2)];
+                //        CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
+                //            [node removeFromParentAndCleanup:YES];
+                //        }];
+                [bomb runAction:actionMove];
+            }
+
+                
+        
+        
+        
+            if(bomber.position.x >= 480)
+            {
+                [bombers removeObject:bomber];
+                [self removeChild:bomber cleanup:YES];
+            }
+
+        }
+    }
+    
     if(helicoptersRemoved % 2 == 0 && helicoptersRemoved > 0)
     {
         Scenario1 = false;
@@ -1621,7 +1659,7 @@
     {
         bullet = [goodBulletArray objectAtIndex:b];
             
-        if(bullet.position.x > 480 || bullet.position.x < 0)
+        if(bullet.position.x > 480 || bullet.position.x < 0 || bullet.position.y < 0)
         {
             [goodBulletArray removeObjectAtIndex:b];
             [self removeChild:bullet cleanup:YES];
@@ -1652,6 +1690,13 @@
             {
                 if([badBulletArray count] > 0 && [goodGuysBottom count] > 0)
                 {
+//                    if([badBulletArray count] == 0)
+//                    {NSLog(@"bullets are 0");
+//                    }
+//                    if([goodGuysBottom count] ==0)
+//                    {
+//                        NSLog(@"goodGuys=0");
+//                    }
                     goodBottom = [goodGuysBottom objectAtIndex:i];
                     goodBottomRect = [goodGuy boundingBox];
                     bullet = [badBulletArray objectAtIndex:j];
@@ -1673,6 +1718,7 @@
                                     ((Character*)goodBottom).health--;
                                     [badBulletArray removeObjectAtIndex:j];
                                     [self removeChild:bullet cleanup:YES];
+                                    NSLog(@"Good guy hit");
                                 }
                    }
                 }
@@ -1714,6 +1760,30 @@ for(int i = 0; i < [badGuysBottom count]; i++)
 }
 
 }
+
+-(void) airstrike: (CCMenuItemImage *)PowerUpButton3
+{
+    bomber = [[Character alloc] initWithGoodHelicopterImage];
+    bomber.scale=.5;
+    
+    
+    bomber.position = ccp(0, 280); //+ enemy.contentSize.height/2);
+    [self addChild:bomber];
+    [bombers addObject:bomber];
+    
+    
+    // Create the actions
+    CCMoveTo * actionMove = [CCMoveTo actionWithDuration:4
+    position:ccp(500, bomber.position.y)];
+
+    [bomber runAction:actionMove];
+    
+
+}
+
+
+
+
 
 
 @end
