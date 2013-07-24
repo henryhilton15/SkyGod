@@ -121,6 +121,7 @@
     {
         worth = 50;
         health = 1;
+        type = DOUBLE_ENEMY;
     }
     return self;
 }
