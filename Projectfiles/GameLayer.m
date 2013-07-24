@@ -1004,14 +1004,19 @@
                 if(((Character*)goodGuy).type == GOOD_GUY)
                 {
                     goodBottom = [[Character alloc] initWithGoodBottomImage];
+                    ((Character*)goodBottom).health = ((Character*)goodGuy).health;
+                    //int x = ((Character*)goodBottom).health;
+                    //NSLog(@"health = %d", x);
                 }
                 if(((Character*)goodGuy).type == SUPER_ZIG_ZAG_GUY)
                 {
                     goodBottom = [[Character alloc] initWithSuperZigZagGuyImage];
+                    ((Character*)goodBottom).health = ((Character*)goodGuy).health;
                 }
                 if(((Character*)goodGuy).type == BIG_GOOD_GUY)
                 {
                     goodBottom = [[Character alloc] initWithSuperZigZagGuyImage];
+                    ((Character*)goodBottom).health = ((Character*)goodGuy).health;
                 }
                 goodBottom.anchorPoint = CGPointZero;
                 goodBottom.position = ccp(goodGuy.position.x - 15, goodGuy.position.y - 20);
@@ -1037,14 +1042,17 @@
                 if(((Character*)badGuy).type == BAD_GUY)
                 {
                     badBottom = [[Character alloc] initWithBadGuyImage];
+                    ((Character*)badBottom).health = ((Character*)badGuy).health;
                 }
                 if(((Character*)badGuy).type == ZIG_ZAG)
                 {
                     badBottom = [[Character alloc] initWithZigZagImage];
+                    ((Character*)badBottom).health = ((Character*)badGuy).health;
                 }
                 if(((Character*)badGuy).type == DOUBLE_ENEMY)
                 {
                     badBottom = [[Character alloc] initWithDoubleEnemyImage];
+                    ((Character*)badBottom).health = ((Character*)badGuy).health;
                 }
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
                 badBottom.anchorPoint = CGPointZero;
