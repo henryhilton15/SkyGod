@@ -682,10 +682,10 @@
 
     //if ([goodGuysBottom count] > 0 && [badGuysBottom count] > 0)
      
-    if([goodGuysBottom count] > 0 || [badGuysBottom count] > 0)
-    {
+    //if([goodGuysBottom count] > 0 || [badGuysBottom count] > 0)
+    //{
         [self detectBulletSoldierCollisions];
-    }
+    //}
 }
 
 -(void) draw
@@ -938,7 +938,7 @@
             if ([bananaArray count] > 0 && [badGuys count] > 0)
             {
                 badGuy = [badGuys objectAtIndex:j];
-                CGRect badGuyRect = [badGuy boundingBox];
+                badGuyRect = [badGuy boundingBox];
                 projectile = [bananaArray objectAtIndex:i];
                 CGRect projectileBox = [projectile boundingBox];
                 

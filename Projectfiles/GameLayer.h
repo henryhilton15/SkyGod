@@ -135,6 +135,7 @@
 -(void) randomNumberGenerator;
 -(void) shoot;
 -(void) detectBulletSoldierCollisions;
+-(CGRect) explosionBox;
 
 
 @end
