@@ -397,7 +397,7 @@
         Scenario3 = false;
         Scenario4 = false;
         isWalking = true;
-        
+        /*
         //Animating bear
         goodTeamCounter = [CCSprite spriteWithSpriteFrameName:@"bear1.png"];
         goodTeamCounter.anchorPoint = CGPointZero;
@@ -432,7 +432,7 @@
         //tell the bear to run the taunting action
         [badTeamCounter runAction:knightAttack];
         [self addChild:badTeamCounter z:1];
-   
+   */
         
         //Background and placeholders -Henry
         
@@ -492,9 +492,10 @@
 
 -(void) update:(ccTime)delta
 {
+    /*
     goodTeamCounter.position = CGPointMake(bar - 40, goodTeamCounter.contentSize.height/2 - 35);
     badTeamCounter.position = CGPointMake(bar, badTeamCounter.contentSize.height/2 - 115);
-
+    
     if(bar >= 480)
     {
        
@@ -513,7 +514,7 @@
         [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
         
     }
-    
+    */
     [self ScenarioGenerator];
     [self CreateScenario];
     
@@ -531,7 +532,7 @@
             }
         }
     
-        if((firstHeli == true || helicopterDelayCounter % 200 == 0) && (firstZigZag == true || zigZagDelayCounter % 250))
+        if((firstHeli == true || helicopterDelayCounter % 200 == 0) && (firstZigZag == true || zigZagDelayCounter % 250 == 0))
         {
             if((framecount - (int)(.5 * goodGuyFramecount)) % badGuyFramecount == 0)
             {
@@ -716,7 +717,7 @@
         [self detectBulletSoldierCollisions];
     //}
 }
-
+/*
 -(void) draw
 {
     ccColor4F red = ccc4f(255, 0, 0, 1);
@@ -724,7 +725,7 @@
     ccColor4F green = ccc4f(0, 255, 0, 1);
     ccDrawSolidRect(CGPointMake(0,0), CGPointMake(bar, 40), green);
 }
-
+*/
 -(void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // Choose one of the touches to work with
@@ -819,6 +820,8 @@
            {
                bomb = [badGuys objectAtIndex:i];
                CGRect bombBox = [badGuy boundingBox];
+               bombBox.size.width *= 5;
+               bombBox.size.height *= 4;
                goodGuy = [goodGuysBottom objectAtIndex:j];
                CGRect goodGuyRect = [goodGuy boundingBox];
                if(((Character*)bomb).type == BAD_HELICOPTER_BOMB)
@@ -849,6 +852,14 @@
            }
     }
 }
+
+-(CGRect) explosionBox
+{
+    int dx = -200;
+    int dy = -100;
+    return CGRectInset(self.boundingBox, dx, dy);
+}
+
 -(void) detectBananaGoodGuyCollisions
 {
     for(int j = 0; j < [goodGuys count]; j++)
@@ -960,7 +971,7 @@
                 
                 if ([Kmonsters count] > 0 && [goodGuys count] > 0)
                 {
-                    NSLog(@"made it loop");
+                    //NSLog(@"made it loop");
                     goodGuy =[goodGuys objectAtIndex:j];
                     goodGuyRect = [goodGuy boundingBox];
                     Kamikaze=[Kmonsters objectAtIndex:i];
@@ -1137,7 +1148,22 @@
                     bar -= ((Character*)badGuy).worth;;
                     
                 }
-                
+                if(((Character*)badGuy).type == DOUBLE_ENEMY)
+                {
+                    badBottom = [[Character alloc] initWithDoubleEnemyImage];
+                    ((Character*)badBottom).health = ((Character*)badGuy).health;
+                    [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
+                    badBottom.anchorPoint = CGPointZero;
+                    badBottom.scale=.15;
+                    badBottom.position = ccp(badGuy.position.x - 15, badGuy.position.y - 20);
+                    [self addChild:badBottom z:1];
+                    [badGuysBottom addObject:badBottom];
+                    [badGuys removeObject:badGuy];
+                    [self removeChild:badGuy cleanup:YES];
+                    bar -= ((Character*)badGuy).worth;;
+                    
+                }
+
                 /*
                 if(((Character*)badGuy).type == BAD_HELICOPTER_BOMB)
                 {
@@ -1702,6 +1728,5 @@ for(int i = 0; i < [badGuysBottom count]; i++)
 }
 
 }
-
 
 @end
