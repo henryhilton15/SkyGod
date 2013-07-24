@@ -674,19 +674,18 @@
     {
         [self badGuysWalk];
     }
+     */
     if (([goodGuysBottom count] > 0 || [badGuysBottom count] > 0) && framecount % 100 == 0)
     {
         [self shoot];
     }
 
-    if ([goodGuysBottom count] > 0 && [badGuysBottom count] > 0)
+    //if ([goodGuysBottom count] > 0 && [badGuysBottom count] > 0)
      
-    if([goodGuysBottom count] > 0 && [badGuysBottom count] > 0)
+    if([goodGuysBottom count] > 0 || [badGuysBottom count] > 0)
     {
         [self detectBulletSoldierCollisions];
     }
-        
-     */
 }
 
 -(void) draw
@@ -1002,7 +1001,18 @@
             if(goodGuy.position.y <= 20)
             {
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
-                goodBottom = [[Character alloc] initWithGoodBottomImage];
+                if(((Character*)goodGuy).type == GOOD_GUY)
+                {
+                    goodBottom = [[Character alloc] initWithGoodBottomImage];
+                }
+                if(((Character*)goodGuy).type == SUPER_ZIG_ZAG_GUY)
+                {
+                    goodBottom = [[Character alloc] initWithSuperZigZagGuyImage];
+                }
+                if(((Character*)goodGuy).type == BIG_GOOD_GUY)
+                {
+                    goodBottom = [[Character alloc] initWithSuperZigZagGuyImage];
+                }
                 goodBottom.anchorPoint = CGPointZero;
                 goodBottom.position = ccp(goodGuy.position.x - 15, goodGuy.position.y - 20);
                 goodBottom.scale=.3;
@@ -1031,6 +1041,10 @@
                 if(((Character*)badGuy).type == ZIG_ZAG)
                 {
                     badBottom = [[Character alloc] initWithZigZagImage];
+                }
+                if(((Character*)badGuy).type == DOUBLE_ENEMY)
+                {
+                    badBottom = [[Character alloc] initWithDoubleEnemyImage];
                 }
                 [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
                 badBottom.anchorPoint = CGPointZero;
@@ -1494,7 +1508,7 @@
         {
             [goodBulletArray removeObjectAtIndex:b];
             [self removeChild:bullet cleanup:YES];
-            
+            NSLog(@"removed bullet");
         }
         
     }
@@ -1506,6 +1520,7 @@
  
         if(bullet.position.x > 480 || bullet.position.x < 0)
         {
+            NSLog(@"removed bullet");
             [badBulletArray removeObjectAtIndex:a];
             [self removeChild:bullet cleanup:YES];
         }
@@ -1574,16 +1589,11 @@ for(int i = 0; i < [badGuysBottom count]; i++)
                     [self removeChild:bullet cleanup:YES];
                 }
             }
-            
-            
         }
     }
-    
-    
 }
 
 }
 
 
 @end
-
