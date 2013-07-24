@@ -41,6 +41,8 @@
     int goodGuyFramecount;
     int badGuyFramecount;
     int scenarioNumber;
+    int enemiesKilledCounter;
+    int bombCount;
     NSMutableArray *bananaArray;
     NSMutableArray *goodGuys;
     NSMutableArray *badGuys;
@@ -88,21 +90,17 @@
     CGRect badGuyRect;
     CGRect KamikazeBox;
     CGRect goodGuyRect;
-
+    NSMutableArray *GoodGuysToDelete;
     CCAction *taunt;
     NSMutableArray *tauntingFrames;
     CCAction *knightAttack;
     NSMutableArray *knightAttackFrames;
-
-
     BOOL Scenario1;
     BOOL Scenario2;
     BOOL Scenario3;
     BOOL Scenario4;
-
-    
+    int spawnedHelicopters;
     BOOL isWalking;
-    
     BOOL firstHeli;
     BOOL firstBigGoodGuy;
     BOOL firstZigZag;

@@ -21,7 +21,7 @@
 #define GOOD_BOTTOM 10
 #define BAD_BOTTOM 11
 #define SUPER_ZIG_ZAG_GUY 12
-
+#define DOUBLE_ENEMY 13
 
 @interface Character : CCSprite
 @property int type;

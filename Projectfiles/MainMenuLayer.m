@@ -28,8 +28,7 @@
         startButton.position = CGPointMake(0, 10);
         
         CCMenuItemImage *StoreButton = [CCMenuItemImage itemWithNormalImage:@"shop-button.png"
-                                        
-                                                              selectedImage: @"shop-button.png"
+                                                                selectedImage: @"shop-button.png"
                                                                  target:self
                                                                    selector:@selector(enterStore:)];
         StoreButton.scale=0.5;
