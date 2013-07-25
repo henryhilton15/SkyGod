@@ -378,6 +378,7 @@
         helicopterDelayCounter = 0;
         zigZagDelayCounter = 0;
         zigZagScenarioCounter = 0;
+        badReinforcementCount = 0;
         level = 0;
         deaths = 0;
         bombCount = 0;
@@ -462,7 +463,10 @@
         PowerUpButton1.scale = 0.2f;
         PowerUpButton1.color = ccBLUE;
         
-        CCMenuItemImage *PowerUpButton2 = [CCMenuItemImage itemWithNormalImage:@"button-top.png" selectedImage:@"button-top.png"];
+        CCMenuItemImage *PowerUpButton2 = [CCMenuItemImage itemWithNormalImage:@"button-top.png" selectedImage:@"button-top.png"
+                                                                                target: self
+                                                                      selector:@selector(reinforcements:)];
+        
         PowerUpButton2.position= CGPointMake (-185, 142);
         PowerUpButton2.scale = 0.2f;
         PowerUpButton2.color = ccGREEN;
@@ -748,19 +752,47 @@
     {
         [self badGuysWalk];
     }
-     */
+    */
     if (([goodGuysBottom count] > 0 || [badGuysBottom count] > 0) && framecount % 100 == 0)
     {
         [self shoot];
     }
-    
     if([goodGuysBottom count] > 0 || [badGuysBottom count] > 0)
     {
         [self detectBulletSoldierCollisions];
     }
-
+    if(truckCount == 1)
+    {
+        [self truckGoodBottomOrBadBottomCollisions];
+        
+    }
+    if (truckCount > 0)
+    {
+        NSLog(@"truckcount > 0" );
+        if (truck.position.x <= 480)
+        {
+            NSLog(@"truck position is less than 480");
+            if(framecount % 60 == 0)
+            {
+                BadReinforcement = [[Character alloc] initWithBadBottomImage];
+                BadReinforcement.position = ccp(410, truck.position.y);
+                BadReinforcement.scale = .1;
+                [self addChild:BadReinforcement];
+                int rangeX3 = 380;
+                int actualX3 = (arc4random() % 380) + 20;
+                CCMoveTo * spreadOut = [CCMoveTo actionWithDuration:2 position:ccp(actualX3, 15)];
+                [badGuysBottom addObject:BadReinforcement];
+                [BadReinforcement runAction:spreadOut];
+                badReinforcementCount++;
+            }
+        }
+    }
+    if(badReinforcementCount == 4)
+    {
+        truckCount = 0;
+        badReinforcementCount = 0;
+    }
 }
-
 -(void) draw
 {
     ccColor4F red = ccc4f(255, 0, 0, 1);
@@ -855,6 +887,7 @@
        }],
       nil]];
 }
+
 -(void) detectBombGoodGuyCollisions
 {
     for(int j=0; j < [goodGuysBottom count]; j++)
@@ -1830,9 +1863,80 @@ for(int i = 0; i < [badGuysBottom count]; i++)
 
 }
 
+-(void)reinforcements: (CCMenuItemImage *) PowerUpButton2
+{
+    truck = [CCSprite spriteWithFile: @"car-side.png"];
+    truck.scale =.5;
+    truck.position = ccp(500,15);
+    [self addChild:truck];
+    truckCount++;
+    
+    CCMoveTo * DriveIn = [CCMoveTo actionWithDuration:2 position:ccp(420, truck.position.y)];
+    CCMoveTo * NoMove = [CCMoveTo actionWithDuration:8 position:ccp(420, truck.position.y)];
+    CCMoveTo * DriveOut = [CCMoveTo actionWithDuration:2 position:ccp(520, truck.position.y)];
+    
+    [truck runAction:[CCSequence actions: DriveIn, NoMove, DriveOut, nil]];
+    
+}
+
+-(void) truckGoodBottomOrBadBottomCollisions
+{
+    NSMutableArray *runOverGoodGuys = [[NSMutableArray alloc] init];
+    NSMutableArray *runOverBadGuys = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < [badGuysBottom count]; i++)
+    {
+        if (truckCount == 1 && [goodGuysBottom count] > 0)
+        {
+            badBottom = [badGuysBottom objectAtIndex: i];
+            badBottomRect = [badBottom boundingBox];
+            truckBox = [truck boundingBox];
+            if(CGRectIntersectsRect(badBottomRect, truckBox))
+            {   NSLog(@"Run over bad guy");
+                [runOverBadGuys addObject:badBottom];
+                
+            }
+        }
+    }
+    for (int i = 0; i < [goodGuysBottom count]; i++)
+    {
+        if (truckCount == 1 && [goodGuysBottom count] > 0)
+        {
+            goodBottom = [goodGuysBottom objectAtIndex: i];
+            goodBottomRect = [goodBottom boundingBox];
+            truckBox = [truck boundingBox];
+            if(CGRectIntersectsRect(goodBottomRect, truckBox))
+            {   NSLog(@"Run over good guy");
+                [runOverGoodGuys addObject:goodBottom];
+                
+            }
+        }
+    }
+
+    for (CCSprite *d in runOverBadGuys)
+    {
+        [badGuysBottom removeObject:d];
+        [self removeChild:d cleanup:YES];
+        NSLog(@"deleted run over bad guy");
+    }
+    [runOverBadGuys removeAllObjects];
+    
+    for (CCSprite *d in runOverGoodGuys)
+    {
+        [goodGuysBottom removeObject:d];
+        [self removeChild:d cleanup:YES];
+        NSLog(@"deleted run over good guy");
+    }
+    [runOverGoodGuys removeAllObjects];
+
+    
+    
 
 
+    
 
+
+}
 
 
 @end
