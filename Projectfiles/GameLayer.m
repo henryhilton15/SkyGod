@@ -1004,7 +1004,7 @@
                 
                 if ([Kmonsters count] > 0 && [goodGuys count] > 0)
                 {
-                    NSLog(@"made it loop");
+                   // NSLog(@"made it loop");
                     goodGuy =[goodGuys objectAtIndex:j];
                     goodGuyRect = [goodGuy boundingBox];
                     Kamikaze=[Kmonsters objectAtIndex:i];
@@ -1013,7 +1013,7 @@
             
                 if(CGRectIntersectsRect(goodGuyRect, KamikazeBox))
                 {
-                    NSLog(@"intersect");
+                   // NSLog(@"intersect");
                     //if (Kamikaze.position.y < 315)
                          
                         
@@ -1440,7 +1440,7 @@
 {
     if (enemiesKilledCounter >= 5)
     {
-        NSLog(@"Killed 5");
+       // NSLog(@"Killed 5");
         randNum++;
         if(randNum == 1){
         [self generateRandomNumber];
@@ -1587,7 +1587,7 @@
 -(void) shoot
 {
 
-    for (int f = 0; f < 1; f++)
+    for (int f = 0; f < [goodGuysBottom count]; f++)
     { if ([goodGuysBottom count] != 0)
     { goodBottom = [goodGuysBottom objectAtIndex:f];
         float goodX = goodBottom.position.x;
@@ -1619,7 +1619,7 @@
     
     }
     }
-    for (int f = 0; f < 1; f++)
+    for (int f = 0; f < [badGuysBottom count]; f++)
     {
         if( [badGuysBottom count] !=0)
         {
@@ -1711,8 +1711,8 @@
                     bullet = [badBulletArray objectAtIndex:j];
                     bulletBox = [bullet boundingBox];
                     
-                    NSLog(NSStringFromCGRect(goodBottomRect));
-                    NSLog(NSStringFromCGRect(bulletBox));
+                   // NSLog(NSStringFromCGRect(goodBottomRect));
+                   // NSLog(NSStringFromCGRect(bulletBox));
                     if(CGRectIntersectsRect(goodBottomRect,bulletBox))
                     {
                         NSLog(@"bullet good guy collide");

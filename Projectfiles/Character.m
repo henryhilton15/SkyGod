@@ -70,7 +70,7 @@
 }
 -(id) initWithGoodHelicopterImage
 {
-    if((self = [super initWithFile:@"planet.png"]))
+    if((self = [super initWithFile:@"jet.png"]))
     {
         health = 5;
         type = GOOD_HELICOPTER;
@@ -174,5 +174,6 @@
     }
     return self;
 }
+
 
 @end
