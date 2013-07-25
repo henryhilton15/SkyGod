@@ -28,6 +28,7 @@
 @property int health;
 @property int worth;
 @property int direction;
+@property int immunity;
 -(id) initWithBigMonsterImage;
 -(id) initWithBigGoodGuyImage;
 -(id) initWithGoodGuyImage;
