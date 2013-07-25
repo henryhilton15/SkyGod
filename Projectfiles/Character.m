@@ -150,14 +150,14 @@
     {
         health = 1;
 
-        if(random() % 2 == 0)
-        {
-            direction = 1;
-        }
-        else
-        {
-            direction = 0;
-        }
+//        if(random() % 2 == 0)
+//        {
+//            direction = 1;
+//        }
+//        else
+//        {
+//            direction = 0;
+//        }
         
         type = GOOD_BOTTOM;
         immunity = 0;
@@ -171,14 +171,15 @@
     {
         health = 1;
         
-        if(random() % 2 == 0)
-        {
-            direction = 1;
-        }
-        else
-        {
-            direction = 0;
-        }
+//        if(random() % 2 == 0)
+//        {
+//            direction = 1;
+//        }
+//        else
+//        {
+//            direction = 0;
+//        }
+        
         type = BAD_BOTTOM;
         immunity = 0;
     }

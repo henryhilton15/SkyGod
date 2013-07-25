@@ -70,13 +70,15 @@
     CCLabelTTF *enemiesKilledLabel;
     CCSprite *goodTeamCounter;
     CCSprite *badTeamCounter;
-    CCSprite *bullet;
+    CCSprite *goodBullet;
+    CCSprite *badBullet;
     CCSprite *bomber;
     Rect goodRect;
     Rect badRect;
     CGRect goodBottomRect;
     CGRect badBottomRect;
-    CGRect bulletBox;
+    CGRect goodBulletBox;
+    CGRect badBulletBox;
     NSMutableArray *bananaFrames;
     NSMutableArray *bananasToDelete;
     NSMutableArray *enemiesToDelete;

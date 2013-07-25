@@ -611,7 +611,7 @@
                 [helicopters removeObject:helicopter];
                 [badGuys removeObject:helicopter];
                 [self removeChild:helicopter cleanup:YES];
-                NSLog(@"removed helicopter");
+                //NSLog(@"removed helicopter");
                 Scenario1 = FALSE;
                 spawnedHelicopters = 0;
                 helicoptersRemoved++;
@@ -1040,14 +1040,14 @@
     {
         [bananaArray removeObject:s];
         [self removeChild:s cleanup:YES];
-        NSLog(@"removed banana");
+       // NSLog(@"removed banana");
     }
     [deadBananas removeAllObjects];
     for (CCSprite *s in deadGoodGuys)
     {
         [goodGuys removeObject:s];
         [self removeChild:s cleanup:YES];
-        NSLog(@"removed goodGuy");
+       // NSLog(@"removed goodGuy");
     }
     [deadGoodGuys removeAllObjects];
 }
@@ -1204,14 +1204,14 @@
     {
         [bananaArray removeObject:s];
         [self removeChild:s cleanup:YES];
-        NSLog(@"removed banana");
+        //NSLog(@"removed banana");
     }
     [deadBananas removeAllObjects];
     for (CCSprite *s in deadBadGuys)
     {
         [badGuys removeObject:s];
         [self removeChild:s cleanup:YES];
-        NSLog(@"removed goodGuy");
+       // NSLog(@"removed goodGuy");
     }
     [deadBadGuys removeAllObjects];
 
@@ -1240,7 +1240,7 @@
                 }
                 if(((Character*)goodGuy).type == BIG_GOOD_GUY)
                 {
-                    goodBottom = [[Character alloc] initWithSuperZigZagGuyImage];
+                    goodBottom = [[Character alloc] initWithBigGoodGuyImage];
                 }
                 ((Character*)goodBottom).health = ((Character*)goodGuy).health;
                 goodBottom.anchorPoint = CGPointZero;
@@ -1603,24 +1603,24 @@
             
         if (scenarioNumber == 1)
         {
-            NSLog(@"scenario1begins");
+           // NSLog(@"scenario1begins");
             Scenario1 = true;
         }
             
         if (scenarioNumber == 2)
 
             {
-                NSLog(@"scenario2begins");
+               // NSLog(@"scenario2begins");
                 Scenario2 = true;
             }
         if (scenarioNumber == 3)
             {
-                NSLog(@"scenario3begins");
+                //NSLog(@"scenario3begins");
                 Scenario3 = true;
             }
         if (scenarioNumber == 4)
             {
-                NSLog(@"scenario4begins");
+               // NSLog(@"scenario4begins");
                 Scenario4 = true;
             }
             enemiesKilledCounter = 0;
@@ -1634,11 +1634,11 @@
     
     if(Scenario1 == true)
     {
-        NSLog(@"Scenario1 == TRUE");
+       // NSLog(@"Scenario1 == TRUE");
         if(framecount % helicopterFramecount == 0)
         {
             spawnedHelicopters++;
-            NSLog(@"adding helicopter");
+          //  NSLog(@"adding helicopter");
             if(spawnedHelicopters == 1)
             {
             [self addHelicopter];
@@ -1651,7 +1651,7 @@
     {
         if(framecount % (int)(helicopterFramecount ) == 0)
         {
-            NSLog(@"spawning big good guy");
+          //  NSLog(@"spawning big good guy");
             [self addBigGoodGuy];
         
         }
@@ -1662,7 +1662,7 @@
 
         if(framecount % 300 == 0)
         {
-            NSLog(@"starting zig zag scenario");
+            //NSLog(@"starting zig zag scenario");
             [self zigZagScenario];
             zigZagScenarioCounter++;
         
@@ -1734,8 +1734,6 @@
 
 -(void) shoot
 {
-
-
     for (int f = 0; f < [badGuysBottom count]; f++)
     {
         if( [badGuysBottom count] !=0)
@@ -1744,27 +1742,32 @@
         float badX = badBottom.position.x;
         float badY = badBottom.position.y;
         
-        bullet = [CCSprite spriteWithFile:@"cat1.png"];
-        bullet.anchorPoint = CGPointZero;
-        bullet.position = ccp(badX, badY + 12);
-        bullet.scale=.1;
-        [self addChild:bullet z:1];
-        [badBulletArray addObject:bullet];
+        badBullet = [CCSprite spriteWithFile:@"cat1.png"];
+        badBullet.anchorPoint = CGPointZero;
+        badBullet.position = ccp(badX, badY + 12);
+        badBullet.scale=.1;
+        [self addChild:badBullet z:1];
+        [badBulletArray addObject:badBullet];
+        int badDirection = arc4random() % 2;
+            
         
-        if (((Character*)badBottom).direction == 1)
+        if (badDirection == 1)
         {
             CCMoveTo *shootRight = [CCMoveTo actionWithDuration:20
-                                                       position:ccp(2000, bullet.position.y)];
+                                                       position:ccp(2000, badBullet.position.y)];
         
-                [bullet runAction:shootRight];
+                [badBullet runAction:shootRight];
+            
+            NSLog(@"bad bullet shot right");
             
         }
-        if (((Character*)goodBottom).direction == 0)
+       if (badDirection == 0)
         {
             CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:20
-                                                      position:ccp(-2000, bullet.position.y)];
+                                                      position:ccp(-2000, badBullet.position.y)];
             
-            [bullet runAction:shootLeft];
+            [badBullet runAction:shootLeft];
+            NSLog(@"bad bullet shot left");
 
             
         }
@@ -1778,28 +1781,32 @@
         float goodX = goodBottom.position.x;
         float goodY = goodBottom.position.y;
         
-        bullet = [CCSprite spriteWithFile:@"cat1.png"];
-        bullet.anchorPoint = CGPointZero;
-        bullet.position = ccp(goodX, goodY + 12);
-        bullet.scale=.1;
-        [self addChild:bullet z:1];
-        [goodBulletArray addObject:bullet];
+        goodBullet = [CCSprite spriteWithFile:@"cat1.png"];
+        goodBullet.anchorPoint = CGPointZero;
+        goodBullet.position = ccp(goodX, goodY + 12);
+        goodBullet.scale=.1;
+        [self addChild:goodBullet z:1];
+        [goodBulletArray addObject:goodBullet];
+        int goodDirection = arc4random() % 2;
         
-        if (((Character*)goodBottom).direction == 1)
+        if (goodDirection == 1)
         {
             CCMoveTo *shootRight = [CCMoveTo actionWithDuration:20
-                                                       position:ccp(2000, bullet.position.y)];
+                                                       position:ccp(2000, goodBullet.position.y)];
             
-            [bullet runAction:shootRight];
+            [goodBullet runAction:shootRight];
+            
+                        NSLog(@"good bullet shot right");
             
         }
-        else if (((Character*)goodBottom).direction == 0)
+        if (goodDirection == 0)
         {
             CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:20
-                                                      position:ccp(-2000, bullet.position.y)];
+                                                      position:ccp(-2000, goodBullet.position.y)];
             
-            [bullet runAction:shootLeft];
+            [goodBullet runAction:shootLeft];
             
+             NSLog(@"good bullet shot left");
         }
         
     }
@@ -1817,11 +1824,11 @@
     
     for (int b = 0; b < [goodBulletArray count]; b++)
     {
-        bullet = [goodBulletArray objectAtIndex:b];
+        goodBullet = [goodBulletArray objectAtIndex:b];
             
-        if(bullet.position.x > 480 || bullet.position.x < 0 || bullet.position.y < 0)
+        if(goodBullet.position.x > 480 || goodBullet.position.x < 0 || goodBullet.position.y < 0)
         {
-            [deadGoodBullets addObject:bullet];
+            [deadGoodBullets addObject:goodBullet];
 //            [goodBulletArray removeObjectAtIndex:b];
 //            [self removeChild:bullet cleanup:YES];
             // NSLog(@"removed bullet off screen");
@@ -1832,11 +1839,11 @@
     for (int a = 0; a < [badBulletArray count]; a++)
     {
  
-        bullet = [badBulletArray objectAtIndex:a];
+        badBullet = [badBulletArray objectAtIndex:a];
  
-        if(bullet.position.x > 480 || bullet.position.x < 0)
+        if(badBullet.position.x > 480 || badBullet.position.x < 0)
         {
-            [deadBadBullets addObject:bullet];
+            [deadBadBullets addObject:badBullet];
             //NSLog(@"removed bullet");
 //            [badBulletArray removeObjectAtIndex:a];
 //            [self removeChild:bullet cleanup:YES];
@@ -1859,31 +1866,31 @@
 //                    }
                     goodBottom = [goodGuysBottom objectAtIndex:i];
                     goodBottomRect = [goodBottom boundingBox];
-                    bullet = [badBulletArray objectAtIndex:j];
-                    bulletBox = [bullet boundingBox];
+                    badBullet = [badBulletArray objectAtIndex:j];
+                    badBulletBox = [badBullet boundingBox];
                     
 
                     //NSLog(NSStringFromCGRect(goodBottomRect));
                     //NSLog(NSStringFromCGRect(bulletBox));
                     
                 
-                    if(CGRectIntersectsRect(goodBottomRect,bulletBox) && ((Character*)goodBottom).immunity >= immunityFramecount)
+                    if(CGRectIntersectsRect(goodBottomRect,badBulletBox) && ((Character*)goodBottom).immunity >= immunityFramecount)
                     {
-                        NSLog(@"bullet good guy collide");
+                       // NSLog(@"bullet good guy collide");
                                 if(((Character*)goodBottom).health == 1)
                                 {
                                     [deadGoodGuys addObject:goodBottom];
-                                    [deadBadBullets addObject:bullet];
+                                    [deadBadBullets addObject:badBullet];
 //                                    [goodGuysBottom removeObjectAtIndex:i];
 //                                    [badBulletArray removeObjectAtIndex:j];
 //                                    [self removeChild:goodBottom cleanup:YES];
 //                                    [self removeChild:bullet cleanup:YES];
-                                     NSLog(@"good guy killed");
+                                  //   NSLog(@"good guy killed");
                                 }
                                 else
                                 {
                                     ((Character*)goodBottom).health--;
-                                    [deadBadBullets addObject:bullet];
+                                    [deadBadBullets addObject:badBullet];
 //                                    [badBulletArray removeObjectAtIndex:j];
 //                                    [self removeChild:bullet cleanup:YES];
                                     NSLog(@"good guy health decremented");
@@ -1901,26 +1908,26 @@
             {
                 badBottom = [badGuysBottom objectAtIndex:i];
                 badBottomRect = [badBottom boundingBox];
-                bullet = [goodBulletArray objectAtIndex:j];
-                bulletBox = [bullet boundingBox];
+                goodBullet = [goodBulletArray objectAtIndex:j];
+                goodBulletBox = [goodBullet boundingBox];
             
-                if(CGRectIntersectsRect(badBottomRect,bulletBox) && ((Character*)badBottom).immunity >= immunityFramecount)
+                if(CGRectIntersectsRect(badBottomRect,goodBulletBox) && ((Character*)badBottom).immunity >= immunityFramecount)
                 {
-                    NSLog(@"bullet bad guy collide");
+                   // NSLog(@"bullet bad guy collide");
                     if(((Character*)badBottom).health == 1)
                     {
                         [deadBadGuys addObject:badBottom];
-                        [deadGoodBullets addObject:bullet];
+                        [deadGoodBullets addObject:goodBullet];
 //                      [badGuysBottom removeObjectAtIndex:i];
 //                      [goodBulletArray removeObjectAtIndex:j];
 //                      [self removeChild:badBottom cleanup:YES];
 //                      [self removeChild:bullet cleanup:YES];
-                        NSLog(@"bad guy killed");
+                       // NSLog(@"bad guy killed");
                     }
                     else
                     {
                         ((Character*)badBottom).health--;
-                        [deadGoodBullets addObject:bullet];
+                        [deadGoodBullets addObject:goodBullet];
 //                      [goodBulletArray removeObjectAtIndex:j];
 //                      [self removeChild:bullet cleanup:YES];
                     }
@@ -1933,20 +1940,20 @@
     {
         [badGuysBottom removeObject:s];
         [self removeChild:s cleanup:YES];
-        NSLog(@"deleted bad guy");
+       // NSLog(@"deleted bad guy");
     }
     for (CCSprite *s in deadBadGuys)
     {
         [badGuysBottom removeObject:s];
         [self removeChild:s cleanup:YES];
-        NSLog(@"deleted bad guy");
+       // NSLog(@"deleted bad guy");
     }
     
     for (CCSprite *s in deadGoodGuys)
     {
         [goodGuysBottom removeObject:s];
         [self removeChild:s cleanup:YES];
-        NSLog(@"deleted good guy");
+       // NSLog(@"deleted good guy");
     }
     [deadGoodGuys removeAllObjects];
     
