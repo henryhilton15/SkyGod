@@ -391,6 +391,9 @@
         immunityFramecount = 100;
         KmonsterMinY = 250;
         KmonsterMaxY = 310;
+        deathFramecount = 60 * 30;
+        pointsFramecount = 0;
+        score = 0;
         firstHeli = true;
         firstBigGoodGuy = true;
         firstZigZag = true;
@@ -524,6 +527,20 @@
     
     framecount++;
     
+    if([badGuysBottom count] > 0 && [goodGuysBottom count] == 0)
+    {
+        deathFramecount--;
+    }
+    if(deathFramecount <= 0)
+    {
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
+    }
+    if([badGuysBottom count] == 0 && [goodGuysBottom count] > 0)
+    {
+        pointsFramecount++;
+        score += (int)(pointsFramecount/60);
+    }
+    
     if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true)
     {
         if((firstHeli == true || helicopterDelayCounter % 200 == 0) && (firstZigZag == true || zigZagDelayCounter % 250 == 0))
@@ -553,7 +570,6 @@
         }
 
     }
-
     if([helicopters count] > 0)
     {
         firstHeli = false;
@@ -872,6 +888,7 @@
        }],
       nil]];
 }
+
 -(void) detectBombGoodGuysBottomCollisions
 {
     NSMutableArray *deadGoodGuysBottom = [[NSMutableArray alloc] init];
@@ -1696,7 +1713,7 @@
 
 -(void) goodGuysWalk
 {
-    for(int q=0; q<[goodGuysBottom count]; q++)
+    for(int q = 0; q < [goodGuysBottom count]; q++)
     {
         goodBottom = (CCSprite *)[goodGuysBottom objectAtIndex:q];
         
@@ -1705,7 +1722,6 @@
         
         //[goodBottom runAction:gBmove];
         goodBottom.position = ccp(goodBottom.position.x + .5,goodBottom.position.y);
-
     }
 }
 
@@ -1727,11 +1743,8 @@
     }
 }
 
-
-
 -(void) shoot
 {
-
     for (int f = 0; f < 1; f++)
     { if ([goodGuysBottom count] != 0)
     { goodBottom = [goodGuysBottom objectAtIndex:f];
@@ -1759,9 +1772,7 @@
                                                        position:ccp(-2000, bullet.position.y)];
             
             [bullet runAction:shootLeft];
-            
         }
-    
     }
     }
     for (int f = 0; f < 1; f++)
@@ -1796,19 +1807,17 @@
 
             
         }
+        }
     }
-}
 }
 
 - (void) detectBulletSoldierCollisions
 {
- 
     NSMutableArray *deadGoodGuys = [[NSMutableArray alloc] init];
     NSMutableArray *deadBadGuys = [[NSMutableArray alloc] init];
     NSMutableArray *deadGoodBullets = [[NSMutableArray alloc] init];
     NSMutableArray *deadBadBullets = [[NSMutableArray alloc] init];
 
-    
     for (int b = 0; b < [goodBulletArray count]; b++)
     {
         bullet = [goodBulletArray objectAtIndex:b];

@@ -44,6 +44,9 @@
     int enemiesKilledCounter;
     int bombCount;
     int immunityFramecount;
+    int pointsFramecount;
+    int deathFramecount;
+    int score;
     NSMutableArray *bananaArray;
     NSMutableArray *goodGuys;
     NSMutableArray *badGuys;
