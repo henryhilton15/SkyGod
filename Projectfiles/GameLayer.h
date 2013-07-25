@@ -43,6 +43,7 @@
     int scenarioNumber;
     int enemiesKilledCounter;
     int bombCount;
+    int badReinforcementCount;
     int immunityFramecount;
     int pointsFramecount;
     int deathFramecount;
@@ -69,8 +70,10 @@
     CCSprite *goodBottom;
     CCSprite *badBottom;
     CCAction *rotateBanana;
+    CCSprite *truck;
     CCLabelTTF *LevelLabel;
     CCLabelTTF *enemiesKilledLabel;
+    CCLabelTTF *timeLeftLabel;
     CCSprite *goodTeamCounter;
     CCSprite *badTeamCounter;
     CCSprite *bullet;
@@ -96,6 +99,7 @@
     CGRect badGuyRect;
     CGRect KamikazeBox;
     CGRect goodGuyRect;
+    CGRect truckBox;
     NSMutableArray *GoodGuysToDelete;
     CCAction *taunt;
     NSMutableArray *tauntingFrames;
@@ -106,10 +110,13 @@
     BOOL Scenario3;
     BOOL Scenario4;
     int spawnedHelicopters;
+    int truckCount;
     BOOL isWalking;
     BOOL firstHeli;
     BOOL firstBigGoodGuy;
     BOOL firstZigZag;
+    CCSprite *GoodReinforcement;
+    CCSprite *BadReinforcement;
 
 }
 
@@ -144,6 +151,7 @@
 -(void) detectBulletSoldierCollisions;
 -(CGRect) explosionBox;
 -(void) airstrike;
+-(void) reinforcements;
 
 
 
