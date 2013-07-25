@@ -389,6 +389,7 @@
         randNum = 0;
         KmonsterCounter = 0;
         bigGoodGuysCounter = 0;
+        immunityFramecount = 100;
         KmonsterMinY = 250;
         KmonsterMaxY = 310;
         firstHeli = true;
@@ -399,7 +400,7 @@
         Scenario3 = false;
         Scenario4 = false;
         isWalking = true;
-        
+        /*
         //Animating bear
         goodTeamCounter = [CCSprite spriteWithSpriteFrameName:@"bear1.png"];
         goodTeamCounter.anchorPoint = CGPointZero;
@@ -434,7 +435,7 @@
         //tell the bear to run the taunting action
         [badTeamCounter runAction:knightAttack];
         [self addChild:badTeamCounter z:1];
-   
+   */
         
         //Background and placeholders -Henry
         
@@ -485,13 +486,7 @@
         [self addChild: myMenu z:100];
         
         [self changeLevel];
-        
-//        [self addGoodGuy];
-//       // [self addZigZagBadGuy];
-//        [self addGoodGuy];
-//        [self addBadGuy];
-//        [self addBadGuy];
-////        [self addBadGuy];
+
         
         [[SimpleAudioEngine sharedEngine] preloadEffect:@"explo2.wav"];
         [[SimpleAudioEngine sharedEngine] preloadEffect:@"Pow.caf"];
@@ -504,10 +499,12 @@
 
 -(void) update:(ccTime)delta
 {
+    /*
     goodTeamCounter.position = CGPointMake(bar - 40, goodTeamCounter.contentSize.height/2 - 35);
     badTeamCounter.position = CGPointMake(bar, badTeamCounter.contentSize.height/2 - 115);
-
+    
     if(bar >= 480)
+     
     {
        
             [self addLevel];
@@ -525,7 +522,7 @@
         [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
         
     }
-    
+    */
     [self ScenarioGenerator];
     [self CreateScenario];
     
@@ -543,7 +540,7 @@
             }
         }
     
-        if((firstHeli == true || helicopterDelayCounter % 200 == 0) && (firstZigZag == true || zigZagDelayCounter % 250))
+        if((firstHeli == true || helicopterDelayCounter % 200 == 0) && (firstZigZag == true || zigZagDelayCounter % 250 == 0))
         {
             if((framecount - (int)(.5 * goodGuyFramecount)) % badGuyFramecount == 0)
             {
@@ -560,6 +557,7 @@
         }
 
     }
+
     if([helicopters count] > 0)
     {
         firstHeli = false;
@@ -679,7 +677,15 @@
             [self addKmonster];
             firstBigGoodGuy = false;
             KmonsterMaxY -= 40;
+            if(KmonsterMaxY < 100)
+            {
+                KmonsterMaxY = 100;
+            }
             KmonsterMinY -= 40;
+            if(KmonsterMaxY < 60)
+            {
+                KmonsterMaxY = 60;
+            }
             if(bigGoodGuysScenarioDelayCounter % 200 == 0)
             {
                 Scenario2 = false;
@@ -726,7 +732,8 @@
     }
     if(bombCount > 0)
     {
-        [self detectBombGoodGuyCollisions];
+        [self detectBombGoodGuysBottomCollisions];
+        /*
         for(int i = 0; i < [badGuys count]; i++)
         {
             badGuy = [badGuys objectAtIndex:i];
@@ -740,9 +747,21 @@
                 }
             }
         }
+        */
         bombCount = 0;
     }
     
+    for(int i = 0; i < [goodGuysBottom count]; i++)
+    {
+        CCSprite* goodGuyBottom = [goodGuysBottom objectAtIndex:i];
+        ((Character*)goodGuyBottom).immunity++;
+    }
+    for(int i = 0; i < [badGuysBottom count]; i++)
+    {
+        CCSprite* badGuyBottom = [badGuysBottom objectAtIndex:i];
+        ((Character*)badGuyBottom).immunity++;
+    }
+
     /*
     if ([goodGuysBottom count] > 0)
     {
@@ -795,10 +814,9 @@
 }
 -(void) draw
 {
-    ccColor4F red = ccc4f(255, 0, 0, 1);
-    ccDrawSolidRect(CGPointMake(0,0), CGPointMake(480,40), red);
+    
     ccColor4F green = ccc4f(0, 255, 0, 1);
-    ccDrawSolidRect(CGPointMake(0,0), CGPointMake(bar, 40), green);
+    ccDrawSolidRect(CGPointMake(0,0), CGPointMake(480, 40), green);
 }
 
 -(void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -888,14 +906,68 @@
       nil]];
 }
 
--(void) detectBombGoodGuyCollisions
+-(void) detectBombGoodGuysBottomCollisions
 {
+    NSMutableArray *deadGoodGuysBottom = [[NSMutableArray alloc] init];
+    NSMutableArray *deadBombs = [[NSMutableArray alloc] init];
+    
+    for(int j = 0; j < [goodGuysBottom count]; j++)
+    {
+        for(int i = 0; i < [badGuys count]; i++)
+        {
+            if([badGuys count] > 0 && [goodGuysBottom count] > 0)
+            {
+                CCSprite* goodGuyBottom = [goodGuysBottom objectAtIndex:j];
+                CGRect goodGuyBottomRect = [goodGuyBottom boundingBox];
+                projectile = [badGuys objectAtIndex:i];
+                CGRect projectileBox = [projectile boundingBox];
+                if(((Character*)projectile).type == BAD_HELICOPTER_BOMB)
+                {
+                if(CGRectIntersectsRect(goodGuyBottomRect,projectileBox))
+                {
+                    if (projectile.position.y < 305)
+                    {
+                        if(((Character*)goodGuyBottom).health == 1)
+                        {
+                            [deadBombs addObject:projectile];
+                            [deadGoodGuysBottom addObject:goodGuyBottom];
+                            [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                            //[self enemiesKilledTotal];
+                            enemiesKilledCounter++;
+                        }
+                        else
+                        {
+                            ((Character*)goodGuy).health--;
+                            [deadBombs addObject:projectile];
+                        }
+                    }
+                }
+                }
+            }
+        }
+    }
+    for (CCSprite *s in deadBombs)
+    {
+        [badGuys removeObject:s];
+        [self removeChild:s cleanup:YES];
+    }
+    [deadBombs removeAllObjects];
+    for (CCSprite *s in deadGoodGuysBottom)
+    {
+        [goodGuysBottom removeObject:s];
+        [self removeChild:s cleanup:YES];
+    }
+    [deadGoodGuysBottom removeAllObjects];
+    
+    /*
     for(int j=0; j < [goodGuysBottom count]; j++)
     {
            for (int i = 0; i < [badGuys count]; i++)
            {
                bomb = [badGuys objectAtIndex:i];
                CGRect bombBox = [badGuy boundingBox];
+               bombBox.size.width *= 5;
+               bombBox.size.height *= 4;
                goodGuy = [goodGuysBottom objectAtIndex:j];
                CGRect goodGuyRect = [goodGuy boundingBox];
                if(((Character*)bomb).type == BAD_HELICOPTER_BOMB)
@@ -925,9 +997,21 @@
            
            }
     }
+     */
 }
+
+-(CGRect) explosionBox
+{
+    int dx = -200;
+    int dy = -100;
+    return CGRectInset(self.boundingBox, dx, dy);
+}
+
 -(void) detectBananaGoodGuyCollisions
 {
+    NSMutableArray *deadBananas = [[NSMutableArray alloc] init];
+    NSMutableArray *deadGoodGuys = [[NSMutableArray alloc] init];
+    
     for(int j = 0; j < [goodGuys count]; j++)
     {
         for(int i = 0; i < [bananaArray count]; i++)
@@ -935,28 +1019,27 @@
             if([bananaArray count] > 0 && [goodGuys count] > 0)
             {
                     goodGuy = [goodGuys objectAtIndex:j];
-                    CGRect badGuyRect = [goodGuy boundingBox];
+                    goodGuyRect = [goodGuy boundingBox];
                     projectile = [bananaArray objectAtIndex:i];
                     CGRect projectileBox = [projectile boundingBox];
                     
-                    if(CGRectIntersectsRect(badGuyRect,projectileBox))
+                    if(CGRectIntersectsRect(goodGuyRect,projectileBox))
                     {
-                    
                     //[enemiesToDelete addObject:badGuy];
                     //[bananasToDelete addObject:projectile];
                         
-                        
-                        
                         if (projectile.position.y < 305)
                         {
-                            if([goodGuy isKindOfClass:[Character class]])
-                            {
+                            //if([goodGuy isKindOfClass:[Character class]])
+                            //{
                                 if(((Character*)goodGuy).health == 1)
                                 {
-                                    [goodGuys removeObjectAtIndex:j];
-                                    [bananaArray removeObjectAtIndex:i];
-                                    [self removeChild:goodGuy cleanup:YES];
-                                    [self removeChild:projectile cleanup:YES];
+//                                    [goodGuys removeObjectAtIndex:j];
+//                                    [bananaArray removeObjectAtIndex:i];
+//                                    [self removeChild:goodGuy cleanup:YES];
+//                                    [self removeChild:projectile cleanup:YES];
+                                    [deadBananas addObject:projectile];
+                                    [deadGoodGuys addObject:goodGuy];
                                     [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
                                     [self enemiesKilledTotal];
                                     enemiesKilledCounter ++;
@@ -964,10 +1047,12 @@
                                 else
                                 {
                                     ((Character*)goodGuy).health--;
-                                    [bananaArray removeObjectAtIndex:i];
-                                    [self removeChild:projectile cleanup:YES];
+                                    [deadBananas addObject:projectile];
+//                                    [bananaArray removeObjectAtIndex:i];
+//                                    [self removeChild:projectile cleanup:YES];
                                 }
-                            }
+                            //}
+                        /*
                             else
                             {
                                 [goodGuys removeObjectAtIndex:j];
@@ -981,161 +1066,188 @@
                             }
                             //[enemiesToDelete removeAllObjects];
                             //[bananasToDelete removeAllObjects];
+                         */
                         }
                     }
                 }
         }
     }
+    for (CCSprite *s in deadBananas)
+    {
+        [bananaArray removeObject:s];
+        [self removeChild:s cleanup:YES];
+        NSLog(@"removed banana");
+    }
+    [deadBananas removeAllObjects];
+    for (CCSprite *s in deadGoodGuys)
+    {
+        [goodGuys removeObject:s];
+        [self removeChild:s cleanup:YES];
+        NSLog(@"removed goodGuy");
+    }
+    [deadGoodGuys removeAllObjects];
 }
 
 -(void) detectKmonsterCollisions
 {
-
-    for(int i = 0; i < [Kmonsters count]; i++)
+    NSMutableArray *deadKmonsters = [[NSMutableArray alloc] init];
+    NSMutableArray *deadBadGuys = [[NSMutableArray alloc] init];
+    NSMutableArray *deadGoodGuys = [[NSMutableArray alloc] init];
+    NSMutableArray *deadBananas = [[NSMutableArray alloc] init];
+    
+    for(int j = 0; j < [bananaArray count]; j++)
     {
-        for(int j = 0; j < [bananaArray count]; j++)
+        for(int i = 0; i < [Kmonsters count]; i++)
         {
             if([Kmonsters count] > 0 && [bananaArray count] > 0)
             {
-            badGuy = [Kmonsters objectAtIndex:i];
-            CGRect badGuyRect = [badGuy boundingBox];
-            projectile = [bananaArray objectAtIndex:j];
-            CGRect projectileBox = [projectile boundingBox];
-            
-            if(CGRectIntersectsRect(badGuyRect,projectileBox))
-            {
-                if (projectile.position.y < 305)
-                {
-                    //if([goodGuy isKindOfClass:[Character class]])
-                    //{
-                        if(((Character*)badGuy).health == 1)
-                        {
-                            [Kmonsters removeObjectAtIndex:i];
-                            [bananaArray removeObjectAtIndex:j];
-                            [self removeChild:badGuy cleanup:YES];
-                            [self removeChild:projectile cleanup:YES];
-                            [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
-                        }
-                        else
-                        {
-                            ((Character*)badGuy).health--;
-                            [bananaArray removeObjectAtIndex:j];
-                            [self removeChild:projectile cleanup:YES];
-                        }
-                }
-            }
-            }
-        }
-    }
-    for(int j=0; j < [goodGuys count]; j++)
-    {
-            for (int i = 0; i < [Kmonsters count]; i++)
-            {
-               // NSLog(@"asdf");
-               // NSLog(@"%d",[Kmonsters count]);
-               // NSLog(@"%d",[goodGuys count]);
-                
-                if ([Kmonsters count] > 0 && [goodGuys count] > 0)
-                {
-                    NSLog(@"made it loop");
-                    goodGuy =[goodGuys objectAtIndex:j];
-                    goodGuyRect = [goodGuy boundingBox];
-                    Kamikaze=[Kmonsters objectAtIndex:i];
-                    KamikazeBox = [Kamikaze boundingBox];
-                }
-            
-                if(CGRectIntersectsRect(goodGuyRect, KamikazeBox))
-                {
-                    NSLog(@"intersect");
-                    //if (Kamikaze.position.y < 315)
-                         
-                        
-                        if(((Character*)goodGuy).health == 1)
-                        {
-                            [Kmonsters removeObjectAtIndex:i];
-                            [GoodGuysToDelete addObject:goodGuy];
-                            [GoodGuysToDelete removeAllObjects];
-                            [self removeChild:goodGuy cleanup:YES];
-                            [self removeChild:Kamikaze cleanup:YES];
-                            [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
-                        }
-                        else
-                        {
-                            ((Character*)goodGuy).health--;
-                            [Kmonsters removeObjectAtIndex:j]; 
-                            [self removeChild:Kamikaze cleanup:YES];
-                        }
-
-                    //}
-                }
-            }
-    }
-
-}
--(void) detectBananaBadGuyCollisions
-{
-    for(int j = 0; j < [badGuys count]; j++)
-    {
-        for(int i = 0; i < [bananaArray count]; i++)
-        {
-            if ([bananaArray count] > 0 && [badGuys count] > 0)
-            {
-                badGuy = [badGuys objectAtIndex:j];
-                CGRect badGuyRect = [badGuy boundingBox];
-                projectile = [bananaArray objectAtIndex:i];
+                CCSprite* Kmonster = [Kmonsters objectAtIndex:i];
+                CGRect KmonsterRect = [Kmonster boundingBox];
+                projectile = [bananaArray objectAtIndex:j];
                 CGRect projectileBox = [projectile boundingBox];
                 
-                if(CGRectIntersectsRect(badGuyRect,projectileBox))
+                if(CGRectIntersectsRect(KmonsterRect,projectileBox))
                 {
                     if (projectile.position.y < 305)
                     {
-                        if([badGuy isKindOfClass:[Character class]])
+                        if(((Character*)Kmonster).health == 1)
                         {
-                            if(((Character*)badGuy).health == 1)
-                            {
-                                [badGuys removeObjectAtIndex:j];
-                                [bananaArray removeObjectAtIndex:i];
-                                [self removeChild:badGuy cleanup:YES];
-                                [self removeChild:projectile cleanup:YES];
-                                [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
-                                enemiesKilledCounter++;
-                                if(((Character*)badGuy).type == BAD_GUY || ((Character*)badGuy).type == ZIG_ZAG)
-                                {
-                                    [self enemiesKilledTotal];
-                                }
-                            }
-                            else
-                            {
-                                ((Character*)badGuy).health--;
-                                [bananaArray removeObjectAtIndex:i];
-                                [self removeChild:projectile cleanup:YES];
-                            }
+                            [deadKmonsters addObject:Kmonster];
+                            [deadBananas addObject:projectile];
+                            [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                            //[self enemiesKilledTotal];
+                            enemiesKilledCounter ++;
                         }
                         else
                         {
-                            [badGuys removeObjectAtIndex:j];
-                            [bananaArray removeObjectAtIndex:i];
-                            [self removeChild:badGuy cleanup:YES];
-                            [self removeChild:projectile cleanup:YES];
-                            [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
-                            enemiesKilledCounter++;
-                            if(((Character*)badGuy).type == BAD_GUY || ((Character*)badGuy).type == ZIG_ZAG)
-                            {
-                                [self enemiesKilledTotal];
-                            }
-                            //[self ScenarioGenerator];
-                            //[enemiesToDelete addObject:badGuy];
-                            //[bananasToDelete addObject:projectile];
+                            ((Character*)Kmonster).health--;
+                            [deadBananas addObject:projectile];
                         }
                     }
                 }
             }
         }
     }
+    for (CCSprite *s in deadKmonsters)
+    {
+        [Kmonsters removeObject:s];
+        [self removeChild:s cleanup:YES];
+    }
+    [deadKmonsters removeAllObjects];
+    for (CCSprite *s in deadBananas)
+    {
+        [bananaArray removeObject:s];
+        [self removeChild:s cleanup:YES];
+    }
+    [deadBananas removeAllObjects];
+    
+    for(int j = 0; j < [goodGuys count]; j++)
+    {
+        for(int i = 0; i < [Kmonsters count]; i++)
+        {
+            if([Kmonsters count] > 0 && [goodGuys count] > 0)
+            {
+                goodGuy = [goodGuys objectAtIndex:j];
+                goodGuyRect = [goodGuy boundingBox];
+                projectile = [Kmonsters objectAtIndex:i];
+                CGRect projectileBox = [projectile boundingBox];
+                
+                if(CGRectIntersectsRect(goodGuyRect,projectileBox))
+                {
+                    if (projectile.position.y < 305)
+                    {
+                        if(((Character*)goodGuy).health == 1)
+                        {
+                            [deadKmonsters addObject:projectile];
+                            [deadGoodGuys addObject:goodGuy];
+                            [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                            [self enemiesKilledTotal];
+                            enemiesKilledCounter ++;
+                        }
+                        else
+                        {
+                            ((Character*)goodGuy).health--;
+                            [deadKmonsters addObject:projectile];
+                        }
+                    }
+                }
+            }
+        }
+    }
+    for (CCSprite *s in deadKmonsters)
+    {
+        [Kmonsters removeObject:s];
+        [self removeChild:s cleanup:YES];
+    }
+    [deadKmonsters removeAllObjects];
+    for (CCSprite *s in deadGoodGuys)
+    {
+        [goodGuys removeObject:s];
+        [self removeChild:s cleanup:YES];
+    }
+    [deadGoodGuys removeAllObjects];
+}
+
+-(void) detectBananaBadGuyCollisions
+{
+    NSMutableArray *deadBananas = [[NSMutableArray alloc] init];
+    NSMutableArray *deadBadGuys = [[NSMutableArray alloc] init];
+    
+    for(int j = 0; j < [badGuys count]; j++)
+    {
+        for(int i = 0; i < [bananaArray count]; i++)
+        {
+            if([bananaArray count] > 0 && [badGuys count] > 0)
+            {
+                badGuy = [badGuys objectAtIndex:j];
+                badGuyRect = [badGuy boundingBox];
+                projectile = [bananaArray objectAtIndex:i];
+                CGRect projectileBox = [projectile boundingBox];
+                
+                if(CGRectIntersectsRect(badGuyRect, projectileBox))
+                {
+                    if (projectile.position.y < 305)
+                    {
+                        if(((Character*)badGuy).health == 1)
+                        {
+                            [deadBananas addObject:projectile];
+                            [deadBadGuys addObject:badGuy];
+                            [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                            [self enemiesKilledTotal];
+                            enemiesKilledCounter ++;
+                        }
+                        else
+                        {
+                            ((Character*)badGuy).health--;
+                            [deadBananas addObject:projectile];
+                        }
+                    }
+                }
+            }
+        }
+    }
+    for (CCSprite *s in deadBananas)
+    {
+        [bananaArray removeObject:s];
+        [self removeChild:s cleanup:YES];
+        NSLog(@"removed banana");
+    }
+    [deadBananas removeAllObjects];
+    for (CCSprite *s in deadBadGuys)
+    {
+        [badGuys removeObject:s];
+        [self removeChild:s cleanup:YES];
+        NSLog(@"removed goodGuy");
+    }
+    [deadBadGuys removeAllObjects];
+
 }
 
 -(void)detectReachBottom
 {
+    NSMutableArray *deadGoodGuys = [[NSMutableArray alloc] init];
+    NSMutableArray *deadBadGuys = [[NSMutableArray alloc] init];
+    
     for(int i = 0; i < [goodGuys count]; i++)
     {
         if([goodGuys count] > 0)
@@ -1147,35 +1259,27 @@
                 if(((Character*)goodGuy).type == GOOD_GUY)
                 {
                     goodBottom = [[Character alloc] initWithGoodBottomImage];
-                    ((Character*)goodBottom).health = ((Character*)goodGuy).health;
-                    //int x = ((Character*)goodBottom).health;
-                    //NSLog(@"health = %d", x);
                 }
                 if(((Character*)goodGuy).type == SUPER_ZIG_ZAG_GUY)
                 {
                     goodBottom = [[Character alloc] initWithSuperZigZagGuyImage];
-                    ((Character*)goodBottom).health = ((Character*)goodGuy).health;
                 }
                 if(((Character*)goodGuy).type == BIG_GOOD_GUY)
                 {
                     goodBottom = [[Character alloc] initWithSuperZigZagGuyImage];
-                    ((Character*)goodBottom).health = ((Character*)goodGuy).health;
                 }
+                ((Character*)goodBottom).health = ((Character*)goodGuy).health;
                 goodBottom.anchorPoint = CGPointZero;
                 goodBottom.position = ccp(goodGuy.position.x - 15, goodGuy.position.y - 20);
                 goodBottom.scale=.3;
-               
-                [goodGuys removeObject:goodGuy];
-                [self removeChild:goodGuy cleanup:YES];
                 [self addChild:goodBottom z:1];
                 [goodGuysBottom addObject:goodBottom];
-
-                bar += ((Character*)goodGuy).worth;
+                
+                [deadGoodGuys addObject:goodGuy];
                // NSLog(@"added to bottom array");
             }
         }
     }
-    
     for(int i = 0; i < [badGuys count]; i++)
     {
         if([badGuys count] > 0)
@@ -1184,6 +1288,7 @@
 
             if(badGuy.position.y <= 20)
             {
+                /*
                 if(((Character*)badGuy).type == BAD_GUY)
                 {
                     badBottom = [[Character alloc] initWithBadGuyImage];
@@ -1197,8 +1302,6 @@
                     [badGuys removeObject:badGuy];
                     [self removeChild:badGuy cleanup:YES];
                     bar -= ((Character*)badGuy).worth;
-
-                    
 
                 }
                 if(((Character*)badGuy).type == ZIG_ZAG)
@@ -1216,35 +1319,78 @@
                     bar -= ((Character*)badGuy).worth;;
                     
                 }
-                
-                /*
-                if(((Character*)badGuy).type == BAD_HELICOPTER_BOMB)
-                {
-                    [badGuys removeObjectAtIndex:i];
-                    ((Character*)badBottom).health = ((Character*)badGuy).health;
-                }
                 if(((Character*)badGuy).type == DOUBLE_ENEMY)
                 {
                     badBottom = [[Character alloc] initWithDoubleEnemyImage];
                     ((Character*)badBottom).health = ((Character*)badGuy).health;
+                    [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
+                    badBottom.anchorPoint = CGPointZero;
+                    badBottom.scale=.15;
+                    badBottom.position = ccp(badGuy.position.x - 15, badGuy.position.y - 20);
+                    [self addChild:badBottom z:1];
+                    [badGuysBottom addObject:badBottom];
+                    [badGuys removeObject:badGuy];
+                    [self removeChild:badGuy cleanup:YES];
+                    bar -= ((Character*)badGuy).worth;;
+                    
                 }
-                 */
-                /*
-                [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
-                badBottom.anchorPoint = CGPointZero;
-                badBottom.scale=.15;
-                badBottom.position = ccp(badGuy.position.x - 15, badGuy.position.y - 20);
-                [badGuys removeObject:badGuy];
-                [self removeChild:badGuy cleanup:YES];
-                [self addChild:badBottom z:1];
-                [badGuysBottom addObject:badBottom];
-
-                bar -= ((Character*)badGuy).worth;
-                 */
+                */
+                if(((Character*)badGuy).type == DOUBLE_ENEMY || ((Character*)badGuy).type == ZIG_ZAG || ((Character*)badGuy).type == BAD_GUY)
+                {
+                    if(((Character*)badGuy).type == BAD_GUY)
+                    {
+                        badBottom = [[Character alloc] initWithBadGuyImage];
+                    }
+                    if(((Character*)badGuy).type == DOUBLE_ENEMY)
+                    {
+                        badBottom = [[Character alloc] initWithDoubleEnemyImage];
+                    }
+                    if(((Character*)badGuy).type == ZIG_ZAG)
+                    {
+                        badBottom = [[Character alloc] initWithZigZagImage];
+                    }
+                    ((Character*)badBottom).health = ((Character*)badGuy).health;
+                    badBottom.anchorPoint = CGPointZero;
+                    badBottom.scale=.15;
+                    badBottom.position = ccp(badGuy.position.x - 15, badGuy.position.y - 20);
+                    [self addChild:badBottom z:1];
+                    [badGuysBottom addObject:badBottom];
+                    [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
+                    
+                    [deadBadGuys addObject:badGuy];
+                }
             }
         }
     }
+    for(int i = 0; i < [badGuys count]; i++)
+    {
+        if([badGuys count] > 0)
+        {
+            badGuy = [badGuys objectAtIndex:i];
+            
+            if(badGuy.position.y <= 10)
+            {
+                if(((Character*)badGuy).type == BAD_HELICOPTER_BOMB)
+                {
+                    [deadBadGuys addObject:badGuy];
+                }
+            }
+        }
+    }
+    for (CCSprite *s in deadGoodGuys)
+    {
+        [goodGuys removeObject:s];
+        [self removeChild:s cleanup:YES];
+    }
+    [deadGoodGuys removeAllObjects];
+    for (CCSprite *s in deadBadGuys)
+    {
+        [badGuys removeObject:s];
+        [self removeChild:s cleanup:YES];
+    }
+    [deadBadGuys removeAllObjects];
 }
+
 
 -(void) zigZagScenario
 {
@@ -1620,7 +1766,7 @@
 -(void) shoot
 {
 
-    for (int f = 0; f < 1; f++)
+    for (int f = 0; f < [goodGuysBottom count]; f++)
     { if ([goodGuysBottom count] != 0)
     { goodBottom = [goodGuysBottom objectAtIndex:f];
         float goodX = goodBottom.position.x;
@@ -1652,7 +1798,7 @@
     
     }
     }
-    for (int f = 0; f < 1; f++)
+    for (int f = 0; f < [badGuysBottom count]; f++)
     {
         if( [badGuysBottom count] !=0)
         {
@@ -1744,9 +1890,9 @@
                     bullet = [badBulletArray objectAtIndex:j];
                     bulletBox = [bullet boundingBox];
                     
-                    NSLog(NSStringFromCGRect(goodBottomRect));
-                    NSLog(NSStringFromCGRect(bulletBox));
-                    if(CGRectIntersectsRect(goodBottomRect,bulletBox))
+                    //NSLog(NSStringFromCGRect(goodBottomRect));
+                    //NSLog(NSStringFromCGRect(bulletBox));
+                    if(CGRectIntersectsRect(goodBottomRect,bulletBox) && ((Character*)goodBottom).immunity >= immunityFramecount)
                     {
                         NSLog(@"bullet good guy collide");
                                 if(((Character*)goodBottom).health == 1)
@@ -1772,42 +1918,41 @@
             }
     }
 
-
-for(int i = 0; i < [badGuysBottom count]; i++)
-{
-    for(int j = 0; j < [goodBulletArray count]; j++)
+    for(int i = 0; i < [badGuysBottom count]; i++)
     {
-        if([goodBulletArray count] > 0 && [badGuysBottom count] > 0)
+        for(int j = 0; j < [goodBulletArray count]; j++)
         {
-            badBottom = [badGuysBottom objectAtIndex:i];
-            badBottomRect = [badBottom boundingBox];
-            bullet = [goodBulletArray objectAtIndex:j];
-            bulletBox = [bullet boundingBox];
-            
-            if(CGRectIntersectsRect(badBottomRect,bulletBox))
+            if([goodBulletArray count] > 0 && [badGuysBottom count] > 0)
             {
-                 NSLog(@"bullet bad guy collide");
-                if(((Character*)badBottom).health == 1)
+                badBottom = [badGuysBottom objectAtIndex:i];
+                badBottomRect = [badBottom boundingBox];
+                bullet = [goodBulletArray objectAtIndex:j];
+                bulletBox = [bullet boundingBox];
+            
+                if(CGRectIntersectsRect(badBottomRect,bulletBox) && ((Character*)badBottom).immunity >= immunityFramecount)
                 {
-                    [deadBadGuys addObject:badBottom];
-                    [deadGoodBullets addObject:bullet];
-//                    [badGuysBottom removeObjectAtIndex:i];
-//                    [goodBulletArray removeObjectAtIndex:j];
-//                    [self removeChild:badBottom cleanup:YES];
-//                    [self removeChild:bullet cleanup:YES];
-                     NSLog(@"bad guy killed");
-                }
-                else
-                {
-                    ((Character*)badBottom).health--;
-                     [deadGoodBullets addObject:bullet];
-//                    [goodBulletArray removeObjectAtIndex:j];
-//                    [self removeChild:bullet cleanup:YES];
+                    NSLog(@"bullet bad guy collide");
+                    if(((Character*)badBottom).health == 1)
+                    {
+                        [deadBadGuys addObject:badBottom];
+                        [deadGoodBullets addObject:bullet];
+//                      [badGuysBottom removeObjectAtIndex:i];
+//                      [goodBulletArray removeObjectAtIndex:j];
+//                      [self removeChild:badBottom cleanup:YES];
+//                      [self removeChild:bullet cleanup:YES];
+                        NSLog(@"bad guy killed");
+                    }
+                    else
+                    {
+                        ((Character*)badBottom).health--;
+                        [deadGoodBullets addObject:bullet];
+//                      [goodBulletArray removeObjectAtIndex:j];
+//                      [self removeChild:bullet cleanup:YES];
+                    }
                 }
             }
         }
     }
-}
    // NSLog(@"yay");
     for (CCSprite *s in deadBadGuys)
     {
@@ -1815,7 +1960,12 @@ for(int i = 0; i < [badGuysBottom count]; i++)
         [self removeChild:s cleanup:YES];
         NSLog(@"deleted bad guy");
     }
-    [deadBadGuys removeAllObjects];
+    for (CCSprite *s in deadBadGuys)
+    {
+        [badGuysBottom removeObject:s];
+        [self removeChild:s cleanup:YES];
+        NSLog(@"deleted bad guy");
+    }
     
     for (CCSprite *s in deadGoodGuys)
     {
@@ -1859,8 +2009,6 @@ for(int i = 0; i < [badGuysBottom count]; i++)
     position:ccp(500, bomber.position.y)];
 
     [bomber runAction:actionMove];
-    
-
 }
 
 -(void)reinforcements: (CCMenuItemImage *) PowerUpButton2
@@ -1928,15 +2076,6 @@ for(int i = 0; i < [badGuysBottom count]; i++)
         NSLog(@"deleted run over good guy");
     }
     [runOverGoodGuys removeAllObjects];
-
-    
-    
-
-
-    
-
-
 }
-
 
 @end

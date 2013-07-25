@@ -44,6 +44,7 @@
     int enemiesKilledCounter;
     int bombCount;
     int badReinforcementCount;
+    int immunityFramecount;
     NSMutableArray *bananaArray;
     NSMutableArray *goodGuys;
     NSMutableArray *badGuys;
@@ -144,8 +145,10 @@
 -(void) randomNumberGenerator;
 -(void) shoot;
 -(void) detectBulletSoldierCollisions;
+-(CGRect) explosionBox;
 -(void) airstrike;
 -(void) reinforcements;
+
 
 
 @end
