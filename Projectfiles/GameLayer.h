@@ -43,6 +43,7 @@
     int scenarioNumber;
     int enemiesKilledCounter;
     int bombCount;
+    int immunityFramecount;
     NSMutableArray *bananaArray;
     NSMutableArray *goodGuys;
     NSMutableArray *badGuys;

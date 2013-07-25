@@ -18,7 +18,6 @@
 {
 	if ((self = [super init]))
 	{
-        
 //        CCMenuItemImage *restartButton = [CCMenuItemImage itemWithNormalImage:@"restart.png"
 //                                                                selectedImage: @"restart.png"
 //                                                                       target:self
@@ -36,9 +35,6 @@
         
         CCMenu *myMenu = [CCMenu menuWithItems:endbutton, /* restartButton, */  nil];
         [self addChild:myMenu];
-        
-        
-        
         
         CCSprite *background = [CCSprite spriteWithFile:@"city-front.png"];
         background.position = CGPointMake(240,160);

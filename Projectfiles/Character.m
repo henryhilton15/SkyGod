@@ -15,6 +15,7 @@
 @synthesize worth;
 @synthesize direction;
 @synthesize type;
+@synthesize immunity;
 
 -(id) initWithBigMonsterImage
 {
@@ -23,6 +24,7 @@
         health = 10;
         worth = 100;
         type = BIG_MONSTER;
+        immunity = 0;
     }
     return self;
 }
@@ -34,6 +36,7 @@
         health = 1;
         worth = 100;
         type = BIG_GOOD_GUY;
+        immunity = 0;
     }
     return self;
 }
@@ -44,6 +47,7 @@
         worth = 50;
         health = 1;
         type = GOOD_GUY;
+        immunity = 0;
     }
     return self;
 }
@@ -55,6 +59,7 @@
         worth = 50;
         health = 1;
         type = BAD_GUY;
+        immunity = 0;
     }
     return self;
 }
@@ -65,6 +70,7 @@
         worth = 50;
         health = 1;
         type = ZIG_ZAG;
+        immunity = 0;
     }
     return self;
 }
@@ -122,6 +128,7 @@
         worth = 50;
         health = 1;
         type = DOUBLE_ENEMY;
+        immunity = 0;
     }
     return self;
 }
@@ -132,6 +139,7 @@
         worth = 1;
         health = 1;
         type = SUPER_ZIG_ZAG_GUY;
+        immunity = 0;
     }
     return self;
 }
@@ -152,6 +160,7 @@
         }
         
         type = GOOD_BOTTOM;
+        immunity = 0;
     }
     return self;
 }
@@ -171,6 +180,7 @@
             direction = 0;
         }
         type = BAD_BOTTOM;
+        immunity = 0;
     }
     return self;
 }

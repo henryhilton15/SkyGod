@@ -388,6 +388,7 @@
         randNum = 0;
         KmonsterCounter = 0;
         bigGoodGuysCounter = 0;
+        immunityFramecount = 100;
         KmonsterMinY = 250;
         KmonsterMaxY = 310;
         firstHeli = true;
@@ -746,6 +747,17 @@
         bombCount = 0;
     }
     
+    for(int i = 0; i < [goodGuysBottom count]; i++)
+    {
+        CCSprite* goodGuyBottom = [goodGuysBottom objectAtIndex:i];
+        ((Character*)goodGuyBottom).immunity++;
+    }
+    for(int i = 0; i < [badGuysBottom count]; i++)
+    {
+        CCSprite* badGuyBottom = [badGuysBottom objectAtIndex:i];
+        ((Character*)badGuyBottom).immunity++;
+    }
+
     /*
     if ([goodGuysBottom count] > 0)
     {
@@ -766,15 +778,14 @@
         [self detectBulletSoldierCollisions];
     }
 }
-/*
+
 -(void) draw
 {
-    ccColor4F red = ccc4f(255, 0, 0, 1);
-    ccDrawSolidRect(CGPointMake(0,0), CGPointMake(480,40), red);
+    
     ccColor4F green = ccc4f(0, 255, 0, 1);
-    ccDrawSolidRect(CGPointMake(0,0), CGPointMake(bar, 40), green);
+    ccDrawSolidRect(CGPointMake(0,0), CGPointMake(480, 40), green);
 }
-*/
+
 -(void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // Choose one of the touches to work with
@@ -1239,7 +1250,6 @@
                 [goodGuysBottom addObject:goodBottom];
                 
                 [deadGoodGuys addObject:goodGuy];
-
                // NSLog(@"added to bottom array");
             }
         }
@@ -1574,7 +1584,7 @@
     [self addChild:background z:-1];
     
     player.anchorPoint = CGPointZero;
-    player.position = CGPointMake(winSize.width/2 - 30, FLOOR_HEIGHT + 10);
+    player.position = CGPointMake(winSize.width/2 - 30, FLOOR_HEIGHT + 5);
     player.scale = .3;
 
     [self addChild:player z:1];
@@ -1725,39 +1735,7 @@
 -(void) shoot
 {
 
-    for (int f = 0; f < [goodGuysBottom count]; f++)
-    { if ([goodGuysBottom count] != 0)
-        
-    { goodBottom = [goodGuysBottom objectAtIndex:f];
-        float goodX = goodBottom.position.x;
-        float goodY = goodBottom.position.y;
-        
-        bullet = [CCSprite spriteWithFile:@"cat1.png"];
-        bullet.anchorPoint = CGPointZero;
-        bullet.position = ccp(goodX, goodY + 12);
-        bullet.scale=.1;
-        [self addChild:bullet z:1];
-        [goodBulletArray addObject:bullet];
 
-        if (((Character*)goodBottom).direction == 1)
-        {
-            CCMoveTo *shootRight = [CCMoveTo actionWithDuration:20
-                            position:ccp(2000, bullet.position.y)];
-            
-            [bullet runAction:shootRight];
-    
-        }
-        else if (((Character*)goodBottom).direction == 0)
-        {
-            CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:20
-                                                       position:ccp(-2000, bullet.position.y)];
-            
-            [bullet runAction:shootLeft];
-            
-        }
-    
-    }
-    }
     for (int f = 0; f < [badGuysBottom count]; f++)
     {
         if( [badGuysBottom count] !=0)
@@ -1792,6 +1770,40 @@
         }
     }
 }
+    
+    for (int f = 0; f < [goodGuysBottom count]; f++)
+    { if ([goodGuysBottom count] != 0)
+        
+    { goodBottom = [goodGuysBottom objectAtIndex:f];
+        float goodX = goodBottom.position.x;
+        float goodY = goodBottom.position.y;
+        
+        bullet = [CCSprite spriteWithFile:@"cat1.png"];
+        bullet.anchorPoint = CGPointZero;
+        bullet.position = ccp(goodX, goodY + 12);
+        bullet.scale=.1;
+        [self addChild:bullet z:1];
+        [goodBulletArray addObject:bullet];
+        
+        if (((Character*)goodBottom).direction == 1)
+        {
+            CCMoveTo *shootRight = [CCMoveTo actionWithDuration:20
+                                                       position:ccp(2000, bullet.position.y)];
+            
+            [bullet runAction:shootRight];
+            
+        }
+        else if (((Character*)goodBottom).direction == 0)
+        {
+            CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:20
+                                                      position:ccp(-2000, bullet.position.y)];
+            
+            [bullet runAction:shootLeft];
+            
+        }
+        
+    }
+    }
 }
 
 - (void) detectBulletSoldierCollisions
@@ -1825,7 +1837,7 @@
         if(bullet.position.x > 480 || bullet.position.x < 0)
         {
             [deadBadBullets addObject:bullet];
-            NSLog(@"removed bullet");
+            //NSLog(@"removed bullet");
 //            [badBulletArray removeObjectAtIndex:a];
 //            [self removeChild:bullet cleanup:YES];
         }
@@ -1854,8 +1866,8 @@
                     //NSLog(NSStringFromCGRect(goodBottomRect));
                     //NSLog(NSStringFromCGRect(bulletBox));
                     
-                    
-                    if(CGRectIntersectsRect(goodBottomRect,bulletBox))
+                
+                    if(CGRectIntersectsRect(goodBottomRect,bulletBox) && ((Character*)goodBottom).immunity >= immunityFramecount)
                     {
                         NSLog(@"bullet good guy collide");
                                 if(((Character*)goodBottom).health == 1)
@@ -1881,42 +1893,41 @@
             }
     }
 
-
-for(int i = 0; i < [badGuysBottom count]; i++)
-{
-    for(int j = 0; j < [goodBulletArray count]; j++)
+    for(int i = 0; i < [badGuysBottom count]; i++)
     {
-        if([goodBulletArray count] > 0 && [badGuysBottom count] > 0)
+        for(int j = 0; j < [goodBulletArray count]; j++)
         {
-            badBottom = [badGuysBottom objectAtIndex:i];
-            badBottomRect = [badBottom boundingBox];
-            bullet = [goodBulletArray objectAtIndex:j];
-            bulletBox = [bullet boundingBox];
-            
-            if(CGRectIntersectsRect(badBottomRect,bulletBox))
+            if([goodBulletArray count] > 0 && [badGuysBottom count] > 0)
             {
-                 NSLog(@"bullet bad guy collide");
-                if(((Character*)badBottom).health == 1)
+                badBottom = [badGuysBottom objectAtIndex:i];
+                badBottomRect = [badBottom boundingBox];
+                bullet = [goodBulletArray objectAtIndex:j];
+                bulletBox = [bullet boundingBox];
+            
+                if(CGRectIntersectsRect(badBottomRect,bulletBox) && ((Character*)badBottom).immunity >= immunityFramecount)
                 {
-                    [deadBadGuys addObject:badBottom];
-                    [deadGoodBullets addObject:bullet];
-//                    [badGuysBottom removeObjectAtIndex:i];
-//                    [goodBulletArray removeObjectAtIndex:j];
-//                    [self removeChild:badBottom cleanup:YES];
-//                    [self removeChild:bullet cleanup:YES];
-                     NSLog(@"bad guy killed");
-                }
-                else
-                {
-                    ((Character*)badBottom).health--;
-                     [deadGoodBullets addObject:bullet];
-//                    [goodBulletArray removeObjectAtIndex:j];
-//                    [self removeChild:bullet cleanup:YES];
+                    NSLog(@"bullet bad guy collide");
+                    if(((Character*)badBottom).health == 1)
+                    {
+                        [deadBadGuys addObject:badBottom];
+                        [deadGoodBullets addObject:bullet];
+//                      [badGuysBottom removeObjectAtIndex:i];
+//                      [goodBulletArray removeObjectAtIndex:j];
+//                      [self removeChild:badBottom cleanup:YES];
+//                      [self removeChild:bullet cleanup:YES];
+                        NSLog(@"bad guy killed");
+                    }
+                    else
+                    {
+                        ((Character*)badBottom).health--;
+                        [deadGoodBullets addObject:bullet];
+//                      [goodBulletArray removeObjectAtIndex:j];
+//                      [self removeChild:bullet cleanup:YES];
+                    }
                 }
             }
         }
     }
-}
    // NSLog(@"yay");
     for (CCSprite *s in deadBadGuys)
     {
@@ -1973,9 +1984,6 @@ for(int i = 0; i < [badGuysBottom count]; i++)
     position:ccp(500, bomber.position.y)];
 
     [bomber runAction:actionMove];
-    
-
 }
-
 
 @end
