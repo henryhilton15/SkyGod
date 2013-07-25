@@ -397,6 +397,7 @@
         KmonsterMinY = 250;
         KmonsterMaxY = 310;
         deathFramecount = 60 * 30;
+        timeRemaining = 30;
         pointsFramecount = 0;
         score = 0;
         firstHeli = true;
@@ -454,7 +455,7 @@
         timeLeftLabel = [CCLabelTTF labelWithString:@"Time left: 30" fontName:@"Marker Felt" fontSize:18];
         timeLeftLabel.position = ccp(360, 260);
         timeLeftLabel.color = ccBLUE;
-        [self addChild:enemiesKilledLabel z:4];
+        [self addChild:timeLeftLabel z:4];
         
         LevelLabel = [CCLabelTTF labelWithString:@"Level:0" fontName:@"Marker Felt" fontSize:18];
         LevelLabel.position = ccp(360, 280);
@@ -1540,7 +1541,11 @@
     enemiesKilled++;
     [enemiesKilledLabel setString:[NSString stringWithFormat:@"Enemies Killed:%d", enemiesKilled]];
 }
-
+-(void) timeRemaining
+{
+    timeRemaining--;
+    []
+}
 -(void) addLevel
 {
     level++;

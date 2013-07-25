@@ -48,6 +48,7 @@
     int pointsFramecount;
     int deathFramecount;
     int score;
+    int timeRemaining;
     NSMutableArray *bananaArray;
     NSMutableArray *goodGuys;
     NSMutableArray *badGuys;
