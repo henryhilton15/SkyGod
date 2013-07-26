@@ -49,6 +49,10 @@
     int deathFramecount;
     int score;
     int timeRemaining;
+    int enemyFrequency;
+    int friendlyFrequency;
+    int enemiesPassed;
+    int friendliesPassed;
     NSMutableArray *bananaArray;
     NSMutableArray *goodGuys;
     NSMutableArray *badGuys;
@@ -77,13 +81,15 @@
     CCLabelTTF *timeRemainingLabel;
     CCSprite *goodTeamCounter;
     CCSprite *badTeamCounter;
-    CCSprite *bullet;
+    CCSprite *goodBullet;
+    CCSprite *badBullet;
     CCSprite *bomber;
     Rect goodRect;
     Rect badRect;
     CGRect goodBottomRect;
     CGRect badBottomRect;
-    CGRect bulletBox;
+    CGRect goodBulletBox;
+    CGRect badBulletBox;
     NSMutableArray *bananaFrames;
     NSMutableArray *bananasToDelete;
     NSMutableArray *enemiesToDelete;
@@ -148,7 +154,7 @@
 -(void) spawnGoodGuyBottom;
 -(void) spawnBadGuyBottom;
 -(void) randomNumberGenerator;
--(void) shoot;
+-(void) fight;
 -(void) detectBulletSoldierCollisions;
 -(CGRect) explosionBox;
 -(void) airstrike;

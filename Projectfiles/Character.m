@@ -16,6 +16,7 @@
 @synthesize direction;
 @synthesize type;
 @synthesize immunity;
+@synthesize row;
 
 -(id) initWithBigMonsterImage
 {
@@ -25,6 +26,7 @@
         worth = 100;
         type = BIG_MONSTER;
         immunity = 0;
+        row = 0;
     }
     return self;
 }
@@ -37,6 +39,7 @@
         worth = 100;
         type = BIG_GOOD_GUY;
         immunity = 0;
+        row = 0;
     }
     return self;
 }
@@ -48,6 +51,7 @@
         health = 1;
         type = GOOD_GUY;
         immunity = 0;
+        row = 0;
     }
     return self;
 }
@@ -60,6 +64,7 @@
         health = 1;
         type = BAD_GUY;
         immunity = 0;
+        row = 0;
     }
     return self;
 }
@@ -71,12 +76,13 @@
         health = 1;
         type = ZIG_ZAG;
         immunity = 0;
+        row = 0;
     }
     return self;
 }
 -(id) initWithGoodHelicopterImage
 {
-    if((self = [super initWithFile:@"planet.png"]))
+    if((self = [super initWithFile:@"jet.png"]))
     {
         health = 5;
         type = GOOD_HELICOPTER;
@@ -129,6 +135,7 @@
         health = 1;
         type = DOUBLE_ENEMY;
         immunity = 0;
+        row = 0;
     }
     return self;
 }
@@ -140,6 +147,7 @@
         health = 1;
         type = SUPER_ZIG_ZAG_GUY;
         immunity = 0;
+        row = 0;
     }
     return self;
 }
@@ -150,17 +158,18 @@
     {
         health = 1;
 
-        if(random() % 2 == 0)
-        {
-            direction = 1;
-        }
-        else
-        {
-            direction = 0;
-        }
+//        if(random() % 2 == 0)
+//        {
+//            direction = 1;
+//        }
+//        else
+//        {
+//            direction = 0;
+//        }
         
         type = GOOD_BOTTOM;
         immunity = 0;
+        row = 0;
     }
     return self;
 }
@@ -171,18 +180,21 @@
     {
         health = 1;
         
-        if(random() % 2 == 0)
-        {
-            direction = 1;
-        }
-        else
-        {
-            direction = 0;
-        }
+//        if(random() % 2 == 0)
+//        {
+//            direction = 1;
+//        }
+//        else
+//        {
+//            direction = 0;
+//        }
+        
         type = BAD_BOTTOM;
         immunity = 0;
+        row = 0;
     }
     return self;
 }
+
 
 @end
