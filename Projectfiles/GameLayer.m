@@ -12,8 +12,8 @@
 #import "SimpleAudioEngine.h"
 #import "Character.h"
 
-#define FLOOR_HEIGHT 25.0f
- 
+#define MOUNTAIN_HEIGHT 70.0f
+
 @implementation GameLayer
 
 -(void) addKmonster
@@ -452,15 +452,19 @@
         enemiesKilledLabel.color = ccBLUE;
         [self addChild:enemiesKilledLabel z:4];
 
-        timeLeftLabel = [CCLabelTTF labelWithString:@"Time left: 30" fontName:@"Marker Felt" fontSize:18];
-        timeLeftLabel.position = ccp(360, 260);
-        timeLeftLabel.color = ccBLUE;
-        [self addChild:timeLeftLabel z:4];
+        timeRemainingLabel = [CCLabelTTF labelWithString:@"Time left: 30" fontName:@"Marker Felt" fontSize:18];
+        timeRemainingLabel.position = ccp(360, 260);
+        timeRemainingLabel.color = ccBLUE;
+        [self addChild:timeRemainingLabel z:4];
         
         LevelLabel = [CCLabelTTF labelWithString:@"Level:0" fontName:@"Marker Felt" fontSize:18];
         LevelLabel.position = ccp(360, 280);
         LevelLabel.color = ccBLUE;
         [self addChild:LevelLabel z:4];
+        
+        CCSprite *wall = [CCSprite spriteWithFile:@"wall.png"];
+        [self addChild:wall z:1];
+        wall.position = ccp(240,40);
 
         
         CCMenuItemImage *pauseButton = [CCMenuItemImage itemWithNormalImage:@"button_pausebutton.png"
@@ -543,6 +547,8 @@
     if([badGuysBottom count] > 0 && [goodGuysBottom count] == 0)
     {
         deathFramecount--;
+        timeRemaining = (int)(deathFramecount/60);
+        [self timeRemaining];
     }
     if(deathFramecount <= 0)
     {
@@ -837,13 +843,13 @@
         badReinforcementCount = 0;
     }
 }
+/*
 -(void) draw
 {
-    
     ccColor4F green = ccc4f(0, 255, 0, 1);
-    ccDrawSolidRect(CGPointMake(0,0), CGPointMake(480, 40), green);
+    ccDrawSolidRect(CGPointMake(0,0), CGPointMake(480, MOUNTAIN_HEIGHT), green);
 }
-
+*/
 -(void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // Choose one of the touches to work with
@@ -896,7 +902,7 @@
     CGPoint offset = ccpSub(location, projectile.position);
     
     // Bail out if you are shooting down
-    if (offset.y <= FLOOR_HEIGHT)
+    if (offset.y <= player.position.y - player.contentSize.height)
     {
         CCMoveTo *movePlayer = [CCMoveTo actionWithDuration:.5 position:ccp(location.x, player.position.y)];
         [player runAction:movePlayer];
@@ -1544,7 +1550,7 @@
 -(void) timeRemaining
 {
     timeRemaining--;
-    []
+    [timeRemainingLabel setString:[NSString stringWithFormat:@"Time Remaining:%d", timeRemaining]];
 }
 -(void) addLevel
 {
@@ -1638,7 +1644,7 @@
     [self addChild:background z:-1];
     
     player.anchorPoint = CGPointZero;
-    player.position = CGPointMake(180.0f, FLOOR_HEIGHT + 15);
+    player.position = CGPointMake(180.0f, MOUNTAIN_HEIGHT + 15);
     player.scale = .2;
 
     [self addChild:player z:1];

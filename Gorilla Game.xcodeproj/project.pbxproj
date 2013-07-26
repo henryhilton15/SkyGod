@@ -328,6 +328,7 @@
 		C3297C0517975CC600A09343 /* knightFramesFlipped.png in Resources */ = {isa = PBXBuildFile; fileRef = C3297C0417975CC600A09343 /* knightFramesFlipped.png */; };
 		C3297C0717975CDA00A09343 /* knightframesflipped.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3297C0617975CDA00A09343 /* knightframesflipped.plist */; };
 		C3367E14179862CA00D321C5 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = C3367E13179862CA00D321C5 /* Character.m */; };
+		C3E69B7A17A2F8FE006C0912 /* wall.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E69B7917A2F8FE006C0912 /* wall.png */; };
 		C3EFA0A317974B64000E23A6 /* bearFrames.png in Resources */ = {isa = PBXBuildFile; fileRef = C3EFA0A217974B61000E23A6 /* bearFrames.png */; };
 		C3EFA0A517974B70000E23A6 /* bearFrames.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3EFA0A417974B6F000E23A6 /* bearFrames.plist */; };
 		DC1BE6A014F417CC00F49D25 /* Ubuntu-B.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC1BE68C14F417CC00F49D25 /* Ubuntu-B.ttf */; };
@@ -713,6 +714,7 @@
 		C3297C0617975CDA00A09343 /* knightframesflipped.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = knightframesflipped.plist; sourceTree = "<group>"; };
 		C3367E12179862CA00D321C5 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
 		C3367E13179862CA00D321C5 /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Character.m; sourceTree = "<group>"; };
+		C3E69B7917A2F8FE006C0912 /* wall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wall.png; sourceTree = "<group>"; };
 		C3EFA0A217974B61000E23A6 /* bearFrames.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bearFrames.png; sourceTree = "<group>"; };
 		C3EFA0A417974B6F000E23A6 /* bearFrames.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bearFrames.plist; sourceTree = "<group>"; };
 		DC1BE68614F417CC00F49D25 /* copyright.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = copyright.txt; sourceTree = "<group>"; };
@@ -821,6 +823,7 @@
 		2D808A7B1795F5BA006EADF5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C3E69B7917A2F8FE006C0912 /* wall.png */,
 				C3297C0617975CDA00A09343 /* knightframesflipped.plist */,
 				C3297C0417975CC600A09343 /* knightFramesFlipped.png */,
 				C3EFA0A217974B61000E23A6 /* bearFrames.png */,
@@ -1939,6 +1942,7 @@
 				C3EFA0A517974B70000E23A6 /* bearFrames.plist in Resources */,
 				C3297C0517975CC600A09343 /* knightFramesFlipped.png in Resources */,
 				C3297C0717975CDA00A09343 /* knightframesflipped.plist in Resources */,
+				C3E69B7A17A2F8FE006C0912 /* wall.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1969,7 +1973,6 @@
 				2D37059D1784D99D0057EB8E /* GameOverLayer.m in Sources */,
 				2D13AA88178F406500945F54 /* PauseMenuLayer.m in Sources */,
 				C3367E14179862CA00D321C5 /* Character.m in Sources */,
-				2DA3EB3B179086BA007D73B5 /* doubleEnemy.m in Sources */,
 				2D808D0717973A58006EADF5 /* Store.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -74,7 +74,7 @@
     CCSprite *truck;
     CCLabelTTF *LevelLabel;
     CCLabelTTF *enemiesKilledLabel;
-    CCLabelTTF *timeLeftLabel;
+    CCLabelTTF *timeRemainingLabel;
     CCSprite *goodTeamCounter;
     CCSprite *badTeamCounter;
     CCSprite *bullet;
