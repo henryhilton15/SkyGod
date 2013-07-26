@@ -24,6 +24,10 @@
     CGSize winSize = [CCDirector sharedDirector].winSize;
     int rangeY = KmonsterMaxY - KmonsterMinY;
     int actualY = arc4random() % rangeY + KmonsterMinY;
+    if(actualY < 120)
+    {
+        actualY+=50;
+    }
     
     // Create the monster slightly off-screen along the right edge,
     // and along a random position along the Y axis as calculated above
@@ -378,6 +382,7 @@
         helicopterDelayCounter = 0;
         zigZagDelayCounter = 0;
         zigZagScenarioCounter = 0;
+        badReinforcementCount = 0;
         level = 0;
         deaths = 0;
         bombCount = 0;
@@ -391,6 +396,13 @@
         immunityFramecount = 100;
         KmonsterMinY = 250;
         KmonsterMaxY = 310;
+        deathFramecount = 60 * 30;
+        pointsFramecount = 0;
+        score = 0;
+        enemyFrequency = 300;
+        friendlyFrequency = 500;
+        enemiesPassed = 0;
+        friendliesPassed = 0;
         firstHeli = true;
         firstBigGoodGuy = true;
         firstZigZag = true;
@@ -443,6 +455,10 @@
         enemiesKilledLabel.color = ccBLUE;
         [self addChild:enemiesKilledLabel z:4];
 
+        timeLeftLabel = [CCLabelTTF labelWithString:@"Time left: 30" fontName:@"Marker Felt" fontSize:18];
+        timeLeftLabel.position = ccp(360, 260);
+        timeLeftLabel.color = ccBLUE;
+        [self addChild:timeLeftLabel z:4];
         
         LevelLabel = [CCLabelTTF labelWithString:@"Level:0" fontName:@"Marker Felt" fontSize:18];
         LevelLabel.position = ccp(360, 280);
@@ -463,7 +479,10 @@
         PowerUpButton1.scale = 0.2f;
         PowerUpButton1.color = ccBLUE;
         
-        CCMenuItemImage *PowerUpButton2 = [CCMenuItemImage itemWithNormalImage:@"button-top.png" selectedImage:@"button-top.png"];
+        CCMenuItemImage *PowerUpButton2 = [CCMenuItemImage itemWithNormalImage:@"button-top.png" selectedImage:@"button-top.png"
+                                                                                target: self
+                                                                      selector:@selector(reinforcements:)];
+        
         PowerUpButton2.position= CGPointMake (-185, 142);
         PowerUpButton2.scale = 0.2f;
         PowerUpButton2.color = ccGREEN;
@@ -524,6 +543,20 @@
     
     framecount++;
     
+    if([badGuysBottom count] > 0 && [goodGuysBottom count] == 0)
+    {
+        deathFramecount--;
+    }
+//    if(deathFramecount <= 0)
+//    {
+//        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
+//    }
+    if([badGuysBottom count] == 0 && [goodGuysBottom count] > 0)
+    {
+        pointsFramecount++;
+        score += (int)(pointsFramecount/60);
+    }
+    
     if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true)
     {
         if((firstHeli == true || helicopterDelayCounter % 200 == 0) && (firstZigZag == true || zigZagDelayCounter % 250 == 0))
@@ -553,7 +586,6 @@
         }
 
     }
-
     if([helicopters count] > 0)
     {
         firstHeli = false;
@@ -672,15 +704,15 @@
         {
             [self addKmonster];
             firstBigGoodGuy = false;
-            KmonsterMaxY -= 40;
-            if(KmonsterMaxY < 100)
+            KmonsterMaxY -= 35;
+            if(KmonsterMaxY < 110)
             {
-                KmonsterMaxY = 100;
+                KmonsterMaxY = 105;
             }
-            KmonsterMinY -= 40;
-            if(KmonsterMaxY < 60)
+            KmonsterMinY -= 35;
+            if(KmonsterMaxY < 70)
             {
-                KmonsterMaxY = 60;
+                KmonsterMaxY = 65;
             }
             if(bigGoodGuysScenarioDelayCounter % 200 == 0)
             {
@@ -747,18 +779,18 @@
         bombCount = 0;
     }
     
-    for(int i = 0; i < [goodGuysBottom count]; i++)
-    {
-        CCSprite* goodGuyBottom = [goodGuysBottom objectAtIndex:i];
-        ((Character*)goodGuyBottom).immunity++;
-    }
-    for(int i = 0; i < [badGuysBottom count]; i++)
-    {
-        CCSprite* badGuyBottom = [badGuysBottom objectAtIndex:i];
-        ((Character*)badGuyBottom).immunity++;
-    }
-
-    /*
+//    for(int i = 0; i < [goodGuysBottom count]; i++)
+//    {
+//        CCSprite* goodGuyBottom = [goodGuysBottom objectAtIndex:i];
+//        ((Character*)goodGuyBottom).immunity++;
+//    }
+//    for(int i = 0; i < [badGuysBottom count]; i++)
+//    {
+//        CCSprite* badGuyBottom = [badGuysBottom objectAtIndex:i];
+//        ((Character*)badGuyBottom).immunity++;
+//    }
+//
+    
     if ([goodGuysBottom count] > 0)
     {
         [self goodGuysWalk];
@@ -767,18 +799,56 @@
     {
         [self badGuysWalk];
     }
-     */
-    if (([goodGuysBottom count] > 0 || [badGuysBottom count] > 0) && framecount % 100 == 0)
+    if (framecount % enemyFrequency == 0)
     {
-        [self shoot];
+        [self spawnBadGuyBottom];
     }
     
+    if (framecount % friendlyFrequency == 0)
+    {
+        [self spawnGoodGuyBottom];
+    }
+
+    if (([goodGuysBottom count] > 0 || [badGuysBottom count] > 0) && framecount % 100 == 0)
+    {
+        [self fight];
+    }
     if([goodGuysBottom count] > 0 || [badGuysBottom count] > 0)
     {
         [self detectBulletSoldierCollisions];
     }
+    if(truckCount == 1)
+    {
+        [self truckGoodBottomOrBadBottomCollisions];
+        
+    }
+    if (truckCount > 0)
+    {
+        NSLog(@"truckcount > 0" );
+        if (truck.position.x <= 480)
+        {
+            NSLog(@"truck position is less than 480");
+            if(framecount % 60 == 0)
+            {
+                BadReinforcement = [[Character alloc] initWithBadBottomImage];
+                BadReinforcement.position = ccp(410, truck.position.y);
+                BadReinforcement.scale = .1;
+                [self addChild:BadReinforcement];
+                int rangeX3 = 380;
+                int actualX3 = (arc4random() % 380) + 20;
+                CCMoveTo * spreadOut = [CCMoveTo actionWithDuration:2 position:ccp(actualX3, 15)];
+                [badGuysBottom addObject:BadReinforcement];
+                [BadReinforcement runAction:spreadOut];
+                badReinforcementCount++;
+            }
+        }
+    }
+    if(badReinforcementCount == 4)
+    {
+        truckCount = 0;
+        badReinforcementCount = 0;
+    }
 }
-
 -(void) draw
 {
     
@@ -870,6 +940,7 @@
        }],
       nil]];
 }
+
 -(void) detectBombGoodGuysBottomCollisions
 {
     NSMutableArray *deadGoodGuysBottom = [[NSMutableArray alloc] init];
@@ -1232,22 +1303,22 @@
                 //[[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
                 if(((Character*)goodGuy).type == GOOD_GUY)
                 {
-                    goodBottom = [[Character alloc] initWithGoodBottomImage];
+                    [self spawnGoodGuyBottom];
                 }
                 if(((Character*)goodGuy).type == SUPER_ZIG_ZAG_GUY)
                 {
-                    goodBottom = [[Character alloc] initWithSuperZigZagGuyImage];
+                    [self spawnGoodZigZagBottom];
                 }
                 if(((Character*)goodGuy).type == BIG_GOOD_GUY)
                 {
-                    goodBottom = [[Character alloc] initWithBigGoodGuyImage];
+                    [self spawnGoodBigGuyBottom];
                 }
-                ((Character*)goodBottom).health = ((Character*)goodGuy).health;
-                goodBottom.anchorPoint = CGPointZero;
-                goodBottom.position = ccp(goodGuy.position.x - 15, goodGuy.position.y - 20);
-                goodBottom.scale=.3;
-                [self addChild:goodBottom z:1];
-                [goodGuysBottom addObject:goodBottom];
+//                ((Character*)goodBottom).health = ((Character*)goodGuy).health;
+//                goodBottom.anchorPoint = CGPointZero;
+//                goodBottom.position = ccp(goodGuy.position.x - 15, goodGuy.position.y - 20);
+//                goodBottom.scale=.3;
+//                [self addChild:goodBottom z:1];
+//                [goodGuysBottom addObject:goodBottom];
                 
                 [deadGoodGuys addObject:goodGuy];
                // NSLog(@"added to bottom array");
@@ -1309,33 +1380,33 @@
                     
                 }
                 */
-                if(((Character*)badGuy).type == DOUBLE_ENEMY || ((Character*)badGuy).type == ZIG_ZAG || ((Character*)badGuy).type == BAD_GUY)
-                {
+//                if(((Character*)badGuy).type == DOUBLE_ENEMY || ((Character*)badGuy).type == ZIG_ZAG || ((Character*)badGuy).type == BAD_GUY)
+//                {
                     if(((Character*)badGuy).type == BAD_GUY)
                     {
-                        badBottom = [[Character alloc] initWithBadGuyImage];
+                        [self spawnBadGuyBottom];
                     }
                     if(((Character*)badGuy).type == DOUBLE_ENEMY)
                     {
-                        badBottom = [[Character alloc] initWithDoubleEnemyImage];
+                        [self spawnBadGuyBottom];
                     }
                     if(((Character*)badGuy).type == ZIG_ZAG)
                     {
-                        badBottom = [[Character alloc] initWithZigZagImage];
+                        [self spawnBadZigZagBottom];
                     }
-                    ((Character*)badBottom).health = ((Character*)badGuy).health;
-                    badBottom.anchorPoint = CGPointZero;
-                    badBottom.scale=.15;
-                    badBottom.position = ccp(badGuy.position.x - 15, badGuy.position.y - 20);
-                    [self addChild:badBottom z:1];
-                    [badGuysBottom addObject:badBottom];
-                    [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
-                    
+//                    ((Character*)badBottom).health = ((Character*)badGuy).health;
+//                    badBottom.anchorPoint = CGPointZero;
+//                    badBottom.scale=.15;
+//                    badBottom.position = ccp(badGuy.position.x - 15, badGuy.position.y - 20);
+//                    [self addChild:badBottom z:1];
+//                    [badGuysBottom addObject:badBottom];
+//                    [[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
+//                    
                     [deadBadGuys addObject:badGuy];
                 }
             }
         }
-    }
+    
     for(int i = 0; i < [badGuys count]; i++)
     {
         if([badGuys count] > 0)
@@ -1592,7 +1663,7 @@
 
 -(void)ScenarioGenerator
 {
-    if (enemiesKilledCounter >= 5)
+    if (enemiesKilledCounter >= 10)
     {
        // NSLog(@"Killed 5");
         randNum++;
@@ -1704,17 +1775,62 @@
     [badGuysBottom addObject:badBottom];
 }
 
+-(void) spawnGoodZigZagBottom
+{
+    //  CGSize winSize = [CCDirector sharedDirector].winSize;
+    goodBottom = [[Character alloc] initWithSuperZigZagGuyImage];
+    goodBottom.anchorPoint = CGPointZero;
+    goodBottom.position = ccp(0,0);
+    goodBottom.scale=.3;
+    [self addChild:goodBottom z:1];
+    [goodGuysBottom addObject:goodBottom];
+}
+
+-(void) spawnGoodBigGuyBottom
+{
+    //  CGSize winSize = [CCDirector sharedDirector].winSize;
+    goodBottom = [[Character alloc] initWithBigGoodGuyImage];
+    goodBottom.anchorPoint = CGPointZero;
+    goodBottom.position = ccp(0,0);
+    goodBottom.scale=.3;
+    [self addChild:goodBottom z:1];
+    [goodGuysBottom addObject:goodBottom];
+}
+
+-(void) spawnBadZigZagBottom
+{
+    // CGSize winSize = [CCDirector sharedDirector].winSize;
+    badBottom = [[Character alloc] initWithZigZagImage];
+    badBottom.anchorPoint = CGPointZero;
+    badBottom.scale=.15;
+    badBottom.position = ccp(460, 0);
+    [self addChild:badBottom z:1];
+    [badGuysBottom addObject:badBottom];
+}
+
+    
 -(void) goodGuysWalk
 {
-    for(int q=0; q<[goodGuysBottom count]; q++)
+    for(int q = 0; q < [goodGuysBottom count]; q++)
     {
         goodBottom = (CCSprite *)[goodGuysBottom objectAtIndex:q];
-        
-        
         goodBottom.position = ccp(goodBottom.position.x + .5,goodBottom.position.y);
-
+        
+        if (goodBottom.position.x > 480)
+        {
+            friendliesPassed++;
+        //    [goodGuysBottom removeObjectAtIndex:q];
+         //   [self removeChild:goodBottom];
+        }
     }
+    if (friendliesPassed >= 5)
+    {
+        friendliesPassed = 0;
+        level++;
+    }
+
 }
+
 
 -(void) badGuysWalk
 {
@@ -1725,44 +1841,62 @@
         
         if (badBottom.position.x < 0)
         {
-            [[CCDirector sharedDirector] replaceScene: (CCScene *)[[GameOverLayer alloc]  init]];
+            enemiesPassed++;
+            [goodGuysBottom removeObjectAtIndex:q];
+            [self removeChild:badBottom cleanup:YES];
         }
     }
+    if (enemiesPassed >= 5)
+    {
+        enemiesPassed = 0;
+        [[CCDirector sharedDirector] replaceScene: (CCScene *)[[GameOverLayer alloc]  init]];
+    }
+        
 }
 
-
-
--(void) shoot
+-(void) fight
 {
+    
     for (int f = 0; f < [badGuysBottom count]; f++)
     {
         if( [badGuysBottom count] !=0)
         {
-        badBottom = [badGuysBottom objectAtIndex:f];
+             badBottom = [badGuysBottom objectAtIndex:f];
+            
+//            if((Character*).badBottom.type == BAD_GUY)
+//            {
+////
+////                goodBottomRect = [goodBottom boundingBox];
+////                badBullet = [badBulletArray objectAtIndex:j];
+////                badBulletBox = [badBullet boundingBox];
+
+         //   }
+            
+    
         float badX = badBottom.position.x;
         float badY = badBottom.position.y;
         
-        badBullet = [CCSprite spriteWithFile:@"cat1.png"];
+        badBullet = [CCSprite spriteWithFile:@"lighting.png"];
         badBullet.anchorPoint = CGPointZero;
-        badBullet.position = ccp(badX, badY + 12);
-        badBullet.scale=.1;
+        badBullet.position = ccp(badX, badY + 10);
+        badBullet.scale=.15;
         [self addChild:badBullet z:1];
         [badBulletArray addObject:badBullet];
-        int badDirection = arc4random() % 2;
-            
-        
-        if (badDirection == 1)
-        {
-            CCMoveTo *shootRight = [CCMoveTo actionWithDuration:20
-                                                       position:ccp(2000, badBullet.position.y)];
-        
-                [badBullet runAction:shootRight];
-            
-            NSLog(@"bad bullet shot right");
-            
-        }
-       if (badDirection == 0)
-        {
+//      int badDirection = arc4random() % 2;
+//            
+//        
+//        if (badDirection == 1)
+//        {
+//            CCMoveTo *shootRight = [CCMoveTo actionWithDuration:20
+//                                                       position:ccp(2000, badBullet.position.y)];
+//        
+//                [badBullet runAction:shootRight];
+//            
+//            NSLog(@"bad bullet shot right");
+//            
+//        }
+//       if (badDirection == 0)
+//        {
             CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:20
                                                       position:ccp(-2000, badBullet.position.y)];
             
@@ -1772,56 +1906,55 @@
             
         }
     }
-}
     
     for (int f = 0; f < [goodGuysBottom count]; f++)
-    { if ([goodGuysBottom count] != 0)
-        
-    { goodBottom = [goodGuysBottom objectAtIndex:f];
+    {
+        if ([goodGuysBottom count] != 0)
+        {
+        goodBottom = [goodGuysBottom objectAtIndex:f];
         float goodX = goodBottom.position.x;
         float goodY = goodBottom.position.y;
         
-        goodBullet = [CCSprite spriteWithFile:@"cat1.png"];
+        goodBullet = [CCSprite spriteWithFile:@"heart.png"];
         goodBullet.anchorPoint = CGPointZero;
         goodBullet.position = ccp(goodX, goodY + 12);
         goodBullet.scale=.1;
         [self addChild:goodBullet z:1];
         [goodBulletArray addObject:goodBullet];
-        int goodDirection = arc4random() % 2;
-        
-        if (goodDirection == 1)
-        {
+//        int goodDirection = arc4random() % 2;
+//        
+//        if (goodDirection == 1)
+//        {
             CCMoveTo *shootRight = [CCMoveTo actionWithDuration:20
                                                        position:ccp(2000, goodBullet.position.y)];
             
             [goodBullet runAction:shootRight];
             
-                        NSLog(@"good bullet shot right");
-            
-        }
-        if (goodDirection == 0)
-        {
-            CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:20
-                                                      position:ccp(-2000, goodBullet.position.y)];
-            
-            [goodBullet runAction:shootLeft];
-            
-             NSLog(@"good bullet shot left");
-        }
+//                        NSLog(@"good bullet shot right");
+//            
+//        }
+//        if (goodDirection == 0)
+//        {
+//            CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:20
+//                                                      position:ccp(-2000, goodBullet.position.y)];
+//            
+//            [goodBullet runAction:shootLeft];
+//            
+//             NSLog(@"good bullet shot left");
+//        }
         
-    }
+        }
+
     }
 }
 
 - (void) detectBulletSoldierCollisions
 {
- 
     NSMutableArray *deadGoodGuys = [[NSMutableArray alloc] init];
     NSMutableArray *deadBadGuys = [[NSMutableArray alloc] init];
     NSMutableArray *deadGoodBullets = [[NSMutableArray alloc] init];
     NSMutableArray *deadBadBullets = [[NSMutableArray alloc] init];
 
-    
     for (int b = 0; b < [goodBulletArray count]; b++)
     {
         goodBullet = [goodBulletArray objectAtIndex:b];
@@ -1874,7 +2007,7 @@
                     //NSLog(NSStringFromCGRect(bulletBox));
                     
                 
-                    if(CGRectIntersectsRect(goodBottomRect,badBulletBox) && ((Character*)goodBottom).immunity >= immunityFramecount)
+                    if(CGRectIntersectsRect(goodBottomRect,badBulletBox)) /* && ((Character*)goodBottom).immunity >= immunityFramecount)*/
                     {
                        // NSLog(@"bullet good guy collide");
                                 if(((Character*)goodBottom).health == 1)
@@ -1911,7 +2044,7 @@
                 goodBullet = [goodBulletArray objectAtIndex:j];
                 goodBulletBox = [goodBullet boundingBox];
             
-                if(CGRectIntersectsRect(badBottomRect,goodBulletBox) && ((Character*)badBottom).immunity >= immunityFramecount)
+                if(CGRectIntersectsRect(badBottomRect,goodBulletBox)) //&& ((Character*)badBottom).immunity >= immunityFramecount)
                 {
                    // NSLog(@"bullet bad guy collide");
                     if(((Character*)badBottom).health == 1)
@@ -1991,6 +2124,73 @@
     position:ccp(500, bomber.position.y)];
 
     [bomber runAction:actionMove];
+}
+
+-(void)reinforcements: (CCMenuItemImage *) PowerUpButton2
+{
+    truck = [CCSprite spriteWithFile: @"car-side.png"];
+    truck.scale =.5;
+    truck.position = ccp(500,15);
+    [self addChild:truck];
+    truckCount++;
+    
+    CCMoveTo * DriveIn = [CCMoveTo actionWithDuration:2 position:ccp(420, truck.position.y)];
+    CCMoveTo * NoMove = [CCMoveTo actionWithDuration:8 position:ccp(420, truck.position.y)];
+    CCMoveTo * DriveOut = [CCMoveTo actionWithDuration:2 position:ccp(520, truck.position.y)];
+    
+    [truck runAction:[CCSequence actions: DriveIn, NoMove, DriveOut, nil]];
+    
+}
+
+-(void) truckGoodBottomOrBadBottomCollisions
+{
+    NSMutableArray *runOverGoodGuys = [[NSMutableArray alloc] init];
+    NSMutableArray *runOverBadGuys = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < [badGuysBottom count]; i++)
+    {
+        if (truckCount == 1 && [goodGuysBottom count] > 0)
+        {
+            badBottom = [badGuysBottom objectAtIndex: i];
+            badBottomRect = [badBottom boundingBox];
+            truckBox = [truck boundingBox];
+            if(CGRectIntersectsRect(badBottomRect, truckBox))
+            {   NSLog(@"Run over bad guy");
+                [runOverBadGuys addObject:badBottom];
+                
+            }
+        }
+    }
+    for (int i = 0; i < [goodGuysBottom count]; i++)
+    {
+        if (truckCount == 1 && [goodGuysBottom count] > 0)
+        {
+            goodBottom = [goodGuysBottom objectAtIndex: i];
+            goodBottomRect = [goodBottom boundingBox];
+            truckBox = [truck boundingBox];
+            if(CGRectIntersectsRect(goodBottomRect, truckBox))
+            {   NSLog(@"Run over good guy");
+                [runOverGoodGuys addObject:goodBottom];
+                
+            }
+        }
+    }
+
+    for (CCSprite *d in runOverBadGuys)
+    {
+        [badGuysBottom removeObject:d];
+        [self removeChild:d cleanup:YES];
+        NSLog(@"deleted run over bad guy");
+    }
+    [runOverBadGuys removeAllObjects];
+    
+    for (CCSprite *d in runOverGoodGuys)
+    {
+        [goodGuysBottom removeObject:d];
+        [self removeChild:d cleanup:YES];
+        NSLog(@"deleted run over good guy");
+    }
+    [runOverGoodGuys removeAllObjects];
 }
 
 @end
