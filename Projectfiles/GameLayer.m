@@ -813,7 +813,7 @@
         [self spawnGoodGuyBottom];
     }
 
-    if (([goodGuysBottom count] > 0 || [badGuysBottom count] > 0) && framecount % 100 == 0)
+    if (([goodGuysBottom count] > 0 || [badGuysBottom count] > 0))// && framecount % 100 == 0)
     {
         [self fight];
     }
@@ -821,11 +821,11 @@
     {
         [self detectBulletSoldierCollisions];
     }
-    if(truckCount == 1)
-    {
-        [self truckGoodBottomOrBadBottomCollisions];
-        
-    }
+//    if(truckCount == 1)
+//    {
+//        [self truckGoodBottomOrBadBottomCollisions];
+//        
+//    }
     if (truckCount > 0)
     {
         NSLog(@"truckcount > 0" );
@@ -852,12 +852,36 @@
         truckCount = 0;
         badReinforcementCount = 0;
     }
+    
 }
 /*
 -(void) draw
 {
     ccColor4F green = ccc4f(0, 255, 0, 1);
+
     ccDrawSolidRect(CGPointMake(0,0), CGPointMake(480, MOUNTAIN_HEIGHT), green);
+
+    
+ 
+    
+//    glColor4f(1.0, 0, 0, 1.0);
+//    
+//    glLineWidth(1.0f);
+    
+    
+    for(int r = 0; r < [goodGuysBottom count]; r++)
+    {
+    [self drawBoundingBox: goodRangeBox];
+    }
+    
+    for(int y = 0; y < [badGuysBottom count]; y++)
+    {
+    [self drawBoundingBox: badRangeBox];
+    }
+    
+        
+//    [super draw];
+>>>>>>> 5c6c65150140577c13e7d757668281d3abab62bd
 }
 */
 -(void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -1879,6 +1903,7 @@
                 //[goodGuysBottom removeObjectAtIndex:q];
                 //[self removeChild:goodBottom];
             }
+
         }
     }
     if (friendliesPassed >= 5)
@@ -1895,14 +1920,14 @@
 }
 
 -(void) badGuysWalk
-{
+{ 
     NSMutableArray *deadBadGuysBottom = [[NSMutableArray alloc] init];
     
     for(int q=0; q<[badGuysBottom count]; q++)
     {
+        badBottom = [badGuysBottom objectAtIndex:q];
         if(((Character*)badBottom).melee == false)
         {
-            badBottom = (CCSprite *)[badGuysBottom objectAtIndex:q];
             badBottom.position = ccp(badBottom.position.x - .5,badBottom.position.y);
         
             if (badBottom.position.x < 0)
@@ -1928,96 +1953,173 @@
 
 -(void) fight
 {
+//    for (int f = 0; f < [badGuysBottom count]; f++)
+//    {
+//        badBottom = [badGuysBottom objectAtIndex:f];
+//        badMeleeBox = [badBottom boundingBox];
+//
+//    }
+//    
+//    for (int f = 0; f < [goodGuysBottom count]; f++)
+//    {
+//        goodBottom = [goodGuysBottom objectAtIndex:f];
+//        goodMeleeBox = [goodBottom boundingBox];
+//    }
+//
+    NSMutableArray *deadGoodGuys = [[NSMutableArray alloc] init];
+    NSMutableArray *deadBadGuys = [[NSMutableArray alloc] init];
     
-    for (int f = 0; f < [badGuysBottom count]; f++)
+    if([goodGuysBottom count] > 0 && [badGuysBottom count] > 0)
     {
-        if( [badGuysBottom count] !=0)
+    for(int j = 0; j < [goodGuysBottom count]; j++)
+    {
+        for (int f = 0; f < [badGuysBottom count]; f++)
         {
-             badBottom = [badGuysBottom objectAtIndex:f];
-            
-//            if((Character*).badBottom.type == BAD_GUY)
-//            {
-////
-////                goodBottomRect = [goodBottom boundingBox];
-////                badBullet = [badBulletArray objectAtIndex:j];
-////                badBulletBox = [badBullet boundingBox];
 
-         //   }
-            
-        if(badBottom.position.x < 470)
-        {
-        float badX = badBottom.position.x;
-        float badY = badBottom.position.y;
-        
-        badBullet = [CCSprite spriteWithFile:@"lighting.png"];
-        badBullet.anchorPoint = CGPointZero;
-        badBullet.position = ccp(badX, badY + 10);
-        badBullet.scale=.15;
-        [self addChild:badBullet z:1];
-        [badBulletArray addObject:badBullet];
-//      int badDirection = arc4random() % 2;
-//            
-//        
-//        if (badDirection == 1)
-//        {
-//            CCMoveTo *shootRight = [CCMoveTo actionWithDuration:20
-//                                                       position:ccp(2000, badBullet.position.y)];
-//        
-//                [badBullet runAction:shootRight];
-//            
-//            NSLog(@"bad bullet shot right");
-//            
-//        }
-//       if (badDirection == 0)
-//        {
-            CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:20
-                                                      position:ccp(-2000, badBullet.position.y)];
-            
-            [badBullet runAction:shootLeft];
-            //NSLog(@"bad bullet shot left");
-        }
+            if([badGuysBottom count] != 0 && [badGuysBottom count] != 0)
+            {
+                badBottom = [badGuysBottom objectAtIndex:f];
+                badMeleeBox = [badBottom boundingBox];
+                badRangeBox = [badBottom boundingBox];
+                badRangeBox.size.width -= 130;
+                goodBottom = [goodGuysBottom objectAtIndex:j];
+                goodMeleeBox = [goodBottom boundingBox];
+                goodRangeBox = [goodBottom boundingBox];
+                goodRangeBox.size.width += 100;
+               
+                
+                if(CGRectIntersectsRect(goodMeleeBox, badMeleeBox))
+                {
+                    ((Character*)goodBottom).melee = true;
+                    ((Character*)badBottom).melee = true;
+                    
+                    if(framecount % 50 == 0)
+                    {
+                        NSLog(@"melee battle");
+                        if(((Character*)badBottom).health <= 1)
+                        {
+                            [deadBadGuys addObject:badBottom];
+                        }
+                        else
+                        {
+                            ((Character*)badBottom).health--;
+                        }
+                        if(((Character*)goodBottom).health <= 1)
+                        {
+                            [deadGoodGuys addObject:goodBottom];
+                        }
+                        else
+                        {
+                            ((Character*)goodBottom).health--;
+                        }
+                        for (CCSprite *s in deadBadGuys)
+                        {
+                            [badGuysBottom removeObject:s];
+                            [self removeChild:s cleanup:YES];
+                            // NSLog(@"deleted bad guy");
+                        }
+                        for (CCSprite *s in deadGoodGuys)
+                        {
+                            [goodGuysBottom removeObject:s];
+                            [self removeChild:s cleanup:YES];
+                            // NSLog(@"deleted bad guy");
+                        }
+                    }
+                }
+                
+                else if(CGRectIntersectsRect(badRangeBox,goodMeleeBox))
+                {
+                    if(framecount % 100 == 0)
+                    {
+                        NSLog(@"bad guy shooting");
+                        float badX = badBottom.position.x;
+                        float badY = badBottom.position.y;
+                    
+                        badBullet = [CCSprite spriteWithFile:@"lighting.png"];
+                        badBullet.anchorPoint = CGPointZero;
+                        badBullet.position = ccp(badX, badY + 10);
+                        badBullet.scale=.15;
+                        [self addChild:badBullet z:1];
+                        [badBulletArray addObject:badBullet];
+                    
+                        CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:25
+                        position:ccp(-2000, badBullet.position.y)];
+                    
+                        [badBullet runAction:shootLeft];
+                        NSLog(@"bad bullet shot left");
+                    }
+                }
+                
+                else if(CGRectIntersectsRect(goodRangeBox,badMeleeBox))
+                {
+                    if(framecount % 100 == 0)
+                    {
+                                
+                        NSLog(@"good guy shooting");
+                        float goodX = goodBottom.position.x;
+                        float goodY = goodBottom.position.y;
+                                
+                        goodBullet = [CCSprite spriteWithFile:@"heart.png"];
+                        goodBullet.anchorPoint = CGPointZero;
+                        goodBullet.position = ccp(goodX, goodY + 12);
+                        goodBullet.scale=.1;
+                        [self addChild:goodBullet z:1];
+                        [goodBulletArray addObject:goodBullet];
+                            
+                        CCMoveTo *shootRight = [CCMoveTo actionWithDuration:20
+                                                                           position:ccp(2000, goodBullet.position.y)];
+                        [goodBullet runAction:shootRight];
+                    }
+
+                }
+                
+            }
         }
     }
-    
-    for (int f = 0; f < [goodGuysBottom count]; f++)
+    }
+   /*
+    for(int j = 0; j < [goodGuysBottom count]; j++)
     {
+        for (int f = 0; f < [badGuysBottom count]; f++)
+        {
         if ([goodGuysBottom count] != 0)
         {
         goodBottom = [goodGuysBottom objectAtIndex:f];
-        float goodX = goodBottom.position.x;
-        float goodY = goodBottom.position.y;
-        
-        goodBullet = [CCSprite spriteWithFile:@"heart.png"];
-        goodBullet.anchorPoint = CGPointZero;
-        goodBullet.position = ccp(goodX, goodY + 12);
-        goodBullet.scale=.1;
-        [self addChild:goodBullet z:1];
-        [goodBulletArray addObject:goodBullet];
-//        int goodDirection = arc4random() % 2;
-//        
-//        if (goodDirection == 1)
+    
+//            
+//        if(((Character*)goodBottom).type != GOOD_GUY)
 //        {
-            CCMoveTo *shootRight = [CCMoveTo actionWithDuration:20
+            goodRangeBox = [goodBottom boundingBox];
+            goodRangeBox.size.width += 100;
+            
+            NSLog(@"good range box made");
+            if(CGRectIntersectsRect(goodRangeBox,badMeleeBox))
+            {
+                if(framecount % 100 == 0)
+                {
+                    
+                NSLog(@"good guy shooting");
+                float goodX = goodBottom.position.x;
+                float goodY = goodBottom.position.y;
+        
+                goodBullet = [CCSprite spriteWithFile:@"heart.png"];
+                goodBullet.anchorPoint = CGPointZero;
+                goodBullet.position = ccp(goodX, goodY + 12);
+                goodBullet.scale=.1;
+                [self addChild:goodBullet z:1];
+                [goodBulletArray addObject:goodBullet];
+
+                CCMoveTo *shootRight = [CCMoveTo actionWithDuration:20
                                                        position:ccp(2000, goodBullet.position.y)];
             
-            [goodBullet runAction:shootRight];
-            
-//                        NSLog(@"good bullet shot right");
-//            
-//        }
-//        if (goodDirection == 0)
-//        {
-//            CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:20
-//                                                      position:ccp(-2000, goodBullet.position.y)];
-//            
-//            [goodBullet runAction:shootLeft];
-//            
-//             NSLog(@"good bullet shot left");
-//        }
+                [goodBullet runAction:shootRight];
+            }
+        }
         
         }
-
+        }
     }
+    */
 }
 
 - (void) detectBulletSoldierCollisions
@@ -2263,4 +2365,32 @@
     [runOverGoodGuys removeAllObjects];
 }
 
+
+
+
+-(void) drawBoundingBox: (CGRect) rect
+
+{
+    
+    CGPoint vertices[4]={
+        
+        ccp(rect.origin.x,rect.origin.y),
+        
+        ccp(rect.origin.x+rect.size.width,rect.origin.y),
+        
+        ccp(rect.origin.x+rect.size.width,rect.origin.y+rect.size.height),
+        
+        ccp(rect.origin.x,rect.origin.y+rect.size.height),
+        
+    };
+    
+    ccDrawPoly(vertices, 4, YES);
+    
+}
+
 @end
+
+
+
+    
+
