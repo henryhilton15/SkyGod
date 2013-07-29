@@ -106,6 +106,10 @@
     CGRect KamikazeBox;
     CGRect goodGuyRect;
     CGRect truckBox;
+    CGRect goodMeleeBox;
+    CGRect badMeleeBox;
+    CGRect goodRangeBox;
+    CGRect badRangeBox;
     NSMutableArray *GoodGuysToDelete;
     CCAction *taunt;
     NSMutableArray *tauntingFrames;
@@ -123,6 +127,8 @@
     BOOL firstZigZag;
     CCSprite *GoodReinforcement;
     CCSprite *BadReinforcement;
+
+    
 
 }
 
@@ -161,4 +167,7 @@
 
 
 
+
+
+-(void) drawBoundingBox: (CGRect) rect;
 @end

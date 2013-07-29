@@ -45,7 +45,7 @@
     if((self = [super initWithFile:@"cat4.png"]))
     {
         worth = 50;
-        health = 1;
+        health = 3;
         type = GOOD_GUY;
         immunity = 0;
     }
@@ -57,7 +57,7 @@
     if((self = [super initWithFile:@"monster1.png"]))
     {
         worth = 50;
-        health = 1;
+        health = 3;
         type = BAD_GUY;
         immunity = 0;
     }
@@ -68,7 +68,7 @@
     if((self = [super initWithFile:@"monster4.png"]))
     {
         worth = 50;
-        health = 1;
+        health = 3;
         type = ZIG_ZAG;
         immunity = 0;
     }
