@@ -17,6 +17,7 @@
 @synthesize type;
 @synthesize immunity;
 @synthesize row;
+@synthesize melee;
 
 -(id) initWithBigMonsterImage
 {
@@ -27,6 +28,8 @@
         type = BIG_MONSTER;
         immunity = 0;
         row = 0;
+        melee = false;
+        
     }
     return self;
 }
@@ -40,6 +43,7 @@
         type = BIG_GOOD_GUY;
         immunity = 0;
         row = 0;
+        melee = false;
     }
     return self;
 }
@@ -52,6 +56,7 @@
         type = GOOD_GUY;
         immunity = 0;
         row = 0;
+        melee = false;
     }
     return self;
 }
@@ -65,6 +70,7 @@
         type = BAD_GUY;
         immunity = 0;
         row = 0;
+        melee = false;
     }
     return self;
 }
@@ -77,6 +83,7 @@
         type = ZIG_ZAG;
         immunity = 0;
         row = 0;
+        melee = false;
     }
     return self;
 }
@@ -136,6 +143,7 @@
         type = DOUBLE_ENEMY;
         immunity = 0;
         row = 0;
+        melee = false;
     }
     return self;
 }
@@ -148,6 +156,7 @@
         type = SUPER_ZIG_ZAG_GUY;
         immunity = 0;
         row = 0;
+        melee = false;
     }
     return self;
 }
@@ -170,6 +179,7 @@
         type = GOOD_BOTTOM;
         immunity = 0;
         row = 0;
+        melee = false;
     }
     return self;
 }
@@ -192,6 +202,7 @@
         type = BAD_BOTTOM;
         immunity = 0;
         row = 0;
+        melee = false;
     }
     return self;
 }

@@ -53,6 +53,7 @@
     int friendlyFrequency;
     int enemiesPassed;
     int friendliesPassed;
+    int helicopters;
     NSMutableArray *bananaArray;
     NSMutableArray *goodGuys;
     NSMutableArray *badGuys;
@@ -94,7 +95,7 @@
     NSMutableArray *bananasToDelete;
     NSMutableArray *enemiesToDelete;
     NSMutableArray *Kmonsters;
-    NSMutableArray *helicopters;
+  //  NSMutableArray *helicopters;
     NSMutableArray *bigGoodGuys;
     NSMutableArray *goodGuysBottom;
     NSMutableArray *badGuysBottom;
