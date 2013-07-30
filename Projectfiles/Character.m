@@ -23,7 +23,7 @@
 {
     if((self = [super initWithFile:@"monster9.png"]))
     {
-        health = 10;
+        health = 5;
         worth = 100;
         type = BIG_MONSTER;
         immunity = 0;
@@ -38,7 +38,7 @@
 {
     if((self = [super initWithFile:@"chest.png"]))
     {
-        health = 1;
+        health = 5;
         worth = 100;
         type = BIG_GOOD_GUY;
         immunity = 0;
@@ -52,7 +52,7 @@
     if((self = [super initWithFile:@"cat4.png"]))
     {
         worth = 50;
-        health = 1;
+        health = 2;
         type = GOOD_GUY;
         immunity = 0;
         row = 0;
@@ -66,7 +66,7 @@
     if((self = [super initWithFile:@"monster1.png"]))
     {
         worth = 50;
-        health = 1;
+        health = 2;
         type = BAD_GUY;
         immunity = 0;
         row = 0;
@@ -100,7 +100,7 @@
 {
     if((self = [super initWithFile:@"barrell.png"]))
     {
-        health = 1;
+        health = 5;
         type = BAD_HELICOPTER;
     }
     return self;
@@ -139,7 +139,7 @@
     if((self = [super initWithFile:@"monster1.png"]))
     {
         worth = 50;
-        health = 1;
+        health = 2;
         type = DOUBLE_ENEMY;
         immunity = 0;
         row = 0;
@@ -152,7 +152,7 @@
     if(self = [super initWithFile:@"cat1-topdown.png"])
     {
         worth = 1;
-        health = 1;
+        health = 5;
         type = SUPER_ZIG_ZAG_GUY;
         immunity = 0;
         row = 0;
