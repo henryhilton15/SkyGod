@@ -1981,11 +1981,11 @@
                 badBottom = [badGuysBottom objectAtIndex:f];
                 badMeleeBox = [badBottom boundingBox];
                 badRangeBox = [badBottom boundingBox];
-                badRangeBox.size.width -= 130;
+                badRangeBox.size.width -= 110;
                 goodBottom = [goodGuysBottom objectAtIndex:j];
                 goodMeleeBox = [goodBottom boundingBox];
                 goodRangeBox = [goodBottom boundingBox];
-                goodRangeBox.size.width += 100;
+                goodRangeBox.size.width += 110;
                
                 
                 if(CGRectIntersectsRect(goodMeleeBox, badMeleeBox))
