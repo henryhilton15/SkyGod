@@ -579,12 +579,12 @@
     
     framecount++;
     
-//    if([badGuysBottom count] > 0 && [goodGuysBottom count] == 0)
-//    {
-//        deathFramecount--;
-//        timeRemaining = (int)(deathFramecount/60);
-//        [self timeRemaining];
-//    }
+    if([badGuysBottom count] > 0 && [goodGuysBottom count] == 0)
+    {
+        deathFramecount--;
+        timeRemaining = (int)(deathFramecount/60);
+        [self timeRemaining];
+    }
 //    if(deathFramecount <= 0)
 //    {
 //        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
@@ -685,9 +685,13 @@
         [deadHelicopters removeAllObjects];
     }
     
-    if(helicoptersRemoved % 2 == 0 && helicoptersRemoved > 0 && Scenario1 == true)
+    if(helicoptersRemoved % 1 == 0 && helicoptersRemoved > 0 && Scenario1 == true)
     {
-       // Scenario1 = false;
+        Scenario1 = false;
+        NSLog(@"Scenario1 is false");
+    }
+    if(helicoptersRemoved % 1 == 0 && helicoptersRemoved > 0)
+    {
         helicopterDelayCounter++;
         helicopters = 0;
         
@@ -736,24 +740,26 @@
         {
             [self addKmonster];
             firstBigGoodGuy = false;
-            KmonsterMaxY -= 35;
-            if(KmonsterMaxY < 110)
+            KmonsterMaxY -= 30;
+            if(KmonsterMaxY < 130)
             {
-                KmonsterMaxY = 105;
+                KmonsterMaxY = 135;
             }
-            KmonsterMinY -= 35;
-            if(KmonsterMaxY < 70)
+            KmonsterMinY -= 30;
+            if(KmonsterMaxY < 90)
             {
-                KmonsterMaxY = 65;
-            }
-            if(bigGoodGuysScenarioDelayCounter % 200 == 0)
-            {
-                //Scenario2 = false;
-                bigGoodGuysCounter = 0;
-                KmonsterMaxY = 310;
-                KmonsterMinY = 250;
+                KmonsterMaxY = 95;
             }
         }
+        if(bigGoodGuysScenarioDelayCounter % 200 == 0)
+        {
+            Scenario2 = false;
+            bigGoodGuysCounter = 0;
+            KmonsterMaxY = 310;
+            KmonsterMinY = 250;
+       NSLog(@"Scenario2 is false");
+        }
+
     }
     if(zigZagScenarioCounter > 0)
     {
@@ -763,6 +769,7 @@
         {
             Scenario3 = false;
             zigZagScenarioCounter = 0;
+            NSLog(@"Scenario3 is false");
         }
     }
     if([goodGuys count] > 0 || [badGuys count] > 0)
@@ -835,12 +842,10 @@
     {
         [self spawnBadGuyBottom];
     }
-    
     if (framecount % friendlyFrequency == 0)
     {
         [self spawnGoodGuyBottom];
     }
-
     if (([goodGuysBottom count] > 0 || [badGuysBottom count] > 0))// && framecount % 100 == 0)
     {
         [self fight];
@@ -1346,7 +1351,6 @@
         Scenario1 = false;
     }
     [deadHelicopters removeAllObjects];
-
 }
 
 -(void)detectReachBottom
@@ -1420,7 +1424,7 @@
         {
             badGuy = [badGuys objectAtIndex:i];
 
-            if(badGuy.position.y <= 20)
+            if(badGuy.position.y <= 30)
             {
                 /*
                 if(((Character*)badGuy).type == BAD_GUY)
@@ -1698,13 +1702,12 @@
 
 -(void) changeLevel
 {
-     CGSize winSize = [CCDirector sharedDirector].winSize;
+    CGSize winSize = [CCDirector sharedDirector].winSize;
     if (level ==0)
     {
         [self removeChild:background cleanup: YES];
         [self removeChild:player];
         background = [CCSprite spriteWithFile:@"background_desert-topdown.png"];
-
         player = [CCSprite spriteWithFile:@"cat2.png"];
     }
     
@@ -1721,11 +1724,10 @@
     
     if (level ==2)
     {
-
         [self removeChild:background cleanup: YES];
         [self removeChild:player];
         background = [CCSprite spriteWithFile:@"background_grid.png"];
-         
+
         player = [CCSprite spriteWithFile:@"monster9.png"];
    
     }
@@ -1736,14 +1738,14 @@
         [self removeChild:player];
 
         background = [CCSprite spriteWithFile:@"background_grass-topdown.png"];
-        
+    
         player = [CCSprite spriteWithFile:@"animation_knight-1.png"];
     }
     if (level ==4)
     {
         [self removeChild:background cleanup:YES];
         [self removeChild:player];
-
+        
         background = [CCSprite spriteWithFile:@"city-back.png"];
 
         player = [CCSprite spriteWithFile:@"cat-main.png"];
@@ -1796,7 +1798,6 @@
            // NSLog(@"scenario1begins");
             Scenario1 = true;
         }
-            
         if (scenarioNumber == 2)
         {
         // NSLog(@"scenario2begins");
@@ -1814,13 +1815,10 @@
         }
         enemiesKilledCounter = 0;
     }
-
 }
-
 
 -(void)CreateScenario
 {
-    
     if(Scenario1 == true)
     {
        // NSLog(@"Scenario1 == TRUE");
@@ -2098,7 +2096,7 @@
                         }
                     }
                 }
-                /*
+                
                 else if(CGRectIntersectsRect(badRangeBox,goodMeleeBox))
                 {
                     if(framecount % 100 == 0)
@@ -2144,7 +2142,6 @@
                     }
 
                 }
-                 */
                 
             }
         }
@@ -2589,7 +2586,7 @@
     }
     
 -(void)badBaseCollisions
-    {
+{
     for (int i = 0; i < [goodGuysBottom count]; i++)
     {
             goodBottom = [goodGuysBottom objectAtIndex: i];
@@ -2634,10 +2631,8 @@
                 
             }
             
-        }
     }
-
-
+}
 
 
 
