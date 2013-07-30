@@ -371,37 +371,27 @@
         badBulletArray = [[NSMutableArray alloc] init];
         bombers = [[NSMutableArray alloc] init];
         framecount = 0;
-        goodGuyFramecount = 150;
-        badGuyFramecount = 150;
-        helicopterBombFramecount = 40;
-        monstercount = 0;
-        numberOfEnemies = 10;
-        KmonsterFramecount = 20;
-        helicopterFramecount = 200;
-        zigZagFramecount = 200;
-        helicopterDelayCounter = 0;
-        zigZagDelayCounter = 0;
-        zigZagScenarioCounter = 0;
+        //monstercount = 0;
+        //numberOfEnemies = 10;
+        //helicopterDelayCounter = 0;
+        //zigZagDelayCounter = 0;
+        //zigZagScenarioCounter = 0;
         badReinforcementCount = 0;
-        level = 0;
-        deaths = 0;
         bombCount = 0;
         enemiesKilled = 0;
         enemiesKilledCounter = 0;
-        bar = 240;
+        //bar = 240;
         helicoptersRemoved = 0;
         randNum = 0;
         KmonsterCounter = 0;
         bigGoodGuysCounter = 0;
-        immunityFramecount = 100;
+        //immunityFramecount = 100;
         KmonsterMinY = 250;
         KmonsterMaxY = 310;
-        deathFramecount = 60 * 30;
-        timeRemaining = 30;
+        //deathFramecount = 60 * 30;
+        //timeRemaining = 30;
         pointsFramecount = 0;
         score = 0;
-        enemyFrequency = 300;
-        friendlyFrequency = 500;
         enemiesPassed = 0;
         friendliesPassed = 0;
         helicopters = 0;
@@ -414,6 +404,18 @@
         Scenario4 = false;
         isWalking = true;
         wave=1;
+        
+//        Modifies frequency
+        goodGuyFramecount = 200 - (wave * 10);
+        badGuyFramecount = 200 - (wave * 10);
+        helicopterBombFramecount = 50 - (wave * 5);
+        KmonsterFramecount = 30 - (wave * 3);
+        helicopterFramecount = 200;
+        zigZagFramecount = 200;
+        enemyFrequency = 300 - (wave * 10);
+        friendlyFrequency = 500 - (wave * 9) ;
+        
+        
         /*
         //Animating bear
         goodTeamCounter = [CCSprite spriteWithSpriteFrameName:@"bear1.png"];
@@ -577,12 +579,12 @@
     
     framecount++;
     
-    if([badGuysBottom count] > 0 && [goodGuysBottom count] == 0)
-    {
-        deathFramecount--;
-        timeRemaining = (int)(deathFramecount/60);
-        [self timeRemaining];
-    }
+//    if([badGuysBottom count] > 0 && [goodGuysBottom count] == 0)
+//    {
+//        deathFramecount--;
+//        timeRemaining = (int)(deathFramecount/60);
+//        [self timeRemaining];
+//    }
 //    if(deathFramecount <= 0)
 //    {
 //        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
@@ -2480,8 +2482,43 @@
 }
 -(void) addWave
 {
+    NSMutableArray *eraseGoodGuysBottom = [[NSMutableArray alloc] init];
+    NSMutableArray *eraseBadGuysBottom = [[NSMutableArray alloc] init];
+    
     wave++;
-    [waveLabel setString:[NSString stringWithFormat:@"Level:%d", level]];
+    [waveLabel setString:[NSString stringWithFormat:@"Wave:%d", wave]];
+   
+    for(int x = 0; x<[badGuysBottom count]; x++)
+    {
+        badBottom = [badGuysBottom objectAtIndex:x];
+        [eraseBadGuysBottom addObject:badBottom];
+    }
+    
+    for (CCSprite *s in eraseBadGuysBottom)
+    {
+        [badGuysBottom removeObject:s];
+        [self removeChild:s cleanup:YES];
+    }
+    [eraseBadGuysBottom removeAllObjects];
+    
+
+    
+    for(int i = 0; i<[goodGuysBottom count]; i++)
+    {
+        goodBottom = [goodGuysBottom objectAtIndex:i];
+        [eraseGoodGuysBottom addObject:goodBottom];
+    }
+    
+    for (CCSprite *s in eraseGoodGuysBottom)
+    {
+        [goodGuysBottom removeObject:s];
+        [self removeChild:s cleanup:YES];
+    }
+
+    [eraseGoodGuysBottom removeAllObjects];
+    
+    ((Character*)badBase).health=10;
+
 }
 -(void) subtractGoodBaseHealth
 {
@@ -2492,6 +2529,7 @@
 -(void) subtractBadBaseHealth
 {
     ((Character*) badBase).health --;
+    
     [badBaseHealthLabel setString:[NSString stringWithFormat:@"Enemy Base Health: %d",((Character*) badBase).health]];
 }
 
