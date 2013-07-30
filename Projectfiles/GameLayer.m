@@ -305,7 +305,7 @@
 -(id) init
 {
 	if ((self = [super init]))
-	{
+	{   [self addBases];
         [self changeLevel];
         //bear animations
         //Load the plist which tells Kobold2D how to properly parse your spritesheet. If on a retina device Kobold2D will automatically use bearframes-hd.plist
@@ -413,6 +413,7 @@
         Scenario3 = false;
         Scenario4 = false;
         isWalking = true;
+        wave=1;
         /*
         //Animating bear
         goodTeamCounter = [CCSprite spriteWithSpriteFrameName:@"bear1.png"];
@@ -452,20 +453,35 @@
         
         //Background and placeholders -Henry
         
-            enemiesKilledLabel = [CCLabelTTF labelWithString:@"Enemies Killed:0" fontName:@"Marker Felt" fontSize:18];
-        enemiesKilledLabel.position = ccp(360, 300);
-        enemiesKilledLabel.color = ccBLUE;
-        [self addChild:enemiesKilledLabel z:4];
+//            enemiesKilledLabel = [CCLabelTTF labelWithString:@"Enemies Killed:0" fontName:@"Marker Felt" fontSize:18];
+//        enemiesKilledLabel.position = ccp(360, 300);
+//        enemiesKilledLabel.color = ccBLUE;
+//        [self addChild:enemiesKilledLabel z:4];
 
 //        timeRemainingLabel = [CCLabelTTF labelWithString:@"Time left: 30" fontName:@"Marker Felt" fontSize:18];
 //        timeRemainingLabel.position = ccp(360, 260);
 //        timeRemainingLabel.color = ccBLUE;
 //        [self addChild:timeRemainingLabel z:4];
         
-        LevelLabel = [CCLabelTTF labelWithString:@"Level:0" fontName:@"Marker Felt" fontSize:18];
-        LevelLabel.position = ccp(360, 280);
-        LevelLabel.color = ccBLUE;
-        [self addChild:LevelLabel z:4];
+//        LevelLabel = [CCLabelTTF labelWithString:@"Level:0" fontName:@"Marker Felt" fontSize:18];
+//        LevelLabel.position = ccp(360, 280);
+//        LevelLabel.color = ccBLUE;
+//        [self addChild:LevelLabel z:4];
+        
+        waveLabel = [CCLabelTTF labelWithString:@"Wave:1" fontName:@"Marker Felt" fontSize:18];
+        waveLabel.position = ccp(380, 300);
+        waveLabel.color = ccBLUE;
+        [self addChild:waveLabel z:4];
+        
+        goodBaseHealthLabel = [CCLabelTTF labelWithString:@"Your Base Health:10" fontName:@"Marker Felt" fontSize:18];
+        goodBaseHealthLabel.position = ccp(80, 260);
+        goodBaseHealthLabel.color = ccBLUE;
+        [self addChild:goodBaseHealthLabel z:4];
+        
+        badBaseHealthLabel = [CCLabelTTF labelWithString:@"Enemy Base Health:10" fontName:@"Marker Felt" fontSize:18];
+        badBaseHealthLabel.position = ccp(380, 260);
+        badBaseHealthLabel.color = ccBLUE;
+        [self addChild:badBaseHealthLabel z:4];
         
         CCSprite *wall = [CCSprite spriteWithFile:@"wall.png"];
         [self addChild:wall z:1];
@@ -1710,7 +1726,7 @@
 
 -(void)ScenarioGenerator
 {
-    if (enemiesKilledCounter >= 10)
+    if (enemiesKilledCounter >= 5)
     {
        // NSLog(@"Killed 5");
         randNum++;
@@ -2387,6 +2403,46 @@
     ccDrawPoly(vertices, 4, YES);
     
 }
+
+-(void) addBases
+{
+    goodBase = [[Character alloc] initWithGoodGuyBaseImage];
+    badBase =[[Character alloc] initWithBadGuyBaseImage];
+    goodBase.position = ccp(35,45);
+    badBase.position = ccp(460,45);
+    goodBase.scale =.4;
+    badBase.scale = .4;
+    [self addChild:goodBase z:100];
+    [self addChild:badBase z:100];
+}
+-(void) changeWave
+{
+    if (((Character*) goodBase).health == 0)
+    {
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
+    }
+    if(((Character*) badBase).health == 0)
+    {
+        [self addWave];
+    }
+}
+-(void) addWave
+{
+    wave++;
+    [waveLabel setString:[NSString stringWithFormat:@"Level:%d", level]];
+}
+-(void) subtractGoodBaseHealth
+{
+    ((Character*) badBase).health --;
+    [goodBaseHealthLabel setString:[NSString stringWithFormat:@"Your Base Health: %d",((Character*) goodBase).health]];
+    
+}
+-(void) subtractBadBaseHealth
+{
+    ((Character*) badBase).health --;
+    [badBaseHealthLabel setString:[NSString stringWithFormat:@"Enemy Base Health: %d",((Character*) badBase).health]];
+}
+
 
 @end
 
