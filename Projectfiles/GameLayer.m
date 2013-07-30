@@ -733,15 +733,15 @@
         {
             [self addKmonster];
             firstBigGoodGuy = false;
-            KmonsterMaxY -= 35;
-            if(KmonsterMaxY < 110)
+            KmonsterMaxY -= 30;
+            if(KmonsterMaxY < 130)
             {
-                KmonsterMaxY = 105;
+                KmonsterMaxY = 135;
             }
-            KmonsterMinY -= 35;
-            if(KmonsterMaxY < 70)
+            KmonsterMinY -= 30;
+            if(KmonsterMaxY < 90)
             {
-                KmonsterMaxY = 65;
+                KmonsterMaxY = 95;
             }
             if(bigGoodGuysScenarioDelayCounter % 200 == 0)
             {
@@ -2046,7 +2046,7 @@
                 badBottom = [badGuysBottom objectAtIndex:f];
                 badMeleeBox = [badBottom boundingBox];
                 badRangeBox = [badBottom boundingBox];
-                badRangeBox.size.width -= 130;
+                badRangeBox.size.width -= 100;
                 goodBottom = [goodGuysBottom objectAtIndex:j];
                 goodMeleeBox = [goodBottom boundingBox];
                 goodRangeBox = [goodBottom boundingBox];
@@ -2093,7 +2093,7 @@
                         }
                     }
                 }
-                /*
+                
                 else if(CGRectIntersectsRect(badRangeBox,goodMeleeBox))
                 {
                     if(framecount % 100 == 0)
@@ -2139,7 +2139,6 @@
                     }
 
                 }
-                 */
                 
             }
         }
@@ -2481,7 +2480,7 @@
 -(void) addWave
 {
     wave++;
-    [waveLabel setString:[NSString stringWithFormat:@"Level:%d", level]];
+    [waveLabel setString:[NSString stringWithFormat:@"Level:%d", wave]];
 }
 -(void) subtractGoodBaseHealth
 {
@@ -2595,8 +2594,6 @@
             
         }
     }
-
-
 
 
 
