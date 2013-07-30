@@ -661,6 +661,7 @@
                     // Create the actions
                     CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
                                                             position:ccp(helicopterPosition.x, -bomb.contentSize.height/2)];
+
                     //        CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
                     //            [node removeFromParentAndCleanup:YES];
                     //        }];
@@ -686,7 +687,7 @@
     
     if(helicoptersRemoved % 2 == 0 && helicoptersRemoved > 0 && Scenario1 == true)
     {
-        Scenario1 = false;
+       // Scenario1 = false;
         helicopterDelayCounter++;
         helicopters = 0;
         
@@ -747,7 +748,7 @@
             }
             if(bigGoodGuysScenarioDelayCounter % 200 == 0)
             {
-                Scenario2 = false;
+                //Scenario2 = false;
                 bigGoodGuysCounter = 0;
                 KmonsterMaxY = 310;
                 KmonsterMinY = 250;
@@ -963,13 +964,13 @@
     CGPoint offset = ccpSub(location, projectile.position);
     
     // Bail out if you are shooting down
-    if (offset.y <= player.position.y - player.contentSize.height)
+    if (location.y <= player.position.y)
     {
         return;
     }
     
     // Ok to add now - we've double checked position
-    [self addChild:projectile];
+    [self addChild:projectile z:2];
     
     float offX = location.x - projectile.position.x;
     float offY = location.y - projectile.position.y;
@@ -1253,6 +1254,7 @@
                             [deadGoodGuys addObject:goodGuy];
                             [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
                             [self enemiesKilledTotal];
+
                             //enemiesKilledCounter ++;
                         }
                         else
@@ -1388,6 +1390,7 @@
                 }
                 if(((Character*)goodGuy).type == BIG_GOOD_GUY)
                 {
+
                     //[self spawnGoodBigGuyBottom];
                     goodBottom = [[Character alloc] initWithBigGoodGuyImage];
                     ((Character*)goodBottom).row = arc4random() % 5 + 1;
@@ -1770,7 +1773,7 @@
     [self addChild:background z:-1];
     
     player.anchorPoint = CGPointZero;
-    player.position = CGPointMake(180.0f, MOUNTAIN_HEIGHT + 15);
+    player.position = CGPointMake(220.0f, MOUNTAIN_HEIGHT + 15);
     player.scale = .2;
 
     [self addChild:player z:1];
@@ -2043,16 +2046,16 @@
         for (int f = 0; f < [badGuysBottom count]; f++)
         {
 
-            if([badGuysBottom count] != 0 && [badGuysBottom count] != 0)
+            if([badGuysBottom count] != 0 && [goodGuysBottom count] != 0)
             {
                 badBottom = [badGuysBottom objectAtIndex:f];
                 badMeleeBox = [badBottom boundingBox];
                 badRangeBox = [badBottom boundingBox];
-                badRangeBox.size.width -= 130;
+                badRangeBox.size.width -= 110;
                 goodBottom = [goodGuysBottom objectAtIndex:j];
                 goodMeleeBox = [goodBottom boundingBox];
                 goodRangeBox = [goodBottom boundingBox];
-                goodRangeBox.size.width += 100;
+                goodRangeBox.size.width += 110;
                
                 
                 if(CGRectIntersectsRect(goodMeleeBox, badMeleeBox))
