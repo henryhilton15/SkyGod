@@ -129,6 +129,12 @@
     BOOL firstZigZag;
     CCSprite *GoodReinforcement;
     CCSprite *BadReinforcement;
+    CCSprite *goodBase;
+    CCSprite *badBase;
+    CCLabelTTF *waveLabel;
+    CCLabelTTF *goodBaseHealthLabel;
+    CCLabelTTF *badBaseHealthLabel;
+    int wave;
 
     
 
@@ -166,6 +172,8 @@
 -(CGRect) explosionBox;
 -(void) airstrike;
 -(void) reinforcements;
+-(void) addBases;
+
 
 
 
