@@ -662,6 +662,7 @@
                 //NSLog(@"removed helicopter");
             //    spawnedHelicopters = 0;
                 helicoptersRemoved++;
+                Scenario1 = false;
             }
             }
         }
@@ -676,7 +677,7 @@
     
     if(helicoptersRemoved % 2 == 0 && helicoptersRemoved > 0)
     {
-        Scenario1 = false;
+       // Scenario1 = false;
         helicopterDelayCounter++;
         
         if(helicopterDelayCounter % 200 == 0)
@@ -736,7 +737,7 @@
             }
             if(bigGoodGuysScenarioDelayCounter % 200 == 0)
             {
-                Scenario2 = false;
+                //Scenario2 = false;
                 bigGoodGuysCounter = 0;
                 KmonsterMaxY = 310;
                 KmonsterMinY = 250;
@@ -952,13 +953,13 @@
     CGPoint offset = ccpSub(location, projectile.position);
     
     // Bail out if you are shooting down
-    if (offset.y <= player.position.y - player.contentSize.height)
+    if (location.y <= player.position.y)
     {
         return;
     }
     
     // Ok to add now - we've double checked position
-    [self addChild:projectile];
+    [self addChild:projectile z:2];
     
     float offX = location.x - projectile.position.x;
     float offY = location.y - projectile.position.y;
@@ -1252,6 +1253,7 @@
                             [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
                             [self enemiesKilledTotal];
                             enemiesKilledCounter ++;
+                            Scenario2 = false;
                         }
                         else
                         {
@@ -1370,6 +1372,7 @@
                 if(((Character*)goodGuy).type == BIG_GOOD_GUY)
                 {
                     [self spawnGoodBigGuyBottom];
+                    Scenario2 = false;
                 }
 //                ((Character*)goodBottom).health = ((Character*)goodGuy).health;
 //                goodBottom.anchorPoint = CGPointZero;
@@ -1718,7 +1721,7 @@
     [self addChild:background z:-1];
     
     player.anchorPoint = CGPointZero;
-    player.position = CGPointMake(180.0f, MOUNTAIN_HEIGHT + 15);
+    player.position = CGPointMake(220.0f, MOUNTAIN_HEIGHT + 15);
     player.scale = .2;
 
     [self addChild:player z:1];
@@ -1992,7 +1995,7 @@
         for (int f = 0; f < [badGuysBottom count]; f++)
         {
 
-            if([badGuysBottom count] != 0 && [badGuysBottom count] != 0)
+            if([badGuysBottom count] != 0 && [goodGuysBottom count] != 0)
             {
                 badBottom = [badGuysBottom objectAtIndex:f];
                 badMeleeBox = [badBottom boundingBox];
