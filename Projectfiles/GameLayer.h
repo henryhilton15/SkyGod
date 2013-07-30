@@ -112,6 +112,8 @@
     CGRect badMeleeBox;
     CGRect goodRangeBox;
     CGRect badRangeBox;
+    CGRect goodBaseBox;
+    CGRect badBaseBox;
     NSMutableArray *GoodGuysToDelete;
     CCAction *taunt;
     NSMutableArray *tauntingFrames;

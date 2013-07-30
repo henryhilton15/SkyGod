@@ -622,6 +622,14 @@
         }
 
     }
+    if([goodGuysBottom count] == 0)
+    {
+      [self goodBaseCollisions];  
+    }
+    if( [badGuysBottom count] == 0)
+    {
+        [self badBaseCollisions];
+    }
     if(helicopters > 0)
     {
         NSMutableArray* deadHelicopters = [[NSMutableArray alloc] init];
@@ -2415,16 +2423,16 @@
     [self addChild:goodBase z:100];
     [self addChild:badBase z:100];
 }
--(void) changeWave
+-(void) subtractWave
 {
-    if (((Character*) goodBase).health == 0)
-    {
+//    if (((Character*) goodBase).health == 0)
+//    {
         [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
-    }
-    if(((Character*) badBase).health == 0)
-    {
-        [self addWave];
-    }
+    
+//    if(((Character*) badBase).health == 0)
+//    {
+//        [self addWave];
+//    }
 }
 -(void) addWave
 {
@@ -2433,7 +2441,7 @@
 }
 -(void) subtractGoodBaseHealth
 {
-    ((Character*) badBase).health --;
+    ((Character*) goodBase).health --;
     [goodBaseHealthLabel setString:[NSString stringWithFormat:@"Your Base Health: %d",((Character*) goodBase).health]];
     
 }
@@ -2442,6 +2450,110 @@
     ((Character*) badBase).health --;
     [badBaseHealthLabel setString:[NSString stringWithFormat:@"Enemy Base Health: %d",((Character*) badBase).health]];
 }
+
+-(void)goodBaseCollisions
+{
+    for (int i = 0; i < [badGuysBottom count]; i++)
+    {
+        
+            badBottom = [badGuysBottom objectAtIndex: i];
+            badMeleeBox = [badBottom boundingBox];
+            goodBaseBox = [goodBase boundingBox];
+            if(CGRectIntersectsRect(badMeleeBox, goodBaseBox))
+            {
+                ((Character*)badBottom).melee = true;
+                if(((Character*)goodBase).health >= 1)
+                {
+                    if(framecount % 50 == 0)
+                    {
+                    [self subtractGoodBaseHealth];
+                
+                    }
+                }
+                if(((Character*)goodBase).health == 0)
+                {
+                    [self subtractWave];
+                }
+            
+            
+            }
+        
+        }
+    
+    
+    for(int j = 0; j < [badBulletArray count]; j++)
+    {
+            goodBaseBox = [badBase boundingBox];
+            badBullet = [badBulletArray objectAtIndex:j];
+            badBulletBox = [badBullet boundingBox];
+            
+            if(CGRectIntersectsRect(goodBaseBox,badBulletBox))
+            {
+                if(((Character*)goodBase).health >= 1)
+                {
+                    [self subtractGoodBaseHealth];
+                }
+                if(((Character*)goodBase).health == 0)
+                {
+                    [self subtractWave];
+                }
+            
+            }
+
+        }
+    }
+    
+-(void)badBaseCollisions
+    {
+    for (int i = 0; i < [goodGuysBottom count]; i++)
+    {
+            goodBottom = [goodGuysBottom objectAtIndex: i];
+            goodMeleeBox = [goodBottom boundingBox];
+            badBaseBox = [badBase boundingBox];
+            if(CGRectIntersectsRect(goodMeleeBox, badBaseBox))
+            {
+                ((Character*)goodBottom).melee = true;
+                if(((Character*)badBase).health >= 1)
+                {
+                    if(framecount % 50 == 0)
+                    {
+                    [self subtractBadBaseHealth];
+                    }
+                }
+                if(((Character*)badBase).health == 0)
+                {
+                    [self addWave];
+                }
+                
+                
+            }
+            
+    }
+    
+    for(int j = 0; j < [badBulletArray count]; j++)
+    {
+            badBaseBox = [goodBase boundingBox];
+            goodBullet = [goodBulletArray objectAtIndex:j];
+            goodBulletBox = [goodBullet boundingBox];
+            
+            if(CGRectIntersectsRect(badBaseBox,goodBulletBox))
+            {
+                if(((Character*)badBase).health >= 1)
+                {
+                    [self subtractBadBaseHealth];
+                }
+                if(((Character*)badBase).health == 0)
+                {
+                    [self addWave];
+                }
+                
+            }
+            
+        }
+    }
+
+
+
 
 
 @end
