@@ -487,6 +487,7 @@
         
         CCSprite *wall = [CCSprite spriteWithFile:@"wall.png"];
         [self addChild:wall z:1];
+        wall.scale *=2;\
         wall.position = ccp(240,40);
 
         
