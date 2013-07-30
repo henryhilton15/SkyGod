@@ -73,6 +73,7 @@
     enemy.scale=.3;
 
     enemy.position = ccp(actualX, winSize.height); //+ enemy.contentSize.height/2);
+    enemy.color = ccc3(0, 255, 0);
     [self addChild:enemy];
     [goodGuys addObject:enemy];
     
@@ -107,6 +108,7 @@
     enemy= [[Character alloc] initWithBadGuyImage];
     enemy.scale=.15;
     enemy.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
+     enemy.color = ccc3(255, 0, 0);
     [self addChild:enemy];
     [badGuys addObject:enemy];
     
@@ -142,6 +144,7 @@
 
     
     enemy.position = ccp(-enemy.contentSize.width, actualY); //+ enemy.contentSize.height/2);
+     enemy.color = ccc3(255, 0, 0);
     [self addChild:enemy];
  //   [helicopters addObject:enemy];
     helicopters++;
@@ -177,6 +180,7 @@
     zenemy = [[Character alloc] initWithZigZagImage];
     zenemy.scale=.15;
     zenemy.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
+     zenemy.color = ccc3(255, 0, 0);
     [self addChild:zenemy];
     [badGuys addObject:zenemy];
 
@@ -259,6 +263,7 @@
     enemy = [[Character alloc] initWithBigGoodGuyImage];
     enemy.scale=.4;
     enemy.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
+     enemy.color = ccc3(0, 255, 0);
     [self addChild:enemy];
     [goodGuys addObject:enemy];
     bigGoodGuysCounter++;
@@ -290,6 +295,7 @@
     enemy= [[Character alloc] initWithBigMonsterImage];
     enemy.scale=.5;
     enemy.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
+     enemy.color = ccc3(255, 0, 0);
     [self addChild:enemy];
     [badGuys addObject:enemy];
     
@@ -657,6 +663,7 @@
                     bomb.scale=.15;
                     bomb.position = helicopterPosition; //+ enemy.contentSize.height/2);
                     [self addChild:bomb z:2];
+                    bomb.color = ccc3(255, 0, 0);
                     [badGuys addObject:bomb];
              
                     // Create the actions
@@ -714,6 +721,7 @@
                 bomb = [CCSprite spriteWithFile:@"bomb.png"];
                 bomb.scale=.15;
                 bomb.position = bomberPosition; //+ enemy.contentSize.height/2);
+                 bomb.color = ccc3(0, 255, 0);
                 [self addChild:bomb z:2];
                 [goodBulletArray addObject:bomb];
                 
@@ -1378,6 +1386,7 @@
                     int posHeight = -8 + (8 * ((Character*)goodBottom).row);
                     goodBottom.position = ccp(0, posHeight);
                     goodBottom.scale=.3;
+                    goodBottom.color = ccc3(0, 255, 0);
                     [self addChild:goodBottom z:(7 - ((Character*)goodBottom).row)];
                 }
                 if(((Character*)goodGuy).type == SUPER_ZIG_ZAG_GUY)
@@ -1391,6 +1400,7 @@
                     int posHeight = -8 + (8 * ((Character*)goodBottom).row);
                     goodBottom.position = ccp(0, posHeight);
                     goodBottom.scale=.3;
+                       goodBottom.color = ccc3(0, 255, 0);
                     [self addChild:goodBottom z:(7 - ((Character*)goodBottom).row)];
                 }
                 if(((Character*)goodGuy).type == BIG_GOOD_GUY)
@@ -1405,6 +1415,7 @@
                     int posHeight = -8 + (8 * ((Character*)goodBottom).row);
                     goodBottom.position = ccp(0, posHeight);
                     goodBottom.scale=.3;
+                       goodBottom.color = ccc3(0, 255, 0);
                     [self addChild:goodBottom z:(7 - ((Character*)goodBottom).row)];
                 }
 //                ((Character*)goodBottom).health = ((Character*)goodGuy).health;
@@ -1485,6 +1496,7 @@
                         badBottom.scale=.15;
                         int posHeight = -8 + (8 * ((Character*)badBottom).row);
                         badBottom.position = ccp(460, posHeight);
+                           badBottom.color = ccc3(255,0, 0);
                         [self addChild:badBottom z:(7 - ((Character*)badBottom).row)];
                         [badGuysBottom addObject:badBottom];
                     }
@@ -1497,6 +1509,7 @@
                         badBottom.scale=.15;
                         int posHeight = -8 + (8 * ((Character*)badBottom).row);
                         badBottom.position = ccp(460, posHeight);
+                           badBottom.color = ccc3(255, 0, 0);
                         [self addChild:badBottom z:(7 - ((Character*)badBottom).row)];
                         [badGuysBottom addObject:badBottom];
                     }
@@ -1509,6 +1522,7 @@
                         badBottom.scale=.15;
                         int posHeight = -8 + (8 * ((Character*)badBottom).row);
                         badBottom.position = ccp(460, posHeight);
+                           badBottom.color = ccc3(255, 0, 0);
                         [self addChild:badBottom z:(7 - ((Character*)badBottom).row)];
                         [badGuysBottom addObject:badBottom];
                     }
@@ -1561,6 +1575,7 @@
     zFriendly1= [[Character alloc] initWithSuperZigZagGuyImage];
     zFriendly1.scale=.15;
     zFriendly1.position = CGPointMake(winSize.width/2, winSize.height);
+    zFriendly1.color = ccc3(0, 255, 0);
     [self addChild:zFriendly1];
     [goodGuys addObject:zFriendly1];
     [zFriendlyArray addObject:zFriendly1];
@@ -1568,24 +1583,28 @@
     CCSprite *enemy1= [[Character alloc] initWithDoubleEnemyImage];
     enemy1.scale=.15;
     enemy1.position = CGPointMake(80, winSize.height + 100); //+ enemy.contentSize.height/2);
+    enemy1.color = ccc3(255, 0, 0);
     [self addChild:enemy1];
     [badGuys addObject:enemy1];
     
     CCSprite *enemy2= [[Character alloc] initWithDoubleEnemyImage];
     enemy2.scale=.15;
     enemy2.position = CGPointMake(180, winSize.height + 100); //+ enemy.contentSize.height/2);
+        enemy2.color = ccc3(255, 0, 0);
     [self addChild:enemy2];
     [badGuys addObject:enemy2];
 
     CCSprite *enemy3= [[Character alloc] initWithDoubleEnemyImage];
     enemy3.scale=.15;
     enemy3.position = CGPointMake(280, winSize.height + 100); //+ enemy.contentSize.height/2);
+        enemy3.color = ccc3(255, 0, 0);
     [self addChild:enemy3];
     [badGuys addObject:enemy3];
 
     CCSprite *enemy4= [[Character alloc] initWithDoubleEnemyImage];
     enemy4.scale=.15;
     enemy4.position = CGPointMake(380, winSize.height + 100); //+ enemy.contentSize.height/2);
+        enemy4.color = ccc3(255, 0, 0);
     [self addChild:enemy4];
     [badGuys addObject:enemy4];
 
@@ -1778,6 +1797,7 @@
     player.anchorPoint = CGPointZero;
     player.position = CGPointMake(220.0f, MOUNTAIN_HEIGHT + 15);
     player.scale = .2;
+    player.color = ccc3(249, 173, 22);
 
     [self addChild:player z:1];
 }
@@ -1893,6 +1913,7 @@
     int posHeight = -8 + (8 * ((Character*)goodBottom).row);
     goodBottom.position = ccp(0, posHeight);
     goodBottom.scale=.3;
+       goodBottom.color = ccc3(0, 255, 0);
     [self addChild:goodBottom z:(7 - ((Character*)goodBottom).row)];
     //NSLog(@"row = %d", ((Character*)goodBottom).row);
     //NSLog(@"height = %d", posHeight);
@@ -1909,6 +1930,7 @@
     int posHeight = -8 + (8 * ((Character*)badBottom).row);
     badBottom.position = ccp(460, posHeight);
     [self addChild:badBottom z:(7 - ((Character*)badBottom).row)];
+       badBottom.color = ccc3(255, 0, 0);
     [badGuysBottom addObject:badBottom];
 //    NSLog(@"row = %d", ((Character*)badBottom).row);
 //    NSLog(@"height = %d", posHeight);
@@ -2359,6 +2381,7 @@
     
     
     bomber.position = ccp(0, 280); //+ enemy.contentSize.height/2);
+     bomber.color = ccc3(0, 255, 0);
     [self addChild:bomber];
     [bombers addObject:bomber];
     
@@ -2467,6 +2490,8 @@
     badBase.position = ccp(460,45);
     goodBase.scale =.4;
     badBase.scale = .4;
+     goodBase.color = ccc3(0, 255, 0);
+     badBase.color = ccc3(255, 0, 0);
     [self addChild:goodBase z:100];
     [self addChild:badBase z:100];
 }
