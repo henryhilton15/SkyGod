@@ -22,6 +22,8 @@
 #define BAD_BOTTOM 11
 #define SUPER_ZIG_ZAG_GUY 12
 #define DOUBLE_ENEMY 13
+#define GOOD_BASE 14
+#define BAD_BASE 15
 
 @interface Character : CCSprite
 @property int type;
@@ -45,5 +47,7 @@
 -(id) initWithGoodBottomImage;
 -(id) initWithBadBottomImage;
 -(id) initWithSuperZigZagGuyImage;
+-(id) initWithBadGuyBaseImage;
+-(id) initWithGoodGuyBaseImage;
 
 @end

@@ -66,7 +66,7 @@
     if((self = [super initWithFile:@"monster1.png"]))
     {
         worth = 50;
-        health = 3;
+        health = 1;
         type = BAD_GUY;
         immunity = 0;
         row = 0;
@@ -79,7 +79,7 @@
     if((self = [super initWithFile:@"monster4.png"]))
     {
         worth = 50;
-        health = 3;
+        health = 1;
         type = ZIG_ZAG;
         immunity = 0;
         row = 0;
@@ -203,6 +203,27 @@
         immunity = 0;
         row = 0;
         melee = false;
+    }
+    return self;
+}
+
+-(id) initWithGoodGuyBaseImage
+{
+    if ((self = [super initWithFile: @"car-topdown.png"]))
+    {
+        health = 10;
+        type = GOOD_BASE;
+    }
+    return self;
+    
+}
+
+-(id) initWithBadGuyBaseImage
+{
+    if ((self = [super initWithFile: @"rocket.png"]))
+    {
+        health = 10;
+        type = BAD_BASE;
     }
     return self;
 }
