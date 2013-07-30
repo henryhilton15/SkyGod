@@ -54,11 +54,9 @@
     int enemiesPassed;
     int friendliesPassed;
     int helicopters;
-    NSMutableArray *bananaArray;
-    NSMutableArray *goodGuys;
-    NSMutableArray *badGuys;
-    NSMutableArray *zFriendlyArray;
-    //NSMutableArray *zenemies;
+    int spawnedHelicopters;
+    int truckCount;
+    int wave;
     CGPoint loc;
     CCSprite *projectile;
     CCSprite *badGuy;
@@ -75,33 +73,37 @@
     CCSprite *zFriendly1;
     CCSprite *goodBottom;
     CCSprite *badBottom;
-    CCAction *rotateBanana;
     CCSprite *truck;
-    CCLabelTTF *LevelLabel;
-    CCLabelTTF *enemiesKilledLabel;
-    CCLabelTTF *timeRemainingLabel;
     CCSprite *goodTeamCounter;
     CCSprite *badTeamCounter;
     CCSprite *goodBullet;
     CCSprite *badBullet;
     CCSprite *bomber;
+    CCSprite *GoodReinforcement;
+    CCSprite *BadReinforcement;
+    CCSprite *goodBase;
+    CCSprite *badBase;
     Rect goodRect;
     Rect badRect;
-    CGRect goodBottomRect;
-    CGRect badBottomRect;
-    CGRect goodBulletBox;
-    CGRect badBulletBox;
+    //  NSMutableArray *helicopters;
+    //NSMutableArray *zenemies;
     NSMutableArray *bananaFrames;
     NSMutableArray *bananasToDelete;
     NSMutableArray *enemiesToDelete;
+    NSMutableArray *bananaArray;
+    NSMutableArray *goodGuys;
+    NSMutableArray *badGuys;
+    NSMutableArray *zFriendlyArray;
     NSMutableArray *Kmonsters;
-  //  NSMutableArray *helicopters;
     NSMutableArray *bigGoodGuys;
     NSMutableArray *goodGuysBottom;
     NSMutableArray *badGuysBottom;
     NSMutableArray *goodBulletArray;
     NSMutableArray *badBulletArray;
     NSMutableArray *bombers;
+    NSMutableArray *knightAttackFrames;
+    NSMutableArray *tauntingFrames;
+    NSMutableArray *GoodGuysToDelete;
     NSString *levelString;
     NSString *enemiesKilledString;
     CGRect badGuyRect;
@@ -114,29 +116,28 @@
     CGRect badRangeBox;
     CGRect goodBaseBox;
     CGRect badBaseBox;
-    NSMutableArray *GoodGuysToDelete;
+    CGRect goodBottomRect;
+    CGRect badBottomRect;
+    CGRect goodBulletBox;
+    CGRect badBulletBox;
     CCAction *taunt;
-    NSMutableArray *tauntingFrames;
     CCAction *knightAttack;
-    NSMutableArray *knightAttackFrames;
+    CCAction *rotateBanana;
     BOOL Scenario1;
     BOOL Scenario2;
     BOOL Scenario3;
     BOOL Scenario4;
-    int spawnedHelicopters;
-    int truckCount;
     BOOL isWalking;
     BOOL firstHeli;
     BOOL firstBigGoodGuy;
     BOOL firstZigZag;
-    CCSprite *GoodReinforcement;
-    CCSprite *BadReinforcement;
-    CCSprite *goodBase;
-    CCSprite *badBase;
     CCLabelTTF *waveLabel;
     CCLabelTTF *goodBaseHealthLabel;
     CCLabelTTF *badBaseHealthLabel;
-    int wave;
+    CCLabelTTF *LevelLabel;
+    CCLabelTTF *enemiesKilledLabel;
+    CCLabelTTF *timeRemainingLabel;
+    
 
     
 
@@ -175,11 +176,9 @@
 -(void) airstrike;
 -(void) reinforcements;
 -(void) addBases;
-
-
-
-
-
-
+-(void) badBaseCollisions;
+-(void) goodBaseCollisions;
+-(void) subtractWave;
+-(void) addWave;
 -(void) drawBoundingBox: (CGRect) rect;
 @end
