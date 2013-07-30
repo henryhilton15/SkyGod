@@ -1345,15 +1345,42 @@
                 //[[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
                 if(((Character*)goodGuy).type == GOOD_GUY)
                 {
-                    [self spawnGoodGuyBottom];
+                    //[self spawnGoodGuyBottom];
+                    goodBottom = [[Character alloc] initWithGoodBottomImage];
+                    ((Character*)goodBottom).row = arc4random() % 5 + 1;
+                    [goodGuysBottom addObject:goodBottom];
+                    goodBottom.anchorPoint = CGPointZero;
+                    ((Character*)goodBottom).health = ((Character*)goodGuy).health;
+                    int posHeight = -8 + (8 * ((Character*)goodBottom).row);
+                    goodBottom.position = ccp(0, posHeight);
+                    goodBottom.scale=.3;
+                    [self addChild:goodBottom z:(7 - ((Character*)goodBottom).row)];
                 }
                 if(((Character*)goodGuy).type == SUPER_ZIG_ZAG_GUY)
                 {
-                    [self spawnGoodZigZagBottom];
+                    //[self spawnGoodZigZagBottom];
+                    goodBottom = [[Character alloc] initWithSuperZigZagGuyImage];
+                    ((Character*)goodBottom).row = arc4random() % 5 + 1;
+                    [goodGuysBottom addObject:goodBottom];
+                    goodBottom.anchorPoint = CGPointZero;
+                    ((Character*)goodBottom).health = ((Character*)goodGuy).health;
+                    int posHeight = -8 + (8 * ((Character*)goodBottom).row);
+                    goodBottom.position = ccp(0, posHeight);
+                    goodBottom.scale=.3;
+                    [self addChild:goodBottom z:(7 - ((Character*)goodBottom).row)];
                 }
                 if(((Character*)goodGuy).type == BIG_GOOD_GUY)
                 {
-                    [self spawnGoodBigGuyBottom];
+                    //[self spawnGoodBigGuyBottom];
+                    goodBottom = [[Character alloc] initWithBigGoodGuyImage];
+                    ((Character*)goodBottom).row = arc4random() % 5 + 1;
+                    [goodGuysBottom addObject:goodBottom];
+                    goodBottom.anchorPoint = CGPointZero;
+                    ((Character*)goodBottom).health = ((Character*)goodGuy).health;
+                    int posHeight = -8 + (8 * ((Character*)goodBottom).row);
+                    goodBottom.position = ccp(0, posHeight);
+                    goodBottom.scale=.3;
+                    [self addChild:goodBottom z:(7 - ((Character*)goodBottom).row)];
                 }
 //                ((Character*)goodBottom).health = ((Character*)goodGuy).health;
 //                goodBottom.anchorPoint = CGPointZero;
@@ -1426,15 +1453,39 @@
 //                {
                     if(((Character*)badGuy).type == BAD_GUY)
                     {
-                        [self spawnBadGuyBottom];
+                        //[self spawnBadGuyBottom];
+                        badBottom = [[Character alloc] initWithBadBottomImage];
+                        ((Character*)badBottom).row = arc4random() % 5 + 1;
+                        badBottom.anchorPoint = CGPointZero;
+                        badBottom.scale=.15;
+                        int posHeight = -8 + (8 * ((Character*)badBottom).row);
+                        badBottom.position = ccp(460, posHeight);
+                        [self addChild:badBottom z:(7 - ((Character*)badBottom).row)];
+                        [badGuysBottom addObject:badBottom];
                     }
                     if(((Character*)badGuy).type == DOUBLE_ENEMY)
                     {
-                        [self spawnBadGuyBottom];
+                        //[self spawnBadGuyBottom];
+                        badBottom = [[Character alloc] initWithBadBottomImage];
+                        ((Character*)badBottom).row = arc4random() % 5 + 1;
+                        badBottom.anchorPoint = CGPointZero;
+                        badBottom.scale=.15;
+                        int posHeight = -8 + (8 * ((Character*)badBottom).row);
+                        badBottom.position = ccp(460, posHeight);
+                        [self addChild:badBottom z:(7 - ((Character*)badBottom).row)];
+                        [badGuysBottom addObject:badBottom];
                     }
                     if(((Character*)badGuy).type == ZIG_ZAG)
                     {
-                        [self spawnBadZigZagBottom];
+                        //[self spawnBadZigZagBottom];
+                        badBottom = [[Character alloc] initWithZigZagImage];
+                        ((Character*)badBottom).row = arc4random() % 5 + 1;
+                        badBottom.anchorPoint = CGPointZero;
+                        badBottom.scale=.15;
+                        int posHeight = -8 + (8 * ((Character*)badBottom).row);
+                        badBottom.position = ccp(460, posHeight);
+                        [self addChild:badBottom z:(7 - ((Character*)badBottom).row)];
+                        [badGuysBottom addObject:badBottom];
                     }
 //                    ((Character*)badBottom).health = ((Character*)badGuy).health;
 //                    badBottom.anchorPoint = CGPointZero;
@@ -1803,8 +1854,7 @@
 -(void) spawnGoodGuyBottom
 {
   //  CGSize winSize = [CCDirector sharedDirector].winSize;
-    goodBottom = [[Character alloc] initWithGoodBottomImage];
-    
+        
     //if([goodGuysBottom count] == 0)
     //{
         //((Character*)goodBottom).row = 1;
@@ -1813,12 +1863,13 @@
     //{
         //int num = [goodGuysBottom count];
         //CCSprite *nextGuy = [goodGuysBottom objectAtIndex:(num - 1)];
-        ((Character*)goodBottom).row = arc4random() % 5 + 1;
         //if(((Character*)goodBottom).row == 6)
         //{
             //((Character*)goodBottom).row = 1;
         //}
     //}
+    goodBottom = [[Character alloc] initWithGoodBottomImage];
+    ((Character*)goodBottom).row = arc4random() % 5 + 1;
     [goodGuysBottom addObject:goodBottom];
     goodBottom.anchorPoint = CGPointZero;
     int posHeight = -8 + (8 * ((Character*)goodBottom).row);
@@ -1841,9 +1892,9 @@
     badBottom.position = ccp(460, posHeight);
     [self addChild:badBottom z:(7 - ((Character*)badBottom).row)];
     [badGuysBottom addObject:badBottom];
-    NSLog(@"row = %d", ((Character*)badBottom).row);
-    NSLog(@"height = %d", posHeight);
-    NSLog(@"z = %d",7 - ((Character*)badBottom).row);
+//    NSLog(@"row = %d", ((Character*)badBottom).row);
+//    NSLog(@"height = %d", posHeight);
+//    NSLog(@"z = %d",7 - ((Character*)badBottom).row);
 }
 
 -(void) spawnGoodZigZagBottom
@@ -1999,6 +2050,7 @@
                         if(((Character*)badBottom).health <= 1)
                         {
                             [deadBadGuys addObject:badBottom];
+                            ((Character*)goodBottom).melee = false;
                         }
                         else
                         {
@@ -2007,6 +2059,7 @@
                         if(((Character*)goodBottom).health <= 1)
                         {
                             [deadGoodGuys addObject:goodBottom];
+                            ((Character*)badBottom).melee = false;
                         }
                         else
                         {
@@ -2026,7 +2079,7 @@
                         }
                     }
                 }
-                
+                /*
                 else if(CGRectIntersectsRect(badRangeBox,goodMeleeBox))
                 {
                     if(framecount % 100 == 0)
@@ -2072,6 +2125,7 @@
                     }
 
                 }
+                 */
                 
             }
         }

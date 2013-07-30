@@ -52,7 +52,7 @@
     if((self = [super initWithFile:@"cat4.png"]))
     {
         worth = 50;
-        health = 3;
+        health = 1;
         type = GOOD_GUY;
         immunity = 0;
         row = 0;
