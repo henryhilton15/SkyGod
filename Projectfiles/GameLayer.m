@@ -2614,6 +2614,8 @@
 {
     for (int i = 0; i < [goodGuysBottom count]; i++)
     {
+        if([goodGuysBottom count] > 0)
+        {
             goodBottom = [goodGuysBottom objectAtIndex: i];
             goodMeleeBox = [goodBottom boundingBox];
             badBaseBox = [badBase boundingBox];
@@ -2634,11 +2636,13 @@
                 
                 
             }
-            
+        }
     }
     
-    for(int j = 0; j < [badBulletArray count]; j++)
+    for(int j = 0; j < [goodBulletArray count]; j++)
     {
+        if([ goodBulletArray count] > 0)
+        {
             badBaseBox = [goodBase boundingBox];
             goodBullet = [goodBulletArray objectAtIndex:j];
             goodBulletBox = [goodBullet boundingBox];
@@ -2655,7 +2659,8 @@
                 }
                 
             }
-            
+        }
+        
     }
 }
 
