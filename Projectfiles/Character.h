@@ -24,6 +24,10 @@
 #define DOUBLE_ENEMY 13
 #define GOOD_BASE 14
 #define BAD_BASE 15
+#define BAD_FASTSHOOTER 16
+#define GOOD_FASTSHOOTER 17
+#define BAD_KNIFE 18
+#define GOOD_KNIFE 19
 
 @interface Character : CCSprite
 @property int type;
@@ -49,5 +53,9 @@
 -(id) initWithSuperZigZagGuyImage;
 -(id) initWithBadGuyBaseImage;
 -(id) initWithGoodGuyBaseImage;
+-(id) initWithFastShooterBadGuyImage;
+-(id) initWithFastShooterGoodGuyImage;
+-(id) initWithKnifeGoodGuyImage;
+-(id) initWithKnifeBadGuyImage;
 
 @end

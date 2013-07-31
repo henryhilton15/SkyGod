@@ -227,6 +227,42 @@
     }
     return self;
 }
+-(id) initWithFastShooterBadGuyImage
+{
+    if((self = [super initWithFile:@"monster2.png"]))
+    {
+        health = 1;
+        type = BAD_FASTSHOOTER;
+    }
+    return  self;
+}
+-(id) initWithFastShooterGoodGuyImage
+{
+    if((self = [super initWithFile:@"spaceman.png"]))
+    {
+        health = 1;
+        type = GOOD_FASTSHOOTER;
+    }
+return self;
+}
+-(id) initWithKnifeGoodGuyImage
+{
+    if ((self = [super initWithFile: @"sidekick.png"]))
+    {
+        health = 4;
+        type = GOOD_KNIFE;
+    }
+return self;
+}
+-(id) initWithKnifeBadGuyImage
+{
+    if ((self = [super initWithFile: @"stickman.png"]))
+    {
+        health = 4;
+        type = BAD_KNIFE;
+    }   
+return self;
+}
 
 
 @end
