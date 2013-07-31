@@ -311,7 +311,8 @@
 -(id) init
 {
 	if ((self = [super init]))
-	{   [self addBases];
+	{
+        [self addBases];
         [self changeLevel];
         //bear animations
         //Load the plist which tells Kobold2D how to properly parse your spritesheet. If on a retina device Kobold2D will automatically use bearframes-hd.plist
@@ -2076,6 +2077,9 @@
                 goodMeleeBox = [goodBottom boundingBox];
                 goodRangeBox = [goodBottom boundingBox];
                 goodRangeBox.size.width += 110;
+                badBaseBox = [badBase boundingBox];
+                goodBaseBox = [goodBase boundingBox];
+
                
                 
                 if(CGRectIntersectsRect(goodMeleeBox, badMeleeBox))
@@ -2119,7 +2123,7 @@
                     }
                 }
                 
-                else if(CGRectIntersectsRect(badRangeBox,goodMeleeBox))
+                else if(CGRectIntersectsRect(badRangeBox,goodMeleeBox) || CGRectIntersectsRect(badRangeBox, goodBaseBox))
                 {
                     if(framecount % 100 == 0)
                     {
@@ -2131,6 +2135,7 @@
                         badBullet.anchorPoint = CGPointZero;
                         badBullet.position = ccp(badX, badY + 10);
                         badBullet.scale=.15;
+                        badBullet.color = ccc3(255, 0, 0);
                         [self addChild:badBullet z:1];
                         [badBulletArray addObject:badBullet];
                     
@@ -2142,7 +2147,7 @@
                     }
                 }
                 
-                else if(CGRectIntersectsRect(goodRangeBox,badMeleeBox))
+                else if(CGRectIntersectsRect(goodRangeBox,badMeleeBox) || CGRectIntersectsRect(goodRangeBox, badBaseBox))
                 {
                     if(framecount % 100 == 0)
                     {
@@ -2155,6 +2160,7 @@
                         goodBullet.anchorPoint = CGPointZero;
                         goodBullet.position = ccp(goodX, goodY + 12);
                         goodBullet.scale=.1;
+                        goodBullet.color = ccc3(0, 255, 0);
                         [self addChild:goodBullet z:1];
                         [goodBulletArray addObject:goodBullet];
                             
@@ -2619,6 +2625,10 @@
             goodBottom = [goodGuysBottom objectAtIndex: i];
             goodMeleeBox = [goodBottom boundingBox];
             badBaseBox = [badBase boundingBox];
+            goodRangeBox = [goodBottom boundingBox];
+            goodRangeBox.size.width += 110;
+            
+
             if(CGRectIntersectsRect(goodMeleeBox, badBaseBox))
             {
                 ((Character*)goodBottom).melee = true;
@@ -2634,8 +2644,9 @@
                     [self addWave];
                 }
                 
-                
             }
+            
+           
         }
     }
     
