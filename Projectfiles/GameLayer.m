@@ -14,6 +14,123 @@
 #define MOUNTAIN_HEIGHT 70.0f
 
 @implementation GameLayer
+-(void) addFastShooterGoodGuy
+{
+    // Determine where to spawn the monster along the X axis
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    int minX = 12;
+    int maxX = winSize.width - 8;
+    int rangeX = maxX - minX;
+    int actualX = minX + arc4random() % rangeX;
+    
+    minDuration = 3.5;
+    maxDuration = 5.0;
+    
+    int rangeDuration = maxDuration - minDuration;
+    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    
+    enemy = [[Character alloc] initWithFastShooterGoodGuyImage];
+    enemy.scale=.15;
+    
+    enemy.position = ccp(actualX, winSize.height); 
+    enemy.color = ccc3(0, 255, 0);
+    [self addChild:enemy];
+    [goodGuys addObject:enemy];
+    
+    // Create the actions
+    CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
+                                                position:ccp(actualX, -enemy.contentSize.height/2)];
+    [enemy runAction:actionMove];
+}
+
+-(void) addFastShooterBadGuy
+{
+    // Determine where to spawn the monster along the X axis
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    int minX = 12;
+    int maxX = winSize.width - 8;
+    int rangeX = maxX - minX;
+    int actualX = minX + arc4random() % rangeX;
+    
+    minDuration = 3.5;
+    maxDuration = 5.0;
+    
+    int rangeDuration = maxDuration - minDuration;
+    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    
+    enemy = [[Character alloc] initWithFastShooterBadGuyImage];
+    enemy.scale=.15;
+    
+    enemy.position = ccp(actualX, winSize.height);
+    enemy.color = ccc3(255, 0, 0);
+    [self addChild:enemy];
+    [badGuys addObject:enemy];
+    
+    // Create the actions
+    CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
+                                                position:ccp(actualX, -enemy.contentSize.height/2)];
+    [enemy runAction:actionMove];
+}
+
+-(void) addKnifeBadGuy
+{
+    // Determine where to spawn the monster along the X axis
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    int minX = 12;
+    int maxX = winSize.width - 8;
+    int rangeX = maxX - minX;
+    int actualX = minX + arc4random() % rangeX;
+    
+    minDuration = 3.0;
+    maxDuration = 4.;
+    
+    int rangeDuration = maxDuration - minDuration;
+    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    
+    enemy = [[Character alloc] initWithKnifeBadGuyImage];
+    enemy.scale=.3;
+    
+    enemy.position = ccp(actualX, winSize.height);
+    enemy.color = ccc3(255, 0, 0);
+    [self addChild:enemy];
+    [badGuys addObject:enemy];
+    
+    // Create the actions
+    CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
+                                                position:ccp(actualX, -enemy.contentSize.height/2)];
+    [enemy runAction:actionMove];
+}
+
+-(void) addKnifeGoodGuy
+{
+    // Determine where to spawn the monster along the X axis
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    int minX = 12;
+    int maxX = winSize.width - 8;
+    int rangeX = maxX - minX;
+    int actualX = minX + arc4random() % rangeX;
+    
+    minDuration = 3.5;
+    maxDuration = 5.0;
+    
+    int rangeDuration = maxDuration - minDuration;
+    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    
+    enemy = [[Character alloc] initWithKnifeGoodGuyImage];
+    enemy.scale=.15;
+    
+    enemy.position = ccp(actualX, winSize.height);
+    enemy.color = ccc3(0,255, 0);
+    [self addChild:enemy];
+    [goodGuys addObject:enemy];
+    
+    // Create the actions
+    CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
+                                                position:ccp(actualX, -enemy.contentSize.height/2)];
+    [enemy runAction:actionMove];
+}
+
+
 
 -(void) addKmonster
 {
@@ -418,8 +535,12 @@
         KmonsterFramecount = 30 - (wave * 3);
         helicopterFramecount = 200;
         zigZagFramecount = 200;
-        enemyFrequency = 300 - (wave * 10);
-        friendlyFrequency = 500 - (wave * 9) ;
+        enemyFrequency = 300 - (wave * 20);
+        friendlyFrequency = 500 - (wave * 17);
+        goodFastShooterFramecount = 220 - (wave * 6);
+        badFastShooterFramecount = 210 - (wave * 8);
+        goodKnifeGuyFramecount = 185 - (wave * 5);
+        badKnifeGuyFrameCount = 180 - (wave * 8);
         
         
         /*
@@ -586,12 +707,12 @@
     
     framecount++;
     
-    if([badGuysBottom count] > 0 && [goodGuysBottom count] == 0)
-    {
-        deathFramecount--;
-        timeRemaining = (int)(deathFramecount/60);
-        [self timeRemaining];
-    }
+//    if([badGuysBottom count] > 0 && [goodGuysBottom count] == 0)
+//    {
+//        deathFramecount--;
+//        timeRemaining = (int)(deathFramecount/60);
+//        [self timeRemaining];
+//    }
 //    if(deathFramecount <= 0)
 //    {
 //        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
@@ -630,6 +751,41 @@
             }
         }
     }
+    
+    if((firstHeli == true || helicopterDelayCounter % 200 == 0) && (firstZigZag == true || zigZagDelayCounter % 250 == 0))
+    {
+        if(framecount % goodFastShooterFramecount == 0)
+        {
+            [self addFastShooterGoodGuy];
+        }
+    
+    }
+    if((firstHeli == true || helicopterDelayCounter % 200 == 0) && (firstZigZag == true || zigZagDelayCounter % 250 == 0))
+    {
+        if(framecount % badFastShooterFramecount == 0)
+        {
+            [self addFastShooterBadGuy];
+        }
+    }
+    if((firstHeli == true || helicopterDelayCounter % 200 == 0) && (firstZigZag == true || zigZagDelayCounter % 250 == 0))
+    {
+        if (framecount % goodKnifeGuyFramecount == 0)
+        
+        {
+            [self addKnifeGoodGuy];
+        }
+    }
+    
+    if((firstHeli == true || helicopterDelayCounter % 200 == 0) && (firstZigZag == true || zigZagDelayCounter % 250 == 0))
+    {
+        if (framecount % goodKnifeGuyFramecount == 0)
+                
+        {
+            [self addKnifeBadGuy];
+        }
+    }
+        
+    
     if([goodGuysBottom count] == 0)
     {
       [self goodBaseCollisions];  
@@ -896,6 +1052,7 @@
     }
     
 }
+
 /*
 -(void) draw
 {
@@ -1418,6 +1575,33 @@
                        goodBottom.color = ccc3(0, 255, 0);
                     [self addChild:goodBottom z:(7 - ((Character*)goodBottom).row)];
                 }
+                if(((Character*)goodGuy).type == GOOD_FASTSHOOTER)
+                {
+                    goodBottom = [[Character alloc] initWithFastShooterGoodGuyImage];
+                    ((Character*)goodBottom).row = arc4random() % 5 + 1;
+                    [goodGuysBottom addObject:goodBottom];
+                    goodBottom.anchorPoint = CGPointZero;
+                    ((Character*)goodBottom).health = ((Character*)goodGuy).health;
+                    int posHeight = -8 + (8 * ((Character*)goodBottom).row);
+                    goodBottom.position = ccp(0, posHeight);
+                    goodBottom.scale=.15;
+                    goodBottom.color = ccc3(0, 255, 0);
+                    [self addChild:goodBottom z:(7 - ((Character*)goodBottom).row)];
+                }
+                if (((Character*)goodGuy).type == GOOD_KNIFE)
+                {
+                    goodBottom = [[Character alloc] initWithKnifeGoodGuyImage];
+                    ((Character*)goodBottom).row = arc4random() % 5 + 1;
+                    [goodGuysBottom addObject:goodBottom];
+                    goodBottom.anchorPoint = CGPointZero;
+                    ((Character*)goodBottom).health = ((Character*)goodGuy).health;
+                    int posHeight = -8 + (8 * ((Character*)goodBottom).row);
+                    goodBottom.position = ccp(0, posHeight);
+                    goodBottom.scale=.15;
+                    goodBottom.color = ccc3(0, 255, 0);
+                    [self addChild:goodBottom z:(7 - ((Character*)goodBottom).row)];
+                }
+                    
 //                ((Character*)goodBottom).health = ((Character*)goodGuy).health;
 //                goodBottom.anchorPoint = CGPointZero;
 //                goodBottom.position = ccp(goodGuy.position.x - 15, goodGuy.position.y - 20);
@@ -1526,6 +1710,32 @@
                         [self addChild:badBottom z:(7 - ((Character*)badBottom).row)];
                         [badGuysBottom addObject:badBottom];
                     }
+                if(((Character*)badGuy).type == BAD_KNIFE)
+                {
+                    //[self spawnBadZigZagBottom];
+                    badBottom = [[Character alloc] initWithKnifeBadGuyImage];
+                    ((Character*)badBottom).row = arc4random() % 5 + 1;
+                    badBottom.anchorPoint = CGPointZero;
+                    badBottom.scale=.15;
+                    int posHeight = -8 + (8 * ((Character*)badBottom).row);
+                    badBottom.position = ccp(460, posHeight);
+                    badBottom.color = ccc3(255, 0, 0);
+                    [self addChild:badBottom z:(7 - ((Character*)badBottom).row)];
+                    [badGuysBottom addObject:badBottom];
+                }
+                if(((Character*)badGuy).type == BAD_FASTSHOOTER)
+                {
+                    //[self spawnBadZigZagBottom];
+                    badBottom = [[Character alloc] initWithFastShooterBadGuyImage];
+                    ((Character*)badBottom).row = arc4random() % 5 + 1;
+                    badBottom.anchorPoint = CGPointZero;
+                    badBottom.scale=.15;
+                    int posHeight = -8 + (8 * ((Character*)badBottom).row);
+                    badBottom.position = ccp(460, posHeight);
+                    badBottom.color = ccc3(255, 0, 0);
+                    [self addChild:badBottom z:(7 - ((Character*)badBottom).row)];
+                    [badGuysBottom addObject:badBottom];
+                }
 //                    ((Character*)badBottom).health = ((Character*)badGuy).health;
 //                    badBottom.anchorPoint = CGPointZero;
 //                    badBottom.scale=.15;

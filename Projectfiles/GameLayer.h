@@ -57,6 +57,10 @@
     int spawnedHelicopters;
     int truckCount;
     int wave;
+    int goodFastShooterFramecount;
+    int badFastShooterFramecount;
+    int goodKnifeGuyFramecount;
+    int badKnifeGuyFrameCount;
     CGPoint loc;
     CCSprite *projectile;
     CCSprite *badGuy;
