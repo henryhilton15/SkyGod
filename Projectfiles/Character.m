@@ -249,7 +249,7 @@ return self;
 {
     if ((self = [super initWithFile: @"sidekick.png"]))
     {
-        health = 4;
+        health = 3;
         type = GOOD_KNIFE;
     }
 return self;
@@ -258,7 +258,7 @@ return self;
 {
     if ((self = [super initWithFile: @"stickman.png"]))
     {
-        health = 4;
+        health = 3;
         type = BAD_KNIFE;
     }   
 return self;
