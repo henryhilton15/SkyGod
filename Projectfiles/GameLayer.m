@@ -751,7 +751,7 @@
                 }
             }
         }
-    }
+    
     
     if((firstHeli == true || helicopterDelayCounter % 200 == 0) && (firstZigZag == true || zigZagDelayCounter % 250 == 0))
     {
@@ -785,7 +785,8 @@
             [self addKnifeBadGuy];
         }
     }
-        
+    }
+    
     
     if([goodGuysBottom count] == 0)
     {
@@ -2298,9 +2299,124 @@
                     ((Character*)goodBottom).melee = true;
                     ((Character*)badBottom).melee = true;
                     
+                if(((Character*) goodBottom).type == GOOD_KNIFE)
+                {
                     if(framecount % 50 == 0)
                     {
-                        NSLog(@"melee battle");
+                        if(((Character*)badBottom).health <= 2)
+                        {
+                            [deadBadGuys addObject:badBottom];
+                            ((Character*)goodBottom).melee = false;
+                        }
+                        else
+                        {
+                            ((Character*)badBottom).health -= 2;
+                        }
+                        if(((Character*)goodBottom).health <= 1)
+                        {
+                            [deadGoodGuys addObject:goodBottom];
+                            ((Character*)badBottom).melee = false;
+                        }
+                        else
+                        {
+                            ((Character*)goodBottom).health--;
+                        }
+                        for (CCSprite *s in deadBadGuys)
+                        {
+                            [badGuysBottom removeObject:s];
+                            [self removeChild:s cleanup:YES];
+                            // NSLog(@"deleted bad guy");
+                        }
+                        for (CCSprite *s in deadGoodGuys)
+                        {
+                            [goodGuysBottom removeObject:s];
+                            [self removeChild:s cleanup:YES];
+                            // NSLog(@"deleted bad guy");
+                        }
+                    }
+
+                }
+                    
+                else if(((Character*) badBottom).type == BAD_KNIFE)
+                {
+                    if(framecount % 50 == 0)
+                    {
+                        if(((Character*)badBottom).health <= 1)
+                        {
+                            [deadBadGuys addObject:badBottom];
+                            ((Character*)goodBottom).melee = false;
+                        }
+                        else
+                        {
+                            ((Character*)badBottom).health--;
+                        }
+                        if(((Character*)goodBottom).health <= 2)
+                        {
+                            [deadGoodGuys addObject:goodBottom];
+                            ((Character*)badBottom).melee = false;
+                        }
+                        else
+                        {
+                            ((Character*)goodBottom).health -= 2;
+                        }
+                        for (CCSprite *s in deadBadGuys)
+                        {
+                            [badGuysBottom removeObject:s];
+                            [self removeChild:s cleanup:YES];
+                            // NSLog(@"deleted bad guy");
+                        }
+                        for (CCSprite *s in deadGoodGuys)
+                        {
+                            [goodGuysBottom removeObject:s];
+                            [self removeChild:s cleanup:YES];
+                            // NSLog(@"deleted bad guy");
+                        }
+                    }
+
+                }
+                    
+                else if((((Character*) goodBottom).type == GOOD_KNIFE) && (((Character*) badBottom).type == BAD_KNIFE))
+                {
+                    if(framecount % 50 == 0)
+                    {
+                        if(((Character*)badBottom).health <= 2)
+                        {
+                            [deadBadGuys addObject:badBottom];
+                            ((Character*)goodBottom).melee = false;
+                        }
+                        else
+                        {
+                            ((Character*)badBottom).health -= 2;
+                        }
+                        if(((Character*)goodBottom).health <= 2)
+                        {
+                            [deadGoodGuys addObject:goodBottom];
+                            ((Character*)badBottom).melee = false;
+                        }
+                        else
+                        {
+                            ((Character*)goodBottom).health -= 2;
+                        }
+                        for (CCSprite *s in deadBadGuys)
+                        {
+                            [badGuysBottom removeObject:s];
+                            [self removeChild:s cleanup:YES];
+                            // NSLog(@"deleted bad guy");
+                        }
+                        for (CCSprite *s in deadGoodGuys)
+                        {
+                            [goodGuysBottom removeObject:s];
+                            [self removeChild:s cleanup:YES];
+                            // NSLog(@"deleted bad guy");
+                        }
+                    }
+
+                }
+                    
+                else
+                {
+                    if(framecount % 50 == 0)
+                    {
                         if(((Character*)badBottom).health <= 1)
                         {
                             [deadBadGuys addObject:badBottom];
@@ -2331,16 +2447,42 @@
                             [self removeChild:s cleanup:YES];
                             // NSLog(@"deleted bad guy");
                         }
+                        }
                     }
                 }
                 
                 else if(CGRectIntersectsRect(badRangeBox,goodMeleeBox) || CGRectIntersectsRect(badRangeBox, goodBaseBox))
                 {
-                    if(framecount % 100 == 0)
+                    if(((Character*) badBottom).type == BAD_FASTSHOOTER)
                     {
-                        NSLog(@"bad guy shooting");
-                        float badX = badBottom.position.x;
-                        float badY = badBottom.position.y;
+                        if(framecount % 50 == 0)
+                        {
+                            NSLog(@"bad fast guy shooting");
+                            float badX = badBottom.position.x;
+                            float badY = badBottom.position.y;
+                            
+                            badBullet = [CCSprite spriteWithFile:@"lighting.png"];
+                            badBullet.anchorPoint = CGPointZero;
+                            badBullet.position = ccp(badX, badY + 10);
+                            badBullet.scale=.15;
+                            [self addChild:badBullet z:1];
+                            [badBulletArray addObject:badBullet];
+                            
+                            CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:25
+                                                                      position:ccp(-2000, badBullet.position.y)];
+                            
+                            [badBullet runAction:shootLeft];
+                            NSLog(@"bad bullet shot left");
+                        }
+                    }
+                    
+                    else if((((Character*) badBottom).type != BAD_FASTSHOOTER) && ((Character*) badBottom).type != BAD_KNIFE)
+                    {
+                        if(framecount % 100 == 0)
+                        {
+                            NSLog(@"bad guy shooting");
+                            float badX = badBottom.position.x;
+                            float badY = badBottom.position.y;
                     
                         badBullet = [CCSprite spriteWithFile:@"lighting.png"];
                         badBullet.anchorPoint = CGPointZero;
@@ -2349,19 +2491,44 @@
                         badBullet.color = ccc3(255, 0, 0);
                         [self addChild:badBullet z:1];
                         [badBulletArray addObject:badBullet];
+
                     
-                        CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:25
-                        position:ccp(-2000, badBullet.position.y)];
+                            CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:25
+                                                                      position:ccp(-2000, badBullet.position.y)];
                     
-                        [badBullet runAction:shootLeft];
-                        NSLog(@"bad bullet shot left");
+                            [badBullet runAction:shootLeft];
+                            NSLog(@"bad bullet shot left");
                     }
+                }
                 }
                 
                 else if(CGRectIntersectsRect(goodRangeBox,badMeleeBox) || CGRectIntersectsRect(goodRangeBox, badBaseBox))
                 {
-                    if(framecount % 100 == 0)
+                    if(((Character*) goodBottom).type == GOOD_FASTSHOOTER)
                     {
+                        if (framecount % 50 == 0)
+                        {
+                        NSLog(@" good fast guy shooting");
+                        float goodX = goodBottom.position.x;
+                        float goodY = goodBottom.position.y;
+                        
+                        goodBullet = [CCSprite spriteWithFile:@"heart.png"];
+                        goodBullet.anchorPoint = CGPointZero;
+                        goodBullet.position = ccp(goodX, goodY + 12);
+                        goodBullet.scale=.1;
+                        [self addChild:goodBullet z:1];
+                        [goodBulletArray addObject:goodBullet];
+                        
+                        CCMoveTo *shootRight = [CCMoveTo actionWithDuration:20
+                                                                   position:ccp(2000, goodBullet.position.y)];
+                        [goodBullet runAction:shootRight];
+                        }
+                    }
+                    
+                    else if((((Character*) goodBottom).type != GOOD_FASTSHOOTER) && ((Character*) goodBottom).type != GOOD_KNIFE)
+                    {
+                        if(framecount % 100 == 0)
+                        {
                                 
                         NSLog(@"good guy shooting");
                         float goodX = goodBottom.position.x;
@@ -2378,8 +2545,8 @@
                         CCMoveTo *shootRight = [CCMoveTo actionWithDuration:20
                                                                            position:ccp(2000, goodBullet.position.y)];
                         [goodBullet runAction:shootRight];
+                        }
                     }
-
                 }
                 
             }
