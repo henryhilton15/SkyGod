@@ -61,6 +61,8 @@
     int badFastShooterFramecount;
     int goodKnifeGuyFramecount;
     int badKnifeGuyFrameCount;
+    int bigMonstercount;
+    int bigMonsterDelayCounter;
     CGPoint loc;
     CCSprite *projectile;
     CCSprite *badGuy;
@@ -135,6 +137,7 @@
     BOOL firstHeli;
     BOOL firstBigGoodGuy;
     BOOL firstZigZag;
+    BOOL firstBigMonster;
     CCLabelTTF *waveLabel;
     CCLabelTTF *goodBaseHealthLabel;
     CCLabelTTF *badBaseHealthLabel;
