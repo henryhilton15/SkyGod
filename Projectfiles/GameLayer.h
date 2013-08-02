@@ -61,6 +61,10 @@
     int badFastShooterFramecount;
     int goodKnifeGuyFramecount;
     int badKnifeGuyFrameCount;
+    int waveChangeCounter;
+    int bigGoodGuyMinX;
+    int bigGoodGuyMaxX;
+    int bigGoodGuyDirection;
     CGPoint loc;
     CCSprite *projectile;
     CCSprite *badGuy;
@@ -135,6 +139,9 @@
     BOOL firstHeli;
     BOOL firstBigGoodGuy;
     BOOL firstZigZag;
+    BOOL canUseJet;
+    BOOL waveChanging;
+    BOOL firstTime;
     CCLabelTTF *waveLabel;
     CCLabelTTF *goodBaseHealthLabel;
     CCLabelTTF *badBaseHealthLabel;

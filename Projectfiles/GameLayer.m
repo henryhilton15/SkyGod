@@ -14,6 +14,7 @@
 #define MOUNTAIN_HEIGHT 70.0f
 
 @implementation GameLayer
+
 -(void) addFastShooterGoodGuy
 {
     // Determine where to spawn the monster along the X axis
@@ -130,41 +131,68 @@
     [enemy runAction:actionMove];
 }
 
-
-
 -(void) addKmonster
 {
-    CCSprite * Kmonster = [[Character alloc] initWithKamikazeImage];
-    Kmonster.scale=.2;
-    // Determine where to spawn the monster along the Y axis
-    CGSize winSize = [CCDirector sharedDirector].winSize;
-    int rangeY = KmonsterMaxY - KmonsterMinY;
-    int actualY = arc4random() % rangeY + KmonsterMinY;
-    if(actualY < 120)
+    if(bigGoodGuysCounter > 0)
     {
-        actualY+=50;
+        CCSprite * Kmonster = [[Character alloc] initWithKamikazeImage];
+        Kmonster.scale=.2;
+        
+        // Determine where to spawn the monster along the Y axis
+        CGSize winSize = [CCDirector sharedDirector].winSize;
+        int rangeY = KmonsterMaxY - KmonsterMinY;
+        int actualY = arc4random() % rangeY + KmonsterMinY;
+        if(actualY < 120)
+        {
+            actualY+=50;
+        }
+        // Determine speed of the monster
+        int minDuration2 = 3.0;
+        int maxDuration2 = 5.0;
+        int rangeDuration2 = maxDuration2 - minDuration2;
+        int actualDuration2 = (arc4random() % rangeDuration2) + minDuration2;
+        
+      
+    
+        //NSLog(@"detects big guy");
+        if(bigGoodGuyDirection == 1)
+        {
+            NSLog(@"senses big guy is on left");
+            
+            // Create the monster slightly off-screen along the right edge,
+            // and along a random position along the Y axis as calculated above
+            Kmonster.position = ccp(winSize.width + Kmonster.contentSize.width/2, actualY);
+            [self addChild:Kmonster];
+            [Kmonsters addObject:Kmonster];
+                    
+            // Create the actions
+            CCMoveTo * actionMoveLeft = [CCMoveTo actionWithDuration:actualDuration2
+                                                                    position:ccp(-Kmonster.contentSize.width/2, actualY)];
+            // CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
+            //[node removeFromParentAndCleanup:YES];
+            //}];
+                    
+            [Kmonster runAction:[CCSequence actions:actionMoveLeft, nil]];
+        }
+                
+        if(bigGoodGuyDirection == 2)
+        {
+            NSLog(@"senses big guy is on right");
+            
+            Kmonster.position = ccp(-Kmonster.contentSize.width/2, actualY);
+            [self addChild:Kmonster];
+            [Kmonsters addObject:Kmonster];
+                    
+            // Create the actions
+            CCMoveTo * actionMoveRight = [CCMoveTo actionWithDuration:actualDuration2
+                                                                     position:ccp(winSize.width + Kmonster.contentSize.width/2, actualY)];
+            // CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
+            //[node removeFromParentAndCleanup:YES];
+            //}];
+                    
+            [Kmonster runAction:[CCSequence actions:actionMoveRight, nil]];
+        }
     }
-    
-    // Create the monster slightly off-screen along the right edge,
-    // and along a random position along the Y axis as calculated above
-    Kmonster.position = ccp(winSize.width + Kmonster.contentSize.width/2, actualY);
-    [self addChild:Kmonster];
-    [Kmonsters addObject:Kmonster];
-    
-    // Determine speed of the monster
-    int minDuration2 = 3.0;
-    int maxDuration2 = 5.0;
-    int rangeDuration2 = maxDuration2 - minDuration2;
-    int actualDuration2 = (arc4random() % rangeDuration2) + minDuration2;
-    
-    // Create the actions
-    CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration2
-                                                position:ccp(-Kmonster.contentSize.width/2, actualY)];
-   // CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
-        //[node removeFromParentAndCleanup:YES];
-    //}];
-    
-        [Kmonster runAction:[CCSequence actions:actionMove, nil]];
 }
 
 -(void) addGoodGuy
@@ -366,31 +394,42 @@
 
 -(void) addBigGoodGuy
 {
+    
     CGSize winSize = [CCDirector sharedDirector].winSize;
-    int minX = 30;
-    int maxX = 130;
-    int rangeX = maxX - minX;
-    int actualX = arc4random() % rangeX + minX;
+    goodGuy = [[Character alloc] initWithBigGoodGuyImage];
+    if(arc4random() % 2 == 0)
+    {
+        bigGoodGuyMinX = 30;
+        bigGoodGuyMaxX = 130;
+        bigGoodGuyDirection = 1;
+    }
+    if(arc4random() % 2 == 1)
+    {
+        bigGoodGuyMinX = 350;
+        bigGoodGuyMaxX = 450;
+        bigGoodGuyDirection = 2;
+    }
+    int rangeX = bigGoodGuyMaxX - bigGoodGuyMinX;
+    int actualX = arc4random() % rangeX + bigGoodGuyMinX;
     
     minDuration = 9.0;
     maxDuration = 11.0;
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
-    enemy = [[Character alloc] initWithBigGoodGuyImage];
-    enemy.scale=.4;
-    enemy.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
-     enemy.color = ccc3(0, 255, 0);
-    [self addChild:enemy];
-    [goodGuys addObject:enemy];
+    goodGuy = [[Character alloc] initWithBigGoodGuyImage];
+    goodGuy.scale=.4;
+    goodGuy.position = CGPointMake(actualX, winSize.height);
+    goodGuy.color = ccc3(0, 255, 0);
+    [self addChild:goodGuy];
+    [goodGuys addObject:goodGuy];
     bigGoodGuysCounter++;
-    //[bigGoodGuys addObject:enemy];
-    
     CCMoveTo *actionMove = [CCMoveTo actionWithDuration:actualDuration
-                                               position:ccp(actualX, -enemy.contentSize.height/2)];
-    [enemy runAction:actionMove];
+                                               position:ccp(actualX, -goodGuy.contentSize.height/2)];
+    [goodGuy runAction:actionMove];
 }
 
+    
 -(void) addBigMonster
 {
     // Determine where to spawn the monster along the X axis
@@ -509,11 +548,15 @@
         randNum = 0;
         KmonsterCounter = 0;
         bigGoodGuysCounter = 0;
+        waveChangeCounter = 0;
+        bigGoodGuyMaxX = 0;
+        bigGoodGuyMinX = 0;
         //immunityFramecount = 100;
         KmonsterMinY = 250;
         KmonsterMaxY = 310;
         //deathFramecount = 60 * 30;
         //timeRemaining = 30;
+        bigGoodGuyDirection = 0;
         pointsFramecount = 0;
         score = 0;
         enemiesPassed = 0;
@@ -527,7 +570,10 @@
         Scenario3 = false;
         Scenario4 = false;
         isWalking = true;
+        canUseJet = true;
+        waveChanging = false;
         wave=1;
+        firstTime = true;
         
 //        Modifies frequency
         goodGuyFramecount = 200 - (wave * 10);
@@ -703,8 +749,7 @@
         [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
     }
     */
-    [self ScenarioGenerator];
-    [self CreateScenario];
+
     
     framecount++;
     
@@ -724,7 +769,26 @@
 //        score += (int)(pointsFramecount/60);
 //    }
     
-    if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true)
+    
+    if(waveChanging == true)
+    {
+        waveChangeCounter++;
+        if(waveChangeCounter == 5)
+        {
+            [self waveChangeAnimation];
+        }
+        if (waveChangeCounter == 300)
+        {
+            waveChanging = false;
+        }
+    }
+    
+    else
+    {
+        [self ScenarioGenerator];
+        [self CreateScenario];
+    
+    if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true && waveChanging == false)
     {
         if((firstHeli == true || helicopterDelayCounter % 200 == 0) && (firstZigZag == true || zigZagDelayCounter % 250 == 0))
         {
@@ -733,6 +797,7 @@
             if(framecount % goodGuyFramecount == 0)
             {
                 [self addGoodGuy];
+                firstTime = false;
             }
         }
     
@@ -1051,6 +1116,7 @@
     {
         truckCount = 0;
         badReinforcementCount = 0;
+    }
     }
     
 }
@@ -1421,7 +1487,7 @@
                    // NSLog(@"intersect");
                     if (Kamikaze.position.y < 315)
                          
-                        if(((Character*)goodGuy).health == 1)
+                        if(((Character*)goodGuy).health <= 3)
                         {
                             [deadKmonsters addObject:Kmonster];
                             [deadGoodGuys addObject:goodGuy];
@@ -1432,7 +1498,7 @@
                         }
                         else
                         {
-                            ((Character*)goodGuy).health--;
+                            ((Character*)goodGuy).health -= 3;
                             [deadKmonsters addObject:Kmonster];
                         }
                     }
@@ -1555,7 +1621,7 @@
                     ((Character*)goodBottom).row = arc4random() % 5 + 1;
                     [goodGuysBottom addObject:goodBottom];
                     goodBottom.anchorPoint = CGPointZero;
-                    ((Character*)goodBottom).health = ((Character*)goodGuy).health;
+                    ((Character*)goodBottom).health = ((Character*)goodGuy).health * 2.5;
                     int posHeight = -8 + (8 * ((Character*)goodBottom).row);
                     goodBottom.position = ccp(0, posHeight);
                     goodBottom.scale=.3;
@@ -1679,6 +1745,7 @@
                         badBottom = [[Character alloc] initWithBadBottomImage];
                         ((Character*)badBottom).row = arc4random() % 5 + 1;
                         badBottom.anchorPoint = CGPointZero;
+                        ((Character*)badBottom).health = ((Character*)badGuy).health;
                         badBottom.scale=.15;
                         int posHeight = -8 + (8 * ((Character*)badBottom).row);
                         badBottom.position = ccp(460, posHeight);
@@ -1692,6 +1759,7 @@
                         badBottom = [[Character alloc] initWithBadBottomImage];
                         ((Character*)badBottom).row = arc4random() % 5 + 1;
                         badBottom.anchorPoint = CGPointZero;
+                        ((Character*)badBottom).health = ((Character*)badGuy).health;
                         badBottom.scale=.15;
                         int posHeight = -8 + (8 * ((Character*)badBottom).row);
                         badBottom.position = ccp(460, posHeight);
@@ -1705,6 +1773,7 @@
                         badBottom = [[Character alloc] initWithZigZagImage];
                         ((Character*)badBottom).row = arc4random() % 5 + 1;
                         badBottom.anchorPoint = CGPointZero;
+                        ((Character*)badBottom).health = ((Character*)badGuy).health * 2;
                         badBottom.scale=.15;
                         int posHeight = -8 + (8 * ((Character*)badBottom).row);
                         badBottom.position = ccp(460, posHeight);
@@ -1718,6 +1787,7 @@
                     badBottom = [[Character alloc] initWithKnifeBadGuyImage];
                     ((Character*)badBottom).row = arc4random() % 5 + 1;
                     badBottom.anchorPoint = CGPointZero;
+                    ((Character*)badBottom).health = ((Character*)badGuy).health * 1.5;
                     badBottom.scale=.15;
                     int posHeight = -8 + (8 * ((Character*)badBottom).row);
                     badBottom.position = ccp(460, posHeight);
@@ -1731,6 +1801,7 @@
                     badBottom = [[Character alloc] initWithFastShooterBadGuyImage];
                     ((Character*)badBottom).row = arc4random() % 5 + 1;
                     badBottom.anchorPoint = CGPointZero;
+                    ((Character*)badBottom).health = ((Character*)badGuy).health;
                     badBottom.scale=.15;
                     int posHeight = -8 + (8 * ((Character*)badBottom).row);
                     badBottom.position = ccp(460, posHeight);
@@ -2029,7 +2100,7 @@
         if (scenarioNumber == 1)
         {
            // NSLog(@"scenario1begins");
-            Scenario1 = true;
+            Scenario2 = true;
         }
         if (scenarioNumber == 2)
         {
@@ -2039,7 +2110,7 @@
         if (scenarioNumber == 3)
         {
             //NSLog(@"scenario3begins");
-            Scenario3 = true;
+            Scenario2 = true;
         }
         if (scenarioNumber == 4)
         {
@@ -2052,6 +2123,8 @@
 
 -(void)CreateScenario
 {
+   if(waveChanging != true)
+   {
     if(Scenario1 == true)
     {
        // NSLog(@"Scenario1 == TRUE");
@@ -2069,6 +2142,7 @@
     }
     if(Scenario2 == true)
     {
+        //NSLog(@"scenario 2 is true;");
         if(framecount % (int)(helicopterFramecount ) == 0)
         {
           //  NSLog(@"spawning big good guy");
@@ -2094,6 +2168,7 @@
 //    
 //    }
 //    randNum=0;
+   }
 }
 
 -(void)generateRandomNumber
@@ -2457,7 +2532,7 @@
                     {
                         if(framecount % 50 == 0)
                         {
-                            NSLog(@"bad fast guy shooting");
+                            //NSLog(@"bad fast guy shooting");
                             float badX = badBottom.position.x;
                             float badY = badBottom.position.y;
                             
@@ -2472,7 +2547,7 @@
                                                                       position:ccp(-2000, badBullet.position.y)];
                             
                             [badBullet runAction:shootLeft];
-                            NSLog(@"bad bullet shot left");
+                            //NSLog(@"bad bullet shot left");
                         }
                     }
                     
@@ -2480,7 +2555,7 @@
                     {
                         if(framecount % 100 == 0)
                         {
-                            NSLog(@"bad guy shooting");
+                            //NSLog(@"bad guy shooting");
                             float badX = badBottom.position.x;
                             float badY = badBottom.position.y;
                     
@@ -2497,7 +2572,7 @@
                                                                       position:ccp(-2000, badBullet.position.y)];
                     
                             [badBullet runAction:shootLeft];
-                            NSLog(@"bad bullet shot left");
+                            //NSLog(@"bad bullet shot left");
                     }
                 }
                 }
@@ -2508,7 +2583,7 @@
                     {
                         if (framecount % 50 == 0)
                         {
-                        NSLog(@" good fast guy shooting");
+                        //NSLog(@" good fast guy shooting");
                         float goodX = goodBottom.position.x;
                         float goodY = goodBottom.position.y;
                         
@@ -2530,7 +2605,7 @@
                         if(framecount % 100 == 0)
                         {
                                 
-                        NSLog(@"good guy shooting");
+                        //NSLog(@"good guy shooting");
                         float goodX = goodBottom.position.x;
                         float goodY = goodBottom.position.y;
                                 
@@ -2675,7 +2750,7 @@
                                     [deadBadBullets addObject:badBullet];
 //                                    [badBulletArray removeObjectAtIndex:j];
 //                                    [self removeChild:bullet cleanup:YES];
-                                    NSLog(@"good guy health decremented");
+                                    //NSLog(@"good guy health decremented");
                                 }
                    }
                 }
@@ -2759,6 +2834,8 @@
 
 -(void) airstrike: (CCMenuItemImage *)PowerUpButton3
 {
+    if(canUseJet == true)
+    {
     bomber = [[Character alloc] initWithGoodHelicopterImage];
     bomber.scale=.5;
     
@@ -2774,6 +2851,8 @@
     position:ccp(500, bomber.position.y)];
 
     [bomber runAction:actionMove];
+    canUseJet = false;
+    }
 }
 
 -(void)reinforcements: (CCMenuItemImage *) PowerUpButton2
@@ -2845,25 +2924,25 @@
 
 
 
--(void) drawBoundingBox: (CGRect) rect
-
-{
-    
-    CGPoint vertices[4]={
-        
-        ccp(rect.origin.x,rect.origin.y),
-        
-        ccp(rect.origin.x+rect.size.width,rect.origin.y),
-        
-        ccp(rect.origin.x+rect.size.width,rect.origin.y+rect.size.height),
-        
-        ccp(rect.origin.x,rect.origin.y+rect.size.height),
-        
-    };
-    
-    ccDrawPoly(vertices, 4, YES);
-    
-}
+//-(void) drawBoundingBox: (CGRect) rect
+//
+//{
+//    
+//    CGPoint vertices[4]={
+//        
+//        ccp(rect.origin.x,rect.origin.y),
+//        
+//        ccp(rect.origin.x+rect.size.width,rect.origin.y),
+//        
+//        ccp(rect.origin.x+rect.size.width,rect.origin.y+rect.size.height),
+//        
+//        ccp(rect.origin.x,rect.origin.y+rect.size.height),
+//        
+//    };
+//    
+//    ccDrawPoly(vertices, 4, YES);
+//    
+//}
 
 -(void) addBases
 {
@@ -2891,12 +2970,40 @@
 }
 -(void) addWave
 {
+    NSMutableArray *eraseGoodGuys = [[NSMutableArray alloc] init];
+    NSMutableArray *eraseBadGuys = [[NSMutableArray alloc] init];
     NSMutableArray *eraseGoodGuysBottom = [[NSMutableArray alloc] init];
     NSMutableArray *eraseBadGuysBottom = [[NSMutableArray alloc] init];
     
-    wave++;
-    [waveLabel setString:[NSString stringWithFormat:@"Wave:%d", wave]];
-   
+    for(int x = 0; x<[badGuys count]; x++)
+    {
+        badGuy = [badGuys objectAtIndex:x];
+        [eraseBadGuys addObject:badGuy];
+    }
+    
+    for (CCSprite *s in eraseBadGuys)
+    {
+        [badGuys removeObject:s];
+        [self removeChild:s cleanup:YES];
+    }
+    [eraseBadGuys removeAllObjects];
+    
+    
+    
+    for(int i = 0; i<[goodGuys count]; i++)
+    {
+        goodGuy = [goodGuys objectAtIndex:i];
+        [eraseGoodGuys addObject:goodGuy];
+    }
+    
+    for (CCSprite *s in eraseGoodGuys)
+    {
+        [goodGuys removeObject:s];
+        [self removeChild:s cleanup:YES];
+    }
+    [eraseGoodGuys removeAllObjects];
+    
+    
     for(int x = 0; x<[badGuysBottom count]; x++)
     {
         badBottom = [badGuysBottom objectAtIndex:x];
@@ -2924,10 +3031,16 @@
         [self removeChild:s cleanup:YES];
     }
 
+    
     [eraseGoodGuysBottom removeAllObjects];
     
     ((Character*)badBase).health=10;
-
+    waveChanging = true;
+    
+    [badBaseHealthLabel setString:[NSString stringWithFormat:@"Enemy Base Health: %d",((Character*) badBase).health]];
+    wave++;
+    [waveLabel setString:[NSString stringWithFormat:@"Wave:%d", wave]];
+    
 }
 -(void) subtractGoodBaseHealth
 {
@@ -3053,11 +3166,52 @@
     }
 }
 
+-(void) waveChangeAnimation
+{
+    if(firstTime == false)
+    {
+    CCSprite *waveImage = [CCSprite spriteWithFile:@"wave.png"];
+    waveImage.anchorPoint = CGPointZero;
+    waveImage.position = CGPointMake(50.0f, 350.0f);
+    waveImage.scale = 1.2;
+    [self addChild:waveImage z:1];
+
+    
+    CCSprite *complete = [CCSprite spriteWithFile:@"complete.png"];
+    complete.anchorPoint = CGPointZero;
+    complete.position = CGPointMake(200.0f, 350.0f);
+    complete.scale = 1.2;
+    [self addChild:complete z:1];
+
+    id waveDrop = [CCMoveTo actionWithDuration:1.0 position:ccp(waveImage.position.x, 165)];
+    id completeDrop = [CCMoveTo actionWithDuration:1.0 position:ccp(complete.position.x, 165)];
+    id waveLeave = [CCMoveTo actionWithDuration:2.0 position:ccp(500, 165)];
+    id completeLeave = [CCMoveTo actionWithDuration:2.0 position:ccp(650, 165)];
+
+    id waveDelay = [CCDelayTime actionWithDuration:2.0f];
+
+    id completeDelay = [CCDelayTime actionWithDuration:1.0f];
+    
+    id completeDropDelay = [CCDelayTime actionWithDuration:1.0f];
+
+
+    [waveImage runAction:[CCSequence actions:waveDrop, waveDelay, waveLeave, nil]];
+    
+    [complete runAction:[CCSequence actions:completeDropDelay, completeDrop, completeDelay, completeLeave, nil]];
+
+    if(waveImage.position.x > 480)
+    {
+    [self removeChild:waveImage cleanup:YES];
+    }
+    
+    if(complete.position.x > 480)
+    {
+    [self removeChild:complete cleanup:YES];
+    }
+    }
+
+}
 
 
 @end
-
-
-
-    
 

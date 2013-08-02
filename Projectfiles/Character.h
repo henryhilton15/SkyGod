@@ -37,6 +37,8 @@
 @property int immunity;
 @property int row;
 @property bool melee;
+@property bool left;
+@property bool right;
 -(id) initWithBigMonsterImage;
 -(id) initWithBigGoodGuyImage;
 -(id) initWithGoodGuyImage;

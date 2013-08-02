@@ -384,6 +384,8 @@
 		DCC1A3AE13A94F1A005BD75D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC1A39113A94F1A005BD75D /* main.m */; };
 		DCF95CD213A97EC500AE3B80 /* libcocos2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF95CC913A97EC500AE3B80 /* libcocos2d-mac.a */; };
 		DCF95CD413A97EC500AE3B80 /* libkobold2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF95CCB13A97EC500AE3B80 /* libkobold2d-mac.a */; };
+		FED477D617AAE6790081A13F /* wave.png in Resources */ = {isa = PBXBuildFile; fileRef = FED477D517AAE6790081A13F /* wave.png */; };
+		FED477D817AAE67E0081A13F /* complete.png in Resources */ = {isa = PBXBuildFile; fileRef = FED477D717AAE67E0081A13F /* complete.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -782,6 +784,8 @@
 		DCF95CCB13A97EC500AE3B80 /* libkobold2d-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libkobold2d-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCFA90EF13B4F6F7009DD35A /* BuildSettings-Debug-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-Debug-iOS.xcconfig"; sourceTree = "<group>"; };
 		DCFA90F013B4F811009DD35A /* BuildSettings-Release-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-Release-iOS.xcconfig"; sourceTree = "<group>"; };
+		FED477D517AAE6790081A13F /* wave.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wave.png; path = ../../../../../Desktop/wave.png; sourceTree = "<group>"; };
+		FED477D717AAE67E0081A13F /* complete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = complete.png; path = ../../../../../Desktop/complete.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -823,6 +827,8 @@
 		2D808A7B1795F5BA006EADF5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FED477D717AAE67E0081A13F /* complete.png */,
+				FED477D517AAE6790081A13F /* wave.png */,
 				C3E69B7917A2F8FE006C0912 /* wall.png */,
 				C3297C0617975CDA00A09343 /* knightframesflipped.plist */,
 				C3297C0417975CC600A09343 /* knightFramesFlipped.png */,
@@ -1943,6 +1949,8 @@
 				C3297C0517975CC600A09343 /* knightFramesFlipped.png in Resources */,
 				C3297C0717975CDA00A09343 /* knightframesflipped.plist in Resources */,
 				C3E69B7A17A2F8FE006C0912 /* wall.png in Resources */,
+				FED477D617AAE6790081A13F /* wave.png in Resources */,
+				FED477D817AAE67E0081A13F /* complete.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
