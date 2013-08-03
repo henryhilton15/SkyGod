@@ -192,4 +192,5 @@
 -(void) subtractWave;
 -(void) addWave;
 -(void) drawBoundingBox: (CGRect) rect;
+-(void) addBaseBars;
 @end

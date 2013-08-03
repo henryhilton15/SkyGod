@@ -468,6 +468,7 @@
 {
 	if ((self = [super init]))
 	{
+        [self addBaseBars];
         [self addBases];
         [self changeLevel];
         //bear animations
@@ -753,6 +754,7 @@
     
     framecount++;
     
+    
 //    if([badGuysBottom count] > 0 && [goodGuysBottom count] == 0)
 //    {
 //        deathFramecount--;
@@ -776,10 +778,11 @@
         if(waveChangeCounter == 5)
         {
             [self waveChangeAnimation];
-        }
+        } 
         if (waveChangeCounter == 300)
         {
             waveChanging = false;
+            waveChangeCounter = 0;
         }
     }
     
@@ -855,7 +858,7 @@
     
     if([goodGuysBottom count] == 0)
     {
-      [self goodBaseCollisions];  
+      [self goodBaseCollisions];
     }
     if( [badGuysBottom count] == 0)
     {
@@ -2948,9 +2951,9 @@
 {
     goodBase = [[Character alloc] initWithGoodGuyBaseImage];
     badBase =[[Character alloc] initWithBadGuyBaseImage];
-    goodBase.position = ccp(35,45);
-    badBase.position = ccp(460,45);
-    goodBase.scale =.4;
+    goodBase.position = ccp(40,35);
+    badBase.position = ccp(450,37);
+    goodBase.scale =.35;
     badBase.scale = .4;
      goodBase.color = ccc3(0, 255, 0);
      badBase.color = ccc3(255, 0, 0);
@@ -3037,9 +3040,12 @@
     ((Character*)badBase).health=10;
     waveChanging = true;
     
+    NSLog(@"Wave changing is true");
     [badBaseHealthLabel setString:[NSString stringWithFormat:@"Enemy Base Health: %d",((Character*) badBase).health]];
     wave++;
     [waveLabel setString:[NSString stringWithFormat:@"Wave:%d", wave]];
+    
+
     
 }
 -(void) subtractGoodBaseHealth
@@ -3047,12 +3053,14 @@
     ((Character*) goodBase).health --;
     [goodBaseHealthLabel setString:[NSString stringWithFormat:@"Your Base Health: %d",((Character*) goodBase).health]];
     
+    
 }
 -(void) subtractBadBaseHealth
 {
     ((Character*) badBase).health --;
     
     [badBaseHealthLabel setString:[NSString stringWithFormat:@"Enemy Base Health: %d",((Character*) badBase).health]];
+    
 }
 
 -(void)goodBaseCollisions
@@ -3071,6 +3079,7 @@
                     if(framecount % 50 == 0)
                     {
                     [self subtractGoodBaseHealth];
+                    [self subtractGoodBarHealth];
                 
                     }
                 }
@@ -3096,6 +3105,7 @@
                 if(((Character*)goodBase).health >= 1)
                 {
                     [self subtractGoodBaseHealth];
+                    [self subtractGoodBarHealth];
                 }
                 if(((Character*)goodBase).health == 0)
                 {
@@ -3128,6 +3138,7 @@
                     if(framecount % 50 == 0)
                     {
                     [self subtractBadBaseHealth];
+                        [self subtractBadBarHealth];
                     }
                 }
                 if(((Character*)badBase).health == 0)
@@ -3154,6 +3165,7 @@
                 if(((Character*)badBase).health >= 1)
                 {
                     [self subtractBadBaseHealth];
+                    [self subtractBadBarHealth];
                 }
                 if(((Character*)badBase).health == 0)
                 {
@@ -3209,6 +3221,168 @@
     [self removeChild:complete cleanup:YES];
     }
     }
+
+}
+
+-(void) addBaseBars
+{
+    
+    CCSprite *goodGreen = [CCSprite spriteWithFile:@"whiteBar.png"];
+    goodGreen.color = ccc3(0, 255, 0);
+    goodGreen.anchorPoint = CGPointZero;
+    goodGreen.position = ccp(0, 80);
+    goodGreen.scale = .3;
+    [self addChild:goodGreen z:10];
+    
+    CCSprite *badGreen = [CCSprite spriteWithFile:@"whiteBar.png"];
+    badGreen.color = ccc3(0, 255, 0);
+    badGreen.anchorPoint = CGPointZero;
+    badGreen.position = ccp(410, 80);
+    badGreen.scale = .3;
+    [self addChild:badGreen z:10];
+    
+    
+}
+
+-(void) subtractGoodBarHealth
+{
+    CCSprite *goodRed = [CCSprite spriteWithFile:@"whiteBar.png"];
+    goodRed.color = ccc3(255, 0, 0);
+    goodRed.anchorPoint = CGPointZero;
+    goodRed.scale = .3;
+    
+    float healthcounter = (goodRed.contentSize.width * .3) / 10;
+    
+    if(((Character*)goodBase).health == 10)
+    {
+        goodRed.position = ccp(-70, 80);
+    }
+    
+    if(((Character*)goodBase).health == 9)
+    {
+        goodRed.position = ccp(-70 + healthcounter, 80);
+    }
+    
+    if(((Character*)goodBase).health == 8)
+    {
+        goodRed.position = ccp(-70 + healthcounter * 2, 80);
+    }
+    
+    if(((Character*)goodBase).health == 7)
+    {
+        goodRed.position = ccp(-70 + healthcounter * 3, 80);
+    }
+    
+    if(((Character*)goodBase).health == 6)
+    {
+        goodRed.position = ccp(-70 + healthcounter * 4, 80);
+    }
+    if(((Character*)goodBase).health == 5)
+    {
+        goodRed.position = ccp(-70 + healthcounter * 5, 80);
+    }
+    
+    if(((Character*)goodBase).health == 4)
+    {
+        goodRed.position = ccp(-70 + healthcounter * 6, 80);
+    }
+    
+    if(((Character*)goodBase).health == 3)
+    {
+        goodRed.position = ccp(-70 + healthcounter * 7, 80);
+    }
+    
+    if(((Character*)goodBase).health == 2)
+    {
+        goodRed.position = ccp(-70 + healthcounter * 8, 80);
+    }
+    
+    if(((Character*)goodBase).health == 1)
+    {
+        goodRed.position = ccp(-70 + healthcounter * 9, 80);
+    }
+    if(((Character*)goodBase).health == 0)
+    {
+//        goodRed.position = ccp(healthcounter * 10, 80);
+        [self removeChild:goodRed cleanup:YES];
+
+    }
+    
+    
+    [self addChild:goodRed z:11];
+    
+    
+}
+
+-(void) subtractBadBarHealth
+{
+    CCSprite *badRed = [CCSprite spriteWithFile:@"whiteBar.png"];
+    badRed.color = ccc3(255, 0, 0);
+    badRed.anchorPoint = CGPointZero;
+    badRed.position = ccp(480, 80);
+    badRed.scale = .3;
+    
+    float healthcounter = (badRed.contentSize.width * .3) / 10;
+
+    
+    if(((Character*)badBase).health == 10)
+    {
+        badRed.position = ccp(480, 80);
+    }
+    
+    if(((Character*)badBase).health == 9)
+    {
+        badRed.position = ccp(480 - healthcounter, 80);
+        
+    }
+    
+    if(((Character*)badBase).health == 8)
+    {
+        badRed.position = ccp(480 - healthcounter * 2, 80);
+    }
+    
+    if(((Character*)badBase).health == 7)
+    {
+        badRed.position = ccp(480 - healthcounter * 3, 80);
+    }
+    
+    if(((Character*)badBase).health == 6)
+    {
+        badRed.position = ccp(480 - healthcounter * 4, 80);
+    }
+    if(((Character*)badBase).health == 5)
+    {
+        badRed.position = ccp(480 - healthcounter * 5, 80);
+    }
+    
+    if(((Character*)badBase).health == 4)
+    {
+        badRed.position = ccp(480 - healthcounter * 6, 80);
+    }
+    
+    if(((Character*)badBase).health == 3)
+    {
+        badRed.position = ccp(480 - healthcounter * 7, 80);
+    }
+    
+    if(((Character*)badBase).health == 2)
+    {
+        badRed.position = ccp(480 - healthcounter * 8, 80);
+    }
+    
+    if(((Character*)badBase).health == 1)
+    {
+        badRed.position = ccp(480 - healthcounter * 9, 80);
+    }
+    if(((Character*)badBase).health == 0)
+    {
+//        badRed.position = ccp(480 - healthcounter * 10, 80);
+        [self removeChild:badRed cleanup:YES];
+    }
+    
+    
+    [self addChild:badRed z:11];
+    
 
 }
 

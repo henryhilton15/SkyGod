@@ -386,6 +386,7 @@
 		DCF95CD413A97EC500AE3B80 /* libkobold2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF95CCB13A97EC500AE3B80 /* libkobold2d-mac.a */; };
 		FED477D617AAE6790081A13F /* wave.png in Resources */ = {isa = PBXBuildFile; fileRef = FED477D517AAE6790081A13F /* wave.png */; };
 		FED477D817AAE67E0081A13F /* complete.png in Resources */ = {isa = PBXBuildFile; fileRef = FED477D717AAE67E0081A13F /* complete.png */; };
+		FED477DA17AC34C70081A13F /* whiteBar.png in Resources */ = {isa = PBXBuildFile; fileRef = FED477D917AC34C70081A13F /* whiteBar.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -786,6 +787,7 @@
 		DCFA90F013B4F811009DD35A /* BuildSettings-Release-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-Release-iOS.xcconfig"; sourceTree = "<group>"; };
 		FED477D517AAE6790081A13F /* wave.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wave.png; path = ../../../../../Desktop/wave.png; sourceTree = "<group>"; };
 		FED477D717AAE67E0081A13F /* complete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = complete.png; path = ../../../../../Desktop/complete.png; sourceTree = "<group>"; };
+		FED477D917AC34C70081A13F /* whiteBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = whiteBar.png; path = ../../../../../Desktop/whiteBar.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -827,6 +829,7 @@
 		2D808A7B1795F5BA006EADF5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FED477D917AC34C70081A13F /* whiteBar.png */,
 				FED477D717AAE67E0081A13F /* complete.png */,
 				FED477D517AAE6790081A13F /* wave.png */,
 				C3E69B7917A2F8FE006C0912 /* wall.png */,
@@ -1951,6 +1954,7 @@
 				C3E69B7A17A2F8FE006C0912 /* wall.png in Resources */,
 				FED477D617AAE6790081A13F /* wave.png in Resources */,
 				FED477D817AAE67E0081A13F /* complete.png in Resources */,
+				FED477DA17AC34C70081A13F /* whiteBar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
