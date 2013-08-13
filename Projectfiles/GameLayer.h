@@ -63,6 +63,10 @@
     int badKnifeGuyFrameCount;
     int bigMonstercount;
     int bigMonsterDelayCounter;
+    int waveChangeCounter;
+    int bigGoodGuyMinX;
+    int bigGoodGuyMaxX;
+    int bigGoodGuyDirection;
     CGPoint loc;
     CCSprite *projectile;
     CCSprite *badGuy;
@@ -89,6 +93,7 @@
     CCSprite *BadReinforcement;
     CCSprite *goodBase;
     CCSprite *badBase;
+    CCSprite *titleImage;
     Rect goodRect;
     Rect badRect;
     //  NSMutableArray *helicopters;
@@ -138,6 +143,9 @@
     BOOL firstBigGoodGuy;
     BOOL firstZigZag;
     BOOL firstBigMonster;
+    BOOL canUseJet;
+    BOOL waveChanging;
+    BOOL firstTime;
     CCLabelTTF *waveLabel;
     CCLabelTTF *goodBaseHealthLabel;
     CCLabelTTF *badBaseHealthLabel;
@@ -188,4 +196,5 @@
 -(void) subtractWave;
 -(void) addWave;
 -(void) drawBoundingBox: (CGRect) rect;
+-(void) addBaseBars;
 @end

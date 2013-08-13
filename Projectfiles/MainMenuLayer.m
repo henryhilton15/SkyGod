@@ -48,10 +48,10 @@
         background.position = CGPointMake(240,160);
         [self addChild:background z:-1];
         
-        TitleLabel = [CCLabelTTF labelWithString:@"Banana Bonanza" fontName:@"Marker Felt" fontSize:40];
-        TitleLabel.position = ccp(240,240);
-        TitleLabel.color = ccBLUE;
-        [self addChild:TitleLabel z:4];
+        CCSprite *titleImage = [CCSprite spriteWithFile: @"title.png"];
+        titleImage.position = ccp(240,240);
+        titleImage.color = ccBLUE;
+        [self addChild:titleImage z:4];
     }
     return self;
     

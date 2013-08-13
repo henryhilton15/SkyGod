@@ -15,6 +15,7 @@
 #define MOUNTAIN_HEIGHT 70.0f
 
 @implementation GameLayer
+
 -(void) addFastShooterGoodGuy
 {
     // Determine where to spawn the monster along the X axis
@@ -131,41 +132,70 @@
     [enemy runAction:actionMove];
 }
 
-
-
 -(void) addKmonster
 {
-    CCSprite * Kmonster = [[Character alloc] initWithKamikazeImage];
-    Kmonster.scale=.2;
-    // Determine where to spawn the monster along the Y axis
-    CGSize winSize = [CCDirector sharedDirector].winSize;
-    int rangeY = KmonsterMaxY - KmonsterMinY;
-    int actualY = arc4random() % rangeY + KmonsterMinY;
-    if(actualY < 120)
+    if(bigGoodGuysCounter > 0)
     {
-        actualY+=50;
+        
+        CCSprite * Kmonster = [[Character alloc] initWithKamikazeImage];
+        Kmonster.scale=.2;
+        Kmonster.color = ccc3(255,0,0);
+        
+        // Determine where to spawn the monster along the Y axis
+        CGSize winSize = [CCDirector sharedDirector].winSize;
+        int rangeY = KmonsterMaxY - KmonsterMinY;
+        int actualY = arc4random() % rangeY + KmonsterMinY;
+        if(actualY < 120)
+        {
+            actualY+=50;
+        }
+        // Determine speed of the monster
+        int minDuration2 = 3.0;
+        int maxDuration2 = 5.0;
+        int rangeDuration2 = maxDuration2 - minDuration2;
+        int actualDuration2 = (arc4random() % rangeDuration2) + minDuration2;
+        
+      
+    
+        //NSLog(@"detects big guy");
+        if(bigGoodGuyDirection == 1)
+        {
+            NSLog(@"senses big guy is on left");
+            
+            // Create the monster slightly off-screen along the right edge,
+            // and along a random position along the Y axis as calculated above
+            Kmonster.position = ccp(winSize.width + Kmonster.contentSize.width/2, actualY);
+            [self addChild:Kmonster];
+            [Kmonsters addObject:Kmonster];
+                    
+            // Create the actions
+            CCMoveTo * actionMoveLeft = [CCMoveTo actionWithDuration:actualDuration2
+                                                                    position:ccp(-Kmonster.contentSize.width/2, actualY)];
+            // CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
+            //[node removeFromParentAndCleanup:YES];
+            //}];
+                    
+            [Kmonster runAction:[CCSequence actions:actionMoveLeft, nil]];
+        }
+                
+        if(bigGoodGuyDirection == 2)
+        {
+            NSLog(@"senses big guy is on right");
+            
+            Kmonster.position = ccp(-Kmonster.contentSize.width/2, actualY);
+            [self addChild:Kmonster];
+            [Kmonsters addObject:Kmonster];
+                    
+            // Create the actions
+            CCMoveTo * actionMoveRight = [CCMoveTo actionWithDuration:actualDuration2
+                                                                     position:ccp(winSize.width + Kmonster.contentSize.width/2, actualY)];
+            // CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
+            //[node removeFromParentAndCleanup:YES];
+            //}];
+                    
+            [Kmonster runAction:[CCSequence actions:actionMoveRight, nil]];
+        }
     }
-    
-    // Create the monster slightly off-screen along the right edge,
-    // and along a random position along the Y axis as calculated above
-    Kmonster.position = ccp(winSize.width + Kmonster.contentSize.width/2, actualY);
-    [self addChild:Kmonster];
-    [Kmonsters addObject:Kmonster];
-    
-    // Determine speed of the monster
-    int minDuration2 = 3.0;
-    int maxDuration2 = 5.0;
-    int rangeDuration2 = maxDuration2 - minDuration2;
-    int actualDuration2 = (arc4random() % rangeDuration2) + minDuration2;
-    
-    // Create the actions
-    CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration2
-                                                position:ccp(-Kmonster.contentSize.width/2, actualY)];
-   // CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
-        //[node removeFromParentAndCleanup:YES];
-    //}];
-    
-        [Kmonster runAction:[CCSequence actions:actionMove, nil]];
 }
 
 -(void) addGoodGuy
@@ -367,31 +397,42 @@
 
 -(void) addBigGoodGuy
 {
+    
     CGSize winSize = [CCDirector sharedDirector].winSize;
-    int minX = 30;
-    int maxX = 130;
-    int rangeX = maxX - minX;
-    int actualX = arc4random() % rangeX + minX;
+    goodGuy = [[Character alloc] initWithBigGoodGuyImage];
+    if(arc4random() % 2 == 0)
+    {
+        bigGoodGuyMinX = 30;
+        bigGoodGuyMaxX = 130;
+        bigGoodGuyDirection = 1;
+    }
+    if(arc4random() % 2 == 1)
+    {
+        bigGoodGuyMinX = 350;
+        bigGoodGuyMaxX = 450;
+        bigGoodGuyDirection = 2;
+    }
+    int rangeX = bigGoodGuyMaxX - bigGoodGuyMinX;
+    int actualX = arc4random() % rangeX + bigGoodGuyMinX;
     
     minDuration = 9.0;
     maxDuration = 11.0;
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
-    enemy = [[Character alloc] initWithBigGoodGuyImage];
-    enemy.scale=.4;
-    enemy.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
-     enemy.color = ccc3(0, 255, 0);
-    [self addChild:enemy];
-    [goodGuys addObject:enemy];
+    goodGuy = [[Character alloc] initWithBigGoodGuyImage];
+    goodGuy.scale=.4;
+    goodGuy.position = CGPointMake(actualX, winSize.height);
+    goodGuy.color = ccc3(0, 255, 0);
+    [self addChild:goodGuy];
+    [goodGuys addObject:goodGuy];
     bigGoodGuysCounter++;
-    //[bigGoodGuys addObject:enemy];
-    
     CCMoveTo *actionMove = [CCMoveTo actionWithDuration:actualDuration
-                                               position:ccp(actualX, -enemy.contentSize.height/2)];
-    [enemy runAction:actionMove];
+                                               position:ccp(actualX, -goodGuy.contentSize.height/2)];
+    [goodGuy runAction:actionMove];
 }
 
+    
 -(void) addBigMonster
 {
     // Determine where to spawn the monster along the X axis
@@ -430,6 +471,7 @@
 {
 	if ((self = [super init]))
 	{
+        [self addBaseBars];
         [self addBases];
         [self changeLevel];
         //bear animations
@@ -510,11 +552,15 @@
         randNum = 0;
         KmonsterCounter = 0;
         bigGoodGuysCounter = 0;
+        waveChangeCounter = 0;
+        bigGoodGuyMaxX = 0;
+        bigGoodGuyMinX = 0;
         //immunityFramecount = 100;
         KmonsterMinY = 250;
         KmonsterMaxY = 310;
         //deathFramecount = 60 * 30;
         //timeRemaining = 30;
+        bigGoodGuyDirection = 0;
         pointsFramecount = 0;
         score = 1;
         enemiesPassed = 0;
@@ -529,10 +575,13 @@
         Scenario3 = false;
         Scenario4 = false;
         isWalking = true;
+        canUseJet = true;
+        waveChanging = false;
         wave=1;
          
         NSNumber *highScore = [NSNumber numberWithInteger:0];
         [[NSUserDefaults standardUserDefaults] setObject:highScore forKey:@"highScore"];
+        firstTime = true;
         
 //        Modifies frequency
         goodGuyFramecount = 200 - (wave * 10);
@@ -708,10 +757,10 @@
         [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameOverLayer alloc] init]];
     }
     */
-    [self ScenarioGenerator];
-    [self CreateScenario];
+
     
     framecount++;
+    
     
 //    if([badGuysBottom count] > 0 && [goodGuysBottom count] == 0)
 //    {
@@ -729,7 +778,27 @@
 //        score += (int)(pointsFramecount/60);
 //    }
     
-    if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true)
+    
+    if(waveChanging == true)
+    {
+        waveChangeCounter++;
+        if(waveChangeCounter == 5)
+        {
+            [self waveChangeAnimation];
+        } 
+        if (waveChangeCounter == 300)
+        {
+            waveChanging = false;
+            waveChangeCounter = 0;
+        }
+    }
+    
+    else
+    {
+        [self ScenarioGenerator];
+        [self CreateScenario];
+    
+    if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true && waveChanging == false)
     {
         if((firstHeli == true || helicopterDelayCounter % 200 == 0) && (firstZigZag == true || zigZagDelayCounter % 250 == 0) && (firstBigMonster == true || bigMonsterDelayCounter % 200 == 0))
         {
@@ -738,6 +807,7 @@
             if(framecount % goodGuyFramecount == 0)
             {
                 [self addGoodGuy];
+                firstTime = false;
             }
         }
     
@@ -810,7 +880,7 @@
     
     if([goodGuysBottom count] <= 2)
     {
-      [self goodBaseCollisions];  
+      [self goodBaseCollisions];
     }
     if( [badGuysBottom count] <= 2)
     {
@@ -1094,6 +1164,7 @@
     {
         truckCount = 0;
         badReinforcementCount = 0;
+    }
     }
     
 }
@@ -1464,7 +1535,7 @@
                    // NSLog(@"intersect");
                     if (Kamikaze.position.y < 315)
                          
-                        if(((Character*)goodGuy).health == 1)
+                        if(((Character*)goodGuy).health <= 3)
                         {
                             [deadKmonsters addObject:Kmonster];
                             [deadGoodGuys addObject:goodGuy];
@@ -1475,7 +1546,7 @@
                         }
                         else
                         {
-                            ((Character*)goodGuy).health--;
+                            ((Character*)goodGuy).health -= 3;
                             [deadKmonsters addObject:Kmonster];
                         }
                     }
@@ -1603,6 +1674,7 @@
                     goodBottom.anchorPoint = CGPointZero;
                     ((Character*)goodBottom).health = ((Character*)goodGuy).health;
                     int posHeight = -14 + (8 * ((Character*)goodBottom).row);
+
                     goodBottom.position = ccp(0, posHeight);
                     goodBottom.scale=.3;
                        goodBottom.color = ccc3(0, 255, 0);
@@ -1725,6 +1797,7 @@
                         badBottom = [[Character alloc] initWithBadBottomImage];
                         ((Character*)badBottom).row = arc4random() % 5 + 1;
                         badBottom.anchorPoint = CGPointZero;
+                        ((Character*)badBottom).health = ((Character*)badGuy).health;
                         badBottom.scale=.15;
                         int posHeight = -8 + (8 * ((Character*)badBottom).row);
                         badBottom.position = ccp(460, posHeight);
@@ -1738,6 +1811,7 @@
                         badBottom = [[Character alloc] initWithBadBottomImage];
                         ((Character*)badBottom).row = arc4random() % 5 + 1;
                         badBottom.anchorPoint = CGPointZero;
+                        ((Character*)badBottom).health = ((Character*)badGuy).health;
                         badBottom.scale=.15;
                         int posHeight = -8 + (8 * ((Character*)badBottom).row);
                         badBottom.position = ccp(460, posHeight);
@@ -1751,6 +1825,7 @@
                         badBottom = [[Character alloc] initWithZigZagImage];
                         ((Character*)badBottom).row = arc4random() % 5 + 1;
                         badBottom.anchorPoint = CGPointZero;
+                        ((Character*)badBottom).health = ((Character*)badGuy).health * 2;
                         badBottom.scale=.15;
                         int posHeight = -8 + (8 * ((Character*)badBottom).row);
                         badBottom.position = ccp(460, posHeight);
@@ -1764,6 +1839,7 @@
                     badBottom = [[Character alloc] initWithKnifeBadGuyImage];
                     ((Character*)badBottom).row = arc4random() % 5 + 1;
                     badBottom.anchorPoint = CGPointZero;
+                    ((Character*)badBottom).health = ((Character*)badGuy).health * 1.5;
                     badBottom.scale=.15;
                     int posHeight = -8 + (8 * ((Character*)badBottom).row);
                     badBottom.position = ccp(460, posHeight);
@@ -1777,6 +1853,7 @@
                     badBottom = [[Character alloc] initWithFastShooterBadGuyImage];
                     ((Character*)badBottom).row = arc4random() % 5 + 1;
                     badBottom.anchorPoint = CGPointZero;
+                    ((Character*)badBottom).health = ((Character*)badGuy).health;
                     badBottom.scale=.15;
                     int posHeight = -8 + (8 * ((Character*)badBottom).row);
                     badBottom.position = ccp(460, posHeight);
@@ -2098,6 +2175,8 @@
 
 -(void)CreateScenario
 {
+   if(waveChanging != true)
+   {
     if(Scenario1 == true)
     {
        // NSLog(@"Scenario1 == TRUE");
@@ -2115,6 +2194,7 @@
     }
     if(Scenario2 == true)
     {
+        //NSLog(@"scenario 2 is true;");
         if(framecount % (int)(helicopterFramecount ) == 0)
         {
           //  NSLog(@"spawning big good guy");
@@ -2142,23 +2222,32 @@
             [self addBigMonster];
             bigMonstercount++;
         }
-        
+        randNum=0; 
     }
-    randNum=0;
+   
+//    if(Scenario4 ==true)
+//    {
+//    
+//    }
+//    randNum=0;
+   }
 }
 
 -(void)generateRandomNumber
 {
     if (wave == 1)
     {
+        NSLog(@"wave = 1");
         scenarioNumber = 2;
     }
     if(wave == 2)
     {
+        NSLog(@"wave = 2");
         scenarioNumber = 1;
     }
     if (wave == 3)
     {
+        NSLog(@"wave = 3");
         scenarioNumber = 3;
     }
     if (wave >= 4)
@@ -2523,7 +2612,7 @@
                     {
                         if(framecount % 50 == 0)
                         {
-                            NSLog(@"bad fast guy shooting");
+                            //NSLog(@"bad fast guy shooting");
                             float badX = badBottom.position.x;
                             float badY = badBottom.position.y;
                             
@@ -2538,7 +2627,7 @@
                                                                       position:ccp(-2000, badBullet.position.y)];
                             
                             [badBullet runAction:shootLeft];
-                            NSLog(@"bad bullet shot left");
+                            //NSLog(@"bad bullet shot left");
                         }
                     }
                     
@@ -2546,7 +2635,7 @@
                     {
                         if(framecount % 100 == 0)
                         {
-                            NSLog(@"bad guy shooting");
+                            //NSLog(@"bad guy shooting");
                             float badX = badBottom.position.x;
                             float badY = badBottom.position.y;
                     
@@ -2563,7 +2652,7 @@
                                                                       position:ccp(-2000, badBullet.position.y)];
                     
                             [badBullet runAction:shootLeft];
-                            NSLog(@"bad bullet shot left");
+                            //NSLog(@"bad bullet shot left");
                     }
                 }
                 }
@@ -2574,7 +2663,7 @@
                     {
                         if (framecount % 50 == 0)
                         {
-                        NSLog(@" good fast guy shooting");
+                        //NSLog(@" good fast guy shooting");
                         float goodX = goodBottom.position.x;
                         float goodY = goodBottom.position.y;
                         
@@ -2596,7 +2685,7 @@
                         if(framecount % 100 == 0)
                         {
                                 
-                        NSLog(@"good guy shooting");
+                        //NSLog(@"good guy shooting");
                         float goodX = goodBottom.position.x;
                         float goodY = goodBottom.position.y;
                                 
@@ -2741,7 +2830,7 @@
                                     [deadBadBullets addObject:badBullet];
 //                                    [badBulletArray removeObjectAtIndex:j];
 //                                    [self removeChild:bullet cleanup:YES];
-                                    NSLog(@"good guy health decremented");
+                                    //NSLog(@"good guy health decremented");
                                 }
                    }
                 }
@@ -2825,6 +2914,8 @@
 
 -(void) airstrike: (CCMenuItemImage *)PowerUpButton3
 {
+    if(canUseJet == true)
+    {
     bomber = [[Character alloc] initWithGoodHelicopterImage];
     bomber.scale=.5;
     
@@ -2840,6 +2931,8 @@
     position:ccp(500, bomber.position.y)];
 
     [bomber runAction:actionMove];
+    canUseJet = false;
+    }
 }
 
 -(void)reinforcements: (CCMenuItemImage *) PowerUpButton2
@@ -2911,33 +3004,33 @@
 
 
 
--(void) drawBoundingBox: (CGRect) rect
-
-{
-    
-    CGPoint vertices[4]={
-        
-        ccp(rect.origin.x,rect.origin.y),
-        
-        ccp(rect.origin.x+rect.size.width,rect.origin.y),
-        
-        ccp(rect.origin.x+rect.size.width,rect.origin.y+rect.size.height),
-        
-        ccp(rect.origin.x,rect.origin.y+rect.size.height),
-        
-    };
-    
-    ccDrawPoly(vertices, 4, YES);
-    
-}
+//-(void) drawBoundingBox: (CGRect) rect
+//
+//{
+//    
+//    CGPoint vertices[4]={
+//        
+//        ccp(rect.origin.x,rect.origin.y),
+//        
+//        ccp(rect.origin.x+rect.size.width,rect.origin.y),
+//        
+//        ccp(rect.origin.x+rect.size.width,rect.origin.y+rect.size.height),
+//        
+//        ccp(rect.origin.x,rect.origin.y+rect.size.height),
+//        
+//    };
+//    
+//    ccDrawPoly(vertices, 4, YES);
+//    
+//}
 
 -(void) addBases
 {
     goodBase = [[Character alloc] initWithGoodGuyBaseImage];
     badBase =[[Character alloc] initWithBadGuyBaseImage];
-    goodBase.position = ccp(35,45);
-    badBase.position = ccp(460,45);
-    goodBase.scale =.4;
+    goodBase.position = ccp(40,35);
+    badBase.position = ccp(450,37);
+    goodBase.scale =.35;
     badBase.scale = .4;
      goodBase.color = ccc3(0, 255, 0);
      badBase.color = ccc3(255, 0, 0);
@@ -2957,6 +3050,8 @@
 }
 -(void) addWave
 {
+    NSMutableArray *eraseGoodGuys = [[NSMutableArray alloc] init];
+    NSMutableArray *eraseBadGuys = [[NSMutableArray alloc] init];
     NSMutableArray *eraseGoodGuysBottom = [[NSMutableArray alloc] init];
     NSMutableArray *eraseBadGuysBottom = [[NSMutableArray alloc] init];
     
@@ -2965,6 +3060,35 @@
     GameData *data = [GameData sharedData];
     data.score = wave; 
    
+    for(int x = 0; x<[badGuys count]; x++)
+    {
+        badGuy = [badGuys objectAtIndex:x];
+        [eraseBadGuys addObject:badGuy];
+    }
+    
+    for (CCSprite *s in eraseBadGuys)
+    {
+        [badGuys removeObject:s];
+        [self removeChild:s cleanup:YES];
+    }
+    [eraseBadGuys removeAllObjects];
+    
+    
+    
+    for(int i = 0; i<[goodGuys count]; i++)
+    {
+        goodGuy = [goodGuys objectAtIndex:i];
+        [eraseGoodGuys addObject:goodGuy];
+    }
+    
+    for (CCSprite *s in eraseGoodGuys)
+    {
+        [goodGuys removeObject:s];
+        [self removeChild:s cleanup:YES];
+    }
+    [eraseGoodGuys removeAllObjects];
+    
+    
     for(int x = 0; x<[badGuysBottom count]; x++)
     {
         badBottom = [badGuysBottom objectAtIndex:x];
@@ -2990,19 +3114,24 @@
         [self removeChild:s cleanup:YES];
     }
 
+    
     [eraseGoodGuysBottom removeAllObjects];
     
     ((Character*)badBase).health=10;
     [badBaseHealthLabel setString:[NSString stringWithFormat:@"Enemy Base Health: %d",((Character*) badBase).health]];
     //Scenario4 = true;
     //[self CreateScenario];
-   
-
+    waveChanging = true;
+    
+    NSLog(@"Wave changing is true");
+    [badBaseHealthLabel setString:[NSString stringWithFormat:@"Enemy Base Health: %d",((Character*) badBase).health]];
+    
 }
 -(void) subtractGoodBaseHealth
 {
     ((Character*) goodBase).health --;
     [goodBaseHealthLabel setString:[NSString stringWithFormat:@"Your Base Health: %d",((Character*) goodBase).health]];
+    
     
 }
 -(void) subtractBadBaseHealth
@@ -3010,6 +3139,7 @@
     ((Character*) badBase).health --;
     
     [badBaseHealthLabel setString:[NSString stringWithFormat:@"Enemy Base Health: %d",((Character*) badBase).health]];
+    
 }
 
 -(void)goodBaseCollisions
@@ -3028,7 +3158,8 @@
                 {
                     if(framecount % 50 == 0)
                     {
-                        [self subtractGoodBaseHealth];
+                    [self subtractGoodBaseHealth];
+                    [self subtractGoodBarHealth];
                     }
                 }
                 if(((Character*)goodBase).health == 0)
@@ -3051,6 +3182,7 @@
                 {
                     [self subtractGoodBaseHealth];
                     [deadBadBullets addObject:badBullet];
+                    [self subtractGoodBarHealth];
                 }
                 if(((Character*)goodBase).health == 0)
                 {
@@ -3091,7 +3223,8 @@
                 {
                     if(framecount % 50 == 0)
                     {
-                        [self subtractBadBaseHealth];
+                    [self subtractBadBaseHealth];
+                        [self subtractBadBarHealth];
                     }
                 }
                 if(((Character*)badBase).health == 0)
@@ -3116,6 +3249,7 @@
                 {
                     [self subtractBadBaseHealth];
                     [deadGoodBullets addObject:goodBullet];
+                    [self subtractBadBarHealth];
                 }
                 if(((Character*)badBase).health == 0)
                 {
@@ -3136,6 +3270,216 @@
     [deadGoodBullets removeAllObjects];
 }
 
+-(void) waveChangeAnimation
+{
+    if(firstTime == false)
+    {
+    CCSprite *waveImage = [CCSprite spriteWithFile:@"wave.png"];
+    waveImage.anchorPoint = CGPointZero;
+    waveImage.position = CGPointMake(50.0f, 350.0f);
+    waveImage.scale = 1;
+    [self addChild:waveImage z:1];
+
+    
+    CCSprite *complete = [CCSprite spriteWithFile:@"complete.png"];
+    complete.anchorPoint = CGPointZero;
+    complete.position = CGPointMake(200.0f, 350.0f);
+    complete.scale = 1;
+    [self addChild:complete z:1];
+
+    id waveDrop = [CCMoveTo actionWithDuration:1.0 position:ccp(waveImage.position.x, 165)];
+    id completeDrop = [CCMoveTo actionWithDuration:1.0 position:ccp(complete.position.x, 165)];
+    id waveLeave = [CCMoveTo actionWithDuration:2.0 position:ccp(500, 165)];
+    id completeLeave = [CCMoveTo actionWithDuration:2.0 position:ccp(650, 165)];
+
+    id waveDelay = [CCDelayTime actionWithDuration:2.0f];
+
+    id completeDelay = [CCDelayTime actionWithDuration:1.0f];
+    
+    id completeDropDelay = [CCDelayTime actionWithDuration:1.0f];
+
+
+    [waveImage runAction:[CCSequence actions:waveDrop, waveDelay, waveLeave, nil]];
+    
+    [complete runAction:[CCSequence actions:completeDropDelay, completeDrop, completeDelay, completeLeave, nil]];
+
+    if(waveImage.position.x > 480)
+    {
+    [self removeChild:waveImage cleanup:YES];
+    }
+    
+    if(complete.position.x > 480)
+    {
+    [self removeChild:complete cleanup:YES];
+    }
+    }
+
+}
+
+-(void) addBaseBars
+{
+    
+    CCSprite *goodGreen = [CCSprite spriteWithFile:@"whiteBar.png"];
+    goodGreen.color = ccc3(0, 255, 0);
+    goodGreen.anchorPoint = CGPointZero;
+    goodGreen.position = ccp(0, 80);
+    goodGreen.scale = .3;
+    [self addChild:goodGreen z:10];
+    
+    CCSprite *badGreen = [CCSprite spriteWithFile:@"whiteBar.png"];
+    badGreen.color = ccc3(0, 255, 0);
+    badGreen.anchorPoint = CGPointZero;
+    badGreen.position = ccp(410, 80);
+    badGreen.scale = .3;
+    [self addChild:badGreen z:10];
+    
+    
+}
+
+-(void) subtractGoodBarHealth
+{
+    CCSprite *goodRed = [CCSprite spriteWithFile:@"whiteBar.png"];
+    goodRed.color = ccc3(255, 0, 0);
+    goodRed.anchorPoint = CGPointZero;
+    goodRed.scale = .3;
+    
+    float healthcounter = (goodRed.contentSize.width * .3) / 10;
+    
+    if(((Character*)goodBase).health == 10)
+    {
+        goodRed.position = ccp(-70, 80);
+    }
+    
+    if(((Character*)goodBase).health == 9)
+    {
+        goodRed.position = ccp(-70 + healthcounter, 80);
+    }
+    
+    if(((Character*)goodBase).health == 8)
+    {
+        goodRed.position = ccp(-70 + healthcounter * 2, 80);
+    }
+    
+    if(((Character*)goodBase).health == 7)
+    {
+        goodRed.position = ccp(-70 + healthcounter * 3, 80);
+    }
+    
+    if(((Character*)goodBase).health == 6)
+    {
+        goodRed.position = ccp(-70 + healthcounter * 4, 80);
+    }
+    if(((Character*)goodBase).health == 5)
+    {
+        goodRed.position = ccp(-70 + healthcounter * 5, 80);
+    }
+    
+    if(((Character*)goodBase).health == 4)
+    {
+        goodRed.position = ccp(-70 + healthcounter * 6, 80);
+    }
+    
+    if(((Character*)goodBase).health == 3)
+    {
+        goodRed.position = ccp(-70 + healthcounter * 7, 80);
+    }
+    
+    if(((Character*)goodBase).health == 2)
+    {
+        goodRed.position = ccp(-70 + healthcounter * 8, 80);
+    }
+    
+    if(((Character*)goodBase).health == 1)
+    {
+        goodRed.position = ccp(-70 + healthcounter * 9, 80);
+    }
+    if(((Character*)goodBase).health == 0)
+    {
+//        goodRed.position = ccp(healthcounter * 10, 80);
+        [self removeChild:goodRed cleanup:YES];
+
+    }
+    
+    
+    [self addChild:goodRed z:11];
+    
+    
+}
+
+-(void) subtractBadBarHealth
+{
+    CCSprite *badRed = [CCSprite spriteWithFile:@"whiteBar.png"];
+    badRed.color = ccc3(255, 0, 0);
+    badRed.anchorPoint = CGPointZero;
+    badRed.position = ccp(480, 80);
+    badRed.scale = .3;
+    
+    float healthcounter = (badRed.contentSize.width * .3) / 10;
+
+    
+    if(((Character*)badBase).health == 10)
+    {
+        badRed.position = ccp(480, 80);
+    }
+    
+    if(((Character*)badBase).health == 9)
+    {
+        badRed.position = ccp(480 - healthcounter, 80);
+        
+    }
+    
+    if(((Character*)badBase).health == 8)
+    {
+        badRed.position = ccp(480 - healthcounter * 2, 80);
+    }
+    
+    if(((Character*)badBase).health == 7)
+    {
+        badRed.position = ccp(480 - healthcounter * 3, 80);
+    }
+    
+    if(((Character*)badBase).health == 6)
+    {
+        badRed.position = ccp(480 - healthcounter * 4, 80);
+    }
+    if(((Character*)badBase).health == 5)
+    {
+        badRed.position = ccp(480 - healthcounter * 5, 80);
+    }
+    
+    if(((Character*)badBase).health == 4)
+    {
+        badRed.position = ccp(480 - healthcounter * 6, 80);
+    }
+    
+    if(((Character*)badBase).health == 3)
+    {
+        badRed.position = ccp(480 - healthcounter * 7, 80);
+    }
+    
+    if(((Character*)badBase).health == 2)
+    {
+        badRed.position = ccp(480 - healthcounter * 8, 80);
+    }
+    
+    if(((Character*)badBase).health == 1)
+    {
+        badRed.position = ccp(480 - healthcounter * 9, 80);
+    }
+    if(((Character*)badBase).health == 0)
+    {
+//        badRed.position = ccp(480 - healthcounter * 10, 80);
+        [self removeChild:badRed cleanup:YES];
+        NSLog(@"bad base health is 0");
+    }
+    
+    
+    [self addChild:badRed z:11];
+    
+
+}
+
 
 @end
+
 

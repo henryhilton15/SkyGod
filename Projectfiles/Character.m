@@ -18,6 +18,8 @@
 @synthesize immunity;
 @synthesize row;
 @synthesize melee;
+@synthesize left;
+@synthesize right;
 
 -(id) initWithBigMonsterImage
 {
@@ -44,6 +46,8 @@
         immunity = 0;
         row = 0;
         melee = false;
+        left = false;
+        right = false;
     }
     return self;
 }
@@ -152,7 +156,7 @@
     if(self = [super initWithFile:@"cat1-topdown.png"])
     {
         worth = 1;
-        health = 5;
+        health = 2;
         type = SUPER_ZIG_ZAG_GUY;
         immunity = 0;
         row = 0;

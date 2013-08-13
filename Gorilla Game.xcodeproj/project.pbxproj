@@ -11,6 +11,8 @@
 		2D3705951784D2850057EB8E /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3705941784D2850057EB8E /* MainMenuLayer.m */; };
 		2D37059A1784D6DA0057EB8E /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3705991784D6DA0057EB8E /* GameLayer.m */; };
 		2D37059D1784D99D0057EB8E /* GameOverLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D37059C1784D99D0057EB8E /* GameOverLayer.m */; };
+		2D568D6F17BAA98100CF86DA /* wave.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D568D6E17BAA98100CF86DA /* wave.png */; };
+		2D568D7117BAA98800CF86DA /* complete.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D568D7017BAA98800CF86DA /* complete.png */; };
 		2D808BCF1795F5BA006EADF5 /* animation_knight-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808A7C1795F5BA006EADF5 /* animation_knight-1.png */; };
 		2D808BD01795F5BA006EADF5 /* background_desert-topdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808A7D1795F5BA006EADF5 /* background_desert-topdown.png */; };
 		2D808BD11795F5BA006EADF5 /* background_grass-top.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808A7E1795F5BA006EADF5 /* background_grass-top.png */; };
@@ -394,6 +396,8 @@
 		2DAA40F217AC271B00BA014B /* send-button-instate.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DAA40B717AC271B00BA014B /* send-button-instate.png */; };
 		2DAA40F317AC271B00BA014B /* send-field-landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DAA40B817AC271B00BA014B /* send-field-landscape.png */; };
 		2DAA40F617AC319B00BA014B /* GameData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAA40F517AC319B00BA014B /* GameData.m */; };
+		2DCAA8D917BAAB2A0099A127 /* whiteBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DCAA8D817BAAB2A0099A127 /* whiteBar.png */; };
+		2DCAA8DB17BAB1070099A127 /* title.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DCAA8DA17BAB1070099A127 /* title.png */; };
 		2DD0C65F178F77BA008AE39F /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DD0C65E178F77BA008AE39F /* images.png */; };
 		2DD0C661178F783F008AE39F /* disasteralert_icon_114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DD0C660178F783F008AE39F /* disasteralert_icon_114x114.png */; };
 		C3297C0517975CC600A09343 /* knightFramesFlipped.png in Resources */ = {isa = PBXBuildFile; fileRef = C3297C0417975CC600A09343 /* knightFramesFlipped.png */; };
@@ -466,6 +470,8 @@
 		2D3705991784D6DA0057EB8E /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
 		2D37059B1784D99C0057EB8E /* GameOverLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverLayer.h; sourceTree = "<group>"; };
 		2D37059C1784D99D0057EB8E /* GameOverLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverLayer.m; sourceTree = "<group>"; };
+		2D568D6E17BAA98100CF86DA /* wave.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wave.png; sourceTree = "<group>"; };
+		2D568D7017BAA98800CF86DA /* complete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = complete.png; sourceTree = "<group>"; };
 		2D808A7C1795F5BA006EADF5 /* animation_knight-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "animation_knight-1.png"; sourceTree = "<group>"; };
 		2D808A7D1795F5BA006EADF5 /* background_desert-topdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_desert-topdown.png"; sourceTree = "<group>"; };
 		2D808A7E1795F5BA006EADF5 /* background_grass-top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_grass-top.png"; sourceTree = "<group>"; };
@@ -851,6 +857,8 @@
 		2DAA40B817AC271B00BA014B /* send-field-landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send-field-landscape.png"; sourceTree = "<group>"; };
 		2DAA40F417AC319B00BA014B /* GameData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameData.h; sourceTree = "<group>"; };
 		2DAA40F517AC319B00BA014B /* GameData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameData.m; sourceTree = "<group>"; };
+		2DCAA8D817BAAB2A0099A127 /* whiteBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteBar.png; sourceTree = "<group>"; };
+		2DCAA8DA17BAB1070099A127 /* title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title.png; sourceTree = "<group>"; };
 		2DD0C65E178F77BA008AE39F /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
 		2DD0C660178F783F008AE39F /* disasteralert_icon_114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disasteralert_icon_114x114.png; sourceTree = "<group>"; };
 		C3297C0417975CC600A09343 /* knightFramesFlipped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knightFramesFlipped.png; sourceTree = "<group>"; };
@@ -978,6 +986,10 @@
 		2D808A7B1795F5BA006EADF5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2DCAA8DA17BAB1070099A127 /* title.png */,
+				2DCAA8D817BAAB2A0099A127 /* whiteBar.png */,
+				2D568D7017BAA98800CF86DA /* complete.png */,
+				2D568D6E17BAA98100CF86DA /* wave.png */,
 				C3E69B7917A2F8FE006C0912 /* wall.png */,
 				C3297C0617975CDA00A09343 /* knightframesflipped.plist */,
 				C3297C0417975CC600A09343 /* knightFramesFlipped.png */,
@@ -2244,6 +2256,10 @@
 				2DAA40F117AC271B00BA014B /* send-button-inactive.png in Resources */,
 				2DAA40F217AC271B00BA014B /* send-button-instate.png in Resources */,
 				2DAA40F317AC271B00BA014B /* send-field-landscape.png in Resources */,
+				2D568D6F17BAA98100CF86DA /* wave.png in Resources */,
+				2D568D7117BAA98800CF86DA /* complete.png in Resources */,
+				2DCAA8D917BAAB2A0099A127 /* whiteBar.png in Resources */,
+				2DCAA8DB17BAB1070099A127 /* title.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
