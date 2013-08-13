@@ -11,6 +11,7 @@
 #import "MainMenuLayer.h"
 #import "GameLayer.h"
 #import "SimpleAudioEngine.h"
+#import "GameData.h"
 
 @implementation GameOverLayer
 
@@ -31,7 +32,7 @@
                                                             selectedImage: @"button_backbutton.png"
                                                                    target:self
                                                                  selector:@selector(endGame:)];
-        endbutton.position = CGPointMake(0, 0);
+        endbutton.position = CGPointMake(100, 0);
         
         CCMenu *myMenu = [CCMenu menuWithItems:endbutton, /* restartButton, */  nil];
         [self addChild:myMenu];
@@ -48,9 +49,30 @@
         GameOverLabel.position = ccp(240,300);
         [self addChild:GameOverLabel z:4];
         
-    
+        GameData *data = [GameData sharedData];
+        int score = data.score;
+        NSString *scoreString = [NSString stringWithFormat:@"score: %d", score];
         
+        scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Marker Felt" fontSize:40];
+        scoreLabel.position = ccp(240,50);
+        //scoreLabel.color = ccBLUE;
+        [self addChild:scoreLabel z:4];
         
+        NSNumber *currentHighScore = [[NSUserDefaults standardUserDefaults] objectForKey:@"highScore"];
+        
+        if(score > [currentHighScore intValue])
+        {
+            NSNumber* newHighScore = [NSNumber numberWithInt:score];
+            [[NSUserDefaults standardUserDefaults] setObject:newHighScore forKey: @"highScore"];
+            newHighScoreLabel = [CCLabelTTF labelWithString:@"New High Score!" fontName:@"Marker Felt" fontSize:36];
+            newHighScoreLabel.position = ccp(100,160);
+            [self addChild:newHighScoreLabel z:4];
+            NSLog(@"new high score!");
+        }
+        else
+        {
+            
+        }
     }
     return self;
 }
@@ -63,9 +85,7 @@
 {
     [[CCDirector sharedDirector] replaceScene: (CCScene*)[[MainMenuLayer alloc] init]];
 }
+
 @end
-
-
-
 
 

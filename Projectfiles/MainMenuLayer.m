@@ -11,8 +11,6 @@
 #import "GameLayer.h"
 #import "Store.h"
 
-
-
 @implementation MainMenuLayer
 
 -(id) init
@@ -31,10 +29,18 @@
                                                                 selectedImage: @"shop-button.png"
                                                                  target:self
                                                                    selector:@selector(enterStore:)];
+        CCMenuItemImage *moreGamesButton = [CCMenuItemImage itemWithNormalImage:@"star.png" selectedImage:@"star.png" target:self selector:@selector(moreGames:)];
+        moreGamesButton.scale = 0.4;
+        moreGamesButton.position = CGPointMake(125, -75);
+        
+         CCMenuItemImage *aboutButton = [CCMenuItemImage itemWithNormalImage:@"superhero.png" selectedImage:@"superhero.png" target:self selector:@selector(about:)];
+        aboutButton.scale = 0.4;
+        aboutButton.position = CGPointMake(-125, -75);
+                                        
         StoreButton.scale=0.5;
         StoreButton.position = CGPointMake(0, -100);
         
-        CCMenu *myMenu = [CCMenu menuWithItems:StoreButton,startButton, nil];
+        CCMenu *myMenu = [CCMenu menuWithItems:StoreButton,startButton, moreGamesButton, aboutButton, nil];
         [self addChild:myMenu];
         
         
@@ -60,6 +66,16 @@
 -(void) enterStore: (CCMenuItemImage *) menuItem
 {
     [[CCDirector sharedDirector] replaceScene: (CCScene*)[[Store alloc] init]];
+}
+
+-(void) moreGames: (CCMenuItem *)menuItem
+{
+    [MGWU displayCrossPromo];
+}
+
+-(void) about: (CCMenuItem *)menuItem
+{
+    [MGWU displayAboutPage];
 }
 @end
 

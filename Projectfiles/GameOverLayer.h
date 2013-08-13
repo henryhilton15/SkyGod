@@ -11,6 +11,8 @@
 @interface GameOverLayer : CCLayer
 {
     CCLabelTTF *GameOverLabel;
+    CCLabelTTF *scoreLabel;
+    CCLabelTTF *newHighScoreLabel;
 }
 
 -(id) init;
