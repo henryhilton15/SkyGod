@@ -162,6 +162,7 @@
             // Create the monster slightly off-screen along the right edge,
             // and along a random position along the Y axis as calculated above
             Kmonster.position = ccp(winSize.width + Kmonster.contentSize.width/2, actualY);
+            Kmonster.color = ccc3(255, 0, 0);
             [self addChild:Kmonster];
             [Kmonsters addObject:Kmonster];
                     
@@ -180,6 +181,7 @@
             NSLog(@"senses big guy is on right");
             
             Kmonster.position = ccp(-Kmonster.contentSize.width/2, actualY);
+            Kmonster.color = ccc3(255, 0, 0);
             [self addChild:Kmonster];
             [Kmonsters addObject:Kmonster];
                     
@@ -534,6 +536,8 @@
         goodBulletArray = [[NSMutableArray alloc] init];
         badBulletArray = [[NSMutableArray alloc] init];
         bombers = [[NSMutableArray alloc] init];
+        badBars = [[NSMutableArray alloc] init];
+
         framecount = 0;
         //monstercount = 0;
         //numberOfEnemies = 10;
@@ -3180,6 +3184,17 @@
 
 -(void) waveChangeAnimation
 {
+    
+    for(int x=0; x<[badBars count]; x++)
+    {
+        badRed = [badBars objectAtIndex:x];
+        [self removeChild:badRed cleanup:YES];
+        [badBars removeObjectAtIndex:x];
+    }
+        
+        
+    [self removeChild:badRed];
+    
     if(firstTime == false)
     {
     CCSprite *waveImage = [CCSprite spriteWithFile:@"wave.png"];
@@ -3316,7 +3331,7 @@
 
 -(void) subtractBadBarHealth
 {
-    CCSprite *badRed = [CCSprite spriteWithFile:@"whiteBar.png"];
+    badRed = [CCSprite spriteWithFile:@"whiteBar.png"];
     badRed.color = ccc3(255, 0, 0);
     badRed.anchorPoint = CGPointZero;
     badRed.position = ccp(480, 80);
@@ -3325,10 +3340,10 @@
     float healthcounter = (badRed.contentSize.width * .3) / 10;
 
     
-    if(((Character*)badBase).health == 10)
-    {
-        badRed.position = ccp(480, 80);
-    }
+//    if(((Character*)badBase).health == 10)
+//    {
+//        badRed.position = ccp(480, 80);
+//    }
     
     if(((Character*)badBase).health == 9)
     {
@@ -3374,14 +3389,14 @@
     {
         badRed.position = ccp(480 - healthcounter * 9, 80);
     }
-    if(((Character*)badBase).health == 0)
-    {
-//        badRed.position = ccp(480 - healthcounter * 10, 80);
-        [self removeChild:badRed cleanup:YES];
-    }
+//    if(((Character*)badBase).health == 0)
+//    {
+//        badRed.position = ccp(480, 80);
+//    }
     
     
     [self addChild:badRed z:11];
+    [badBars addObject:badRed];
     
 
 }

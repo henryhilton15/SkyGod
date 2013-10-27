@@ -91,6 +91,7 @@
     CCSprite *BadReinforcement;
     CCSprite *goodBase;
     CCSprite *badBase;
+    CCSprite *badRed;
     Rect goodRect;
     Rect badRect;
     //  NSMutableArray *helicopters;
@@ -112,6 +113,7 @@
     NSMutableArray *knightAttackFrames;
     NSMutableArray *tauntingFrames;
     NSMutableArray *GoodGuysToDelete;
+    NSMutableArray *badBars;
     NSString *levelString;
     NSString *enemiesKilledString;
     CGRect badGuyRect;
