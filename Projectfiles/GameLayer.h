@@ -93,7 +93,9 @@
     CCSprite *BadReinforcement;
     CCSprite *goodBase;
     CCSprite *badBase;
+    CCSprite *badRed;
     CCSprite *titleImage;
+    
     Rect goodRect;
     Rect badRect;
     //  NSMutableArray *helicopters;
@@ -115,6 +117,7 @@
     NSMutableArray *knightAttackFrames;
     NSMutableArray *tauntingFrames;
     NSMutableArray *GoodGuysToDelete;
+    NSMutableArray *badBars;
     NSString *levelString;
     NSString *enemiesKilledString;
     CGRect badGuyRect;
@@ -197,4 +200,5 @@
 -(void) addWave;
 -(void) drawBoundingBox: (CGRect) rect;
 -(void) addBaseBars;
+-(void) addBadRedBar;
 @end

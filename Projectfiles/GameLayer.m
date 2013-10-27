@@ -165,6 +165,7 @@
             // Create the monster slightly off-screen along the right edge,
             // and along a random position along the Y axis as calculated above
             Kmonster.position = ccp(winSize.width + Kmonster.contentSize.width/2, actualY);
+            Kmonster.color = ccc3(255, 0, 0);
             [self addChild:Kmonster];
             [Kmonsters addObject:Kmonster];
                     
@@ -183,6 +184,7 @@
             NSLog(@"senses big guy is on right");
             
             Kmonster.position = ccp(-Kmonster.contentSize.width/2, actualY);
+            Kmonster.color = ccc3(255, 0, 0);
             [self addChild:Kmonster];
             [Kmonsters addObject:Kmonster];
                     
@@ -473,6 +475,7 @@
 	{
         [self addBaseBars];
         [self addBases];
+        [self addBadRedBar];
         [self changeLevel];
         //bear animations
         //Load the plist which tells Kobold2D how to properly parse your spritesheet. If on a retina device Kobold2D will automatically use bearframes-hd.plist
@@ -537,6 +540,8 @@
         goodBulletArray = [[NSMutableArray alloc] init];
         badBulletArray = [[NSMutableArray alloc] init];
         bombers = [[NSMutableArray alloc] init];
+        badBars = [[NSMutableArray alloc] init];
+
         framecount = 0;
         //monstercount = 0;
         //numberOfEnemies = 10;
@@ -3117,7 +3122,7 @@
     
     [eraseGoodGuysBottom removeAllObjects];
     
-    ((Character*)badBase).health=10;
+    (((Character*)badBase).health) = 10;
     [badBaseHealthLabel setString:[NSString stringWithFormat:@"Enemy Base Health: %d",((Character*) badBase).health]];
     //Scenario4 = true;
     //[self CreateScenario];
@@ -3129,14 +3134,14 @@
 }
 -(void) subtractGoodBaseHealth
 {
-    ((Character*) goodBase).health --;
+    (((Character*) goodBase).health) --;
     [goodBaseHealthLabel setString:[NSString stringWithFormat:@"Your Base Health: %d",((Character*) goodBase).health]];
     
     
 }
 -(void) subtractBadBaseHealth
 {
-    ((Character*) badBase).health --;
+    (((Character*) badBase).health) --;
     
     [badBaseHealthLabel setString:[NSString stringWithFormat:@"Enemy Base Health: %d",((Character*) badBase).health]];
     
@@ -3272,6 +3277,9 @@
 
 -(void) waveChangeAnimation
 {
+    
+  
+    
     if(firstTime == false)
     {
     CCSprite *waveImage = [CCSprite spriteWithFile:@"wave.png"];
@@ -3332,8 +3340,16 @@
     badGreen.position = ccp(410, 80);
     badGreen.scale = .3;
     [self addChild:badGreen z:10];
-    
-    
+}
+
+-(void) addBadRedBar
+{
+    badRed = [CCSprite spriteWithFile:@"whiteBar.png"];
+    badRed.color = ccc3(255, 0, 0);
+    badRed.anchorPoint = CGPointZero;
+    badRed.scale = .3;
+    badRed.position = ccp(480, 80);
+    [self addChild:badRed z:11];
 }
 
 -(void) subtractGoodBarHealth
@@ -3408,75 +3424,84 @@
 
 -(void) subtractBadBarHealth
 {
-    CCSprite *badRed = [CCSprite spriteWithFile:@"whiteBar.png"];
-    badRed.color = ccc3(255, 0, 0);
-    badRed.anchorPoint = CGPointZero;
-    badRed.position = ccp(480, 80);
-    badRed.scale = .3;
-    
     float healthcounter = (badRed.contentSize.width * .3) / 10;
-
-    
-    if(((Character*)badBase).health == 10)
-    {
-        badRed.position = ccp(480, 80);
-    }
     
     if(((Character*)badBase).health == 9)
     {
-        badRed.position = ccp(480 - healthcounter, 80);
-        
+        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter, 80)];
+        [badRed runAction:barMove];
     }
     
     if(((Character*)badBase).health == 8)
     {
-        badRed.position = ccp(480 - healthcounter * 2, 80);
+        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 2, 80)];
+        [badRed runAction:barMove];
     }
     
     if(((Character*)badBase).health == 7)
     {
-        badRed.position = ccp(480 - healthcounter * 3, 80);
+        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 3, 80)];
+        [badRed runAction:barMove];
     }
     
     if(((Character*)badBase).health == 6)
     {
-        badRed.position = ccp(480 - healthcounter * 4, 80);
+        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 4, 80)];
+        [badRed runAction:barMove];
+
+
     }
     if(((Character*)badBase).health == 5)
     {
-        badRed.position = ccp(480 - healthcounter * 5, 80);
+        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 5, 80)];
+        [badRed runAction:barMove];
+
+
     }
     
     if(((Character*)badBase).health == 4)
     {
-        badRed.position = ccp(480 - healthcounter * 6, 80);
+        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 6, 80)];
+        [badRed runAction:barMove];
+
+
     }
     
     if(((Character*)badBase).health == 3)
     {
-        badRed.position = ccp(480 - healthcounter * 7, 80);
+        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 7, 80)];
+        [badRed runAction:barMove];
+
+
     }
-    
+
     if(((Character*)badBase).health == 2)
     {
-        badRed.position = ccp(480 - healthcounter * 8, 80);
+        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 8, 80)];
+        [badRed runAction:barMove];
+
+
     }
     
     if(((Character*)badBase).health == 1)
     {
-        badRed.position = ccp(480 - healthcounter * 9, 80);
+        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 9, 80)];
+        [badRed runAction:barMove];
     }
+    
     if(((Character*)badBase).health == 0)
     {
-//        badRed.position = ccp(480 - healthcounter * 10, 80);
-        [self removeChild:badRed cleanup:YES];
-        NSLog(@"bad base health is 0");
+        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480, 80)];
+        [badRed runAction:barMove];
+
     }
     
-    
-    [self addChild:badRed z:11];
-    
+    if(((Character*)badBase).health == 10)
+    {
+        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480, 80)];
+        [badRed runAction:barMove];
 
+    }
 }
 
 
