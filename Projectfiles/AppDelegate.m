@@ -11,6 +11,8 @@
 
 -(void) initializationComplete
 {
+    [MGWU loadMGWU:@"menloatherton15compscidumanske"];
+    [MGWU preFacebook];
 #ifdef KK_ARC_ENABLED
 	CCLOG(@"ARC is enabled");
 #else

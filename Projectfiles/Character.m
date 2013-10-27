@@ -40,7 +40,7 @@
 {
     if((self = [super initWithFile:@"chest.png"]))
     {
-        health = 5;
+        health = 2;
         worth = 100;
         type = BIG_GOOD_GUY;
         immunity = 0;
