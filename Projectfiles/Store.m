@@ -7,6 +7,8 @@
 //
 
 #import "Store.h"
+#import "MainMenuLayer.h"
+#import "Character.h"
 
 @implementation Store
  -(id)init
@@ -34,15 +36,48 @@ if ((self = [super init]))
             StoreLabel.color = ccBLUE;
             [self addChild:StoreLabel z:4];
 
-                                          
-                        
+            CCMenuItemImage *mainMenuButton = [CCMenuItemImage itemWithNormalImage:@"button_backbutton.png"
+                                                                     selectedImage: @"button_backbutton.png"
+                                                                            target:self
+                                                                          selector:@selector(mainMenu:)];
+            mainMenuButton.position = CGPointMake(100, 0);
+            mainMenuButton.scale = 0.5f;
+          
+            CCMenuItemImage *goodGuyButton = [CCMenuItemImage itemWithNormalImage:@"cat4.png" selectedImage:@"cat4.png" target:self selector:@selector(upgradeGoodGuy:)];
             
-            
-
-                }
-            
-            
-    return self;
+            CCMenu* storeMenu = [CCMenu menuWithItems:mainMenuButton, goodGuyButton, nil ];
+            [self addChild:storeMenu];
             
         }
+            
+        
+    return self;
+            
+}
+
+- (void) mainMenu: (CCMenuItemImage *) mainMenuButton
+{
+    [[CCDirector sharedDirector] replaceScene: (CCScene *)[[MainMenuLayer alloc]  init]];
+}
+
+- (void) upgradeGoodGuy: (CCMenuItemImage *) goodGuyButton
+{
+    NSNumber *currentGoodGuyRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentGoodGuyRank"];
+    
+    {
+        int rank = [currentGoodGuyRank intValue];
+        rank++;
+        NSNumber *newGoodGuyRank = [NSNumber numberWithInt:rank];
+        [[NSUserDefaults standardUserDefaults] setObject:newGoodGuyRank forKey: @"currentGoodGuyRank"];
+        if ([newGoodGuyRank intValue] == 1)
+        {
+            goodGuyButton.color = ccBLUE;
+        }
+        if ([newGoodGuyRank intValue] == 2)
+        {
+            goodGuyButton.color = ccRED;
+        }
+    }
+}
+
 @end
