@@ -34,7 +34,6 @@
 @property int health;
 @property int worth;
 @property int direction;
-@property int immunity;
 @property int row;
 @property bool melee;
 @property bool left;

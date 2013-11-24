@@ -149,6 +149,7 @@
     BOOL canUseJet;
     BOOL waveChanging;
     BOOL firstTime;
+    BOOL immunity;
     CCLabelTTF *waveLabel;
     CCLabelTTF *goodBaseHealthLabel;
     CCLabelTTF *badBaseHealthLabel;
@@ -193,6 +194,7 @@
 -(CGRect) explosionBox;
 -(void) airstrike;
 -(void) reinforcements;
+-(void) immunityActivator;
 -(void) addBases;
 -(void) badBaseCollisions;
 -(void) goodBaseCollisions;

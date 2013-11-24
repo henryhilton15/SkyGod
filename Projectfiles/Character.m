@@ -15,7 +15,6 @@
 @synthesize worth;
 @synthesize direction;
 @synthesize type;
-@synthesize immunity;
 @synthesize row;
 @synthesize melee;
 @synthesize left;
@@ -28,7 +27,6 @@
         health = 5;
         worth = 100;
         type = BIG_MONSTER;
-        immunity = 0;
         row = 0;
         melee = false;
         
@@ -43,7 +41,6 @@
         health = 2;
         worth = 100;
         type = BIG_GOOD_GUY;
-        immunity = 0;
         row = 0;
         melee = false;
         left = false;
@@ -58,7 +55,6 @@
         worth = 50;
         health = 2;
         type = GOOD_GUY;
-        immunity = 0;
         row = 0;
         melee = false;
     }
@@ -72,7 +68,6 @@
         worth = 50;
         health = 2;
         type = BAD_GUY;
-        immunity = 0;
         row = 0;
         melee = false;
     }
@@ -85,7 +80,6 @@
         worth = 50;
         health = 1;
         type = ZIG_ZAG;
-        immunity = 0;
         row = 0;
         melee = false;
     }
@@ -145,7 +139,6 @@
         worth = 50;
         health = 2;
         type = DOUBLE_ENEMY;
-        immunity = 0;
         row = 0;
         melee = false;
     }
@@ -158,7 +151,6 @@
         worth = 1;
         health = 2;
         type = SUPER_ZIG_ZAG_GUY;
-        immunity = 0;
         row = 0;
         melee = false;
     }
@@ -181,7 +173,6 @@
 //        }
         
         type = GOOD_BOTTOM;
-        immunity = 0;
         row = 0;
         melee = false;
     }
@@ -204,7 +195,6 @@
 //        }
         
         type = BAD_BOTTOM;
-        immunity = 0;
         row = 0;
         melee = false;
     }

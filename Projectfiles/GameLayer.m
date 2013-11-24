@@ -560,7 +560,7 @@
         waveChangeCounter = 0;
         bigGoodGuyMaxX = 0;
         bigGoodGuyMinX = 0;
-        //immunityFramecount = 100;
+        immunityFramecount = 0;
         KmonsterMinY = 250;
         KmonsterMaxY = 310;
         //deathFramecount = 60 * 30;
@@ -583,6 +583,7 @@
         canUseJet = true;
         waveChanging = false;
         wave=1;
+        immunity = false;
          
         NSNumber *highScore = [NSNumber numberWithInteger:0];
         [[NSUserDefaults standardUserDefaults] setObject:highScore forKey:@"highScore"];
@@ -686,7 +687,9 @@
         pauseButton.scale = 0.15f;
         
     
-        CCMenuItemImage *PowerUpButton1 = [CCMenuItemImage itemWithNormalImage:@"button-top.png" selectedImage:@"button-top.png"];
+        CCMenuItemImage *PowerUpButton1 = [CCMenuItemImage itemWithNormalImage:@"button-top.png" selectedImage:@"button-top.png"
+                                                                                target: self
+                                                                        selector:@selector(immunityActivator:)];
         PowerUpButton1.position= CGPointMake (-220, 142);
         PowerUpButton1.scale = 0.2f;
         PowerUpButton1.color = ccBLUE;
@@ -1100,18 +1103,6 @@
         bombCount = 0;
     }
     
-//    for(int i = 0; i < [goodGuysBottom count]; i++)
-//    {
-//        CCSprite* goodGuyBottom = [goodGuysBottom objectAtIndex:i];
-//        ((Character*)goodGuyBottom).immunity++;
-//    }
-//    for(int i = 0; i < [badGuysBottom count]; i++)
-//    {
-//        CCSprite* badGuyBottom = [badGuysBottom objectAtIndex:i];
-//        ((Character*)badGuyBottom).immunity++;
-//    }
-//
-    
     if ([goodGuysBottom count] > 0)
     {
         [self goodGuysWalk];
@@ -1170,6 +1161,17 @@
         truckCount = 0;
         badReinforcementCount = 0;
     }
+    }
+    
+    if(immunity == true)
+    {
+        immunityFramecount++;
+        if (immunityFramecount >= 600)
+        {
+            immunity = false;
+            immunityFramecount = 0;
+            NSLog(@"immunity ended");
+        }
     }
     
 }
@@ -2956,6 +2958,12 @@
     
 }
 
+-(void)immunityActivator: (CCMenuItemImage *) PowerUpButton1
+{
+    immunity = true;
+    NSLog(@"immunity activated");
+}
+
 -(void) truckGoodBottomOrBadBottomCollisions
 {
     NSMutableArray *runOverGoodGuys = [[NSMutableArray alloc] init];
@@ -3134,8 +3142,11 @@
 }
 -(void) subtractGoodBaseHealth
 {
-    (((Character*) goodBase).health) --;
-    [goodBaseHealthLabel setString:[NSString stringWithFormat:@"Your Base Health: %d",((Character*) goodBase).health]];
+    if(immunity!=true)
+    {
+        (((Character*) goodBase).health) --;
+        [goodBaseHealthLabel setString:[NSString stringWithFormat:@"Your Base Health: %d",((Character*) goodBase).health]];
+    }
     
     
 }
@@ -3150,7 +3161,7 @@
 -(void)goodBaseCollisions
 {
     NSMutableArray* deadBadBullets = [[NSMutableArray alloc] init];
-    
+  
     for (int i = 0; i < [badGuysBottom count]; i++)
     {
             badBottom = [badGuysBottom objectAtIndex: i];
@@ -3354,6 +3365,9 @@
 
 -(void) subtractGoodBarHealth
 {
+if(immunity != true)
+{
+    
     CCSprite *goodRed = [CCSprite spriteWithFile:@"whiteBar.png"];
     goodRed.color = ccc3(255, 0, 0);
     goodRed.anchorPoint = CGPointZero;
@@ -3418,7 +3432,7 @@
     
     
     [self addChild:goodRed z:11];
-    
+}
     
 }
 
