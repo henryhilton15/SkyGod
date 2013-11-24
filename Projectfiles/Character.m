@@ -19,6 +19,8 @@
 @synthesize melee;
 @synthesize left;
 @synthesize right;
+@synthesize unlockLevel;
+@synthesize unlocked;
 
 -(id) initWithBigMonsterImage
 {
@@ -29,6 +31,7 @@
         type = BIG_MONSTER;
         row = 0;
         melee = false;
+        unlockLevel = 0;
         
     }
     return self;
@@ -45,6 +48,7 @@
         melee = false;
         left = false;
         right = false;
+        unlocked = false;
     }
     return self;
 }
@@ -57,6 +61,7 @@
         type = GOOD_GUY;
         row = 0;
         melee = false;
+        unlocked = false;
     }
     return self;
 }
@@ -70,6 +75,7 @@
         type = BAD_GUY;
         row = 0;
         melee = false;
+        unlockLevel = 0;
     }
     return self;
 }
@@ -82,6 +88,7 @@
         type = ZIG_ZAG;
         row = 0;
         melee = false;
+        unlockLevel = 0;
     }
     return self;
 }
@@ -227,6 +234,7 @@
     {
         health = 1;
         type = BAD_FASTSHOOTER;
+        unlockLevel = 0;
     }
     return  self;
 }
@@ -236,6 +244,7 @@
     {
         health = 1;
         type = GOOD_FASTSHOOTER;
+        unlocked = false;
     }
 return self;
 }
@@ -245,6 +254,7 @@ return self;
     {
         health = 3;
         type = GOOD_KNIFE;
+        unlocked = false;
     }
 return self;
 }
@@ -254,6 +264,7 @@ return self;
     {
         health = 3;
         type = BAD_KNIFE;
+        unlockLevel = 0;
     }   
 return self;
 }
