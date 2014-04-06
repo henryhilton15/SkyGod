@@ -118,6 +118,7 @@
     NSMutableArray *tauntingFrames;
     NSMutableArray *GoodGuysToDelete;
     NSMutableArray *badBars;
+    NSMutableArray *goodBombs;
     NSString *levelString;
     NSString *enemiesKilledString;
     CGRect badGuyRect;

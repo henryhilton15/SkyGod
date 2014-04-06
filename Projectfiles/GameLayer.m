@@ -541,6 +541,8 @@
         badBulletArray = [[NSMutableArray alloc] init];
         bombers = [[NSMutableArray alloc] init];
         badBars = [[NSMutableArray alloc] init];
+        goodBombs = [[NSMutableArray alloc] init];
+
 
         framecount = 0;
         //monstercount = 0;
@@ -979,7 +981,7 @@
                 bomb.position = bomberPosition; //+ enemy.contentSize.height/2);
                  bomb.color = ccc3(0, 255, 0);
                 [self addChild:bomb z:2];
-                [goodBulletArray addObject:bomb];
+                [goodBombs addObject:bomb];
                 
                 CCMoveTo * actionMove = [CCMoveTo actionWithDuration:3
                                                             position:ccp(bomb.position.x, -bomb.contentSize.height/2)];
@@ -2879,6 +2881,44 @@
             }
         }
     }
+    
+    for(int i = 0; i < [badGuysBottom count]; i++)
+    {
+        for(int j = 0; j < [goodBombs count]; j++)
+        {
+            if([goodBombs count] > 0 && [badGuysBottom count] > 0)
+            {
+                badBottom = [badGuysBottom objectAtIndex:i];
+                badBottomRect = [badBottom boundingBox];
+                goodBullet = [goodBombs objectAtIndex:j];
+                goodBulletBox = [goodBullet boundingBox];
+                
+                if(CGRectIntersectsRect(badBottomRect,goodBulletBox)) //&& ((Character*)badBottom).immunity >= immunityFramecount)
+                {
+                    // NSLog(@"bullet bad guy collide");
+                    if(((Character*)badBottom).health == 1)
+                    {
+                        [deadBadGuys addObject:badBottom];
+                        [deadGoodBullets addObject:goodBullet];
+                        //                      [badGuysBottom removeObjectAtIndex:i];
+                        //                      [goodBulletArray removeObjectAtIndex:j];
+                        //                      [self removeChild:badBottom cleanup:YES];
+                        //                      [self removeChild:bullet cleanup:YES];
+                        // NSLog(@"bad guy killed");
+                    }
+                    else
+                    {
+                        ((Character*)badBottom).health--;
+                        [deadGoodBullets addObject:goodBullet];
+                        //                      [goodBulletArray removeObjectAtIndex:j];
+                        //                      [self removeChild:bullet cleanup:YES];
+                    }
+                }
+            }
+        }
+    }
+
+    
    // NSLog(@"yay");
     for (CCSprite *s in deadBadGuys)
     {
@@ -3288,8 +3328,6 @@
 
 -(void) waveChangeAnimation
 {
-    
-  
     
     if(firstTime == false)
     {
