@@ -40,6 +40,9 @@
 @property bool melee;
 @property bool left;
 @property bool right;
+@property int unlockLevel;
+@property bool unlocked;
+
 -(id) initWithBigMonsterImage;
 -(id) initWithBigGoodGuyImage;
 -(id) initWithGoodGuyImage;

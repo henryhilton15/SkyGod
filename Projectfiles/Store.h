@@ -11,8 +11,10 @@
 @interface Store : CCLayer
 {
     CCLabelTTF *StoreLabel;
+    NSNumber *newGoodGuyRank;
 }
 
 -(id) init;
-
+-(void) mainMenu;
+-(void) upgradeGoodGuy;
 @end

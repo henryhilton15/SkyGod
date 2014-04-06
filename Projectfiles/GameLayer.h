@@ -93,6 +93,7 @@
     CCSprite *BadReinforcement;
     CCSprite *goodBase;
     CCSprite *badBase;
+    CCSprite *badRed;
     CCSprite *titleImage;
     Player *player;
     Rect goodRect;
@@ -116,6 +117,7 @@
     NSMutableArray *knightAttackFrames;
     NSMutableArray *tauntingFrames;
     NSMutableArray *GoodGuysToDelete;
+    NSMutableArray *badBars;
     NSString *levelString;
     NSString *enemiesKilledString;
     CGRect badGuyRect;
@@ -199,4 +201,5 @@
 -(void) drawBoundingBox: (CGRect) rect;
 -(void) addBaseBars;
 -(void) addImmunity;
+-(void) addBadRedBar;
 @end

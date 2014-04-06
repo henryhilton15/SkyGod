@@ -16,6 +16,7 @@
 //nonatomic properties have better performance than atomic properties (so use them!)
 
 @property (nonatomic) int score;
+@property int rank;
 
 
 //Static (class) method:
