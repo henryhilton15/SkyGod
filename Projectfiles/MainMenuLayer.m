@@ -10,6 +10,7 @@
 #import "MainMenuLayer.h"
 #import "GameLayer.h"
 #import "Store.h"
+#import "Levelselect.h"
 
 @implementation MainMenuLayer
 
@@ -22,35 +23,45 @@
                                                               selectedImage: @"play-button.png"
                                                                      target:self
                                                                    selector:@selector(startGame:)];
-        startButton.scale=0.5;
-        startButton.position = CGPointMake(0, 10);
+        startButton.scale=0.25;
+        startButton.position = CGPointMake(-120, -120);
         
-        CCMenuItemImage *StoreButton = [CCMenuItemImage itemWithNormalImage:@"shop-button.png"
-                                                                selectedImage: @"shop-button.png"
+        CCMenuItemImage *StoreButton = [CCMenuItemImage itemWithNormalImage:@"shop-button-d.png"
+                                                                selectedImage: @"shop-button-d.png"
                                                                  target:self
                                                                    selector:@selector(enterStore:)];
-        CCMenuItemImage *moreGamesButton = [CCMenuItemImage itemWithNormalImage:@"star.png" selectedImage:@"star.png" target:self selector:@selector(moreGames:)];
-        moreGamesButton.scale = 0.4;
-        moreGamesButton.position = CGPointMake(125, -75);
+       
+        CCMenuItemImage *LevelButton = [CCMenuItemImage itemWithNormalImage:@"select-button-d.png"
+                                                              selectedImage: @"select-button-d.png"
+                                                                     target:self
+                                                                   selector:@selector(selectLevel:)];
+        LevelButton.scale=0.3;
+        LevelButton.position = CGPointMake(-10,-120);
         
-         CCMenuItemImage *aboutButton = [CCMenuItemImage itemWithNormalImage:@"superhero.png" selectedImage:@"superhero.png" target:self selector:@selector(about:)];
-        aboutButton.scale = 0.4;
-        aboutButton.position = CGPointMake(-125, -75);
-                                        
-        StoreButton.scale=0.5;
-        StoreButton.position = CGPointMake(0, -100);
         
-        CCMenu *myMenu = [CCMenu menuWithItems:StoreButton,startButton, moreGamesButton, aboutButton, nil];
+        
+//        CCMenuItemImage *moreGamesButton = [CCMenuItemImage itemWithNormalImage:@"star.png" selectedImage:@"star.png" target:self selector:@selector(moreGames:)];
+//        moreGamesButton.scale = 0.4;
+//        moreGamesButton.position = CGPointMake(125, -75);
+//        
+//         CCMenuItemImage *aboutButton = [CCMenuItemImage itemWithNormalImage:@"superhero.png" selectedImage:@"superhero.png" target:self selector:@selector(about:)];
+//        aboutButton.scale = 0.4;
+//        aboutButton.position = CGPointMake(-125, -75);
+        
+        StoreButton.scale=0.3;
+        StoreButton.position = CGPointMake(200, -120);
+        
+        CCMenu *myMenu = [CCMenu menuWithItems:StoreButton,startButton, LevelButton, nil];
         [self addChild:myMenu];
         
         
-        CCSprite *background = [CCSprite spriteWithFile:@"background_grass-top.png"];
+        CCSprite *background = [CCSprite spriteWithFile:@"main-menu.png"];
         background.position = CGPointMake(240,160);
         [self addChild:background z:-1];
         
-        CCSprite *titleImage = [CCSprite spriteWithFile: @"title.png"];
-        titleImage.position = ccp(240,240);
-        titleImage.color = ccBLUE;
+        CCSprite *titleImage = [CCSprite spriteWithFile: @"game-logo.png"];
+        titleImage.position = ccp(120,110);
+        titleImage.scale=.14;
         [self addChild:titleImage z:4];
     }
     return self;
@@ -66,6 +77,10 @@
 -(void) enterStore: (CCMenuItemImage *) menuItem
 {
     [[CCDirector sharedDirector] replaceScene: (CCScene*)[[Store alloc] init]];
+}
+-(void) selectLevel: (CCMenuItemImage *) menuItem
+{
+    [[CCDirector sharedDirector] replaceScene: (CCScene*)[[Levelselect alloc] init]];
 }
 
 -(void) moreGames: (CCMenuItem *)menuItem

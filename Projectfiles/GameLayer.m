@@ -11,6 +11,7 @@
 #import "SimpleAudioEngine.h"
 #import "Character.h"
 #import "GameData.h"
+#import "Player.h"
 
 #define MOUNTAIN_HEIGHT 70.0f
 
@@ -414,6 +415,7 @@
     }
     int rangeX = bigGoodGuyMaxX - bigGoodGuyMinX;
     int actualX = arc4random() % rangeX + bigGoodGuyMinX;
+    NSLog(@"the actual x is %i",actualX);
     
     minDuration = 9.0;
     maxDuration = 11.0;
@@ -466,14 +468,32 @@
     //        }];
     [enemy runAction:actionMove];//[CCSequence actions:actionMove, actionMoveDone, nil]];
 }
+-(void) addPlayer
+{
+    player = [[Player alloc] initWithPlayerPicture];
+    player.anchorPoint = CGPointZero;
+    player.position = CGPointMake(220.0f, MOUNTAIN_HEIGHT + 15);
+    player.scale = .2;
+    player.color = ccc3(249, 173, 22);
+    player.visible = true;
+    
+    [self addChild:player z:100];
+    
+}
 
 -(id) init
 {
 	if ((self = [super init]))
 	{
+        self.isAccelerometerEnabled = YES;
+        [[UIAccelerometer sharedAccelerometer] setUpdateInterval:
+         (1.0 / 60)];
         [self addBaseBars];
         [self addBases];
         [self changeLevel];
+        [self addPlayer];
+        
+        
         //bear animations
         //Load the plist which tells Kobold2D how to properly parse your spritesheet. If on a retina device Kobold2D will automatically use bearframes-hd.plist
         
@@ -543,7 +563,7 @@
         //helicopterDelayCounter = 0;
         //zigZagDelayCounter = 0;
         //zigZagScenarioCounter = 0;
-        badReinforcementCount = 0;
+        goodReinforcementCount = 0;
         bombCount = 0;
         enemiesKilled = 0;
         enemiesKilledCounter = 0;
@@ -652,7 +672,7 @@
 //        LevelLabel.color = ccBLUE;
 //        [self addChild:LevelLabel z:4];
         
-        waveLabel = [CCLabelTTF labelWithString:@"Wave:1" fontName:@"Marker Felt" fontSize:18];
+       waveLabel = [CCLabelTTF labelWithString:@"Wave:1" fontName:@"Marker Felt" fontSize:18];
         waveLabel.position = ccp(380, 300);
         waveLabel.color = ccBLUE;
         [self addChild:waveLabel z:4];
@@ -667,10 +687,16 @@
         badBaseHealthLabel.color = ccBLUE;
         [self addChild:badBaseHealthLabel z:4];
         
-        CCSprite *wall = [CCSprite spriteWithFile:@"wall.png"];
+        CCSprite *wall = [CCSprite spriteWithFile:@"foreground.png"];
         [self addChild:wall z:1];
-        wall.scale *=2;\
-        wall.position = ccp(240,40);
+        wall.scale *=1;\
+        wall.position = ccp(240,160);
+        
+        CCSprite *mountains = [CCSprite spriteWithFile:@"mountain.png"];
+        [self addChild:mountains z:1];
+        mountains.scale *=1;\
+        mountains.position = ccp(240,160);
+        
 
         
         CCMenuItemImage *pauseButton = [CCMenuItemImage itemWithNormalImage:@"button_pausebutton.png"
@@ -681,27 +707,24 @@
         pauseButton.scale = 0.15f;
         
     
-        CCMenuItemImage *PowerUpButton1 = [CCMenuItemImage itemWithNormalImage:@"button-top.png" selectedImage:@"button-top.png"];
+        CCMenuItemImage *PowerUpButton1 = [CCMenuItemImage itemWithNormalImage:@"immunity_btn.png" selectedImage:@"immunity_btn.png"];
         PowerUpButton1.position= CGPointMake (-220, 142);
-        PowerUpButton1.scale = 0.2f;
-        PowerUpButton1.color = ccBLUE;
+        PowerUpButton1.scale = 0.7f;
+
         
-        CCMenuItemImage *PowerUpButton2 = [CCMenuItemImage itemWithNormalImage:@"button-top.png" selectedImage:@"button-top.png"
+        CCMenuItemImage *PowerUpButton2 = [CCMenuItemImage itemWithNormalImage:@"reinforcement_btn.png" selectedImage:@"reinforcement_btn.png"
                                                                                 target: self
                                                                       selector:@selector(reinforcements:)];
         
-        PowerUpButton2.position= CGPointMake (-185, 142);
-        PowerUpButton2.scale = 0.2f;
-        PowerUpButton2.color = ccGREEN;
+        PowerUpButton2.position= CGPointMake (-180, 142);
+        PowerUpButton2.scale = .7f;
         
         
-        CCMenuItemImage *PowerUpButton3 = [CCMenuItemImage itemWithNormalImage:@"button-top.png" selectedImage:@"button-top.png"
+        CCMenuItemImage *PowerUpButton3 = [CCMenuItemImage itemWithNormalImage:@"airstrike_btn.png" selectedImage:@"airstrike_btn.png"
                                                                         target: self
                                                                     selector:@selector(airstrike:)];
-        PowerUpButton3.position= CGPointMake (-150, 142);
-        PowerUpButton3.scale = 0.2f;
-        PowerUpButton3.color = ccRED;
-        
+        PowerUpButton3.position= CGPointMake (-140, 142);
+        PowerUpButton3.scale = 0.7f;
     
         
         CCMenu *myMenu = [CCMenu menuWithItems:pauseButton, PowerUpButton1, PowerUpButton2, PowerUpButton3, nil];
@@ -759,7 +782,7 @@
     */
 
     
-    framecount++;
+   
     
     
 //    if([badGuysBottom count] > 0 && [goodGuysBottom count] == 0)
@@ -779,6 +802,8 @@
 //    }
     
     
+     framecount++;
+    
     if(waveChanging == true)
     {
         waveChangeCounter++;
@@ -790,6 +815,7 @@
         {
             waveChanging = false;
             waveChangeCounter = 0;
+            NSLog(@"wavechanging is false");
         }
     }
     
@@ -1095,11 +1121,11 @@
         bombCount = 0;
     }
     
-//    for(int i = 0; i < [goodGuysBottom count]; i++)
-//    {
-//        CCSprite* goodGuyBottom = [goodGuysBottom objectAtIndex:i];
-//        ((Character*)goodGuyBottom).immunity++;
-//    }
+    for(int i = 0; i < [goodGuysBottom count]; i++)
+    {
+        CCSprite* goodGuyBottom = [goodGuysBottom objectAtIndex:i];
+        ((Character*)goodGuyBottom).immunity++;
+    }
 //    for(int i = 0; i < [badGuysBottom count]; i++)
 //    {
 //        CCSprite* badGuyBottom = [badGuysBottom objectAtIndex:i];
@@ -1142,30 +1168,31 @@
     if (truckCount > 0)
     {
         NSLog(@"truckcount > 0" );
-        if (truck.position.x <= 480)
+        if (truck.position.x >=50)
         {
-            NSLog(@"truck position is less than 480");
+            NSLog(@"truck position is more than 50");
             if(framecount % 60 == 0)
             {
-                BadReinforcement = [[Character alloc] initWithBadBottomImage];
-                BadReinforcement.position = ccp(410, truck.position.y);
-                BadReinforcement.scale = .1;
-                [self addChild:BadReinforcement];
-                int rangeX3 = 380;
-                int actualX3 = (arc4random() % 380) + 20;
-                CCMoveTo * spreadOut = [CCMoveTo actionWithDuration:2 position:ccp(actualX3, 15)];
-                [badGuysBottom addObject:BadReinforcement];
-                [BadReinforcement runAction:spreadOut];
-                badReinforcementCount++;
+                GoodReinforcement = [[Character alloc] initWithGoodReinforcementImage];
+                GoodReinforcement.position = ccp(70, truck.position.y);
+                GoodReinforcement.scale = .1;
+                GoodReinforcement.color = ccc3(0,255,0);
+                [self addChild:GoodReinforcement z:10];
+                //int rangeX3 = 380;
+                int actualX3 = (arc4random() % 200) + 20;
+                CCMoveTo * spreadOut = [CCMoveTo actionWithDuration:2 position:ccp(actualX3, 30)];
+                [goodGuysBottom addObject:GoodReinforcement];
+                [GoodReinforcement runAction:spreadOut];
+                goodReinforcementCount++;
             }
         }
     }
-    if(badReinforcementCount == 4)
+    if(goodReinforcementCount == 3)
     {
         truckCount = 0;
-        badReinforcementCount = 0;
+        goodReinforcementCount = 0;
     }
-    }
+}
     
 }
 
@@ -2062,8 +2089,8 @@
     {
         [self removeChild:background cleanup: YES];
         [self removeChild:player];
-        background = [CCSprite spriteWithFile:@"background_desert-topdown.png"];
-        player = [CCSprite spriteWithFile:@"cat2.png"];
+        background = [CCSprite spriteWithFile:@"sky.png"];
+        //player = [[Player alloc] initWithPlayerPicture];
     }
     
     if (level ==1)
@@ -2072,18 +2099,18 @@
         [self removeChild:background cleanup: YES];
         [self removeChild:player];
 
-        background = [CCSprite spriteWithFile:@"background_grass-top.png"];
+        background = [CCSprite spriteWithFile:@"sky.png"];
 
-        player = [CCSprite spriteWithFile:@"monster8.png"];
+        //player = [[Player alloc] initWithPlayerPicture];
     }
     
     if (level ==2)
     {
         [self removeChild:background cleanup: YES];
         [self removeChild:player];
-        background = [CCSprite spriteWithFile:@"background_grid.png"];
+        background = [CCSprite spriteWithFile:@"sky.png"];
 
-        player = [CCSprite spriteWithFile:@"monster9.png"];
+        //player = [[Player alloc] initWithPlayerPicture];
    
     }
     if (level ==3)
@@ -2092,18 +2119,18 @@
         [self removeChild:background cleanup: YES];
         [self removeChild:player];
 
-        background = [CCSprite spriteWithFile:@"background_grass-topdown.png"];
+        background = [CCSprite spriteWithFile:@"sky.png"];
     
-        player = [CCSprite spriteWithFile:@"animation_knight-1.png"];
+        //player = [[Player alloc] initWithPlayerPicture];
     }
     if (level ==4)
     {
         [self removeChild:background cleanup:YES];
         [self removeChild:player];
         
-        background = [CCSprite spriteWithFile:@"city-back.png"];
+        background = [CCSprite spriteWithFile:@"sky.png"];
 
-        player = [CCSprite spriteWithFile:@"cat-main.png"];
+        //player = [[Player alloc] initWithPlayerPicture];
     }
     if (level ==5)
     {
@@ -2111,8 +2138,8 @@
         [self removeChild:background cleanup: YES];
         [self removeChild:player];
 
-        background = [CCSprite spriteWithFile:@"city-front.png"];
-        player = [CCSprite spriteWithFile:@"cat3.png"];
+        background = [CCSprite spriteWithFile:@"sky.png"];
+        //player = [[Player alloc] initWithPlayerPicture];
     }
     
     if (level==6)
@@ -2121,20 +2148,14 @@
         [self removeChild:background cleanup: YES];
         [self removeChild:player];
 
-        background = [CCSprite spriteWithFile:@"background_topofcastle.png"];
-        player = [CCSprite spriteWithFile:@"cat1.png"];
+        background = [CCSprite spriteWithFile:@"sky.png"];
+        //player = [[Player alloc] initWithPlayerPicture];
     }
 
     background.scale = 1;
     background.anchorPoint = CGPointZero;
-    [self addChild:background z:-1];
+    [self addChild:background z:-2];
     
-    player.anchorPoint = CGPointZero;
-    player.position = CGPointMake(220.0f, MOUNTAIN_HEIGHT + 15);
-    player.scale = .2;
-    player.color = ccc3(249, 173, 22);
-
-    [self addChild:player z:1];
 }
 
 -(void)ScenarioGenerator
@@ -2250,7 +2271,12 @@
         NSLog(@"wave = 3");
         scenarioNumber = 3;
     }
-    if (wave >= 4)
+    if (wave == 4)
+    {
+        NSLog(@"wave = 3");
+        scenarioNumber = 4;
+    }
+    if (wave >= 5)
     {
     scenarioNumber = (arc4random() % 3) + 1;
     }
@@ -2939,13 +2965,13 @@
 {
     truck = [CCSprite spriteWithFile: @"car-side.png"];
     truck.scale =.5;
-    truck.position = ccp(500,15);
-    [self addChild:truck];
+    truck.position = ccp(-20,15);
+    [self addChild:truck z:10];
     truckCount++;
     
-    CCMoveTo * DriveIn = [CCMoveTo actionWithDuration:2 position:ccp(420, truck.position.y)];
-    CCMoveTo * NoMove = [CCMoveTo actionWithDuration:8 position:ccp(420, truck.position.y)];
-    CCMoveTo * DriveOut = [CCMoveTo actionWithDuration:2 position:ccp(520, truck.position.y)];
+    CCMoveTo * DriveIn = [CCMoveTo actionWithDuration:2 position:ccp(60, truck.position.y)];
+    CCMoveTo * NoMove = [CCMoveTo actionWithDuration:5 position:ccp(60, truck.position.y)];
+    CCMoveTo * DriveOut = [CCMoveTo actionWithDuration:2 position:ccp(-100, truck.position.y)];
     
     [truck runAction:[CCSequence actions: DriveIn, NoMove, DriveOut, nil]];
     
@@ -2970,20 +2996,20 @@
             }
         }
     }
-    for (int i = 0; i < [goodGuysBottom count]; i++)
-    {
-        if (truckCount == 1 && [goodGuysBottom count] > 0)
-        {
-            goodBottom = [goodGuysBottom objectAtIndex: i];
-            goodBottomRect = [goodBottom boundingBox];
-            truckBox = [truck boundingBox];
-            if(CGRectIntersectsRect(goodBottomRect, truckBox))
-            {
-                // NSLog(@"Run over good guy");
-                [runOverGoodGuys addObject:goodBottom];
-            }
-        }
-    }
+//    for (int i = 0; i < [goodGuysBottom count]; i++)
+//    {
+//        if (truckCount == 1 && [goodGuysBottom count] > 0)
+//        {
+//            goodBottom = [goodGuysBottom objectAtIndex: i];
+//            goodBottomRect = [goodBottom boundingBox];
+//            truckBox = [truck boundingBox];
+//            if(CGRectIntersectsRect(goodBottomRect, truckBox))
+//            {
+//                // NSLog(@"Run over good guy");
+//                [runOverGoodGuys addObject:goodBottom];
+//            }
+//        }
+//    }
     for (CCSprite *d in runOverBadGuys)
     {
         [badGuysBottom removeObject:d];
@@ -3476,6 +3502,36 @@
     
     [self addChild:badRed z:11];
     
+
+}
+
+- (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
+{
+
+    {
+        // controls how quickly velocity decelerates (lower = quicker to change direction)
+        float deceleration = 0.2f;
+        // determines how sensitive the accelerometer reacts (higher = more sensitive)
+        float sensitivity = 15.0f;
+        // how fast the velocity can be at most
+        float maxVelocity = 15;
+    	
+        // adjust velocity based on current accelerometer acceleration
+        float velocityX = player.velocity.x * deceleration + acceleration.y * sensitivity;
+        
+        // we must limit the maximum velocity of the player sprite, in both directions
+        if (player.velocity.x > maxVelocity)
+        {
+            velocityX = maxVelocity;
+        }
+        else if (player.velocity.x < - maxVelocity)
+        {
+            velocityX = - maxVelocity;
+        }
+        
+        player.velocity = ccp(velocityX, player.velocity.y);
+    }
+
 
 }
 

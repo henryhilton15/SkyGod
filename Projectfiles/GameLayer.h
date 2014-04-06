@@ -7,6 +7,7 @@
 //
 
 #import "CCLayer.h"
+#import "Player.h"
 
 
 @interface GameLayer : CCLayer
@@ -43,7 +44,7 @@
     int scenarioNumber;
     int enemiesKilledCounter;
     int bombCount;
-    int badReinforcementCount;
+    int goodReinforcementCount;
     int immunityFramecount;
     int pointsFramecount;
     int deathFramecount;
@@ -78,7 +79,6 @@
     CCSprite *background;
     CCSprite *Kamikaze;
     CCSprite *helicopter;
-    CCSprite *player;
     CCSprite *zenemy;
     CCSprite *zFriendly1;
     CCSprite *goodBottom;
@@ -94,6 +94,7 @@
     CCSprite *goodBase;
     CCSprite *badBase;
     CCSprite *titleImage;
+    Player *player;
     Rect goodRect;
     Rect badRect;
     //  NSMutableArray *helicopters;
@@ -197,4 +198,5 @@
 -(void) addWave;
 -(void) drawBoundingBox: (CGRect) rect;
 -(void) addBaseBars;
+-(void) addImmunity;
 @end

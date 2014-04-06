@@ -72,7 +72,7 @@
         worth = 50;
         health = 2;
         type = BAD_GUY;
-        immunity = 0;
+        //immunity = 0;
         row = 0;
         melee = false;
     }
@@ -145,7 +145,7 @@
         worth = 50;
         health = 2;
         type = DOUBLE_ENEMY;
-        immunity = 0;
+        //immunity = 0;
         row = 0;
         melee = false;
     }
@@ -204,7 +204,7 @@
 //        }
         
         type = BAD_BOTTOM;
-        immunity = 0;
+        //immunity = 0;
         row = 0;
         melee = false;
     }
@@ -266,6 +266,15 @@ return self;
         type = BAD_KNIFE;
     }   
 return self;
+}
+-(id) initWithGoodReinforcementImage
+{
+    if ((self = [super initWithFile:@"ufo.png"]))
+        {
+            health = 1;
+            type = GOOD_REINFORCEMENT;
+        }
+        return  self;
 }
 
 

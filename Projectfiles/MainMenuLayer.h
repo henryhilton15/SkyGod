@@ -16,4 +16,5 @@
 -(id) init;
 -(void) startGame;
 -(void) enterStore;
+-(void) selectLevel;
 @end
