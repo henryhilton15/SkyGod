@@ -7,6 +7,7 @@
 //
 
 #import "Character.h"
+#import "Player.h"
 
 @implementation Character
 
