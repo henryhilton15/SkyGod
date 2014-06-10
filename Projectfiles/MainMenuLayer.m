@@ -32,8 +32,8 @@
                                                               selectedImage: @"start-button-d.png"
                                                                      target:self
                                                                    selector:@selector(startGame:)];
-        startButton.scale=0.25;
-        startButton.position = CGPointMake(100, 100);
+        startButton.scale=0.75;
+        startButton.position = CGPointMake(-120, 130);
         
         
         
@@ -60,8 +60,8 @@
                                                                 selectedImage: @"shop-button-d.png"
                                                                  target:self
                                                                    selector:@selector(enterStore:)];
-        StoreButton.scale=0.3;
-        StoreButton.position = CGPointMake(150, 100);
+        StoreButton.scale=0.5;
+        StoreButton.position = CGPointMake(180, 110);
         
        
         CCMenuItemImage *LevelButton = [CCMenuItemImage itemWithNormalImage:@"select-button-d.png"
@@ -69,7 +69,7 @@
                                                                      target:self
                                                                    selector:@selector(selectLevel:)];
         LevelButton.scale=0.3;
-        LevelButton.position = CGPointMake(200,100);
+        LevelButton.position = CGPointMake(-1000,-1000);
         
         
         
