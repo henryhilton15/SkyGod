@@ -11,9 +11,11 @@
 @interface MainMenuLayer : CCLayer
 {
     CCLabelTTF *TitleLabel;
+    CCMenu *myMenu;
 }
 
 -(id) init;
 -(void) startGame;
 -(void) enterStore;
+-(void) selectLevel;
 @end

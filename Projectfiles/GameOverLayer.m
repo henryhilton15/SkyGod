@@ -28,16 +28,17 @@
         
         //startButton.tag = 1;
         
-        CCMenuItemImage *endbutton = [CCMenuItemImage itemWithNormalImage:@"button_backbutton.png"
-                                                            selectedImage: @"button_backbutton.png"
+        CCMenuItemImage *endbutton = [CCMenuItemImage itemWithNormalImage:@"restart-button-d.png"
+                                                            selectedImage: @"restart-button-d.png"
                                                                    target:self
                                                                  selector:@selector(endGame:)];
         endbutton.position = CGPointMake(100, 0);
+        endbutton.scale=.5;
         
         CCMenu *myMenu = [CCMenu menuWithItems:endbutton, /* restartButton, */  nil];
         [self addChild:myMenu];
         
-        CCSprite *background = [CCSprite spriteWithFile:@"city-front.png"];
+        CCSprite *background = [CCSprite spriteWithFile:@"game-over.png"];
         background.position = CGPointMake(240,160);
         [self addChild:background z:-1];
         /*

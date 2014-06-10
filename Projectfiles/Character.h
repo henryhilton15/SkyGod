@@ -28,6 +28,7 @@
 #define GOOD_FASTSHOOTER 17
 #define BAD_KNIFE 18
 #define GOOD_KNIFE 19
+#define GOOD_REINFORCEMENT 20
 
 @interface Character : CCSprite
 @property int type;
@@ -61,5 +62,6 @@
 -(id) initWithFastShooterGoodGuyImage;
 -(id) initWithKnifeGoodGuyImage;
 -(id) initWithKnifeBadGuyImage;
+-(id) initWithGoodReinforcementImage;
 
 @end

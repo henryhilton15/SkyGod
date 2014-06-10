@@ -73,6 +73,8 @@
         worth = 50;
         health = 2;
         type = BAD_GUY;
+
+        //immunity = 0;
         row = 0;
         melee = false;
         unlockLevel = 0;
@@ -146,6 +148,8 @@
         worth = 50;
         health = 2;
         type = DOUBLE_ENEMY;
+
+        //immunity = 0;
         row = 0;
         melee = false;
     }
@@ -202,6 +206,8 @@
 //        }
         
         type = BAD_BOTTOM;
+
+        //immunity = 0;
         row = 0;
         melee = false;
     }
@@ -267,6 +273,15 @@ return self;
         unlockLevel = 0;
     }   
 return self;
+}
+-(id) initWithGoodReinforcementImage
+{
+    if ((self = [super initWithFile:@"ufo.png"]))
+        {
+            health = 1;
+            type = GOOD_REINFORCEMENT;
+        }
+        return  self;
 }
 
 

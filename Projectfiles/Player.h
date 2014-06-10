@@ -9,5 +9,9 @@
 #import "CCSprite.h"
 
 @interface Player : CCSprite
+{
+}
+@property (nonatomic, assign) CGPoint velocity;
+-(id)initWithPlayerPicture;
 
 @end
