@@ -8,8 +8,8 @@
 
 #import "GameOverLayer.h"
 
-#import "MainMenuLayer.h"
-#import "GameLayer.h"
+#import "Levelselect.h"
+#import "Store.h"
 #import "SimpleAudioEngine.h"
 #import "GameData.h"
 
@@ -19,24 +19,25 @@
 {
 	if ((self = [super init]))
 	{
-//        CCMenuItemImage *restartButton = [CCMenuItemImage itemWithNormalImage:@"restart.png"
-//                                                                selectedImage: @"restart.png"
-//                                                                       target:self
-//                                                                     selector:@selector(restartGame:)];
-//        restartButton.position = CGPointMake(0,100);
+        CCMenuItemImage *restartButton = [CCMenuItemImage itemWithNormalImage:@"select-button-d.png"
+                                                                selectedImage: @"select-button-d.png"
+                                                                       target:self
+                                                                     selector:@selector(restartGame:)];
+        restartButton.position = CGPointMake(50,250);
+        restartButton.scale=.5;
 
         
         //startButton.tag = 1;
         
-        CCMenuItemImage *endbutton = [CCMenuItemImage itemWithNormalImage:@"restart-button-d.png"
-                                                            selectedImage: @"restart-button-d.png"
+        CCMenuItemImage *endbutton = [CCMenuItemImage itemWithNormalImage:@"shop-button-d.png"
+                                                            selectedImage: @"shop-button-d.png"
                                                                    target:self
                                                                  selector:@selector(endGame:)];
-        endbutton.position = CGPointMake(100, 0);
+        endbutton.position = CGPointMake(-50, 250);
         endbutton.scale=.5;
         
-        CCMenu *myMenu = [CCMenu menuWithItems:endbutton, /* restartButton, */  nil];
-        [self addChild:myMenu];
+        CCMenu *myMenu = [CCMenu menuWithItems: endbutton,restartButton,  nil];
+        [self addChild:myMenu z:10];
         
         CCSprite *background = [CCSprite spriteWithFile:@"game-over.png"];
         background.position = CGPointMake(240,160);
@@ -79,12 +80,12 @@
 }
 -(void)restartGame: (CCMenuItem *)menuItem
 {
-    [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    [[CCDirector sharedDirector] replaceScene: (CCScene*)[[Levelselect alloc] init]];
     
 }
 -(void)endGame:(CCMenuItem *)menuItem
 {
-    [[CCDirector sharedDirector] replaceScene: (CCScene*)[[MainMenuLayer alloc] init]];
+    [[CCDirector sharedDirector] replaceScene: (CCScene*)[[Store alloc] init]];
 }
 
 @end

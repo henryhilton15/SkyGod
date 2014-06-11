@@ -24,16 +24,16 @@
         [self addChild:background z:-1];
         
         CCSprite *titleImage = [CCSprite spriteWithFile: @"game-logo.png"];
-        titleImage.position = ccp(120,110);
-        titleImage.scale=.14;
+        titleImage.position = ccp(110,110);
+        titleImage.scale=.25;
         [self addChild:titleImage z:4];
         
         CCMenuItemImage *startButton = [CCMenuItemImage itemWithNormalImage:@"start-button-d.png"
                                                               selectedImage: @"start-button-d.png"
                                                                      target:self
                                                                    selector:@selector(startGame:)];
-        startButton.scale=0.75;
-        startButton.position = CGPointMake(-120, 130);
+        startButton.scale=0.8;
+        startButton.position = CGPointMake(-122.5, 115);
         
         
         
@@ -60,8 +60,8 @@
                                                                 selectedImage: @"shop-button-d.png"
                                                                  target:self
                                                                    selector:@selector(enterStore:)];
-        StoreButton.scale=0.5;
-        StoreButton.position = CGPointMake(180, 110);
+        StoreButton.scale=0.55;
+        StoreButton.position = CGPointMake(180, 108);
         
        
         CCMenuItemImage *LevelButton = [CCMenuItemImage itemWithNormalImage:@"select-button-d.png"
@@ -95,7 +95,7 @@
 
 -(void) startGame: (CCMenuItem *)menuItem
 {
-    [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    [[CCDirector sharedDirector] replaceScene: (CCScene*)[[Levelselect alloc] init]];
     
 }
 

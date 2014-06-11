@@ -16,5 +16,7 @@
 - (void) resumeGame;
 - (void) restartGame;
 - (void) mainMenu;
+-(void) sfxToggle;
+-(void) musicToggle;
 
 @end
