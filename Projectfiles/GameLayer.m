@@ -919,7 +919,7 @@
                                                               selectedImage: @"button_pausebutton.png"
                                                                      target:self
                                                                    selector:@selector(pauseMenu:)];
-        pauseButton.position = CGPointMake(225, 145);
+        pauseButton.position = CGPointMake(225, 380);
         pauseButton.scale = 0.15f;
         
     
@@ -927,7 +927,7 @@
         target: self
         selector:@selector(immunityActivator:)];
         
-        PowerUpButton1.position= CGPointMake (-220, 142);
+        PowerUpButton1.position= CGPointMake (-220, 380);
         PowerUpButton1.scale = 0.7f;
 
         
@@ -935,14 +935,14 @@
                                                                                 target: self
                                                                       selector:@selector(reinforcements:)];
         
-        PowerUpButton2.position= CGPointMake (-180, 142);
+        PowerUpButton2.position= CGPointMake (-180, 380);
         PowerUpButton2.scale = .7f;
         
         
         CCMenuItemImage *PowerUpButton3 = [CCMenuItemImage itemWithNormalImage:@"airstrike_btn.png" selectedImage:@"airstrike_btn.png"
                                                                         target: self
                                                                     selector:@selector(airstrike:)];
-        PowerUpButton3.position= CGPointMake (-140, 142);
+        PowerUpButton3.position= CGPointMake (-140, 380);
         PowerUpButton3.scale = 0.7f;
     
         

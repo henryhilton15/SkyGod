@@ -12,4 +12,6 @@
 {CCMenu *myMenu;
 }
 -(void) setUpMenus;
+-(void) level1;
+
 @end
