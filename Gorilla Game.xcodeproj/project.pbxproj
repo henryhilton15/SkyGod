@@ -86,7 +86,6 @@
 		C351042D1947B53300057578 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = C35100FE1947B53100057578 /* Character.m */; };
 		C351042E1947B53300057578 /* doubleEnemy.m in Sources */ = {isa = PBXBuildFile; fileRef = C35101001947B53100057578 /* doubleEnemy.m */; };
 		C351042F1947B53300057578 /* GameData.m in Sources */ = {isa = PBXBuildFile; fileRef = C35101021947B53100057578 /* GameData.m */; };
-		C35104301947B53300057578 /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C35101041947B53100057578 /* GameLayer.m */; };
 		C35104311947B53300057578 /* GameOverLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C35101061947B53100057578 /* GameOverLayer.m */; };
 		C35104321947B53300057578 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C35101081947B53100057578 /* HelloWorldLayer.m */; };
 		C35104331947B53300057578 /* Levelselect.m in Sources */ = {isa = PBXBuildFile; fileRef = C351010A1947B53100057578 /* Levelselect.m */; };
@@ -110,10 +109,6 @@
 		C35104451947B53300057578 /* game-over.png in Resources */ = {isa = PBXBuildFile; fileRef = C35101261947B53100057578 /* game-over.png */; };
 		C35104461947B53300057578 /* mockup-game-over-ip5.png in Resources */ = {isa = PBXBuildFile; fileRef = C35101271947B53100057578 /* mockup-game-over-ip5.png */; };
 		C35104471947B53300057578 /* mockup-game-over-retina.png in Resources */ = {isa = PBXBuildFile; fileRef = C35101281947B53100057578 /* mockup-game-over-retina.png */; };
-		C35104481947B53300057578 /* restart-button-d.png in Resources */ = {isa = PBXBuildFile; fileRef = C35101291947B53100057578 /* restart-button-d.png */; };
-		C35104491947B53300057578 /* restart-button-hd-d.png in Resources */ = {isa = PBXBuildFile; fileRef = C351012A1947B53100057578 /* restart-button-hd-d.png */; };
-		C351044A1947B53300057578 /* restart-button-hd-n.png in Resources */ = {isa = PBXBuildFile; fileRef = C351012B1947B53100057578 /* restart-button-hd-n.png */; };
-		C351044B1947B53300057578 /* restart-button-n.png in Resources */ = {isa = PBXBuildFile; fileRef = C351012C1947B53100057578 /* restart-button-n.png */; };
 		C351044C1947B53300057578 /* select-button-d.png in Resources */ = {isa = PBXBuildFile; fileRef = C351012D1947B53100057578 /* select-button-d.png */; };
 		C351044D1947B53300057578 /* select-button-hd-d.png in Resources */ = {isa = PBXBuildFile; fileRef = C351012E1947B53100057578 /* select-button-hd-d.png */; };
 		C351044E1947B53300057578 /* select-button-hd-n.png in Resources */ = {isa = PBXBuildFile; fileRef = C351012F1947B53100057578 /* select-button-hd-n.png */; };
@@ -242,9 +237,9 @@
 		C35104C91947B53300057578 /* badbase-1.png in Resources */ = {isa = PBXBuildFile; fileRef = C35101C61947B53100057578 /* badbase-1.png */; };
 		C35104CA1947B53300057578 /* badbase-2.png in Resources */ = {isa = PBXBuildFile; fileRef = C35101C71947B53100057578 /* badbase-2.png */; };
 		C35104CB1947B53300057578 /* badbase-3.png in Resources */ = {isa = PBXBuildFile; fileRef = C35101C81947B53100057578 /* badbase-3.png */; };
-		C35104CC1947B53300057578 /* d1-attack1.png in Resources */ = {isa = PBXBuildFile; fileRef = C35101CB1947B53100057578 /* d1-attack1.png */; };
-		C35104CD1947B53300057578 /* d1-attack2.png in Resources */ = {isa = PBXBuildFile; fileRef = C35101CC1947B53100057578 /* d1-attack2.png */; };
-		C35104CE1947B53300057578 /* d1-attack3.png in Resources */ = {isa = PBXBuildFile; fileRef = C35101CD1947B53100057578 /* d1-attack3.png */; };
+		C35104CC1947B53300057578 /* d1-attack-1.png in Resources */ = {isa = PBXBuildFile; fileRef = C35101CB1947B53100057578 /* d1-attack-1.png */; };
+		C35104CD1947B53300057578 /* d1-attack-2.png in Resources */ = {isa = PBXBuildFile; fileRef = C35101CC1947B53100057578 /* d1-attack-2.png */; };
+		C35104CE1947B53300057578 /* d1-attack-3.png in Resources */ = {isa = PBXBuildFile; fileRef = C35101CD1947B53100057578 /* d1-attack-3.png */; };
 		C35104CF1947B53300057578 /* d1-1.png in Resources */ = {isa = PBXBuildFile; fileRef = C35101CE1947B53100057578 /* d1-1.png */; };
 		C35104D01947B53300057578 /* d1-2.png in Resources */ = {isa = PBXBuildFile; fileRef = C35101CF1947B53100057578 /* d1-2.png */; };
 		C35104D11947B53300057578 /* d1-3.png in Resources */ = {isa = PBXBuildFile; fileRef = C35101D01947B53100057578 /* d1-3.png */; };
@@ -481,15 +476,9 @@
 		C35105BC1947B53300057578 /* config.lua in Resources */ = {isa = PBXBuildFile; fileRef = C35102D01947B53200057578 /* config.lua */; };
 		C35105BD1947B53300057578 /* cooltext1150760500.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102D11947B53200057578 /* cooltext1150760500.png */; };
 		C35105BE1947B53300057578 /* cooltext1265591974.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102D21947B53200057578 /* cooltext1265591974.png */; };
-		C35105BF1947B53300057578 /* friendly.plist in Resources */ = {isa = PBXBuildFile; fileRef = C35102D31947B53200057578 /* friendly.plist */; };
 		C35105C01947B53300057578 /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102D41947B53200057578 /* images.png */; };
 		C35105C11947B53300057578 /* knightframesflipped.plist in Resources */ = {isa = PBXBuildFile; fileRef = C35102D51947B53200057578 /* knightframesflipped.plist */; };
 		C35105C21947B53300057578 /* knightFramesFlipped.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102D61947B53200057578 /* knightFramesFlipped.png */; };
-		C35105C31947B53300057578 /* Level 1.plist in Resources */ = {isa = PBXBuildFile; fileRef = C35102D71947B53200057578 /* Level 1.plist */; };
-		C35105C41947B53300057578 /* Level 2.plist in Resources */ = {isa = PBXBuildFile; fileRef = C35102D81947B53200057578 /* Level 2.plist */; };
-		C35105C51947B53300057578 /* Level 3.plist in Resources */ = {isa = PBXBuildFile; fileRef = C35102D91947B53200057578 /* Level 3.plist */; };
-		C35105C61947B53300057578 /* Level 4.plist in Resources */ = {isa = PBXBuildFile; fileRef = C35102DA1947B53200057578 /* Level 4.plist */; };
-		C35105C71947B53300057578 /* Level 5.plist in Resources */ = {isa = PBXBuildFile; fileRef = C35102DB1947B53200057578 /* Level 5.plist */; };
 		C35105C81947B53300057578 /* level1Label.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102DC1947B53200057578 /* level1Label.png */; };
 		C35105C91947B53300057578 /* level2Label.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102DD1947B53200057578 /* level2Label.png */; };
 		C35105CA1947B53300057578 /* level3Label.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102DE1947B53200057578 /* level3Label.png */; };
@@ -796,6 +785,68 @@
 		C35106F71947B53300057578 /* wave.png in Resources */ = {isa = PBXBuildFile; fileRef = C35104281947B53300057578 /* wave.png */; };
 		C35106F81947B53300057578 /* whiteBar.png in Resources */ = {isa = PBXBuildFile; fileRef = C35104291947B53300057578 /* whiteBar.png */; };
 		C35106F91947B53300057578 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = C351042B1947B53300057578 /* Store.m */; };
+		C369F4951963574000A8C0C4 /* plists in Resources */ = {isa = PBXBuildFile; fileRef = C369F4941963574000A8C0C4 /* plists */; };
+		C369F49719648D8000A8C0C4 /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C369F49619648D8000A8C0C4 /* GameLayer.m */; };
+		C38C65071948DA4200566EB7 /* angel1attack.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C64EC1948DA4200566EB7 /* angel1attack.png */; };
+		C38C65081948DA4200566EB7 /* angel1fall.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C64ED1948DA4200566EB7 /* angel1fall.png */; };
+		C38C650A1948DA4200566EB7 /* angel2attack.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C64EF1948DA4200566EB7 /* angel2attack.png */; };
+		C38C650B1948DA4200566EB7 /* angel2fall.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C64F01948DA4200566EB7 /* angel2fall.png */; };
+		C38C650D1948DA4200566EB7 /* angel3attack.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C64F21948DA4200566EB7 /* angel3attack.png */; };
+		C38C650E1948DA4200566EB7 /* angel3fall.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C64F31948DA4200566EB7 /* angel3fall.png */; };
+		C38C650F1948DA4200566EB7 /* angelplanemove.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C64F41948DA4200566EB7 /* angelplanemove.png */; };
+		C38C65101948DA4200566EB7 /* angeltankattack.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C64F51948DA4200566EB7 /* angeltankattack.png */; };
+		C38C65111948DA4200566EB7 /* angeltankbomb.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C64F61948DA4200566EB7 /* angeltankbomb.png */; };
+		C38C65121948DA4200566EB7 /* angeltankmove.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C64F71948DA4200566EB7 /* angeltankmove.png */; };
+		C38C65131948DA4200566EB7 /* devil1attack.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C64F81948DA4200566EB7 /* devil1attack.png */; };
+		C38C65141948DA4200566EB7 /* devil1fall.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C64F91948DA4200566EB7 /* devil1fall.png */; };
+		C38C65151948DA4200566EB7 /* devil1move.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C64FA1948DA4200566EB7 /* devil1move.png */; };
+		C38C65161948DA4200566EB7 /* devil2attack.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C64FB1948DA4200566EB7 /* devil2attack.png */; };
+		C38C65171948DA4200566EB7 /* devil2fall.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C64FC1948DA4200566EB7 /* devil2fall.png */; };
+		C38C65181948DA4200566EB7 /* devil2move.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C64FD1948DA4200566EB7 /* devil2move.png */; };
+		C38C65191948DA4200566EB7 /* devil2tank.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C64FE1948DA4200566EB7 /* devil2tank.png */; };
+		C38C651A1948DA4200566EB7 /* deviltankattack.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C64FF1948DA4200566EB7 /* deviltankattack.png */; };
+		C38C651B1948DA4200566EB7 /* deviltankmove.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C65001948DA4200566EB7 /* deviltankmove.png */; };
+		C38C651C1948DA4200566EB7 /* dying.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C65011948DA4200566EB7 /* dying.png */; };
+		C38C651D1948DA4200566EB7 /* explosion.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C65021948DA4200566EB7 /* explosion.png */; };
+		C38C651E1948DA4200566EB7 /* spartanattack.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C65031948DA4200566EB7 /* spartanattack.png */; };
+		C38C651F1948DA4200566EB7 /* spartanfall.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C65041948DA4200566EB7 /* spartanfall.png */; };
+		C38C65201948DA4200566EB7 /* spartanmove.png in Resources */ = {isa = PBXBuildFile; fileRef = C38C65051948DA4200566EB7 /* spartanmove.png */; };
+		C38C653C1948DA8500566EB7 /* angel1attack.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C65211948DA8400566EB7 /* angel1attack.plist */; };
+		C38C653D1948DA8500566EB7 /* angel1fall.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C65221948DA8400566EB7 /* angel1fall.plist */; };
+		C38C653F1948DA8500566EB7 /* angel2attack.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C65241948DA8400566EB7 /* angel2attack.plist */; };
+		C38C65401948DA8500566EB7 /* angel2fall.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C65251948DA8400566EB7 /* angel2fall.plist */; };
+		C38C65421948DA8500566EB7 /* angel3attack.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C65271948DA8400566EB7 /* angel3attack.plist */; };
+		C38C65431948DA8500566EB7 /* angel3fall.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C65281948DA8400566EB7 /* angel3fall.plist */; };
+		C38C65451948DA8500566EB7 /* angelplanemove.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C652A1948DA8400566EB7 /* angelplanemove.plist */; };
+		C38C65461948DA8500566EB7 /* angeltankattack.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C652B1948DA8400566EB7 /* angeltankattack.plist */; };
+		C38C65471948DA8500566EB7 /* angeltankbomb.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C652C1948DA8400566EB7 /* angeltankbomb.plist */; };
+		C38C65481948DA8500566EB7 /* angeltankmove.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C652D1948DA8400566EB7 /* angeltankmove.plist */; };
+		C38C65491948DA8500566EB7 /* devil1attack.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C652E1948DA8400566EB7 /* devil1attack.plist */; };
+		C38C654A1948DA8500566EB7 /* devil1fall.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C652F1948DA8400566EB7 /* devil1fall.plist */; };
+		C38C654B1948DA8500566EB7 /* devil1move.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C65301948DA8500566EB7 /* devil1move.plist */; };
+		C38C654C1948DA8500566EB7 /* devil2attack.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C65311948DA8500566EB7 /* devil2attack.plist */; };
+		C38C654D1948DA8500566EB7 /* devil2fall.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C65321948DA8500566EB7 /* devil2fall.plist */; };
+		C38C654E1948DA8500566EB7 /* devil2move.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C65331948DA8500566EB7 /* devil2move.plist */; };
+		C38C654F1948DA8500566EB7 /* devilplanemove.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C65341948DA8500566EB7 /* devilplanemove.plist */; };
+		C38C65501948DA8500566EB7 /* deviltankattack.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C65351948DA8500566EB7 /* deviltankattack.plist */; };
+		C38C65511948DA8500566EB7 /* deviltankmove.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C65361948DA8500566EB7 /* deviltankmove.plist */; };
+		C38C65521948DA8500566EB7 /* dying.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C65371948DA8500566EB7 /* dying.plist */; };
+		C38C65531948DA8500566EB7 /* explosion.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C65381948DA8500566EB7 /* explosion.plist */; };
+		C38C65541948DA8500566EB7 /* spartanattack.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C65391948DA8500566EB7 /* spartanattack.plist */; };
+		C38C65551948DA8500566EB7 /* spartanfall.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C653A1948DA8500566EB7 /* spartanfall.plist */; };
+		C38C65561948DA8500566EB7 /* spartanmove.plist in Resources */ = {isa = PBXBuildFile; fileRef = C38C653B1948DA8500566EB7 /* spartanmove.plist */; };
+		C3A48F4F195B4C3500E0350F /* main-idle.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3A48F4E195B4C3500E0350F /* main-idle.plist */; };
+		C3A48F51195B4C5700E0350F /* main-idle.png in Resources */ = {isa = PBXBuildFile; fileRef = C3A48F50195B4C5700E0350F /* main-idle.png */; };
+		C3A48F53195B5A8000E0350F /* main-shoot.png in Resources */ = {isa = PBXBuildFile; fileRef = C3A48F52195B5A8000E0350F /* main-shoot.png */; };
+		C3A48F55195B5AA100E0350F /* main-shoot.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3A48F54195B5AA100E0350F /* main-shoot.plist */; };
+		C3A48F57195B691D00E0350F /* blue-energy.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3A48F56195B691D00E0350F /* blue-energy.plist */; };
+		C3A48F59195B694500E0350F /* blue-energy.png in Resources */ = {isa = PBXBuildFile; fileRef = C3A48F58195B694500E0350F /* blue-energy.png */; };
+		C3C7CFDB194909A300E22136 /* angel1move.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3C7CFDA194909A300E22136 /* angel1move.plist */; };
+		C3C7CFDD194909DB00E22136 /* angel2move.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3C7CFDC194909DB00E22136 /* angel2move.plist */; };
+		C3C7CFDF194909F700E22136 /* angel3move.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3C7CFDE194909F700E22136 /* angel3move.plist */; };
+		C3C7CFE119490A3D00E22136 /* angel1move.png in Resources */ = {isa = PBXBuildFile; fileRef = C3C7CFE019490A3D00E22136 /* angel1move.png */; };
+		C3C7CFE319490A4900E22136 /* angel2move.png in Resources */ = {isa = PBXBuildFile; fileRef = C3C7CFE219490A4900E22136 /* angel2move.png */; };
+		C3C7CFE519490A5300E22136 /* angel3move.png in Resources */ = {isa = PBXBuildFile; fileRef = C3C7CFE419490A5300E22136 /* angel3move.png */; };
 		DC1BE6A014F417CC00F49D25 /* Ubuntu-B.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC1BE68C14F417CC00F49D25 /* Ubuntu-B.ttf */; };
 		DC1BE6A114F417CC00F49D25 /* Ubuntu-BI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC1BE68D14F417CC00F49D25 /* Ubuntu-BI.ttf */; };
 		DC1BE6A214F417CC00F49D25 /* Ubuntu-C.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC1BE68E14F417CC00F49D25 /* Ubuntu-C.ttf */; };
@@ -931,7 +982,6 @@
 		C35101011947B53100057578 /* GameData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameData.h; sourceTree = "<group>"; };
 		C35101021947B53100057578 /* GameData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameData.m; sourceTree = "<group>"; };
 		C35101031947B53100057578 /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
-		C35101041947B53100057578 /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
 		C35101051947B53100057578 /* GameOverLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverLayer.h; sourceTree = "<group>"; };
 		C35101061947B53100057578 /* GameOverLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverLayer.m; sourceTree = "<group>"; };
 		C35101071947B53100057578 /* HelloWorldLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
@@ -963,10 +1013,6 @@
 		C35101261947B53100057578 /* game-over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "game-over.png"; sourceTree = "<group>"; };
 		C35101271947B53100057578 /* mockup-game-over-ip5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mockup-game-over-ip5.png"; sourceTree = "<group>"; };
 		C35101281947B53100057578 /* mockup-game-over-retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mockup-game-over-retina.png"; sourceTree = "<group>"; };
-		C35101291947B53100057578 /* restart-button-d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "restart-button-d.png"; sourceTree = "<group>"; };
-		C351012A1947B53100057578 /* restart-button-hd-d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "restart-button-hd-d.png"; sourceTree = "<group>"; };
-		C351012B1947B53100057578 /* restart-button-hd-n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "restart-button-hd-n.png"; sourceTree = "<group>"; };
-		C351012C1947B53100057578 /* restart-button-n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "restart-button-n.png"; sourceTree = "<group>"; };
 		C351012D1947B53100057578 /* select-button-d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select-button-d.png"; sourceTree = "<group>"; };
 		C351012E1947B53100057578 /* select-button-hd-d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select-button-hd-d.png"; sourceTree = "<group>"; };
 		C351012F1947B53100057578 /* select-button-hd-n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select-button-hd-n.png"; sourceTree = "<group>"; };
@@ -1095,9 +1141,9 @@
 		C35101C61947B53100057578 /* badbase-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badbase-1.png"; sourceTree = "<group>"; };
 		C35101C71947B53100057578 /* badbase-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badbase-2.png"; sourceTree = "<group>"; };
 		C35101C81947B53100057578 /* badbase-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badbase-3.png"; sourceTree = "<group>"; };
-		C35101CB1947B53100057578 /* d1-attack1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "d1-attack1.png"; sourceTree = "<group>"; };
-		C35101CC1947B53100057578 /* d1-attack2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "d1-attack2.png"; sourceTree = "<group>"; };
-		C35101CD1947B53100057578 /* d1-attack3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "d1-attack3.png"; sourceTree = "<group>"; };
+		C35101CB1947B53100057578 /* d1-attack-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "d1-attack-1.png"; sourceTree = "<group>"; };
+		C35101CC1947B53100057578 /* d1-attack-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "d1-attack-2.png"; sourceTree = "<group>"; };
+		C35101CD1947B53100057578 /* d1-attack-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "d1-attack-3.png"; sourceTree = "<group>"; };
 		C35101CE1947B53100057578 /* d1-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "d1-1.png"; sourceTree = "<group>"; };
 		C35101CF1947B53100057578 /* d1-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "d1-2.png"; sourceTree = "<group>"; };
 		C35101D01947B53100057578 /* d1-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "d1-3.png"; sourceTree = "<group>"; };
@@ -1334,15 +1380,9 @@
 		C35102D01947B53200057578 /* config.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.lua; sourceTree = "<group>"; };
 		C35102D11947B53200057578 /* cooltext1150760500.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cooltext1150760500.png; sourceTree = "<group>"; };
 		C35102D21947B53200057578 /* cooltext1265591974.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cooltext1265591974.png; sourceTree = "<group>"; };
-		C35102D31947B53200057578 /* friendly.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = friendly.plist; sourceTree = "<group>"; };
 		C35102D41947B53200057578 /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
 		C35102D51947B53200057578 /* knightframesflipped.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = knightframesflipped.plist; sourceTree = "<group>"; };
 		C35102D61947B53200057578 /* knightFramesFlipped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knightFramesFlipped.png; sourceTree = "<group>"; };
-		C35102D71947B53200057578 /* Level 1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Level 1.plist"; sourceTree = "<group>"; };
-		C35102D81947B53200057578 /* Level 2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Level 2.plist"; sourceTree = "<group>"; };
-		C35102D91947B53200057578 /* Level 3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Level 3.plist"; sourceTree = "<group>"; };
-		C35102DA1947B53200057578 /* Level 4.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Level 4.plist"; sourceTree = "<group>"; };
-		C35102DB1947B53200057578 /* Level 5.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Level 5.plist"; sourceTree = "<group>"; };
 		C35102DC1947B53200057578 /* level1Label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level1Label.png; sourceTree = "<group>"; };
 		C35102DD1947B53200057578 /* level2Label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level2Label.png; sourceTree = "<group>"; };
 		C35102DE1947B53200057578 /* level3Label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level3Label.png; sourceTree = "<group>"; };
@@ -1650,6 +1690,68 @@
 		C35104291947B53300057578 /* whiteBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteBar.png; sourceTree = "<group>"; };
 		C351042A1947B53300057578 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
 		C351042B1947B53300057578 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Store.m; sourceTree = "<group>"; };
+		C369F4941963574000A8C0C4 /* plists */ = {isa = PBXFileReference; lastKnownFileType = folder; path = plists; sourceTree = "<group>"; };
+		C369F49619648D8000A8C0C4 /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
+		C38C64EC1948DA4200566EB7 /* angel1attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = angel1attack.png; path = "Angels vs Devils/angel1attack.png"; sourceTree = "<group>"; };
+		C38C64ED1948DA4200566EB7 /* angel1fall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = angel1fall.png; path = "Angels vs Devils/angel1fall.png"; sourceTree = "<group>"; };
+		C38C64EF1948DA4200566EB7 /* angel2attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = angel2attack.png; path = "Angels vs Devils/angel2attack.png"; sourceTree = "<group>"; };
+		C38C64F01948DA4200566EB7 /* angel2fall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = angel2fall.png; path = "Angels vs Devils/angel2fall.png"; sourceTree = "<group>"; };
+		C38C64F21948DA4200566EB7 /* angel3attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = angel3attack.png; path = "Angels vs Devils/angel3attack.png"; sourceTree = "<group>"; };
+		C38C64F31948DA4200566EB7 /* angel3fall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = angel3fall.png; path = "Angels vs Devils/angel3fall.png"; sourceTree = "<group>"; };
+		C38C64F41948DA4200566EB7 /* angelplanemove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = angelplanemove.png; path = "Angels vs Devils/angelplanemove.png"; sourceTree = "<group>"; };
+		C38C64F51948DA4200566EB7 /* angeltankattack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = angeltankattack.png; path = "Angels vs Devils/angeltankattack.png"; sourceTree = "<group>"; };
+		C38C64F61948DA4200566EB7 /* angeltankbomb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = angeltankbomb.png; path = "Angels vs Devils/angeltankbomb.png"; sourceTree = "<group>"; };
+		C38C64F71948DA4200566EB7 /* angeltankmove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = angeltankmove.png; path = "Angels vs Devils/angeltankmove.png"; sourceTree = "<group>"; };
+		C38C64F81948DA4200566EB7 /* devil1attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = devil1attack.png; path = "Angels vs Devils/devil1attack.png"; sourceTree = "<group>"; };
+		C38C64F91948DA4200566EB7 /* devil1fall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = devil1fall.png; path = "Angels vs Devils/devil1fall.png"; sourceTree = "<group>"; };
+		C38C64FA1948DA4200566EB7 /* devil1move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = devil1move.png; path = "Angels vs Devils/devil1move.png"; sourceTree = "<group>"; };
+		C38C64FB1948DA4200566EB7 /* devil2attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = devil2attack.png; path = "Angels vs Devils/devil2attack.png"; sourceTree = "<group>"; };
+		C38C64FC1948DA4200566EB7 /* devil2fall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = devil2fall.png; path = "Angels vs Devils/devil2fall.png"; sourceTree = "<group>"; };
+		C38C64FD1948DA4200566EB7 /* devil2move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = devil2move.png; path = "Angels vs Devils/devil2move.png"; sourceTree = "<group>"; };
+		C38C64FE1948DA4200566EB7 /* devil2tank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = devil2tank.png; path = "Angels vs Devils/devil2tank.png"; sourceTree = "<group>"; };
+		C38C64FF1948DA4200566EB7 /* deviltankattack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = deviltankattack.png; path = "Angels vs Devils/deviltankattack.png"; sourceTree = "<group>"; };
+		C38C65001948DA4200566EB7 /* deviltankmove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = deviltankmove.png; path = "Angels vs Devils/deviltankmove.png"; sourceTree = "<group>"; };
+		C38C65011948DA4200566EB7 /* dying.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dying.png; path = "Angels vs Devils/dying.png"; sourceTree = "<group>"; };
+		C38C65021948DA4200566EB7 /* explosion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explosion.png; path = "Angels vs Devils/explosion.png"; sourceTree = "<group>"; };
+		C38C65031948DA4200566EB7 /* spartanattack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartanattack.png; path = "Angels vs Devils/spartanattack.png"; sourceTree = "<group>"; };
+		C38C65041948DA4200566EB7 /* spartanfall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartanfall.png; path = "Angels vs Devils/spartanfall.png"; sourceTree = "<group>"; };
+		C38C65051948DA4200566EB7 /* spartanmove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartanmove.png; path = "Angels vs Devils/spartanmove.png"; sourceTree = "<group>"; };
+		C38C65211948DA8400566EB7 /* angel1attack.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = angel1attack.plist; path = "Angels vs Devils/angel1attack.plist"; sourceTree = "<group>"; };
+		C38C65221948DA8400566EB7 /* angel1fall.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = angel1fall.plist; path = "Angels vs Devils/angel1fall.plist"; sourceTree = "<group>"; };
+		C38C65241948DA8400566EB7 /* angel2attack.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = angel2attack.plist; path = "Angels vs Devils/angel2attack.plist"; sourceTree = "<group>"; };
+		C38C65251948DA8400566EB7 /* angel2fall.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = angel2fall.plist; path = "Angels vs Devils/angel2fall.plist"; sourceTree = "<group>"; };
+		C38C65271948DA8400566EB7 /* angel3attack.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = angel3attack.plist; path = "Angels vs Devils/angel3attack.plist"; sourceTree = "<group>"; };
+		C38C65281948DA8400566EB7 /* angel3fall.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = angel3fall.plist; path = "Angels vs Devils/angel3fall.plist"; sourceTree = "<group>"; };
+		C38C652A1948DA8400566EB7 /* angelplanemove.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = angelplanemove.plist; path = "Angels vs Devils/angelplanemove.plist"; sourceTree = "<group>"; };
+		C38C652B1948DA8400566EB7 /* angeltankattack.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = angeltankattack.plist; path = "Angels vs Devils/angeltankattack.plist"; sourceTree = "<group>"; };
+		C38C652C1948DA8400566EB7 /* angeltankbomb.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = angeltankbomb.plist; path = "Angels vs Devils/angeltankbomb.plist"; sourceTree = "<group>"; };
+		C38C652D1948DA8400566EB7 /* angeltankmove.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = angeltankmove.plist; path = "Angels vs Devils/angeltankmove.plist"; sourceTree = "<group>"; };
+		C38C652E1948DA8400566EB7 /* devil1attack.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = devil1attack.plist; path = "Angels vs Devils/devil1attack.plist"; sourceTree = "<group>"; };
+		C38C652F1948DA8400566EB7 /* devil1fall.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = devil1fall.plist; path = "Angels vs Devils/devil1fall.plist"; sourceTree = "<group>"; };
+		C38C65301948DA8500566EB7 /* devil1move.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = devil1move.plist; path = "Angels vs Devils/devil1move.plist"; sourceTree = "<group>"; };
+		C38C65311948DA8500566EB7 /* devil2attack.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = devil2attack.plist; path = "Angels vs Devils/devil2attack.plist"; sourceTree = "<group>"; };
+		C38C65321948DA8500566EB7 /* devil2fall.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = devil2fall.plist; path = "Angels vs Devils/devil2fall.plist"; sourceTree = "<group>"; };
+		C38C65331948DA8500566EB7 /* devil2move.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = devil2move.plist; path = "Angels vs Devils/devil2move.plist"; sourceTree = "<group>"; };
+		C38C65341948DA8500566EB7 /* devilplanemove.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = devilplanemove.plist; path = "Angels vs Devils/devilplanemove.plist"; sourceTree = "<group>"; };
+		C38C65351948DA8500566EB7 /* deviltankattack.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = deviltankattack.plist; path = "Angels vs Devils/deviltankattack.plist"; sourceTree = "<group>"; };
+		C38C65361948DA8500566EB7 /* deviltankmove.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = deviltankmove.plist; path = "Angels vs Devils/deviltankmove.plist"; sourceTree = "<group>"; };
+		C38C65371948DA8500566EB7 /* dying.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = dying.plist; path = "Angels vs Devils/dying.plist"; sourceTree = "<group>"; };
+		C38C65381948DA8500566EB7 /* explosion.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = explosion.plist; path = "Angels vs Devils/explosion.plist"; sourceTree = "<group>"; };
+		C38C65391948DA8500566EB7 /* spartanattack.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = spartanattack.plist; path = "Angels vs Devils/spartanattack.plist"; sourceTree = "<group>"; };
+		C38C653A1948DA8500566EB7 /* spartanfall.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = spartanfall.plist; path = "Angels vs Devils/spartanfall.plist"; sourceTree = "<group>"; };
+		C38C653B1948DA8500566EB7 /* spartanmove.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = spartanmove.plist; path = "Angels vs Devils/spartanmove.plist"; sourceTree = "<group>"; };
+		C3A48F4E195B4C3500E0350F /* main-idle.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "main-idle.plist"; path = "animation plists/main-idle.plist"; sourceTree = "<group>"; };
+		C3A48F50195B4C5700E0350F /* main-idle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "main-idle.png"; path = "animation pngs/main-idle.png"; sourceTree = "<group>"; };
+		C3A48F52195B5A8000E0350F /* main-shoot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "main-shoot.png"; path = "animation pngs/main-shoot.png"; sourceTree = "<group>"; };
+		C3A48F54195B5AA100E0350F /* main-shoot.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "main-shoot.plist"; path = "animation plists/main-shoot.plist"; sourceTree = "<group>"; };
+		C3A48F56195B691D00E0350F /* blue-energy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "blue-energy.plist"; path = "animation plists/blue-energy.plist"; sourceTree = "<group>"; };
+		C3A48F58195B694500E0350F /* blue-energy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blue-energy.png"; path = "animation pngs/blue-energy.png"; sourceTree = "<group>"; };
+		C3C7CFDA194909A300E22136 /* angel1move.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = angel1move.plist; path = "Angels vs Devils/Victory screen - AVD/angel1move.plist"; sourceTree = "<group>"; };
+		C3C7CFDC194909DB00E22136 /* angel2move.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = angel2move.plist; sourceTree = "<group>"; };
+		C3C7CFDE194909F700E22136 /* angel3move.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = angel3move.plist; sourceTree = "<group>"; };
+		C3C7CFE019490A3D00E22136 /* angel1move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = angel1move.png; sourceTree = "<group>"; };
+		C3C7CFE219490A4900E22136 /* angel2move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = angel2move.png; sourceTree = "<group>"; };
+		C3C7CFE419490A5300E22136 /* angel3move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = angel3move.png; sourceTree = "<group>"; };
 		DC1BE68614F417CC00F49D25 /* copyright.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = copyright.txt; sourceTree = "<group>"; };
 		DC1BE68914F417CC00F49D25 /* LICENCE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENCE.txt; sourceTree = "<group>"; };
 		DC1BE68C14F417CC00F49D25 /* Ubuntu-B.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-B.ttf"; sourceTree = "<group>"; };
@@ -1838,10 +1940,68 @@
 		C35101151947B53100057578 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C369F4941963574000A8C0C4 /* plists */,
 				C35101161947B53100057578 /* Angels vs Devils */,
-				C35102BD1947B53200057578 /* animation plists */,
-				C35102BE1947B53200057578 /* animation pngs */,
-				C35102BF1947B53200057578 /* animation_knight-1.png */,
+				C3C7CFE019490A3D00E22136 /* angel1move.png */,
+				C38C64EC1948DA4200566EB7 /* angel1attack.png */,
+				C38C64ED1948DA4200566EB7 /* angel1fall.png */,
+				C3C7CFE219490A4900E22136 /* angel2move.png */,
+				C38C64EF1948DA4200566EB7 /* angel2attack.png */,
+				C38C64F01948DA4200566EB7 /* angel2fall.png */,
+				C3C7CFE419490A5300E22136 /* angel3move.png */,
+				C38C64F21948DA4200566EB7 /* angel3attack.png */,
+				C38C64F31948DA4200566EB7 /* angel3fall.png */,
+				C38C64F41948DA4200566EB7 /* angelplanemove.png */,
+				C38C64F51948DA4200566EB7 /* angeltankattack.png */,
+				C38C64F61948DA4200566EB7 /* angeltankbomb.png */,
+				C38C64F71948DA4200566EB7 /* angeltankmove.png */,
+				C3A48F50195B4C5700E0350F /* main-idle.png */,
+				C3A48F52195B5A8000E0350F /* main-shoot.png */,
+				C3A48F58195B694500E0350F /* blue-energy.png */,
+				C38C64FA1948DA4200566EB7 /* devil1move.png */,
+				C38C64F81948DA4200566EB7 /* devil1attack.png */,
+				C38C64F91948DA4200566EB7 /* devil1fall.png */,
+				C38C64FD1948DA4200566EB7 /* devil2move.png */,
+				C38C64FB1948DA4200566EB7 /* devil2attack.png */,
+				C38C64FC1948DA4200566EB7 /* devil2fall.png */,
+				C38C64FE1948DA4200566EB7 /* devil2tank.png */,
+				C38C64FF1948DA4200566EB7 /* deviltankattack.png */,
+				C38C65001948DA4200566EB7 /* deviltankmove.png */,
+				C38C65011948DA4200566EB7 /* dying.png */,
+				C38C65021948DA4200566EB7 /* explosion.png */,
+				C38C65031948DA4200566EB7 /* spartanattack.png */,
+				C38C65041948DA4200566EB7 /* spartanfall.png */,
+				C38C65051948DA4200566EB7 /* spartanmove.png */,
+				C3C7CFDA194909A300E22136 /* angel1move.plist */,
+				C38C65211948DA8400566EB7 /* angel1attack.plist */,
+				C38C65221948DA8400566EB7 /* angel1fall.plist */,
+				C3C7CFDC194909DB00E22136 /* angel2move.plist */,
+				C38C65241948DA8400566EB7 /* angel2attack.plist */,
+				C38C65251948DA8400566EB7 /* angel2fall.plist */,
+				C3C7CFDE194909F700E22136 /* angel3move.plist */,
+				C38C65271948DA8400566EB7 /* angel3attack.plist */,
+				C38C65281948DA8400566EB7 /* angel3fall.plist */,
+				C38C652A1948DA8400566EB7 /* angelplanemove.plist */,
+				C38C652B1948DA8400566EB7 /* angeltankattack.plist */,
+				C38C652C1948DA8400566EB7 /* angeltankbomb.plist */,
+				C38C652D1948DA8400566EB7 /* angeltankmove.plist */,
+				C3A48F4E195B4C3500E0350F /* main-idle.plist */,
+				C3A48F54195B5AA100E0350F /* main-shoot.plist */,
+				C3A48F56195B691D00E0350F /* blue-energy.plist */,
+				C38C652E1948DA8400566EB7 /* devil1attack.plist */,
+				C38C652F1948DA8400566EB7 /* devil1fall.plist */,
+				C38C65301948DA8500566EB7 /* devil1move.plist */,
+				C38C65311948DA8500566EB7 /* devil2attack.plist */,
+				C38C65321948DA8500566EB7 /* devil2fall.plist */,
+				C38C65331948DA8500566EB7 /* devil2move.plist */,
+				C38C65341948DA8500566EB7 /* devilplanemove.plist */,
+				C38C65351948DA8500566EB7 /* deviltankattack.plist */,
+				C38C65361948DA8500566EB7 /* deviltankmove.plist */,
+				C38C65371948DA8500566EB7 /* dying.plist */,
+				C38C65381948DA8500566EB7 /* explosion.plist */,
+				C38C65391948DA8500566EB7 /* spartanattack.plist */,
+				C38C653A1948DA8500566EB7 /* spartanfall.plist */,
+				C38C653B1948DA8500566EB7 /* spartanmove.plist */,
 				C35102C01947B53200057578 /* background_desert-topdown.png */,
 				C35102C11947B53200057578 /* background_grass-top.png */,
 				C35102C21947B53200057578 /* background_grass-topdown.png */,
@@ -1861,15 +2021,10 @@
 				C35102D01947B53200057578 /* config.lua */,
 				C35102D11947B53200057578 /* cooltext1150760500.png */,
 				C35102D21947B53200057578 /* cooltext1265591974.png */,
-				C35102D31947B53200057578 /* friendly.plist */,
 				C35102D41947B53200057578 /* images.png */,
 				C35102D51947B53200057578 /* knightframesflipped.plist */,
 				C35102D61947B53200057578 /* knightFramesFlipped.png */,
-				C35102D71947B53200057578 /* Level 1.plist */,
-				C35102D81947B53200057578 /* Level 2.plist */,
-				C35102D91947B53200057578 /* Level 3.plist */,
-				C35102DA1947B53200057578 /* Level 4.plist */,
-				C35102DB1947B53200057578 /* Level 5.plist */,
+				C35102BF1947B53200057578 /* animation_knight-1.png */,
 				C35102DC1947B53200057578 /* level1Label.png */,
 				C35102DD1947B53200057578 /* level2Label.png */,
 				C35102DE1947B53200057578 /* level3Label.png */,
@@ -1943,10 +2098,6 @@
 				C35101261947B53100057578 /* game-over.png */,
 				C35101271947B53100057578 /* mockup-game-over-ip5.png */,
 				C35101281947B53100057578 /* mockup-game-over-retina.png */,
-				C35101291947B53100057578 /* restart-button-d.png */,
-				C351012A1947B53100057578 /* restart-button-hd-d.png */,
-				C351012B1947B53100057578 /* restart-button-hd-n.png */,
-				C351012C1947B53100057578 /* restart-button-n.png */,
 				C351012D1947B53100057578 /* select-button-d.png */,
 				C351012E1947B53100057578 /* select-button-hd-d.png */,
 				C351012F1947B53100057578 /* select-button-hd-n.png */,
@@ -2331,9 +2482,9 @@
 		C35101CA1947B53100057578 /* attack */ = {
 			isa = PBXGroup;
 			children = (
-				C35101CB1947B53100057578 /* d1-attack1.png */,
-				C35101CC1947B53100057578 /* d1-attack2.png */,
-				C35101CD1947B53100057578 /* d1-attack3.png */,
+				C35101CB1947B53100057578 /* d1-attack-1.png */,
+				C35101CC1947B53100057578 /* d1-attack-2.png */,
+				C35101CD1947B53100057578 /* d1-attack-3.png */,
 			);
 			path = attack;
 			sourceTree = "<group>";
@@ -2681,20 +2832,6 @@
 				C35102BC1947B53200057578 /* victory-screen-retina.png */,
 			);
 			path = "Victory screen - AVD";
-			sourceTree = "<group>";
-		};
-		C35102BD1947B53200057578 /* animation plists */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "animation plists";
-			sourceTree = "<group>";
-		};
-		C35102BE1947B53200057578 /* animation pngs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "animation pngs";
 			sourceTree = "<group>";
 		};
 		C35102E61947B53200057578 /* Placeholder Art Monsters vs Kittens */ = {
@@ -3350,7 +3487,7 @@
 				C35101011947B53100057578 /* GameData.h */,
 				C35101021947B53100057578 /* GameData.m */,
 				C35101031947B53100057578 /* GameLayer.h */,
-				C35101041947B53100057578 /* GameLayer.m */,
+				C369F49619648D8000A8C0C4 /* GameLayer.m */,
 				C35101051947B53100057578 /* GameOverLayer.h */,
 				C35101061947B53100057578 /* GameOverLayer.m */,
 				C35101071947B53100057578 /* HelloWorldLayer.h */,
@@ -3362,14 +3499,14 @@
 				C351010D1947B53100057578 /* MainMenuLayer.m */,
 				C351010E1947B53100057578 /* PauseMenuLayer.h */,
 				C351010F1947B53100057578 /* PauseMenuLayer.m */,
+				C351042A1947B53300057578 /* Store.h */,
+				C351042B1947B53300057578 /* Store.m */,
 				C35101101947B53100057578 /* Player.h */,
 				C35101111947B53100057578 /* Player.m */,
 				C35101121947B53100057578 /* Prefix-iOS.pch */,
 				C35101131947B53100057578 /* Prefix-Mac.pch */,
 				C35101141947B53100057578 /* Property List.plist */,
 				C35101151947B53100057578 /* Resources */,
-				C351042A1947B53300057578 /* Store.h */,
-				C351042B1947B53300057578 /* Store.m */,
 				DCC1A3CF13A94F2C005BD75D /* Supporting Files */,
 			);
 			path = Projectfiles;
@@ -3468,7 +3605,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C351053D1947B53300057578 /* main-6-3.png in Resources */,
-				C35105C61947B53300057578 /* Level 4.plist in Resources */,
 				C351069E1947B53300057578 /* cat1.png in Resources */,
 				C35105BB1947B53300057578 /* complete.png in Resources */,
 				C35104821947B53300057578 /* a3-attack-8.png in Resources */,
@@ -3476,7 +3612,7 @@
 				C351051C1947B53300057578 /* main-idle-7.png in Resources */,
 				DCC1A0FA13A94ED5005BD75D /* Default.png in Resources */,
 				C35104741947B53300057578 /* a3-2.png in Resources */,
-				C35105C51947B53300057578 /* Level 3.plist in Resources */,
+				C3C7CFDD194909DB00E22136 /* angel2move.plist in Resources */,
 				C35106981947B53300057578 /* cat2-hd.png in Resources */,
 				C35104E81947B53300057578 /* bomb-2.png in Resources */,
 				C351052C1947B53300057578 /* main-2-2.png in Resources */,
@@ -3498,6 +3634,7 @@
 				DCC1A0FC13A94ED5005BD75D /* fps_images.png in Resources */,
 				C35105651947B53300057578 /* main-menu-retina.png in Resources */,
 				C35106F61947B53300057578 /* wall.png in Resources */,
+				C38C651A1948DA4200566EB7 /* deviltankattack.png in Resources */,
 				C35106A71947B53300057578 /* animation_sword-1-hd.png in Resources */,
 				C35105A61947B53300057578 /* victory screen.png in Resources */,
 				C35106D01947B53300057578 /* title_highscore-hd.png in Resources */,
@@ -3506,7 +3643,9 @@
 				C35104D11947B53300057578 /* d1-3.png in Resources */,
 				C35104BB1947B53300057578 /* foreground-retina.png in Resources */,
 				C35105B71947B53300057578 /* cat3.png in Resources */,
+				C38C65131948DA4200566EB7 /* devil1attack.png in Resources */,
 				DCC1A0FE13A94ED5005BD75D /* Icon-72.png in Resources */,
+				C38C653D1948DA8500566EB7 /* angel1fall.plist in Resources */,
 				C35106961947B53300057578 /* cat1-hd.png in Resources */,
 				C35105A81947B53300057578 /* victory-screen-ip5.png in Resources */,
 				DCC1A10013A94ED5005BD75D /* Icon-Small-50.png in Resources */,
@@ -3515,7 +3654,6 @@
 				DCC1A10413A94ED5005BD75D /* Icon-Small@2x.png in Resources */,
 				DCC1A10613A94ED5005BD75D /* Icon.png in Resources */,
 				C35106C11947B53300057578 /* dragon-top.png in Resources */,
-				C35105C71947B53300057578 /* Level 5.plist in Resources */,
 				C351061A1947B53300057578 /* tree1-hd.png in Resources */,
 				DCC1A10813A94ED5005BD75D /* Icon@2x.png in Resources */,
 				C351068F1947B53300057578 /* sword.png in Resources */,
@@ -3528,9 +3666,11 @@
 				DC1BE6A214F417CC00F49D25 /* Ubuntu-C.ttf in Resources */,
 				C35106111947B53300057578 /* palmtree-hd.png in Resources */,
 				C35105691947B53300057578 /* main menu-button-d.png in Resources */,
+				C369F4951963574000A8C0C4 /* plists in Resources */,
 				C35106E21947B53300057578 /* monster8-hd.png in Resources */,
 				DC1BE6A314F417CC00F49D25 /* Ubuntu-L.ttf in Resources */,
 				C351048A1947B53300057578 /* a4-3.png in Resources */,
+				C38C651B1948DA4200566EB7 /* deviltankmove.png in Resources */,
 				C35104701947B53300057578 /* a2-fall-2.png in Resources */,
 				C351061C1947B53300057578 /* trees-hd.png in Resources */,
 				DC1BE6A414F417CC00F49D25 /* Ubuntu-LI.ttf in Resources */,
@@ -3555,8 +3695,11 @@
 				C35105901947B53300057578 /* 20131121_084339.jpg in Resources */,
 				C35105991947B53300057578 /* continue-button-hd-d.png in Resources */,
 				C351054D1947B53300057578 /* 3.png in Resources */,
+				C38C653C1948DA8500566EB7 /* angel1attack.plist in Resources */,
+				C38C654A1948DA8500566EB7 /* devil1fall.plist in Resources */,
 				C35105FD1947B53300057578 /* joystick-bottom.png in Resources */,
 				C35106891947B53300057578 /* spider.png in Resources */,
+				C38C65461948DA8500566EB7 /* angeltankattack.plist in Resources */,
 				C35105C01947B53300057578 /* images.png in Resources */,
 				C35104DC1947B53300057578 /* d2-attack-4.png in Resources */,
 				C35105C91947B53300057578 /* level2Label.png in Resources */,
@@ -3566,13 +3709,17 @@
 				DC1BE6A814F417CC00F49D25 /* Ubuntu-RI.ttf in Resources */,
 				C351063B1947B53300057578 /* box-hd.png in Resources */,
 				C35105371947B53300057578 /* main-5-1.png in Resources */,
+				C38C650B1948DA4200566EB7 /* angel2fall.png in Resources */,
 				C35104A41947B53300057578 /* explode-3.png in Resources */,
 				C35104F71947B53300057578 /* d4-3.png in Resources */,
+				C38C651E1948DA4200566EB7 /* spartanattack.png in Resources */,
 				C35104FE1947B53300057578 /* airstrike_btn.png in Resources */,
 				C351062F1947B53300057578 /* topdowntree.png in Resources */,
 				DC1BE6A914F417CC00F49D25 /* UbuntuMono-B.ttf in Resources */,
 				DC1BE6AA14F417CC00F49D25 /* UbuntuMono-BI.ttf in Resources */,
 				C35105CD1947B53300057578 /* monster1.png in Resources */,
+				C38C65191948DA4200566EB7 /* devil2tank.png in Resources */,
+				C38C650F1948DA4200566EB7 /* angelplanemove.png in Resources */,
 				C35106F71947B53300057578 /* wave.png in Resources */,
 				C35106481947B53300057578 /* jet-hd.png in Resources */,
 				C351049E1947B53300057578 /* poof-1.png in Resources */,
@@ -3583,6 +3730,7 @@
 				C35105E31947B53300057578 /* background_desert.png in Resources */,
 				C35104A11947B53300057578 /* poof-4.png in Resources */,
 				C35105041947B53300057578 /* pause_btn.png in Resources */,
+				C3A48F57195B691D00E0350F /* blue-energy.plist in Resources */,
 				C35105541947B53300057578 /* continue-button-d.png in Resources */,
 				C35106811947B53300057578 /* rocket.png in Resources */,
 				C35106B61947B53300057578 /* monster14-hd.png in Resources */,
@@ -3595,18 +3743,20 @@
 				C35105271947B53300057578 /* main-11-1.png in Resources */,
 				C351061B1947B53300057578 /* tree2-hd.png in Resources */,
 				C35106DC1947B53300057578 /* cat3-hd.png in Resources */,
+				C38C65521948DA8500566EB7 /* dying.plist in Resources */,
 				C35105A71947B53300057578 /* victory-screen-hd.png in Resources */,
-				C35104491947B53300057578 /* restart-button-hd-d.png in Resources */,
 				C351052D1947B53300057578 /* main-2-3.png in Resources */,
 				C35105421947B53300057578 /* main-7-4.png in Resources */,
 				C351050B1947B53300057578 /* main-idle-1.png in Resources */,
+				C3A48F4F195B4C3500E0350F /* main-idle.plist in Resources */,
 				DC1BE6AC14F417CC00F49D25 /* UbuntuMono-RI.ttf in Resources */,
 				DC26D6DA14B9F2C600B6002E /* fps_images-hd.png in Resources */,
 				C351063E1947B53300057578 /* car-topdown-hd.png in Resources */,
-				C35104CC1947B53300057578 /* d1-attack1.png in Resources */,
+				C35104CC1947B53300057578 /* d1-attack-1.png in Resources */,
 				C35104571947B53300057578 /* a1-4.png in Resources */,
 				C35106971947B53300057578 /* cat1-topdown-hd.png in Resources */,
 				C351056C1947B53300057578 /* main menu-button-n.png in Resources */,
+				C38C65201948DA4200566EB7 /* spartanmove.png in Resources */,
 				C35104641947B53300057578 /* a2-2.png in Resources */,
 				C351043A1947B53300057578 /* game-icon.png in Resources */,
 				C35105F71947B53300057578 /* button_arrowbutton.png in Resources */,
@@ -3618,8 +3768,11 @@
 				C35105071947B53300057578 /* sound_btn.png in Resources */,
 				C35106031947B53300057578 /* view.png in Resources */,
 				DC65617315114B4A00E59F8A /* fps_images-ipadhd.png in Resources */,
+				C38C65081948DA4200566EB7 /* angel1fall.png in Resources */,
 				C35104E51947B53300057578 /* d2-fall-3.png in Resources */,
+				C38C65141948DA4200566EB7 /* devil1fall.png in Resources */,
 				C35104861947B53300057578 /* 3.png in Resources */,
+				C38C654C1948DA8500566EB7 /* devil2attack.plist in Resources */,
 				C35106781947B53300057578 /* jet.png in Resources */,
 				C35105631947B53300057578 /* main-menu-ip5.png in Resources */,
 				C35105171947B53300057578 /* main-idle-20.png in Resources */,
@@ -3634,6 +3787,7 @@
 				C35106CE1947B53300057578 /* tall-monster.png in Resources */,
 				C35105301947B53300057578 /* main-3-2.png in Resources */,
 				C35106B51947B53300057578 /* monster13-hd.png in Resources */,
+				C38C65501948DA8500566EB7 /* deviltankattack.plist in Resources */,
 				C351048F1947B53300057578 /* a4-8.png in Resources */,
 				C35105BA1947B53300057578 /* city-front.png in Resources */,
 				DC2721A2160CAEB600D88944 /* Default-568h@2x.png in Resources */,
@@ -3641,14 +3795,19 @@
 				C35106E41947B53300057578 /* animation_knight-1.png in Resources */,
 				C351060B1947B53300057578 /* fence-hd.png in Resources */,
 				C35105C21947B53300057578 /* knightFramesFlipped.png in Resources */,
+				C38C65491948DA8500566EB7 /* devil1attack.plist in Resources */,
 				C351063C1947B53300057578 /* bulldozer-hd.png in Resources */,
+				C38C653F1948DA8500566EB7 /* angel2attack.plist in Resources */,
 				C35106601947B53300057578 /* toilet-hd.png in Resources */,
 				C35104DE1947B53300057578 /* d2-2.png in Resources */,
 				C35106ED1947B53300057578 /* monster2.png in Resources */,
 				C351054F1947B53300057578 /* 5.png in Resources */,
+				C38C65401948DA8500566EB7 /* angel2fall.plist in Resources */,
 				C35105501947B53300057578 /* 6.png in Resources */,
 				DC2721AA160CAFC700D88944 /* iTunesArtwork in Resources */,
 				C35105621947B53300057578 /* main-menu-hd.png in Resources */,
+				C3C7CFDF194909F700E22136 /* angel3move.plist in Resources */,
+				C38C65121948DA4200566EB7 /* angeltankmove.png in Resources */,
 				C35105061947B53300057578 /* reinforcement_btn.png in Resources */,
 				2DD0C65F178F77BA008AE39F /* images.png in Resources */,
 				2DD0C661178F783F008AE39F /* disasteralert_icon_114x114.png in Resources */,
@@ -3658,6 +3817,7 @@
 				C35106E01947B53300057578 /* monster2-hd.png in Resources */,
 				C35106541947B53300057578 /* sink-hd.png in Resources */,
 				C35106351947B53300057578 /* apple-hd.png in Resources */,
+				C38C65471948DA8500566EB7 /* angeltankbomb.plist in Resources */,
 				C35105731947B53300057578 /* pause-screen-retina.png in Resources */,
 				C35105001947B53300057578 /* immunity_btn.png in Resources */,
 				C35104691947B53300057578 /* a2-7.png in Resources */,
@@ -3673,9 +3833,11 @@
 				C35105221947B53300057578 /* main-1-4.png in Resources */,
 				C35106CB1947B53300057578 /* monster5.png in Resources */,
 				C35105511947B53300057578 /* 7.png in Resources */,
+				C38C65551948DA8500566EB7 /* spartanfall.plist in Resources */,
 				C35106681947B53300057578 /* bird.png in Resources */,
 				C35106D91947B53300057578 /* background_grass-top-hd.png in Resources */,
 				C35106871947B53300057578 /* spaceship2.png in Resources */,
+				C38C65511948DA8500566EB7 /* deviltankmove.plist in Resources */,
 				C35105841947B53300057578 /* main menu & Shop screen.ai in Resources */,
 				C351047F1947B53300057578 /* a3-attack-5.png in Resources */,
 				C35105E11947B53300057578 /* city-front-ip5.png in Resources */,
@@ -3701,13 +3863,16 @@
 				C35105381947B53300057578 /* main-5-2.png in Resources */,
 				C35105CF1947B53300057578 /* monster4.png in Resources */,
 				C351051B1947B53300057578 /* main-idle-6.png in Resources */,
+				C3A48F59195B694500E0350F /* blue-energy.png in Resources */,
 				2DAA40BE17AC271B00BA014B /* FacebookSDKResources.bundle in Resources */,
 				C35106E61947B53300057578 /* background_grass-top.png in Resources */,
 				C35104F81947B53300057578 /* d4-4.png in Resources */,
 				C35106101947B53300057578 /* moon-hd.png in Resources */,
+				C38C65451948DA8500566EB7 /* angelplanemove.plist in Resources */,
 				C35104DF1947B53300057578 /* d2-3.png in Resources */,
 				C35106C61947B53300057578 /* monster15.png in Resources */,
 				C35104F61947B53300057578 /* d4-2.png in Resources */,
+				C38C65431948DA8500566EB7 /* angel3fall.plist in Resources */,
 				2DAA40BF17AC271B00BA014B /* fb_connect.png in Resources */,
 				C35106441947B53300057578 /* gear-hd.png in Resources */,
 				C35106BC1947B53300057578 /* monster5-hd.png in Resources */,
@@ -3720,6 +3885,7 @@
 				C351061F1947B53300057578 /* block.png in Resources */,
 				C351059C1947B53300057578 /* mockup-victory-ip5.png in Resources */,
 				C351057B1947B53300057578 /* resume-button-n.png in Resources */,
+				C3C7CFDB194909A300E22136 /* angel1move.plist in Resources */,
 				C35105DF1947B53300057578 /* background_topofcastle-ip5.png in Resources */,
 				C35106E11947B53300057578 /* monster4-hd.png in Resources */,
 				C35104781947B53300057578 /* a3-6.png in Resources */,
@@ -3737,6 +3903,7 @@
 				C35106341947B53300057578 /* trees.png in Resources */,
 				C35104731947B53300057578 /* a3-1.png in Resources */,
 				C35104F21947B53300057578 /* d3-3.png in Resources */,
+				C38C654B1948DA8500566EB7 /* devil1move.plist in Resources */,
 				2DAA40C117AC271B00BA014B /* fbloginbackgroundlandscape@2x.png in Resources */,
 				C35104C51947B53300057578 /* mountain-ip5.png in Resources */,
 				C35104881947B53300057578 /* a4-1.png in Resources */,
@@ -3754,6 +3921,7 @@
 				C351051D1947B53300057578 /* main-idle-8.png in Resources */,
 				C35106061947B53300057578 /* block-hd.png in Resources */,
 				C35106291947B53300057578 /* palmtree.png in Resources */,
+				C38C65181948DA4200566EB7 /* devil2move.png in Resources */,
 				C35106C51947B53300057578 /* monster14.png in Resources */,
 				C35106951947B53300057578 /* cat-main-top-hd.png in Resources */,
 				C351055D1947B53300057578 /* main-menu-banner-hd.png in Resources */,
@@ -3778,6 +3946,7 @@
 				C35105C11947B53300057578 /* knightframesflipped.plist in Resources */,
 				C35104671947B53300057578 /* a2-5.png in Resources */,
 				2DAA40C817AC271B00BA014B /* fbloginbutton.png in Resources */,
+				C38C654F1948DA8500566EB7 /* devilplanemove.plist in Resources */,
 				C35105D01947B53300057578 /* monster8.png in Resources */,
 				C35104C21947B53300057578 /* mountain-hd.png in Resources */,
 				C35106EB1947B53300057578 /* city-front.png in Resources */,
@@ -3798,11 +3967,13 @@
 				C35105E51947B53300057578 /* background_topofcastle.png in Resources */,
 				2DAA40CA17AC271B00BA014B /* fbloginbuttonpressed.png in Resources */,
 				C35106791947B53300057578 /* key.png in Resources */,
+				C38C65421948DA8500566EB7 /* angel3attack.plist in Resources */,
 				C35104531947B53300057578 /* shop-button-n.png in Resources */,
 				C35106B01947B53300057578 /* animation_sword-3.png in Resources */,
 				C35105711947B53300057578 /* pause-screen-ip5.png in Resources */,
 				C35104B81947B53300057578 /* foreground-ipad.png in Resources */,
 				2DAA40CB17AC271B00BA014B /* fbloginbuttonpressed@2x.png in Resources */,
+				C38C651F1948DA4200566EB7 /* spartanfall.png in Resources */,
 				C35104B51947B53300057578 /* a6-fall-2.png in Resources */,
 				C35104CB1947B53300057578 /* badbase-3.png in Resources */,
 				C35106011947B53300057578 /* shop-button.png in Resources */,
@@ -3810,11 +3981,12 @@
 				C35106511947B53300057578 /* rocket-hd.png in Resources */,
 				C35105A11947B53300057578 /* select-button-n.png in Resources */,
 				C351068B1947B53300057578 /* star.png in Resources */,
-				C35105C31947B53300057578 /* Level 1.plist in Resources */,
 				2DAA40CC17AC271B00BA014B /* fbnothanksbutton.png in Resources */,
+				C38C650E1948DA4200566EB7 /* angel3fall.png in Resources */,
 				C351069B1947B53300057578 /* cat4-hd.png in Resources */,
 				C35105E81947B53300057578 /* button_arrowbutton-hd.png in Resources */,
 				C35104E21947B53300057578 /* d2-6.png in Resources */,
+				C38C650D1948DA4200566EB7 /* angel3attack.png in Resources */,
 				C35106B91947B53300057578 /* monster3-hd.png in Resources */,
 				C35104931947B53300057578 /* a5-4.png in Resources */,
 				C35105551947B53300057578 /* continue-button-n.png in Resources */,
@@ -3822,12 +3994,14 @@
 				C351046A1947B53300057578 /* a2-8.png in Resources */,
 				C35104841947B53300057578 /* 1.png in Resources */,
 				C35105B31947B53300057578 /* bearFrames.plist in Resources */,
+				C38C65481948DA8500566EB7 /* angeltankmove.plist in Resources */,
 				C35105D71947B53300057578 /* background_topofcastle-hd.png in Resources */,
 				C35104601947B53300057578 /* a1-fall-2.png in Resources */,
 				C35105101947B53300057578 /* main-idle-14.png in Resources */,
 				C35106A91947B53300057578 /* animation_sword-3-hd.png in Resources */,
 				C35106801947B53300057578 /* princess.png in Resources */,
 				C35105331947B53300057578 /* main-4-1.png in Resources */,
+				C38C65171948DA4200566EB7 /* devil2fall.png in Resources */,
 				C35105241947B53300057578 /* main-10-2.png in Resources */,
 				C351064C1947B53300057578 /* menu-small-hd.png in Resources */,
 				C35106A81947B53300057578 /* animation_sword-2-hd.png in Resources */,
@@ -3841,6 +4015,7 @@
 				C35106731947B53300057578 /* dollar.png in Resources */,
 				C35104B71947B53300057578 /* a6-fall-4.png in Resources */,
 				C35105CA1947B53300057578 /* level3Label.png in Resources */,
+				C38C65541948DA8500566EB7 /* spartanattack.plist in Resources */,
 				C35106DA1947B53300057578 /* background_grass-topdown-hd.png in Resources */,
 				C351055B1947B53300057578 /* victory screen.png in Resources */,
 				C35106231947B53300057578 /* fence.png in Resources */,
@@ -3848,7 +4023,6 @@
 				C35104E71947B53300057578 /* bomb-1.png in Resources */,
 				C35106F51947B53300057578 /* title.png in Resources */,
 				C35105E91947B53300057578 /* button_backbutton-hd.png in Resources */,
-				C35105BF1947B53300057578 /* friendly.plist in Resources */,
 				C35105121947B53300057578 /* main-idle-16.png in Resources */,
 				C35106BA1947B53300057578 /* monster3-topdown-hd.png in Resources */,
 				C35105681947B53300057578 /* mockup-main-menu-retina.png in Resources */,
@@ -3882,9 +4056,10 @@
 				C35105211947B53300057578 /* main-1-3.png in Resources */,
 				C351058A1947B53300057578 /* shop-ip5.png in Resources */,
 				2DAA40CF17AC271B00BA014B /* fbnothanksbuttonpressed@2x.png in Resources */,
-				C35105C41947B53300057578 /* Level 2.plist in Resources */,
 				2DAA40D017AC271B00BA014B /* green.png in Resources */,
+				C38C654E1948DA8500566EB7 /* devil2move.plist in Resources */,
 				C35106EC1947B53300057578 /* monster1.png in Resources */,
+				C38C65151948DA4200566EB7 /* devil1move.png in Resources */,
 				2DAA40D117AC271B00BA014B /* grey-background.png in Resources */,
 				C35106571947B53300057578 /* spaceship2-hd.png in Resources */,
 				C35106AD1947B53300057578 /* animation_knight-5.png in Resources */,
@@ -3899,6 +4074,7 @@
 				C35106271947B53300057578 /* mailbox.png in Resources */,
 				C351057D1947B53300057578 /* app icon.ai in Resources */,
 				2DAA40D217AC271B00BA014B /* hipmob.back.btn.png in Resources */,
+				C38C65071948DA4200566EB7 /* angel1attack.png in Resources */,
 				C351060A1947B53300057578 /* cloud-hd.png in Resources */,
 				C35105F51947B53300057578 /* button-top.png in Resources */,
 				C35104BE1947B53300057578 /* foreground.png in Resources */,
@@ -3925,6 +4101,7 @@
 				C351059A1947B53300057578 /* continue-button-hd-n.png in Resources */,
 				C351062D1947B53300057578 /* rocks.png in Resources */,
 				C35106561947B53300057578 /* spaceship1-hd.png in Resources */,
+				C38C65561948DA8500566EB7 /* spartanmove.plist in Resources */,
 				C35104E31947B53300057578 /* d2-fall-1.png in Resources */,
 				C351046B1947B53300057578 /* a2-attack-1.png in Resources */,
 				C35105EE1947B53300057578 /* joystick-bottom-hd.png in Resources */,
@@ -3944,13 +4121,13 @@
 				C35104801947B53300057578 /* a3-attack-6.png in Resources */,
 				C35106381947B53300057578 /* bee-hd.png in Resources */,
 				C351052A1947B53300057578 /* main-11-4.png in Resources */,
+				C3C7CFE519490A5300E22136 /* angel3move.png in Resources */,
 				C351054E1947B53300057578 /* 4.png in Resources */,
 				C35105051947B53300057578 /* reinforcement_btn-hd.png in Resources */,
 				C35104581947B53300057578 /* a1-5.png in Resources */,
 				C35105AC1947B53300057578 /* background_desert-topdown.png in Resources */,
 				C351058F1947B53300057578 /* 20131121_084311.jpg in Resources */,
 				C35105B81947B53300057578 /* cat4.png in Resources */,
-				C35104481947B53300057578 /* restart-button-d.png in Resources */,
 				C35105971947B53300057578 /* wireframe.jpg in Resources */,
 				C35106321947B53300057578 /* tree1.png in Resources */,
 				C35105521947B53300057578 /* back-button-d.png in Resources */,
@@ -3959,15 +4136,18 @@
 				C35104611947B53300057578 /* a1-fall-3.png in Resources */,
 				C35105B51947B53300057578 /* cat-main.png in Resources */,
 				C35106051947B53300057578 /* basicbarrell-hd.png in Resources */,
+				C3C7CFE319490A4900E22136 /* angel2move.png in Resources */,
 				C35104621947B53300057578 /* a1-fall-4.png in Resources */,
 				C35105081947B53300057578 /* sound_button-hd.png in Resources */,
 				C35106411947B53300057578 /* coin-hd.png in Resources */,
 				2DAA40D617AC271B00BA014B /* mgwu-gk-notification.png in Resources */,
+				C38C65111948DA4200566EB7 /* angeltankbomb.png in Resources */,
 				C35106611947B53300057578 /* trophy-hd.png in Resources */,
 				C35104971947B53300057578 /* a5-attack-4.png in Resources */,
 				C351066E1947B53300057578 /* carrots.png in Resources */,
 				C35105601947B53300057578 /* main-menu-banner-retina.png in Resources */,
 				C351069A1947B53300057578 /* cat3-topdown-hd.png in Resources */,
+				C3A48F51195B4C5700E0350F /* main-idle.png in Resources */,
 				2DAA40D717AC271B00BA014B /* mgwu-gk-notification@2x.png in Resources */,
 				C35105561947B53300057578 /* restart-button-d.png in Resources */,
 				2DAA40D817AC271B00BA014B /* mgwu-m.png in Resources */,
@@ -3994,14 +4174,14 @@
 				C35104661947B53300057578 /* a2-4.png in Resources */,
 				C35106151947B53300057578 /* rocks-hd.png in Resources */,
 				C35106DF1947B53300057578 /* monster1-hd.png in Resources */,
+				C38C65531948DA8500566EB7 /* explosion.plist in Resources */,
 				C35106991947B53300057578 /* cat2-topdown-hd.png in Resources */,
 				C351049D1947B53300057578 /* angel's bomb.png in Resources */,
 				C35106241947B53300057578 /* flag.png in Resources */,
 				2DAA40DB17AC271B00BA014B /* mgwuaboutfooterlandscape.png in Resources */,
-				C351044A1947B53300057578 /* restart-button-hd-n.png in Resources */,
 				C351067A1947B53300057578 /* lighting.png in Resources */,
 				C35106091947B53300057578 /* chest-open-hd.png in Resources */,
-				C35104CE1947B53300057578 /* d1-attack3.png in Resources */,
+				C35104CE1947B53300057578 /* d1-attack-3.png in Resources */,
 				C351057A1947B53300057578 /* resume-button-hd-n.png in Resources */,
 				C35105131947B53300057578 /* main-idle-17.png in Resources */,
 				C35104DD1947B53300057578 /* d2-1.png in Resources */,
@@ -4039,6 +4219,7 @@
 				C35104FC1947B53300057578 /* d4-8.png in Resources */,
 				2DAA40E117AC271B00BA014B /* MGWUFacebookLoginLandscape.nib in Resources */,
 				C351045F1947B53300057578 /* a1-fall-1.png in Resources */,
+				C3A48F53195B5A8000E0350F /* main-shoot.png in Resources */,
 				C35105761947B53300057578 /* restart-button-hd-n.png in Resources */,
 				C35104901947B53300057578 /* a5-1.png in Resources */,
 				C351052B1947B53300057578 /* main-2-1.png in Resources */,
@@ -4063,6 +4244,7 @@
 				C35105E21947B53300057578 /* background_belowground.png in Resources */,
 				C35104F31947B53300057578 /* d3-4.png in Resources */,
 				C351068E1947B53300057578 /* swirl.png in Resources */,
+				C38C650A1948DA4200566EB7 /* angel2attack.png in Resources */,
 				2DAA40E317AC271B00BA014B /* MGWUFacebookLoginPortrait.nib in Resources */,
 				C35105D51947B53300057578 /* background_grass-side.png in Resources */,
 				C351045B1947B53300057578 /* a1-8.png in Resources */,
@@ -4075,7 +4257,6 @@
 				C35104F11947B53300057578 /* d3-2.png in Resources */,
 				C35106661947B53300057578 /* beaker.png in Resources */,
 				C35106701947B53300057578 /* cloudmonster.png in Resources */,
-				C351044B1947B53300057578 /* restart-button-n.png in Resources */,
 				C351043C1947B53300057578 /* BE09013T.TTF in Resources */,
 				C35106CC1947B53300057578 /* monster7.png in Resources */,
 				C35105311947B53300057578 /* main-3-3.png in Resources */,
@@ -4087,6 +4268,7 @@
 				C35104A21947B53300057578 /* explode-1.png in Resources */,
 				C35104B31947B53300057578 /* spear.png in Resources */,
 				C351064F1947B53300057578 /* mobile-hd.png in Resources */,
+				C38C654D1948DA8500566EB7 /* devil2fall.plist in Resources */,
 				C35105D91947B53300057578 /* background_desert-ip5.png in Resources */,
 				2DAA40E517AC271B00BA014B /* mgwulogo.png in Resources */,
 				C35105921947B53300057578 /* 20131121_124221.jpg in Resources */,
@@ -4178,6 +4360,7 @@
 				C35105881947B53300057578 /* mockup-shop-retina.png in Resources */,
 				C35105801947B53300057578 /* background-ipad.psd in Resources */,
 				C35104681947B53300057578 /* a2-6.png in Resources */,
+				C3A48F55195B5AA100E0350F /* main-shoot.plist in Resources */,
 				C351045D1947B53300057578 /* a1-attack-2.png in Resources */,
 				C35105931947B53300057578 /* 20131121_231418.jpg in Resources */,
 				C35104B01947B53300057578 /* a6-attack-1.png in Resources */,
@@ -4203,10 +4386,12 @@
 				C35104CA1947B53300057578 /* badbase-2.png in Resources */,
 				C351047D1947B53300057578 /* a3-attack-3.png in Resources */,
 				C35106EA1947B53300057578 /* city-back.png in Resources */,
-				C35104CD1947B53300057578 /* d1-attack2.png in Resources */,
+				C35104CD1947B53300057578 /* d1-attack-2.png in Resources */,
+				C3C7CFE119490A3D00E22136 /* angel1move.png in Resources */,
 				C35104511947B53300057578 /* shop-button-hd-d.png in Resources */,
 				C351053E1947B53300057578 /* main-6-4.png in Resources */,
 				C351054C1947B53300057578 /* 2.png in Resources */,
+				C38C65101948DA4200566EB7 /* angeltankattack.png in Resources */,
 				C351053A1947B53300057578 /* main-5-4.png in Resources */,
 				C35106821947B53300057578 /* sheild.png in Resources */,
 				C35106C41947B53300057578 /* monster13.png in Resources */,
@@ -4218,7 +4403,9 @@
 				2DAA40F217AC271B00BA014B /* send-button-instate.png in Resources */,
 				C35106631947B53300057578 /* wrench-hd.png in Resources */,
 				C351046D1947B53300057578 /* a2-attack-3.png in Resources */,
+				C38C65161948DA4200566EB7 /* devil2attack.png in Resources */,
 				2DAA40F317AC271B00BA014B /* send-field-landscape.png in Resources */,
+				C38C651C1948DA4200566EB7 /* dying.png in Resources */,
 				C35105821947B53300057578 /* background.psd in Resources */,
 				C35104F51947B53300057578 /* d4-1.png in Resources */,
 				C35106081947B53300057578 /* chest-hd.png in Resources */,
@@ -4233,6 +4420,7 @@
 				C351067D1947B53300057578 /* milk.png in Resources */,
 				C35106AA1947B53300057578 /* animation_knight-2.png in Resources */,
 				C35106591947B53300057578 /* spider-hd.png in Resources */,
+				C38C651D1948DA4200566EB7 /* explosion.png in Resources */,
 				C35104381947B53300057578 /* Property List.plist in Resources */,
 				C35105911947B53300057578 /* 20131121_124149.jpg in Resources */,
 				C351051F1947B53300057578 /* main-1-1.png in Resources */,
@@ -4277,12 +4465,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C369F49719648D8000A8C0C4 /* GameLayer.m in Sources */,
 				C35104341947B53300057578 /* main.m in Sources */,
 				C351042C1947B53300057578 /* AppDelegate.m in Sources */,
 				C35104331947B53300057578 /* Levelselect.m in Sources */,
 				C35106F91947B53300057578 /* Store.m in Sources */,
 				C35104371947B53300057578 /* Player.m in Sources */,
-				C35104301947B53300057578 /* GameLayer.m in Sources */,
 				C35104351947B53300057578 /* MainMenuLayer.m in Sources */,
 				C35104311947B53300057578 /* GameOverLayer.m in Sources */,
 				C351042F1947B53300057578 /* GameData.m in Sources */,

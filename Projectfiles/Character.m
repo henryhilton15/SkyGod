@@ -22,6 +22,11 @@
 @synthesize right;
 @synthesize unlockLevel;
 @synthesize unlocked;
+@synthesize power;
+@synthesize attackFrequency;
+@synthesize bulletPower;
+@synthesize bulletType;
+@synthesize fallSpeed;
 
 -(id) initWithBigMonsterImage
 {
@@ -40,51 +45,73 @@
 
 -(id) initWithBigGoodGuyImage
 {
-    if((self = [super initWithFile:@"chest.png"]))
+    if((self = [super initWithFile:@"a5-1.png"]))
     {
-        health = 2;
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"friendlies" ofType:@"plist"];
+        NSDictionary *friendlies = [NSDictionary dictionaryWithContentsOfFile:path];
+        
+        NSMutableDictionary* d = [friendlies objectForKey:@"friendlyTank"];
+        
+        unlocked = [[d objectForKey:@"available"] boolValue];
+        health = [[d objectForKey:@"health"] intValue];
+        power = [[d objectForKey:@"power"] intValue];
+        attackFrequency = [[d objectForKey:@"attackFrequency"] intValue];
+        fallSpeed = [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
+        
+
         worth = 100;
         type = BIG_GOOD_GUY;
         row = 0;
         melee = false;
         left = false;
         right = false;
-        unlocked = false;
+        bulletType = GOOD_HELICOPTER_BOMB;
     }
     return self;
 }
--(id) initWithGoodGuyImage
+-(id) initWithFriendlyRegularShooterImage
 {
-    if((self = [super initWithFile:@"cat4.png"]))
+    if((self = [super initWithFile:@"a2-1.png"]))
     {
-        worth = 50;
-        health = 2;
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"friendlies" ofType:@"plist"];
+        NSDictionary *friendlies = [NSDictionary dictionaryWithContentsOfFile:path];
+        
+        NSMutableDictionary* d = [friendlies objectForKey:@"friendlyRegularShooter"];
+        
+        unlocked = [[d objectForKey:@"available"] boolValue];
+        health = [[d objectForKey:@"health"] intValue];
+        power = [[d objectForKey:@"power"] intValue];
+        attackFrequency = [[d objectForKey:@"attackFrequency"] intValue];
+        fallSpeed = [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
         type = GOOD_GUY;
         row = 0;
         melee = false;
-        unlocked = false;
+        bulletType = REGULAR_GOOD_BULLET;
+        worth = 50;
     }
     return self;
 }
 
 -(id) initWithBadGuyImage
 {
-    if((self = [super initWithFile:@"monster1.png"]))
+    if((self = [super initWithFile:@"d2-1.png"]))
     {
         worth = 50;
         health = 2;
+        attackFrequency = 50;
         type = BAD_GUY;
-
+        power = 1;
         //immunity = 0;
         row = 0;
         melee = false;
         unlockLevel = 0;
+        bulletType = REGULAR_BAD_BULLET;
     }
     return self;
 }
 -(id) initWithZigZagImage
 {
-    if((self = [super initWithFile:@"monster4.png"]))
+    if((self = [super initWithFile:@"d2-1.png"]))
     {
         worth = 50;
         health = 1;
@@ -97,8 +124,18 @@
 }
 -(id) initWithGoodHelicopterImage
 {
-    if((self = [super initWithFile:@"jet.png"]))
+    if((self = [super initWithFile:@"a4-1.png"]))
     {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"friendlies" ofType:@"plist"];
+        NSDictionary *friendlies = [NSDictionary dictionaryWithContentsOfFile:path];
+        
+        NSMutableDictionary* d = [friendlies objectForKey:@"friendlyPlane"];
+        
+        unlocked = [[d objectForKey:@"available"] boolValue];
+        health = [[d objectForKey:@"health"] intValue];
+        attackFrequency = [[d objectForKey:@"attackFrequency"] intValue];
+      
+        
         health = 5;
         type = GOOD_HELICOPTER;
     }
@@ -106,7 +143,7 @@
 }
 -(id) initWithBadHelicopterImage
 {
-    if((self = [super initWithFile:@"barrell.png"]))
+    if((self = [super initWithFile:@"d4-1.png"]))
     {
         health = 5;
         type = BAD_HELICOPTER;
@@ -115,17 +152,26 @@
 }
 -(id) initWithGoodHelicopterBombImage
 {
-    if((self = [super initWithFile:@"basicbarrell.png"]))
+    if((self = [super initWithFile:@"angel's bomb.png"]))
     {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"friendlies" ofType:@"plist"];
+        NSDictionary *friendlies = [NSDictionary dictionaryWithContentsOfFile:path];
+        
+        NSMutableDictionary* d = [friendlies objectForKey:@"friendlyHelicopterBomb"];
+        
+        health = [[d objectForKey:@"health"] intValue];
+        power = [[d objectForKey:@"power"] intValue];
+        fallSpeed = [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
+        
         worth = 50;
-        health = 1;
+        power = 3;
         type = GOOD_HELICOPTER_BOMB;
     }
     return self;
 }
 -(id) initWithBadHelicopterBombImage
 {
-    if((self = [super initWithFile:@"block.png"]))
+    if((self = [super initWithFile:@"devil's bomb.png"]))
     {
         worth = 50;
         health = 1;
@@ -139,12 +185,13 @@
     {
         health = 1;
         type = KAMIKAZE;
+        power = 3;
     }
     return self;
 }
 -(id) initWithDoubleEnemyImage
 {
-    if((self = [super initWithFile:@"monster1.png"]))
+    if((self = [super initWithFile:@"d2-1.png"]))
     {
         worth = 50;
         health = 2;
@@ -217,7 +264,7 @@
 
 -(id) initWithGoodGuyBaseImage
 {
-    if ((self = [super initWithFile: @"car-topdown.png"]))
+    if ((self = [super initWithFile: @"goodbase-1.png"]))
     {
         health = 10;
         type = GOOD_BASE;
@@ -228,7 +275,7 @@
 
 -(id) initWithBadGuyBaseImage
 {
-    if ((self = [super initWithFile: @"rocket.png"]))
+    if ((self = [super initWithFile: @"badbase-1.png"]))
     {
         health = 10;
         type = BAD_BASE;
@@ -237,39 +284,62 @@
 }
 -(id) initWithFastShooterBadGuyImage
 {
-    if((self = [super initWithFile:@"monster2.png"]))
+    if((self = [super initWithFile:@"d2-1.png"]))
     {
         health = 1;
+        attackFrequency = 30;
         type = BAD_FASTSHOOTER;
         unlockLevel = 0;
+        bulletType = REGULAR_BAD_BULLET;
     }
     return  self;
 }
 -(id) initWithFastShooterGoodGuyImage
 {
-    if((self = [super initWithFile:@"spaceman.png"]))
+    if((self = [super initWithFile:@"a3-1.png"]))
     {
-        health = 1;
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"friendlies" ofType:@"plist"];
+        NSDictionary *friendlies = [NSDictionary dictionaryWithContentsOfFile:path];
+        
+        NSMutableDictionary* d = [friendlies objectForKey:@"friendlyFastShooter"];
+        
+        unlocked = [[d objectForKey:@"available"] boolValue];
+        health = [[d objectForKey:@"health"] intValue];
+        power = [[d objectForKey:@"power"] intValue];
+        attackFrequency = [[d objectForKey:@"attackFrequency"] intValue];
+        fallSpeed = [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
+        
         type = GOOD_FASTSHOOTER;
-        unlocked = false;
+        bulletType = REGULAR_GOOD_BULLET;
     }
 return self;
 }
 -(id) initWithKnifeGoodGuyImage
 {
-    if ((self = [super initWithFile: @"sidekick.png"]))
+    if ((self = [super initWithFile: @"a1-1.png"]))
     {
-        health = 3;
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"friendlies" ofType:@"plist"];
+        NSDictionary *friendlies = [NSDictionary dictionaryWithContentsOfFile:path];
+        
+        NSMutableDictionary* d = [friendlies objectForKey:@"friendlyMelee"];
+        
+        unlocked = [[d objectForKey:@"available"] boolValue];
+        health = [[d objectForKey:@"health"] intValue];
+        power = [[d objectForKey:@"power"] intValue];
+        attackFrequency = [[d objectForKey:@"attackFrequency"] intValue];
+        fallSpeed = [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
+        
         type = GOOD_KNIFE;
-        unlocked = false;
     }
-return self;
+    return self;
 }
 -(id) initWithKnifeBadGuyImage
 {
-    if ((self = [super initWithFile: @"stickman.png"]))
+    if ((self = [super initWithFile: @"d1-1.png"]))
     {
-        health = 3;
+        health = 2;
+        power = 1;
+        attackFrequency = 150;
         type = BAD_KNIFE;
         unlockLevel = 0;
     }   
@@ -277,13 +347,62 @@ return self;
 }
 -(id) initWithGoodReinforcementImage
 {
-    if ((self = [super initWithFile:@"ufo.png"]))
+    if ((self = [super initWithFile:@"a6-1.png"]))
         {
-            health = 1;
+            NSString *path = [[NSBundle mainBundle] pathForResource:@"friendlies" ofType:@"plist"];
+            NSDictionary *friendlies = [NSDictionary dictionaryWithContentsOfFile:path];
+            
+            NSMutableDictionary* d = [friendlies objectForKey:@"friendlySpartan"];
+            
+            unlocked = [[d objectForKey:@"available"] boolValue];
+            health = [[d objectForKey:@"health"] intValue];
+            power = [[d objectForKey:@"power"] intValue];
+            attackFrequency = [[d objectForKey:@"attackFrequency"] intValue];
+            fallSpeed = [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
             type = GOOD_REINFORCEMENT;
+            bulletType = SPEAR;
         }
         return  self;
 }
-
+-(id) initWithGoodGuyBulletImage
+{
+    if ((self = [super initWithFile:@"lighting.png"]))
+    {
+        power = 1;
+    }
+    return self;
+}
+-(id) initWithGoodGuyFastShooterBulletImage
+{
+    if ((self = [super initWithFile:@"lighting.png"]))
+    {
+        power = 1;
+    }
+    return self;
+}
+-(id) initWithBadGuyBulletImage
+{
+    if ((self = [super initWithFile:@"lighting.png"]))
+    {
+        power = 1;
+    }
+    return self;
+}
+-(id) initWithSpearImage
+{
+    if ((self = [super initWithFile:@"spear.png"]))
+    {
+        power = 1;
+    }
+    return self;
+}
+-(id) initWithBlueEnergyImage
+{
+    if ((self = [super initWithFile:@"blue-energy.png"]))
+    {
+        power = 1;
+    }
+    return self;
+}
 
 @end

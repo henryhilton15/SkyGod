@@ -29,6 +29,9 @@
 #define BAD_KNIFE 18
 #define GOOD_KNIFE 19
 #define GOOD_REINFORCEMENT 20
+#define REGULAR_GOOD_BULLET 21
+#define SPEAR 22
+#define REGULAR_BAD_BULLET 23
 
 @interface Character : CCSprite
 @property int type;
@@ -41,10 +44,15 @@
 @property bool right;
 @property int unlockLevel;
 @property bool unlocked;
+@property int power;
+@property int attackFrequency;
+@property int bulletPower;
+@property int bulletType;
+@property double fallSpeed;
 
 -(id) initWithBigMonsterImage;
 -(id) initWithBigGoodGuyImage;
--(id) initWithGoodGuyImage;
+-(id) initWithFriendlyRegularShooterImage;
 -(id) initWithBadGuyImage;
 -(id) initWithZigZagImage;
 -(id) initWithGoodHelicopterImage;
@@ -63,5 +71,10 @@
 -(id) initWithKnifeGoodGuyImage;
 -(id) initWithKnifeBadGuyImage;
 -(id) initWithGoodReinforcementImage;
+-(id) initWithGoodGuyBulletImage;
+-(id) initWithGoodGuyFastShooterBulletImage;
+-(id) initWithBadGuyBulletImage;
+-(id) initWithSpearImage;
+-(id) initWithBlueEnergyImage;
 
 @end
