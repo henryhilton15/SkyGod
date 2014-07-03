@@ -44,14 +44,14 @@
         CCMenuItemImage *sfxButton = [CCMenuItemImage itemWithNormalImage:@"sound_btn.png"
                                                           selectedImage: @"sound_btn.png"
                                                                  target:self
-                                                                 selector:@selector(sfxToggle)];
+                                                                 selector:@selector(sfxToggle:)];
         sfxButton.position = CGPointMake(-20, 200);
         sfxButton.scale = 1.0f;
         
         CCMenuItemImage *musicButton = [CCMenuItemImage itemWithNormalImage:@"music_btn.png"
                                                           selectedImage: @"music_btn.png"
                                                                  target:self
-                                                                   selector:@selector(musicToggle)];
+                                                                   selector:@selector(musicToggle:)];
         musicButton.position = CGPointMake(20, 200);
         musicButton.scale = 0.5f;
         
@@ -87,10 +87,12 @@
 
 - (void) sfxToggle: (CCMenuItemImage *) sfxButton
 {
+    return;
 }
 
 - (void) musicToggle: (CCMenuItemImage *) musicButton
 {
+    return;
 }
 
 @end

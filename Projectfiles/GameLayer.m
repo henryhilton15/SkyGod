@@ -181,7 +181,6 @@
 -(void) addKnifeGoodGuy
 {
     // Determine where to spawn the monster along the X axis
-    CGSize winSize = [CCDirector sharedDirector].winSize;
     int minX = 12;
     int maxX = winSize.width - 8;
     int rangeX = maxX - minX;
@@ -348,7 +347,6 @@
 -(void) addFriendlyRegularShooter
 {
     // Determine where to spawn the monster along the X axis
-    CGSize winSize = [CCDirector sharedDirector].winSize;
     int minX = 12;
     int maxX = winSize.width - 8;
     int rangeX = maxX - minX;
@@ -410,7 +408,6 @@
 -(void) addBadGuy
 {
     // Determine where to spawn the monster along the X axis
-    CGSize winSize = [CCDirector sharedDirector].winSize;
     int minX = 10;
     int maxX = winSize.width - 10;
     int rangeX = maxX - minX;
@@ -480,7 +477,6 @@
 -(void) addBadHelicopter
 {
     // Determine where to spawn the monster along the X axis
-    CGSize winSize = [CCDirector sharedDirector].winSize;
     int minY = 250;
     int maxY = 290;
     int rangeY = maxY - minY;
@@ -551,7 +547,6 @@
 
 - (void) addZigZagBadGuy
 {
-    CGSize winSize = [CCDirector sharedDirector].winSize;
     int minX = 80;
     int maxX = winSize.width - 40;
     int rangeX = maxX - minX;
@@ -638,8 +633,6 @@
 
 -(void) addBigGoodGuy
 {
-    
-    CGSize winSize = [CCDirector sharedDirector].winSize;
     goodGuy = [[Character alloc] initWithBigGoodGuyImage];
     if(arc4random() % 2 == 0)
     {
@@ -678,7 +671,6 @@
 -(void) addBigMonster
 {
     // Determine where to spawn the monster along the X axis
-    CGSize winSize = [CCDirector sharedDirector].winSize;
     int minX = 100;
     int maxX = 380;
     int rangeX = maxX - minX;
@@ -1029,7 +1021,7 @@
             {
                 [bananasToDelete addObject:blueOrb];
                 [bananaArray removeObject:blueOrb];
-                NSLog(@"recognized banana should be deleted");
+//                NSLog(@"recognized banana should be deleted");
             }
         }
     }
@@ -1038,9 +1030,9 @@
     {
         [bananasToDelete removeObject:s];
         [self removeChild:s cleanup:YES];
-        NSLog(@"removed banana");
-        orbsDeleted++;
-        NSLog(@"orbs deleted = %d", orbsDeleted);
+//        NSLog(@"removed banana");
+//        orbsDeleted++;
+//        NSLog(@"orbs deleted = %d", orbsDeleted);
     }
     [bananasToDelete removeAllObjects];
     
@@ -1125,7 +1117,8 @@
             if (framecount % goodKnifeGuyFramecount == 0)
         
             {
-            [self addKnifeGoodGuy];
+                [self addKnifeGoodGuy];
+                NSLog(@"added good knife guy");
             }
     
         }
@@ -1813,7 +1806,7 @@
     for (CCSprite *s in deadGoodGuys)
     {
         [goodGuys removeObject:s];
-        NSLog(@"removed from good guy array");
+//        NSLog(@"removed from good guy array");
     }
     [deadGoodGuys removeAllObjects];
 }
@@ -2370,22 +2363,24 @@
             }
         }
     }
-    for (CCSprite *s in deadGoodGuys)
-    {
-        [goodGuys removeObject:s];
-        [self removeChild:s cleanup:YES];
-    }
+    
     if([deadGoodGuys count] > 0)
     {
+        for (CCSprite *s in deadGoodGuys)
+        {
+            [goodGuys removeObject:s];
+            [self removeChild:s cleanup:YES];
+        }
         [deadGoodGuys removeAllObjects];
     }
-    for (CCSprite *s in deadBadGuys)
-    {
-        [badGuys removeObject:s];
-        [self removeChild:s cleanup:YES];
-    }
+    
     if([deadBadGuys count] > 0)
     {
+        for (CCSprite *s in deadBadGuys)
+        {
+            [badGuys removeObject:s];
+            [self removeChild:s cleanup:YES];
+        }
         [deadBadGuys removeAllObjects];
     }
 }
@@ -2980,6 +2975,9 @@
                 goodRangeBox.size.width += 110;
                 goodRangeBox.size.height += 10;
                 
+                int fightingAngelHealth = ((Character*)fightingAngel).health;
+                NSLog(@"angel health = %d", fightingAngelHealth);
+                
 //                [self draw];
                 
                 if (CGRectIntersectsRect(goodMeleeBox, badMeleeBox))
@@ -3039,6 +3037,8 @@
                         }
                         
                         [self angelShoot:fightingAngel];
+                        int angelAttackFrequency = ((Character*)fightingAngel).attackFrequency;
+                        NSLog(@"angel attack frequency = %d", angelAttackFrequency);
                     }
                 }
                 
@@ -3067,29 +3067,15 @@
                 {
                     [deadGoodGuys addObject:fightingAngel];
                     [self dying:fightingAngel :deadGoodGuys :dyingAnimationLength];
-                    NSLog(@"dying method called");
+                    NSLog(@"dying method called for angel");
                 }
                 
                 if(((Character*)fightingDevil).health <= 0)
                 {
                     [deadBadGuys addObject:fightingDevil];
                     [self dying:fightingDevil :deadBadGuys :dyingAnimationLength];
-                    NSLog(@"dying method called");
+                    NSLog(@"dying method called for devil");
                 }
-                
-                for (CCSprite *s in deadBadGuys)
-                {
-                    [badGuysBottom removeObject:s];
-//                    [self removeChild:s cleanup:YES];
-                }
-                
-                for (CCSprite *s in deadGoodGuys)
-                {
-                    [goodGuysBottom removeObject:s];
-//                    [self removeChild:s cleanup:YES];
-                }
-                [deadBadGuys removeAllObjects];
-                [deadGoodGuys removeAllObjects];
             
                 /*
                 badMeleeBox = [badBottom boundingBox];
@@ -3364,6 +3350,27 @@
             }
         }
     }
+    
+    if([deadBadGuys count] > 0)
+    {
+        for (CCSprite *s in deadBadGuys)
+        {
+            [badGuysBottom removeObject:s];
+            //                    [self removeChild:s cleanup:YES];
+        }
+        [deadBadGuys removeAllObjects];
+    }
+    
+    if([deadGoodGuys count] > 0)
+    {
+        for (CCSprite *s in deadGoodGuys)
+        {
+            [goodGuysBottom removeObject:s];
+            NSLog(@"removed good guy bottom from array");
+            //                    [self removeChild:s cleanup:YES];
+        }
+        [deadGoodGuys removeAllObjects];
+    }
 //    else if([goodGuysBottom count] > 0  && [badGuysBottom count] == 0)
 //    {
 //        for(int i = 0; i < [goodGuysBottom count]; i++)
@@ -3435,6 +3442,8 @@
         }
     }
     */
+    
+   
 }
 
 -(void) changeHealthAndRemoveIfNecessary:(CCSprite*) angel :(CCSprite*) devil
@@ -3639,7 +3648,7 @@
     goodBullet.anchorPoint = CGPointZero;
     goodBullet.position = ccp(angelX, angelY + 10);
     goodBullet.scale=.15;
-    [self addChild:goodBullet z:1];
+    [self addChild:goodBullet z:3];
     [goodBulletArray addObject:goodBullet];
     
     CCMoveTo *shootRight = [CCMoveTo actionWithDuration:25
@@ -3661,7 +3670,7 @@
     badBullet.anchorPoint = CGPointZero;
     badBullet.position = ccp(devilX, devilY + 10);
     badBullet.scale=.15;
-    [self addChild:badBullet z:1];
+    [self addChild:badBullet z:3];
     [badBulletArray addObject:badBullet];
     
     CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:25
@@ -3928,7 +3937,7 @@
     
     //tell the bear to run the taunting action
     [character runAction:dying];
-    NSLog(@"was told to run dying animation");
+    //NSLog(@"was told to run dying animation");
     
 }
 
@@ -4001,6 +4010,7 @@
                         if(((Character*)goodBottom).health <= 0)
                         {
                             [deadGoodGuys addObject:goodBottom];
+                            [self dying:goodBottom :deadGoodGuys :dyingAnimationLength];
                 
                             //                                    [goodGuysBottom removeObjectAtIndex:i];
                             //                                    [badBulletArray removeObjectAtIndex:j];
@@ -4034,6 +4044,7 @@
                     if(((Character*)badBottom).health <= 0)
                     {
                         [deadBadGuys addObject:badBottom];
+                        [self dying:badBottom :deadBadGuys :dyingAnimationLength];
                     }
                 }
             }
@@ -4069,37 +4080,45 @@
 
     
    // NSLog(@"yay");
-    for (CCSprite *s in deadBadGuys)
+    if([deadBadGuys count] > 0)
     {
-        [badGuysBottom removeObject:s];
-        [self removeChild:s cleanup:YES];
-       // NSLog(@"deleted bad guy");
+        for (CCSprite *s in deadBadGuys)
+        {
+            [badGuysBottom removeObject:s];
+            // NSLog(@"deleted bad guy");
+        }
+        [deadBadGuys removeAllObjects];
     }
-    [deadBadGuys removeAllObjects];
-    for (CCSprite *s in deadGoodGuys)
+    if([deadGoodGuys count] > 0)
     {
-        [goodGuysBottom removeObject:s];
-        [self removeChild:s cleanup:YES];
-       // NSLog(@"deleted good guy");
+        for (CCSprite *s in deadGoodGuys)
+        {
+            [goodGuysBottom removeObject:s];
+            NSLog(@"deleted good guy");
+        }
+        [deadGoodGuys removeAllObjects];
     }
-    [deadGoodGuys removeAllObjects];
+    if([deadGoodBullets count] > 0)
+    {
+        for (CCSprite *s in deadGoodBullets)
+        {
+            [goodBulletArray removeObject:s];
+            [self removeChild:s cleanup:YES];
+            //NSLog(@"deleted good bullet");
+        }
+        [deadGoodBullets removeAllObjects];
+    }
     
-    for (CCSprite *s in deadGoodBullets)
+    if([deadBadBullets count] > 0)
     {
-        [goodBulletArray removeObject:s];
-        [self removeChild:s cleanup:YES];
-        //NSLog(@"deleted good bullet");
+        for (CCSprite *s in deadBadBullets)
+        {
+            [badBulletArray removeObject:s];
+            [self removeChild:s cleanup:YES];
+            //NSLog(@"deleted bad bullet");
+        }
+        [deadBadBullets removeAllObjects];
     }
-    [deadGoodBullets removeAllObjects];
-    
-    for (CCSprite *s in deadBadBullets)
-    {
-        [badBulletArray removeObject:s];
-        [self removeChild:s cleanup:YES];
-        //NSLog(@"deleted bad bullet");
-    }
-    [deadBadBullets removeAllObjects];
-
 }
 
 -(void) airstrike: (CCMenuItemImage *)PowerUpButton3
