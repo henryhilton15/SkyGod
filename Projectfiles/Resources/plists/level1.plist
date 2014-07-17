@@ -5,7 +5,7 @@
 	<key>enemyRegularShooter</key>
 	<dict>
 		<key>available</key>
-		<true/>
+		<false/>
 		<key>health</key>
 		<integer>0</integer>
 		<key>spawnRate</key>
@@ -18,7 +18,7 @@
 	<key>enemyMelee</key>
 	<dict>
 		<key>available</key>
-		<false/>
+		<true/>
 		<key>health</key>
 		<integer>0</integer>
 		<key>spawnRate</key>
@@ -28,7 +28,20 @@
 		<key>fallSpeed</key>
 		<integer>0</integer>
 	</dict>
-	<key>enemyZigZag</key>
+	<key>Kmonster</key>
+	<dict>
+		<key>available</key>
+		<false/>
+		<key>health</key>
+		<integer>0</integer>
+		<key>spawnRate</key>
+		<integer>0</integer>
+		<key>damage</key>
+		<integer>0</integer>
+		<key>speed</key>
+		<integer>0</integer>
+	</dict>
+	<key>enemyBomb</key>
 	<dict>
 		<key>available</key>
 		<false/>

@@ -16,7 +16,14 @@
 //nonatomic properties have better performance than atomic properties (so use them!)
 
 @property (nonatomic) int score;
-@property int rank;
+@property (nonatomic) int currentLevelSelected;
+@property (nonatomic) BOOL friendlyRegularShooterAvailable;
+@property BOOL friendlyMeleeAvailable;
+@property (nonatomic) BOOL friendlyFastShooterAvailable;
+
+
+
+
 
 
 //Static (class) method:

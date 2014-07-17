@@ -28,7 +28,7 @@
 		<key>fallSpeed</key>
 		<integer>0</integer>
 	</dict>
-	<key>enemyZigZag</key>
+	<key>Kmonster</key>
 	<dict>
 		<key>available</key>
 		<false/>
@@ -38,7 +38,7 @@
 		<integer>0</integer>
 		<key>damage</key>
 		<integer>0</integer>
-		<key>fallSpeed</key>
+		<key>speed</key>
 		<integer>0</integer>
 	</dict>
 	<key>scoreCounter</key>

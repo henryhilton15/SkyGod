@@ -9,9 +9,12 @@
 #import "CCLayer.h"
 
 @interface Levelselect : CCLayer
-{CCMenu *myMenu;
+{
+    NSNumber *NSHighestLevelUnlocked;
+    int highestLevelUnlocked;
 }
 -(void) setUpMenus;
 -(void) level1;
+-(void) level2;
 
 @end

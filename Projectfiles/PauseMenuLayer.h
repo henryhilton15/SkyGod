@@ -11,12 +11,13 @@
 @interface PauseMenuLayer : CCLayer
 {
     CCLabelTTF *PauseLabel;
+    CGSize winSize;
 }
 - (id) init;
 - (void) resumeGame;
 - (void) restartGame;
 - (void) mainMenu;
--(void) sfxToggle;
--(void) musicToggle;
+- (void) sfxToggle;
+- (void) musicToggle;
 
 @end

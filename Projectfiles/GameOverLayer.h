@@ -13,6 +13,7 @@
     CCLabelTTF *GameOverLabel;
     CCLabelTTF *scoreLabel;
     CCLabelTTF *newHighScoreLabel;
+    CGSize winSize;
 }
 
 -(id) init;

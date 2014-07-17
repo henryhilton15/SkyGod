@@ -33,7 +33,7 @@
                                                                      target:self
                                                                    selector:@selector(startGame:)];
         startButton.scale=0.8;
-        startButton.position = CGPointMake(-122.5, 115);
+        startButton.position = CGPointMake(-122.5, 150);
         
         
         
@@ -61,7 +61,7 @@
                                                                  target:self
                                                                    selector:@selector(enterStore:)];
         StoreButton.scale=0.55;
-        StoreButton.position = CGPointMake(180, 108);
+        StoreButton.position = CGPointMake(0, 150);
         
        
         CCMenuItemImage *LevelButton = [CCMenuItemImage itemWithNormalImage:@"select-button-d.png"
@@ -70,7 +70,6 @@
                                                                    selector:@selector(selectLevel:)];
         LevelButton.scale=0.3;
         LevelButton.position = CGPointMake(-1000,-1000);
-        
         
         
         
@@ -90,13 +89,11 @@
 
     }
     return self;
-    
 }
 
 -(void) startGame: (CCMenuItem *)menuItem
 {
     [[CCDirector sharedDirector] replaceScene: (CCScene*)[[Levelselect alloc] init]];
-    
 }
 
 -(void) enterStore: (CCMenuItemImage *) menuItem

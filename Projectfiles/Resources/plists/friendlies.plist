@@ -5,7 +5,7 @@
 	<key>friendlyRegularShooter</key>
 	<dict>
 		<key>available</key>
-		<true/>
+		<false/>
 		<key>health</key>
 		<integer>10</integer>
 		<key>spawnRate</key>

@@ -19,6 +19,8 @@
 {
 	if ((self = [super init]))
 	{
+        winSize = [CCDirector sharedDirector].winSize;
+         
         CCMenuItemImage *restartButton = [CCMenuItemImage itemWithNormalImage:@"select-button-d.png"
                                                                 selectedImage: @"select-button-d.png"
                                                                        target:self
@@ -40,7 +42,7 @@
         [self addChild:myMenu z:10];
         
         CCSprite *background = [CCSprite spriteWithFile:@"game-over.png"];
-        background.position = CGPointMake(240,160);
+        background.position = CGPointMake(winSize.width/2,winSize.height/2);
         [self addChild:background z:-1];
         /*
         [[SimpleAudioEngine sharedEngine] preloadEffect:@"gameOverLaugh.wav"];

@@ -11,6 +11,10 @@
 @implementation GameData
 
 @synthesize score;
+@synthesize currentLevelSelected;
+@synthesize friendlyMeleeAvailable;
+@synthesize friendlyRegularShooterAvailable;
+@synthesize friendlyFastShooterAvailable;
 
 
 //static variable - this stores our singleton instance
@@ -23,14 +27,15 @@ static GameData *sharedData = nil;
     {
         //create our singleton instance
         sharedData = [[GameData alloc] init];
-        
-        NSNumber* goodGuyRank = 0;
+    
         
         //collections (Sets, Dictionaries, Arrays) must be initialized
         //Note: our class does not contain properties, only the instance does
         //self.arrayOfDataToBeStored is invalid
         
         //sharedData.arrayOfDataToBeStored = [[NSMutableArray alloc] init];
+        
+        sharedData.currentLevelSelected = 1;
     }
     
     //if the singleton instance is already created, return it

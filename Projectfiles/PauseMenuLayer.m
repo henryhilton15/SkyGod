@@ -16,13 +16,14 @@
 {
 	if ((self = [super init]))
 	{
+        winSize = [CCDirector sharedDirector].winSize;
         
         CCMenuItemImage *resume = [CCMenuItemImage itemWithNormalImage:@"resume-button-d.png"
             selectedImage: @"resume-button-d.png"
             target:self
             selector:@selector(resumeGame:)];
-       resume.position = CGPointMake(160, 110);
-        resume.scale = 0.8f;
+       resume.position = CGPointMake(0, 305);
+        resume.scale = 0.5f;
     
 
         CCMenuItemImage *restart = [CCMenuItemImage itemWithNormalImage:@"restart-button-d.png"
@@ -61,7 +62,7 @@
         [self addChild: pauseMenu z:1];
         
         CCSprite *pause_background = [CCSprite spriteWithFile:@"pause-screen-hd.png"];
-        pause_background.position = CGPointMake(240,160);
+        pause_background.position = CGPointMake(winSize.width/2,winSize.height/2);
         [self addChild:pause_background z:0];
         
 

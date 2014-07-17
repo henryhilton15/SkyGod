@@ -1,5 +1,5 @@
 //
-//  BigMonster.h
+//  Character.h
 //  Gorilla Game
 //
 //  Created by Danny Laporte on 7/18/13.
@@ -22,8 +22,8 @@
 #define BAD_BOTTOM 11
 #define SUPER_ZIG_ZAG_GUY 12
 #define DOUBLE_ENEMY 13
-#define GOOD_BASE 14
-#define BAD_BASE 15
+#define GOOD_BASE1 14
+#define BAD_BASE1 15
 #define BAD_FASTSHOOTER 16
 #define GOOD_FASTSHOOTER 17
 #define BAD_KNIFE 18
@@ -32,6 +32,10 @@
 #define REGULAR_GOOD_BULLET 21
 #define SPEAR 22
 #define REGULAR_BAD_BULLET 23
+#define GOOD_BASE2 24
+#define GOOD_BASE3 25
+#define BAD_BASE2 26
+#define BAD_BASE3 27
 
 @interface Character : CCSprite
 @property int type;
@@ -48,6 +52,7 @@
 @property int attackFrequency;
 @property int bulletPower;
 @property int bulletType;
+@property double speed;
 @property double fallSpeed;
 
 -(id) initWithBigMonsterImage;
@@ -64,8 +69,12 @@
 -(id) initWithGoodBottomImage;
 -(id) initWithBadBottomImage;
 -(id) initWithSuperZigZagGuyImage;
--(id) initWithBadGuyBaseImage;
--(id) initWithGoodGuyBaseImage;
+-(id) initWithBadGuyBaseImage1;
+-(id) initWithBadGuyBaseImage2;
+-(id) initWithBadGuyBaseImage3;
+-(id) initWithGoodGuyBaseImage1;
+-(id) initWithGoodGuyBaseImage2;
+-(id) initWithGoodGuyBaseImage3;
 -(id) initWithFastShooterBadGuyImage;
 -(id) initWithFastShooterGoodGuyImage;
 -(id) initWithKnifeGoodGuyImage;
