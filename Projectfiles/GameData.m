@@ -7,10 +7,13 @@
 //
 
 #import "GameData.h"
+#import "SimpleAudioEngine.h"
 
 @implementation GameData
 
 @synthesize score;
+@synthesize sfx;
+@synthesize musicPlaying;
 
 
 //static variable - this stores our singleton instance
@@ -25,7 +28,7 @@ static GameData *sharedData = nil;
         sharedData = [[GameData alloc] init];
         
         NSNumber* goodGuyRank = 0;
-        
+
         //collections (Sets, Dictionaries, Arrays) must be initialized
         //Note: our class does not contain properties, only the instance does
         //self.arrayOfDataToBeStored is invalid

@@ -12,7 +12,7 @@
 #import "Character.h"
 #import "GameData.h"
 #import "Player.h"
-\
+
 #define MOUNTAIN_HEIGHT 70.0f
 
 @implementation GameLayer
@@ -216,9 +216,6 @@
 
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
-    
-    // Create the monster slightly off-screen along the right edge,
-    // and along a random position along the Y axis as calculated above
 
     enemy = [[Character alloc] initWithGoodGuyImage];
     enemy.scale=.3;
@@ -254,8 +251,6 @@
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
     
-    // Create the monster slightly off-screen along the right edge,
-    // and along a random position along the Y axis as calculated above
     enemy= [[Character alloc] initWithBadGuyImage];
     enemy.scale=.15;
     enemy.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
@@ -742,11 +737,38 @@
         [self addChild: myMenu z:100];
         
         [self changeLevel];
+        
+        
+        if ([[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
+        {
+            [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+        }
+
+        
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimeSound"] boolValue] == false)
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:true] forKey:@"sfx"];
+        }
+        
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimeMusic"] boolValue] == false)
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:true] forKey:@"music"];
+        }
 
         
         [[SimpleAudioEngine sharedEngine] preloadEffect:@"explo2.wav"];
         [[SimpleAudioEngine sharedEngine] preloadEffect:@"Pow.caf"];
         [[SimpleAudioEngine sharedEngine] preloadEffect:@"thatWasEasy.wav"];
+        
+    
+        if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
+        {
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == true)
+            {
+                [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:(@"The Descent.wav")];
+                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:(@"The Descent.wav") loop:YES];
+            }
+        }
         
         [self scheduleUpdate];
     }
@@ -1358,7 +1380,13 @@
                         {
                             [deadBombs addObject:projectile];
                             [deadGoodGuysBottom addObject:goodGuyBottom];
-                            [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                            
+                            if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+                            {
+
+                                [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                            }
+                            
                             //[self enemiesKilledTotal];
                             //enemiesKilledCounter++;
                         }
@@ -1467,7 +1495,13 @@
 //                                    [self removeChild:projectile cleanup:YES];
                                     [deadBananas addObject:projectile];
                                     [deadGoodGuys addObject:goodGuy];
-                                    [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                                    
+                                    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+                                    {
+
+                                        [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                                    }
+                                        
                                     [self enemiesKilledTotal];
                                     //enemiesKilledCounter ++;
                                 }
@@ -1541,7 +1575,11 @@
                         {
                             [deadKmonsters addObject:Kmonster];
                             [deadBananas addObject:projectile];
+                            if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+                            {
+
                             [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                            }
                             //[self enemiesKilledTotal];
                             //enemiesKilledCounter ++;
                         }
@@ -1588,7 +1626,11 @@
                         {
                             [deadKmonsters addObject:Kmonster];
                             [deadGoodGuys addObject:goodGuy];
+                            if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+                            {
+
                             [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                            }
                             [self enemiesKilledTotal];
 
                             //enemiesKilledCounter ++;
@@ -1642,7 +1684,11 @@
                         {
                             [deadBananas addObject:projectile];
                             [deadBadGuys addObject:badGuy];
+                            if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+                            {
+
                             [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                            }
                             [self enemiesKilledTotal];
                             if(Scenario4 == false && Scenario3 == false && Scenario2 == false && Scenario1 == false)
                             {

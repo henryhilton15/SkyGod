@@ -11,6 +11,9 @@
 #import "GameLayer.h"
 #import "Store.h"
 #import "Levelselect.h"
+#import "SimpleAudioEngine.h"
+#import "GameData.h"
+
 
 @implementation MainMenuLayer
 
@@ -18,6 +21,15 @@
 {
 	if ((self = [super init]))
 	{
+        
+        if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
+        {
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == true)
+            {
+                [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"Undaunted.wav"];
+                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Undaunted.wav" loop:YES];
+            }
+        }
         
         CCSprite *background = [CCSprite spriteWithFile:@"main-menu.png"];
         background.position = CGPointMake(240,160);
@@ -87,14 +99,25 @@
         myMenu = [CCMenu menuWithItems:StoreButton,startButton, LevelButton, nil];
         [self addChild:myMenu z:2];
         
+        [self scheduleUpdate];
 
     }
     return self;
     
 }
 
+//-(void) update:(ccTime)delta
+//{
+//    if([GameData sharedData].musicPlaying == NO)
+//    {
+//        [[SimpleAudioEngine sharedEngine] playEffect:@"Undaunted.wav"];
+//        [GameData sharedData].musicPlaying = YES;
+//    }
+//}
+
 -(void) startGame: (CCMenuItem *)menuItem
 {
+    
     [[CCDirector sharedDirector] replaceScene: (CCScene*)[[Levelselect alloc] init]];
     
 }

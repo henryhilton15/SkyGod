@@ -19,6 +19,13 @@
 {
 	if ((self = [super init]))
 	{
+        
+        if ([[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
+        {
+            [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+        }
+
+        
         CCMenuItemImage *restartButton = [CCMenuItemImage itemWithNormalImage:@"select-button-d.png"
                                                                 selectedImage: @"select-button-d.png"
                                                                        target:self

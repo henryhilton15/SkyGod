@@ -9,6 +9,8 @@
 #import "Store.h"
 #import "MainMenuLayer.h"
 #import "Character.h"
+#import "GameData.h"
+#import "SimpleAudioEngine.h"
 
 @implementation Store
  -(id)init
@@ -16,6 +18,17 @@
     
 if ((self = [super init]))
         {
+
+            if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
+            {
+                if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == true)
+                {
+                    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"Undaunted.wav"];
+                    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Undaunted.wav" loop:YES];
+                }
+            }
+
+            
             CCMenuItemImage *BuyButton1 = [CCMenuItemImage itemWithNormalImage:@"upgrades-button.png" selectedImage:@"upgrades-button.png"];
             BuyButton1.position= CGPointMake (100, 300);
             BuyButton1.scale = 0.1f;

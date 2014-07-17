@@ -9,6 +9,8 @@
 #import "PauseMenuLayer.h"
 #import "GameLayer.h"
 #import "MainMenuLayer.h"
+#import "GameData.h"
+#import "SimpleAudioEngine.h"
 
 @implementation PauseMenuLayer
 
@@ -44,14 +46,14 @@
         CCMenuItemImage *sfxButton = [CCMenuItemImage itemWithNormalImage:@"sound_btn.png"
                                                           selectedImage: @"sound_btn.png"
                                                                  target:self
-                                                                 selector:@selector(sfxToggle)];
+                                                                 selector:@selector(sfxToggle:)];
         sfxButton.position = CGPointMake(-20, 200);
         sfxButton.scale = 1.0f;
         
         CCMenuItemImage *musicButton = [CCMenuItemImage itemWithNormalImage:@"music_btn.png"
                                                           selectedImage: @"music_btn.png"
                                                                  target:self
-                                                                   selector:@selector(musicToggle)];
+                                                                   selector:@selector(musicToggle:)];
         musicButton.position = CGPointMake(20, 200);
         musicButton.scale = 0.5f;
         
@@ -69,6 +71,8 @@
     return self;
 }
 
+
+
 - (void) resumeGame: (CCMenuItemImage *) resume
 {
    // [[CCDirector sharedDirector] popScene: (CCScene *)[[GameLayer alloc]  init]];
@@ -77,20 +81,76 @@
 
 - (void) restartGame: (CCMenuItemImage *) restart
 {
+    
+    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+    
     [[CCDirector sharedDirector] replaceScene: (CCScene *)[[GameLayer alloc]  init]];
 }
 
 - (void) mainMenu: (CCMenuItemImage *) mainMenuButton
 {
+        [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+    
     [[CCDirector sharedDirector] replaceScene: (CCScene *)[[MainMenuLayer alloc]  init]];
 }
 
 - (void) sfxToggle: (CCMenuItemImage *) sfxButton
 {
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimeSound"] boolValue] == true)
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:false] forKey:@"firstTimeSound"];
+    }
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+    {
+        sfx = false;
+        NSLog(@"sfx off");
+    }
+    
+    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == false)
+    {
+        sfx = true;
+        NSLog(@"sfx on");
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:sfx] forKey:@"sfx"];
 }
 
 - (void) musicToggle: (CCMenuItemImage *) musicButton
 {
+    
+    
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimeMusic"] boolValue] == true)
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:false] forKey:@"firstTimeMusic"];
+    }
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == true)
+    {
+        music = false;
+        NSLog(@"music off");
+    }
+    
+    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == false)
+    {
+        music = true;
+        NSLog(@"music on");
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:music] forKey:@"music"];
+    
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == true)
+    {
+        [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:(@"The Descent.wav")];
+        [[SimpleAudioEngine sharedEngine] playBackgroundMusic:(@"The Descent.wav") loop:YES];
+
+    }
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == false)
+    {
+        [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+    }
+
 }
 
 @end

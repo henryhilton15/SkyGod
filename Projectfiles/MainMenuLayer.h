@@ -18,4 +18,5 @@
 -(void) startGame;
 -(void) enterStore;
 -(void) selectLevel;
+-(void) update:(ccTime)delta;
 @end

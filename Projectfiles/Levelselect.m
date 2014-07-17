@@ -8,6 +8,7 @@
 
 #import "Levelselect.h"
 #import "GameLayer.h"
+#import "SimpleAudioEngine.h"
 
 @implementation Levelselect
 -(id)init
@@ -15,6 +16,16 @@
     
     if ((self = [super init]))
     {
+        
+        if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
+        {
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == true)
+            {
+                [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"Undaunted.wav"];
+                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Undaunted.wav" loop:YES];
+            }
+        }
+
         
         
         CCSprite *levelTitleImage = [CCSprite spriteWithFile: @"cooltext1265591974.png"];

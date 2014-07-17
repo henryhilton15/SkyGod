@@ -17,6 +17,9 @@
 
 @property (nonatomic) int score;
 @property int rank;
+@property (nonatomic) BOOL sfx;
+@property (nonatomic) BOOL musicPlaying;
+
 
 
 //Static (class) method:

@@ -871,6 +871,8 @@
 		FE57866A18E9F8D7000F220E /* spartanattack.png in Resources */ = {isa = PBXBuildFile; fileRef = FE57864F18E9F8D7000F220E /* spartanattack.png */; };
 		FE57866B18E9F8D7000F220E /* spartanfall.png in Resources */ = {isa = PBXBuildFile; fileRef = FE57865018E9F8D7000F220E /* spartanfall.png */; };
 		FE57866C18E9F8D7000F220E /* spartanmove.png in Resources */ = {isa = PBXBuildFile; fileRef = FE57865118E9F8D7000F220E /* spartanmove.png */; };
+		FE6A8E401977325900EFAC00 /* Undaunted.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE6A8E3F1977325900EFAC00 /* Undaunted.wav */; };
+		FE6A8E421977325F00EFAC00 /* The Descent.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE6A8E411977325F00EFAC00 /* The Descent.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1759,6 +1761,8 @@
 		FE57864F18E9F8D7000F220E /* spartanattack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spartanattack.png; sourceTree = "<group>"; };
 		FE57865018E9F8D7000F220E /* spartanfall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spartanfall.png; sourceTree = "<group>"; };
 		FE57865118E9F8D7000F220E /* spartanmove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spartanmove.png; sourceTree = "<group>"; };
+		FE6A8E3F1977325900EFAC00 /* Undaunted.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Undaunted.wav; path = ../../../../../Desktop/Undaunted.wav; sourceTree = "<group>"; };
+		FE6A8E411977325F00EFAC00 /* The Descent.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "The Descent.wav"; path = "../../../../../Desktop/The Descent.wav"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2604,6 +2608,8 @@
 		2D808A7B1795F5BA006EADF5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FE6A8E411977325F00EFAC00 /* The Descent.wav */,
+				FE6A8E3F1977325900EFAC00 /* Undaunted.wav */,
 				FE57863618E9F8D7000F220E /* animation pngs */,
 				2D6E355618E9EBC300573401 /* Angels vs Devils */,
 				2DFC0F551842A26C00EF09C8 /* level5Label.png */,
@@ -3891,6 +3897,7 @@
 				2DAA40C317AC271B00BA014B /* fbloginbackgroundlandscapedark@2x.png in Resources */,
 				2DAA40C417AC271B00BA014B /* fbloginbackgroundportrait.png in Resources */,
 				2DAA40C517AC271B00BA014B /* fbloginbackgroundportrait@2x.png in Resources */,
+				FE6A8E421977325F00EFAC00 /* The Descent.wav in Resources */,
 				2DAA40C617AC271B00BA014B /* fbloginbackgroundportraitdark.png in Resources */,
 				2DAA40C717AC271B00BA014B /* fbloginbackgroundportraitdark@2x.png in Resources */,
 				2DAA40C817AC271B00BA014B /* fbloginbutton.png in Resources */,
@@ -4277,6 +4284,7 @@
 				2D6E382418E9EBC400573401 /* main-menu-banner-retina.png in Resources */,
 				2D6E382518E9EBC400573401 /* main-menu-banner.png in Resources */,
 				2D6E382618E9EBC400573401 /* main-menu-hd.png in Resources */,
+				FE6A8E401977325900EFAC00 /* Undaunted.wav in Resources */,
 				2D6E382718E9EBC400573401 /* main-menu-ip5.png in Resources */,
 				2D6E382818E9EBC400573401 /* main-menu-ipad.png in Resources */,
 				2D6E382918E9EBC400573401 /* main-menu-retina.png in Resources */,

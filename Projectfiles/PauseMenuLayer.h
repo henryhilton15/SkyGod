@@ -11,6 +11,8 @@
 @interface PauseMenuLayer : CCLayer
 {
     CCLabelTTF *PauseLabel;
+    bool sfx;
+    bool music;
 }
 - (id) init;
 - (void) resumeGame;
