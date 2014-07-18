@@ -18,7 +18,7 @@
 	{
         winSize = [CCDirector sharedDirector].winSize;
         
-        CCMenuItemImage *resume = [CCMenuItemImage itemWithNormalImage:@"resume-button-d.png"
+        CCMenuItemImage *resume = [CCMenuItemImage itemWithNormalImage:@"resume-button-n.png"
             selectedImage: @"resume-button-d.png"
             target:self
             selector:@selector(resumeGame:)];
@@ -26,7 +26,7 @@
         resume.scale = 0.5f;
     
 
-        CCMenuItemImage *restart = [CCMenuItemImage itemWithNormalImage:@"restart-button-d.png"
+        CCMenuItemImage *restart = [CCMenuItemImage itemWithNormalImage:@"restart-button-n.png"
             selectedImage: @"restart-button-d.png"
             target:self
             selector:@selector(restartGame:)];
@@ -34,7 +34,7 @@
         restart.scale = 0.5f;
         
         
-        CCMenuItemImage *mainMenuButton = [CCMenuItemImage itemWithNormalImage:@"main menu-button-d.png"
+        CCMenuItemImage *mainMenuButton = [CCMenuItemImage itemWithNormalImage:@"main menu-button-n.png"
              selectedImage: @"main menu-button-d.png"
              target:self
              selector:@selector(mainMenu:)];

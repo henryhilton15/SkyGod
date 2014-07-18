@@ -38,7 +38,7 @@
         //            StoreLabel.color = ccBLUE;
         //            [self addChild:StoreLabel z:4];
         
-        CCMenuItemImage *mainMenuButton = [CCMenuItemImage itemWithNormalImage:@"main menu-button-d.png"
+        CCMenuItemImage *mainMenuButton = [CCMenuItemImage itemWithNormalImage:@"main menu-button-n.png"
                                                                  selectedImage: @"main menu-button-d.png"
                                                                         target:self
                                                                       selector:@selector(mainMenu:)];
@@ -93,8 +93,8 @@
         int centerLeftX = -(winSize.width * .125);
         int centerRightX = winSize.width * .125;
         int farRightX = winSize.width * .375;
-        regularShooterButton.position = CGPointMake(farLeftX ,320);
-        meleeButton.position = CGPointMake(centerLeftX, 320);
+        meleeButton.position = CGPointMake(farLeftX ,320);
+        regularShooterButton.position = CGPointMake(centerLeftX, 320);
         fastShooterButton.position = CGPointMake(centerRightX,320);
         tankButton.position = CGPointMake(farRightX,320);
         //            spartanButton.position = CGPointMake(farLeftX, 200);

@@ -15,7 +15,7 @@
 		<key>attackFrequency</key>
 		<integer>50</integer>
 		<key>fallSpeed</key>
-		<integer>5</integer>
+		<integer>0</integer>
 	</dict>
 	<key>friendlyMelee</key>
 	<dict>

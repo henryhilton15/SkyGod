@@ -28,7 +28,7 @@
         titleImage.scale=.25;
         [self addChild:titleImage z:4];
         
-        CCMenuItemImage *startButton = [CCMenuItemImage itemWithNormalImage:@"start-button-d.png"
+        CCMenuItemImage *startButton = [CCMenuItemImage itemWithNormalImage:@"start-button-n.png"
                                                               selectedImage: @"start-button-d.png"
                                                                      target:self
                                                                    selector:@selector(startGame:)];
@@ -56,7 +56,7 @@
         
         
         
-        CCMenuItemImage *StoreButton = [CCMenuItemImage itemWithNormalImage:@"shop-button-d.png"
+        CCMenuItemImage *StoreButton = [CCMenuItemImage itemWithNormalImage:@"shop-button-n.png"
                                                                 selectedImage: @"shop-button-d.png"
                                                                  target:self
                                                                    selector:@selector(enterStore:)];
@@ -64,7 +64,7 @@
         StoreButton.position = CGPointMake(0, 150);
         
        
-        CCMenuItemImage *LevelButton = [CCMenuItemImage itemWithNormalImage:@"select-button-d.png"
+        CCMenuItemImage *LevelButton = [CCMenuItemImage itemWithNormalImage:@"select-button-n.png"
                                                               selectedImage: @"select-button-d.png"
                                                                      target:self
                                                                    selector:@selector(selectLevel:)];
@@ -83,7 +83,7 @@
         
 
         
-        myMenu = [CCMenu menuWithItems:StoreButton,startButton, LevelButton, nil];
+        myMenu = [CCMenu menuWithItems:StoreButton, startButton, LevelButton, nil];
         [self addChild:myMenu z:2];
         
 

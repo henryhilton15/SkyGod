@@ -21,7 +21,7 @@
 	{
         winSize = [CCDirector sharedDirector].winSize;
          
-        CCMenuItemImage *restartButton = [CCMenuItemImage itemWithNormalImage:@"select-button-d.png"
+        CCMenuItemImage *restartButton = [CCMenuItemImage itemWithNormalImage:@"select-button-n.png"
                                                                 selectedImage: @"select-button-d.png"
                                                                        target:self
                                                                      selector:@selector(restartGame:)];
@@ -31,7 +31,7 @@
         
         //startButton.tag = 1;
         
-        CCMenuItemImage *endbutton = [CCMenuItemImage itemWithNormalImage:@"shop-button-d.png"
+        CCMenuItemImage *endbutton = [CCMenuItemImage itemWithNormalImage:@"shop-button-n.png"
                                                             selectedImage: @"shop-button-d.png"
                                                                    target:self
                                                                  selector:@selector(endGame:)];

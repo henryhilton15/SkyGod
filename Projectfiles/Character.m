@@ -88,7 +88,7 @@
         health = [[d objectForKey:@"health"] intValue] + [rank intValue];
         power = [[d objectForKey:@"power"] intValue] + [rank intValue];
         attackFrequency = [[d objectForKey:@"attackFrequency"] intValue] - (5 * [rank intValue]);
-        fallSpeed = [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
+        fallSpeed = 5 + [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
 
         type = GOOD_GUY;
         row = 0;
@@ -105,7 +105,7 @@
     {
         worth = 50;
         health = 2;
-        attackFrequency = 50;
+        attackFrequency = 40;
         type = BAD_GUY;
         power = 1;
         //immunity = 0;
@@ -359,8 +359,7 @@
         health = [[d objectForKey:@"health"] intValue] + [rank intValue];
         power = [[d objectForKey:@"power"] intValue] + [rank intValue];
         attackFrequency = [[d objectForKey:@"attackFrequency"] intValue] - (5 * [rank intValue]);
-        fallSpeed = [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
-        
+        fallSpeed = 5 + [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
         type = GOOD_FASTSHOOTER;
         bulletType = REGULAR_GOOD_BULLET;
     }
@@ -381,8 +380,7 @@
         health = [[d objectForKey:@"health"] intValue] + [rank intValue];
         power = [[d objectForKey:@"power"] intValue] + [rank intValue];
         attackFrequency = [[d objectForKey:@"attackFrequency"] intValue] - (5 * [rank intValue]);
-        fallSpeed = [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
-        
+        fallSpeed = 5 + [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
         type = GOOD_KNIFE;
     }
     return self;
@@ -397,7 +395,7 @@
         type = BAD_KNIFE;
         unlockLevel = 0;
     }   
-return self;
+    return self;
 }
 -(id) initWithGoodReinforcementImage
 {

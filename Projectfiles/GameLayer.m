@@ -28,13 +28,12 @@
     int rangeX = maxX - minX;
     int actualX = minX + arc4random() % rangeX;
     
-    minDuration = ((Character*)angel3).fallSpeed - 1;
-    maxDuration = ((Character*)angel3).fallSpeed + 1;
+    int minDuration = ((Character*)angel3).fallSpeed - 1;
+    int maxDuration = ((Character*)angel3).fallSpeed + 1;
     
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
-    angel3 = [[Character alloc] initWithFastShooterGoodGuyImage];
     angel3.scale = .6;
     
     angel3.position = ccp(actualX, winSize.height);
@@ -67,7 +66,7 @@
     for(int i = 1; i <= 4; ++i)
     {
         [angel3fallFrames addObject:
-         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"a3-fall-%d.png", i]]];
+         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"%d.png", i]]];
     }
     
     //Create an animation from the set of frames you created earlier
@@ -79,7 +78,7 @@
     CCAction *angel3fall = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:angel3fallAnimation restoreOriginalFrame:NO]];
     
     //tell the bear to run the taunting action
-    [angel1 runAction:angel3fall];
+    [angel3 runAction:angel3fall];
 
 }
 
@@ -185,11 +184,13 @@
     int rangeX = maxX - minX;
     int actualX = minX + arc4random() % rangeX;
     
-    minDuration = ((Character*)angel1).fallSpeed + 1;
-    maxDuration = ((Character*)angel1).fallSpeed - 1;
+    int minDuration = ((Character*)angel1).fallSpeed - 1;
+    int maxDuration = ((Character*)angel1).fallSpeed + 1;
     
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
+
+    NSLog(@"friendly melee fall duration = %d", actualDuration);
     
     angel1.position = ccp(actualX, winSize.height);
     [self addChild:angel1];
@@ -270,12 +271,12 @@
             
             // Create the monster slightly off-screen along the right edge,
             // and along a random position along the Y axis as calculated above
-            Kmonster.position = ccp(winSize.width + Kmonster.contentSize.width/2, actualY);
+            Kmonster.position = ccp(winSize.width + 20, actualY);
             
                     
             // Create the actions
             CCMoveTo * actionMoveLeft = [CCMoveTo actionWithDuration:actualDuration2
-                                                                    position:ccp(-Kmonster.contentSize.width/2, actualY)];
+                                                                    position:ccp(-40, actualY)];
             // CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
             //[node removeFromParentAndCleanup:YES];
             //}];
@@ -286,12 +287,11 @@
         if(bigGoodGuyDirection == 2)
         {
             //NSLog(@"senses big guy is on right");
-            
-            Kmonster.position = ccp(-Kmonster.contentSize.width/2, actualY);
+            Kmonster.position = ccp(-20, actualY);
                     
             // Create the actions
             CCMoveTo * actionMoveRight = [CCMoveTo actionWithDuration:actualDuration2
-                                                                     position:ccp(winSize.width + Kmonster.contentSize.width/2, actualY)];
+                                                                     position:ccp(winSize.width + 40, actualY)];
             // CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
             //[node removeFromParentAndCleanup:YES];
             //}];
@@ -348,14 +348,15 @@
     int rangeX = maxX - minX;
     int actualX = minX + arc4random() % rangeX;
     
-    minDuration = ((Character*)angel2).fallSpeed - 1;
-    maxDuration = ((Character*)angel2).fallSpeed + 1;
+    int minDuration = ((Character*)angel2).fallSpeed - 1;
+    int maxDuration = ((Character*)angel2).fallSpeed + 1;
     
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    NSLog(@"friendly regular shooter fall speed = %d", actualDuration);
     
-    int friendlyRegularShooterHealth = ((Character*)angel2).health;
-    NSLog(@"friendly regualr shooter health = %d", friendlyRegularShooterHealth);
+//    int friendlyRegularShooterHealth = ((Character*)angel2).health;
+//    NSLog(@"friendly regualr shooter health = %d", friendlyRegularShooterHealth);
     angel2.scale = .8;
     angel2.position = ccp(actualX, winSize.height);
     [self addChild:angel2];
@@ -466,14 +467,15 @@
     
     //tell the bear to run the taunting action
     [devil2 runAction:devil2fall];
-
 }
 
 -(void) addBadHelicopter
 {
+    NSLog(@"inside bad helicopter");
+    
     // Determine where to spawn the monster along the X axis
-    int minY = winSize.height - 20;
-    int maxY = winSize.height - 70;
+    int minY = winSize.height - 70;
+    int maxY = winSize.height - 20;
     int rangeY = maxY - minY;
     int actualY = (arc4random() % rangeY) + minY;
     
@@ -484,12 +486,12 @@
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
-
-    devilHeli = [[Character alloc] initWithBadHelicopterImage];
-
+    NSLog(@"bad heli actual duration = %d", actualDuration);
     
-    devilHeli.position = ccp(winSize.width + devilHeli.contentSize.width, actualY); //+ enemy.contentSize.height/2);
-    [self addChild:devilHeli];
+    devilHeli = [[Character alloc] initWithBadHelicopterImage];
+    [self addChild:devilHeli z:1];
+    devilHeli.scale = .6;
+    devilHeli.position = ccp(winSize.width, actualY); //+ enemy.contentSize.height/2);
  //   [badHelicopters addObject:enemy];
     badHelicopters++;
     [badGuys addObject: devilHeli];
@@ -518,26 +520,24 @@
     
     //When it comes time to get art for your own original game, makegameswith.us will give you spritesheets that follow this convention, <spritename>1 <spritename>2 <spritename>3 etc...
     
-    NSMutableArray *angel2fallFrames = [NSMutableArray array];
+    NSMutableArray *devilHeliFrames = [NSMutableArray array];
     
     for(int i = 1; i <= 4; ++i)
     {
-        [angel2fallFrames addObject:
+        [devilHeliFrames addObject:
          [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"d4-%d.png", i]]];
     }
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *angel2fallAnimation = [CCAnimation animationWithFrames: angel2fallFrames delay:0.25f];
+    CCAnimation *devilHeliAnimation = [CCAnimation animationWithFrames: devilHeliFrames delay:0.25f];
     
     //Create an action with the animation that can then be assigned to a sprite
     
-    CCAction *angel2fall = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:angel2fallAnimation restoreOriginalFrame:NO]];
+    CCAction *devilHeliMove = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:devilHeliAnimation restoreOriginalFrame:NO]];
     
     //tell the bear to run the taunting action
-    [angel2 runAction:angel2fall];
-
-    
+    [devilHeli runAction:devilHeliMove];
 }
 
 - (void) addZigZagBadGuy
@@ -643,7 +643,7 @@
     }
     int rangeX = bigGoodGuyMaxX - bigGoodGuyMinX;
     int actualX = arc4random() % rangeX + bigGoodGuyMinX;
-    NSLog(@"the actual x is %i",actualX);
+    NSLog(@"the actual x is %i" ,actualX);
     
     minDuration = 9.0;
     maxDuration = 11.0;
@@ -713,8 +713,6 @@
 {
 	if ((self = [super init]))
 	{
-        
-        
 //        self.isAccelerometerEnabled = YES;
 //        [[UIAccelerometer sharedAccelerometer] setUpdateInterval:
 //         (1.0 / 60)];
@@ -944,7 +942,6 @@
         
         CCMenu *myMenu = [CCMenu menuWithItems:pauseButton, airstrikePowerUp, reinforcementPowerUp, immunityPowerUp, nil];
         [self addChild: myMenu z:100];
-
         
         [[SimpleAudioEngine sharedEngine] preloadEffect:@"explo2.wav"];
         [[SimpleAudioEngine sharedEngine] preloadEffect:@"Pow.caf"];
@@ -1013,7 +1010,6 @@
 //        score += (int)(pointsFramecount/60);
 //    }
     
-    
     framecount++;
     
 //    if(framecount % 50 == 0)
@@ -1061,15 +1057,19 @@
             NSLog(@"wavechanging is false");
         }
     }
-    
     else
     {
-        [self ScenarioGenerator];
-        [self CreateScenario];
+//        if((framecount + 480) % 500 == 0)
+//        {
+//            NSLog(@"supposed to call scenario generator");
+//            [self ScenarioGenerator];
+//            [self CreateScenario];
+//        }
     }
+        
     if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true && waveChanging == false)
     {
-        if((firstHeli == true || helicopterDelayCounter % 200 == 0) && (firstZigZag == true || zigZagDelayCounter % 250 == 0) && (firstBigMonster == true || bigMonsterDelayCounter % 200 == 0))
+        if((firstZigZag == true || zigZagDelayCounter % 250 == 0) && (firstBigMonster == true || bigMonsterDelayCounter % 200 == 0))
         {
             //[self addBigGoodGuy];
             //[self addBigMonster];
@@ -1136,26 +1136,26 @@
                     int rangeDuration = maxDuration - minDuration;
                     int actualDuration = (arc4random() % rangeDuration) + minDuration;
                     
-                    bomb.scale= .6;
+                    bomb.scale = .6;
                     bomb.position = helicopterPosition; //+ enemy.contentSize.height/2);
                     [self addChild:bomb z:2];
                     [badGuys addObject:bomb];
              
                     // Create the actions
                     CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
-                                                            position:ccp(helicopterPosition.x, -bomb.contentSize.height/2)];
+                                                            position:ccp(bomb.position.x, -20)];
 
                     //        CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
                     //            [node removeFromParentAndCleanup:YES];
                     //        }];
                     [bomb runAction:actionMove];
                 }
-                if(helicopter.position.x >= 480)
+                if(helicopter.position.x <= -20)
                 {
                     [deadHelicopters addObject:helicopter];
+                    Scenario1 = false;
                     //NSLog(@"removed helicopter");
                     //spawnedHelicopters = 0;
-                    helicoptersRemoved++;
                 }
             }
         }
@@ -1166,22 +1166,6 @@
             //badHelicopters--;
         }
         [deadHelicopters removeAllObjects];
-    }
-    
-    if(helicoptersRemoved % 1 == 0 && helicoptersRemoved > 0 && Scenario1 == true)
-    {
-        Scenario1 = false;
-        NSLog(@"Scenario1 is false");
-    }
-    if(helicoptersRemoved % 1 == 0 && helicoptersRemoved > 0)
-    {
-        helicopterDelayCounter++;
-        badHelicopters = 0;
-        
-        if(helicopterDelayCounter % 200 == 0)
-        {
-            helicoptersRemoved = 0;
-        }
     }
     
     if ([bombers count] > 0)
@@ -1237,10 +1221,10 @@
     
     if(bigGoodGuysCounter > 0)
     {
-        bigGoodGuysScenarioDelayCounter++;
         if(framecount % KmonsterFramecount == 0)
         {
             [self addKmonster];
+            NSLog(@"called add Kmonster");
             firstBigGoodGuy = false;
             KmonsterMaxY -= 30;
             if(KmonsterMaxY < 130)
@@ -1253,16 +1237,38 @@
                 KmonsterMaxY = 95;
             }
         }
-        if(bigGoodGuysScenarioDelayCounter % 200 == 0)
-        {
-            Scenario2 = false;
-            bigGoodGuysCounter = 0;
-            KmonsterMaxY = 310;
-            KmonsterMinY = 250;
-       NSLog(@"Scenario2 is false");
-        }
-
     }
+    
+    NSMutableArray *deadKmonsters = [[NSMutableArray alloc] init];
+        
+    if([Kmonsters count] > 0)
+    {
+        for(int i = 0; i < [Kmonsters count]; i++)
+        {
+            CCSprite* kamikaze = [Kmonsters objectAtIndex:i];
+            if(kamikaze.position.x < -30 || kamikaze.position.x > winSize.width + 30)
+            {
+                [deadKmonsters addObject:kamikaze];
+                if([Kmonsters count] == 1 && bigGoodGuysCounter == 0)
+                {
+                    Scenario2 = false;
+                    bigGoodGuysCounter = 0;
+                    KmonsterMaxY = 310;
+                    KmonsterMinY = 250;
+                    NSLog(@"scenario 2 = false");
+                }
+            }
+        }
+    }
+        
+    for (CCSprite *s in deadKmonsters)
+    {
+        [Kmonsters removeObject:s];
+        [badGuys removeObject:s];
+        [self removeChild:s cleanup:YES];
+    }
+    [deadKmonsters removeAllObjects];
+
     if(zigZagScenarioCounter > 0)
     {
         zigZagDelayCounter++;
@@ -1739,6 +1745,14 @@
                             [self enemiesKilledTotal];
                             [self dying:goodGuy :explosionAnimationLength];
                             NSLog(@"explosion called");
+                            if(((Character*)goodGuy).type == BIG_GOOD_GUY && [Kmonsters count] == 0)
+                            {
+                                Scenario2 = false;
+                                bigGoodGuysCounter = 0;
+                                KmonsterMaxY = 310;
+                                KmonsterMinY = 250;
+                                NSLog(@"scenario 2 = false");
+                            }
                         }
                         
                         //}
@@ -1868,6 +1882,7 @@
                             {
                                 helicoptersRemoved++;
                                 Scenario1 = false;
+                                NSLog(@"scenario 1 = false");
                             }
                         }
                     }
@@ -1982,6 +1997,12 @@
                     int posHeight = -8 + (8 * ((Character*)goodBottom).row);
                     goodBottom.position = ccp(0, posHeight);
                     [self addChild:goodBottom z:(7 - ((Character*)goodBottom).row)];
+                    
+                    Scenario2 = false;
+                    bigGoodGuysCounter = 0;
+                    KmonsterMaxY = 310;
+                    KmonsterMinY = 250;
+                    NSLog(@"scenario 2 = false");
                 }
                 if(((Character*)goodGuy).type == GOOD_FASTSHOOTER)
                 {
@@ -2574,16 +2595,16 @@
 
 -(void)ScenarioGenerator
 {
-    if (enemiesKilledCounter >= 5)
+    //if (enemiesKilledCounter >= 5)
     {
        // NSLog(@"Killed 5");
-        randNum++;
-        if(randNum == 1)
-        {
-            [self generateRandomNumber];
-        }
-        //scenarioNumber = 1;
-            
+        
+        //[self generateRandomNumber];
+        
+        scenarioNumber = 2;
+        
+        NSLog(@"scenario number = %d", scenarioNumber);
+        
         if (scenarioNumber == 1)
         {
            // NSLog(@"scenario1begins");
@@ -2612,58 +2633,43 @@
 {
    if(waveChanging != true)
    {
-    if(Scenario1 == true)
-    {
-       // NSLog(@"Scenario1 == TRUE");
-        if(framecount % helicopterFramecount == 0)
-        {
-            spawnedHelicopters++;
-          //  NSLog(@"adding helicopter");
-            if(spawnedHelicopters == 1)
-            {
-               [self addBadHelicopter];
-            }
-            randNum = 0;
-        }
-    }
-    if(Scenario2 == true)
-    {
-        //NSLog(@"scenario 2 is true;");
-        if(framecount % (int)(helicopterFramecount ) == 0)
-        {
-          //  NSLog(@"spawning big good guy");
-            [self addBigGoodGuy];
+       if(Scenario1 == true)
+       {
+           spawnedHelicopters++;
+           //  NSLog(@"adding helicopter");
+           [self addBadHelicopter];
+           randNum = 0;
+       }
+       if(Scenario2 == true)
+       {
+           //NSLog(@"scenario 2 is true;");
         
-        }
-        randNum=0;
-    }
-    if(Scenario3 == true)
-    {
-
-        if(framecount % 300 == 0)
-        {
-            //NSLog(@"starting zig zag scenario");
-            [self zigZagScenario];
-            zigZagScenarioCounter++;
-        
-        }
-        randNum=0;
-    }
-    if(Scenario4 ==true)
-    {
-        if (framecount % 200 == 0)
-        {
-            [self addBigMonster];
-            bigMonstercount++;
-        }
-        randNum=0; 
-    }
-   
-//    if(Scenario4 ==true)
-//    {
-//    
-//    }
-//    randNum=0;
+               //  NSLog(@"spawning big good guy");
+               [self addBigGoodGuy];
+           
+           randNum=0;
+       }
+       if(Scenario3 == true)
+       {
+           
+           if(framecount % 300 == 0)
+           {
+               //NSLog(@"starting zig zag scenario");
+               [self zigZagScenario];
+               zigZagScenarioCounter++;
+               
+           }
+           randNum=0;
+       }
+       if(Scenario4 ==true)
+       {
+           if (framecount % 200 == 0)
+           {
+               [self addBigMonster];
+               bigMonstercount++;
+           }
+           randNum=0; 
+       }
    }
 }
 
@@ -2899,7 +2905,7 @@
             badBottom = [badGuysBottom objectAtIndex:q];
             if(((Character*)badBottom).melee == false)
             {
-                badBottom.position = ccp(badBottom.position.x - .5,badBottom.position.y);
+                badBottom.position = ccp(badBottom.position.x - .5, badBottom.position.y);
                 
                 if (badBottom.position.x < 0)
                 {
@@ -2929,7 +2935,6 @@
         {
             if([goodGuysBottom count] > 0 && [badGuysBottom count] > 0)
             {
-          
                 CCSprite *fightingDevil = [badGuysBottom objectAtIndex:f];
                 badMeleeBox = [fightingDevil boundingBox];
                 badRangeBox = [fightingDevil boundingBox];
@@ -2951,17 +2956,8 @@
                 {
                     ((Character*)fightingAngel).melee = true;
                     ((Character*)fightingDevil).melee = true;
-                }
-                
-                else
-                {
-                    ((Character*)fightingAngel).melee = false;
-                    ((Character*)fightingDevil).melee = false;
-                }
-                
-                if(CGRectIntersectsRect(goodMeleeBox, badMeleeBox))
-                {
-                    if(framecount % ((Character*)fightingAngel).attackFrequency == 0)
+               
+                    if(framecount % ((Character*)fightingAngel).attackFrequency == 0 && ((Character*)fightingAngel).type == GOOD_KNIFE)
                     {
                         [self angel1attackAnimation:fightingAngel];
                         NSLog(@"angel attack animation started");
@@ -2975,7 +2971,7 @@
                         
                     }
                     
-                    if(framecount % ((Character*)fightingDevil).attackFrequency == 0 && immunity == false)
+                    if(framecount % ((Character*)fightingDevil).attackFrequency == 0 && immunity == false && ((Character*)fightingDevil).type == BAD_KNIFE)
                     {
                         
                         [self devil1attackAnimation:fightingDevil];
@@ -3008,7 +3004,7 @@
                         //                        NSLog(@"angel attack frequency = %d", angelAttackFrequency);
                     }
                 }
-                
+
                 else if(CGRectIntersectsRect(badRangeBox, goodMeleeBox) && ((Character*)fightingDevil).type != BAD_KNIFE)
                 {
                     if(framecount % ((Character*)fightingDevil).attackFrequency == 0)
@@ -3033,6 +3029,7 @@
                 if(((Character*)fightingAngel).health <= 0)
                 {
                     [deadGoodGuys addObject:fightingAngel];
+                    ((Character*)fightingDevil).melee = false;
                     NSLog(@"dying method called for angel");
                     
                 }
@@ -3040,6 +3037,7 @@
                 if(((Character*)fightingDevil).health <= 0)
                 {
                     [deadBadGuys addObject:fightingDevil];
+                    ((Character*)fightingAngel).melee = false;
                     NSLog(@"dying method called for devil");
                 }
                 
@@ -4119,14 +4117,13 @@
 {
     NSNumber* NSNumAvailable = [[NSUserDefaults standardUserDefaults] objectForKey:@"airstrikesAvailable"];
     int numAvailable = [NSNumAvailable intValue];
-    
+    [self youWin];
     if(numAvailable > 0)
     {
         bomber = [[Character alloc] initWithGoodHelicopterImage];
         bomber.scale=.5;
-        
-        
-        bomber.position = ccp(0, 280); //+ enemy.contentSize.height/2);
+    
+        bomber.position = ccp(-20, winSize.height * .85); //+ enemy.contentSize.height/2);
         [self addChild:bomber];
         [bombers addObject:bomber];
         
@@ -4189,7 +4186,9 @@
 //    CCMoveTo * NoMove = [CCMoveTo actionWithDuration:5 position:ccp(60, truck.position.y)];
 //    CCMoveTo * DriveOut = [CCMoveTo actionWithDuration:2 position:ccp(-100, truck.position.y)];
 //    
-//    [truck runAction:[CCSequence actions: DriveIn, NoMove, DriveOut, nil]];
+//    [truck runAction:[CCSequence  actions: DriveIn, NoMove, DriveOut, nil]];
+    
+    [self youLose];
     
     NSNumber* NSNumAvailable = [[NSUserDefaults standardUserDefaults] objectForKey:@"reinforcementsAvailable"];
     int numAvailable = [NSNumAvailable intValue];
@@ -4421,7 +4420,7 @@
     (((Character*)badBase).health) = 10;
     [badBaseHealthLabel setString:[NSString stringWithFormat:@"Enemy Base Health: %d",((Character*) badBase).health]];
     //Scenario4 = true;
-    //[self CreateScenario];
+
     waveChanging = true;
     
     NSNumber* NSHighestLevelUnlocked = [[NSUserDefaults standardUserDefaults] objectForKey:@"highestLevelUnlocked"];
@@ -4505,7 +4504,7 @@
             goodBaseBox = [goodBase boundingBox];
             if(CGRectIntersectsRect(badMeleeBox, goodBaseBox))
             {
-                ((Character*)badBottom).melee = true;
+                ((Character*)fightingDevil).melee = true;
 //                if(((Character*)goodBase).health >= 1)
 //                {
                     if(framecount % ((Character*)fightingDevil).attackFrequency == 0)
@@ -4581,13 +4580,13 @@
         }
     }
     
-    if( [goodBulletArray count] > 0)
+    if([goodBulletArray count] > 0)
     {
         for(int j = 0; j < [goodBulletArray count]; j++)
         {
-            badBaseBox = [goodBase boundingBox];
-            goodBullet = [badBulletArray objectAtIndex:j];
-            goodBulletBox = [badBullet boundingBox];
+            badBaseBox = [badBase boundingBox];
+            goodBullet = [goodBulletArray objectAtIndex:j];
+            goodBulletBox = [goodBullet boundingBox];
             
             if(CGRectIntersectsRect(badBaseBox,goodBulletBox))
             {
@@ -4608,12 +4607,6 @@
         [self removeChild:s cleanup:YES];
     }
     [deadGoodBullets removeAllObjects];
-    
-    
-    
-    
-    
-    
     
 //    NSMutableArray *deadGoodBullets = [[NSMutableArray alloc] init];
 //    
@@ -4872,10 +4865,11 @@
     
     NSMutableDictionary *KmonsterDict = [levelDictionary objectForKey:@"Kmonster"];
     KmonsterSpeed = 5 - [[KmonsterDict objectForKey:@"speed"] intValue] * 1.0;
+    KmonsterFramecount = 40 - [[KmonsterDict objectForKey:@"spawnRate"] intValue];
     
     NSMutableDictionary *enemyHeliBombDict = [levelDictionary objectForKey:@"enemyBomb"];
-    enemyBombSpeed = [[enemyHeliBombDict objectForKey:@"fallSpeed"] intValue] * 1.0;
-    enemyBombSpawnRate = 60 + [[enemyHeliBombDict objectForKey:@"spawnRate"] intValue];
+    enemyBombSpeed = 5 + [[enemyHeliBombDict objectForKey:@"fallSpeed"] intValue] * 1.0;
+    enemyBombSpawnRate = 30 + [[enemyHeliBombDict objectForKey:@"spawnRate"] intValue];
     
     
     NSString *path2 = [[NSBundle mainBundle] pathForResource:@"friendlies" ofType:@"plist"];
