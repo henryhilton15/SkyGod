@@ -19,6 +19,9 @@
 	if ((self = [super init]))
 	{
         
+        CGSize winSize = [CCDirector sharedDirector].winSize;
+
+        
         CCMenuItemImage *resume = [CCMenuItemImage itemWithNormalImage:@"resume-button-d.png"
             selectedImage: @"resume-button-d.png"
             target:self
@@ -47,14 +50,14 @@
                                                           selectedImage: @"sound_btn.png"
                                                                  target:self
                                                                  selector:@selector(sfxToggle:)];
-        sfxButton.position = CGPointMake(-20, 200);
+        sfxButton.position = CGPointMake(-25, 200);
         sfxButton.scale = 1.0f;
         
         CCMenuItemImage *musicButton = [CCMenuItemImage itemWithNormalImage:@"music_btn.png"
                                                           selectedImage: @"music_btn.png"
                                                                  target:self
                                                                    selector:@selector(musicToggle:)];
-        musicButton.position = CGPointMake(20, 200);
+        musicButton.position = CGPointMake(25, 200);
         musicButton.scale = 0.5f;
         
         
@@ -66,6 +69,24 @@
         pause_background.position = CGPointMake(240,160);
         [self addChild:pause_background z:0];
         
+
+        
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == false)
+        {
+            sfxNo = [CCSprite spriteWithFile:@"redX.png"];
+            sfxNo.position = CGPointMake( winSize.width/2 - winSize.width/26, winSize.height/2 - winSize.height/8);
+            sfxNo.scale = .05;
+            [self addChild:sfxNo z:2];
+        }
+        
+       if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == false)
+        {
+            musicNo = [CCSprite spriteWithFile:@"redX.png"];
+            musicNo.position = CGPointMake( winSize.width/2 + winSize.width/20, winSize.height/2 - winSize.height/7);
+            musicNo.scale = .05;
+            [self addChild:musicNo z:2];
+        }
+
 
     }
     return self;
@@ -96,6 +117,9 @@
 
 - (void) sfxToggle: (CCMenuItemImage *) sfxButton
 {
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+
+    
     if([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimeSound"] boolValue] == true)
     {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:false] forKey:@"firstTimeSound"];
@@ -114,11 +138,25 @@
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:sfx] forKey:@"sfx"];
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == false)
+    {
+        sfxNo = [CCSprite spriteWithFile:@"redX.png"];
+        sfxNo.position = CGPointMake( winSize.width/2 - winSize.width/26, winSize.height/2 - winSize.height/8);
+        sfxNo.scale = .05;
+        [self addChild:sfxNo z:2];
+    }
+    else if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+    {
+        [self removeChild: sfxNo];
+    }
+    
+    
 }
 
 - (void) musicToggle: (CCMenuItemImage *) musicButton
 {
-    
+    CGSize winSize = [CCDirector sharedDirector].winSize;
     
     if([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimeMusic"] boolValue] == true)
     {
@@ -146,9 +184,19 @@
         [[SimpleAudioEngine sharedEngine] playBackgroundMusic:(@"The Descent.wav") loop:YES];
 
     }
+    
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == false)
     {
         [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+        
+        musicNo = [CCSprite spriteWithFile:@"redX.png"];
+        musicNo.position = CGPointMake( winSize.width/2 + winSize.width/20, winSize.height/2 - winSize.height/7);
+        musicNo.scale = .05;
+        [self addChild:musicNo z:2];
+    }
+    else if([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == true)
+    {
+        [self removeChild: musicNo];
     }
 
 }

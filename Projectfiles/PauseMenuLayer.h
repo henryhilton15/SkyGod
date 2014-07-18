@@ -13,6 +13,9 @@
     CCLabelTTF *PauseLabel;
     bool sfx;
     bool music;
+    CCSprite *sfxNo;
+    CCSprite *musicNo;
+    
 }
 - (id) init;
 - (void) resumeGame;
@@ -20,5 +23,6 @@
 - (void) mainMenu;
 -(void) sfxToggle;
 -(void) musicToggle;
+-(void) update;
 
 @end

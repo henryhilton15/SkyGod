@@ -844,6 +844,7 @@
 		DCC1A3AE13A94F1A005BD75D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC1A39113A94F1A005BD75D /* main.m */; };
 		DCF95CD213A97EC500AE3B80 /* libcocos2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF95CC913A97EC500AE3B80 /* libcocos2d-mac.a */; };
 		DCF95CD413A97EC500AE3B80 /* libkobold2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF95CCB13A97EC500AE3B80 /* libkobold2d-mac.a */; };
+		FE3F43C81979CDC100AAC589 /* redX.png in Resources */ = {isa = PBXBuildFile; fileRef = FE3F43C71979CDC100AAC589 /* redX.png */; };
 		FE57865218E9F8D7000F220E /* angel1.png in Resources */ = {isa = PBXBuildFile; fileRef = FE57863718E9F8D7000F220E /* angel1.png */; };
 		FE57865318E9F8D7000F220E /* angel1attack.png in Resources */ = {isa = PBXBuildFile; fileRef = FE57863818E9F8D7000F220E /* angel1attack.png */; };
 		FE57865418E9F8D7000F220E /* angel1fall.png in Resources */ = {isa = PBXBuildFile; fileRef = FE57863918E9F8D7000F220E /* angel1fall.png */; };
@@ -1734,6 +1735,7 @@
 		DCF95CCB13A97EC500AE3B80 /* libkobold2d-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libkobold2d-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCFA90EF13B4F6F7009DD35A /* BuildSettings-Debug-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-Debug-iOS.xcconfig"; sourceTree = "<group>"; };
 		DCFA90F013B4F811009DD35A /* BuildSettings-Release-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-Release-iOS.xcconfig"; sourceTree = "<group>"; };
+		FE3F43C71979CDC100AAC589 /* redX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = redX.png; path = ../../../../../Desktop/redX.png; sourceTree = "<group>"; };
 		FE57863718E9F8D7000F220E /* angel1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = angel1.png; sourceTree = "<group>"; };
 		FE57863818E9F8D7000F220E /* angel1attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = angel1attack.png; sourceTree = "<group>"; };
 		FE57863918E9F8D7000F220E /* angel1fall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = angel1fall.png; sourceTree = "<group>"; };
@@ -2608,6 +2610,7 @@
 		2D808A7B1795F5BA006EADF5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FE3F43C71979CDC100AAC589 /* redX.png */,
 				FE6A8E411977325F00EFAC00 /* The Descent.wav */,
 				FE6A8E3F1977325900EFAC00 /* Undaunted.wav */,
 				FE57863618E9F8D7000F220E /* animation pngs */,
@@ -3764,6 +3767,7 @@
 				2D808C8E1795F5BA006EADF5 /* milk.png in Resources */,
 				2D808C8F1795F5BA006EADF5 /* misc copy.png in Resources */,
 				2D808C901795F5BA006EADF5 /* mobile.png in Resources */,
+				FE3F43C81979CDC100AAC589 /* redX.png in Resources */,
 				2D808C911795F5BA006EADF5 /* princess.png in Resources */,
 				2D808C921795F5BA006EADF5 /* rocket.png in Resources */,
 				2D808C931795F5BA006EADF5 /* sheild.png in Resources */,
