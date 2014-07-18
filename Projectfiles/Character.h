@@ -55,10 +55,10 @@
 @property double speed;
 @property double fallSpeed;
 
--(id) initWithBigMonsterImage;
--(id) initWithBigGoodGuyImage;
+-(id) initWithEnemyTankImage;
+-(id) initWithFriendlyTankImage;
 -(id) initWithFriendlyRegularShooterImage;
--(id) initWithBadGuyImage;
+-(id) initWithEnemyRegularShooterImage;
 -(id) initWithZigZagImage;
 -(id) initWithGoodHelicopterImage;
 -(id) initWithBadHelicopterImage;
@@ -75,14 +75,14 @@
 -(id) initWithGoodGuyBaseImage1;
 -(id) initWithGoodGuyBaseImage2;
 -(id) initWithGoodGuyBaseImage3;
--(id) initWithFastShooterBadGuyImage;
--(id) initWithFastShooterGoodGuyImage;
--(id) initWithKnifeGoodGuyImage;
--(id) initWithKnifeBadGuyImage;
--(id) initWithGoodReinforcementImage;
--(id) initWithGoodGuyBulletImage;
--(id) initWithGoodGuyFastShooterBulletImage;
--(id) initWithBadGuyBulletImage;
+-(id) initWithEnemyFastShooterImage;
+-(id) initWithFriendlyFastShooterImage;
+-(id) initWithFriendlyMeleeImage;
+-(id) initWithEnemyMeleeImage;
+-(id) initWithSpartanImage;
+-(id) initWithFriendlyRegularShooterBulletImage;
+-(id) initWithFriendlyFastShooterBulletImage;
+-(id) initWithEnemyRegularShooterBulletImage;
 -(id) initWithSpearImage;
 -(id) initWithBlueEnergyImage;
 

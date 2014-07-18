@@ -14,6 +14,8 @@
 		<integer>0</integer>
 		<key>fallSpeed</key>
 		<integer>0</integer>
+		<key>attackFrequency</key>
+		<integer>0</integer>
 	</dict>
 	<key>enemyMelee</key>
 	<dict>
@@ -26,6 +28,8 @@
 		<key>damage</key>
 		<integer>0</integer>
 		<key>fallSpeed</key>
+		<integer>0</integer>
+		<key>attackFrequency</key>
 		<integer>0</integer>
 	</dict>
 	<key>Kmonster</key>
@@ -40,6 +44,23 @@
 		<integer>0</integer>
 		<key>speed</key>
 		<integer>0</integer>
+		<key>attackFrequency</key>
+		<integer>0</integer>
+	</dict>
+	<key>enemyHelicopter</key>
+	<dict>
+		<key>available</key>
+		<false/>
+		<key>health</key>
+		<integer>0</integer>
+		<key>spawnRate</key>
+		<integer>0</integer>
+		<key>damage</key>
+		<integer>0</integer>
+		<key>speed</key>
+		<integer>0</integer>
+		<key>attackFrequency</key>
+		<integer>0</integer>
 	</dict>
 	<key>enemyBomb</key>
 	<dict>
@@ -52,6 +73,38 @@
 		<key>damage</key>
 		<integer>0</integer>
 		<key>fallSpeed</key>
+		<integer>0</integer>
+		<key>attackFrequency</key>
+		<integer>0</integer>
+	</dict>
+	<key>enemyTank</key>
+	<dict>
+		<key>available</key>
+		<false/>
+		<key>health</key>
+		<integer>0</integer>
+		<key>spawnRate</key>
+		<integer>0</integer>
+		<key>damage</key>
+		<integer>0</integer>
+		<key>fallSpeed</key>
+		<integer>0</integer>
+		<key>attackFrequency</key>
+		<integer>0</integer>
+	</dict>
+	<key>enemyZigZag</key>
+	<dict>
+		<key>available</key>
+		<false/>
+		<key>health</key>
+		<integer>0</integer>
+		<key>spawnRate</key>
+		<integer>0</integer>
+		<key>damage</key>
+		<integer>0</integer>
+		<key>fallSpeed</key>
+		<integer>0</integer>
+		<key>attackFrequency</key>
 		<integer>0</integer>
 	</dict>
 	<key>scoreCounter</key>

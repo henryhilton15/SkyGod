@@ -18,7 +18,7 @@
 @property (nonatomic) int score;
 @property (nonatomic) int currentLevelSelected;
 @property (nonatomic) BOOL friendlyRegularShooterAvailable;
-@property BOOL friendlyMeleeAvailable;
+@property (nonatomic) BOOL friendlyMeleeAvailable;
 @property (nonatomic) BOOL friendlyFastShooterAvailable;
 
 
