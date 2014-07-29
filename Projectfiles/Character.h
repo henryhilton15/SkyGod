@@ -22,8 +22,8 @@
 #define BAD_BOTTOM 11
 #define SUPER_ZIG_ZAG_GUY 12
 #define DOUBLE_ENEMY 13
-#define GOOD_BASE1 14
-#define BAD_BASE1 15
+#define GOOD_BASE 14
+#define BAD_BASE 15
 #define BAD_FASTSHOOTER 16
 #define GOOD_FASTSHOOTER 17
 #define BAD_KNIFE 18
@@ -32,10 +32,7 @@
 #define REGULAR_GOOD_BULLET 21
 #define SPEAR 22
 #define REGULAR_BAD_BULLET 23
-#define GOOD_BASE2 24
-#define GOOD_BASE3 25
-#define BAD_BASE2 26
-#define BAD_BASE3 27
+#define TANK_BOMB 24
 
 @interface Character : CCSprite
 @property int type;
@@ -84,6 +81,7 @@
 -(id) initWithFriendlyFastShooterBulletImage;
 -(id) initWithEnemyRegularShooterBulletImage;
 -(id) initWithSpearImage;
+-(id) initWithTankBombImage;
 -(id) initWithBlueEnergyImage;
 
 @end

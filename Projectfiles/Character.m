@@ -33,7 +33,7 @@
 
 -(id) initWithEnemyTankImage
 {
-    if((self = [super initWithFile:@"monster9.png"]))
+    if((self = [super initWithFile:@"d3-1.png"]))
     {
         NSString *plistName = [NSString stringWithFormat:@"level%d", [GameData sharedData].currentLevelSelected];
         NSString *path = [[NSBundle mainBundle] pathForResource:plistName ofType:@"plist"];
@@ -42,7 +42,7 @@
         NSMutableDictionary *enemyTankDict = [levelDictionary objectForKey:@"enemyTank"];
         
         health = 5 + [[enemyTankDict objectForKey:@"health"] intValue];
-        attackFrequency = 100 - [[enemyTankDict objectForKey:@"attackFrequency"] intValue];
+        attackFrequency = 40 - [[enemyTankDict objectForKey:@"attackFrequency"] intValue];
         power = 3 + [[enemyTankDict objectForKey:@"damage"] intValue];
         fallSpeed = 5 - [[enemyTankDict objectForKey:@"fallSpeed"] intValue];
         worth = 100;
@@ -50,6 +50,7 @@
         row = 0;
         melee = false;
         unlockLevel = 0;
+        bulletType = TANK_BOMB;
     }
     return self;
 }
@@ -77,7 +78,7 @@
         melee = false;
         left = false;
         right = false;
-        bulletType = GOOD_HELICOPTER_BOMB;
+        bulletType = TANK_BOMB;
     }
     return self;
 }
@@ -271,7 +272,8 @@
     if ((self = [super initWithFile: @"goodbase-1.png"]))
     {
         health = 10;
-        type = GOOD_BASE1;
+        type = GOOD_BASE;
+        melee = true;
     }
     return self;
 }
@@ -281,7 +283,8 @@
     if ((self = [super initWithFile: @"goodbase-2.png"]))
     {
         health = 6;
-        type = GOOD_BASE2;
+        type = GOOD_BASE;
+        melee = true;
     }
     return self;
 }
@@ -291,7 +294,8 @@
     if ((self = [super initWithFile: @"goodbase-3.png"]))
     {
         health = 3;
-        type = GOOD_BASE3;
+        type = GOOD_BASE;
+        melee = true;
     }
     return self;
 }
@@ -301,7 +305,8 @@
     if ((self = [super initWithFile: @"badbase-1.png"]))
     {
         health = 10;
-        type = BAD_BASE1;
+        type = BAD_BASE;
+        melee = true;
     }
     return self;
 }
@@ -311,7 +316,8 @@
     if ((self = [super initWithFile: @"badbase-2.png"]))
     {
         health = 6;
-        type = BAD_BASE2;
+        type = BAD_BASE;
+        melee = true;
     }
     return self;
 }
@@ -321,7 +327,8 @@
     if ((self = [super initWithFile: @"badbase-3.png"]))
     {
         health = 3;
-        type = BAD_BASE3;
+        type = BAD_BASE;
+        melee = true;
     }
     return self;
 }
@@ -447,6 +454,15 @@
 -(id) initWithSpearImage
 {
     if ((self = [super initWithFile:@"spear.png"]))
+    {
+        power = 0;;
+    }
+    return self;
+}
+
+-(id) initWithTankBombImage
+{
+    if ((self = [super initWithFile:@"bomb-1.png"]))
     {
         power = 0;;
     }

@@ -56,7 +56,6 @@
     int friendlyFrequency;
     int enemiesPassed;
     int friendliesPassed;
-    int badHelicopters;
     int spawnedHelicopters;
     int truckCount;
     int wave;
@@ -79,6 +78,12 @@
     int enemyBombFramecount;
     int enemyHeliSpeed;
     int enemyHeliHealth;
+    int scenarioDelayCounter;
+    int scenarioDelay;
+    int scenario2interludeCounter;
+    int goodBaseImageChangeCount;
+    int badBaseImageChangeCount;
+    int enemyHelicopterCount;
     double zigZagPercentage;
     double explosionAnimationLength;
     double dyingAnimationLength;
@@ -141,6 +146,8 @@
     NSMutableArray *GoodGuysToDelete;
     NSMutableArray *badBars;
     NSMutableArray *goodBombs;
+    NSMutableArray *zigZagScenarioEnemies;
+//    NSMutableArray *badHelicopters;
     NSString *levelString;
     NSString *enemiesKilledString;
     CGRect badGuyRect;
@@ -162,6 +169,7 @@
     CCAction *rotateBanana;
     BOOL Scenario1;
     BOOL Scenario2;
+    BOOL Scenario2interlude;
     BOOL Scenario3;
     BOOL Scenario4;
     BOOL isWalking;

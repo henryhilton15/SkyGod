@@ -468,7 +468,6 @@
 		C35105AA1947B53300057578 /* victory-screen-retina.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102BC1947B53200057578 /* victory-screen-retina.png */; };
 		C35105AB1947B53300057578 /* animation_knight-1.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102BF1947B53200057578 /* animation_knight-1.png */; };
 		C35105AC1947B53300057578 /* background_desert-topdown.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102C01947B53200057578 /* background_desert-topdown.png */; };
-		C35105AD1947B53300057578 /* background_grass-top.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102C11947B53200057578 /* background_grass-top.png */; };
 		C35105AE1947B53300057578 /* background_grass-topdown.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102C21947B53200057578 /* background_grass-topdown.png */; };
 		C35105AF1947B53300057578 /* background_grid.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102C31947B53200057578 /* background_grid.png */; };
 		C35105B01947B53300057578 /* background_topofcastle.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102C41947B53200057578 /* background_topofcastle.png */; };
@@ -477,7 +476,6 @@
 		C35105B31947B53300057578 /* bearFrames.plist in Resources */ = {isa = PBXBuildFile; fileRef = C35102C71947B53200057578 /* bearFrames.plist */; };
 		C35105B41947B53300057578 /* bearFrames.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102C81947B53200057578 /* bearFrames.png */; };
 		C35105B51947B53300057578 /* cat-main.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102C91947B53200057578 /* cat-main.png */; };
-		C35105B61947B53300057578 /* cat1.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102CA1947B53200057578 /* cat1.png */; };
 		C35105B71947B53300057578 /* cat3.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102CB1947B53200057578 /* cat3.png */; };
 		C35105B81947B53300057578 /* cat4.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102CC1947B53200057578 /* cat4.png */; };
 		C35105B91947B53300057578 /* city-back.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102CD1947B53200057578 /* city-back.png */; };
@@ -494,9 +492,7 @@
 		C35105CA1947B53300057578 /* level3Label.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102DE1947B53200057578 /* level3Label.png */; };
 		C35105CB1947B53300057578 /* level4Label.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102DF1947B53200057578 /* level4Label.png */; };
 		C35105CC1947B53300057578 /* level5Label.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102E01947B53200057578 /* level5Label.png */; };
-		C35105CD1947B53300057578 /* monster1.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102E11947B53200057578 /* monster1.png */; };
 		C35105CE1947B53300057578 /* monster2.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102E21947B53200057578 /* monster2.png */; };
-		C35105CF1947B53300057578 /* monster4.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102E31947B53200057578 /* monster4.png */; };
 		C35105D01947B53300057578 /* monster8.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102E41947B53200057578 /* monster8.png */; };
 		C35105D11947B53300057578 /* monster9.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102E51947B53200057578 /* monster9.png */; };
 		C35105D21947B53300057578 /* background_belowground-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = C35102E91947B53200057578 /* background_belowground-hd.png */; };
@@ -907,8 +903,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2D6E386F18E9F9B000573401 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		2D6E387118E9F9BE00573401 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		2D6E386F18E9F9B000573401 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../../../Default.png; sourceTree = "<group>"; };
+		2D6E387118E9F9BE00573401 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../../Default-568h@2x.png"; sourceTree = "<group>"; };
 		2DA3EB3217907425007D73B5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		2DAA406617AC23DC00BA014B /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accounts.framework; sourceTree = DEVELOPER_DIR; };
 		2DAA406817AC23E400BA014B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/AdSupport.framework; sourceTree = DEVELOPER_DIR; };
@@ -1382,7 +1378,6 @@
 		C35102BC1947B53200057578 /* victory-screen-retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "victory-screen-retina.png"; sourceTree = "<group>"; };
 		C35102BF1947B53200057578 /* animation_knight-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "animation_knight-1.png"; sourceTree = "<group>"; };
 		C35102C01947B53200057578 /* background_desert-topdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_desert-topdown.png"; sourceTree = "<group>"; };
-		C35102C11947B53200057578 /* background_grass-top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_grass-top.png"; sourceTree = "<group>"; };
 		C35102C21947B53200057578 /* background_grass-topdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_grass-topdown.png"; sourceTree = "<group>"; };
 		C35102C31947B53200057578 /* background_grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_grid.png; sourceTree = "<group>"; };
 		C35102C41947B53200057578 /* background_topofcastle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_topofcastle.png; sourceTree = "<group>"; };
@@ -1391,7 +1386,6 @@
 		C35102C71947B53200057578 /* bearFrames.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bearFrames.plist; sourceTree = "<group>"; };
 		C35102C81947B53200057578 /* bearFrames.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bearFrames.png; sourceTree = "<group>"; };
 		C35102C91947B53200057578 /* cat-main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cat-main.png"; sourceTree = "<group>"; };
-		C35102CA1947B53200057578 /* cat1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat1.png; sourceTree = "<group>"; };
 		C35102CB1947B53200057578 /* cat3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat3.png; sourceTree = "<group>"; };
 		C35102CC1947B53200057578 /* cat4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat4.png; sourceTree = "<group>"; };
 		C35102CD1947B53200057578 /* city-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "city-back.png"; sourceTree = "<group>"; };
@@ -1408,9 +1402,7 @@
 		C35102DE1947B53200057578 /* level3Label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level3Label.png; sourceTree = "<group>"; };
 		C35102DF1947B53200057578 /* level4Label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level4Label.png; sourceTree = "<group>"; };
 		C35102E01947B53200057578 /* level5Label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level5Label.png; sourceTree = "<group>"; };
-		C35102E11947B53200057578 /* monster1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster1.png; sourceTree = "<group>"; };
 		C35102E21947B53200057578 /* monster2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster2.png; sourceTree = "<group>"; };
-		C35102E31947B53200057578 /* monster4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster4.png; sourceTree = "<group>"; };
 		C35102E41947B53200057578 /* monster8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster8.png; sourceTree = "<group>"; };
 		C35102E51947B53200057578 /* monster9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster9.png; sourceTree = "<group>"; };
 		C35102E91947B53200057578 /* background_belowground-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_belowground-hd.png"; sourceTree = "<group>"; };
@@ -1809,7 +1801,7 @@
 		DC9C33E713B5024400931BF2 /* BuildSettings-Debug-Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-Debug-Mac.xcconfig"; sourceTree = "<group>"; };
 		DC9C33E813B5024400931BF2 /* BuildSettings-Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-Mac.xcconfig"; sourceTree = "<group>"; };
 		DC9C33E913B5024400931BF2 /* BuildSettings-Release-Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-Release-Mac.xcconfig"; sourceTree = "<group>"; };
-		DCC1A0E313A94ED5005BD75D /* Gorilla Game-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorilla Game-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCC1A0E313A94ED5005BD75D /* SkyGod-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SkyGod-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCC1A0F913A94ED5005BD75D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		DCC1A0FB13A94ED5005BD75D /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fps_images.png; sourceTree = "<group>"; };
 		DCC1A0FD13A94ED5005BD75D /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -1819,7 +1811,7 @@
 		DCC1A10513A94ED5005BD75D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		DCC1A10713A94ED5005BD75D /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		DCC1A10913A94ED5005BD75D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DCC1A25A13A94EE6005BD75D /* Gorilla Game-Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorilla Game-Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCC1A25A13A94EE6005BD75D /* SkyGod-Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SkyGod-Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCC1A26813A94EE6005BD75D /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DCC1A26B13A94EE6005BD75D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Resources/English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		DCC1A26D13A94EE6005BD75D /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fps_images.png; path = Resources/fps_images.png; sourceTree = "<group>"; };
@@ -2030,7 +2022,6 @@
 				C38C653A1948DA8500566EB7 /* spartanfall.plist */,
 				C38C653B1948DA8500566EB7 /* spartanmove.plist */,
 				C35102C01947B53200057578 /* background_desert-topdown.png */,
-				C35102C11947B53200057578 /* background_grass-top.png */,
 				C35102C21947B53200057578 /* background_grass-topdown.png */,
 				C35102C31947B53200057578 /* background_grid.png */,
 				C35102C41947B53200057578 /* background_topofcastle.png */,
@@ -2039,7 +2030,6 @@
 				C35102C71947B53200057578 /* bearFrames.plist */,
 				C35102C81947B53200057578 /* bearFrames.png */,
 				C35102C91947B53200057578 /* cat-main.png */,
-				C35102CA1947B53200057578 /* cat1.png */,
 				C35102CB1947B53200057578 /* cat3.png */,
 				C35102CC1947B53200057578 /* cat4.png */,
 				C35102CD1947B53200057578 /* city-back.png */,
@@ -2057,9 +2047,7 @@
 				C35102DE1947B53200057578 /* level3Label.png */,
 				C35102DF1947B53200057578 /* level4Label.png */,
 				C35102E01947B53200057578 /* level5Label.png */,
-				C35102E11947B53200057578 /* monster1.png */,
 				C35102E21947B53200057578 /* monster2.png */,
-				C35102E31947B53200057578 /* monster4.png */,
 				C35102E41947B53200057578 /* monster8.png */,
 				C35102E51947B53200057578 /* monster9.png */,
 				C35102E61947B53200057578 /* Placeholder Art Monsters vs Kittens */,
@@ -2079,6 +2067,8 @@
 		C35101161947B53100057578 /* Angels vs Devils */ = {
 			isa = PBXGroup;
 			children = (
+				2D6E387118E9F9BE00573401 /* Default-568h@2x.png */,
+				2D6E386F18E9F9B000573401 /* Default.png */,
 				C35101171947B53100057578 /* App icon - AVD */,
 				C351011A1947B53100057578 /* fonts - AVD */,
 				C35101211947B53100057578 /* Game Over screen - AVD */,
@@ -3403,8 +3393,6 @@
 		DCC1A0D613A94EC0005BD75D = {
 			isa = PBXGroup;
 			children = (
-				2D6E387118E9F9BE00573401 /* Default-568h@2x.png */,
-				2D6E386F18E9F9B000573401 /* Default.png */,
 				2DAA407A17AC248000BA014B /* Twitter.framework */,
 				2DAA407817AC247400BA014B /* SystemConfiguration.framework */,
 				2DAA407617AC246D00BA014B /* StoreKit.framework */,
@@ -3431,8 +3419,8 @@
 		DCC1A0E413A94ED5005BD75D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DCC1A0E313A94ED5005BD75D /* Gorilla Game-iOS.app */,
-				DCC1A25A13A94EE6005BD75D /* Gorilla Game-Mac.app */,
+				DCC1A0E313A94ED5005BD75D /* SkyGod-iOS.app */,
+				DCC1A25A13A94EE6005BD75D /* SkyGod-Mac.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3567,9 +3555,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DCC1A0E213A94ED5005BD75D /* Gorilla Game-iOS */ = {
+		DCC1A0E213A94ED5005BD75D /* SkyGod-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DCC1A25313A94ED7005BD75D /* Build configuration list for PBXNativeTarget "Gorilla Game-iOS" */;
+			buildConfigurationList = DCC1A25313A94ED7005BD75D /* Build configuration list for PBXNativeTarget "SkyGod-iOS" */;
 			buildPhases = (
 				DCC1A0DF13A94ED5005BD75D /* Sources */,
 				DCC1A0E013A94ED5005BD75D /* Frameworks */,
@@ -3579,14 +3567,14 @@
 			);
 			dependencies = (
 			);
-			name = "Gorilla Game-iOS";
+			name = "SkyGod-iOS";
 			productName = "Hello-World-iOS";
-			productReference = DCC1A0E313A94ED5005BD75D /* Gorilla Game-iOS.app */;
+			productReference = DCC1A0E313A94ED5005BD75D /* SkyGod-iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DCC1A25913A94EE6005BD75D /* Gorilla Game-Mac */ = {
+		DCC1A25913A94EE6005BD75D /* SkyGod-Mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DCC1A38913A94EE7005BD75D /* Build configuration list for PBXNativeTarget "Gorilla Game-Mac" */;
+			buildConfigurationList = DCC1A38913A94EE7005BD75D /* Build configuration list for PBXNativeTarget "SkyGod-Mac" */;
 			buildPhases = (
 				DCC1A25613A94EE6005BD75D /* Sources */,
 				DCC1A25713A94EE6005BD75D /* Frameworks */,
@@ -3596,9 +3584,9 @@
 			);
 			dependencies = (
 			);
-			name = "Gorilla Game-Mac";
+			name = "SkyGod-Mac";
 			productName = "Hello-World-Mac";
-			productReference = DCC1A25A13A94EE6005BD75D /* Gorilla Game-Mac.app */;
+			productReference = DCC1A25A13A94EE6005BD75D /* SkyGod-Mac.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -3609,7 +3597,7 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 			};
-			buildConfigurationList = DCC1A0DB13A94EC0005BD75D /* Build configuration list for PBXProject "Gorilla Game" */;
+			buildConfigurationList = DCC1A0DB13A94EC0005BD75D /* Build configuration list for PBXProject "SkyGod" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -3622,8 +3610,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DCC1A0E213A94ED5005BD75D /* Gorilla Game-iOS */,
-				DCC1A25913A94EE6005BD75D /* Gorilla Game-Mac */,
+				DCC1A0E213A94ED5005BD75D /* SkyGod-iOS */,
+				DCC1A25913A94EE6005BD75D /* SkyGod-Mac */,
 			);
 		};
 /* End PBXProject section */
@@ -3690,7 +3678,6 @@
 				DC1BE6A014F417CC00F49D25 /* Ubuntu-B.ttf in Resources */,
 				C35105831947B53300057578 /* game over & victory screen.ai in Resources */,
 				C35106F11947B53300057578 /* Pow.caf in Resources */,
-				C35105B61947B53300057578 /* cat1.png in Resources */,
 				C35105EF1947B53300057578 /* joystick-top-hd.png in Resources */,
 				DC1BE6A114F417CC00F49D25 /* Ubuntu-BI.ttf in Resources */,
 				DC1BE6A214F417CC00F49D25 /* Ubuntu-C.ttf in Resources */,
@@ -3748,7 +3735,6 @@
 				C351062F1947B53300057578 /* topdowntree.png in Resources */,
 				DC1BE6A914F417CC00F49D25 /* UbuntuMono-B.ttf in Resources */,
 				DC1BE6AA14F417CC00F49D25 /* UbuntuMono-BI.ttf in Resources */,
-				C35105CD1947B53300057578 /* monster1.png in Resources */,
 				C38C65191948DA4200566EB7 /* devil2tank.png in Resources */,
 				C38C650F1948DA4200566EB7 /* angelplanemove.png in Resources */,
 				C35106F71947B53300057578 /* wave.png in Resources */,
@@ -3892,7 +3878,6 @@
 				C35105AF1947B53300057578 /* background_grid.png in Resources */,
 				2DAA40BD17AC271B00BA014B /* facebookicon.png in Resources */,
 				C35105381947B53300057578 /* main-5-2.png in Resources */,
-				C35105CF1947B53300057578 /* monster4.png in Resources */,
 				C351051B1947B53300057578 /* main-idle-6.png in Resources */,
 				2DAA40BE17AC271B00BA014B /* FacebookSDKResources.bundle in Resources */,
 				C35106E61947B53300057578 /* background_grass-top.png in Resources */,
@@ -4144,7 +4129,6 @@
 				C351059B1947B53300057578 /* continue-button-n.png in Resources */,
 				C351045C1947B53300057578 /* a1-attack-1.png in Resources */,
 				C35104A81947B53300057578 /* goodbase-3.png in Resources */,
-				C35105AD1947B53300057578 /* background_grass-top.png in Resources */,
 				C351066F1947B53300057578 /* cloud.png in Resources */,
 				C35105401947B53300057578 /* main-7-2.png in Resources */,
 				2DAA40D417AC271B00BA014B /* hipmobsend_field.png in Resources */,
@@ -4575,6 +4559,7 @@
 					"$(KKFRAMEWORKS_IOS)",
 					"-lsqlite3.0",
 				);
+				PRODUCT_NAME = "SkyGod-iOS";
 			};
 			name = Debug;
 		};
@@ -4591,6 +4576,7 @@
 					"$(KKFRAMEWORKS_IOS)",
 					"-lsqlite3.0",
 				);
+				PRODUCT_NAME = "SkyGod-iOS";
 			};
 			name = Release;
 		};
@@ -4599,6 +4585,7 @@
 			baseConfigurationReference = DC9C33E713B5024400931BF2 /* BuildSettings-Debug-Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				PRODUCT_NAME = "SkyGod-Mac";
 			};
 			name = Debug;
 		};
@@ -4607,13 +4594,14 @@
 			baseConfigurationReference = DC9C33E913B5024400931BF2 /* BuildSettings-Release-Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				PRODUCT_NAME = "SkyGod-Mac";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DCC1A0DB13A94EC0005BD75D /* Build configuration list for PBXProject "Gorilla Game" */ = {
+		DCC1A0DB13A94EC0005BD75D /* Build configuration list for PBXProject "SkyGod" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DCC1A0DD13A94EC0005BD75D /* Debug */,
@@ -4622,7 +4610,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DCC1A25313A94ED7005BD75D /* Build configuration list for PBXNativeTarget "Gorilla Game-iOS" */ = {
+		DCC1A25313A94ED7005BD75D /* Build configuration list for PBXNativeTarget "SkyGod-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DCC1A25413A94ED7005BD75D /* Debug */,
@@ -4631,7 +4619,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DCC1A38913A94EE7005BD75D /* Build configuration list for PBXNativeTarget "Gorilla Game-Mac" */ = {
+		DCC1A38913A94EE7005BD75D /* Build configuration list for PBXNativeTarget "SkyGod-Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DCC1A38A13A94EE7005BD75D /* Debug */,
