@@ -281,7 +281,8 @@
             //[node removeFromParentAndCleanup:YES];
             //}];
                     
-            [Kmonster runAction:[CCSequence actions:actionMoveLeft, nil]];
+            [Kmonster runAction:actionMoveLeft];
+            
         }
                 
         if(bigGoodGuyDirection == 2)
@@ -296,8 +297,42 @@
             //[node removeFromParentAndCleanup:YES];
             //}];
                     
-            [Kmonster runAction:[CCSequence actions:actionMoveRight, nil]];
+            [Kmonster runAction:actionMoveRight];
         }
+        
+        //Load the plist which tells Kobold2D how to properly parse your spritesheet. If on a retina device Kobold2D will automatically use bearframes-hd.plist
+        
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile: @"devilplanemove.plist"];
+        
+        //Load in the spritesheet, if retina Kobold2D will automatically use bearframes-hd.png
+        
+        CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"devilplanemove.png"];
+        
+        [self addChild:spriteSheet];
+        
+        //Define the frames based on the plist - note that for this to work, the original files must be in the format bear1, bear2, bear3 etc...
+        
+        //When it comes time to get art for your own original game, makegameswith.us will give you spritesheets that follow this convention, <spritename>1 <spritename>2 <spritename>3 etc...
+        
+        NSMutableArray *devilHeliFrames = [NSMutableArray array];
+        
+        for(int i = 1; i <= 4; ++i)
+        {
+            [devilHeliFrames addObject:
+             [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"d4-%d.png", i]]];
+        }
+        
+        //Create an animation from the set of frames you created earlier
+        
+        CCAnimation *devilHeliAnimation = [CCAnimation animationWithFrames: devilHeliFrames delay:0.25f];
+        
+        //Create an action with the animation that can then be assigned to a sprite
+        
+        CCAction *devilHeliMove = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:devilHeliAnimation restoreOriginalFrame:NO]];
+        
+        //tell the bear to run the taunting action
+        [devilHeli runAction:devilHeliMove];
+
     }
 }
 
@@ -738,6 +773,7 @@
         bombers = [[NSMutableArray alloc] init];
         badBars = [[NSMutableArray alloc] init];
         goodBombs = [[NSMutableArray alloc] init];
+        badBombs = [[NSMutableArray alloc] init];
         zigZagScenarioEnemies = [[NSMutableArray alloc] init];
 //        badHelicopters = [[NSMutableArray alloc] init];
 
@@ -1168,8 +1204,9 @@
                     int actualDuration = (arc4random() % rangeDuration) + minDuration;
                     
                     bomb.scale = .6;
-                    bomb.position = CGPointMake(helicopter.position.x, helicopter.position.y - helicopter.contentSize.height/2); //+ enemy.contentSize.height/2);
+                    bomb.position = CGPointMake(helicopter.position.x, helicopter.position.y - helicopter.contentSize.height/4); //+ enemy.contentSize.height/2);
                     [self addChild:bomb z:2];
+                    [badBombs addObject:bomb];
                     [badGuys addObject:bomb];
                     
                     // Create the actions
@@ -1283,7 +1320,7 @@
             NSLog(@"Scenario3 is false");
         }
     }
-    if([goodGuys count] > 0 || [badGuys count] > 0 || [goodBombs count] > 0)
+    if([goodGuys count] > 0 || [badGuys count] > 0 || [goodBombs count] > 0 || [badBombs count] > 0)
     {
         [self detectReachBottom];
     }
@@ -1298,35 +1335,6 @@
     if ([Kmonsters count] > 0)
     {
         [self detectKmonsterCollisions];
-    }
-    
-    for(int i = 0; i < [badGuys count]; i++)
-    {
-        badGuy = [badGuys objectAtIndex:i];
-        if(((Character*)badGuy).type == BAD_HELICOPTER_BOMB)
-        {
-            bombCount++;
-        }
-    }
-    if(bombCount > 0)
-    {
-        [self detectBombGoodGuysBottomCollisions];
-        /*
-        for(int i = 0; i < [badGuys count]; i++)
-        {
-            badGuy = [badGuys objectAtIndex:i];
-            if(((Character*)badGuy).type == BAD_HELICOPTER_BOMB)
-            {
-                if(badGuy.position.y < 0)
-                {
-                    [badGuys removeObject:badGuy];
-                    [self removeChild:badGuy cleanup:YES];
-                    NSLog(@"removed bomb");
-                }
-            }
-        }
-        */
-        bombCount = 0;
     }
         
 //    for(int i = 0; i < [goodGuysBottom count]; i++)
@@ -1348,17 +1356,6 @@
     if ([badGuysBottom count] > 1)
     {
         [self badGuysWalk];
-    }
-    if (Scenario4 != true)
-    {
-        if (framecount % enemyFrequency == 0)
-        {
-            //[self spawnBadGuyBottom];
-        }   
-        if (framecount % friendlyFrequency == 0)
-        {
-            //[self spawnGoodGuyBottom];
-        }
     }
     if (([goodGuysBottom count] > 0 || [badGuysBottom count] > 0))
     {
@@ -1869,7 +1866,7 @@
                 
                 if(CGRectIntersectsRect(badGuyRect, projectileBox))
                 {
-                    if (projectile.position.y < 305)
+                    if (projectile.position.y < winSize.height - 5)
                     {
                         ((Character*)badGuy).health -= ((Character*)projectile).power;
                         [deadBananas addObject:projectile];
@@ -1921,6 +1918,10 @@
     for (CCSprite *s in deadBadGuys)
     {
         [badGuys removeObject:s];
+        if(((Character*)s).type == BAD_HELICOPTER_BOMB)
+        {
+            [badBombs removeObject:s];
+        }
        // NSLog(@"removed goodGuy");
     }
     [deadBadGuys removeAllObjects];
@@ -2652,6 +2653,7 @@
 -(void)createScenario
 {
     scenarioNumber = [self generateRandomNumber];
+    scenarioNumber = 1;
     
     NSLog(@"scenario number = %d", scenarioNumber);
     
@@ -2896,7 +2898,7 @@
                 for(int i = 0; i < [badGuysBottom count]; i++)
                 {
                     badBottom = [badGuysBottom objectAtIndex:i];
-                    if(abs(badBottom.position.x - goodBottom.position.x) < 150)
+                    if(abs(badBottom.position.x - goodBottom.position.x) < 100)
                     {
                         enemiesClose++;
 //                        NSLog(@"enemies close++");
@@ -2944,6 +2946,29 @@
         for(int q = 0; q < [badGuysBottom count]; q++)
         {
             badBottom = [badGuysBottom objectAtIndex:q];
+            if(((Character*)badBottom).melee == true && badBottom.position.x < winSize.width - 70)
+            {
+                int enemiesClose = 0;
+                for(int i = 0; i < [goodGuysBottom count]; i++)
+                {
+                    goodBottom = [goodGuysBottom objectAtIndex:i];
+                    if(abs(badBottom.position.x - goodBottom.position.x) < 100)
+                    {
+                        enemiesClose++;
+                        //                        NSLog(@"enemies close++");
+                    }
+                }
+                if(enemiesClose > 0)
+                {
+                    ((Character*)badBottom).melee = true;
+                }
+                else
+                {
+                    ((Character*)badBottom).melee = false;
+                    NSLog(@"melee changed to false in bad guys walk detection");
+                }
+            }
+            
             if(((Character*)badBottom).melee == false)
             {
                 badBottom.position = ccp(badBottom.position.x - .5, badBottom.position.y);
@@ -3778,7 +3803,7 @@
     
     attackFrames = [NSMutableArray array];
     
-    for(int i = 1; i <= 3; ++i)
+    for(int i = 1; i <= 3; i++)
     {
         [attackFrames addObject:
          [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"d1-attack-%d.png", i]]];
@@ -3819,7 +3844,7 @@
     
     attackFrames = [NSMutableArray array];
     
-    for(int i = 1; i <= 4; ++i)
+    for(int i = 1; i <= 4; i++)
     {
         [attackFrames addObject:
          [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"d2-attack-%d.png", i]]];
@@ -4046,6 +4071,7 @@
     NSMutableArray *deadGoodBullets = [[NSMutableArray alloc] init];
     NSMutableArray *deadBadBullets = [[NSMutableArray alloc] init];
     NSMutableArray *deadGoodBombs = [[NSMutableArray alloc] init];
+    NSMutableArray *deadBadBombs = [[NSMutableArray alloc] init];
 
     for (int b = 0; b < [goodBulletArray count]; b++)
     {
@@ -4196,6 +4222,42 @@
             }
         }
     }
+    
+    for(int i = 0; i < [goodGuysBottom count]; i++)
+    {
+        for(int j = 0; j < [badBombs count]; j++)
+        {
+            if([badBombs count] > 0 && [goodGuysBottom count] > 0)
+            {
+                goodBottom = [goodGuysBottom objectAtIndex:i];
+                goodBottomRect = [goodBottom boundingBox];
+                badBullet = [badBombs objectAtIndex:j];
+                badBulletBox = [badBullet boundingBox];
+                
+                if(CGRectIntersectsRect(goodBottomRect,badBulletBox))
+                {
+                    if(((Character*)goodBottom).type == GOOD_BASE)
+                    {
+                        [self subtractGoodBaseHealth:badBullet];
+                        NSLog(@"bad bomb detection - subtract base health");
+                    }
+                    else
+                    {
+                        ((Character*)goodBottom).health -= ((Character*)badBullet).power;
+                        if(((Character*)goodBottom).health <= 0)
+                        {
+                            [deadGoodGuys addObject:goodBottom];
+                        }
+                    }
+                    [deadBadBombs addObject:badBullet];
+                    [self explosion:badBullet :explosionAnimationLength :NO];
+                    
+                    
+                }
+            }
+        }
+    }
+
 
    // NSLog(@"yay");
     if([deadBadGuys count] > 0)

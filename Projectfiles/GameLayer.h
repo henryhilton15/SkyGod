@@ -146,6 +146,7 @@
     NSMutableArray *GoodGuysToDelete;
     NSMutableArray *badBars;
     NSMutableArray *goodBombs;
+    NSMutableArray *badBombs;
     NSMutableArray *zigZagScenarioEnemies;
 //    NSMutableArray *badHelicopters;
     NSString *levelString;
