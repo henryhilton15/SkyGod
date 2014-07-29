@@ -1708,7 +1708,7 @@
 		DC9C33E713B5024400931BF2 /* BuildSettings-Debug-Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-Debug-Mac.xcconfig"; sourceTree = "<group>"; };
 		DC9C33E813B5024400931BF2 /* BuildSettings-Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-Mac.xcconfig"; sourceTree = "<group>"; };
 		DC9C33E913B5024400931BF2 /* BuildSettings-Release-Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-Release-Mac.xcconfig"; sourceTree = "<group>"; };
-		DCC1A0E313A94ED5005BD75D /* Gorilla Game-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorilla Game-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCC1A0E313A94ED5005BD75D /* SkyGod-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SkyGod-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCC1A0F913A94ED5005BD75D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		DCC1A0FB13A94ED5005BD75D /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fps_images.png; sourceTree = "<group>"; };
 		DCC1A0FD13A94ED5005BD75D /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -1718,7 +1718,7 @@
 		DCC1A10513A94ED5005BD75D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		DCC1A10713A94ED5005BD75D /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		DCC1A10913A94ED5005BD75D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DCC1A25A13A94EE6005BD75D /* Gorilla Game-Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorilla Game-Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCC1A25A13A94EE6005BD75D /* SkyGod-Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SkyGod-Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCC1A26813A94EE6005BD75D /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DCC1A26B13A94EE6005BD75D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Resources/English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		DCC1A26D13A94EE6005BD75D /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fps_images.png; path = Resources/fps_images.png; sourceTree = "<group>"; };
@@ -3317,8 +3317,8 @@
 		DCC1A0E413A94ED5005BD75D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DCC1A0E313A94ED5005BD75D /* Gorilla Game-iOS.app */,
-				DCC1A25A13A94EE6005BD75D /* Gorilla Game-Mac.app */,
+				DCC1A0E313A94ED5005BD75D /* SkyGod-iOS.app */,
+				DCC1A25A13A94EE6005BD75D /* SkyGod-Mac.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3480,9 +3480,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DCC1A0E213A94ED5005BD75D /* Gorilla Game-iOS */ = {
+		DCC1A0E213A94ED5005BD75D /* SkyGod-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DCC1A25313A94ED7005BD75D /* Build configuration list for PBXNativeTarget "Gorilla Game-iOS" */;
+			buildConfigurationList = DCC1A25313A94ED7005BD75D /* Build configuration list for PBXNativeTarget "SkyGod-iOS" */;
 			buildPhases = (
 				DCC1A0DF13A94ED5005BD75D /* Sources */,
 				DCC1A0E013A94ED5005BD75D /* Frameworks */,
@@ -3492,14 +3492,14 @@
 			);
 			dependencies = (
 			);
-			name = "Gorilla Game-iOS";
+			name = "SkyGod-iOS";
 			productName = "Hello-World-iOS";
-			productReference = DCC1A0E313A94ED5005BD75D /* Gorilla Game-iOS.app */;
+			productReference = DCC1A0E313A94ED5005BD75D /* SkyGod-iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DCC1A25913A94EE6005BD75D /* Gorilla Game-Mac */ = {
+		DCC1A25913A94EE6005BD75D /* SkyGod-Mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DCC1A38913A94EE7005BD75D /* Build configuration list for PBXNativeTarget "Gorilla Game-Mac" */;
+			buildConfigurationList = DCC1A38913A94EE7005BD75D /* Build configuration list for PBXNativeTarget "SkyGod-Mac" */;
 			buildPhases = (
 				DCC1A25613A94EE6005BD75D /* Sources */,
 				DCC1A25713A94EE6005BD75D /* Frameworks */,
@@ -3509,9 +3509,9 @@
 			);
 			dependencies = (
 			);
-			name = "Gorilla Game-Mac";
+			name = "SkyGod-Mac";
 			productName = "Hello-World-Mac";
-			productReference = DCC1A25A13A94EE6005BD75D /* Gorilla Game-Mac.app */;
+			productReference = DCC1A25A13A94EE6005BD75D /* SkyGod-Mac.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -3522,7 +3522,7 @@
 			attributes = {
 				LastUpgradeCheck = 0420;
 			};
-			buildConfigurationList = DCC1A0DB13A94EC0005BD75D /* Build configuration list for PBXProject "Gorilla Game" */;
+			buildConfigurationList = DCC1A0DB13A94EC0005BD75D /* Build configuration list for PBXProject "SkyGod" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -3535,8 +3535,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DCC1A0E213A94ED5005BD75D /* Gorilla Game-iOS */,
-				DCC1A25913A94EE6005BD75D /* Gorilla Game-Mac */,
+				DCC1A0E213A94ED5005BD75D /* SkyGod-iOS */,
+				DCC1A25913A94EE6005BD75D /* SkyGod-Mac */,
 			);
 		};
 /* End PBXProject section */
@@ -4457,6 +4457,7 @@
 					"$(KKFRAMEWORKS_IOS)",
 					"-lsqlite3.0",
 				);
+				PRODUCT_NAME = "SkyGod-iOS";
 			};
 			name = Debug;
 		};
@@ -4473,6 +4474,7 @@
 					"$(KKFRAMEWORKS_IOS)",
 					"-lsqlite3.0",
 				);
+				PRODUCT_NAME = "SkyGod-iOS";
 			};
 			name = Release;
 		};
@@ -4480,6 +4482,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DC9C33E713B5024400931BF2 /* BuildSettings-Debug-Mac.xcconfig */;
 			buildSettings = {
+				PRODUCT_NAME = "SkyGod-Mac";
 			};
 			name = Debug;
 		};
@@ -4487,13 +4490,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DC9C33E913B5024400931BF2 /* BuildSettings-Release-Mac.xcconfig */;
 			buildSettings = {
+				PRODUCT_NAME = "SkyGod-Mac";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DCC1A0DB13A94EC0005BD75D /* Build configuration list for PBXProject "Gorilla Game" */ = {
+		DCC1A0DB13A94EC0005BD75D /* Build configuration list for PBXProject "SkyGod" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DCC1A0DD13A94EC0005BD75D /* Debug */,
@@ -4502,7 +4506,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DCC1A25313A94ED7005BD75D /* Build configuration list for PBXNativeTarget "Gorilla Game-iOS" */ = {
+		DCC1A25313A94ED7005BD75D /* Build configuration list for PBXNativeTarget "SkyGod-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DCC1A25413A94ED7005BD75D /* Debug */,
@@ -4511,7 +4515,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DCC1A38913A94EE7005BD75D /* Build configuration list for PBXNativeTarget "Gorilla Game-Mac" */ = {
+		DCC1A38913A94EE7005BD75D /* Build configuration list for PBXNativeTarget "SkyGod-Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DCC1A38A13A94EE7005BD75D /* Debug */,
