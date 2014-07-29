@@ -12,6 +12,7 @@
 #import "Store.h"
 #import "SimpleAudioEngine.h"
 #import "GameData.h"
+#import "GameLayer.h"
 
 @implementation GameOverLayer
 
@@ -20,34 +21,44 @@
 	if ((self = [super init]))
 	{
         
+        
+        winSize = [CCDirector sharedDirector].winSize;
+
+        
         if ([[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
         {
             [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
         }
 
-        
-        CCMenuItemImage *restartButton = [CCMenuItemImage itemWithNormalImage:@"select-button-d.png"
+        CCMenuItemImage *selectButton = [CCMenuItemImage itemWithNormalImage:@"select-button-n.png"
                                                                 selectedImage: @"select-button-d.png"
                                                                        target:self
-                                                                     selector:@selector(restartGame:)];
-        restartButton.position = CGPointMake(50,250);
-        restartButton.scale=.5;
+                                                                     selector:@selector(levelSelect:)];
+        
+        selectButton.position = CGPointMake(winSize.width * .25, winSize.height);
+        selectButton.scale = .5;
 
+        CCMenuItemImage *restartButton = [CCMenuItemImage itemWithNormalImage:@"restart-button-n.png"
+                                                                selectedImage: @"restart-button-d.png"
+                                                                       target:self
+                                                                     selector:@selector(restartLevel:)];
         
-        //startButton.tag = 1;
+        restartButton.position = CGPointMake(0, winSize.height);
+        restartButton.scale = .5;
         
-        CCMenuItemImage *endbutton = [CCMenuItemImage itemWithNormalImage:@"shop-button-d.png"
+        CCMenuItemImage *endbutton = [CCMenuItemImage itemWithNormalImage:@"shop-button-n.png"
                                                             selectedImage: @"shop-button-d.png"
                                                                    target:self
                                                                  selector:@selector(endGame:)];
-        endbutton.position = CGPointMake(-50, 250);
+       
+        endbutton.position = CGPointMake(-winSize.width * .25, winSize.height);
         endbutton.scale=.5;
         
-        CCMenu *myMenu = [CCMenu menuWithItems: endbutton,restartButton,  nil];
+        CCMenu *myMenu = [CCMenu menuWithItems:endbutton, selectButton, restartButton, nil];
         [self addChild:myMenu z:10];
         
         CCSprite *background = [CCSprite spriteWithFile:@"game-over.png"];
-        background.position = CGPointMake(240,160);
+        background.position = CGPointMake(winSize.width/2,winSize.height/2);
         [self addChild:background z:-1];
         /*
         [[SimpleAudioEngine sharedEngine] preloadEffect:@"gameOverLaugh.wav"];
@@ -85,15 +96,21 @@
     }
     return self;
 }
--(void)restartGame: (CCMenuItem *)menuItem
+-(void)levelSelect: (CCMenuItem *)menuItem
 {
     [[CCDirector sharedDirector] replaceScene: (CCScene*)[[Levelselect alloc] init]];
-    
 }
+
 -(void)endGame:(CCMenuItem *)menuItem
 {
     [[CCDirector sharedDirector] replaceScene: (CCScene*)[[Store alloc] init]];
 }
+
+-(void) restartLevel:(CCMenuItemImage *)menuItem
+{
+    [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+}
+
 
 @end
 

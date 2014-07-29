@@ -40,12 +40,12 @@
         titleImage.scale=.25;
         [self addChild:titleImage z:4];
         
-        CCMenuItemImage *startButton = [CCMenuItemImage itemWithNormalImage:@"start-button-d.png"
+        CCMenuItemImage *startButton = [CCMenuItemImage itemWithNormalImage:@"start-button-n.png"
                                                               selectedImage: @"start-button-d.png"
                                                                      target:self
                                                                    selector:@selector(startGame:)];
         startButton.scale=0.8;
-        startButton.position = CGPointMake(-122.5, 115);
+        startButton.position = CGPointMake(-122.5, 150);
         
         
         
@@ -68,21 +68,20 @@
         
         
         
-        CCMenuItemImage *StoreButton = [CCMenuItemImage itemWithNormalImage:@"shop-button-d.png"
+        CCMenuItemImage *StoreButton = [CCMenuItemImage itemWithNormalImage:@"shop-button-n.png"
                                                                 selectedImage: @"shop-button-d.png"
                                                                  target:self
                                                                    selector:@selector(enterStore:)];
         StoreButton.scale=0.55;
-        StoreButton.position = CGPointMake(180, 108);
+        StoreButton.position = CGPointMake(0, 150);
         
        
-        CCMenuItemImage *LevelButton = [CCMenuItemImage itemWithNormalImage:@"select-button-d.png"
+        CCMenuItemImage *LevelButton = [CCMenuItemImage itemWithNormalImage:@"select-button-n.png"
                                                               selectedImage: @"select-button-d.png"
                                                                      target:self
                                                                    selector:@selector(selectLevel:)];
         LevelButton.scale=0.3;
         LevelButton.position = CGPointMake(-1000,-1000);
-        
         
         
         
@@ -96,14 +95,13 @@
         
 
         
-        myMenu = [CCMenu menuWithItems:StoreButton,startButton, LevelButton, nil];
+        myMenu = [CCMenu menuWithItems:StoreButton, startButton, LevelButton, nil];
         [self addChild:myMenu z:2];
         
         [self scheduleUpdate];
 
     }
     return self;
-    
 }
 
 //-(void) update:(ccTime)delta
@@ -119,7 +117,6 @@
 {
     
     [[CCDirector sharedDirector] replaceScene: (CCScene*)[[Levelselect alloc] init]];
-    
 }
 
 -(void) enterStore: (CCMenuItemImage *) menuItem

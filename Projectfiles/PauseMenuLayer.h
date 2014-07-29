@@ -16,13 +16,14 @@
     CCSprite *sfxNo;
     CCSprite *musicNo;
     
+    CGSize winSize;
 }
 - (id) init;
 - (void) resumeGame;
 - (void) restartGame;
 - (void) mainMenu;
--(void) sfxToggle;
--(void) musicToggle;
 -(void) update;
+- (void) sfxToggle;
+- (void) musicToggle;
 
 @end

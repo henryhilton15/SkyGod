@@ -19,6 +19,13 @@
 @property int rank;
 @property (nonatomic) BOOL sfx;
 @property (nonatomic) BOOL musicPlaying;
+@property (nonatomic) int currentLevelSelected;
+@property (nonatomic) BOOL friendlyRegularShooterAvailable;
+@property (nonatomic) BOOL friendlyMeleeAvailable;
+@property (nonatomic) BOOL friendlyFastShooterAvailable;
+
+
+
 
 
 

@@ -1,5 +1,5 @@
 //
-//  BigMonster.h
+//  Character.h
 //  Gorilla Game
 //
 //  Created by Danny Laporte on 7/18/13.
@@ -29,6 +29,10 @@
 #define BAD_KNIFE 18
 #define GOOD_KNIFE 19
 #define GOOD_REINFORCEMENT 20
+#define REGULAR_GOOD_BULLET 21
+#define SPEAR 22
+#define REGULAR_BAD_BULLET 23
+#define TANK_BOMB 24
 
 @interface Character : CCSprite
 @property int type;
@@ -41,11 +45,17 @@
 @property bool right;
 @property int unlockLevel;
 @property bool unlocked;
+@property int power;
+@property int attackFrequency;
+@property int bulletPower;
+@property int bulletType;
+@property double speed;
+@property double fallSpeed;
 
--(id) initWithBigMonsterImage;
--(id) initWithBigGoodGuyImage;
--(id) initWithGoodGuyImage;
--(id) initWithBadGuyImage;
+-(id) initWithEnemyTankImage;
+-(id) initWithFriendlyTankImage;
+-(id) initWithFriendlyRegularShooterImage;
+-(id) initWithEnemyRegularShooterImage;
 -(id) initWithZigZagImage;
 -(id) initWithGoodHelicopterImage;
 -(id) initWithBadHelicopterImage;
@@ -56,12 +66,22 @@
 -(id) initWithGoodBottomImage;
 -(id) initWithBadBottomImage;
 -(id) initWithSuperZigZagGuyImage;
--(id) initWithBadGuyBaseImage;
--(id) initWithGoodGuyBaseImage;
--(id) initWithFastShooterBadGuyImage;
--(id) initWithFastShooterGoodGuyImage;
--(id) initWithKnifeGoodGuyImage;
--(id) initWithKnifeBadGuyImage;
--(id) initWithGoodReinforcementImage;
+-(id) initWithBadGuyBaseImage1;
+-(id) initWithBadGuyBaseImage2;
+-(id) initWithBadGuyBaseImage3;
+-(id) initWithGoodGuyBaseImage1;
+-(id) initWithGoodGuyBaseImage2;
+-(id) initWithGoodGuyBaseImage3;
+-(id) initWithEnemyFastShooterImage;
+-(id) initWithFriendlyFastShooterImage;
+-(id) initWithFriendlyMeleeImage;
+-(id) initWithEnemyMeleeImage;
+-(id) initWithSpartanImage;
+-(id) initWithFriendlyRegularShooterBulletImage;
+-(id) initWithFriendlyFastShooterBulletImage;
+-(id) initWithEnemyRegularShooterBulletImage;
+-(id) initWithSpearImage;
+-(id) initWithTankBombImage;
+-(id) initWithBlueEnergyImage;
 
 @end

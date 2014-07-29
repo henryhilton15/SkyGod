@@ -8,6 +8,8 @@
 
 #import "CCLayer.h"
 #import "Player.h"
+#import "Character.h"
+#import "GameData.h"
 
 
 @interface GameLayer : CCLayer
@@ -39,8 +41,8 @@
     int zigZagScenarioCounter;
     int bigGoodGuysScenarioDelayCounter;
     //int levelFramecount;
-    int goodGuyFramecount;
-    int badGuyFramecount;
+    int friendlyRegularShooterFramecount;
+    int enemyRegularShooterFramecount;
     int scenarioNumber;
     int enemiesKilledCounter;
     int bombCount;
@@ -54,21 +56,41 @@
     int friendlyFrequency;
     int enemiesPassed;
     int friendliesPassed;
-    int helicopters;
     int spawnedHelicopters;
     int truckCount;
     int wave;
-    int goodFastShooterFramecount;
-    int badFastShooterFramecount;
-    int goodKnifeGuyFramecount;
-    int badKnifeGuyFrameCount;
+    int friendlyFastShooterFramecount;
+    int enemyFastShooterFramecount;
+    int friendlyMeleeFramecount;
+    int enemyMeleeFramecount;
     int bigMonstercount;
     int bigMonsterDelayCounter;
     int waveChangeCounter;
     int bigGoodGuyMinX;
     int bigGoodGuyMaxX;
     int bigGoodGuyDirection;
+    int orbsDeleted;
+    int immunityLength;
+    int reinforcementFramecount;
+    int numReinforcments;
+    int reinforcementsSpawned;
+    int currentLevelSelected;
+    int enemyBombFramecount;
+    int enemyHeliSpeed;
+    int enemyHeliHealth;
+    int scenarioDelayCounter;
+    int scenarioDelay;
+    int scenario2interludeCounter;
+    int goodBaseImageChangeCount;
+    int badBaseImageChangeCount;
+    int enemyHelicopterCount;
+    double zigZagPercentage;
+    double explosionAnimationLength;
+    double dyingAnimationLength;
+    double KmonsterSpeed;
+    double enemyBombSpeed;
     CGPoint loc;
+    CGSize winSize;
     CCSprite *projectile;
     CCSprite *badGuy;
     CCSprite *enemy;
@@ -76,11 +98,9 @@
     CCSprite *bomb;
     CCSprite *droppingEnemy;
     CCSprite *princess;
-    CCSprite *background;
     CCSprite *Kamikaze;
     CCSprite *helicopter;
     CCSprite *zenemy;
-    CCSprite *zFriendly1;
     CCSprite *goodBottom;
     CCSprite *badBottom;
     CCSprite *truck;
@@ -95,7 +115,14 @@
     CCSprite *badBase;
     CCSprite *badRed;
     CCSprite *titleImage;
-    Player *player;
+    CCSprite *angel1;
+    CCSprite *angel2;
+    CCSprite *angel3;
+    CCSprite *devil1;
+    CCSprite *devil2;
+    CCSprite *devil3;
+    CCSprite *devilHeli;
+    CCSprite *player;
     Rect goodRect;
     Rect badRect;
     //  NSMutableArray *helicopters;
@@ -119,6 +146,8 @@
     NSMutableArray *GoodGuysToDelete;
     NSMutableArray *badBars;
     NSMutableArray *goodBombs;
+    NSMutableArray *zigZagScenarioEnemies;
+//    NSMutableArray *badHelicopters;
     NSString *levelString;
     NSString *enemiesKilledString;
     CGRect badGuyRect;
@@ -140,6 +169,7 @@
     CCAction *rotateBanana;
     BOOL Scenario1;
     BOOL Scenario2;
+    BOOL Scenario2interlude;
     BOOL Scenario3;
     BOOL Scenario4;
     BOOL isWalking;
@@ -151,10 +181,16 @@
     BOOL waveChanging;
     BOOL firstTime;
     BOOL immunity;
+    BOOL reinforcements;
+    BOOL enemyMeleeAvailable;
+    BOOL enemyRegularShooterAvailable;
+    BOOL enemyFastShooterAvailable;
+    BOOL badBaseExploded;
+    BOOL goodBaseExploded;
     CCLabelTTF *waveLabel;
     CCLabelTTF *goodBaseHealthLabel;
     CCLabelTTF *badBaseHealthLabel;
-    CCLabelTTF *LevelLabel;
+    CCLabelTTF *levelLabel;
     CCLabelTTF *enemiesKilledLabel;
     CCLabelTTF *timeRemainingLabel;
     
@@ -170,39 +206,58 @@
 -(void) detectBananaBadGuyCollisions;
 -(void) detectReachBottom;
 -(void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
--(void) addGoodGuy;
--(void) addBadGuy;
+-(void) addFriendlyRegularShooter;
+-(void) addEnemyRegularShooter;
+-(void) addFriendlyMelee;
+-(void) addEnemyMelee;
+-(void) addFriendlyFastShooter;
+-(void) addEnemyFastShooter;
 -(void) pauseMenu: (CCMenuItemImage *)pauseButton;
 -(void) enemiesKilledTotal;
 -(void) addZigZagBadGuy;
--(void) addBigMonster;
--(void) addBigGoodGuy;
--(void) addHelicopter;
+-(void) addEnemyTank;
+-(void) addFriendlyTank;
+-(void) addEnemyHelicopter;
 -(void) addLevel;
 -(void) subtractLevel;
 -(void) changeLevel;
 -(void) detectKmonsterWrongGuyCollisions;
--(void) ScenarioGenerator;
+-(void) scenarioGenerator;
 -(void) changeLevel;
 -(void) detectKmonsterCollisions;
--(void) CreateScenario;
 -(void) zigZagScenario;
 -(void) spawnGoodGuyBottom;
 -(void) spawnBadGuyBottom;
--(void) randomNumberGenerator;
+-(void) createScenario;
+-(int) generateRandomNumber;
 -(void) fight;
+-(void) angel1attackAnimation:(CCSprite*)angelOne;
+-(void) angel2attackAnimation:(CCSprite*)angel;
+-(void) angel3attackAnimation:(CCSprite*)angel;
+-(void) devil1attackAnimation:(CCSprite*)devil;
+-(void) devil2attackAnimation:(CCSprite*)devil;
+-(void) spartanAttackAnimation:(CCSprite*)spartan;
+-(void) angelShoot:(CCSprite*)angel;
+-(void) devilShoot:(CCSprite*)devil;
+-(void) mainCharacterIdleAnimation:(CCSprite*)mainCharacter;
+-(void) mainCharacterShootAnimation:(CCSprite*)mainCharacter :(int)direction;
+-(void) explosion:(CCSprite*)character :(double)delay :(BOOL)big;
+-(void) dying:(CCSprite*)character :(double)delay;
 -(void) detectBulletSoldierCollisions;
--(CGRect) explosionBox;
 -(void) airstrike;
 -(void) reinforcements;
+-(void) spawnReinforcement;
 -(void) immunityActivator;
+-(void) drawBoundingBox:(CGRect)rect;
 -(void) addBases;
 -(void) badBaseCollisions;
 -(void) goodBaseCollisions;
--(void) subtractWave;
--(void) addWave;
+-(void) youLose;
+-(void) youWin;
 -(void) drawBoundingBox: (CGRect) rect;
 -(void) addBaseBars;
 -(void) addImmunity;
 -(void) addBadRedBar;
+-(void) loadLevelSettings;
+
 @end

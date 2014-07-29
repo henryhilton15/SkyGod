@@ -11,10 +11,17 @@
 @interface Store : CCLayer
 {
     CCLabelTTF *StoreLabel;
-    NSNumber *newGoodGuyRank;
+    int coins;
+    NSNumber *NSCoins;
 }
 
 -(id) init;
 -(void) mainMenu;
--(void) upgradeGoodGuy;
+-(void) upgradeFriendlyRegularShooter;
+-(void) upgradeFriendlyMelee;
+-(void) upgradeFriendlyFastShooter;
+-(void) upgradeSpartan;
+-(void) upgradeFriendlyHelicopter;
+-(void) upgradeFriendlyTank;
+-(void) upgradeImmunity;
 @end
