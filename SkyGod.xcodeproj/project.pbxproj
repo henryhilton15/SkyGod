@@ -924,11 +924,8 @@
 		FEFF35CB198824C7002E668A /* explosion.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEFF357F198824C6002E668A /* explosion.plist */; };
 		FEFF35CC198824C7002E668A /* explosion.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF3580198824C6002E668A /* explosion.png */; };
 		FEFF35CD198824C7002E668A /* spartanattack.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEFF3581198824C6002E668A /* spartanattack.plist */; };
-		FEFF35CE198824C7002E668A /* spartanattack.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF3582198824C6002E668A /* spartanattack.png */; };
 		FEFF35CF198824C7002E668A /* spartanfall.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEFF3583198824C6002E668A /* spartanfall.plist */; };
-		FEFF35D0198824C7002E668A /* spartanfall.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF3584198824C6002E668A /* spartanfall.png */; };
 		FEFF35D1198824C7002E668A /* spartanmove.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEFF3585198824C6002E668A /* spartanmove.plist */; };
-		FEFF35D2198824C7002E668A /* spartanmove.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF3586198824C6002E668A /* spartanmove.png */; };
 		FEFF35D3198824C7002E668A /* bigExplosion.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEFF3587198824C6002E668A /* bigExplosion.plist */; };
 		FEFF35D4198824C7002E668A /* bigExplosion.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF3588198824C6002E668A /* bigExplosion.png */; };
 		FEFF35D5198824C7002E668A /* blue-energy.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEFF3589198824C6002E668A /* blue-energy.plist */; };
@@ -951,6 +948,9 @@
 		FEFF35E9198827C6002E668A /* d1-attack-3.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF35E6198827C6002E668A /* d1-attack-3.png */; };
 		FEFF35EB19882816002E668A /* angel1move.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEFF35EA19882816002E668A /* angel1move.plist */; };
 		FEFF35ED1988281D002E668A /* victory-screen.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF35EC1988281D002E668A /* victory-screen.png */; };
+		FEFF35F11988B221002E668A /* spartanattack.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF35EE1988B221002E668A /* spartanattack.png */; };
+		FEFF35F21988B221002E668A /* spartanfall.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF35EF1988B221002E668A /* spartanfall.png */; };
+		FEFF35F31988B221002E668A /* spartanmove.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF35F01988B221002E668A /* spartanmove.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1893,11 +1893,8 @@
 		FEFF357F198824C6002E668A /* explosion.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = explosion.plist; path = "Angels vs Devils/explosion.plist"; sourceTree = "<group>"; };
 		FEFF3580198824C6002E668A /* explosion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explosion.png; path = "Angels vs Devils/explosion.png"; sourceTree = "<group>"; };
 		FEFF3581198824C6002E668A /* spartanattack.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = spartanattack.plist; path = "Angels vs Devils/spartanattack.plist"; sourceTree = "<group>"; };
-		FEFF3582198824C6002E668A /* spartanattack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartanattack.png; path = "Angels vs Devils/spartanattack.png"; sourceTree = "<group>"; };
 		FEFF3583198824C6002E668A /* spartanfall.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = spartanfall.plist; path = "Angels vs Devils/spartanfall.plist"; sourceTree = "<group>"; };
-		FEFF3584198824C6002E668A /* spartanfall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartanfall.png; path = "Angels vs Devils/spartanfall.png"; sourceTree = "<group>"; };
 		FEFF3585198824C6002E668A /* spartanmove.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = spartanmove.plist; path = "Angels vs Devils/spartanmove.plist"; sourceTree = "<group>"; };
-		FEFF3586198824C6002E668A /* spartanmove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartanmove.png; path = "Angels vs Devils/spartanmove.png"; sourceTree = "<group>"; };
 		FEFF3587198824C6002E668A /* bigExplosion.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bigExplosion.plist; sourceTree = "<group>"; };
 		FEFF3588198824C6002E668A /* bigExplosion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bigExplosion.png; sourceTree = "<group>"; };
 		FEFF3589198824C6002E668A /* blue-energy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "blue-energy.plist"; sourceTree = "<group>"; };
@@ -1920,6 +1917,9 @@
 		FEFF35E6198827C6002E668A /* d1-attack-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "d1-attack-3.png"; sourceTree = "<group>"; };
 		FEFF35EA19882816002E668A /* angel1move.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = angel1move.plist; path = "Angels vs Devils/Victory screen - AVD/angel1move.plist"; sourceTree = "<group>"; };
 		FEFF35EC1988281D002E668A /* victory-screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "victory-screen.png"; sourceTree = "<group>"; };
+		FEFF35EE1988B221002E668A /* spartanattack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartanattack.png; path = "Angels vs Devils/spartanattack.png"; sourceTree = "<group>"; };
+		FEFF35EF1988B221002E668A /* spartanfall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartanfall.png; path = "Angels vs Devils/spartanfall.png"; sourceTree = "<group>"; };
+		FEFF35F01988B221002E668A /* spartanmove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartanmove.png; path = "Angels vs Devils/spartanmove.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2765,6 +2765,9 @@
 		2D808A7B1795F5BA006EADF5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FEFF35EE1988B221002E668A /* spartanattack.png */,
+				FEFF35EF1988B221002E668A /* spartanfall.png */,
+				FEFF35F01988B221002E668A /* spartanmove.png */,
 				FEFF354D198824C5002E668A /* angel2move.plist */,
 				FEFF354E198824C6002E668A /* angel2move.png */,
 				FEFF354F198824C6002E668A /* angel3move.plist */,
@@ -2818,11 +2821,8 @@
 				FEFF357F198824C6002E668A /* explosion.plist */,
 				FEFF3580198824C6002E668A /* explosion.png */,
 				FEFF3581198824C6002E668A /* spartanattack.plist */,
-				FEFF3582198824C6002E668A /* spartanattack.png */,
 				FEFF3583198824C6002E668A /* spartanfall.plist */,
-				FEFF3584198824C6002E668A /* spartanfall.png */,
 				FEFF3585198824C6002E668A /* spartanmove.plist */,
-				FEFF3586198824C6002E668A /* spartanmove.png */,
 				FEFF3587198824C6002E668A /* bigExplosion.plist */,
 				FEFF3588198824C6002E668A /* bigExplosion.png */,
 				FEFF3589198824C6002E668A /* blue-energy.plist */,
@@ -3809,7 +3809,6 @@
 				2DD0C65F178F77BA008AE39F /* images.png in Resources */,
 				2DD0C661178F783F008AE39F /* disasteralert_icon_114x114.png in Resources */,
 				FEFF35B7198824C7002E668A /* devil1attack.plist in Resources */,
-				FEFF35D2198824C7002E668A /* spartanmove.png in Resources */,
 				2D808BCF1795F5BA006EADF5 /* animation_knight-1.png in Resources */,
 				2D808BD01795F5BA006EADF5 /* background_desert-topdown.png in Resources */,
 				2D808BD11795F5BA006EADF5 /* background_grass-top.png in Resources */,
@@ -4067,7 +4066,6 @@
 				2D808CB61795F5BA006EADF5 /* animation_knight-4-hd.png in Resources */,
 				2D808CB71795F5BA006EADF5 /* animation_knight-5-hd.png in Resources */,
 				2D808CB81795F5BA006EADF5 /* animation_sword-1-hd.png in Resources */,
-				FEFF35D0198824C7002E668A /* spartanfall.png in Resources */,
 				2D808CB91795F5BA006EADF5 /* animation_sword-2-hd.png in Resources */,
 				2D808CBA1795F5BA006EADF5 /* animation_sword-3-hd.png in Resources */,
 				2D808CBB1795F5BA006EADF5 /* animation_knight-2.png in Resources */,
@@ -4125,6 +4123,7 @@
 				2D808CEB1795F5BA006EADF5 /* background_grass-topdown-hd.png in Resources */,
 				2D808CEC1795F5BA006EADF5 /* cat-main-hd.png in Resources */,
 				2D808CED1795F5BA006EADF5 /* cat3-hd.png in Resources */,
+				FEFF35F31988B221002E668A /* spartanmove.png in Resources */,
 				2D808CEE1795F5BA006EADF5 /* city-back-hd.png in Resources */,
 				2D808CEF1795F5BA006EADF5 /* city-front-hd.png in Resources */,
 				2D808CF01795F5BA006EADF5 /* monster1-hd.png in Resources */,
@@ -4202,6 +4201,7 @@
 				2DAA40E617AC271B00BA014B /* mgwuLogo@2x.png in Resources */,
 				2DAA40E717AC271B00BA014B /* mgwuLogoDark.png in Resources */,
 				2DAA40E817AC271B00BA014B /* mgwuLogoDark@2x.png in Resources */,
+				FEFF35F11988B221002E668A /* spartanattack.png in Resources */,
 				2DAA40E917AC271B00BA014B /* mgwuPlaceholderIcon.png in Resources */,
 				2DAA40EA17AC271B00BA014B /* mgwuPlaceholderIcon@2x.png in Resources */,
 				2DAA40EB17AC271B00BA014B /* mgwuPlaceholderIconDark.png in Resources */,
@@ -4330,6 +4330,7 @@
 				2D6E373A18E9EBC400573401 /* a3-4.png in Resources */,
 				2D6E373B18E9EBC400573401 /* a3-5.png in Resources */,
 				2D6E373C18E9EBC400573401 /* a3-6.png in Resources */,
+				FEFF35F21988B221002E668A /* spartanfall.png in Resources */,
 				2D6E373D18E9EBC400573401 /* a3-7.png in Resources */,
 				2D6E373E18E9EBC400573401 /* a3-8.png in Resources */,
 				2D6E373F18E9EBC400573401 /* a3-attack-1.png in Resources */,
@@ -4504,7 +4505,6 @@
 				2D6E37D818E9EBC400573401 /* main-idle-18.png in Resources */,
 				2D6E37D918E9EBC400573401 /* main-idle-19.png in Resources */,
 				2D6E37DA18E9EBC400573401 /* main-idle-2.png in Resources */,
-				FEFF35CE198824C7002E668A /* spartanattack.png in Resources */,
 				2D6E37DB18E9EBC400573401 /* main-idle-20.png in Resources */,
 				2D6E37DC18E9EBC400573401 /* main-idle-3.png in Resources */,
 				2D6E37DD18E9EBC400573401 /* main-idle-4.png in Resources */,

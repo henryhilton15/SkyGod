@@ -960,7 +960,7 @@
                                                               selectedImage: @"pause_btn.png"
                                                                      target:self
                                                                    selector:@selector(pauseMenu:)];
-        pauseButton.position = CGPointMake((winSize.width * .5) - 30, winSize.height + 90);
+        pauseButton.position = CGPointMake((winSize.width * .5) - 30, winSize.height + 70);
         pauseButton.scale = .7;
         
     
@@ -968,7 +968,7 @@
         target: self
         selector:@selector(immunityActivator:)];
         
-        immunityPowerUp.position= CGPointMake ((farLeftX + (2 * buttonSpacing)), winSize.height + 90);
+        immunityPowerUp.position= CGPointMake ((farLeftX + (2 * buttonSpacing)), winSize.height + 70);
         immunityPowerUp.scale = 0.7f;
 
         
@@ -976,14 +976,14 @@
                                                                                 target: self
                                                                       selector:@selector(reinforcements:)];
         
-        reinforcementPowerUp.position= CGPointMake ((farLeftX + buttonSpacing), winSize.height + 90);
+        reinforcementPowerUp.position= CGPointMake ((farLeftX + buttonSpacing), winSize.height + 70);
         reinforcementPowerUp.scale = .7f;
         
         
         CCMenuItemImage *airstrikePowerUp = [CCMenuItemImage itemWithNormalImage:@"airstrike_btn.png" selectedImage:@"airstrike_btn.png"
                                                                         target: self
                                                                     selector:@selector(airstrike:)];
-        airstrikePowerUp.position= CGPointMake (farLeftX, winSize.height + 90);
+        airstrikePowerUp.position= CGPointMake (farLeftX, winSize.height + 70);
         airstrikePowerUp.scale = 0.7f;
         
         CCMenu *myMenu = [CCMenu menuWithItems:pauseButton, airstrikePowerUp, reinforcementPowerUp, immunityPowerUp, nil];
