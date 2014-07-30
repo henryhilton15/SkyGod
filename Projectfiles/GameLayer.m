@@ -4334,7 +4334,6 @@
         for (CCSprite *s in deadGoodBullets)
         {
             [goodBulletArray removeObject:s];
-            [self removeChild:s cleanup:YES];
             
             //NSLog(@"deleted good bullet");
         }
@@ -4346,10 +4345,6 @@
         for (CCSprite *s in deadBadBullets)
         {
             [badBulletArray removeObject:s];
-            if(((Character*)s).type != BAD_HELICOPTER_BOMB)
-            {
-                [self removeChild:s cleanup:YES];
-            }
             //NSLog(@"deleted bad bullet");
         }
         [deadBadBullets removeAllObjects];
@@ -4359,10 +4354,22 @@
         for (CCSprite *s in deadGoodBombs)
         {
             [goodBombs removeObject:s];
+            [self removeChild:s cleanup:YES];
 
             //NSLog(@"deleted bad bullet");
         }
         [deadGoodBombs removeAllObjects];
+    }
+    if([deadBadBombs count] > 0)
+    {
+        for (CCSprite *s in deadBadBombs)
+        {
+            [badBombs removeObject:s];
+            [self removeChild:s cleanup:YES];
+            
+            //NSLog(@"deleted bad bullet");
+        }
+        [deadBadBombs removeAllObjects];
     }
 }
 
