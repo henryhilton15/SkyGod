@@ -235,7 +235,7 @@
         health = 1 + [[kamikazeDict objectForKey:@"health"] intValue];
         type = KAMIKAZE;
         power = 3 + [[kamikazeDict objectForKey:@"damage"] intValue];
-        speed = 7 + [[kamikazeDict objectForKey:@"speed"] intValue];
+        speed = 5 + [[kamikazeDict objectForKey:@"speed"] intValue];
     }
     return self;
 }

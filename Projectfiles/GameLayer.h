@@ -35,8 +35,6 @@
     int randNum;
     int KmonsterCounter;
     int bigGoodGuysCounter;
-    int KmonsterMinY;
-    int KmonsterMaxY;
     int zigZagDelayCounter;
     int zigZagScenarioCounter;
     int bigGoodGuysScenarioDelayCounter;

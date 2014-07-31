@@ -191,7 +191,7 @@
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
 
-    NSLog(@"friendly melee fall duration = %d", actualDuration);
+//    NSLog(@"friendly melee fall duration = %d", actualDuration);
     
     angel1.position = ccp(actualX, winSize.height);
     [self addChild:angel1];
@@ -244,15 +244,27 @@
 {
     if(bigGoodGuysCounter > 0)
     {
-        CCSprite * Kmonster = [[Character alloc] initWithKamikazeImage];
+        CCSprite *Kmonster = [[Character alloc] initWithKamikazeImage];
         Kmonster.scale=.3;
         
         // Determine where to spawn the monster along the Y axis
+        for(int i = 0; i < [goodGuys count]; i++)
+        {
+            if([goodGuys count] > 0)
+            {
+                if(((Character*)[goodGuys objectAtIndex:i]).type == BIG_GOOD_GUY)
+                {
+                    goodGuy = [goodGuys objectAtIndex:i];
+                }
+            }
+        }
+        int KmonsterMaxY = goodGuy.position.y - (((Character*)Kmonster).speed * 12) - 25;
+        int KmonsterMinY = KmonsterMaxY - 10;
         int rangeY = KmonsterMaxY - KmonsterMinY;
         int actualY = arc4random() % rangeY + KmonsterMinY;
         if(actualY < 130)
         {
-            actualY+=50;
+            return;
         }
         // Determine speed of the monster
         int minDuration2 = ((Character*)Kmonster).speed - 1;
@@ -331,7 +343,7 @@
         CCAction *devilHeliMove = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:devilHeliAnimation restoreOriginalFrame:NO]];
         
         //tell the bear to run the taunting action
-        [devilHeli runAction:devilHeliMove];
+        [Kmonster runAction:devilHeliMove];
 
     }
 }
@@ -689,7 +701,7 @@
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
     angelTank.scale = 1;
-    angelTank.position = CGPointMake(actualX, winSize.height);
+    angelTank.position = CGPointMake(actualX, winSize.height + 30);
     [self addChild:angelTank];
     [goodGuys addObject:angelTank];
     bigGoodGuysCounter++;
@@ -798,8 +810,7 @@
         bigGoodGuyMaxX = 0;
         bigGoodGuyMinX = 0;
         immunityFramecount = 0;
-        KmonsterMinY = 250;
-        KmonsterMaxY = 310;
+
         //deathFramecount = 60 * 30;
         //timeRemaining = 30;
         bigGoodGuyDirection = 0;
@@ -1097,10 +1108,10 @@
 //        [self subtractGoodBaseHealth:fakeBullet];
 //    }
     
-    if(framecount % 200 == 0)
-    {
-        NSLog(@"good guys bottom count = %lu, bad guys bottom count = %lu", (unsigned long)[goodGuysBottom count], (unsigned long)[badGuysBottom count]);
-    }
+//    if(framecount % 200 == 0)
+//    {
+//        NSLog(@"good guys bottom count = %lu, bad guys bottom count = %lu", (unsigned long)[goodGuysBottom count], (unsigned long)[badGuysBottom count]);
+//    }
     
     if([bananaArray count] > 0)
     {
@@ -1133,8 +1144,6 @@
         {
             Scenario2interlude = false;
             Scenario2 = false;
-            KmonsterMaxY = 310;
-            KmonsterMinY = 250;
             NSLog(@"scenario 2 = false");
             scenario2interludeCounter = 0;
         }
@@ -1178,28 +1187,28 @@
             
             if(framecount % friendlyRegularShooterFramecount == 0 && [GameData sharedData].friendlyRegularShooterAvailable == true)
             {
-                NSLog(@"add friendly regular shooter");
+//                NSLog(@"add friendly regular shooter");
                 [self addFriendlyRegularShooter];
             }
             if(framecount % friendlyMeleeFramecount == 0 && [GameData sharedData].friendlyMeleeAvailable == true)
             {
-                NSLog(@"add friendly melee");
+//                NSLog(@"add friendly melee");
                 [self addFriendlyMelee];
             }
             if(framecount % friendlyFastShooterFramecount == 0 && [GameData sharedData].friendlyFastShooterAvailable == true)
             {
-                NSLog(@"add friendly fast shooter");
+//                NSLog(@"add friendly fast shooter");
                 [self addFriendlyFastShooter];
             }
             if(framecount % enemyMeleeFramecount == 0 && enemyMeleeAvailable == true)
             {
-                NSLog(@"add enemy melee");
+//                NSLog(@"add enemy melee");
 //  need to make it so that zizZag spawns sometimes          arc4random()
                 [self addEnemyMelee];
             }
             if(framecount % enemyRegularShooterFramecount == 0 && enemyRegularShooterAvailable == true)
             {
-                NSLog(@"add enemy regular shooter");
+//                NSLog(@"add enemy regular shooter");
                 [self addEnemyRegularShooter];
             }
 //        }
@@ -1308,16 +1317,6 @@
         {
             [self addKmonster];
             firstBigGoodGuy = false;
-            KmonsterMaxY -= 30;
-            if(KmonsterMaxY < 180)
-            {
-                KmonsterMaxY = 180;
-            }
-            KmonsterMinY -= 30;
-            if(KmonsterMinY < 150)
-            {
-                KmonsterMaxY = 150;
-            }
         }
     }
     
@@ -1763,7 +1762,7 @@
                 projectile = [bananaArray objectAtIndex:i];
                 CGRect projectileBox = [projectile boundingBox];
                 
-                if(CGRectIntersectsRect(goodGuyRect,projectileBox))
+                if(CGRectIntersectsRect(goodGuyRect, projectileBox))
                 {
                     //[enemiesToDelete addObject:badGuy];
                     //[bananasToDelete addObject:projectile];
@@ -1782,14 +1781,11 @@
                             {
                                 [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
                             }
-                            [self dying:goodGuy :explosionAnimationLength];
-                            NSLog(@"dying 5");
+                            [self explosion:goodGuy :explosionAnimationLength: NO];
                             if(((Character*)goodGuy).type == BIG_GOOD_GUY && Scenario2 == true)
                             {
                                 Scenario2interlude = true;
                                 bigGoodGuysCounter = 0;
-                                KmonsterMaxY = 310;
-                                KmonsterMinY = 250;
                                 NSLog(@"scenario 2 interlude = true");
                             }
                         }
@@ -1863,8 +1859,6 @@
                             [self explosion:goodGuy :explosionAnimationLength :NO];
                             Scenario2interlude = true;
                             bigGoodGuysCounter = 0;
-                            KmonsterMaxY = 310;
-                            KmonsterMinY = 250;
                             NSLog(@"scenario 2 interlude = true");
                             
                             if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
@@ -2075,8 +2069,6 @@
                     
                     Scenario2 = false;
                     bigGoodGuysCounter = 0;
-                    KmonsterMaxY = 310;
-                    KmonsterMinY = 250;
                     NSLog(@"scenario 2 = false");
                 }
                 if(((Character*)goodGuy).type == GOOD_FASTSHOOTER)
@@ -2698,7 +2690,7 @@
 -(void)createScenario
 {
     scenarioNumber = [self generateRandomNumber];
-    scenarioNumber = 1;
+    scenarioNumber = 2;
     
     NSLog(@"scenario number = %d", scenarioNumber);
     
@@ -3511,7 +3503,6 @@
         {
             [badGuysBottom removeObject:s];
             [self dying:s :dyingAnimationLength];
-            NSLog(@"dying 1");
         }
         [deadBadGuys removeAllObjects];
     }
@@ -3522,7 +3513,6 @@
         {
             [goodGuysBottom removeObject:s];
             [self dying:s :dyingAnimationLength];
-            NSLog(@"dying 2");
         }
         [deadGoodGuys removeAllObjects];
     }
@@ -4315,7 +4305,6 @@
         {
             [badGuysBottom removeObject:s];
             [self dying:badBottom :dyingAnimationLength];
-            NSLog(@"dying 3");
             //NSLog(@"inside bullet bad guy collision");
         }
         [deadBadGuys removeAllObjects];
@@ -4326,7 +4315,6 @@
         {
             [goodGuysBottom removeObject:s];
             [self dying:goodBottom :dyingAnimationLength];
-            NSLog(@"dying 4");
             //NSLog(@"inside bullet good guy collision");
         }
         [deadGoodGuys removeAllObjects];
@@ -5194,7 +5182,7 @@
     enemyRegularShooterAvailable = [[enemyRegularShooterDict objectForKey:@"available"] boolValue];
     
     NSMutableDictionary *KmonsterDict = [levelDictionary objectForKey:@"Kmonster"];
-    KmonsterFramecount = 40 - [[KmonsterDict objectForKey:@"spawnRate"] intValue];
+    KmonsterFramecount = 30 - [[KmonsterDict objectForKey:@"spawnRate"] intValue];
     
     NSMutableDictionary *enemyHeliBombDict = [levelDictionary objectForKey:@"enemyBomb"];
     enemyBombFramecount = 30 + [[enemyHeliBombDict objectForKey:@"spawnRate"] intValue];
