@@ -1273,7 +1273,7 @@
         for(int i = 0; i < [bombers count]; i++)
         {
             bomber = [bombers objectAtIndex:i];
-            if(framecount % ((Character*)bomber).attackFrequency == 0 && bomber.position.x > 5 && bomber.position.x < 475)
+            if(framecount % ((Character*)bomber).attackFrequency == 0 && bomber.position.x > 20 && bomber.position.x < winSize.width)
             {
                 CGPoint bomberPosition = ccp(bomber.position.x, bomber.position.y);
 
@@ -1282,6 +1282,7 @@
                 bomb.position = bomberPosition; //+ enemy.contentSize.height/2);
                 [self addChild:bomb z:2];
                 [goodBombs addObject:bomb];
+                [goodGuys addObject:bomb];
                 
                 CCMoveTo * actionMove = [CCMoveTo actionWithDuration:3
                                                             position:ccp(bomb.position.x, -bomb.contentSize.height/2)];
@@ -1291,7 +1292,7 @@
                 [bomb runAction:actionMove];
             }
         
-            if(bomber.position.x >= 480)
+            if(bomber.position.x >= winSize.width + 10)
             {
                 [bombers removeObject:bomber];
                 [self removeChild:bomber cleanup:YES];
@@ -1856,7 +1857,7 @@
 
                             [deadGoodGuys addObject:goodGuy];
                             [self enemiesKilledTotal];
-                            [self explosion:goodGuy :explosionAnimationLength :false];
+                            [self explosion:goodGuy :explosionAnimationLength :NO];
                             Scenario2interlude = true;
                             bigGoodGuysCounter = 0;
                             KmonsterMaxY = 310;
@@ -1924,7 +1925,7 @@
                             [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
                             }
                             [self enemiesKilledTotal];
-                            [self explosion:badGuy :explosionAnimationLength: false];
+                            [self explosion:badGuy :explosionAnimationLength: NO];
                             if(Scenario4 == false && Scenario3 == false && Scenario2 == false && Scenario1 == false)
                             {
                                 enemiesKilledCounter ++;
@@ -1990,9 +1991,8 @@
         if([goodGuys count] > 0)
         {
             goodGuy = [goodGuys objectAtIndex:i];
-            if(goodGuy.position.y <= 20)
+            if(goodGuy.position.y <= 20 && ((Character*)goodGuy).type != GOOD_HELICOPTER_BOMB)
             {
-                //[[SimpleAudioEngine sharedEngine] playEffect:@"Pow.caf"];
                 if(((Character*)goodGuy).type == GOOD_GUY)
                 {
                     //[self spawnGoodGuyBottom];
@@ -2198,7 +2198,7 @@
         {
             badGuy = [badGuys objectAtIndex:i];
 
-            if(badGuy.position.y <= 30)
+            if(badGuy.position.y <= 30 && ((Character*)badGuy).type != BAD_HELICOPTER_BOMB)
             {
                 if(((Character*)badGuy).type == BAD_GUY)
                 {
@@ -2389,8 +2389,6 @@
                     
                     //tell the bear to run the taunting action
                     [badBottom runAction:devil3move];
-                    
-                    
                 }
                 
                 if(((Character*)badGuy).type == BIG_MONSTER)
@@ -2419,25 +2417,20 @@
             
             if(bomb.position.y <= 10)
             {
-                [deadGoodGuys addObject:bomb];
-                [self explosion:bomb :explosionAnimationLength :NO];
+                [deadGoodBombs addObject:bomb];
             }
         }
     }
 
-    for(int i = 0; i < [badGuys count]; i++)
+    for(int i = 0; i < [badBombs count]; i++)
     {
-        if([badGuys count] > 0)
+        if([badBombs count] > 0)
         {
-            badGuy = [badGuys objectAtIndex:i];
+            bomb = [badBombs objectAtIndex:i];
             
-            if(badGuy.position.y <= 10)
+            if(bomb.position.y <= 10)
             {
-                if(((Character*)badGuy).type == BAD_HELICOPTER_BOMB)
-                {
-                    [deadBadGuys addObject:badGuy];
-                    [self explosion:badGuy :explosionAnimationLength :NO];
-                }
+                [deadBadBombs addObject:bomb];
             }
         }
     }
@@ -2465,17 +2458,21 @@
     {
         for (CCSprite *s in deadBadBombs)
         {
+            [badBombs removeObject:s];
             [badGuys removeObject:s];
+            [self explosion:bomb :explosionAnimationLength :NO];
         }
-        [deadBadGuys removeAllObjects];
+        [deadBadBombs removeAllObjects];
     }
     if([deadGoodBombs count] > 0)
     {
         for (CCSprite *s in deadGoodBombs)
         {
+            [goodBombs removeObject:s];
             [goodGuys removeObject:s];
+            [self explosion:bomb :explosionAnimationLength :NO];
         }
-        [deadGoodGuys removeAllObjects];
+        [deadGoodBombs removeAllObjects];
     }
 
    
@@ -3996,13 +3993,16 @@
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
  
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        
         if(((Character*)character).type == GOOD_BASE)
         {
             [self youLose];
+            NSLog(@"called you lose");
         }
         if(((Character*)character).type == BAD_BASE)
         {
             [self youWin];
+            NSLog(@"called you win");
         }
         [self removeChild:character cleanup:YES];
     });
@@ -4182,14 +4182,10 @@
                         else
                         {
                             ((Character*)goodBottom).health -= ((Character*)badBullet).power;
-                                                        if(((Character*)goodBottom).health <= 0)
+                            if(((Character*)goodBottom).health <= 0)
                             {
                                 [deadGoodGuys addObject:goodBottom];
                             }
-                        }
-                        if(((Character*)badBullet).type == BAD_HELICOPTER_BOMB)
-                        {
-                            [self explosion:badBullet :explosionAnimationLength :NO];
                         }
                         [deadBadBullets addObject:badBullet];
                     
@@ -4263,7 +4259,7 @@
                         }
                     }
                     [deadGoodBombs addObject:goodBullet];
-                    [self explosion:goodBullet :explosionAnimationLength :NO];
+                    
                     
                     
                 }
@@ -4298,8 +4294,6 @@
                         }
                     }
                     [deadBadBombs addObject:badBullet];
-                    [self explosion:badBullet :explosionAnimationLength :NO];
-                    
                     
                 }
             }
@@ -4333,7 +4327,7 @@
         for (CCSprite *s in deadGoodBullets)
         {
             [goodBulletArray removeObject:s];
-            
+            [self removeChild:s cleanup:YES];
             //NSLog(@"deleted good bullet");
         }
         [deadGoodBullets removeAllObjects];
@@ -4344,6 +4338,7 @@
         for (CCSprite *s in deadBadBullets)
         {
             [badBulletArray removeObject:s];
+            [self removeChild:s cleanup:YES];
             //NSLog(@"deleted bad bullet");
         }
         [deadBadBullets removeAllObjects];
@@ -4353,8 +4348,7 @@
         for (CCSprite *s in deadGoodBombs)
         {
             [goodBombs removeObject:s];
-            [self removeChild:s cleanup:YES];
-
+            [self explosion:s :explosionAnimationLength :NO];
             //NSLog(@"deleted bad bullet");
         }
         [deadGoodBombs removeAllObjects];
@@ -4364,8 +4358,7 @@
         for (CCSprite *s in deadBadBombs)
         {
             [badBombs removeObject:s];
-            [self removeChild:s cleanup:YES];
-            
+            [self explosion:s :explosionAnimationLength :NO];
             //NSLog(@"deleted bad bullet");
         }
         [deadBadBombs removeAllObjects];
@@ -4381,15 +4374,15 @@
     {
         bomber = [[Character alloc] initWithGoodHelicopterImage];
         bomber.scale=.5;
-    
+        
         bomber.position = ccp(-20, winSize.height * .85); //+ enemy.contentSize.height/2);
         [self addChild:bomber];
         [bombers addObject:bomber];
         
         
         // Create the actions
-        CCMoveTo * actionMove = [CCMoveTo actionWithDuration:4
-                                                    position:ccp(500, bomber.position.y)];
+        CCMoveTo * actionMove = [CCMoveTo actionWithDuration:5
+                                                    position:ccp(winSize.width + 30, bomber.position.y)];
         
         [bomber runAction:actionMove];
         numAvailable--;
@@ -4769,6 +4762,7 @@
     if(immunity == false)
     {
         (((Character*)goodBase).health) -= ((Character*)fightingDevil).power;
+        int healthCount = (((Character*)goodBase).health);
         [goodBaseHealthLabel setString:[NSString stringWithFormat:@"Your Base Health: %d",((Character*)goodBase).health]];
         [self subtractGoodBarHealth:((Character*)fightingDevil).power];
         if(((Character*)goodBase).health < 7 && ((Character*)goodBase).health > 3 && goodBaseImageChangeCount == 0)
@@ -4778,6 +4772,7 @@
             goodBase = [[Character alloc] initWithGoodGuyBaseImage2];
             goodBase.position = ccp(50, BASE_HEIGHT);
             goodBase.scale =.6;
+            ((Character*)goodBase).health = healthCount;
             [self addChild:goodBase z:1];
             [goodGuysBottom addObject:goodBase];
             NSLog(@"good base 2");
@@ -4789,13 +4784,15 @@
             goodBase = [[Character alloc] initWithGoodGuyBaseImage3];
             goodBase.position = ccp(50, BASE_HEIGHT);
             goodBase.scale =.6;
+            ((Character*)goodBase).health = healthCount;
             [self addChild:goodBase z:1];
             [goodGuysBottom addObject:goodBase];
             NSLog(@"good base 3");
         }
         if(((Character*)goodBase).health <= 0 && goodBaseExploded == false)
         {
-            [self explosion:goodBase :2.0 :true];
+            NSLog(@"called good base explosion, goodBaseExploded = true");
+            [self explosion:goodBase :1.5 :YES];
             goodBaseExploded = true;
         }
     }
@@ -4803,6 +4800,7 @@
 -(void) subtractBadBaseHealth:(CCSprite*)fightingAngel
 {
         (((Character*)badBase).health) -= ((Character*)fightingAngel).power;
+        int healthCount = (((Character*)goodBase).health);
         [badBaseHealthLabel setString:[NSString stringWithFormat:@"Bad Base Health: %d",((Character*)badBase).health]];
         [self subtractBadBarHealth:((Character*)fightingAngel).power];
         if(((Character*)badBase).health < 7 && ((Character*)badBase).health > 3 && badBaseImageChangeCount == 0)
@@ -4812,6 +4810,7 @@
             badBase = [[Character alloc] initWithBadGuyBaseImage2];
             badBase.position = ccp(winSize.width - 50, BASE_HEIGHT);
             badBase.scale = .6;
+            ((Character*)badBase).health = healthCount;
             [self addChild:badBase z:1];
             [badGuysBottom addObject:badBase];
             NSLog(@"bad base 2");
@@ -4823,13 +4822,15 @@
             badBase = [[Character alloc] initWithBadGuyBaseImage3];
             badBase.position = ccp(winSize.width - 50, BASE_HEIGHT);
             badBase.scale = .6;
+            ((Character*)badBase).health = healthCount;
             [self addChild:badBase z:1];
             [badGuysBottom addObject:badBase];
             NSLog(@"bad base 3");
         }
         if(((Character*)badBase).health <= 0 && badBaseExploded == false)
         {
-            [self explosion:badBase :2.0 :true];
+            NSLog(@"called bad base explosion, goodBaseExploded = true");
+            [self explosion:badBase :1.5 :YES];
             badBaseExploded = true;
         }
 }

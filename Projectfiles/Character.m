@@ -282,7 +282,6 @@
 {
     if ((self = [super initWithFile: @"goodbase-2.png"]))
     {
-        health = 6;
         type = GOOD_BASE;
         melee = true;
     }
@@ -293,7 +292,6 @@
 {
     if ((self = [super initWithFile: @"goodbase-3.png"]))
     {
-        health = 3;
         type = GOOD_BASE;
         melee = true;
     }
@@ -315,7 +313,6 @@
 {
     if ((self = [super initWithFile: @"badbase-2.png"]))
     {
-        health = 6;
         type = BAD_BASE;
         melee = true;
     }
@@ -326,7 +323,6 @@
 {
     if ((self = [super initWithFile: @"badbase-3.png"]))
     {
-        health = 3;
         type = BAD_BASE;
         melee = true;
     }

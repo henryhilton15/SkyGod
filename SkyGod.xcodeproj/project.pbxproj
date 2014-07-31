@@ -775,6 +775,7 @@
 		2DFC0F521842A10900EF09C8 /* level1Label.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DFC0F4F1842A10900EF09C8 /* level1Label.png */; };
 		2DFC0F541842A26600EF09C8 /* level4Label.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DFC0F531842A26600EF09C8 /* level4Label.png */; };
 		2DFC0F561842A26C00EF09C8 /* level5Label.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DFC0F551842A26C00EF09C8 /* level5Label.png */; };
+		C3038A0E198AC90800A81E0E /* explo2.wav in Resources */ = {isa = PBXBuildFile; fileRef = C3038A0D198AC90800A81E0E /* explo2.wav */; };
 		C3297C0517975CC600A09343 /* knightFramesFlipped.png in Resources */ = {isa = PBXBuildFile; fileRef = C3297C0417975CC600A09343 /* knightFramesFlipped.png */; };
 		C3297C0717975CDA00A09343 /* knightframesflipped.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3297C0617975CDA00A09343 /* knightframesflipped.plist */; };
 		C3367E14179862CA00D321C5 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = C3367E13179862CA00D321C5 /* Character.m */; };
@@ -842,7 +843,6 @@
 		FEFF359E198824C7002E668A /* angel1attack.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF3552198824C6002E668A /* angel1attack.png */; };
 		FEFF359F198824C7002E668A /* angel1fall.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEFF3553198824C6002E668A /* angel1fall.plist */; };
 		FEFF35A0198824C7002E668A /* angel1fall.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF3554198824C6002E668A /* angel1fall.png */; };
-		FEFF35A1198824C7002E668A /* angel1move.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEFF3555198824C6002E668A /* angel1move.plist */; };
 		FEFF35A3198824C7002E668A /* angel2attack.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEFF3557198824C6002E668A /* angel2attack.plist */; };
 		FEFF35A4198824C7002E668A /* angel2attack.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF3558198824C6002E668A /* angel2attack.png */; };
 		FEFF35A5198824C7002E668A /* angel2fall.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEFF3559198824C6002E668A /* angel2fall.plist */; };
@@ -913,7 +913,6 @@
 		FEFF35F11988B221002E668A /* spartanattack.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF35EE1988B221002E668A /* spartanattack.png */; };
 		FEFF35F21988B221002E668A /* spartanfall.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF35EF1988B221002E668A /* spartanfall.png */; };
 		FEFF35F31988B221002E668A /* spartanmove.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF35F01988B221002E668A /* spartanmove.png */; };
-		FEFF36001989830A002E668A /* explo2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEFF35FF1989830A002E668A /* explo2.wav */; };
 		FEFF3602198989F2002E668A /* redX.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF3601198989F2002E668A /* redX.png */; };
 		FEFF360419898A44002E668A /* The Descent.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEFF360319898A44002E668A /* The Descent.wav */; };
 		FEFF360619898A4B002E668A /* Undaunted.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEFF360519898A4B002E668A /* Undaunted.wav */; };
@@ -1696,6 +1695,7 @@
 		2DFC0F4F1842A10900EF09C8 /* level1Label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level1Label.png; sourceTree = "<group>"; };
 		2DFC0F531842A26600EF09C8 /* level4Label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level4Label.png; sourceTree = "<group>"; };
 		2DFC0F551842A26C00EF09C8 /* level5Label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level5Label.png; sourceTree = "<group>"; };
+		C3038A0D198AC90800A81E0E /* explo2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explo2.wav; sourceTree = "<group>"; };
 		C3297C0417975CC600A09343 /* knightFramesFlipped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knightFramesFlipped.png; sourceTree = "<group>"; };
 		C3297C0617975CDA00A09343 /* knightframesflipped.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = knightframesflipped.plist; sourceTree = "<group>"; };
 		C3367E12179862CA00D321C5 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
@@ -1777,7 +1777,6 @@
 		FEFF3552198824C6002E668A /* angel1attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = angel1attack.png; path = "Angels vs Devils/angel1attack.png"; sourceTree = "<group>"; };
 		FEFF3553198824C6002E668A /* angel1fall.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = angel1fall.plist; path = "Angels vs Devils/angel1fall.plist"; sourceTree = "<group>"; };
 		FEFF3554198824C6002E668A /* angel1fall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = angel1fall.png; path = "Angels vs Devils/angel1fall.png"; sourceTree = "<group>"; };
-		FEFF3555198824C6002E668A /* angel1move.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = angel1move.plist; path = "Angels vs Devils/angel1move.plist"; sourceTree = "<group>"; };
 		FEFF3557198824C6002E668A /* angel2attack.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = angel2attack.plist; path = "Angels vs Devils/angel2attack.plist"; sourceTree = "<group>"; };
 		FEFF3558198824C6002E668A /* angel2attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = angel2attack.png; path = "Angels vs Devils/angel2attack.png"; sourceTree = "<group>"; };
 		FEFF3559198824C6002E668A /* angel2fall.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = angel2fall.plist; path = "Angels vs Devils/angel2fall.plist"; sourceTree = "<group>"; };
@@ -1848,7 +1847,6 @@
 		FEFF35EE1988B221002E668A /* spartanattack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartanattack.png; path = "Angels vs Devils/spartanattack.png"; sourceTree = "<group>"; };
 		FEFF35EF1988B221002E668A /* spartanfall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartanfall.png; path = "Angels vs Devils/spartanfall.png"; sourceTree = "<group>"; };
 		FEFF35F01988B221002E668A /* spartanmove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartanmove.png; path = "Angels vs Devils/spartanmove.png"; sourceTree = "<group>"; };
-		FEFF35FF1989830A002E668A /* explo2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = explo2.wav; path = "../../../Peeved Penguins/Projectfiles/Resources/explo2.wav"; sourceTree = "<group>"; };
 		FEFF3601198989F2002E668A /* redX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redX.png; sourceTree = "<group>"; };
 		FEFF360319898A44002E668A /* The Descent.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "The Descent.wav"; sourceTree = "<group>"; };
 		FEFF360519898A4B002E668A /* Undaunted.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Undaunted.wav; sourceTree = "<group>"; };
@@ -2699,22 +2697,21 @@
 			children = (
 				FEFF360519898A4B002E668A /* Undaunted.wav */,
 				FEFF360319898A44002E668A /* The Descent.wav */,
+				C3038A0D198AC90800A81E0E /* explo2.wav */,
 				FEFF3601198989F2002E668A /* redX.png */,
-				FEFF35FF1989830A002E668A /* explo2.wav */,
 				FEFF35EE1988B221002E668A /* spartanattack.png */,
 				FEFF35EF1988B221002E668A /* spartanfall.png */,
 				FEFF35F01988B221002E668A /* spartanmove.png */,
+				FEFF35EA19882816002E668A /* angel1move.plist */,
+				FEFF354C198824C5002E668A /* angel1move.png */,
 				FEFF354D198824C5002E668A /* angel2move.plist */,
 				FEFF354E198824C6002E668A /* angel2move.png */,
 				FEFF354F198824C6002E668A /* angel3move.plist */,
 				FEFF3550198824C6002E668A /* angel3move.png */,
-				FEFF35EA19882816002E668A /* angel1move.plist */,
-				FEFF354C198824C5002E668A /* angel1move.png */,
 				FEFF3551198824C6002E668A /* angel1attack.plist */,
 				FEFF3552198824C6002E668A /* angel1attack.png */,
 				FEFF3553198824C6002E668A /* angel1fall.plist */,
 				FEFF3554198824C6002E668A /* angel1fall.png */,
-				FEFF3555198824C6002E668A /* angel1move.plist */,
 				FEFF3557198824C6002E668A /* angel2attack.plist */,
 				FEFF3558198824C6002E668A /* angel2attack.png */,
 				FEFF3559198824C6002E668A /* angel2fall.plist */,
@@ -3953,7 +3950,6 @@
 				2D808CBD1795F5BA006EADF5 /* animation_knight-4.png in Resources */,
 				2D808CBE1795F5BA006EADF5 /* animation_knight-5.png in Resources */,
 				2D808CBF1795F5BA006EADF5 /* animation_sword-1.png in Resources */,
-				FEFF35A1198824C7002E668A /* angel1move.plist in Resources */,
 				2D808CC01795F5BA006EADF5 /* animation_sword-2.png in Resources */,
 				2D808CC11795F5BA006EADF5 /* animation_sword-3.png in Resources */,
 				2D808CC21795F5BA006EADF5 /* dragon-side-hd.png in Resources */,
@@ -3997,6 +3993,7 @@
 				2D808CE61795F5BA006EADF5 /* title_shop.png in Resources */,
 				FEFF35A4198824C7002E668A /* angel2attack.png in Resources */,
 				2D808CE71795F5BA006EADF5 /* title_upgrades.png in Resources */,
+				C3038A0E198AC90800A81E0E /* explo2.wav in Resources */,
 				2D808CE81795F5BA006EADF5 /* animation_knight-1-hd.png in Resources */,
 				2D808CE91795F5BA006EADF5 /* background_desert-topdown-hd.png in Resources */,
 				2D808CEA1795F5BA006EADF5 /* background_grass-top-hd.png in Resources */,
@@ -4268,7 +4265,6 @@
 				2D6E378C18E9EBC400573401 /* mockup-background-retina.png in Resources */,
 				2D6E378D18E9EBC400573401 /* badbase-1.png in Resources */,
 				2D6E378E18E9EBC400573401 /* badbase-2.png in Resources */,
-				FEFF36001989830A002E668A /* explo2.wav in Resources */,
 				FEFF35A6198824C7002E668A /* angel2fall.png in Resources */,
 				2D6E378F18E9EBC400573401 /* badbase-3.png in Resources */,
 				FEFF3602198989F2002E668A /* redX.png in Resources */,
