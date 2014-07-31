@@ -960,7 +960,7 @@
                                                               selectedImage: @"pause_btn.png"
                                                                      target:self
                                                                    selector:@selector(pauseMenu:)];
-        pauseButton.position = CGPointMake((winSize.width * .5) - 30, winSize.height + 70);
+        pauseButton.position = CGPointMake((winSize.width * .5) - 30, winSize.height + 55);
         pauseButton.scale = .7;
         
     
@@ -968,7 +968,7 @@
         target: self
         selector:@selector(immunityActivator:)];
         
-        immunityPowerUp.position= CGPointMake ((farLeftX + (2 * buttonSpacing)), winSize.height + 70);
+        immunityPowerUp.position= CGPointMake ((farLeftX + (2 * buttonSpacing)), winSize.height + 55);
         immunityPowerUp.scale = 0.7f;
 
         
@@ -976,14 +976,14 @@
                                                                                 target: self
                                                                       selector:@selector(reinforcements:)];
         
-        reinforcementPowerUp.position= CGPointMake ((farLeftX + buttonSpacing), winSize.height + 70);
+        reinforcementPowerUp.position= CGPointMake ((farLeftX + buttonSpacing), winSize.height + 55);
         reinforcementPowerUp.scale = .7f;
         
         
         CCMenuItemImage *airstrikePowerUp = [CCMenuItemImage itemWithNormalImage:@"airstrike_btn.png" selectedImage:@"airstrike_btn.png"
                                                                         target: self
                                                                     selector:@selector(airstrike:)];
-        airstrikePowerUp.position= CGPointMake (farLeftX, winSize.height + 70);
+        airstrikePowerUp.position= CGPointMake (farLeftX, winSize.height + 55);
         airstrikePowerUp.scale = 0.7f;
         
         CCMenu *myMenu = [CCMenu menuWithItems:pauseButton, airstrikePowerUp, reinforcementPowerUp, immunityPowerUp, nil];
@@ -1010,8 +1010,6 @@
 
 
         [[SimpleAudioEngine sharedEngine] preloadEffect:@"explo2.wav"];
-        [[SimpleAudioEngine sharedEngine] preloadEffect:@"Pow.caf"];
-        [[SimpleAudioEngine sharedEngine] preloadEffect:@"thatWasEasy.wav"];
         
     
         if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
@@ -1030,6 +1028,7 @@
 
 -(void) update:(ccTime)delta
 {
+    
 //    if(framecount % 500 == 0)
 //    {
 //        for(int i = 0; i < [goodGuysBottom count]; i++)

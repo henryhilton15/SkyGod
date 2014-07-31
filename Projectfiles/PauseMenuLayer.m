@@ -23,7 +23,7 @@
         CGSize winSize = [CCDirector sharedDirector].winSize;
 
         
-        CCMenuItemImage *resume = [CCMenuItemImage itemWithNormalImage:@"resume-button-d.png"
+        CCMenuItemImage *resume = [CCMenuItemImage itemWithNormalImage:@"resume-button-n.png"
             selectedImage: @"resume-button-d.png"
             target:self
             selector:@selector(resumeGame:)];

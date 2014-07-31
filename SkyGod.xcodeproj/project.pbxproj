@@ -913,6 +913,10 @@
 		FEFF35F11988B221002E668A /* spartanattack.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF35EE1988B221002E668A /* spartanattack.png */; };
 		FEFF35F21988B221002E668A /* spartanfall.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF35EF1988B221002E668A /* spartanfall.png */; };
 		FEFF35F31988B221002E668A /* spartanmove.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF35F01988B221002E668A /* spartanmove.png */; };
+		FEFF36001989830A002E668A /* explo2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEFF35FF1989830A002E668A /* explo2.wav */; };
+		FEFF3602198989F2002E668A /* redX.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF3601198989F2002E668A /* redX.png */; };
+		FEFF360419898A44002E668A /* The Descent.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEFF360319898A44002E668A /* The Descent.wav */; };
+		FEFF360619898A4B002E668A /* Undaunted.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEFF360519898A4B002E668A /* Undaunted.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1844,6 +1848,10 @@
 		FEFF35EE1988B221002E668A /* spartanattack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartanattack.png; path = "Angels vs Devils/spartanattack.png"; sourceTree = "<group>"; };
 		FEFF35EF1988B221002E668A /* spartanfall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartanfall.png; path = "Angels vs Devils/spartanfall.png"; sourceTree = "<group>"; };
 		FEFF35F01988B221002E668A /* spartanmove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartanmove.png; path = "Angels vs Devils/spartanmove.png"; sourceTree = "<group>"; };
+		FEFF35FF1989830A002E668A /* explo2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = explo2.wav; path = "../../../Peeved Penguins/Projectfiles/Resources/explo2.wav"; sourceTree = "<group>"; };
+		FEFF3601198989F2002E668A /* redX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redX.png; sourceTree = "<group>"; };
+		FEFF360319898A44002E668A /* The Descent.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "The Descent.wav"; sourceTree = "<group>"; };
+		FEFF360519898A4B002E668A /* Undaunted.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Undaunted.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2689,6 +2697,10 @@
 		2D808A7B1795F5BA006EADF5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FEFF360519898A4B002E668A /* Undaunted.wav */,
+				FEFF360319898A44002E668A /* The Descent.wav */,
+				FEFF3601198989F2002E668A /* redX.png */,
+				FEFF35FF1989830A002E668A /* explo2.wav */,
 				FEFF35EE1988B221002E668A /* spartanattack.png */,
 				FEFF35EF1988B221002E668A /* spartanfall.png */,
 				FEFF35F01988B221002E668A /* spartanmove.png */,
@@ -2765,6 +2777,7 @@
 				FEFF3595198824C7002E668A /* level3.plist */,
 				FEFF3596198824C7002E668A /* level4.plist */,
 				FEFF3597198824C7002E668A /* level5.plist */,
+				FEFF35EA19882816002E668A /* angel1move.plist */,
 				2D6E355618E9EBC300573401 /* Angels vs Devils */,
 				2DFC0F551842A26C00EF09C8 /* level5Label.png */,
 				2DFC0F531842A26600EF09C8 /* level4Label.png */,
@@ -3733,6 +3746,7 @@
 				2D808C011795F5BA006EADF5 /* play-button-hd.png in Resources */,
 				2D808C021795F5BA006EADF5 /* restart-hd.png in Resources */,
 				2D808C031795F5BA006EADF5 /* shop-button-hd.png in Resources */,
+				FEFF360619898A4B002E668A /* Undaunted.wav in Resources */,
 				2D808C041795F5BA006EADF5 /* upgrades-button-hd.png in Resources */,
 				2D808C051795F5BA006EADF5 /* view-hd.png in Resources */,
 				FEFF35E2198824C7002E668A /* level4.plist in Resources */,
@@ -4122,6 +4136,7 @@
 				2D6E371618E9EBC400573401 /* shop-button-hd-n.png in Resources */,
 				2D6E371718E9EBC400573401 /* shop-button-n.png in Resources */,
 				2D6E371818E9EBC400573401 /* a1-1.png in Resources */,
+				FEFF360419898A44002E668A /* The Descent.wav in Resources */,
 				2D6E371918E9EBC400573401 /* a1-2.png in Resources */,
 				2D6E371A18E9EBC400573401 /* a1-3.png in Resources */,
 				2D6E371B18E9EBC400573401 /* a1-4.png in Resources */,
@@ -4253,8 +4268,10 @@
 				2D6E378C18E9EBC400573401 /* mockup-background-retina.png in Resources */,
 				2D6E378D18E9EBC400573401 /* badbase-1.png in Resources */,
 				2D6E378E18E9EBC400573401 /* badbase-2.png in Resources */,
+				FEFF36001989830A002E668A /* explo2.wav in Resources */,
 				FEFF35A6198824C7002E668A /* angel2fall.png in Resources */,
 				2D6E378F18E9EBC400573401 /* badbase-3.png in Resources */,
+				FEFF3602198989F2002E668A /* redX.png in Resources */,
 				FEFF35CF198824C7002E668A /* spartanfall.plist in Resources */,
 				2D6E379318E9EBC400573401 /* d1-1.png in Resources */,
 				2D6E379418E9EBC400573401 /* d1-2.png in Resources */,
