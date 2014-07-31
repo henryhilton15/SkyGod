@@ -835,6 +835,8 @@
         scenarioDelayCounter = 0;
         scenarioDelay = 600;
         scenario2interludeCounter = 0;
+        devilStartingWidth = winSize.width - 100;
+        angelStartingWidth = 30;
         
         currentLevelSelected = [GameData sharedData].currentLevelSelected;
         NSLog(@"level selected = %d", currentLevelSelected);
@@ -1781,6 +1783,7 @@
                                 [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
                             }
                             [self dying:goodGuy :explosionAnimationLength];
+                            NSLog(@"dying 5");
                             if(((Character*)goodGuy).type == BIG_GOOD_GUY && Scenario2 == true)
                             {
                                 Scenario2interlude = true;
@@ -1982,9 +1985,6 @@
     NSMutableArray *deadBadGuys = [[NSMutableArray alloc] init];
     NSMutableArray *deadGoodBombs = [[NSMutableArray alloc] init];
     NSMutableArray *deadBadBombs = [[NSMutableArray alloc] init];
-    
-    int devilStartingWidth = winSize.width - 100;
-    int angelStartingWidth = 30;
     
     for(int i = 0; i < [goodGuys count]; i++)
     {
@@ -3053,6 +3053,11 @@
                 goodRangeBox.size.width += 110;
                 goodRangeBox.size.height += 10;
                 
+                if(((Character*)fightingAngel).type == GOOD_REINFORCEMENT)
+                {
+                    NSLog(@"spartan health = %d", ((Character*)fightingAngel).health);
+                }
+                
                 CCSprite *fightingDevil = [badGuysBottom objectAtIndex:f];
                 badMeleeBox = [fightingDevil boundingBox];
                 badMeleeBox.size.width += 10;
@@ -3506,6 +3511,7 @@
         {
             [badGuysBottom removeObject:s];
             [self dying:s :dyingAnimationLength];
+            NSLog(@"dying 1");
         }
         [deadBadGuys removeAllObjects];
     }
@@ -3516,6 +3522,7 @@
         {
             [goodGuysBottom removeObject:s];
             [self dying:s :dyingAnimationLength];
+            NSLog(@"dying 2");
         }
         [deadGoodGuys removeAllObjects];
     }
@@ -4308,6 +4315,7 @@
         {
             [badGuysBottom removeObject:s];
             [self dying:badBottom :dyingAnimationLength];
+            NSLog(@"dying 3");
             //NSLog(@"inside bullet bad guy collision");
         }
         [deadBadGuys removeAllObjects];
@@ -4318,6 +4326,7 @@
         {
             [goodGuysBottom removeObject:s];
             [self dying:goodBottom :dyingAnimationLength];
+            NSLog(@"dying 4");
             //NSLog(@"inside bullet good guy collision");
         }
         [deadGoodGuys removeAllObjects];
@@ -4460,7 +4469,7 @@
     [goodGuysBottom addObject:reinforcement];
     reinforcement.anchorPoint = CGPointZero;
     int posHeight = -8 + (8 * ((Character*)reinforcement).row);
-    reinforcement.position = ccp(0, posHeight);
+    reinforcement.position = ccp(angelStartingWidth, posHeight);
     [self addChild:reinforcement z:(7 - ((Character*)reinforcement).row)];
     //NSLog(@"row = %d", ((Character*)goodBottom).row);
     //NSLog(@"height = %d", posHeight);

@@ -408,7 +408,7 @@
             NSString *path = [[NSBundle mainBundle] pathForResource:@"friendlies" ofType:@"plist"];
             NSDictionary *friendlies = [NSDictionary dictionaryWithContentsOfFile:path];
             
-            NSMutableDictionary* d = [friendlies objectForKey:@"spartan"];
+            NSMutableDictionary* d = [friendlies objectForKey:@"friendlySpartan"];
             
             NSNumber *rank = [[NSUserDefaults standardUserDefaults] objectForKey:@"spartanRank"];
             

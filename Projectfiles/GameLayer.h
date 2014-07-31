@@ -84,6 +84,8 @@
     int goodBaseImageChangeCount;
     int badBaseImageChangeCount;
     int enemyHelicopterCount;
+    int devilStartingWidth;
+    int angelStartingWidth;
     double zigZagPercentage;
     double explosionAnimationLength;
     double dyingAnimationLength;
