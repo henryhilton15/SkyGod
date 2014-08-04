@@ -1010,10 +1010,7 @@
    //     [self changeLevel];
         
         
-        if ([[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
-        {
-            [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
-        }
+
 
         
         if([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimeSound"] boolValue] == false)
