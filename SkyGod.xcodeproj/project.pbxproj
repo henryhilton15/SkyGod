@@ -874,7 +874,6 @@
 		FEFF35C5198824C7002E668A /* deviltankattack.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEFF3579198824C6002E668A /* deviltankattack.plist */; };
 		FEFF35C6198824C7002E668A /* deviltankattack.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF357A198824C6002E668A /* deviltankattack.png */; };
 		FEFF35C7198824C7002E668A /* deviltankmove.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEFF357B198824C6002E668A /* deviltankmove.plist */; };
-		FEFF35C8198824C7002E668A /* deviltankmove.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF357C198824C6002E668A /* deviltankmove.png */; };
 		FEFF35C9198824C7002E668A /* dying.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEFF357D198824C6002E668A /* dying.plist */; };
 		FEFF35CA198824C7002E668A /* dying.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF357E198824C6002E668A /* dying.png */; };
 		FEFF35CB198824C7002E668A /* explosion.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEFF357F198824C6002E668A /* explosion.plist */; };
@@ -1802,7 +1801,6 @@
 		FEFF3579198824C6002E668A /* deviltankattack.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = deviltankattack.plist; path = "Angels vs Devils/deviltankattack.plist"; sourceTree = "<group>"; };
 		FEFF357A198824C6002E668A /* deviltankattack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = deviltankattack.png; path = "Angels vs Devils/deviltankattack.png"; sourceTree = "<group>"; };
 		FEFF357B198824C6002E668A /* deviltankmove.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = deviltankmove.plist; path = "Angels vs Devils/deviltankmove.plist"; sourceTree = "<group>"; };
-		FEFF357C198824C6002E668A /* deviltankmove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = deviltankmove.png; path = "Angels vs Devils/deviltankmove.png"; sourceTree = "<group>"; };
 		FEFF357D198824C6002E668A /* dying.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = dying.plist; path = "Angels vs Devils/dying.plist"; sourceTree = "<group>"; };
 		FEFF357E198824C6002E668A /* dying.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dying.png; path = "Angels vs Devils/dying.png"; sourceTree = "<group>"; };
 		FEFF357F198824C6002E668A /* explosion.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = explosion.plist; path = "Angels vs Devils/explosion.plist"; sourceTree = "<group>"; };
@@ -2726,12 +2724,12 @@
 				FEFF3574198824C6002E668A /* devil2fall.png */,
 				FEFF3575198824C6002E668A /* devil2move.plist */,
 				FEFF3576198824C6002E668A /* devil2move.png */,
+				FEFF357B198824C6002E668A /* deviltankmove.plist */,
 				FEFF3577198824C6002E668A /* devil2tank.png */,
 				FEFF3578198824C6002E668A /* devilplanemove.plist */,
+				FEFF358C198824C6002E668A /* devilplanemove.png */,
 				FEFF3579198824C6002E668A /* deviltankattack.plist */,
 				FEFF357A198824C6002E668A /* deviltankattack.png */,
-				FEFF357B198824C6002E668A /* deviltankmove.plist */,
-				FEFF357C198824C6002E668A /* deviltankmove.png */,
 				FEFF357D198824C6002E668A /* dying.plist */,
 				FEFF357E198824C6002E668A /* dying.png */,
 				FEFF357F198824C6002E668A /* explosion.plist */,
@@ -2744,7 +2742,6 @@
 				FEFF3589198824C6002E668A /* blue-energy.plist */,
 				FEFF358A198824C6002E668A /* blue-energy.png */,
 				FEFF358B198824C6002E668A /* cooltext1150760500.png */,
-				FEFF358C198824C6002E668A /* devilplanemove.png */,
 				FEFF358D198824C6002E668A /* images.png */,
 				FEFF358E198824C6002E668A /* main-idle.plist */,
 				FEFF358F198824C6002E668A /* main-idle.png */,
@@ -4104,7 +4101,6 @@
 				2D6E371018E9EBC400573401 /* select-button-d.png in Resources */,
 				2D6E371118E9EBC400573401 /* select-button-hd-d.png in Resources */,
 				2D6E371218E9EBC400573401 /* select-button-hd-n.png in Resources */,
-				FEFF35C8198824C7002E668A /* deviltankmove.png in Resources */,
 				2D6E371318E9EBC400573401 /* select-button-n.png in Resources */,
 				2D6E371418E9EBC400573401 /* shop-button-d.png in Resources */,
 				2D6E371518E9EBC400573401 /* shop-button-hd-d.png in Resources */,

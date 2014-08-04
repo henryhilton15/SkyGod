@@ -238,6 +238,8 @@
 -(void) devil1attackAnimation:(CCSprite*)devil;
 -(void) devil2attackAnimation:(CCSprite*)devil;
 -(void) spartanAttackAnimation:(CCSprite*)spartan;
+-(void) angelTankAttackAnimation:(CCSprite*)angel;
+-(void) devilTankAttackAnimation:(CCSprite*)devil;
 -(void) angelShoot:(CCSprite*)angel;
 -(void) devilShoot:(CCSprite*)devil;
 -(void) mainCharacterIdleAnimation:(CCSprite*)mainCharacter;
