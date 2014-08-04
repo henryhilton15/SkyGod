@@ -2345,7 +2345,7 @@
                     
                     if(Scenario3 == true)
                     {
-                        [zigZagScenarioEnemies removeObject:badBottom];
+                        [zigZagScenarioEnemies removeObject:badGuy];
                         if([zigZagScenarioEnemies count] == 0)
                         {
                             Scenario3 = false;
@@ -2789,8 +2789,7 @@
 -(void)createScenario
 {
     scenarioNumber = [self generateRandomNumber];
-    scenarioNumber = 2;
-    
+    scenarioNumber = 3;
     NSLog(@"scenario number = %d", scenarioNumber);
     
     if (scenarioNumber == 1)
