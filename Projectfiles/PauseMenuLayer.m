@@ -123,9 +123,9 @@
     CGSize winSize = [CCDirector sharedDirector].winSize;
 
     
-    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimeSound"] boolValue] == true)
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimeSound"] boolValue] == false)
     {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:false] forKey:@"firstTimeSound"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:true] forKey:@"firstTimeSound"];
     }
     
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
@@ -162,9 +162,9 @@
 {
     CGSize winSize = [CCDirector sharedDirector].winSize;
     
-    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimeMusic"] boolValue] == true)
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimeMusic"] boolValue] == false)
     {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:false] forKey:@"firstTimeMusic"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:true] forKey:@"firstTimeMusic"];
     }
     
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == true)
