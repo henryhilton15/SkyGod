@@ -1010,7 +1010,10 @@
    //     [self changeLevel];
         
         
-
+        if ([[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
+        {
+            [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+        }
 
         
         if([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimeSound"] boolValue] == false)
@@ -2786,7 +2789,8 @@
 -(void)createScenario
 {
     scenarioNumber = [self generateRandomNumber];
-    scenarioNumber = 2;
+   
+    //scenarioNumber = 2;
     
     NSLog(@"scenario number = %d", scenarioNumber);
     
