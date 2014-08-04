@@ -1348,17 +1348,17 @@
     }
     [deadKmonsters removeAllObjects];
 
-    if(Scenario3 == true)
-    {
-        zigZagDelayCounter++;
-        firstZigZag = false;
-        if(zigZagDelayCounter % 250 == 0)
-        {
-            Scenario3 = false;
-            zigZagScenarioCounter = 0;
-            NSLog(@"Scenario3 is false");
-        }
-    }
+//    if(Scenario3 == true)
+//    {
+//        zigZagDelayCounter++;
+//        firstZigZag = false;
+//        if(zigZagDelayCounter % 250 == 0)
+//        {
+//            Scenario3 = false;
+//            zigZagScenarioCounter = 0;
+//            NSLog(@"Scenario3 is false");
+//        }
+//    }
     if([goodGuys count] > 0 || [badGuys count] > 0 || [goodBombs count] > 0 || [badBombs count] > 0)
     {
         [self detectReachBottom];
@@ -1411,28 +1411,28 @@
 //        [self truckGoodBottomOrBadBottomCollisions];
 //        
 //    }
-    if (truckCount > 0)
-    {
-        NSLog(@"truckcount > 0" );
-        if (truck.position.x >=50)
-        {
-            NSLog(@"truck position is more than 50");
-            if(framecount % 60 == 0)
-            {
-                GoodReinforcement = [[Character alloc] initWithSpartanImage];
-                GoodReinforcement.position = ccp(70, truck.position.y);
-                GoodReinforcement.scale = .1;
-                GoodReinforcement.color = ccc3(0,255,0);
-                [self addChild:GoodReinforcement z:10];
-                //int rangeX3 = 380;
-                int actualX3 = (arc4random() % 200) + 20;
-                CCMoveTo * spreadOut = [CCMoveTo actionWithDuration:2 position:ccp(actualX3, 30)];
-                [goodGuysBottom addObject:GoodReinforcement];
-                [GoodReinforcement runAction:spreadOut];
-                goodReinforcementCount++;
-            }
-        }
-    }
+//    if (truckCount > 0)
+//    {
+//        NSLog(@"truckcount > 0" );
+//        if (truck.position.x >=50)
+//        {
+//            NSLog(@"truck position is more than 50");
+//            if(framecount % 60 == 0)
+//            {
+//                GoodReinforcement = [[Character alloc] initWithSpartanImage];
+//                GoodReinforcement.position = ccp(70, truck.position.y);
+//                GoodReinforcement.scale = .1;
+//                GoodReinforcement.color = ccc3(0,255,0);
+//                [self addChild:GoodReinforcement z:10];
+//                //int rangeX3 = 380;
+//                int actualX3 = (arc4random() % 200) + 20;
+//                CCMoveTo * spreadOut = [CCMoveTo actionWithDuration:2 position:ccp(actualX3, 30)];
+//                [goodGuysBottom addObject:GoodReinforcement];
+//                [GoodReinforcement runAction:spreadOut];
+//                goodReinforcementCount++;
+//            }
+//        }
+//    }
     
     
     if(immunity == true)
@@ -1913,7 +1913,6 @@
                 
                 if(CGRectIntersectsRect(badGuyRect, projectileBox))
                 {
-
                     if (projectile.position.y < winSize.height - 5)
                     {
                         ((Character*)badGuy).health -= ((Character*)projectile).power;
@@ -1924,15 +1923,14 @@
                             [deadBadGuys addObject:badGuy];
                             if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
                             {
-
-                            [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                                [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
                             }
                             [self enemiesKilledTotal];
                             [self explosion:badGuy :explosionAnimationLength: NO];
-                            if(Scenario4 == false && Scenario3 == false && Scenario2 == false && Scenario1 == false)
-                            {
-                                enemiesKilledCounter ++;
-                            }
+//                            if(Scenario4 == false && Scenario3 == false && Scenario2 == false && Scenario1 == false)
+//                            {
+//                                enemiesKilledCounter ++;
+//                            }
                             if(((Character*)badGuy).type == BAD_HELICOPTER)
                             {
                                 helicoptersRemoved++;
@@ -1974,6 +1972,10 @@
         {
             [badBombs removeObject:s];
         }
+        if(((Character*)s).type == KAMIKAZE)
+        {
+            [Kmonsters removeObject:s];
+        }
        // NSLog(@"removed goodGuy");
     }
     [deadBadGuys removeAllObjects];
@@ -1991,6 +1993,7 @@
         if([goodGuys count] > 0)
         {
             goodGuy = [goodGuys objectAtIndex:i];
+            
             if(goodGuy.position.y <= 20 && ((Character*)goodGuy).type != GOOD_HELICOPTER_BOMB)
             {
                 if(((Character*)goodGuy).type == GOOD_GUY)
@@ -2068,14 +2071,61 @@
                     ((Character*)goodBottom).row = arc4random() % 5 + 1;
                     [goodGuysBottom addObject:goodBottom];
                     goodBottom.anchorPoint = CGPointZero;
-                    ((Character*)goodBottom).health = ((Character*)goodGuy).health *2;
+                    ((Character*)goodBottom).health = 5;
                     int posHeight = -8 + (8 * ((Character*)goodBottom).row);
                     goodBottom.position = ccp(angelStartingWidth, posHeight);
                     [self addChild:goodBottom z:(7 - ((Character*)goodBottom).row)];
                     
-                    Scenario2 = false;
-                    bigGoodGuysCounter = 0;
-                    NSLog(@"scenario 2 = false");
+                    //animation
+                    
+                    NSMutableArray *moveFrames;
+                    
+                    //Load the plist which tells Kobold2D how to properly parse your spritesheet. If on a retina device Kobold2D will automatically use bearframes-hd.plist
+                    
+                    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile: @"angeltankmove.plist"];
+                    
+                    //Load in the spritesheet, if retina Kobold2D will automatically use bearframes-hd.png
+                    
+                    CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"angeltankmove.png"];
+                    
+                    [self addChild:spriteSheet];
+                    
+                    //Define the frames based on the plist - note that for this to work, the original files must be in the format bear1, bear2, bear3 etc...
+                    
+                    //When it comes time to get art for your own original game, makegameswith.us will give you spritesheets that follow this convention, <spritename>1 <spritename>2 <spritename>3 etc...
+                    
+                    moveFrames = [NSMutableArray array];
+                    
+                    for(int i = 1; i <= 4; ++i)
+                    {
+                        [moveFrames addObject:
+                         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"a5-%d.png", i]]];
+                    }
+                    
+                    //Create an animation from the set of frames you created earlier
+                    
+                    CCAnimation *moveAnimation = [CCAnimation animationWithFrames: moveFrames delay:0.25f];
+                    
+                    //Create an action with the animation that can then be assigned to a sprite
+                    
+                    CCAction *move = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:moveAnimation restoreOriginalFrame:NO]];
+                    
+                    
+                    //tell the bear to run the taunting action
+                    [goodBottom runAction:move];
+                    //NSLog(@"good guy animation started");
+                    
+                    if(Scenario2 == true)
+                    {
+                        Scenario2 = false;
+                        bigGoodGuysCounter = 0;
+                        NSLog(@"scenario 2 = false");
+                    }
+                    if(Scenario3 == true)
+                    {
+                        Scenario3 = false;
+                        NSLog(@"scenario 3 = false");
+                    }
                 }
                 if(((Character*)goodGuy).type == GOOD_FASTSHOOTER)
                 {
@@ -2401,6 +2451,45 @@
                     [badGuysBottom addObject:badBottom];
                     Scenario4 = false;
                     NSLog(@"scenario 4 = false");
+                    
+                    //animation
+                    
+                    NSMutableArray *moveFrames;
+                    
+                    //Load the plist which tells Kobold2D how to properly parse your spritesheet. If on a retina device Kobold2D will automatically use bearframes-hd.plist
+                    
+                    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile: @"deviltankmove.plist"];
+                    
+                    //Load in the spritesheet, if retina Kobold2D will automatically use bearframes-hd.png
+                    
+                    CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"devil2tank.png"];
+                    
+                    [self addChild:spriteSheet];
+                    
+                    //Define the frames based on the plist - note that for this to work, the original files must be in the format bear1, bear2, bear3 etc...
+                    
+                    //When it comes time to get art for your own original game, makegameswith.us will give you spritesheets that follow this convention, <spritename>1 <spritename>2 <spritename>3 etc...
+                    
+                    moveFrames = [NSMutableArray array];
+                    
+                    for(int i = 1; i <= 3; ++i)
+                    {
+                        [moveFrames addObject:
+                         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"d3-%d.png", i]]];
+                    }
+                    
+                    //Create an animation from the set of frames you created earlier
+                    
+                    CCAnimation *moveAnimation = [CCAnimation animationWithFrames: moveFrames delay:0.25f];
+                    
+                    //Create an action with the animation that can then be assigned to a sprite
+                    
+                    CCAction *move = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:moveAnimation restoreOriginalFrame:NO]];
+                    
+                    
+                    //tell the bear to run the taunting action
+                    [badBottom runAction:move];
+                    //NSLog(@"good guy animation started");
                 }
                 
                 [deadBadGuys addObject:badGuy];
@@ -2555,16 +2644,16 @@
     int actualDuration3 = (arc4random() % rangeDuration) + minDuration;
     int actualDuration4 = (arc4random() % rangeDuration) + minDuration;
     
-    CCMoveTo *actionMove1 = [CCMoveTo actionWithDuration:actualDuration1 position:ccp(enemy1.position.x, -enemy1.contentSize.height/2)];
+    CCMoveTo *actionMove1 = [CCMoveTo actionWithDuration:actualDuration1 position:ccp(enemy1.position.x, -20)];
     [enemy1 runAction:actionMove1];
     
-    CCMoveTo *actionMove2 = [CCMoveTo actionWithDuration:actualDuration2 position:ccp(enemy2.position.x, -enemy2.contentSize.height/2)];
+    CCMoveTo *actionMove2 = [CCMoveTo actionWithDuration:actualDuration2 position:ccp(enemy2.position.x, -20)];
     [enemy2 runAction:actionMove2];
     
-    CCMoveTo *actionMove3 = [CCMoveTo actionWithDuration:actualDuration3 position:ccp(enemy3.position.x, -enemy3.contentSize.height/2)];
+    CCMoveTo *actionMove3 = [CCMoveTo actionWithDuration:actualDuration3 position:ccp(enemy3.position.x, -20)];
     [enemy3 runAction:actionMove3];
     
-    CCMoveTo *actionMove4 = [CCMoveTo actionWithDuration:actualDuration4 position:ccp(enemy4.position.x, -enemy4.contentSize.height/2)];
+    CCMoveTo *actionMove4 = [CCMoveTo actionWithDuration:actualDuration4 position:ccp(enemy4.position.x, -20)];
     [enemy4 runAction:actionMove4];
         
         id leftTop = [CCMoveTo actionWithDuration:1.0
@@ -2584,8 +2673,9 @@
         
         id rightLow = [CCMoveTo actionWithDuration:1.0
                                           position:ccp(winSize.width * .8, winSize.height * .15)];
-        
-        [zFriendly runAction:[CCSequence actions: leftTop, rightTop, leftMid, rightMid, leftLow, rightLow, nil]];
+        id drop = [CCMoveTo actionWithDuration:1.0 position:ccp(winSize.width * .5, -20)];
+    
+        [zFriendly runAction:[CCSequence actions: leftTop, rightTop, leftMid, rightMid, leftLow, rightLow,drop, nil]];
 
 //            [zFriendly2 runAction:[CCSequence actions:delay2, leftTop, rightTop, leftMid, rightMid, leftLow, rightLow, nil]];
 //    
@@ -2702,26 +2792,26 @@
     
     if (scenarioNumber == 1)
     {
-        NSLog(@"scenario1begins");
+        NSLog(@"scenario 1 begins");
         Scenario1 = true;
         spawnedHelicopters++;
         [self addEnemyHelicopter];
     }
     if (scenarioNumber == 2)
     {
-        NSLog(@"scenario2begins");
+        NSLog(@"scenario 2 begins");
         Scenario2 = true;
         [self addFriendlyTank];
     }
     if (scenarioNumber == 3)
     {
-        NSLog(@"scenario3begins");
+        NSLog(@"scenario 3 begins");
         Scenario3 = true;
         [self zigZagScenario];
     }
     if (scenarioNumber == 4)
     {
-        NSLog(@"scenario4begins");
+        NSLog(@"scenario 4 begins");
         Scenario4 = true;
         [self addEnemyTank];
         bigMonstercount++;
@@ -3046,19 +3136,14 @@
             {
                 CCSprite *fightingAngel = [goodGuysBottom objectAtIndex:j];
                 goodMeleeBox = [fightingAngel boundingBox];
-                goodMeleeBox.size.width -= 10;
+                goodMeleeBox.size.width += 10;
                 goodRangeBox = [fightingAngel boundingBox];
                 goodRangeBox.size.width += 110;
                 goodRangeBox.size.height += 10;
                 
-                if(((Character*)fightingAngel).type == GOOD_REINFORCEMENT)
-                {
-                    NSLog(@"spartan health = %d", ((Character*)fightingAngel).health);
-                }
-                
                 CCSprite *fightingDevil = [badGuysBottom objectAtIndex:f];
                 badMeleeBox = [fightingDevil boundingBox];
-                badMeleeBox.size.width += 10;
+                badMeleeBox.size.width -= 10;
                 badRangeBox = [fightingDevil boundingBox];
                 badRangeBox.size.width -= 110;
                 badRangeBox.size.height += 10;
@@ -3122,7 +3207,10 @@
                         {
                             [self angel3attackAnimation:fightingAngel];
                         }
-                        
+                        if(((Character*)fightingAngel).type == BIG_GOOD_GUY)
+                        {
+                            [self angelTankAttackAnimation:fightingAngel];
+                        }
                         [self angelShoot:fightingAngel];
                         //                        int angelAttackFrequency = ((Character*)fightingAngel).attackFrequency;
                         //                        NSLog(@"angel attack frequency = %d", angelAttackFrequency);
@@ -3137,9 +3225,13 @@
                         {
                             [self devil2attackAnimation:fightingDevil];
                         }
-                        if(((Character*)fightingAngel).type == BAD_FASTSHOOTER)
+                        if(((Character*)fightingDevil).type == BAD_FASTSHOOTER)
                         {
                             [self devil2attackAnimation:fightingDevil];
+                        }
+                        if(((Character*)fightingDevil).type == BIG_MONSTER)
+                        {
+                            [self devilTankAttackAnimation:fightingDevil];
                         }
                         [self devilShoot:fightingDevil];
                     }
@@ -3759,6 +3851,89 @@
     [spartan runAction:attack];
 }
 
+-(void) angelTankAttackAnimation:(CCSprite*)angel
+{
+    //animation
+    
+    NSMutableArray *attackFrames;
+    
+    //Load the plist which tells Kobold2D how to properly parse your spritesheet. If on a retina device Kobold2D will automatically use bearframes-hd.plist
+    
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile: @"angeltankattack.plist"];
+    
+    //Load in the spritesheet, if retina Kobold2D will automatically use bearframes-hd.png
+    
+    CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"angeltankattack.png"];
+    
+    [self addChild:spriteSheet];
+    
+    //Define the frames based on the plist - note that for this to work, the original files must be in the format bear1, bear2, bear3 etc...
+    
+    //When it comes time to get art for your own original game, makegameswith.us will give you spritesheets that follow this convention, <spritename>1 <spritename>2 <spritename>3 etc...
+    
+    attackFrames = [NSMutableArray array];
+    
+    for(int i = 1; i <= 4; ++i)
+    {
+        [attackFrames addObject:
+         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"a5-attack-%d.png", i]]];
+    }
+    
+    //Create an animation from the set of frames you created earlier
+    
+    CCAnimation *attackAnimation = [CCAnimation animationWithFrames: attackFrames delay:0.1f];
+    
+    //Create an action with the animation that can then be assigned to a sprite
+    
+    CCAction *attack = [CCAnimate actionWithDuration:2.0f animation:attackAnimation restoreOriginalFrame:NO];
+    
+    //tell the bear to run the taunting action
+    [angel runAction:attack];
+
+}
+
+-(void) devilTankAttackAnimation:(CCSprite*)devil
+{
+    //animation
+    
+    NSMutableArray *attackFrames;
+    
+    //Load the plist which tells Kobold2D how to properly parse your spritesheet. If on a retina device Kobold2D will automatically use bearframes-hd.plist
+    
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile: @"deviltankattack.plist"];
+    
+    //Load in the spritesheet, if retina Kobold2D will automatically use bearframes-hd.png
+    
+    CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"deviltankattack.png"];
+    
+    [self addChild:spriteSheet];
+    
+    //Define the frames based on the plist - note that for this to work, the original files must be in the format bear1, bear2, bear3 etc...
+    
+    //When it comes time to get art for your own original game, makegameswith.us will give you spritesheets that follow this convention, <spritename>1 <spritename>2 <spritename>3 etc...
+    
+    attackFrames = [NSMutableArray array];
+    
+    for(int i = 5; i <= 9; ++i)
+    {
+        int j = i - 4;
+        [attackFrames addObject:
+         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"d3-attack-%d.png", j]]];
+    }
+    
+    //Create an animation from the set of frames you created earlier
+    
+    CCAnimation *attackAnimation = [CCAnimation animationWithFrames: attackFrames delay:0.1f];
+    
+    //Create an action with the animation that can then be assigned to a sprite
+    
+    CCAction *attack = [CCAnimate actionWithDuration:2.0f animation:attackAnimation restoreOriginalFrame:NO];
+    
+    //tell the bear to run the taunting action
+    [devil runAction:attack];
+
+}
+
 -(void) angelShoot:(CCSprite*) angel
 {
     float angelX = angel.position.x;
@@ -3779,7 +3954,7 @@
     if(((Character*)angel).bulletType == TANK_BOMB)
     {
         goodBullet = [[Character alloc] initWithTankBombImage];
-        goodBullet.position = ccp(angelX + angel.contentSize.width, angelY + 15);
+        goodBullet.position = ccp(angelX + angel.contentSize.width, angelY + 20);
         ((Character*)goodBullet).power = ((Character*)angel).power;
     }
     
