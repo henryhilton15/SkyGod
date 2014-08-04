@@ -5,6 +5,11 @@
 //  Created by henry hilton, danny laporte, and scrub on 7/3/13.
 //
 
+/*
+
+*/
+
+
 #import "GameLayer.h"
 #import "PauseMenuLayer.h"
 #import "GameOverLayer.h"
@@ -1014,11 +1019,15 @@
         if([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimeSound"] boolValue] == false)
         {
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:true] forKey:@"sfx"];
+//            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:true] forKey:@"firstTimeSound"];
+            
         }
-        
+
         if([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimeMusic"] boolValue] == false)
         {
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:true] forKey:@"music"];
+//            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:true] forKey:@"firstTimeMusic"];
+
         }
 
 
