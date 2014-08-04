@@ -2786,7 +2786,7 @@
 -(void)createScenario
 {
     scenarioNumber = [self generateRandomNumber];
-    scenarioNumber = 3;
+//    scenarioNumber = 3;
     NSLog(@"scenario number = %d", scenarioNumber);
     
     if (scenarioNumber == 1)
@@ -3024,29 +3024,29 @@
         {
             goodBottom = [goodGuysBottom objectAtIndex:q];
             
-            if(((Character*)goodBottom).melee == true && goodBottom.position.x < winSize.width - 70)
-            {
-                int enemiesClose = 0;
-                for(int i = 0; i < [badGuysBottom count]; i++)
-                {
-                    badBottom = [badGuysBottom objectAtIndex:i];
-                    if(abs(badBottom.position.x - goodBottom.position.x) < 50)
-                    {
-                        enemiesClose++;
-//                        NSLog(@"enemies close++");
-                    }
-                }
-                if(enemiesClose > 0)
-                {
-                    ((Character*)goodBottom).melee = true;
-
-                }
-                else
-                {
-                    ((Character*)goodBottom).melee = false;
-                    NSLog(@"melee changed to false in good guys walk detection");
-                }
-            }
+//            if(((Character*)goodBottom).melee == true && goodBottom.position.x < winSize.width - 70)
+//            {
+//                int enemiesClose = 0;
+//                for(int i = 0; i < [badGuysBottom count]; i++)
+//                {
+//                    badBottom = [badGuysBottom objectAtIndex:i];
+//                    if(abs(badBottom.position.x - goodBottom.position.x) < 50)
+//                    {
+//                        enemiesClose++;
+////                        NSLog(@"enemies close++");
+//                    }
+//                }
+//                if(enemiesClose > 0)
+//                {
+//                    ((Character*)goodBottom).melee = true;
+//
+//                }
+//                else
+//                {
+//                    ((Character*)goodBottom).melee = false;
+//                    NSLog(@"melee changed to false in good guys walk detection");
+//                }
+//            }
         
             if(((Character*)goodBottom).melee == false && ((Character*)goodBottom).type != GOOD_BASE)
             {
@@ -3078,29 +3078,29 @@
         for(int q = 0; q < [badGuysBottom count]; q++)
         {
             badBottom = [badGuysBottom objectAtIndex:q];
-            if(((Character*)badBottom).melee == true && badBottom.position.x < winSize.width - 70)
-            {
-                int enemiesClose = 0;
-                for(int i = 0; i < [goodGuysBottom count]; i++)
-                {
-                    goodBottom = [goodGuysBottom objectAtIndex:i];
-                    if(abs(badBottom.position.x - goodBottom.position.x) < 100)
-                    {
-                        enemiesClose++;
-                        //                        NSLog(@"enemies close++");
-                    }
-                }
-                if(enemiesClose > 0)
-                {
-                    ((Character*)badBottom).melee = true;
-                }
-                else
-                {
-                    ((Character*)badBottom).melee = false;
-                    NSLog(@"melee changed to false in bad guys walk detection");
-                }
-            }
-            
+//            if(((Character*)badBottom).melee == true && badBottom.position.x < winSize.width - 70)
+//            {
+//                int enemiesClose = 0;
+//                for(int i = 0; i < [goodGuysBottom count]; i++)
+//                {
+//                    goodBottom = [goodGuysBottom objectAtIndex:i];
+//                    if(abs(badBottom.position.x - goodBottom.position.x) < 100)
+//                    {
+//                        enemiesClose++;
+//                        //                        NSLog(@"enemies close++");
+//                    }
+//                }
+//                if(enemiesClose > 0)
+//                {
+//                    ((Character*)badBottom).melee = true;
+//                }
+//                else
+//                {
+//                    ((Character*)badBottom).melee = false;
+//                    NSLog(@"melee changed to false in bad guys walk detection");
+//                }
+//            }
+//            
             if(((Character*)badBottom).melee == false)
             {
                 badBottom.position = ccp(badBottom.position.x - .5, badBottom.position.y);
@@ -4484,7 +4484,7 @@
         for (CCSprite *s in deadBadGuys)
         {
             [badGuysBottom removeObject:s];
-            [self dying:badBottom :dyingAnimationLength];
+            [self dying:s :dyingAnimationLength];
             //NSLog(@"inside bullet bad guy collision");
         }
         [deadBadGuys removeAllObjects];
@@ -4494,7 +4494,7 @@
         for (CCSprite *s in deadGoodGuys)
         {
             [goodGuysBottom removeObject:s];
-            [self dying:goodBottom :dyingAnimationLength];
+            [self dying:s :dyingAnimationLength];
             //NSLog(@"inside bullet good guy collision");
         }
         [deadGoodGuys removeAllObjects];
