@@ -3030,7 +3030,11 @@
                 for(int i = 0; i < [badGuysBottom count]; i++)
                 {
                     badBottom = [badGuysBottom objectAtIndex:i];
+<<<<<<< HEAD
                     if(abs(badBottom.position.x - goodBottom.position.x) < 50)
+=======
+                    if(abs(badBottom.position.x - goodBottom.position.x) < 150)
+>>>>>>> 074a8cdcb3d61c68195212ad7dc16138d7564606
                     {
                         enemiesClose++;
 //                        NSLog(@"enemies close++");
@@ -3084,7 +3088,8 @@
                 for(int i = 0; i < [goodGuysBottom count]; i++)
                 {
                     goodBottom = [goodGuysBottom objectAtIndex:i];
-                    if(abs(badBottom.position.x - goodBottom.position.x) < 100)
+
+                    if(abs(badBottom.position.x - goodBottom.position.x) < 150)
                     {
                         enemiesClose++;
                         //                        NSLog(@"enemies close++");
@@ -3135,14 +3140,14 @@
             {
                 CCSprite *fightingAngel = [goodGuysBottom objectAtIndex:j];
                 goodMeleeBox = [fightingAngel boundingBox];
-                goodMeleeBox.size.width += 10;
+                goodMeleeBox.size.width -= 10;
                 goodRangeBox = [fightingAngel boundingBox];
                 goodRangeBox.size.width += 110;
                 goodRangeBox.size.height += 10;
                 
                 CCSprite *fightingDevil = [badGuysBottom objectAtIndex:f];
                 badMeleeBox = [fightingDevil boundingBox];
-                badMeleeBox.size.width -= 10;
+                badMeleeBox.size.width += 10;
                 badRangeBox = [fightingDevil boundingBox];
                 badRangeBox.size.width -= 110;
                 badRangeBox.size.height += 10;
