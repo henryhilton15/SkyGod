@@ -4484,7 +4484,7 @@
         for (CCSprite *s in deadBadGuys)
         {
             [badGuysBottom removeObject:s];
-            [self dying:badBottom :dyingAnimationLength];
+            [self dying:s :dyingAnimationLength];
             //NSLog(@"inside bullet bad guy collision");
         }
         [deadBadGuys removeAllObjects];
@@ -4494,7 +4494,7 @@
         for (CCSprite *s in deadGoodGuys)
         {
             [goodGuysBottom removeObject:s];
-            [self dying:goodBottom :dyingAnimationLength];
+            [self dying:s :dyingAnimationLength];
             //NSLog(@"inside bullet good guy collision");
         }
         [deadGoodGuys removeAllObjects];
