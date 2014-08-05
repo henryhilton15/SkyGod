@@ -1210,7 +1210,8 @@
             {
 //                NSLog(@"add enemy melee");
 //  need to make it so that zizZag spawns sometimes          arc4random()
-                [self addEnemyMelee];
+//                [self addEnemyMelee];
+                [self addEnemyRegularShooter];
             }
             if(framecount % enemyRegularShooterFramecount == 0 && enemyRegularShooterAvailable == true)
             {
@@ -2786,7 +2787,7 @@
 -(void)createScenario
 {
     scenarioNumber = [self generateRandomNumber];
-//    scenarioNumber = 3;
+    scenarioNumber = 4;
     NSLog(@"scenario number = %d", scenarioNumber);
     
     if (scenarioNumber == 1)
@@ -3194,7 +3195,7 @@
                     }
                 }
                 
-                else if((CGRectIntersectsRect(goodRangeBox, badMeleeBox)) && ((Character*)fightingAngel).type != GOOD_KNIFE && ((Character*)fightingAngel).type != GOOD_BASE)
+                if((CGRectIntersectsRect(goodRangeBox, badMeleeBox)) && ((Character*)fightingAngel).type != GOOD_KNIFE && ((Character*)fightingAngel).type != GOOD_BASE)
                 {
                     if(framecount % ((Character*)fightingAngel).attackFrequency == 0)
                     {
@@ -3216,13 +3217,14 @@
                     }
                 }
 
-                else if((CGRectIntersectsRect(badRangeBox, goodMeleeBox)) && ((Character*)fightingDevil).type != BAD_KNIFE && ((Character*)fightingDevil).type != BAD_BASE)
+                if((CGRectIntersectsRect(badRangeBox, goodMeleeBox)) && ((Character*)fightingDevil).type != BAD_KNIFE && ((Character*)fightingDevil).type != BAD_BASE)
                 {
                     if(framecount % ((Character*)fightingDevil).attackFrequency == 0)
                     {
                         if(((Character*)fightingDevil).type == BAD_GUY)
                         {
                             [self devil2attackAnimation:fightingDevil];
+                            NSLog(@"devil regular shooter attack called");
                         }
                         if(((Character*)fightingDevil).type == BAD_FASTSHOOTER)
                         {
@@ -3231,13 +3233,10 @@
                         if(((Character*)fightingDevil).type == BIG_MONSTER)
                         {
                             [self devilTankAttackAnimation:fightingDevil];
+                            NSLog(@"devil tank attack called");
                         }
                         [self devilShoot:fightingDevil];
                     }
-                }
-                
-                else
-                {
                 }
                 
                 if(((Character*)fightingAngel).health <= 0)
@@ -3913,7 +3912,7 @@
     
     attackFrames = [NSMutableArray array];
     
-    for(int i = 5; i <= 9; ++i)
+    for(int i = 5; i <= 8; ++i)
     {
         int j = i - 4;
         [attackFrames addObject:

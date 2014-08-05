@@ -2675,7 +2675,6 @@
 		2D808A7B1795F5BA006EADF5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FEFF3609198EE438002E668A /* angel1move.plist */,
 				FEFF360519898A4B002E668A /* Undaunted.wav */,
 				FEFF360319898A44002E668A /* The Descent.wav */,
 				C3038A0D198AC90800A81E0E /* explo2.wav */,
@@ -2683,6 +2682,7 @@
 				FEFF35EE1988B221002E668A /* spartanattack.png */,
 				FEFF35EF1988B221002E668A /* spartanfall.png */,
 				FEFF35F01988B221002E668A /* spartanmove.png */,
+				FEFF3609198EE438002E668A /* angel1move.plist */,
 				FEFF354C198824C5002E668A /* angel1move.png */,
 				FEFF354D198824C5002E668A /* angel2move.plist */,
 				FEFF354E198824C6002E668A /* angel2move.png */,
