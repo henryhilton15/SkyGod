@@ -115,10 +115,7 @@
 
 -(void) startGame: (CCMenuItem *)menuItem
 {
-    if ([[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
-    {
-        [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
-    }
+
     
     [[CCDirector sharedDirector] replaceScene: (CCScene*)[[Levelselect alloc] init]];
 }

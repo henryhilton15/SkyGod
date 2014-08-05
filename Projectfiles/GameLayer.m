@@ -5,10 +5,6 @@
 //  Created by henry hilton, danny laporte, and scrub on 7/3/13.
 //
 
-/*
-
-*/
-
 
 #import "GameLayer.h"
 #import "PauseMenuLayer.h"
@@ -1010,7 +1006,10 @@
    //     [self changeLevel];
         
         
-
+        if ([[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
+        {
+            [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+        }
 
         
         if([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimeSound"] boolValue] == false)
@@ -2787,7 +2786,6 @@
 -(void)createScenario
 {
     scenarioNumber = [self generateRandomNumber];
-    scenarioNumber = 4;
     NSLog(@"scenario number = %d", scenarioNumber);
     
     if (scenarioNumber == 1)
@@ -3031,6 +3029,7 @@
                 for(int i = 0; i < [badGuysBottom count]; i++)
                 {
                     badBottom = [badGuysBottom objectAtIndex:i];
+
                     if(abs(badBottom.position.x - goodBottom.position.x) < 150)
                     {
                         enemiesClose++;
@@ -3085,6 +3084,7 @@
                 for(int i = 0; i < [goodGuysBottom count]; i++)
                 {
                     goodBottom = [goodGuysBottom objectAtIndex:i];
+
                     if(abs(badBottom.position.x - goodBottom.position.x) < 150)
                     {
                         enemiesClose++;

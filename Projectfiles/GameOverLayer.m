@@ -21,7 +21,6 @@
 	if ((self = [super init]))
 	{
         
-        
         winSize = [CCDirector sharedDirector].winSize;
 
         
