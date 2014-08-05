@@ -3030,11 +3030,8 @@
                 for(int i = 0; i < [badGuysBottom count]; i++)
                 {
                     badBottom = [badGuysBottom objectAtIndex:i];
-<<<<<<< HEAD
-                    if(abs(badBottom.position.x - goodBottom.position.x) < 50)
-=======
+
                     if(abs(badBottom.position.x - goodBottom.position.x) < 150)
->>>>>>> 074a8cdcb3d61c68195212ad7dc16138d7564606
                     {
                         enemiesClose++;
 //                        NSLog(@"enemies close++");
