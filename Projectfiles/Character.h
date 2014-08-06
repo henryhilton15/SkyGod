@@ -50,7 +50,9 @@
 @property int bulletPower;
 @property int bulletType;
 @property double speed;
-@property double fallSpeed;
+@property int fallSpeed;
+@property bool attacked;
+@property double endgameFallSpeed;
 
 -(id) initWithEnemyTankImage;
 -(id) initWithFriendlyTankImage;
@@ -83,5 +85,6 @@
 -(id) initWithSpearImage;
 -(id) initWithTankBombImage;
 -(id) initWithBlueEnergyImage;
+-(id) initWithCoinImage;
 
 @end

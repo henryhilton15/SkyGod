@@ -30,6 +30,8 @@
 @synthesize bulletType;
 @synthesize fallSpeed;
 @synthesize speed;
+@synthesize attacked;
+@synthesize endgameFallSpeed;
 
 -(id) initWithEnemyTankImage
 {
@@ -51,6 +53,7 @@
         melee = false;
         unlockLevel = 0;
         bulletType = TANK_BOMB;
+        attacked = false;
     }
     return self;
 }
@@ -79,6 +82,7 @@
         left = false;
         right = false;
         bulletType = TANK_BOMB;
+        attacked = false;
     }
     return self;
 }
@@ -104,6 +108,7 @@
         melee = false;
         bulletType = REGULAR_GOOD_BULLET;
         worth = 50;
+        attacked = false;
     }
     return self;
 }
@@ -129,6 +134,7 @@
         melee = false;
         unlockLevel = 0;
         bulletType = REGULAR_BAD_BULLET;
+        attacked = false;
     }
     return self;
 }
@@ -162,6 +168,7 @@
         
         health = 5;
         type = GOOD_HELICOPTER;
+        attacked = false;
     }
     return self;
 }
@@ -219,6 +226,7 @@
         worth = 50;
 
         type = BAD_HELICOPTER_BOMB;
+        attacked = false;
     }
     return self;
 }
@@ -359,6 +367,7 @@
         fallSpeed = 5 + [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
         type = GOOD_FASTSHOOTER;
         bulletType = REGULAR_GOOD_BULLET;
+        attacked = false;
     }
     return self;
 }
@@ -379,6 +388,7 @@
         attackFrequency = [[d objectForKey:@"attackFrequency"] intValue] - (5 * [rank intValue]);
         fallSpeed = 5 + [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
         type = GOOD_KNIFE;
+        attacked = false;
     }
     return self;
 }
@@ -398,6 +408,7 @@
         
         type = BAD_KNIFE;
         unlockLevel = 0;
+        attacked = false;
     }   
     return self;
 }
@@ -420,6 +431,7 @@
             
             type = GOOD_REINFORCEMENT;
             bulletType = SPEAR;
+            attacked = false;
         }
         return self;
 }
@@ -428,6 +440,7 @@
     if ((self = [super initWithFile:@"lighting.png"]))
     {
         power = 0;
+        attacked = false;
     }
     return self;
 }
@@ -435,6 +448,7 @@
 {
     if ((self = [super initWithFile:@"lighting.png"]))
     {
+        attacked = false;
         power = 0;
     }
     return self;
@@ -444,6 +458,7 @@
     if ((self = [super initWithFile:@"lighting.png"]))
     {
         power = 0;
+        attacked = false;
     }
     return self;
 }
@@ -451,7 +466,8 @@
 {
     if ((self = [super initWithFile:@"spear.png"]))
     {
-        power = 0;;
+        power = 0;
+        attacked = false;
     }
     return self;
 }
@@ -460,7 +476,8 @@
 {
     if ((self = [super initWithFile:@"bomb-1.png"]))
     {
-        power = 0;;
+        power = 0;
+        attacked = false;
     }
     return self;
 }
@@ -469,6 +486,24 @@
     if ((self = [super initWithFile:@"blue-energy.png"]))
     {
         power = 1;
+    }
+    return self;
+}
+
+-(id) initWithCoinImage
+{
+    if((self = [super initWithFile:@"coin.png"]))
+    {
+        NSString *plistName = [NSString stringWithFormat:@"level%d", [GameData sharedData].currentLevelSelected];
+        NSString *path = [[NSBundle mainBundle] pathForResource:plistName ofType:@"plist"];
+        NSDictionary *levelDictionary = [NSDictionary dictionaryWithContentsOfFile:path];
+        
+        NSMutableDictionary *coinDict = [levelDictionary objectForKey:@"coin"];
+        
+        fallSpeed = 7 - [[coinDict objectForKey:@"gameplayFallSpeed"] intValue];
+        endgameFallSpeed = 3 - [[coinDict objectForKey:@"endgameFallSpeed"] intValue];
+        worth = 1;
+        health = 1;
     }
     return self;
 }

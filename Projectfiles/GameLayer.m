@@ -732,7 +732,6 @@
     
     // Create the monster slightly off-screen along the right edge,
     // and along a random position along the Y axis as calculated above
-    devilTank = [[Character alloc] initWithEnemyTankImage];
     devilTank.scale=.5;
     devilTank.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:devilTank];
@@ -758,6 +757,42 @@
     
     [self addChild:player z:1000];
     
+}
+
+-(void) addCoin
+{
+    CCSprite *coin = [[Character alloc] initWithCoinImage];
+    
+    // Determine where to spawn the monster along the X axis
+    int minX = 50;
+    int maxX = winSize.width - 50;
+    int rangeX = maxX - minX;
+    int actualX = arc4random() % rangeX + minX;
+    
+//    NSLog(@"coin fallSpeed = %d", ((Character*)coin).fallSpeed);
+    
+    // Determine speed of the monster2
+    if(waveChanging == true)
+    {
+        minDuration = ((Character*)coin).endgameFallSpeed - 1;
+        maxDuration = ((Character*)coin).endgameFallSpeed + 1;
+    }
+    else
+    {
+        minDuration = ((Character*)coin).fallSpeed - 1;
+        maxDuration = ((Character*)coin).fallSpeed + 1;
+    }
+    int rangeDuration = maxDuration - minDuration;
+    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    
+    coin.position = CGPointMake(actualX, winSize.height + 10);
+    coin.scale = .5;
+    [self addChild:coin z:3];
+    [coinsArray addObject:coin];
+    
+    CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
+                                                position:ccp(actualX, -20)];
+    [coin runAction:actionMove];
 }
 
 -(id) init
@@ -790,6 +825,7 @@
         goodBombs = [[NSMutableArray alloc] init];
         badBombs = [[NSMutableArray alloc] init];
         zigZagScenarioEnemies = [[NSMutableArray alloc] init];
+        coinsArray = [[NSMutableArray alloc] init];
 //        badHelicopters = [[NSMutableArray alloc] init];
 
         framecount = 0;
@@ -811,6 +847,7 @@
         bigGoodGuyMaxX = 0;
         bigGoodGuyMinX = 0;
         immunityFramecount = 0;
+        coinInterludeCounter = 0;
 
         //deathFramecount = 60 * 30;
         //timeRemaining = 30;
@@ -831,6 +868,7 @@
         Scenario4 = false;
         isWalking = true;
         waveChanging = false;
+        coinInterlude = false;
         wave=1;
         immunity = false;
         orbsDeleted = 0;
@@ -1046,7 +1084,6 @@
 
 -(void) update:(ccTime)delta
 {
-    
 //    if(framecount % 500 == 0)
 //    {
 //        for(int i = 0; i < [goodGuysBottom count]; i++)
@@ -1104,8 +1141,6 @@
 //        score += (int)(pointsFramecount/60);
 //    }
     
-    framecount++;
-    
 //    if(framecount % 50 == 0)
 //    {
 //        CCSprite *fakeBullet = [[Character alloc] initWithGoodGuyBulletImage];
@@ -1117,6 +1152,8 @@
 //    {
 //        NSLog(@"good guys bottom count = %lu, bad guys bottom count = %lu", (unsigned long)[goodGuysBottom count], (unsigned long)[badGuysBottom count]);
 //    }
+    
+        framecount++;
     
     if([bananaArray count] > 0)
     {
@@ -1154,35 +1191,19 @@
         }
     }
     
-    if(waveChanging == true)
+    if(Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true && waveChanging == false)
     {
-        waveChangeCounter++;
-        if(waveChangeCounter == 5)
-        {
-            [self waveChangeAnimation];
-        } 
-        if (waveChangeCounter == 300)
-        {
-            waveChanging = false;
-            waveChangeCounter = 0;
-            NSLog(@"wavechanging is false");
-        }
-    }
-    else
-    {
-        if(Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true)
-        {
-            scenarioDelayCounter++;
-            
-            if(scenarioDelayCounter % scenarioDelay == 0)
-            {
-                NSLog(@"called create scenario");
-                [self createScenario];
-                scenarioDelayCounter = 0;
-            }
-        }
-    }
+        scenarioDelayCounter++;
         
+        if(scenarioDelayCounter % scenarioDelay == 0)
+        {
+            NSLog(@"called create scenario");
+            [self createScenario];
+            scenarioDelayCounter = 0;
+        }
+    }
+
+    
     if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true && waveChanging == false && (scenarioDelay - scenarioDelayCounter) > 80)
     {
 //        if((firstZigZag == true || zigZagDelayCounter % 250 == 0) && (firstBigMonster == true || bigMonsterDelayCounter % 200 == 0))
@@ -1209,16 +1230,48 @@
             {
 //                NSLog(@"add enemy melee");
 //  need to make it so that zizZag spawns sometimes          arc4random()
-//                [self addEnemyMelee];
-                [self addEnemyRegularShooter];
+                [self addEnemyMelee];
+
             }
             if(framecount % enemyRegularShooterFramecount == 0 && enemyRegularShooterAvailable == true)
             {
 //                NSLog(@"add enemy regular shooter");
                 [self addEnemyRegularShooter];
             }
+        
+            if(framecount % gameplayCoinFramecount == 0)
+            {
+                [self addCoin];
+            }
 //        }
     }
+    
+    if(waveChanging == true)
+    {
+        if((framecount % endgameCoinFramecount == 0) && (endgameCoinCount < endgameCoinTotal))
+        {
+            NSLog(@"should add coin");
+            endgameCoinCount++;
+            [self addCoin];
+            if(endgameCoinTotal == endgameCoinCount)
+            {
+                coinInterlude = true;
+            }
+        }
+        
+        if(coinInterlude == true)
+        {
+            coinInterludeCounter++;
+            if(coinInterludeCounter == 150)
+            {
+                coinInterlude = false;
+                coinInterludeCounter = 0;
+                waveChanging = false;
+                [self youWin];
+            }
+        }
+    }
+    
     
 //    if([badBulletArray count] > 0)
 //    {
@@ -1374,6 +1427,10 @@
     if ([Kmonsters count] > 0)
     {
         [self detectKmonsterCollisions];
+    }
+    if([coinsArray count] > 0)
+    {
+        [self detectBananaCoinCollisions];
     }
 
         
@@ -1828,6 +1885,10 @@
     for (CCSprite *s in deadGoodGuys)
     {
         [goodGuys removeObject:s];
+        if(((Character*)s).type == GOOD_HELICOPTER_BOMB)
+        {
+            [goodBombs removeObject:s];
+        }
 //        NSLog(@"removed from good guy array");
     }
     [deadGoodGuys removeAllObjects];
@@ -1979,6 +2040,55 @@
        // NSLog(@"removed goodGuy");
     }
     [deadBadGuys removeAllObjects];
+}
+
+-(void) detectBananaCoinCollisions
+{
+    NSMutableArray *deadBananas = [[NSMutableArray alloc] init];
+    NSMutableArray *deadCoins = [[NSMutableArray alloc] init];
+    
+    for(int j = 0; j < [coinsArray count]; j++)
+    {
+        for(int i = 0; i < [bananaArray count]; i++)
+        {
+            if([bananaArray count] > 0 && [coinsArray count] > 0)
+            {
+                CCSprite* coin = [coinsArray objectAtIndex:j];
+                CGRect coinRect = [coin boundingBox];
+                projectile = [bananaArray objectAtIndex:i];
+                CGRect projectileBox = [projectile boundingBox];
+                
+                if(CGRectIntersectsRect(coinRect, projectileBox))
+                {
+                    if (projectile.position.y < winSize.height - 5)
+                    {
+                        ((Character*)coin).health -= ((Character*)projectile).power;
+                        [deadBananas addObject:projectile];
+                        if(((Character*)coin).health <= 0)
+                        {
+                            [deadCoins addObject:coin];
+                            [self addCoins:((Character*)coin).worth];
+                        }
+                    }
+                }
+            }
+        }
+    }
+    for (CCSprite *s in deadBananas)
+    {
+        [bananaArray removeObject:s];
+        [self removeChild:s cleanup:YES];
+        //NSLog(@"removed banana");
+    }
+    [deadBananas removeAllObjects];
+    for (CCSprite *s in deadCoins)
+    {
+        [coinsArray removeObject:s];
+        [self dying:s :dyingAnimationLength];
+        // NSLog(@"removed goodGuy");
+    }
+    [deadCoins removeAllObjects];
+
 }
 
 -(void)detectReachBottom
@@ -2786,6 +2896,7 @@
 -(void)createScenario
 {
     scenarioNumber = [self generateRandomNumber];
+    scenarioNumber = 3;
     NSLog(@"scenario number = %d", scenarioNumber);
     
     if (scenarioNumber == 1)
@@ -3127,7 +3238,18 @@
 {
     NSMutableArray *deadGoodGuys = [[NSMutableArray alloc] init];
     NSMutableArray *deadBadGuys = [[NSMutableArray alloc] init];
- 
+    
+    for(int j = 0; j < [goodGuysBottom count]; j++)
+    {
+        CCSprite *angel = [goodGuysBottom objectAtIndex:j];
+        ((Character*)angel).attacked = false;
+    }
+    for (int f = 0; f < [badGuysBottom count]; f++)
+    {
+        CCSprite *devil = [badGuysBottom objectAtIndex:f];
+        ((Character*)devil).attacked = false;
+    }
+    
     for(int j = 0; j < [goodGuysBottom count]; j++)
     {
         for (int f = 0; f < [badGuysBottom count]; f++)
@@ -3154,9 +3276,10 @@
                     ((Character*)fightingAngel).melee = true;
                     ((Character*)fightingDevil).melee = true;
                
-                    if(framecount % ((Character*)fightingAngel).attackFrequency == 0 && ((Character*)fightingAngel).type == GOOD_KNIFE)
+                    if(framecount % ((Character*)fightingAngel).attackFrequency == 0 && ((Character*)fightingAngel).type == GOOD_KNIFE && ((Character*)fightingAngel).attacked == false)
                     {
                         [self angel1attackAnimation:fightingAngel];
+                        ((Character*)fightingAngel).attacked = true;
                         
                         if(((Character*)fightingDevil).type == BAD_BASE)
                         {
@@ -3166,7 +3289,7 @@
                         else
                         {
                             //delay actual subtraction of health to allow time for animation to run
-                            double delayInSeconds = 1.0;
+                            double delayInSeconds = 0.3;
                             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
                             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                                 ((Character*)fightingDevil).health -= (int)((Character*)fightingAngel).power;
@@ -3174,9 +3297,10 @@
                         }
                     }
                     
-                    if(framecount % ((Character*)fightingDevil).attackFrequency == 0 && immunity == false && ((Character*)fightingDevil).type == BAD_KNIFE)
+                    if(framecount % ((Character*)fightingDevil).attackFrequency == 0 && immunity == false && ((Character*)fightingDevil).type == BAD_KNIFE && ((Character*)fightingDevil).attacked == false)
                     {
                         [self devil1attackAnimation:fightingDevil];
+                        ((Character*)fightingDevil).attacked = true;
                         
                         if(((Character*)fightingAngel).type == GOOD_BASE)
                         {
@@ -3186,7 +3310,7 @@
                         else
                         {
                             //delay actual subtraction of health to allow time for animation to run
-                            double delayInSeconds = 1.0;
+                            double delayInSeconds = 0.3;
                             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
                             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                                 ((Character*)fightingAngel).health -= (int)((Character*)fightingDevil).power;
@@ -3211,7 +3335,14 @@
                         {
                             [self angelTankAttackAnimation:fightingAngel];
                         }
-                        [self angelShoot:fightingAngel];
+                        
+                        //delay actual subtraction of health to allow time for animation to run
+                        double delayInSeconds = 0.3;
+                        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                            [self angelShoot:fightingAngel];
+                        });
+                        
                         //                        int angelAttackFrequency = ((Character*)fightingAngel).attackFrequency;
                         //                        NSLog(@"angel attack frequency = %d", angelAttackFrequency);
                     }
@@ -3224,7 +3355,7 @@
                         if(((Character*)fightingDevil).type == BAD_GUY)
                         {
                             [self devil2attackAnimation:fightingDevil];
-                            NSLog(@"devil regular shooter attack called");
+//                            NSLog(@"devil regular shooter attack called");
                         }
                         if(((Character*)fightingDevil).type == BAD_FASTSHOOTER)
                         {
@@ -3233,9 +3364,15 @@
                         if(((Character*)fightingDevil).type == BIG_MONSTER)
                         {
                             [self devilTankAttackAnimation:fightingDevil];
-                            NSLog(@"devil tank attack called");
+//                            NSLog(@"devil tank attack called");
                         }
-                        [self devilShoot:fightingDevil];
+                        //delay actual subtraction of health to allow time for animation to run
+                        double delayInSeconds = 0.3;
+                        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                            [self devilShoot:fightingDevil];
+                        });
+                        
                     }
                 }
                 
@@ -3247,7 +3384,6 @@
                         ((Character*)fightingDevil).melee = false;
                     }
 //                    NSLog(@"dying method called for angel");
-                    
                 }
                 
                 if(((Character*)fightingDevil).health <= 0)
@@ -3879,11 +4015,11 @@
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *attackAnimation = [CCAnimation animationWithFrames: attackFrames delay:0.1f];
+    CCAnimation *attackAnimation = [CCAnimation animationWithFrames: attackFrames delay:0.25f];
     
     //Create an action with the animation that can then be assigned to a sprite
     
-    CCAction *attack = [CCAnimate actionWithDuration:2.0f animation:attackAnimation restoreOriginalFrame:NO];
+    CCAction *attack = [CCAnimate actionWithDuration:1.0f animation:attackAnimation restoreOriginalFrame:NO];
     
     //tell the bear to run the taunting action
     [angel runAction:attack];
@@ -3929,7 +4065,6 @@
     
     //tell the bear to run the taunting action
     [devil runAction:attack];
-
 }
 
 -(void) angelShoot:(CCSprite*) angel
@@ -3964,7 +4099,12 @@
     CCMoveTo *shootRight = [CCMoveTo actionWithDuration:25
                                               position:ccp(2000, goodBullet.position.y)];
     
-    [goodBullet runAction:shootRight];
+//    //delay actual subtraction of health to allow time for animation to run
+//    double delayInSeconds = 0.3;
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [goodBullet runAction:shootRight];
+//    });
 }
 
 -(void) devilShoot:(CCSprite*) devil
@@ -3988,10 +4128,8 @@
         badBullet.position = ccp(devilX - devil.contentSize.width, devilY + 15);
         badBullet.color = ccc3(100,0,0);
         NSLog(@"shot tank bomb");
-   
     }
 
-    
     badBullet.anchorPoint = CGPointZero;
     
     [self addChild:badBullet z:3];
@@ -4000,8 +4138,15 @@
     CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:25
                                               position:ccp(-2000, badBullet.position.y)];
     
-    [badBullet runAction:shootLeft];
+    //delay actual subtraction of health to allow time for animation to run
+    double delayInSeconds = 0.3;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [badBullet runAction:shootLeft];
+    });
+    
 }
+
 -(void) devil1attackAnimation:(CCSprite*) devil
 {
     //animation
@@ -4177,7 +4322,7 @@
         }
         if(((Character*)character).type == BAD_BASE)
         {
-            [self youWin];
+            waveChanging = true;
             NSLog(@"called you win");
         }
         [self removeChild:character cleanup:YES];
@@ -4348,8 +4493,10 @@
                     //NSLog(NSStringFromCGRect(bulletBox));
                     
                     
-                    if(CGRectIntersectsRect(goodBottomRect,badBulletBox)) /* && ((Character*)goodBottom).immunity >= immunityFramecount)*/
+                    if(CGRectIntersectsRect(goodBottomRect,badBulletBox) && ((Character*)badBullet).attacked == false) /* && ((Character*)goodBottom).immunity >= immunityFramecount)*/
                     {
+                        ((Character*)badBullet).attacked = true;
+                        
                         if(((Character*)goodBottom).type == GOOD_BASE)
                         {
                             NSLog(@"called subtract good base health in bullet detection");
@@ -4387,8 +4534,10 @@
                 goodBullet = [goodBulletArray objectAtIndex:j];
                 goodBulletBox = [goodBullet boundingBox];
             
-                if(CGRectIntersectsRect(badBottomRect,goodBulletBox)) //&& ((Character*)badBottom).immunity >= immunityFramecount)
+                if(CGRectIntersectsRect(badBottomRect,goodBulletBox) && ((Character*)goodBullet).attacked == false) //&& ((Character*)badBottom).immunity >= immunityFramecount)
                 {
+                    ((Character*)goodBullet).attacked = true;
+                    
                     if(((Character*)badBottom).type == BAD_BASE)
                     {
                         NSLog(@"called subtract bad base health in bullet detection");
@@ -4418,8 +4567,9 @@
                 badBottomRect = [badBottom boundingBox];
                 goodBullet = [goodBombs objectAtIndex:j];
                 goodBulletBox = [goodBullet boundingBox];
+                goodBulletBox.size.height -= 50;
                 
-                if(CGRectIntersectsRect(badBottomRect,goodBulletBox))
+                if(CGRectIntersectsRect(badBottomRect,goodBulletBox) && abs(goodBullet.position.y - badBottom.position.y) < 45)
                 {
                     if(((Character*)badBottom).type == BAD_BASE)
                     {
@@ -4435,9 +4585,6 @@
                         }
                     }
                     [deadGoodBombs addObject:goodBullet];
-                    
-                    
-                    
                 }
             }
         }
@@ -4453,8 +4600,9 @@
                 goodBottomRect = [goodBottom boundingBox];
                 badBullet = [badBombs objectAtIndex:j];
                 badBulletBox = [badBullet boundingBox];
+                badBulletBox.size.height -= 50;
                 
-                if(CGRectIntersectsRect(goodBottomRect,badBulletBox))
+                if(CGRectIntersectsRect(goodBottomRect,badBulletBox) && abs(goodBottom.position.y - badBullet.position.y) < 45)
                 {
                     if(((Character*)goodBottom).type == GOOD_BASE)
                     {
@@ -4916,8 +5064,6 @@
 //    [badBaseHealthLabel setString:[NSString stringWithFormat:@"Enemy Base Health: %d",((Character*) badBase).health]];
     //Scenario4 = true;
     
-   
-
     waveChanging = true;
     
     NSNumber* NSHighestLevelUnlocked = [[NSUserDefaults standardUserDefaults] objectForKey:@"highestLevelUnlocked"];
@@ -4945,11 +5091,12 @@
         {
             [goodGuysBottom removeObject:goodBase];
             goodBaseImageChangeCount = 1;
+            
             goodBase = [[Character alloc] initWithGoodGuyBaseImage2];
             goodBase.position = ccp(50, BASE_HEIGHT);
             goodBase.scale =.6;
             ((Character*)goodBase).health = healthCount;
-            [self addChild:goodBase z:1];
+            [self addChild:goodBase z:2];
             [goodGuysBottom addObject:goodBase];
             NSLog(@"good base 2");
         }
@@ -4961,7 +5108,7 @@
             goodBase.position = ccp(50, BASE_HEIGHT);
             goodBase.scale =.6;
             ((Character*)goodBase).health = healthCount;
-            [self addChild:goodBase z:1];
+            [self addChild:goodBase z:3];
             [goodGuysBottom addObject:goodBase];
             NSLog(@"good base 3");
         }
@@ -4987,7 +5134,7 @@
             badBase.position = ccp(winSize.width - 50, BASE_HEIGHT);
             badBase.scale = .6;
             ((Character*)badBase).health = healthCount;
-            [self addChild:badBase z:1];
+            [self addChild:badBase z:2];
             [badGuysBottom addObject:badBase];
             NSLog(@"bad base 2");
         }
@@ -4999,7 +5146,7 @@
             badBase.position = ccp(winSize.width - 50, BASE_HEIGHT);
             badBase.scale = .6;
             ((Character*)badBase).health = healthCount;
-            [self addChild:badBase z:1];
+            [self addChild:badBase z:3];
             [badGuysBottom addObject:badBase];
             NSLog(@"bad base 3");
         }
@@ -5382,6 +5529,20 @@
     [GameData sharedData].friendlyFastShooterAvailable = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterAvailable"] boolValue];
     friendlyFastShooterFramecount = [[friendlyFastShooterDict objectForKey:@"spawnRate"] intValue];
     NSLog(@"friendly fast shooter available = %d", [GameData sharedData].friendlyFastShooterAvailable);
+    
+    NSMutableDictionary* coinDict = [levelDictionary objectForKey:@"coin"];
+    endgameCoinFramecount = 20 + [[coinDict objectForKey:@"endgameFrequency"] intValue];
+    gameplayCoinFramecount = 500 + [[coinDict objectForKey:@"gameplayFrequency"] intValue];
+    endgameCoinTotal = 10 + [[coinDict objectForKey:@"endgameCoinTotal"] intValue];
+}
+
+-(void) addCoins:(int)numCoins
+{
+    int currentCoins = [[[NSUserDefaults standardUserDefaults] objectForKey:@"coins"] intValue];
+    int newCoins = currentCoins + numCoins;
+    NSNumber *newNSCoins = [NSNumber numberWithInt:newCoins];
+    [[NSUserDefaults standardUserDefaults] setObject:newNSCoins forKey:@"coins"];
+    NSLog(@"coins = %@", newNSCoins);
 }
 
 /*

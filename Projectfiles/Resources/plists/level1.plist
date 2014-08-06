@@ -107,6 +107,19 @@
 		<key>attackFrequency</key>
 		<integer>0</integer>
 	</dict>
+	<key>coin</key>
+	<dict>
+		<key>gameplayFallSpeed</key>
+		<integer>0</integer>
+		<key>gameplayFrequency</key>
+		<integer>0</integer>
+		<key>endgameFallSpeed</key>
+		<integer>0</integer>
+		<key>endgameFrequency</key>
+		<integer>0</integer>
+		<key>endgameCoinTotal</key>
+		<integer>0</integer>
+	</dict>
 	<key>scoreCounter</key>
 	<integer>0</integer>
 	<key>coinCounter</key>

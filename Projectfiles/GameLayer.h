@@ -84,6 +84,11 @@
     int enemyHelicopterCount;
     int devilStartingWidth;
     int angelStartingWidth;
+    int endgameCoinFramecount;
+    int gameplayCoinFramecount;
+    int endgameCoinTotal;
+    int endgameCoinCount;
+    int coinInterludeCounter;
     double zigZagPercentage;
     double explosionAnimationLength;
     double dyingAnimationLength;
@@ -148,6 +153,7 @@
     NSMutableArray *goodBombs;
     NSMutableArray *badBombs;
     NSMutableArray *zigZagScenarioEnemies;
+    NSMutableArray *coinsArray;
 //    NSMutableArray *badHelicopters;
     NSString *levelString;
     NSString *enemiesKilledString;
@@ -188,6 +194,8 @@
     BOOL enemyFastShooterAvailable;
     BOOL badBaseExploded;
     BOOL goodBaseExploded;
+    BOOL coinInterlude;
+    
     CCLabelTTF *waveLabel;
     CCLabelTTF *goodBaseHealthLabel;
     CCLabelTTF *badBaseHealthLabel;
@@ -205,6 +213,7 @@
 -(void) draw;
 -(void) detectBananaGoodGuyCollisions;
 -(void) detectBananaBadGuyCollisions;
+-(void) detectBananaCoinCollisions;
 -(void) detectReachBottom;
 -(void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
 -(void) addFriendlyRegularShooter;
@@ -219,6 +228,7 @@
 -(void) addEnemyTank;
 -(void) addFriendlyTank;
 -(void) addEnemyHelicopter;
+-(void) addCoin;
 -(void) addLevel;
 -(void) subtractLevel;
 -(void) changeLevel;
@@ -262,5 +272,6 @@
 -(void) addImmunity;
 -(void) addBadRedBar;
 -(void) loadLevelSettings;
+-(void) addCoins:(int)numCoins;
 
 @end
