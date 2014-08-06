@@ -29,6 +29,7 @@
 @synthesize shootLevel;
 @synthesize fastShootLevel;
 @synthesize tankLevel;
+@synthesize coinsGained;
 
 
 //static variable - this stores our singleton instance

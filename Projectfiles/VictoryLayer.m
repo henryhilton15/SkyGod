@@ -50,6 +50,12 @@
         CCMenu *victoryMenu = [CCMenu menuWithItems:continueButton, shopButton, levelSelectButton, nil];
         [self addChild: victoryMenu z:1];
         
+        CCLabelTTF* coinsWonLabel = [CCLabelTTF labelWithString:@" " fontName:@"Marker Felt" fontSize:35];
+        [coinsWonLabel setString:[NSString stringWithFormat:@"coins won: %d", [GameData sharedData].coinsGained]];
+        coinsWonLabel.position = CGPointMake(winSize.width * .5, winSize.height * .75);
+        coinsWonLabel.color = ccBLACK;
+        [self addChild:coinsWonLabel];
+        
     }
     return self;
 }
@@ -58,7 +64,6 @@
 {
     [GameData sharedData].currentLevelSelected++;
     [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
-    NSLog(@"hit continue button");
 }
 
 -(void) shop: (CCMenuItem *)shopButton

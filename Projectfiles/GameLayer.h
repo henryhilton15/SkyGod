@@ -89,6 +89,7 @@
     int endgameCoinTotal;
     int endgameCoinCount;
     int coinInterludeCounter;
+    int coinDelayCounter;
     double zigZagPercentage;
     double explosionAnimationLength;
     double dyingAnimationLength;
@@ -202,6 +203,7 @@
     CCLabelTTF *levelLabel;
     CCLabelTTF *enemiesKilledLabel;
     CCLabelTTF *timeRemainingLabel;
+    CCLabelTTF *bonusCoinsLabel;
     
 
     

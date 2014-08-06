@@ -16,7 +16,7 @@
 //nonatomic properties have better performance than atomic properties (so use them!)
 
 @property (nonatomic) int score;
-@property int rank;
+@property (nonatomic) int rank;
 @property (nonatomic) BOOL sfx;
 @property (nonatomic) BOOL musicPlaying;
 @property (nonatomic) int currentLevelSelected;
@@ -34,6 +34,7 @@
 @property (nonatomic) int shootLevel;
 @property (nonatomic) int fastShootLevel;
 @property (nonatomic) int tankLevel;
+@property (nonatomic) int coinsGained;
 
 
 
