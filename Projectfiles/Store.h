@@ -11,8 +11,21 @@
 @interface Store : CCLayer
 {
     CCLabelTTF *StoreLabel;
+    CCLabelTTF *meleePrice;
+    CCLabelTTF *shooterPrice;
+    CCLabelTTF *fastShooterPrice;
+    CCLabelTTF *tankPrice;
+    CCLabelTTF *airstrikePrice;
+    CCLabelTTF *reinforcementsPrice;
+    CCLabelTTF *immunityPrice;
+    CCLabelTTF *meleeRank;
+    CCLabelTTF *shooterRank;
+    CCLabelTTF *fastShooterRank;
+    CCLabelTTF *tankRank;
     int coins;
     NSNumber *NSCoins;
+    CGSize winSize;
+
 }
 
 -(id) init;

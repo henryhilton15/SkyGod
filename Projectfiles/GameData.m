@@ -18,6 +18,17 @@
 @synthesize friendlyMeleeAvailable;
 @synthesize friendlyRegularShooterAvailable;
 @synthesize friendlyFastShooterAvailable;
+@synthesize meleePrice;
+@synthesize shootPrice;
+@synthesize fastShootPrice;
+@synthesize tankPrice;
+@synthesize airPrice;
+@synthesize reinforcePrice;
+@synthesize immunityPrice;
+@synthesize meleeLevel;
+@synthesize shootLevel;
+@synthesize fastShootLevel;
+@synthesize tankLevel;
 
 
 //static variable - this stores our singleton instance
@@ -42,6 +53,8 @@ static GameData *sharedData = nil;
         //sharedData.arrayOfDataToBeStored = [[NSMutableArray alloc] init];
         
         sharedData.currentLevelSelected = 1;
+        
+        
     }
     
     //if the singleton instance is already created, return it
