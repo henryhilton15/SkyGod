@@ -30,13 +30,10 @@
 @property (nonatomic) int airPrice;
 @property (nonatomic) int reinforcePrice;
 @property (nonatomic) int immunityPrice;
-@property (nonatomic) int meleeLevel;
-@property (nonatomic) int shootLevel;
-@property (nonatomic) int fastShootLevel;
-@property (nonatomic) int tankLevel;
 @property (nonatomic) int coinsGained;
-
-
+@property (nonatomic) int airstrikeCount;
+@property (nonatomic) int reinforcementsCount;
+@property (nonatomic) int immunityCount;
 
 
 //Static (class) method:

@@ -27,35 +27,32 @@
                 [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Undaunted.wav" loop:YES];
             }
         }
+        NSNumber *NSRank1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"];
+        int rank1 = [NSRank1 intValue];
         
-        if ([GameData sharedData].meleePrice == 0)
-        {
-            [GameData sharedData].meleePrice = 50;
-        }
-        if ([GameData sharedData].shootPrice == 0)
-        {
-            [GameData sharedData].shootPrice = 50;
-        }
-        if ([GameData sharedData].fastShootPrice == 0)
-        {
-            [GameData sharedData].fastShootPrice = 50;
-        }
-        if ([GameData sharedData].tankPrice == 0)
-        {
-            [GameData sharedData].tankPrice = 50;
-        }
-        if ([GameData sharedData].airPrice == 0)
-        {
+            [GameData sharedData].meleePrice = (rank1 + 1) * 50;
+        
+        NSNumber *NSRank2 = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"];
+        int rank2 = [NSRank2 intValue];
+        
+            [GameData sharedData].shootPrice = (rank2 + 1) * 50;
+        
+        NSNumber *NSRank3 = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterRank"];
+        int rank3 = [NSRank3 intValue];
+        
+            [GameData sharedData].fastShootPrice = (rank3 + 1) * 50;
+        
+        NSNumber *NSRank4 = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankRank"];
+        int rank4 = [NSRank4 intValue];
+ 
+            [GameData sharedData].tankPrice = (rank4 + 1) * 50;
+   
             [GameData sharedData].airPrice = 50;
-        }
-        if ([GameData sharedData].reinforcePrice == 0)
-        {
+   
             [GameData sharedData].reinforcePrice = 50;
-        }
-        if ([GameData sharedData].immunityPrice == 0)
-        {
+   
             [GameData sharedData].immunityPrice = 50;
-        }
+        
         
         
         CGSize winSize = [CCDirector sharedDirector].winSize;
@@ -219,6 +216,37 @@
         tankRank.position = CGPointMake(winSize.width * .875, 170);
         tankRank.color = ccBLACK;
         [self addChild:tankRank z:4];
+        
+        
+        if ([GameData sharedData].immunityCount == 0)
+        {
+            immunityCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+            [immunityCount setString:[NSString stringWithFormat:@"%d", [GameData sharedData].immunityCount]];
+            immunityCount.position = CGPointMake(winSize.width * .625, 40);
+            immunityCount.color = ccBLACK;
+            [self addChild:immunityCount z:4];
+        }
+
+        if ([GameData sharedData].reinforcementsCount == 0)
+        {
+            reinforcemtsCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+            [reinforcemtsCount setString:[NSString stringWithFormat:@"%d", [GameData sharedData].reinforcementsCount]];
+            reinforcemtsCount.position = CGPointMake(winSize.width * .375, 40);
+            reinforcemtsCount.color = ccBLACK;
+            [self addChild:reinforcemtsCount z:4];
+        }
+
+        if ([GameData sharedData].airstrikeCount == 0)
+        {
+            airstrikeCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+            [airstrikeCount setString:[NSString stringWithFormat:@"%d", [GameData sharedData].airstrikeCount]];
+            airstrikeCount.position = CGPointMake(winSize.width * .125, 40);
+            airstrikeCount.color = ccBLACK;
+            [self addChild:airstrikeCount z:4];
+        }
+
+        
+
 
 
 
@@ -500,6 +528,15 @@
         NSCoins = [NSNumber numberWithInt:coins];
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
+        
+        [self removeChild:immunityCount];
+        [GameData sharedData].immunityCount++;
+        immunityCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [immunityCount setString:[NSString stringWithFormat:@"%d", [GameData sharedData].immunityCount]];
+        immunityCount.position = CGPointMake(winSize.width * .625, 40);
+        immunityCount.color = ccBLACK;
+        [self addChild:immunityCount z:4];
+        
     }
     
     else
@@ -528,6 +565,14 @@
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
         NSLog(@"airstrike available = %@", newNumAvailable);
         NSLog(@"coins = %@", NSCoins);
+        
+        [self removeChild:airstrikeCount];
+        [GameData sharedData].airstrikeCount++;
+        airstrikeCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [airstrikeCount setString:[NSString stringWithFormat:@"%d", [GameData sharedData].airstrikeCount]];
+        airstrikeCount.position = CGPointMake(winSize.width * .125, 40);
+        airstrikeCount.color = ccBLACK;
+        [self addChild:airstrikeCount z:4];
     }
     
     else
@@ -555,6 +600,14 @@
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
         NSLog(@"reinforcement available = %@", newNumAvailable);
         NSLog(@"coins = %@", NSCoins);
+        
+        [self removeChild:reinforcemtsCount];
+        [GameData sharedData].reinforcementsCount++;
+        reinforcemtsCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [reinforcemtsCount setString:[NSString stringWithFormat:@"%d", [GameData sharedData].reinforcementsCount]];
+        reinforcemtsCount.position = CGPointMake(winSize.width * .375, 40);
+        reinforcemtsCount.color = ccBLACK;
+        [self addChild:reinforcemtsCount z:4];
     }
     
     else

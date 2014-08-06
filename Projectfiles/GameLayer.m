@@ -2717,9 +2717,6 @@
         }
         [deadGoodBombs removeAllObjects];
     }
-
-   
-
     
 }
 
