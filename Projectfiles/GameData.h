@@ -23,8 +23,17 @@
 @property (nonatomic) BOOL friendlyRegularShooterAvailable;
 @property (nonatomic) BOOL friendlyMeleeAvailable;
 @property (nonatomic) BOOL friendlyFastShooterAvailable;
-
-
+@property (nonatomic) int meleePrice;
+@property (nonatomic) int shootPrice;
+@property (nonatomic) int fastShootPrice;
+@property (nonatomic) int tankPrice;
+@property (nonatomic) int airPrice;
+@property (nonatomic) int reinforcePrice;
+@property (nonatomic) int immunityPrice;
+@property (nonatomic) int meleeLevel;
+@property (nonatomic) int shootLevel;
+@property (nonatomic) int fastShootLevel;
+@property (nonatomic) int tankLevel;
 
 
 

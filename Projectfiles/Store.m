@@ -28,6 +28,36 @@
             }
         }
         
+        if ([GameData sharedData].meleePrice == 0)
+        {
+            [GameData sharedData].meleePrice = 50;
+        }
+        if ([GameData sharedData].shootPrice == 0)
+        {
+            [GameData sharedData].shootPrice = 50;
+        }
+        if ([GameData sharedData].fastShootPrice == 0)
+        {
+            [GameData sharedData].fastShootPrice = 50;
+        }
+        if ([GameData sharedData].tankPrice == 0)
+        {
+            [GameData sharedData].tankPrice = 50;
+        }
+        if ([GameData sharedData].airPrice == 0)
+        {
+            [GameData sharedData].airPrice = 50;
+        }
+        if ([GameData sharedData].reinforcePrice == 0)
+        {
+            [GameData sharedData].reinforcePrice = 50;
+        }
+        if ([GameData sharedData].immunityPrice == 0)
+        {
+            [GameData sharedData].immunityPrice = 50;
+        }
+        
+        
         CGSize winSize = [CCDirector sharedDirector].winSize;
         
         CCMenuItemImage *BuyButton1 = [CCMenuItemImage itemWithNormalImage:@"upgrades-button.png" selectedImage:@"upgrades-button.png"];
@@ -57,10 +87,12 @@
                                                                       selector:@selector(mainMenu:)];
         
         
+        
         CCMenuItemImage *regularShooterButton = [CCMenuItemImage itemWithNormalImage:@"a2-1.png"
                                                                        selectedImage:@"a2-1.png"
                                                                               target:self
                                                                             selector:@selector(upgradeRegularShooter:)];
+        
         
         CCMenuItemImage *fastShooterButton = [CCMenuItemImage itemWithNormalImage:@"a3-1.png"
                                                                     selectedImage:@"a3-1.png"
@@ -113,14 +145,83 @@
         //            spartanButton.position = CGPointMake(farLeftX, 200);
         //            helicopterButton.position = CGPointMake(centerLeftX, 200);
         //            immunityButton.position = CGPointMake(centerRightX, 200);
-        buyAirstrikeButton.position = CGPointMake(farLeftX, 200);
-        buyReinforcementButton.position = CGPointMake(centerLeftX, 200);
-        buyImmunityButton.position = CGPointMake(centerRightX, 200);
-        mainMenuButton.position = CGPointMake(farRightX, 200);
+        buyAirstrikeButton.position = CGPointMake(farLeftX, 160);
+        buyReinforcementButton.position = CGPointMake(centerLeftX, 160);
+        buyImmunityButton.position = CGPointMake(centerRightX, 160);
+        mainMenuButton.position = CGPointMake(farRightX, 160);
         mainMenuButton.scale = 0.5;
         
         CCMenu* storeMenu = [CCMenu menuWithItems:mainMenuButton, regularShooterButton, fastShooterButton, meleeButton, tankButton, buyAirstrikeButton, buyReinforcementButton, buyImmunityButton, nil];
         [self addChild:storeMenu];
+        
+        meleePrice = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [meleePrice setString:[NSString stringWithFormat:@"Price:%d", [GameData sharedData].meleePrice]];
+        meleePrice.position = CGPointMake(winSize.width * .125, 290);
+        meleePrice.color = ccBLACK;
+        [self addChild:meleePrice z:4];
+        
+        shooterPrice = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [shooterPrice setString:[NSString stringWithFormat:@"Price:%d", [GameData sharedData].shootPrice]];
+        shooterPrice.position = CGPointMake(winSize.width * .375, 290);
+        shooterPrice.color = ccBLACK;
+        [self addChild:shooterPrice z:4];
+        
+        fastShooterPrice = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [fastShooterPrice setString:[NSString stringWithFormat:@"Price:%d", [GameData sharedData].fastShootPrice]];
+        fastShooterPrice.position = CGPointMake(winSize.width * .625, 290);
+        fastShooterPrice.color = ccBLACK;
+        [self addChild:fastShooterPrice z:4];
+        
+        tankPrice = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [tankPrice setString:[NSString stringWithFormat:@"Price:%d", [GameData sharedData].tankPrice]];
+        tankPrice.position = CGPointMake(winSize.width * .875, 290);
+        tankPrice.color = ccBLACK;
+        [self addChild:tankPrice z:4];
+        
+        airstrikePrice = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [airstrikePrice setString:[NSString stringWithFormat:@"Price:%d", [GameData sharedData].airPrice]];
+        airstrikePrice.position = CGPointMake(winSize.width * .125, 120);
+        airstrikePrice.color = ccBLACK;
+        [self addChild:airstrikePrice z:4];
+        
+        reinforcementsPrice = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [reinforcementsPrice setString:[NSString stringWithFormat:@"Price:%d", [GameData sharedData].reinforcePrice]];
+        reinforcementsPrice.position = CGPointMake(winSize.width * .375, 120);
+        reinforcementsPrice.color = ccBLACK;
+        [self addChild:reinforcementsPrice z:4];
+        
+        immunityPrice = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [immunityPrice setString:[NSString stringWithFormat:@"Price:%d", [GameData sharedData].immunityPrice]];
+        immunityPrice.position = CGPointMake(winSize.width * .625, 120);
+        immunityPrice.color = ccBLACK;
+        [self addChild:immunityPrice z:4];
+        
+        meleeRank = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [meleeRank setString:[NSString stringWithFormat:@"Lvl:%@/5", [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"]]];
+        meleeRank.position = CGPointMake(winSize.width * .125, 170);
+        meleeRank.color = ccBLACK;
+        [self addChild:meleeRank z:4];
+        
+        shooterRank = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [shooterRank setString:[NSString stringWithFormat:@"Lvl:%@/5", [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"]]];
+        shooterRank.position = CGPointMake(winSize.width * .375, 170);
+        shooterRank.color = ccBLACK;
+        [self addChild:shooterRank z:4];
+        
+        fastShooterRank = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [fastShooterRank setString:[NSString stringWithFormat:@"Lvl:%@/5", [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterRank"]]];
+        fastShooterRank.position = CGPointMake(winSize.width * .625, 170);
+        fastShooterRank.color = ccBLACK;
+        [self addChild:fastShooterRank z:4];
+        
+        tankRank = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [tankRank setString:[NSString stringWithFormat:@"Lvl:%@/5", [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankRank"]]];
+        tankRank.position = CGPointMake(winSize.width * .875, 170);
+        tankRank.color = ccBLACK;
+        [self addChild:tankRank z:4];
+
+
+
     }
     return self;
 }
@@ -132,9 +233,11 @@
 
 - (void) upgradeRegularShooter: (CCMenuItemImage *) regularShooterButton
 {
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+
     NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"];
     int rank = [NSRank intValue];
-    int price = 50 + (50 * rank);
+    int price = [GameData sharedData].shootPrice;
     if(coins > price)
     {
         rank++;
@@ -147,20 +250,43 @@
         NSCoins = [NSNumber numberWithInt:coins];
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
+        
+        [GameData sharedData].shootPrice = rank * 50 + 50;
+        
+        [self removeChild:shooterPrice];
+        
+        shooterPrice = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [shooterPrice setString:[NSString stringWithFormat:@"Price:%d", [GameData sharedData].shootPrice]];
+        shooterPrice.position = CGPointMake(winSize.width * .375, 290);
+        shooterPrice.color = ccBLACK;
+        [self addChild:shooterPrice z:4];
+        
+        [self removeChild:shooterRank];
+        
+        shooterRank = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [shooterRank setString:[NSString stringWithFormat:@"Lvl:%@/5", [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"]]];
+        shooterRank.position = CGPointMake(winSize.width * .375, 170);
+        shooterRank.color = ccBLACK;
+        [self addChild:shooterRank z:4];
+
     }
     else
     {
         NSLog(@"can't afford that!");
     }
+
 }
 
 - (void) upgradeMelee: (CCMenuItemImage *) meleeButton
 {
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+
     NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"];
     int rank = [NSRank intValue];
-    int price = 50 + (50 * rank);
+    int price = [GameData sharedData].meleePrice;
     if(coins > price)
     {
+ 
         rank++;
         NSNumber *newRank = [NSNumber numberWithInt:rank];
         [[NSUserDefaults standardUserDefaults] setObject:newRank forKey: @"friendlyMeleeRank"];
@@ -169,6 +295,26 @@
         NSCoins = [NSNumber numberWithInt:coins];
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
+        
+        [GameData sharedData].meleePrice = rank * 50 + 50;
+        
+        [self removeChild:meleePrice];
+        
+        meleePrice = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [meleePrice setString:[NSString stringWithFormat:@"Price:%d", [GameData sharedData].meleePrice]];
+        meleePrice.position = CGPointMake(winSize.width * .125, 290);
+        meleePrice.color = ccBLACK;
+        [self addChild:meleePrice z:4];
+
+        
+        [self removeChild:meleeRank];
+
+        meleeRank = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [meleeRank setString:[NSString stringWithFormat:@"Lvl:%@/5", [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"]]];
+        meleeRank.position = CGPointMake(winSize.width * .125, 170);
+        meleeRank.color = ccBLACK;
+        [self addChild:meleeRank z:4];
+
     }
     else
     {
@@ -178,9 +324,11 @@
 
 - (void) upgradeFastShooter: (CCMenuItemImage *) fastShooterButton
 {
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+
     NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterRank"];
     int rank = [NSRank intValue];
-    int price = 50 + (50 * rank);
+    int price = [GameData sharedData].fastShootPrice;
     if(coins > price)
     {
         rank++;
@@ -193,6 +341,24 @@
         NSCoins = [NSNumber numberWithInt:coins];
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
+        
+        [GameData sharedData].fastShootPrice = rank * 50 + 50;
+        
+        [self removeChild:fastShooterPrice];
+        
+        fastShooterPrice = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [fastShooterPrice setString:[NSString stringWithFormat:@"Price:%d", [GameData sharedData].fastShootPrice]];
+        fastShooterPrice.position = CGPointMake(winSize.width * .625, 290);
+        fastShooterPrice.color = ccBLACK;
+        [self addChild:fastShooterPrice z:4];
+        
+        [self removeChild:fastShooterRank];
+        
+        fastShooterRank = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [fastShooterRank setString:[NSString stringWithFormat:@"Lvl:%@/5", [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterRank"]]];
+        fastShooterRank.position = CGPointMake(winSize.width * .625, 170);
+        fastShooterRank.color = ccBLACK;
+        [self addChild:fastShooterRank z:4];
     }
     else
     {
@@ -202,9 +368,11 @@
 
 -(void) upgradeSpartan: (CCMenuItemImage *) spartanButton
 {
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+
     NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"spartanRank"];
     int rank = [NSRank intValue];
-    int price = 50 + (50 * rank);
+    int price = [GameData sharedData].reinforcePrice;
     if(coins > price)
     {
         rank++;
@@ -215,6 +383,7 @@
         NSCoins = [NSNumber numberWithInt:coins];
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
+        
     }
     else
     {
@@ -224,9 +393,11 @@
 
 -(void) upgradeHelicopter: (CCMenuItemImage *) helicopterButton
 {
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+
     NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyHelicopterRank"];
     int rank = [NSRank intValue];
-    int price = 50 + (50 * rank);
+    int price = [GameData sharedData].airPrice;
     if(coins > price)
     {
         rank++;
@@ -246,9 +417,11 @@
 
 -(void) upgradeTank: (CCMenuItemImage *) tankButton
 {
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+
     NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankRank"];
     int rank = [NSRank intValue];
-    int price = 50 + (50 * rank);
+    int price = [GameData sharedData].tankPrice;
     if(coins > price)
     {
         rank++;
@@ -259,6 +432,25 @@
         NSCoins = [NSNumber numberWithInt:coins];
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
+        
+        [GameData sharedData].tankPrice = rank * 50 + 50;
+        
+        [self removeChild:tankPrice];
+        
+        tankPrice = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [tankPrice setString:[NSString stringWithFormat:@"Price:%d", [GameData sharedData].tankPrice]];
+        tankPrice.position = CGPointMake(winSize.width * .875, 290);
+        tankPrice.color = ccBLACK;
+        [self addChild:tankPrice z:4];
+        
+        [self removeChild:tankRank];
+        
+        tankRank = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [tankRank setString:[NSString stringWithFormat:@"Lvl:%@/5", [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankRank"]]];
+        tankRank.position = CGPointMake(winSize.width * .875, 170);
+        tankRank.color = ccBLACK;
+        [self addChild:tankRank z:4];
+        
     }
     else
     {
@@ -268,9 +460,11 @@
 
 -(void) upgradeImmunity: (CCMenuItemImage *) immunityButton
 {
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+
     NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"immunityRank"];
     int rank = [NSRank intValue];
-    int price = 50 + (50 * rank);
+    int price = [GameData sharedData].immunityPrice;
     if(coins > price)
     {
         rank++;
@@ -289,7 +483,9 @@
 }
 -(void) buyImmunity: (CCMenuItemImage *) buyImmunityButton
 {
-    int immunityPrice = 50;
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+
+    int immunityPrice = [GameData sharedData].immunityPrice;
     
     if(coins > immunityPrice)
     {
@@ -315,7 +511,9 @@
 
 -(void) buyAirstrike: (CCMenuItemImage *) buyAirstrikeButton
 {
-    int airstrikePrice = 50;
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+
+    int airstrikePrice = [GameData sharedData].airPrice;
     
     if(coins > airstrikePrice)
     {
@@ -340,7 +538,9 @@
 
 -(void) buyReinforcement: (CCMenuItemImage *) buyReinforcementButton
 {
-    int reinforcementPrice = 50;
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+
+    int reinforcementPrice = [GameData sharedData].reinforcePrice;
     
     if(coins > reinforcementPrice)
     {
