@@ -22,6 +22,9 @@
     CCLabelTTF *shooterRank;
     CCLabelTTF *fastShooterRank;
     CCLabelTTF *tankRank;
+    CCLabelTTF *immunityCount;
+    CCLabelTTF *airstrikeCount;
+    CCLabelTTF *reinforcemtsCount;
     int coins;
     NSNumber *NSCoins;
     CGSize winSize;

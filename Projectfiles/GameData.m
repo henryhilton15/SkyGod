@@ -25,10 +25,10 @@
 @synthesize airPrice;
 @synthesize reinforcePrice;
 @synthesize immunityPrice;
-@synthesize meleeLevel;
-@synthesize shootLevel;
-@synthesize fastShootLevel;
-@synthesize tankLevel;
+@synthesize airstrikeCount;
+@synthesize reinforcementsCount;
+@synthesize immunityCount;
+
 
 
 //static variable - this stores our singleton instance
