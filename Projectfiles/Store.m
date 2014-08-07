@@ -251,7 +251,6 @@
         immunityCount.position = CGPointMake(winSize.width * .625, bottomRowAvailableY);
         immunityCount.color = ccBLACK;
         [self addChild:immunityCount z:4];
-
         
         reinforcemtsCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
         [reinforcemtsCount setString:[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"reinforcementsAvailable"]]];

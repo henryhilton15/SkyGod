@@ -1078,6 +1078,38 @@
         
         CCMenu *myMenu = [CCMenu menuWithItems:pauseButton, airstrikePowerUp, reinforcementPowerUp, immunityPowerUp, nil];
         [self addChild: myMenu z:100];
+
+        
+        NSNumber* NSNumAvailable1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"airstrikesAvailable"];
+        int numAvailable1 = [NSNumAvailable1 intValue];
+        
+        airstrikeCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [airstrikeCount setString:[NSString stringWithFormat:@"%d", numAvailable1]];
+        airstrikeCount.position = CGPointMake(winSize.width/12, winSize.height - winSize.height/8);
+        airstrikeCount.color = ccBLACK;
+        [self addChild:airstrikeCount z:5000];
+        
+        NSNumber* NSNumAvailable2 = [[NSUserDefaults standardUserDefaults] objectForKey:@"reinforcementsAvailable"];
+        int numAvailable2 = [NSNumAvailable2 intValue];
+        
+        reinforcemtsCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [reinforcemtsCount setString:[NSString stringWithFormat:@"%d", numAvailable2]];
+        reinforcemtsCount.position = CGPointMake(winSize.width/6, winSize.height - winSize.height/8);
+        reinforcemtsCount.color = ccBLACK;
+        [self addChild:reinforcemtsCount z:5000];
+        
+        NSNumber* NSNumAvailable3 = [[NSUserDefaults standardUserDefaults] objectForKey:@"immunityAvailable"];
+        int numAvailable3 = [NSNumAvailable3 intValue];
+        
+        immunityCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [immunityCount setString:[NSString stringWithFormat:@"%d", numAvailable3]];
+        immunityCount.position = CGPointMake(winSize.width/4, winSize.height - winSize.height/8);
+        immunityCount.color = ccBLACK;
+        [self addChild:immunityCount z:5000];
+        
+
+        
+        
         
    //     [self changeLevel];
         
@@ -4828,6 +4860,13 @@
         
         //tell the bear to run the taunting action
         [bomber runAction:angelPlaneMove];
+        
+        [self removeChild:airstrikeCount];
+        airstrikeCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        [airstrikeCount setString:[NSString stringWithFormat:@"%d", numAvailable]];
+        airstrikeCount.position = CGPointMake(winSize.width/12, winSize.height - winSize.height/8);
+        airstrikeCount.color = ccBLACK;
+        [self addChild:airstrikeCount z:5000];
     }
     
     NSNumAvailable = [NSNumber numberWithInt:numAvailable];
@@ -4859,6 +4898,13 @@
     
     NSNumAvailable = [NSNumber numberWithInt:numAvailable];
     [[NSUserDefaults standardUserDefaults] setObject:NSNumAvailable forKey: @"reinforcementsAvailable"];
+    
+    [self removeChild:reinforcemtsCount];
+    reinforcemtsCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+    [reinforcemtsCount setString:[NSString stringWithFormat:@"%d", numAvailable]];
+    reinforcemtsCount.position = CGPointMake(winSize.width/6, winSize.height - winSize.height/8);
+    reinforcemtsCount.color = ccBLACK;
+    [self addChild:reinforcemtsCount z:5000];
 }
 
 -(void)spawnReinforcement
@@ -4910,6 +4956,8 @@
     
     //tell the bear to run the taunting action
     [reinforcement runAction:move];
+    
+
 }
 
 -(void)immunityActivator: (CCMenuItemImage *) immunityPowerUp
@@ -4926,6 +4974,15 @@
     
     NSNumAvailable = [NSNumber numberWithInt:numAvailable];
     [[NSUserDefaults standardUserDefaults] setObject:NSNumAvailable forKey: @"immunityAvailable"];
+    
+    [self removeChild:immunityCount];
+    immunityCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+    [immunityCount setString:[NSString stringWithFormat:@"%d", numAvailable]];
+    immunityCount.position = CGPointMake(winSize.width/4, winSize.height - winSize.height/8);
+    immunityCount.color = ccBLACK;
+    [self addChild:immunityCount z:5000];
+
+
 }
 
 -(void) truckGoodBottomOrBadBottomCollisions
