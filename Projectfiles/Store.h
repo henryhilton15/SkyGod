@@ -25,6 +25,7 @@
     CCLabelTTF *immunityCount;
     CCLabelTTF *airstrikeCount;
     CCLabelTTF *reinforcemtsCount;
+    CCLabelTTF *coinsLabel;
     int coins;
     NSNumber *NSCoins;
     CGSize winSize;

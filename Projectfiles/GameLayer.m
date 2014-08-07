@@ -30,13 +30,18 @@
     int rangeX = maxX - minX;
     int actualX = minX + arc4random() % rangeX;
     
+    while ((actualX < winSize.width * .55) && (actualX > winSize.width * .45))
+    {
+        actualX = minX + arc4random() % rangeX;
+    }
+    
     int minDuration = ((Character*)angel3).fallSpeed - 1;
     int maxDuration = ((Character*)angel3).fallSpeed + 1;
     
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
-    angel3.scale = .6;
+    angel3.scale = .5;
     
     angel3.position = ccp(actualX, winSize.height);
     [self addChild:angel3];
@@ -119,6 +124,11 @@
     int rangeX = maxX - minX;
     int actualX = minX + arc4random() % rangeX;
     
+    while ((actualX < winSize.width * .55) && (actualX > winSize.width * .45))
+    {
+        actualX = minX + arc4random() % rangeX;
+    }
+    
     minDuration = 3.0;
     maxDuration = 4;
     
@@ -126,7 +136,7 @@
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
     devil1 = [[Character alloc] initWithEnemyMeleeImage];
-    devil1.scale = .6;
+    devil1.scale = .5;
     
     devil1.position = ccp(actualX, winSize.height);
     [self addChild:devil1];
@@ -186,6 +196,11 @@
     int rangeX = maxX - minX;
     int actualX = minX + arc4random() % rangeX;
     
+    while ((actualX < winSize.width * .55) && (actualX > winSize.width * .45))
+    {
+        actualX = minX + arc4random() % rangeX;
+    }
+    
     int minDuration = ((Character*)angel1).fallSpeed - 1;
     int maxDuration = ((Character*)angel1).fallSpeed + 1;
     
@@ -195,6 +210,7 @@
 //    NSLog(@"friendly melee fall duration = %d", actualDuration);
     
     angel1.position = ccp(actualX, winSize.height);
+    angel1.scale = .5;
     [self addChild:angel1];
     [goodGuys addObject:angel1];
     
@@ -396,6 +412,11 @@
     int rangeX = maxX - minX;
     int actualX = minX + arc4random() % rangeX;
     
+    while ((actualX < winSize.width * .55) && (actualX > winSize.width * .45))
+    {
+        actualX = minX + arc4random() % rangeX;
+    }
+    
     int minDuration = ((Character*)angel2).fallSpeed - 1;
     int maxDuration = ((Character*)angel2).fallSpeed + 1;
     
@@ -406,7 +427,7 @@
     
 //    int friendlyRegularShooterHealth = ((Character*)angel2).health;
 //    NSLog(@"friendly regualr shooter health = %d", friendlyRegularShooterHealth);
-    angel2.scale = .8;
+    angel2.scale = .5;
     angel2.position = ccp(actualX, winSize.height);
     [self addChild:angel2];
     [goodGuys addObject:angel2];
@@ -457,6 +478,11 @@
     int maxX = winSize.width - 10;
     int rangeX = maxX - minX;
     int actualX = minX + arc4random() % rangeX;
+    
+    while ((actualX < winSize.width * .55) && (actualX > winSize.width * .45))
+    {
+        actualX = minX + arc4random() % rangeX;
+    }
     
     // Determine speed of the monster
     minDuration = 3.5;
@@ -712,7 +738,7 @@
     NSLog(@"added angel tank");
 }
 
-    
+
 -(void) addEnemyTank
 {
     CCSprite *devilTank = [[Character alloc] initWithEnemyTankImage];
@@ -723,6 +749,11 @@
     int rangeX = maxX - minX;
     int actualX = arc4random() % rangeX + minX;
     
+    while ((actualX < winSize.width * .55) && (actualX > winSize.width * .45))
+    {
+        actualX = minX + arc4random() % rangeX;
+    }
+    
     // Determine speed of the monster2
     minDuration = ((Character*)devilTank).fallSpeed - 1;
     maxDuration = ((Character*)devilTank).fallSpeed + 1;
@@ -732,7 +763,7 @@
     
     // Create the monster slightly off-screen along the right edge,
     // and along a random position along the Y axis as calculated above
-    devilTank.scale=.5;
+    devilTank.scale= 1;
     devilTank.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:devilTank];
     [badGuys addObject:devilTank];
@@ -973,7 +1004,7 @@
         
         
         bonusCoinsLabel = [CCLabelTTF labelWithString:@"Bonus Coins!" fontName:@"Marker Felt" fontSize:30];
-        bonusCoinsLabel.position = ccp(-winSize.width * .5, winSize.height * .5);
+        bonusCoinsLabel.position = ccp(-winSize.width * .5, winSize.height * .7);
         bonusCoinsLabel.color = ccBLACK;
         [self addChild:bonusCoinsLabel z:4];
         
@@ -1009,7 +1040,7 @@
         
         player = [CCSprite spriteWithFile:@"main-idle-1.png"];
         [self addChild:player z:1];
-        player.position = ccp(240,100);
+        player.position = ccp(winSize.width * .5, winSize.height * .3);
         [self mainCharacterIdleAnimation:player];
         
         int buttonSpacing = 40;
@@ -4747,7 +4778,7 @@
     NSNumber* NSNumAvailable = [[NSUserDefaults standardUserDefaults] objectForKey:@"airstrikesAvailable"];
     int numAvailable = [NSNumAvailable intValue];
     
-    if(numAvailable > 0)
+    if(numAvailable > 0 && waveChanging == false)
     {
         bomber = [[Character alloc] initWithGoodHelicopterImage];
         bomber.scale=.5;
@@ -4820,7 +4851,7 @@
     NSNumber* NSNumAvailable = [[NSUserDefaults standardUserDefaults] objectForKey:@"reinforcementsAvailable"];
     int numAvailable = [NSNumAvailable intValue];
     
-    if(numAvailable > 0)
+    if(numAvailable > 0 && waveChanging == false)
     {
         reinforcements = true;
         numAvailable--;
@@ -4886,7 +4917,7 @@
     NSNumber* NSNumAvailable = [[NSUserDefaults standardUserDefaults] objectForKey:@"immunityAvailable"];
     int numAvailable = [NSNumAvailable intValue];
     
-    if(numAvailable > 0 && immunity == false)
+    if(numAvailable > 0 && immunity == false && waveChanging == false)
     {
         immunity = true;
         NSLog(@"immunity activated");
@@ -5173,11 +5204,11 @@
     
     waveChanging = true;
     
-    CCMoveTo *bonusCoinsLabelIn = [CCMoveTo actionWithDuration:2 position:ccp(winSize.width * .5, winSize.height * .5)];
+    CCMoveTo *bonusCoinsLabelIn = [CCMoveTo actionWithDuration:2 position:ccp(winSize.width * .5, winSize.height * .7)];
     
-    CCMoveTo *bonusCoinsLabelStay = [CCMoveTo actionWithDuration:2 position:ccp(winSize.width * .5, winSize.height * .5)];
+    CCMoveTo *bonusCoinsLabelStay = [CCMoveTo actionWithDuration:2 position:ccp(winSize.width * .5, winSize.height * .7)];
     
-    CCMoveTo *bonusCoinsLabelOut = [CCMoveTo actionWithDuration:2 position:ccp(-winSize.width * .5, winSize.height * .5)];
+    CCMoveTo *bonusCoinsLabelOut = [CCMoveTo actionWithDuration:2 position:ccp(-winSize.width * .5, winSize.height * .7)];
     
     [bonusCoinsLabel runAction:[CCSequence actions:bonusCoinsLabelIn, bonusCoinsLabelStay, bonusCoinsLabelOut, nil]];
     

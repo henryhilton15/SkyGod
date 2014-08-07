@@ -30,9 +30,6 @@
 @synthesize reinforcementsCount;
 @synthesize immunityCount;
 
-
-
-
 //static variable - this stores our singleton instance
 static GameData *sharedData = nil;
 
