@@ -1066,7 +1066,7 @@
                                                                                 target: self
                                                                       selector:@selector(reinforcements:)];
         
-        reinforcementPowerUp.position= CGPointMake ((farLeftX + buttonSpacing), winSize.height + 55);
+        reinforcementPowerUp.position= CGPointMake ((farLeftX + buttonSpacing), winSize.height * 1.4);
         reinforcementPowerUp.scale = .7f;
         
         
@@ -3002,7 +3002,7 @@
 -(void)createScenario
 {
     scenarioNumber = [self generateRandomNumber];
-    scenarioNumber = 1;
+
     NSLog(@"scenario number = %d", scenarioNumber);
     
     if (scenarioNumber == 1)

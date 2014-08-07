@@ -20,14 +20,11 @@
 	{
         winSize = [CCDirector sharedDirector].winSize;
         
-        CGSize winSize = [CCDirector sharedDirector].winSize;
-
-        
         CCMenuItemImage *resume = [CCMenuItemImage itemWithNormalImage:@"resume-button-n.png"
             selectedImage: @"resume-button-d.png"
             target:self
             selector:@selector(resumeGame:)];
-       resume.position = CGPointMake(0, 305);
+       resume.position = CGPointMake(0, winSize.height * .95);
         resume.scale = 0.5f;
     
 
@@ -35,7 +32,7 @@
             selectedImage: @"restart-button-d.png"
             target:self
             selector:@selector(restartGame:)];
-        restart.position = CGPointMake(0, 270);
+        restart.position = CGPointMake(0, winSize.height * .825);
         restart.scale = 0.5f;
         
         
@@ -43,24 +40,23 @@
              selectedImage: @"main menu-button-d.png"
              target:self
              selector:@selector(mainMenu:)];
-        mainMenuButton.position = CGPointMake(0, 235);
+        mainMenuButton.position = CGPointMake(0, winSize.height * .7);
         mainMenuButton.scale = 0.5f;
-        
         
         CCMenuItemImage *sfxButton = [CCMenuItemImage itemWithNormalImage:@"sound_btn.png"
                                                           selectedImage: @"sound_btn.png"
                                                                  target:self
                                                                  selector:@selector(sfxToggle:)];
-        sfxButton.position = CGPointMake(-25, 200);
 
+        
+        sfxButton.position = CGPointMake(-25, winSize.height * .575);
         sfxButton.scale = 1.0f;
         
         CCMenuItemImage *musicButton = [CCMenuItemImage itemWithNormalImage:@"music_btn.png"
                                                           selectedImage: @"music_btn.png"
                                                                  target:self
                                                                    selector:@selector(musicToggle:)];
-        musicButton.position = CGPointMake(25, 200);
-
+        musicButton.position = CGPointMake(25, winSize.height * .575);
         musicButton.scale = 0.5f;
         
         
@@ -72,12 +68,14 @@
         pause_background.position = CGPointMake(winSize.width/2,winSize.height/2);
         [self addChild:pause_background z:0];
         
-
+        redXHeight = winSize.height * .21;
+        sfxRedXWidth = winSize.width/2 - winSize.width/26;
+        musicRedXWidth = winSize.width/2 + winSize.width/20;
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == false)
         {
             sfxNo = [CCSprite spriteWithFile:@"redX.png"];
-            sfxNo.position = CGPointMake( winSize.width/2 - winSize.width/26, winSize.height/2 - winSize.height/8);
+            sfxNo.position = CGPointMake(sfxRedXWidth, redXHeight);
             sfxNo.scale = .05;
             [self addChild:sfxNo z:2];
         }
@@ -85,7 +83,7 @@
        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == false)
         {
             musicNo = [CCSprite spriteWithFile:@"redX.png"];
-            musicNo.position = CGPointMake( winSize.width/2 + winSize.width/20, winSize.height/2 - winSize.height/7);
+            musicNo.position = CGPointMake(musicRedXWidth, redXHeight);
             musicNo.scale = .05;
             [self addChild:musicNo z:2];
         }
@@ -145,7 +143,7 @@
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == false)
     {
         sfxNo = [CCSprite spriteWithFile:@"redX.png"];
-        sfxNo.position = CGPointMake( winSize.width/2 - winSize.width/26, winSize.height/2 - winSize.height/8);
+        sfxNo.position = CGPointMake(sfxRedXWidth, redXHeight);
         sfxNo.scale = .05;
         [self addChild:sfxNo z:2];
     }
@@ -194,7 +192,7 @@
         [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
         
         musicNo = [CCSprite spriteWithFile:@"redX.png"];
-        musicNo.position = CGPointMake( winSize.width/2 + winSize.width/20, winSize.height/2 - winSize.height/7);
+        musicNo.position = CGPointMake(musicRedXWidth, redXHeight);
         musicNo.scale = .05;
         [self addChild:musicNo z:2];
     }

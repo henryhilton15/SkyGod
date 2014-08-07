@@ -15,6 +15,9 @@
     bool music;
     CCSprite *sfxNo;
     CCSprite *musicNo;
+    int sfxRedXWidth;
+    int musicRedXWidth;
+    int redXHeight;
     
     CGSize winSize;
 }
