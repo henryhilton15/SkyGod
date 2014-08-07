@@ -204,6 +204,9 @@
     CCLabelTTF *enemiesKilledLabel;
     CCLabelTTF *timeRemainingLabel;
     CCLabelTTF *bonusCoinsLabel;
+    CCLabelTTF *airstrikeCount;
+    CCLabelTTF *reinforcemtsCount;
+    CCLabelTTF *immunityCount;
     
 
     

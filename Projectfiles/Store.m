@@ -27,6 +27,32 @@
                 [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Undaunted.wav" loop:YES];
             }
         }
+        
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"] == NULL) {
+            
+            NSNumber *set0 = [NSNumber numberWithInt:0];
+            [[NSUserDefaults standardUserDefaults] setObject:set0 forKey: @"friendlyMeleeRank"];
+        }
+        
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"] == NULL) {
+            
+            NSNumber *set0 = [NSNumber numberWithInt:0];
+            [[NSUserDefaults standardUserDefaults] setObject:set0 forKey: @"friendlyRegularShooterRank"];
+        }
+        
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterRank"] == NULL) {
+            
+            NSNumber *set0 = [NSNumber numberWithInt:0];
+            [[NSUserDefaults standardUserDefaults] setObject:set0 forKey: @"friendlyFastShooterRank"];
+        }
+        
+        
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankRank"] == NULL) {
+            
+            NSNumber *set0 = [NSNumber numberWithInt:0];
+            [[NSUserDefaults standardUserDefaults] setObject:set0 forKey: @"friendlyTankRank"];
+        }
+        
         NSNumber *NSRank1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"];
         int rank1 = [NSRank1 intValue];
         
@@ -244,11 +270,6 @@
             airstrikeCount.color = ccBLACK;
             [self addChild:airstrikeCount z:4];
         }
-
-        
-
-
-
 
     }
     return self;
