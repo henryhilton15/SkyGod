@@ -1059,7 +1059,7 @@
         target: self
         selector:@selector(immunityActivator:)];
         
-        immunityPowerUp.position= CGPointMake ((farLeftX + (2 * buttonSpacing)), winSize.height + 55);
+        immunityPowerUp.position= CGPointMake ((farLeftX + (2 * buttonSpacing)), winSize.height * 1.4);
         immunityPowerUp.scale = 0.7f;
 
         
