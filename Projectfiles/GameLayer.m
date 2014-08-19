@@ -4957,7 +4957,6 @@
     //tell the bear to run the taunting action
     [reinforcement runAction:move];
     
-
 }
 
 -(void)immunityActivator: (CCMenuItemImage *) immunityPowerUp
