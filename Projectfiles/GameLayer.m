@@ -856,6 +856,7 @@
         badBombs = [[NSMutableArray alloc] init];
         zigZagScenarioEnemies = [[NSMutableArray alloc] init];
         coinsArray = [[NSMutableArray alloc] init];
+        deadBases = [[NSMutableArray alloc] init];
 //        badHelicopters = [[NSMutableArray alloc] init];
 
         framecount = 0;
@@ -2453,6 +2454,8 @@
 //                [self addChild:goodBottom z:1];
 //                [goodGuysBottom addObject:goodBottom];
                 
+                goodBottom.scale = .5;
+                
                 [deadGoodGuys addObject:goodGuy];
   
                // NSLog(@"added to bottom array");
@@ -2710,6 +2713,8 @@
                     [badBottom runAction:move];
                     //NSLog(@"good guy animation started");
                 }
+                
+                badBottom.scale = .5;
                 
                 [deadBadGuys addObject:badGuy];
             }
@@ -3470,15 +3475,15 @@
                         if(((Character*)fightingDevil).type == BIG_MONSTER)
                         {
                             [self devilTankAttackAnimation:fightingDevil];
-//                            NSLog(@"devil tank attack called");
+                            NSLog(@"devil tank attack called");
                         }
-                        //delay actual subtraction of health to allow time for animation to run
-                        double delayInSeconds = 0.3;
-                        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-                        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                            [self devilShoot:fightingDevil];
-                        });
-                        
+//                        //delay actual subtraction of health to allow time for animation to run
+//                        double delayInSeconds = 0.15;
+//                        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+//                        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//                            [self devilShoot:fightingDevil];
+//                        });
+//                        
                     }
                 }
                 
@@ -4121,7 +4126,7 @@
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *attackAnimation = [CCAnimation animationWithFrames: attackFrames delay:0.25f];
+    CCAnimation *attackAnimation = [CCAnimation animationWithFrames: attackFrames delay:0.1f];
     
     //Create an action with the animation that can then be assigned to a sprite
     
@@ -4181,19 +4186,19 @@
     if(((Character*)angel).bulletType == REGULAR_GOOD_BULLET)
     {
         goodBullet = [[Character alloc] initWithFriendlyRegularShooterBulletImage];
-        goodBullet.position = ccp(angelX + angel.contentSize.width, angelY + 10);
+        goodBullet.position = ccp(angelX + 10, angelY + 10);
         ((Character*)goodBullet).power = ((Character*)angel).power;
     }
     if(((Character*)angel).bulletType == SPEAR)
     {
         goodBullet = [[Character alloc] initWithSpearImage];
-        goodBullet.position = ccp(angelX + angel.contentSize.width, angelY + 10);
+        goodBullet.position = ccp(angelX + 10, angelY + 10);
         ((Character*)goodBullet).power = ((Character*)angel).power;
     }
     if(((Character*)angel).bulletType == TANK_BOMB)
     {
         goodBullet = [[Character alloc] initWithTankBombImage];
-        goodBullet.position = ccp(angelX + angel.contentSize.width, angelY + 20);
+        goodBullet.position = ccp(angelX + 15, angelY + 20);
         ((Character*)goodBullet).power = ((Character*)angel).power;
     }
     
@@ -4222,7 +4227,7 @@
     if(((Character*)devil).bulletType == REGULAR_BAD_BULLET)
     {
         badBullet = [[Character alloc] initWithEnemyRegularShooterBulletImage];
-        badBullet.position = ccp(devilX - devil.contentSize.width, devilY + 10);
+        badBullet.position = ccp(devilX - 5, devilY + 10);
         ((Character*)badBullet).power = ((Character*)devil).power;
         badBullet.color = ccc3(100,0,0);
 
@@ -4231,7 +4236,7 @@
     {
         badBullet = [[Character alloc] initWithTankBombImage];
         ((Character*)badBullet).power = ((Character*)devil).power;
-        badBullet.position = ccp(devilX - devil.contentSize.width, devilY + 15);
+        badBullet.position = ccp(devilX - 10, devilY + 15);
         badBullet.color = ccc3(100,0,0);
         NSLog(@"shot tank bomb");
     }
@@ -4244,12 +4249,12 @@
     CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:25
                                               position:ccp(-2000, badBullet.position.y)];
     
-    //delay actual subtraction of health to allow time for animation to run
-    double delayInSeconds = 0.3;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [badBullet runAction:shootLeft];
-    });
+//    //delay actual subtraction of health to allow time for animation to run
+//    double delayInSeconds = 0.3;
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//        [badBullet runAction:shootLeft];
+//    });
     
 }
 
@@ -4672,7 +4677,7 @@
                 badBottomRect = [badBottom boundingBox];
                 goodBullet = [goodBombs objectAtIndex:j];
                 goodBulletBox = [goodBullet boundingBox];
-                goodBulletBox.size.height -= 50;
+                goodBulletBox.size.height += 50;
                 
                 if(CGRectIntersectsRect(badBottomRect,goodBulletBox) && abs(goodBullet.position.y - badBottom.position.y) < 45)
                 {
@@ -4705,7 +4710,7 @@
                 goodBottomRect = [goodBottom boundingBox];
                 badBullet = [badBombs objectAtIndex:j];
                 badBulletBox = [badBullet boundingBox];
-                badBulletBox.size.height -= 50;
+                badBulletBox.size.height += 50;
                 
                 if(CGRectIntersectsRect(goodBottomRect,badBulletBox) && abs(goodBottom.position.y - badBullet.position.y) < 45)
                 {
@@ -5146,9 +5151,23 @@
     NSMutableArray *eraseGoodBulletsBottom = [[NSMutableArray alloc] init];
     NSMutableArray *eraseBadBulletsBottom = [[NSMutableArray alloc] init];
     NSMutableArray *eraseCoins = [[NSMutableArray alloc] init];
+//    NSMutableArray *eraseBases = [[NSMutableArray alloc] init];
     
     GameData *data = [GameData sharedData];
-    data.score = wave; 
+    data.score = wave;
+    
+//    for(int x = 0; x < [deadBases count]; x++)
+//    {
+//        CCSprite *base = [deadBases objectAtIndex:x];
+//        [eraseBases addObject:base];
+//    }
+//    
+//    for(CCSprite *s in eraseBases)
+//    {
+//        [deadBases removeObject:s];
+//        [self removeChild:s cleanup:YES];
+//    }
+//    [eraseBases removeAllObjects];
    
     for(int x = 0; x<[badGuys count]; x++)
     {
@@ -5164,7 +5183,7 @@
     [eraseBadGuys removeAllObjects];
     
     
-    for(int i = 0; i<[goodGuys count]; i++)
+    for(int i = 0; i < [goodGuys count]; i++)
     {
         goodGuy = [goodGuys objectAtIndex:i];
         [eraseGoodGuys addObject:goodGuy];
@@ -5252,6 +5271,8 @@
     
     [eraseCoins removeAllObjects];
     
+
+    
     
     
 //    ((Character*)badBase).health = 10;
@@ -5262,7 +5283,7 @@
     
     CCMoveTo *bonusCoinsLabelIn = [CCMoveTo actionWithDuration:2 position:ccp(winSize.width * .5, winSize.height * .7)];
     
-    CCMoveTo *bonusCoinsLabelStay = [CCMoveTo actionWithDuration:2 position:ccp(winSize.width * .5, winSize.height * .7)];
+    CCMoveTo *bonusCoinsLabelStay = [CCMoveTo actionWithDuration:1 position:ccp(winSize.width * .5, winSize.height * .7)];
     
     CCMoveTo *bonusCoinsLabelOut = [CCMoveTo actionWithDuration:2 position:ccp(-winSize.width * .5, winSize.height * .7)];
     
@@ -5288,11 +5309,19 @@
     {
         (((Character*)goodBase).health) -= ((Character*)fightingDevil).power;
         int healthCount = (((Character*)goodBase).health);
-        [goodBaseHealthLabel setString:[NSString stringWithFormat:@"Your Base Health: %d",((Character*)goodBase).health]];
+        if(healthCount >= 0)
+        {
+            [goodBaseHealthLabel setString:[NSString stringWithFormat:@"Your Base Health: %d",((Character*)goodBase).health]];
+        }
+        else
+        {
+            [goodBaseHealthLabel setString:[NSString stringWithFormat:@"Your Base Health: 0"]];
+        }
         [self subtractGoodBarHealth:((Character*)fightingDevil).power];
         if(((Character*)goodBase).health < 7 && ((Character*)goodBase).health > 3 && goodBaseImageChangeCount == 0)
         {
             [goodGuysBottom removeObject:goodBase];
+            [self removeChild: goodBase cleanup:YES];
             goodBaseImageChangeCount = 1;
             
             goodBase = [[Character alloc] initWithGoodGuyBaseImage2];
@@ -5306,6 +5335,7 @@
         if(((Character*)goodBase).health < 4 && ((Character*)goodBase).health > 0 && goodBaseImageChangeCount == 1)
         {
             [goodGuysBottom removeObject:goodBase];
+            [self removeChild:goodBase cleanup:YES];
             goodBaseImageChangeCount = 2;
             goodBase = [[Character alloc] initWithGoodGuyBaseImage3];
             goodBase.position = ccp(50, BASE_HEIGHT);
@@ -5327,11 +5357,19 @@
 {
         (((Character*)badBase).health) -= ((Character*)fightingAngel).power;
         int healthCount = (((Character*)badBase).health);
-        [badBaseHealthLabel setString:[NSString stringWithFormat:@"Bad Base Health: %d",((Character*)badBase).health]];
+        if(healthCount >= 0)
+        {
+            [badBaseHealthLabel setString:[NSString stringWithFormat:@"Bad Base Health: %d",((Character*)badBase).health]];
+        }
+        else
+        {
+            [badBaseHealthLabel setString:[NSString stringWithFormat:@"Bad Base Health: 0"]];
+        }
         [self subtractBadBarHealth:((Character*)fightingAngel).power];
         if(((Character*)badBase).health < 7 && ((Character*)badBase).health > 3 && badBaseImageChangeCount == 0)
         {
             [badGuysBottom removeObject:badBase];
+            [self removeChild:badBase cleanup:YES];
             badBaseImageChangeCount = 1;
             badBase = [[Character alloc] initWithBadGuyBaseImage2];
             badBase.position = ccp(winSize.width - 50, BASE_HEIGHT);
@@ -5344,6 +5382,7 @@
         if(((Character*)badBase).health < 4 && ((Character*)badBase).health > 0 && badBaseImageChangeCount == 1)
         {
             [badGuysBottom removeObject:badBase];
+            [self removeChild:badBase cleanup:YES];
             badBaseImageChangeCount = 2;
             badBase = [[Character alloc] initWithBadGuyBaseImage3];
             badBase.position = ccp(winSize.width - 50, BASE_HEIGHT);

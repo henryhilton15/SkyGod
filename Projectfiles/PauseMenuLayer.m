@@ -87,12 +87,9 @@
             musicNo.scale = .05;
             [self addChild:musicNo z:2];
         }
-
-
     }
     return self;
 }
-
 
 
 - (void) resumeGame: (CCMenuItemImage *) resume
@@ -111,15 +108,13 @@
 
 - (void) mainMenu: (CCMenuItemImage *) mainMenuButton
 {
-        [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
     
     [[CCDirector sharedDirector] replaceScene: (CCScene *)[[MainMenuLayer alloc]  init]];
 }
 
 - (void) sfxToggle: (CCMenuItemImage *) sfxButton
 {
-    CGSize winSize = [CCDirector sharedDirector].winSize;
-
     
     if([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimeSound"] boolValue] == false)
     {
@@ -151,15 +146,11 @@
     {
         [self removeChild: sfxNo];
     }
-    
-    
 
 }
 
 - (void) musicToggle: (CCMenuItemImage *) musicButton
 {
-    CGSize winSize = [CCDirector sharedDirector].winSize;
-    
     if([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimeMusic"] boolValue] == false)
     {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:true] forKey:@"firstTimeMusic"];
@@ -179,12 +170,10 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:music] forKey:@"music"];
     
-    
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == true)
     {
         [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:(@"The Descent.wav")];
         [[SimpleAudioEngine sharedEngine] playBackgroundMusic:(@"The Descent.wav") loop:YES];
-
     }
     
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == false)
@@ -200,7 +189,6 @@
     {
         [self removeChild: musicNo];
     }
-
 }
 
 @end

@@ -155,6 +155,7 @@
     NSMutableArray *badBombs;
     NSMutableArray *zigZagScenarioEnemies;
     NSMutableArray *coinsArray;
+    NSMutableArray *deadBases;
 //    NSMutableArray *badHelicopters;
     NSString *levelString;
     NSString *enemiesKilledString;
