@@ -556,7 +556,6 @@
 		2D808C7F1795F5BA006EADF5 /* carrots.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808B3A1795F5BA006EADF5 /* carrots.png */; };
 		2D808C801795F5BA006EADF5 /* cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808B3B1795F5BA006EADF5 /* cloud.png */; };
 		2D808C811795F5BA006EADF5 /* cloudmonster.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808B3C1795F5BA006EADF5 /* cloudmonster.png */; };
-		2D808C821795F5BA006EADF5 /* coin.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808B3D1795F5BA006EADF5 /* coin.png */; };
 		2D808C831795F5BA006EADF5 /* cup.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808B3E1795F5BA006EADF5 /* cup.png */; };
 		2D808C841795F5BA006EADF5 /* dollar.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808B3F1795F5BA006EADF5 /* dollar.png */; };
 		2D808C851795F5BA006EADF5 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808B401795F5BA006EADF5 /* gear.png */; };
@@ -773,6 +772,12 @@
 		C3297C0517975CC600A09343 /* knightFramesFlipped.png in Resources */ = {isa = PBXBuildFile; fileRef = C3297C0417975CC600A09343 /* knightFramesFlipped.png */; };
 		C3297C0717975CDA00A09343 /* knightframesflipped.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3297C0617975CDA00A09343 /* knightframesflipped.plist */; };
 		C3367E14179862CA00D321C5 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = C3367E13179862CA00D321C5 /* Character.m */; };
+		C3E2088E19AA7527007BCF23 /* Dollar-4.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E2088A19AA7527007BCF23 /* Dollar-4.png */; };
+		C3E2088F19AA7527007BCF23 /* Dollar-3.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E2088B19AA7527007BCF23 /* Dollar-3.png */; };
+		C3E2089019AA7527007BCF23 /* Dollar-2.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E2088C19AA7527007BCF23 /* Dollar-2.png */; };
+		C3E2089119AA7527007BCF23 /* Dollar-1.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E2088D19AA7527007BCF23 /* Dollar-1.png */; };
+		C3E2089719ADA385007BCF23 /* coinDrop.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E2089619ADA385007BCF23 /* coinDrop.png */; };
+		C3E2089919ADA394007BCF23 /* coinDrop.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3E2089819ADA394007BCF23 /* coinDrop.plist */; };
 		C3E69B7A17A2F8FE006C0912 /* wall.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E69B7917A2F8FE006C0912 /* wall.png */; };
 		C3EFA0A317974B64000E23A6 /* bearFrames.png in Resources */ = {isa = PBXBuildFile; fileRef = C3EFA0A217974B61000E23A6 /* bearFrames.png */; };
 		C3EFA0A517974B70000E23A6 /* bearFrames.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3EFA0A417974B6F000E23A6 /* bearFrames.plist */; };
@@ -1463,7 +1468,6 @@
 		2D808B3A1795F5BA006EADF5 /* carrots.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carrots.png; sourceTree = "<group>"; };
 		2D808B3B1795F5BA006EADF5 /* cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud.png; sourceTree = "<group>"; };
 		2D808B3C1795F5BA006EADF5 /* cloudmonster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloudmonster.png; sourceTree = "<group>"; };
-		2D808B3D1795F5BA006EADF5 /* coin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coin.png; sourceTree = "<group>"; };
 		2D808B3E1795F5BA006EADF5 /* cup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cup.png; sourceTree = "<group>"; };
 		2D808B3F1795F5BA006EADF5 /* dollar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dollar.png; sourceTree = "<group>"; };
 		2D808B401795F5BA006EADF5 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
@@ -1683,6 +1687,12 @@
 		C3297C0617975CDA00A09343 /* knightframesflipped.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = knightframesflipped.plist; sourceTree = "<group>"; };
 		C3367E12179862CA00D321C5 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
 		C3367E13179862CA00D321C5 /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Character.m; sourceTree = "<group>"; };
+		C3E2088A19AA7527007BCF23 /* Dollar-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dollar-4.png"; sourceTree = "<group>"; };
+		C3E2088B19AA7527007BCF23 /* Dollar-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dollar-3.png"; sourceTree = "<group>"; };
+		C3E2088C19AA7527007BCF23 /* Dollar-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dollar-2.png"; sourceTree = "<group>"; };
+		C3E2088D19AA7527007BCF23 /* Dollar-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dollar-1.png"; sourceTree = "<group>"; };
+		C3E2089619ADA385007BCF23 /* coinDrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coinDrop.png; sourceTree = "<group>"; };
+		C3E2089819ADA394007BCF23 /* coinDrop.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = coinDrop.plist; sourceTree = "<group>"; };
 		C3E69B7917A2F8FE006C0912 /* wall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wall.png; sourceTree = "<group>"; };
 		C3EFA0A217974B61000E23A6 /* bearFrames.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bearFrames.png; sourceTree = "<group>"; };
 		C3EFA0A417974B6F000E23A6 /* bearFrames.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bearFrames.plist; sourceTree = "<group>"; };
@@ -2667,6 +2677,12 @@
 		2D808A7B1795F5BA006EADF5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C3E2088A19AA7527007BCF23 /* Dollar-4.png */,
+				C3E2088B19AA7527007BCF23 /* Dollar-3.png */,
+				C3E2088C19AA7527007BCF23 /* Dollar-2.png */,
+				C3E2088D19AA7527007BCF23 /* Dollar-1.png */,
+				C3E2089819ADA394007BCF23 /* coinDrop.plist */,
+				C3E2089619ADA385007BCF23 /* coinDrop.png */,
 				FEFF360519898A4B002E668A /* Undaunted.wav */,
 				FEFF360319898A44002E668A /* The Descent.wav */,
 				C3038A0D198AC90800A81E0E /* explo2.wav */,
@@ -3057,7 +3073,6 @@
 				2D808B3A1795F5BA006EADF5 /* carrots.png */,
 				2D808B3B1795F5BA006EADF5 /* cloud.png */,
 				2D808B3C1795F5BA006EADF5 /* cloudmonster.png */,
-				2D808B3D1795F5BA006EADF5 /* coin.png */,
 				2D808B3E1795F5BA006EADF5 /* cup.png */,
 				2D808B3F1795F5BA006EADF5 /* dollar.png */,
 				2D808B401795F5BA006EADF5 /* gear.png */,
@@ -3680,6 +3695,7 @@
 				2D808BE61795F5BA006EADF5 /* background_grass-side.png in Resources */,
 				2D808BE71795F5BA006EADF5 /* background_grid-hd.png in Resources */,
 				FEFF35AB198824C7002E668A /* angel3fall.plist in Resources */,
+				C3E2089019AA7527007BCF23 /* Dollar-2.png in Resources */,
 				2D808BE81795F5BA006EADF5 /* background_topofcastle-hd.png in Resources */,
 				2D808BE91795F5BA006EADF5 /* background_belowground-ip5.png in Resources */,
 				2D808BEA1795F5BA006EADF5 /* background_desert-ip5.png in Resources */,
@@ -3827,6 +3843,7 @@
 				2D808C6D1795F5BA006EADF5 /* stickman-hd.png in Resources */,
 				2D808C6E1795F5BA006EADF5 /* superhero-hd.png in Resources */,
 				2D808C6F1795F5BA006EADF5 /* swirl-hd.png in Resources */,
+				C3E2088F19AA7527007BCF23 /* Dollar-3.png in Resources */,
 				2D808C701795F5BA006EADF5 /* sword-hd.png in Resources */,
 				2D808C711795F5BA006EADF5 /* toilet-hd.png in Resources */,
 				2D808C721795F5BA006EADF5 /* trophy-hd.png in Resources */,
@@ -3846,7 +3863,6 @@
 				2D808C7F1795F5BA006EADF5 /* carrots.png in Resources */,
 				2D808C801795F5BA006EADF5 /* cloud.png in Resources */,
 				2D808C811795F5BA006EADF5 /* cloudmonster.png in Resources */,
-				2D808C821795F5BA006EADF5 /* coin.png in Resources */,
 				2D808C831795F5BA006EADF5 /* cup.png in Resources */,
 				2D808C841795F5BA006EADF5 /* dollar.png in Resources */,
 				2D808C851795F5BA006EADF5 /* gear.png in Resources */,
@@ -3939,6 +3955,7 @@
 				2D808CD51795F5BA006EADF5 /* monster13.png in Resources */,
 				2D808CD61795F5BA006EADF5 /* monster14.png in Resources */,
 				2D808CD71795F5BA006EADF5 /* monster15.png in Resources */,
+				C3E2089119AA7527007BCF23 /* Dollar-1.png in Resources */,
 				FEFF360A198EE438002E668A /* angel1move.plist in Resources */,
 				FEFF35A3198824C7002E668A /* angel2attack.plist in Resources */,
 				2D808CD81795F5BA006EADF5 /* monster2-topdown.png in Resources */,
@@ -3960,6 +3977,7 @@
 				2D808CE71795F5BA006EADF5 /* title_upgrades.png in Resources */,
 				C3038A0E198AC90800A81E0E /* explo2.wav in Resources */,
 				2D808CE81795F5BA006EADF5 /* animation_knight-1-hd.png in Resources */,
+				C3E2089919ADA394007BCF23 /* coinDrop.plist in Resources */,
 				2D808CE91795F5BA006EADF5 /* background_desert-topdown-hd.png in Resources */,
 				2D808CEA1795F5BA006EADF5 /* background_grass-top-hd.png in Resources */,
 				2D808CEB1795F5BA006EADF5 /* background_grass-topdown-hd.png in Resources */,
@@ -4046,6 +4064,7 @@
 				2DAA40E917AC271B00BA014B /* mgwuPlaceholderIcon.png in Resources */,
 				2DAA40EA17AC271B00BA014B /* mgwuPlaceholderIcon@2x.png in Resources */,
 				2DAA40EB17AC271B00BA014B /* mgwuPlaceholderIconDark.png in Resources */,
+				C3E2089719ADA385007BCF23 /* coinDrop.png in Resources */,
 				2DAA40EC17AC271B00BA014B /* mgwuPlaceholderIconDark@2x.png in Resources */,
 				2DAA40ED17AC271B00BA014B /* operator.available.png in Resources */,
 				2DAA40EE17AC271B00BA014B /* operator.connecting.png in Resources */,
@@ -4166,6 +4185,7 @@
 				2D6E375918E9EBC400573401 /* a5-attack-2.png in Resources */,
 				FEFF359D198824C7002E668A /* angel1attack.plist in Resources */,
 				FEFF35BC198824C7002E668A /* devil1move.png in Resources */,
+				C3E2088E19AA7527007BCF23 /* Dollar-4.png in Resources */,
 				2D6E375A18E9EBC400573401 /* a5-attack-3.png in Resources */,
 				2D6E375B18E9EBC400573401 /* a5-attack-4.png in Resources */,
 				2D6E375C18E9EBC400573401 /* bomb-1.png in Resources */,

@@ -816,7 +816,7 @@
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
-    coin.position = CGPointMake(actualX, winSize.height + 10);
+    coin.position = CGPointMake(actualX, winSize.height - 10);
     coin.scale = .3;
     [self addChild:coin];
     [coinsArray addObject:coin];
@@ -824,6 +824,39 @@
     CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
                                                 position:ccp(actualX, -20)];
     [coin runAction:actionMove];
+    
+    //Load the plist which tells Kobold2D how to properly parse your spritesheet. If on a retina device Kobold2D will automatically use bearframes-hd.plist
+    
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile: @"coinDrop.plist"];
+    
+    //Load in the spritesheet, if retina Kobold2D will automatically use bearframes-hd.png
+    
+    CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"coinDrop.png"];
+    
+    [self addChild:spriteSheet];
+    
+    //Define the frames based on the plist - note that for this to work, the original files must be in the format bear1, bear2, bear3 etc...
+    
+    //When it comes time to get art for your own original game, makegameswith.us will give you spritesheets that follow this convention, <spritename>1 <spritename>2 <spritename>3 etc...
+    
+    NSMutableArray *animationFrames = [NSMutableArray array];
+    
+    for(int i = 1; i <= 4; i++)
+    {
+        [animationFrames addObject:
+         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"Dollar-%d.png", i]]];
+    }
+    
+    //Create an animation from the set of frames you created earlier
+    
+    CCAnimation *animation = [CCAnimation animationWithFrames: animationFrames delay:0.2f];
+    
+    //Create an action with the animation that can then be assigned to a sprite
+    
+    CCAction *fall = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animation restoreOriginalFrame:NO]];
+    
+    //tell the bear to run the taunting action
+    [coin runAction:fall];
 }
 
 -(id) init
@@ -1310,7 +1343,7 @@
                 [self addEnemyRegularShooter];
             }
         
-            if(framecount % gameplayCoinFramecount == 0)
+            if(framecount % gameplayCoinFramecount == 0 || framecount % 10 == 0)
             {
                 [self addCoin];
             }
@@ -3969,7 +4002,7 @@
     
     //Create an action with the animation that can then be assigned to a sprite
     
-    CCAction *attack = [CCAnimate actionWithDuration:0.2f animation:attackAnimation restoreOriginalFrame:YES];
+    CCAction *attack = [CCAnimate actionWithDuration:0.2f animation:attackAnimation restoreOriginalFrame:NO];
     
     //tell the bear to run the taunting action
     [angelOne runAction:attack];
@@ -4410,7 +4443,7 @@
     
     //Create an action with the animation that can then be assigned to a sprite
     
-    //CCAction *shoot = [CCRepeat actionWithAction:[CCAnimate actionWithDuration:1.0f animation:shootAnimation restoreOriginalFrame:YES] times: 1];
+    //CCAction *shoot = [CCRepeat actionWithAction:[CCAnimate actionWithDuration:1.0f animation:shootAnimation restoreOriginalFrame:NO] times: 1];
     
     CCAction *shoot = [CCAnimate actionWithDuration:0.2f animation:shootAnimation restoreOriginalFrame:NO];
     

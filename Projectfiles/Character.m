@@ -492,7 +492,7 @@
 
 -(id) initWithCoinImage
 {
-    if((self = [super initWithFile:@"coin.png"]))
+    if((self = [super initWithFile:@"Dollar-1.png"]))
     {
         NSString *plistName = [NSString stringWithFormat:@"level%d", [GameData sharedData].currentLevelSelected];
         NSString *path = [[NSBundle mainBundle] pathForResource:plistName ofType:@"plist"];
