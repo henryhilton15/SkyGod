@@ -1092,7 +1092,7 @@
         target: self
         selector:@selector(immunityActivator:)];
         
-        immunityPowerUp.position= CGPointMake ((farLeftX + (2 * buttonSpacing)), winSize.height + 55);
+        immunityPowerUp.position= CGPointMake ((farLeftX + (2 * buttonSpacing)), winSize.height * 1.4);
         immunityPowerUp.scale = 0.7f;
 
         
@@ -4995,7 +4995,6 @@
     //tell the bear to run the taunting action
     [reinforcement runAction:move];
     
-
 }
 
 -(void)immunityActivator: (CCMenuItemImage *) immunityPowerUp
