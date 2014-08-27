@@ -90,6 +90,9 @@
     int endgameCoinCount;
     int coinInterludeCounter;
     int coinDelayCounter;
+    int coinsInARow;
+    int previousCoinX;
+    int calledYouWin;
     double zigZagPercentage;
     double explosionAnimationLength;
     double dyingAnimationLength;
@@ -234,7 +237,7 @@
 -(void) addEnemyTank;
 -(void) addFriendlyTank;
 -(void) addEnemyHelicopter;
--(void) addCoin;
+-(void) addCoin: (BOOL)sameSpot;
 -(void) addLevel;
 -(void) subtractLevel;
 -(void) changeLevel;

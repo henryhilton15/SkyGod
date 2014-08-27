@@ -790,15 +790,24 @@
     
 }
 
--(void) addCoin
+-(void) addCoin:(BOOL)sameSpot
 {
     CCSprite *coin = [[Character alloc] initWithCoinImage];
     
     // Determine where to spawn the monster along the X axis
-    int minX = 50;
-    int maxX = winSize.width - 50;
-    int rangeX = maxX - minX;
-    int actualX = arc4random() % rangeX + minX;
+    int actualX = 0;
+    if(sameSpot == NO)
+    {
+        int minX = 50;
+        int maxX = winSize.width - 50;
+        int rangeX = maxX - minX;
+        actualX = arc4random() % rangeX + minX;
+        previousCoinX = actualX;
+    }
+    else
+    {
+        actualX = previousCoinX;
+    }
     
 //    NSLog(@"coin fallSpeed = %d", ((Character*)coin).fallSpeed);
     
@@ -952,6 +961,9 @@
         scenario2interludeCounter = 0;
         devilStartingWidth = winSize.width - 100;
         angelStartingWidth = 30;
+        coinsInARow = 0;
+        previousCoinX = 0;
+        calledYouWin = 0;
         
         [GameData sharedData].coinsGained = 0;
         currentLevelSelected = [GameData sharedData].currentLevelSelected;
@@ -1345,9 +1357,15 @@
         
             if(framecount % gameplayCoinFramecount == 0)
             {
-                [self addCoin];
+                [self addCoin:NO];
             }
 //        }
+    }
+    
+    if(framecount % 10 == 0 && calledYouWin == 0)
+    {
+        [self youWin];
+        calledYouWin++;
     }
     
     if(waveChanging == true)
@@ -1361,7 +1379,17 @@
         {
 //            NSLog(@"should add coin");
             endgameCoinCount++;
-            [self addCoin];
+            if(coinsInARow < 4)
+            {
+                [self addCoin:YES];
+                coinsInARow++;
+            }
+            else
+            {
+                [self addCoin:NO];
+                coinsInARow = 1;
+            }
+            
             if(endgameCoinTotal == endgameCoinCount)
             {
                 coinInterlude = true;
