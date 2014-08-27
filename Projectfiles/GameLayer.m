@@ -1343,7 +1343,7 @@
                 [self addEnemyRegularShooter];
             }
         
-            if(framecount % gameplayCoinFramecount == 0 || framecount % 10 == 0)
+            if(framecount % gameplayCoinFramecount == 0)
             {
                 [self addCoin];
             }
