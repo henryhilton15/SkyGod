@@ -92,7 +92,18 @@
     int coinDelayCounter;
     int coinsInARow;
     int previousCoinX;
+    int previousCoinDuration;
+    int betweenCoinRowDelay;
     int calledYouWin;
+    int baseCount;
+    int friendlyRegularShooterModifier;
+    int friendlyMeleeModifier;
+    int friendlyFastShooterModifier;
+    int enemyMeleeModifier;
+    int enemyRegularShooterModifier;
+    int coinModifier;
+    int scenarioModifier;
+    
     double zigZagPercentage;
     double explosionAnimationLength;
     double dyingAnimationLength;

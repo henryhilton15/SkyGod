@@ -796,6 +796,8 @@
     
     // Determine where to spawn the monster along the X axis
     int actualX = 0;
+    int actualDuration = 0;
+    int rangeDuration = 0;
     if(sameSpot == NO)
     {
         int minX = 50;
@@ -814,16 +816,27 @@
     // Determine speed of the monster2
     if(waveChanging == true)
     {
-        minDuration = ((Character*)coin).endgameFallSpeed - 1;
-        maxDuration = ((Character*)coin).endgameFallSpeed + 1;
+//        if(sameSpot == NO)
+//        {3
+            minDuration = ((Character*)coin).endgameFallSpeed - 1;
+            maxDuration = ((Character*)coin).endgameFallSpeed + 1;
+            rangeDuration = maxDuration - minDuration;
+            actualDuration = (arc4random() % rangeDuration) + minDuration;
+            previousCoinDuration = actualDuration;
+//        }
+//        else
+//        {
+//            actualDuration = previousCoinDuration;
+//        }
     }
     else
     {
         minDuration = ((Character*)coin).fallSpeed - 1;
         maxDuration = ((Character*)coin).fallSpeed + 1;
+        rangeDuration = maxDuration - minDuration;
+        actualDuration = (arc4random() % rangeDuration) + minDuration;
     }
-    int rangeDuration = maxDuration - minDuration;
-    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    
     
     coin.position = CGPointMake(actualX, winSize.height - 10);
     coin.scale = .3;
@@ -963,7 +976,17 @@
         angelStartingWidth = 30;
         coinsInARow = 0;
         previousCoinX = 0;
+        previousCoinDuration = 0;
         calledYouWin = 0;
+        betweenCoinRowDelay = 0;
+        baseCount = 6;
+        friendlyRegularShooterModifier = (arc4random() * baseCount);
+        friendlyMeleeModifier = (arc4random() * baseCount);
+        friendlyFastShooterModifier = (arc4random() * baseCount);
+        enemyMeleeModifier = (arc4random() * baseCount);
+        enemyRegularShooterModifier = (arc4random() * baseCount);
+        coinModifier = (arc4random() * baseCount);
+        scenarioModifier = (arc4random() * (gameplayCoinFramecount/100));
         
         [GameData sharedData].coinsGained = 0;
         currentLevelSelected = [GameData sharedData].currentLevelSelected;
@@ -1279,7 +1302,7 @@
             if(blueOrb.position.x > winSize.width + 20 || blueOrb.position.x < -20 || blueOrb.position.y > winSize.height + 20)
             {
                 [bananasToDelete addObject:blueOrb];
-                [bananaArray removeObject:blueOrb];
+//                [bananaArray removeObject:blueOrb];
 //                NSLog(@"recognized banana should be deleted");
             }
         }
@@ -1287,7 +1310,7 @@
     
     for (CCSprite *s in bananasToDelete)
     {
-        [bananasToDelete removeObject:s];
+        [bananaArray removeObject:s];
         [self removeChild:s cleanup:YES];
 //        NSLog(@"removed banana");
 //        orbsDeleted++;
@@ -1318,7 +1341,16 @@
             scenarioDelayCounter = 0;
         }
     }
-
+    
+    // b/c if all 3 friendlies are available, we want approx. 1 to come every X frames, or all three in a 3X frame cycle. baseCount * 100 should equal the total cycle, which should also be the plist value of friendlyFastShooter (if baseCount = 6, that means the big cycle and the plist value of friendlyFastShooter should be 600)
+    
+//    friendlyRegularShooterModifier;
+//    friendlyMeleeModifier;
+//    friendlyFastShooterModifier;
+//    enemyMeleeModifier;
+//    enemyRegularShooterModifier;
+//    coinModifier;
+//    scenarioModifier;
     
     if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true && waveChanging == false && (scenarioDelay - scenarioDelayCounter) > 80)
     {
@@ -1327,46 +1359,52 @@
             //[self addBigGoodGuy];
             //[self addBigMonster];
             
-            if(framecount % friendlyRegularShooterFramecount == 0 && [GameData sharedData].friendlyRegularShooterAvailable == true)
+            if((framecount + friendlyRegularShooterModifier) % friendlyRegularShooterFramecount == 0 && [GameData sharedData].friendlyRegularShooterAvailable == true)
             {
 //                NSLog(@"add friendly regular shooter");
                 [self addFriendlyRegularShooter];
+                friendlyRegularShooterModifier = (arc4random() * baseCount);
             }
-            if(framecount % friendlyMeleeFramecount == 0 && [GameData sharedData].friendlyMeleeAvailable == true)
+            if((framecount + friendlyMeleeModifier) % friendlyMeleeFramecount == 0 && [GameData sharedData].friendlyMeleeAvailable == true)
             {
 //                NSLog(@"add friendly melee");
                 [self addFriendlyMelee];
+                friendlyMeleeModifier = (arc4random() * baseCount);
             }
-            if(framecount % friendlyFastShooterFramecount == 0 && [GameData sharedData].friendlyFastShooterAvailable == true)
+            if((framecount + friendlyFastShooterModifier) % friendlyFastShooterFramecount == 0 && [GameData sharedData].friendlyFastShooterAvailable == true)
             {
 //                NSLog(@"add friendly fast shooter");
                 [self addFriendlyFastShooter];
+                friendlyFastShooterModifier = (arc4random() * baseCount);
             }
-            if(framecount % enemyMeleeFramecount == 0 && enemyMeleeAvailable == true)
+            if((framecount + enemyMeleeModifier) % enemyMeleeFramecount == 0 && enemyMeleeAvailable == true)
             {
 //                NSLog(@"add enemy melee");
 //  need to make it so that zizZag spawns sometimes          arc4random()
                 [self addEnemyMelee];
+                enemyMeleeModifier = (arc4random() * baseCount);
 
             }
-            if(framecount % enemyRegularShooterFramecount == 0 && enemyRegularShooterAvailable == true)
+            if((framecount + enemyMeleeModifier) % enemyRegularShooterFramecount == 0 && enemyRegularShooterAvailable == true)
             {
 //                NSLog(@"add enemy regular shooter");
                 [self addEnemyRegularShooter];
+                enemyRegularShooterModifier = (arc4random() * baseCount);
             }
         
-            if(framecount % gameplayCoinFramecount == 0)
+            if((framecount + coinModifier) % gameplayCoinFramecount == 0)
             {
                 [self addCoin:NO];
+                coinModifier = (arc4random() * gameplayCoinFramecount);
             }
 //        }
     }
     
-    if(framecount % 10 == 0 && calledYouWin == 0)
-    {
-        [self youWin];
-        calledYouWin++;
-    }
+//    if(framecount % 10 == 0 && calledYouWin == 0)
+//    {
+//        [self youWin];
+//        calledYouWin++;
+//    }
     
     if(waveChanging == true)
     {
@@ -1386,8 +1424,17 @@
             }
             else
             {
-                [self addCoin:NO];
-                coinsInARow = 1;
+                if(betweenCoinRowDelay == 1)
+                {
+                    [self addCoin:NO];
+                    coinsInARow = 1;
+                    betweenCoinRowDelay = 0;
+                }
+                else
+                {
+                    betweenCoinRowDelay++;
+                }
+                
             }
             
             if(endgameCoinTotal == endgameCoinCount)
@@ -5826,10 +5873,22 @@
     NSMutableDictionary* friendlyMeleeDict = [friendlies objectForKey:@"friendlyMelee"];
     [GameData sharedData].friendlyMeleeAvailable = true;
     friendlyMeleeFramecount = [[friendlyMeleeDict objectForKey:@"spawnRate"] intValue];
+    if([GameData sharedData].friendlyRegularShooterAvailable == true && [GameData sharedData].friendlyFastShooterAvailable == false)
+    {
+        friendlyMeleeFramecount *= 2;
+    }
+    if([GameData sharedData].friendlyRegularShooterAvailable == true && [GameData sharedData].friendlyFastShooterAvailable == true)
+    {
+        friendlyMeleeFramecount *= 3;
+    }
  
     NSMutableDictionary* friendlyRegularShooterDict = [friendlies objectForKey:@"friendlyRegularShooter"];
     [GameData sharedData].friendlyRegularShooterAvailable  = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterAvailable"] boolValue];
     friendlyRegularShooterFramecount = [[friendlyRegularShooterDict objectForKey:@"spawnRate"] intValue];
+    if([GameData sharedData].friendlyFastShooterAvailable == true)
+    {
+        friendlyRegularShooterFramecount *= 1.5;
+    }
     
     NSMutableDictionary* friendlyFastShooterDict = [friendlies objectForKey:@"friendlyFastShooter"];
     [GameData sharedData].friendlyFastShooterAvailable = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterAvailable"] boolValue];

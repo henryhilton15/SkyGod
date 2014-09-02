@@ -4564,12 +4564,14 @@
 		DCC1A0DD13A94EC0005BD75D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		DCC1A0DE13A94EC0005BD75D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -4587,6 +4589,7 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "SkyGod-iOS";
+				PROVISIONING_PROFILE = "1fe73b7c-b722-4b29-a21f-0b6342f9fc30";
 			};
 			name = Debug;
 		};
@@ -4604,6 +4607,7 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "SkyGod-iOS";
+				PROVISIONING_PROFILE = "1fe73b7c-b722-4b29-a21f-0b6342f9fc30";
 			};
 			name = Release;
 		};

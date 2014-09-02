@@ -279,6 +279,7 @@
     int price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterPrice"] intValue];
     if(coins > price)
     {
+        [GameData sharedData].friendlyRegularShooterAvailable = true;
         rank++;
         NSNumber *newRank = [NSNumber numberWithInt:rank];
         [[NSUserDefaults standardUserDefaults] setObject:newRank forKey: @"friendlyRegularShooterRank"];
@@ -312,6 +313,7 @@
     int price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleePrice"] intValue];
     if(coins > price)
     {
+        [GameData sharedData].friendlyMeleeAvailable = true;
         rank++;
         NSNumber *newRank = [NSNumber numberWithInt:rank];
         [[NSUserDefaults standardUserDefaults] setObject:newRank forKey: @"friendlyMeleeRank"];
@@ -341,6 +343,7 @@
     int price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterPrice"] intValue];
     if(coins > price)
     {
+        [GameData sharedData].friendlyFastShooterAvailable = true;
         rank++;
         NSNumber *newRank = [NSNumber numberWithInt:rank];
         [[NSUserDefaults standardUserDefaults] setObject:newRank forKey: @"friendlyFastShooterRank"];
@@ -355,8 +358,8 @@
         price = rank * 50 + 50;
         NSNumber* NSPrice = [NSNumber numberWithInt:price];
         [[NSUserDefaults standardUserDefaults] setObject:NSPrice forKey:@"friendlyFastShooterPrice"];
-        [meleePrice setString:[NSString stringWithFormat:@"Price:%d", price]];
-        [meleeRank setString:[NSString stringWithFormat:@"Lvl:%d/5", rank]];
+        [fastShooterPrice setString:[NSString stringWithFormat:@"Price:%d", price]];
+        [fastShooterRank setString:[NSString stringWithFormat:@"Lvl:%d/5", rank]];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
     }
     else
