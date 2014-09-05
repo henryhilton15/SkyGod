@@ -12,6 +12,7 @@
 {
     CCLabelTTF *TitleLabel;
     CCMenu *myMenu;
+    CGSize winSize;
 }
 
 -(id) init;

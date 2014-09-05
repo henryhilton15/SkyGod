@@ -149,10 +149,10 @@
         int centerRightX = winSize.width * .125;
         int farRightX = winSize.width * .375;
         int topRowPriceY = winSize.height * .7;
-        int topRowAngelY = winSize.height * .97;
+        int topRowAngelY = winSize.height * .57;
         int topRowLevelY = winSize.height * .4;
         int bottomRowPriceY = winSize.height * .31;
-        int bottomRowLogoY = winSize.height * .57;
+        int bottomRowLogoY = winSize.height * .19;
         int bottomRowAvailableY = winSize.height * .07;
         meleeButton.position = CGPointMake(farLeftX , topRowAngelY);
         regularShooterButton.position = CGPointMake(centerLeftX, topRowAngelY);
@@ -168,6 +168,7 @@
         mainMenuButton.scale = 0.5;
         
         CCMenu* storeMenu = [CCMenu menuWithItems:mainMenuButton, regularShooterButton, fastShooterButton, meleeButton, tankButton, buyAirstrikeButton, buyReinforcementButton, buyImmunityButton, nil];
+        storeMenu.position = ccp(winSize.width/2, 0);
         [self addChild:storeMenu];
         
         CCLabelTTF *shopLabel = [CCLabelTTF labelWithString:@"SHOP" fontName:@"Marker Felt" fontSize: 30];
