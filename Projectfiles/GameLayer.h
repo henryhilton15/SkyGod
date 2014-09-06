@@ -103,6 +103,7 @@
     int enemyRegularShooterModifier;
     int coinModifier;
     int scenarioModifier;
+    int scenariosAvailable;
     
     double zigZagPercentage;
     double explosionAnimationLength;
@@ -211,6 +212,7 @@
     BOOL badBaseExploded;
     BOOL goodBaseExploded;
     BOOL coinInterlude;
+    BOOL friendlyTankAvailable;
     
     CCLabelTTF *waveLabel;
     CCLabelTTF *goodBaseHealthLabel;

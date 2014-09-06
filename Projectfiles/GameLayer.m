@@ -30,7 +30,7 @@
     int rangeX = maxX - minX;
     int actualX = minX + arc4random() % rangeX;
     
-    while ((actualX < winSize.width * .55) && (actualX > winSize.width * .45))
+    while ((actualX < winSize.width * .57) && (actualX > winSize.width * .43))
     {
         actualX = minX + arc4random() % rangeX;
     }
@@ -124,7 +124,7 @@
     int rangeX = maxX - minX;
     int actualX = minX + arc4random() % rangeX;
     
-    while ((actualX < winSize.width * .55) && (actualX > winSize.width * .45))
+    while ((actualX < winSize.width * .57) && (actualX > winSize.width * .43))
     {
         actualX = minX + arc4random() % rangeX;
     }
@@ -196,7 +196,7 @@
     int rangeX = maxX - minX;
     int actualX = minX + arc4random() % rangeX;
     
-    while ((actualX < winSize.width * .55) && (actualX > winSize.width * .45))
+    while ((actualX < winSize.width * .57) && (actualX > winSize.width * .43))
     {
         actualX = minX + arc4random() % rangeX;
     }
@@ -479,7 +479,7 @@
     int rangeX = maxX - minX;
     int actualX = minX + arc4random() % rangeX;
     
-    while ((actualX < winSize.width * .55) && (actualX > winSize.width * .45))
+    while ((actualX < winSize.width * .57) && (actualX > winSize.width * .43))
     {
         actualX = minX + arc4random() % rangeX;
     }
@@ -935,6 +935,7 @@
         immunityFramecount = 0;
         coinInterludeCounter = 0;
         coinDelayCounter = 0;
+        scenariosAvailable = 0;
 
         //deathFramecount = 60 * 30;
         //timeRemaining = 30;
@@ -969,6 +970,7 @@
         reinforcements = false;
         badBaseExploded = false;
         goodBaseExploded = false;
+        friendlyTankAvailable = NO;
         scenarioDelayCounter = 0;
         scenarioDelay = 600;
         scenario2interludeCounter = 0;
@@ -1352,7 +1354,7 @@
 //    coinModifier;
 //    scenarioModifier;
     
-    if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true && waveChanging == false && (scenarioDelay - scenarioDelayCounter) > 80)
+    if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true && waveChanging == false)
     {
 //        if((firstZigZag == true || zigZagDelayCounter % 250 == 0) && (firstBigMonster == true || bigMonsterDelayCounter % 200 == 0))
 //        {
@@ -1397,6 +1399,12 @@
                 [self addCoin:NO];
                 coinModifier = (arc4random() * gameplayCoinFramecount);
             }
+        
+        if(friendlyTankAvailable == true && framecount % 2000 == 0)
+        {
+            Scenario2 = true;
+            [self addFriendlyTank];
+        }
 //        }
     }
     
@@ -2318,6 +2326,11 @@
     NSMutableArray *deadGoodBombs = [[NSMutableArray alloc] init];
     NSMutableArray *deadBadBombs = [[NSMutableArray alloc] init];
     
+    if(waveChanging == true)
+    {
+        return;
+    }
+    
     for(int i = 0; i < [goodGuys count]; i++)
     {
         if([goodGuys count] > 0)
@@ -3114,7 +3127,8 @@
 
 -(void)createScenario
 {
-    scenarioNumber = [self generateRandomNumber];
+    
+    scenarioNumber = [self generateRandomNumber:scenariosAvailable];
 
     NSLog(@"scenario number = %d", scenarioNumber);
     
@@ -3128,8 +3142,7 @@
     if (scenarioNumber == 2)
     {
         NSLog(@"scenario 2 begins");
-        Scenario2 = true;
-        [self addFriendlyTank];
+        
     }
     if (scenarioNumber == 3)
     {
@@ -3176,9 +3189,9 @@
 //   }
 //}
 
--(int)generateRandomNumber
+-(int)generateRandomNumber :(int)numScenariosAvailable
 {
-    int num = (arc4random() % 4) + 1;
+    int num = (arc4random() % numScenariosAvailable) + 1;
     return num;
 }
 
@@ -4534,6 +4547,7 @@
  
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         
+        
         if(((Character*)character).type == GOOD_BASE)
         {
             [self youLose];
@@ -4541,10 +4555,19 @@
         }
         if(((Character*)character).type == BAD_BASE)
         {
-            [self youWin];
             NSLog(@"called you win");
+            [goodGuysBottom removeObject:character];
+            CCSprite* base = [[Character alloc] initWithBadGuyBaseImage3];
+            base.position = ccp(winSize.width - 50, BASE_HEIGHT);
+            base.scale = .6;
+            [self addChild:base z:4];
+            [badGuysBottom addObject:base];
+            [self youWin];
+            NSLog(@"here");
         }
+        
         [self removeChild:character cleanup:YES];
+        
     });
 
     //animation
@@ -5182,64 +5205,71 @@
 }
 -(void) youLose
 {
-    NSMutableArray *eraseGoodGuys = [[NSMutableArray alloc] init];
-    NSMutableArray *eraseBadGuys = [[NSMutableArray alloc] init];
-    NSMutableArray *eraseGoodGuysBottom = [[NSMutableArray alloc] init];
-    NSMutableArray *eraseBadGuysBottom = [[NSMutableArray alloc] init];
+//    NSMutableArray *eraseGoodGuys = [[NSMutableArray alloc] init];
+//    NSMutableArray *eraseBadGuys = [[NSMutableArray alloc] init];
+//    NSMutableArray *eraseGoodGuysBottom = [[NSMutableArray alloc] init];
+//    NSMutableArray *eraseBadGuysBottom = [[NSMutableArray alloc] init];
+//    
+//    for(int x = 0; x < [badGuys count]; x++)
+//    {
+//        badGuy = [badGuys objectAtIndex:x];
+//        [eraseBadGuys addObject:badGuy];
+//    }
+//    
+//    for (CCSprite *s in eraseBadGuys)
+//    {
+//        [badGuys removeObject:s];
+//        [self removeChild:s cleanup:YES];
+//    }
+//    [eraseBadGuys removeAllObjects];
+//    
+//    for(int i = 0; i < [goodGuys count]; i++)
+//    {
+//        goodGuy = [goodGuys objectAtIndex:i];
+//        [eraseGoodGuys addObject:goodGuy];
+//    
+//    }
+//    
+//    for (CCSprite *s in eraseGoodGuys)
+//    {
+//        [goodGuys removeObject:s];
+//        [self removeChild:s cleanup:YES];
+//    }
+//    [eraseGoodGuys removeAllObjects];
     
-    for(int x = 0; x < [badGuys count]; x++)
-    {
-        badGuy = [badGuys objectAtIndex:x];
-        [eraseBadGuys addObject:badGuy];
-    }
-    
-    for (CCSprite *s in eraseBadGuys)
-    {
-        [badGuys removeObject:s];
-        [self removeChild:s cleanup:YES];
-    }
-    [eraseBadGuys removeAllObjects];
-    
-    for(int i = 0; i < [goodGuys count]; i++)
-    {
-        goodGuy = [goodGuys objectAtIndex:i];
-        [eraseGoodGuys addObject:goodGuy];
-    }
-    
-    for (CCSprite *s in eraseGoodGuys)
-    {
-        [goodGuys removeObject:s];
-        [self removeChild:s cleanup:YES];
-    }
-    [eraseGoodGuys removeAllObjects];
-    
-    
-    for(int x = 0; x < [badGuysBottom count]; x++)
-    {
-        badBottom = [badGuysBottom objectAtIndex:x];
-        [eraseBadGuysBottom addObject:badBottom];
-    }
-    
-    for (CCSprite *s in eraseBadGuysBottom)
-    {
-        [badGuysBottom removeObject:s];
-        [self removeChild:s cleanup:YES];
-    }
-    [eraseBadGuysBottom removeAllObjects];
-    
-    for(int i = 0; i<[goodGuysBottom count]; i++)
-    {
-        goodBottom = [goodGuysBottom objectAtIndex:i];
-        [eraseGoodGuysBottom addObject:goodBottom];
-    }
-    
-    for (CCSprite *s in eraseGoodGuysBottom)
-    {
-        [goodGuysBottom removeObject:s];
-        [self removeChild:s cleanup:YES];
-    }
-    
-    [eraseGoodGuysBottom removeAllObjects];
+//
+//    for(int x = 0; x < [badGuysBottom count]; x++)
+//    {
+//        badBottom = [badGuysBottom objectAtIndex:x];
+//        if(((Character*)badBottom).type != BAD_BASE)
+//        {
+//            [eraseBadGuysBottom addObject:badBottom];
+//        }
+//    }
+//    
+//    for (CCSprite *s in eraseBadGuysBottom)
+//    {
+//        [badGuysBottom removeObject:s];
+//        [self removeChild:s cleanup:YES];
+//    }
+//    [eraseBadGuysBottom removeAllObjects];
+//    
+//    for(int i = 0; i<[goodGuysBottom count]; i++)
+//    {
+//        goodBottom = [goodGuysBottom objectAtIndex:i];
+//        if(((Character*)goodBottom).type != GOOD_BASE)
+//        {
+//            [eraseGoodGuysBottom addObject:goodBottom];
+//        }
+//    }
+//    
+//    for (CCSprite *s in eraseGoodGuysBottom)
+//    {
+//        [goodGuysBottom removeObject:s];
+//        [self removeChild:s cleanup:YES];
+//    }
+//    
+//    [eraseGoodGuysBottom removeAllObjects];
     
 //    (((Character*)badBase).health) = 10;
 //    [badBaseHealthLabel setString:[NSString stringWithFormat:@"Enemy Base Health: %d",((Character*) badBase).health]];
@@ -5277,108 +5307,108 @@
 //    }
 //    [eraseBases removeAllObjects];
    
-    for(int x = 0; x<[badGuys count]; x++)
-    {
-        badGuy = [badGuys objectAtIndex:x];
-        [eraseBadGuys addObject:badGuy];
-    }
-    
-    for (CCSprite *s in eraseBadGuys)
-    {
-        [badGuys removeObject:s];
-        [self removeChild:s cleanup:YES];
-    }
-    [eraseBadGuys removeAllObjects];
-    
-    
-    for(int i = 0; i < [goodGuys count]; i++)
-    {
-        goodGuy = [goodGuys objectAtIndex:i];
-        [eraseGoodGuys addObject:goodGuy];
-    }
-    
-    for (CCSprite *s in eraseGoodGuys)
-    {
-        [goodGuys removeObject:s];
-        [self removeChild:s cleanup:YES];
-    }
-    
-    [eraseGoodGuys removeAllObjects];
-    
-    
-    for(int x = 0; x < [badGuysBottom count]; x++)
-    {
-        badBottom = [badGuysBottom objectAtIndex:x];
-        [eraseBadGuysBottom addObject:badBottom]; 
-    }
-    
-    for (CCSprite *s in eraseBadGuysBottom)
-    {
-        [badGuysBottom removeObject:s];
-        [self removeChild:s cleanup:YES];
-    }
-    
-    [eraseBadGuysBottom removeAllObjects];
-    
-    
-    for(int i = 0; i<[goodGuysBottom count]; i++)
-    {
-        goodBottom = [goodGuysBottom objectAtIndex:i];
-        [eraseGoodGuysBottom addObject:goodBottom];
-    }
-    
-    for (CCSprite *s in eraseGoodGuysBottom)
-    {
-        [goodGuysBottom removeObject:s];
-        [self removeChild:s cleanup:YES];
-    }
-    
-    [eraseGoodGuysBottom removeAllObjects];
-    
-    
-    for(int x = 0; x < [badBulletArray count]; x++)
-    {
-        badBottom = [badBulletArray objectAtIndex:x];
-        [eraseBadBulletsBottom addObject:badBottom];
-    }
-    
-    for (CCSprite *s in eraseBadBulletsBottom)
-    {
-        [badBulletArray removeObject:s];
-        [self removeChild:s cleanup:YES];
-    }
-    
-    [eraseBadBulletsBottom removeAllObjects];
-    
-    
-    for(int i = 0; i<[goodBulletArray count]; i++)
-    {
-        goodBottom = [goodBulletArray objectAtIndex:i];
-        [eraseGoodBulletsBottom addObject:goodBottom];
-    }
-    
-    for (CCSprite *s in eraseGoodBulletsBottom)
-    {
-        [goodBulletArray removeObject:s];
-        [self removeChild:s cleanup:YES];
-    }
-    
-    [eraseGoodBulletsBottom removeAllObjects];
-    
-    for(int i = 0; i<[coinsArray count]; i++)
-    {
-        goodBottom = [coinsArray objectAtIndex:i];
-        [eraseCoins addObject:goodBottom];
-    }
-    
-    for (CCSprite *s in eraseCoins)
-    {
-        [coinsArray removeObject:s];
-        [self removeChild:s cleanup:YES];
-    }
-    
-    [eraseCoins removeAllObjects];
-    
+//    for(int x = 0; x<[badGuys count]; x++)
+//    {
+//        badGuy = [badGuys objectAtIndex:x];
+//        [eraseBadGuys addObject:badGuy];
+//    }
+//    
+//    for (CCSprite *s in eraseBadGuys)
+//    {
+//        [badGuys removeObject:s];
+//        [self removeChild:s cleanup:YES];
+//    }
+//    [eraseBadGuys removeAllObjects];
+//    
+//    
+//    for(int i = 0; i < [goodGuys count]; i++)
+//    {
+//        goodGuy = [goodGuys objectAtIndex:i];
+//        [eraseGoodGuys addObject:goodGuy];
+//    }
+//    
+//    for (CCSprite *s in eraseGoodGuys)
+//    {
+//        [goodGuys removeObject:s];
+//        [self removeChild:s cleanup:YES];
+//    }
+//    
+//    [eraseGoodGuys removeAllObjects];
+//    
+//    
+//    for(int x = 0; x < [badGuysBottom count]; x++)
+//    {
+//        badBottom = [badGuysBottom objectAtIndex:x];
+//        [eraseBadGuysBottom addObject:badBottom]; 
+//    }
+//    
+//    for (CCSprite *s in eraseBadGuysBottom)
+//    {
+//        [badGuysBottom removeObject:s];
+//        [self removeChild:s cleanup:YES];
+//    }
+//    
+//    [eraseBadGuysBottom removeAllObjects];
+//    
+//    
+//    for(int i = 0; i<[goodGuysBottom count]; i++)
+//    {
+//        goodBottom = [goodGuysBottom objectAtIndex:i];
+//        [eraseGoodGuysBottom addObject:goodBottom];
+//    }
+//    
+//    for (CCSprite *s in eraseGoodGuysBottom)
+//    {
+//        [goodGuysBottom removeObject:s];
+//        [self removeChild:s cleanup:YES];
+//    }
+//    
+//    [eraseGoodGuysBottom removeAllObjects];
+//    
+//    
+//    for(int x = 0; x < [badBulletArray count]; x++)
+//    {
+//        badBottom = [badBulletArray objectAtIndex:x];
+//        [eraseBadBulletsBottom addObject:badBottom];
+//    }
+//    
+//    for (CCSprite *s in eraseBadBulletsBottom)
+//    {
+//        [badBulletArray removeObject:s];
+//        [self removeChild:s cleanup:YES];
+//    }
+//    
+//    [eraseBadBulletsBottom removeAllObjects];
+//    
+//    
+//    for(int i = 0; i<[goodBulletArray count]; i++)
+//    {
+//        goodBottom = [goodBulletArray objectAtIndex:i];
+//        [eraseGoodBulletsBottom addObject:goodBottom];
+//    }
+//    
+//    for (CCSprite *s in eraseGoodBulletsBottom)
+//    {
+//        [goodBulletArray removeObject:s];
+//        [self removeChild:s cleanup:YES];
+//    }
+//    
+//    [eraseGoodBulletsBottom removeAllObjects];
+//    
+//    for(int i = 0; i<[coinsArray count]; i++)
+//    {
+//        goodBottom = [coinsArray objectAtIndex:i];
+//        [eraseCoins addObject:goodBottom];
+//    }
+//    
+//    for (CCSprite *s in eraseCoins)
+//    {
+//        [coinsArray removeObject:s];
+//        [self removeChild:s cleanup:YES];
+//    }
+//    
+//    [eraseCoins removeAllObjects];
+//    
 
     
     
@@ -5413,7 +5443,7 @@
 
 -(void) subtractGoodBaseHealth:(CCSprite*)fightingDevil
 {
-    if(immunity == false)
+    if(immunity == false && waveChanging == false)
     {
         (((Character*)goodBase).health) -= ((Character*)fightingDevil).power;
         int healthCount = (((Character*)goodBase).health);
@@ -5505,6 +5535,12 @@
             NSLog(@"called bad base explosion, goodBaseExploded = true");
             [self explosion:badBase :1.5 :YES];
             badBaseExploded = true;
+//            int delayInSeconds = 1.5;
+//            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+//                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//                   
+//                
+//                });
         }
 }
 
@@ -5853,7 +5889,7 @@
     NSDictionary *levelDictionary = [NSDictionary dictionaryWithContentsOfFile:path];
     
     NSMutableDictionary *enemyMeleeDict = [levelDictionary objectForKey:@"enemyMelee"];
-    enemyMeleeFramecount = 300 + [[enemyMeleeDict objectForKey:@"spawnRate"] intValue];
+    enemyMeleeFramecount = 150 + [[enemyMeleeDict objectForKey:@"spawnRate"] intValue];
     enemyMeleeAvailable = [[enemyMeleeDict objectForKey:@"available"] boolValue];
     
     NSMutableDictionary *enemyRegularShooterDict = [levelDictionary objectForKey:@"enemyRegularShooter"];
@@ -5895,10 +5931,14 @@
     friendlyFastShooterFramecount = [[friendlyFastShooterDict objectForKey:@"spawnRate"] intValue];
     NSLog(@"friendly fast shooter available = %d", [GameData sharedData].friendlyFastShooterAvailable);
     
+    friendlyTankAvailable = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankAvailable"] boolValue];
+    
     NSMutableDictionary* coinDict = [levelDictionary objectForKey:@"coin"];
     endgameCoinFramecount = 20 + [[coinDict objectForKey:@"endgameFrequency"] intValue];
     gameplayCoinFramecount = 500 + [[coinDict objectForKey:@"gameplayFrequency"] intValue];
     endgameCoinTotal = 10 + [[coinDict objectForKey:@"endgameCoinTotal"] intValue];
+    
+    scenariosAvailable = [levelDictionary objectForKey: @"scenarios available"];
 }
 
 -(void) addCoins:(int)numCoins

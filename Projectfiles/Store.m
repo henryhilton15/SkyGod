@@ -168,6 +168,7 @@
         mainMenuButton.scale = 0.5;
         
         CCMenu* storeMenu = [CCMenu menuWithItems:mainMenuButton, regularShooterButton, fastShooterButton, meleeButton, tankButton, buyAirstrikeButton, buyReinforcementButton, buyImmunityButton, nil];
+        storeMenu.position = ccp(0,0);
         [self addChild:storeMenu];
         
         CCLabelTTF *shopLabel = [CCLabelTTF labelWithString:@"SHOP" fontName:@"Marker Felt" fontSize: 30];
@@ -428,6 +429,8 @@
         NSNumber *newRank = [NSNumber numberWithInt:rank];
         [[NSUserDefaults standardUserDefaults] setObject:newRank forKey: @"friendlyTankRank"];
         NSLog(@"friendly tank rank = %@", newRank);
+        NSNumber *unlocked = [NSNumber numberWithBool:true];
+        [[NSUserDefaults standardUserDefaults] setObject:unlocked forKey:@"friendlyTankAvailable"];
         coins -= price;
         NSCoins = [NSNumber numberWithInt:coins];
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
