@@ -24,7 +24,7 @@
             selectedImage: @"resume-button-d.png"
             target:self
             selector:@selector(resumeGame:)];
-       resume.position = CGPointMake(0, winSize.height * .95);
+       resume.position = CGPointMake(0, winSize.height * .55);
         resume.scale = 0.5f;
     
 
@@ -32,7 +32,7 @@
             selectedImage: @"restart-button-d.png"
             target:self
             selector:@selector(restartGame:)];
-        restart.position = CGPointMake(0, winSize.height * .825);
+        restart.position = CGPointMake(0, winSize.height * .425);
         restart.scale = 0.5f;
         
         
@@ -40,7 +40,7 @@
              selectedImage: @"main menu-button-d.png"
              target:self
              selector:@selector(mainMenu:)];
-        mainMenuButton.position = CGPointMake(0, winSize.height * .7);
+        mainMenuButton.position = CGPointMake(0, winSize.height * .3);
         mainMenuButton.scale = 0.5f;
         
         CCMenuItemImage *sfxButton = [CCMenuItemImage itemWithNormalImage:@"sound_btn.png"
@@ -49,26 +49,27 @@
                                                                  selector:@selector(sfxToggle:)];
 
         
-        sfxButton.position = CGPointMake(-25, winSize.height * .575);
+        sfxButton.position = CGPointMake(-25, winSize.height * .175);
         sfxButton.scale = 1.0f;
         
         CCMenuItemImage *musicButton = [CCMenuItemImage itemWithNormalImage:@"music_btn.png"
                                                           selectedImage: @"music_btn.png"
                                                                  target:self
                                                                    selector:@selector(musicToggle:)];
-        musicButton.position = CGPointMake(25, winSize.height * .575);
+        musicButton.position = CGPointMake(25, winSize.height * .175);
         musicButton.scale = 0.5f;
         
         
         
         CCMenu *pauseMenu = [CCMenu menuWithItems:resume, restart, mainMenuButton, sfxButton, musicButton, nil];
+        pauseMenu.position = ccp(winSize.width/2,0);
         [self addChild: pauseMenu z:1];
         
         CCSprite *pause_background = [CCSprite spriteWithFile:@"pause-screen-hd.png"];
         pause_background.position = CGPointMake(winSize.width/2,winSize.height/2);
         [self addChild:pause_background z:0];
         
-        redXHeight = winSize.height * .21;
+        redXHeight = winSize.height * .17;
         sfxRedXWidth = winSize.width/2 - winSize.width/26;
         musicRedXWidth = winSize.width/2 + winSize.width/20;
         
