@@ -168,7 +168,9 @@
         mainMenuButton.scale = 0.5;
         
         CCMenu* storeMenu = [CCMenu menuWithItems:mainMenuButton, regularShooterButton, fastShooterButton, meleeButton, tankButton, buyAirstrikeButton, buyReinforcementButton, buyImmunityButton, nil];
+
         storeMenu.position = ccp(winSize.width/2, 0);
+
         [self addChild:storeMenu];
         
         CCLabelTTF *shopLabel = [CCLabelTTF labelWithString:@"SHOP" fontName:@"Marker Felt" fontSize: 30];
@@ -429,6 +431,8 @@
         NSNumber *newRank = [NSNumber numberWithInt:rank];
         [[NSUserDefaults standardUserDefaults] setObject:newRank forKey: @"friendlyTankRank"];
         NSLog(@"friendly tank rank = %@", newRank);
+        NSNumber *unlocked = [NSNumber numberWithBool:true];
+        [[NSUserDefaults standardUserDefaults] setObject:unlocked forKey:@"friendlyTankAvailable"];
         coins -= price;
         NSCoins = [NSNumber numberWithInt:coins];
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
@@ -437,8 +441,8 @@
         price = rank * 50 + 50;
         NSNumber* NSPrice = [NSNumber numberWithInt:price];
         [[NSUserDefaults standardUserDefaults] setObject:NSPrice forKey:@"friendlyTankPrice"];
-        [meleePrice setString:[NSString stringWithFormat:@"Price:%d", price]];
-        [meleeRank setString:[NSString stringWithFormat:@"Lvl:%d/5", rank]];
+        [tankPrice setString:[NSString stringWithFormat:@"Price:%d", price]];
+        [tankRank setString:[NSString stringWithFormat:@"Lvl:%d/5", rank]];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
     }
     else

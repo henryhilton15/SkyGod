@@ -60,6 +60,7 @@
     int friendlyFastShooterFramecount;
     int enemyFastShooterFramecount;
     int friendlyMeleeFramecount;
+    int friendlyTankFramecount;
     int enemyMeleeFramecount;
     int bigMonstercount;
     int bigMonsterDelayCounter;
@@ -103,6 +104,7 @@
     int enemyRegularShooterModifier;
     int coinModifier;
     int scenarioModifier;
+    int scenariosAvailable;
     
     double zigZagPercentage;
     double explosionAnimationLength;
@@ -211,6 +213,7 @@
     BOOL badBaseExploded;
     BOOL goodBaseExploded;
     BOOL coinInterlude;
+    BOOL friendlyTankAvailable;
     
     CCLabelTTF *waveLabel;
     CCLabelTTF *goodBaseHealthLabel;

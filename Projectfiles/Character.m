@@ -501,7 +501,7 @@
         NSMutableDictionary *coinDict = [levelDictionary objectForKey:@"coin"];
         
         fallSpeed = 7 - [[coinDict objectForKey:@"gameplayFallSpeed"] intValue];
-        endgameFallSpeed = 3 - [[coinDict objectForKey:@"endgameFallSpeed"] intValue];
+        endgameFallSpeed = 5 - [[coinDict objectForKey:@"endgameFallSpeed"] intValue];
         worth = 1;
         health = 1;
     }

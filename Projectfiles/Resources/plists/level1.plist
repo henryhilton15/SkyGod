@@ -120,6 +120,8 @@
 		<key>endgameCoinTotal</key>
 		<integer>0</integer>
 	</dict>
+	<key>scenariosAvailable</key>
+	<integer>0</integer>
 	<key>scoreCounter</key>
 	<integer>0</integer>
 	<key>coinCounter</key>
