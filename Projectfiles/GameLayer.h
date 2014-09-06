@@ -60,6 +60,7 @@
     int friendlyFastShooterFramecount;
     int enemyFastShooterFramecount;
     int friendlyMeleeFramecount;
+    int friendlyTankFramecount;
     int enemyMeleeFramecount;
     int bigMonstercount;
     int bigMonsterDelayCounter;

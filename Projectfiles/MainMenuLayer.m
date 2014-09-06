@@ -22,6 +22,9 @@
 	if ((self = [super init]))
 	{
         
+        winSize = [CCDirector sharedDirector].winSize;
+
+        
         if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
         {
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == true || [[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimeMusic"] boolValue] == false)
@@ -30,6 +33,7 @@
                 [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Undaunted.wav" loop:YES];
             }
         }
+        
         
         CCSprite *background = [CCSprite spriteWithFile:@"main-menu.png"];
         background.position = CGPointMake(240,160);
@@ -45,7 +49,7 @@
                                                                      target:self
                                                                    selector:@selector(startGame:)];
         startButton.scale=0.8;
-        startButton.position = CGPointMake(-122.5, 150);
+        startButton.position = CGPointMake(-winSize.width/4,winSize.height/8);
         
         
         
@@ -73,7 +77,7 @@
                                                                  target:self
                                                                    selector:@selector(enterStore:)];
         StoreButton.scale=0.55;
-        StoreButton.position = CGPointMake(0, 150);
+        StoreButton.position = CGPointMake(-winSize.width/30, winSize.height/8);
         
        
         CCMenuItemImage *LevelButton = [CCMenuItemImage itemWithNormalImage:@"select-button-n.png"
@@ -96,6 +100,7 @@
 
         
         myMenu = [CCMenu menuWithItems:StoreButton, startButton, LevelButton, nil];
+        myMenu.position = ccp(winSize.width/2,0);
         [self addChild:myMenu z:2];
         
         [self scheduleUpdate];

@@ -936,6 +936,7 @@
         coinInterludeCounter = 0;
         coinDelayCounter = 0;
         scenariosAvailable = 0;
+        friendlyTankFramecount = 0;
 
         //deathFramecount = 60 * 30;
         //timeRemaining = 30;
@@ -994,7 +995,7 @@
         currentLevelSelected = [GameData sharedData].currentLevelSelected;
         NSLog(@"level selected = %d", currentLevelSelected);
         
-        [self loadLevelSettings];
+        
         [self addBaseBars];
         [self addBases];
         [self addBadRedBar];
@@ -1017,6 +1018,7 @@
 //        friendlyMeleeFramecount = 215 - (wave * 5);
 //        enemyMeleeFramecount = 210 - (wave * 8);
         
+        [self loadLevelSettings];
         
         
         /*
@@ -1400,7 +1402,7 @@
                 coinModifier = (arc4random() * gameplayCoinFramecount);
             }
         
-        if(friendlyTankAvailable == true && framecount % 2000 == 0)
+        if(friendlyTankAvailable == true && framecount % friendlyTankFramecount == 0)
         {
             Scenario2 = true;
             [self addFriendlyTank];
@@ -3127,9 +3129,25 @@
 
 -(void)createScenario
 {
-    
-    scenarioNumber = [self generateRandomNumber:scenariosAvailable];
-
+    if(scenariosAvailable > 0)
+    {
+        if(scenariosAvailable == 1)
+        {
+            scenarioNumber = 1;
+        }
+        else
+        {
+            scenarioNumber = [self generateRandomNumber:scenariosAvailable];
+        }
+    }
+    if(scenarioNumber == 3)
+    {
+        scenarioNumber = 4;
+    }
+    if(scenarioNumber == 2)
+    {
+        scenarioNumber = 3;
+    }
     NSLog(@"scenario number = %d", scenarioNumber);
     
     if (scenarioNumber == 1)
@@ -3139,11 +3157,7 @@
         spawnedHelicopters++;
         [self addEnemyHelicopter];
     }
-    if (scenarioNumber == 2)
-    {
-        NSLog(@"scenario 2 begins");
-        
-    }
+    
     if (scenarioNumber == 3)
     {
         NSLog(@"scenario 3 begins");
@@ -3191,6 +3205,7 @@
 
 -(int)generateRandomNumber :(int)numScenariosAvailable
 {
+    NSLog(@"scenarios available = %d", numScenariosAvailable);
     int num = (arc4random() % numScenariosAvailable) + 1;
     return num;
 }
@@ -4922,10 +4937,7 @@
 //            [goodGuys removeObject:s];
             [self explosion:s :explosionAnimationLength :NO];
             //NSLog(@"deleted bad bullet");
-            if(((Character*)s).type == GOOD_HELICOPTER_BOMB)
-            {
-                NSLog(@"3");
-            }
+
         }
         [deadGoodBombs removeAllObjects];
     }
@@ -5932,13 +5944,15 @@
     NSLog(@"friendly fast shooter available = %d", [GameData sharedData].friendlyFastShooterAvailable);
     
     friendlyTankAvailable = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankAvailable"] boolValue];
+    friendlyTankFramecount = 2000;
     
     NSMutableDictionary* coinDict = [levelDictionary objectForKey:@"coin"];
     endgameCoinFramecount = 20 + [[coinDict objectForKey:@"endgameFrequency"] intValue];
     gameplayCoinFramecount = 500 + [[coinDict objectForKey:@"gameplayFrequency"] intValue];
     endgameCoinTotal = 10 + [[coinDict objectForKey:@"endgameCoinTotal"] intValue];
     
-    scenariosAvailable = [levelDictionary objectForKey: @"scenarios available"];
+    scenariosAvailable = [[levelDictionary objectForKey:@"scenariosAvailable"] intValue];
+    NSLog(@"scenarios available = %d", scenariosAvailable);
 }
 
 -(void) addCoins:(int)numCoins

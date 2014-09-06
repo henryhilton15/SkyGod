@@ -9,7 +9,7 @@
 		<key>health</key>
 		<integer>10</integer>
 		<key>spawnRate</key>
-		<integer>400</integer>
+		<integer>600</integer>
 		<key>power</key>
 		<integer>1</integer>
 		<key>attackFrequency</key>
@@ -39,7 +39,7 @@
 		<key>health</key>
 		<integer>1</integer>
 		<key>spawnRate</key>
-		<integer>600</integer>
+		<integer>900</integer>
 		<key>power</key>
 		<integer>1</integer>
 		<key>attackFrequency</key>
@@ -54,7 +54,7 @@
 		<key>health</key>
 		<integer>1</integer>
 		<key>spawnRate</key>
-		<integer>200</integer>
+		<integer>2000</integer>
 		<key>power</key>
 		<integer>1</integer>
 		<key>attackFrequency</key>
