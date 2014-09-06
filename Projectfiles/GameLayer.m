@@ -1119,7 +1119,7 @@
                                                               selectedImage: @"pause_btn.png"
                                                                      target:self
                                                                    selector:@selector(pauseMenu:)];
-        pauseButton.position = CGPointMake((winSize.width * .5) - 30, winSize.height + 55);
+        pauseButton.position = CGPointMake((winSize.width * .45), winSize.height * .93);
         pauseButton.scale = .7;
         
     
@@ -1127,7 +1127,7 @@
         target: self
         selector:@selector(immunityActivator:)];
         
-        immunityPowerUp.position= CGPointMake ((farLeftX + (2 * buttonSpacing)), winSize.height * 1.4);
+        immunityPowerUp.position= CGPointMake ((farLeftX + (2 * buttonSpacing)), winSize.height * .93);
         immunityPowerUp.scale = 0.7f;
 
         
@@ -1135,17 +1135,18 @@
                                                                                 target: self
                                                                       selector:@selector(reinforcements:)];
         
-        reinforcementPowerUp.position= CGPointMake ((farLeftX + buttonSpacing), winSize.height * 1.4);
+        reinforcementPowerUp.position= CGPointMake ((farLeftX + buttonSpacing), winSize.height * .93);
         reinforcementPowerUp.scale = .7f;
         
         
         CCMenuItemImage *airstrikePowerUp = [CCMenuItemImage itemWithNormalImage:@"airstrike_btn.png" selectedImage:@"airstrike_btn.png"
                                                                         target: self
                                                                     selector:@selector(airstrike:)];
-        airstrikePowerUp.position= CGPointMake (farLeftX, winSize.height + 55);
+        airstrikePowerUp.position= CGPointMake (farLeftX, winSize.height * .93);
         airstrikePowerUp.scale = 0.7f;
         
         CCMenu *myMenu = [CCMenu menuWithItems:pauseButton, airstrikePowerUp, reinforcementPowerUp, immunityPowerUp, nil];
+        myMenu.position = ccp(winSize.width/2, 0);
         [self addChild: myMenu z:100];
 
         
