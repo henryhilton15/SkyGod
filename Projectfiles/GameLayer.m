@@ -2345,13 +2345,8 @@
                 {
                     //[self spawnGoodGuyBottom];
                     goodBottom = [[Character alloc] initWithFriendlyRegularShooterImage];
-                    ((Character*)goodBottom).row = arc4random() % 5 + 1;
-                    [goodGuysBottom addObject:goodBottom];
-                    goodBottom.anchorPoint = CGPointZero;
-                    ((Character*)goodBottom).health = ((Character*)goodGuy).health;
-                    int posHeight = -8 + (8 * ((Character*)goodBottom).row);
-                    goodBottom.position = ccp(angelStartingWidth, posHeight);
-                    [self addChild:goodBottom z:(7 - ((Character*)goodBottom).row)];
+                    goodBottom.scale = 1.5;
+                    [self spawnBottom:goodGuy :goodBottom :YES];
                     
                     //animation
                     
@@ -2397,14 +2392,7 @@
                 {
                     //[self spawnGoodZigZagBottom];
                     goodBottom = [[Character alloc] initWithSuperZigZagGuyImage];
-                    ((Character*)goodBottom).row = arc4random() % 5 + 1;
-                    [goodGuysBottom addObject:goodBottom];
-                    goodBottom.anchorPoint = CGPointZero;
-                    ((Character*)goodBottom).health = ((Character*)goodGuy).health;
-                    int posHeight = -14 + (8 * ((Character*)goodBottom).row);
-
-                    goodBottom.position = ccp(angelStartingWidth, posHeight);
-                    [self addChild:goodBottom z:(7 - ((Character*)goodBottom).row)];
+                    [self spawnBottom:goodGuy :goodBottom :YES];
                 }
                 
                 if(((Character*)goodGuy).type == BIG_GOOD_GUY)
@@ -2412,13 +2400,7 @@
 
                     //[self spawnGoodBigGuyBottom];
                     goodBottom = [[Character alloc] initWithFriendlyTankImage];
-                    ((Character*)goodBottom).row = arc4random() % 5 + 1;
-                    [goodGuysBottom addObject:goodBottom];
-                    goodBottom.anchorPoint = CGPointZero;
-                    ((Character*)goodBottom).health = 5;
-                    int posHeight = -8 + (8 * ((Character*)goodBottom).row);
-                    goodBottom.position = ccp(angelStartingWidth, posHeight);
-                    [self addChild:goodBottom z:(7 - ((Character*)goodBottom).row)];
+                    [self spawnBottom:goodGuy :goodBottom :YES];
                     
                     //animation
                     
@@ -2452,7 +2434,7 @@
                     
                     //Create an action with the animation that can then be assigned to a sprite
                     
-                    CCAction *move = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:moveAnimation restoreOriginalFrame:NO]];
+                    CCAction *move = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:moveAnimation restoreOriginalFrame:YES]];
                     
                     
                     //tell the bear to run the taunting action
@@ -2475,13 +2457,7 @@
                 if(((Character*)goodGuy).type == GOOD_FASTSHOOTER)
                 {
                     goodBottom = [[Character alloc] initWithFriendlyFastShooterImage];
-                    ((Character*)goodBottom).row = arc4random() % 5 + 1;
-                    [goodGuysBottom addObject:goodBottom];
-                    goodBottom.anchorPoint = CGPointZero;
-                    ((Character*)goodBottom).health = ((Character*)goodGuy).health;
-                    int posHeight = -8 + (8 * ((Character*)goodBottom).row);
-                    goodBottom.position = ccp(angelStartingWidth, posHeight);
-                    [self addChild:goodBottom z:(7 - ((Character*)goodBottom).row)];
+                    [self spawnBottom:goodGuy :goodBottom :YES];
                     
                     //animation
                     
@@ -2524,13 +2500,7 @@
                 if (((Character*)goodGuy).type == GOOD_KNIFE)
                 {
                     goodBottom = [[Character alloc] initWithFriendlyMeleeImage];
-                    ((Character*)goodBottom).row = arc4random() % 5 + 1;
-                    [goodGuysBottom addObject:goodBottom];
-                    goodBottom.anchorPoint = CGPointZero;
-                    ((Character*)goodBottom).health = ((Character*)goodGuy).health;
-                    int posHeight = -8 + (8 * ((Character*)goodBottom).row);
-                    goodBottom.position = ccp(angelStartingWidth, posHeight);
-                    [self addChild:goodBottom z:(7 - ((Character*)goodBottom).row)];
+                    [self spawnBottom:goodGuy :goodBottom :YES];
                     
                     //animation
                     
@@ -2597,13 +2567,7 @@
                 {
                     //[self spawnBadGuyBottom];
                     badBottom = [[Character alloc] initWithEnemyRegularShooterImage];
-                    ((Character*)badBottom).row = arc4random() % 5 + 1;
-                    badBottom.anchorPoint = CGPointZero;
-                    ((Character*)badBottom).health = ((Character*)badGuy).health;
-                    int posHeight = -8 + (8 * ((Character*)badBottom).row);
-                    badBottom.position = ccp(devilStartingWidth, posHeight);
-                    [self addChild:badBottom z:(7 - ((Character*)badBottom).row)];
-                    [badGuysBottom addObject:badBottom];
+                    [self spawnBottom:badGuy :badBottom :NO];
                     
                     //animation
                     
@@ -2649,13 +2613,7 @@
                 {
                     //[self spawnBadGuyBottom];
                     badBottom = [[Character alloc] initWithDoubleEnemyImage];
-                    ((Character*)badBottom).row = arc4random() % 5 + 1;
-                    badBottom.anchorPoint = CGPointZero;
-                    ((Character*)badBottom).health = ((Character*)badGuy).health;
-                    int posHeight = -8 + (8 * ((Character*)badBottom).row);
-                    badBottom.position = ccp(devilStartingWidth, posHeight);
-                    [self addChild:badBottom z:(7 - ((Character*)badBottom).row)];
-                    [badGuysBottom addObject:badBottom];
+                    [self spawnBottom:badGuy :badBottom :NO];
                     
                     
                 }
@@ -2663,27 +2621,14 @@
                 {
                     //[self spawnBadZigZagBottom];
                     badBottom = [[Character alloc] initWithZigZagImage];
-                    ((Character*)badBottom).row = arc4random() % 5 + 1;
-                    badBottom.anchorPoint = CGPointZero;
-                    ((Character*)badBottom).health = ((Character*)badGuy).health * 2;
-                    int posHeight = -8 + (8 * ((Character*)badBottom).row);
-                    badBottom.position = ccp(devilStartingWidth, posHeight);
-                    [self addChild:badBottom z:(7 - ((Character*)badBottom).row)];
-                    [badGuysBottom addObject:badBottom];
+                    [self spawnBottom:badGuy :badBottom :NO];
                 }
 
                 if(((Character*)badGuy).type == BAD_KNIFE)
                 {
                     //[self spawnBadZigZagBottom];
                     badBottom = [[Character alloc] initWithEnemyMeleeImage];
-                    ((Character*)badBottom).row = arc4random() % 5 + 1;
-                    badBottom.anchorPoint = CGPointZero;
-                    ((Character*)badBottom).health = ((Character*)badGuy).health;
-                    badBottom.scale=.6;
-                    int posHeight = -8 + (8 * ((Character*)badBottom).row);
-                    badBottom.position = ccp(devilStartingWidth, posHeight);
-                    [self addChild:badBottom z:(7 - ((Character*)badBottom).row)];
-                    [badGuysBottom addObject:badBottom];
+                    [self spawnBottom:badGuy :badBottom :NO];
                     
                     if(Scenario3 == true)
                     {
@@ -2737,13 +2682,7 @@
                 {
                     //[self spawnBadZigZagBottom];
                     badBottom = [[Character alloc] initWithEnemyFastShooterImage];
-                    ((Character*)badBottom).row = arc4random() % 5 + 1;
-                    badBottom.anchorPoint = CGPointZero;
-                    ((Character*)badBottom).health = ((Character*)badGuy).health;
-                    int posHeight = -8 + (8 * ((Character*)badBottom).row);
-                    badBottom.position = ccp(devilStartingWidth, posHeight);
-                    [self addChild:badBottom z:(7 - ((Character*)badBottom).row)];
-                    [badGuysBottom addObject:badBottom];
+                    [self spawnBottom:badGuy :badBottom :NO];
                     
                     //animation
                     
@@ -2787,13 +2726,7 @@
                 if(((Character*)badGuy).type == BIG_MONSTER)
                 {
                     badBottom = [[Character alloc] initWithEnemyTankImage];
-                    ((Character*)badBottom).row = arc4random() % 5 + 1;
-                    badBottom.anchorPoint = CGPointZero;
-                    ((Character*)badBottom).health = ((Character*)badGuy).health;
-                    int posHeight = -8 + (8 * ((Character*)badBottom).row);
-                    badBottom.position = ccp(devilStartingWidth, posHeight);
-                    [self addChild:badBottom z:(7 - ((Character*)badBottom).row)];
-                    [badGuysBottom addObject:badBottom];
+                    [self spawnBottom:badGuy :badBottom :NO];
                     Scenario4 = false;
                     NSLog(@"scenario 4 = false");
                     
@@ -2909,6 +2842,25 @@
         [deadGoodBombs removeAllObjects];
     }
     
+}
+-(void)spawnBottom:(CCSprite *)original :(CCSprite *)new :(BOOL)friendly
+{
+    ((Character*)new).row = arc4random() % 5 + 1;
+    new.anchorPoint = CGPointZero;
+    ((Character*)new).health = ((Character*)original).health;
+    int posHeight = -5 + (5 * ((Character*)badBottom).row);
+    [self addChild:new z:(7 - ((Character*)new).row)];
+    if(friendly == YES)
+    {
+        new.position = ccp(angelStartingWidth, posHeight);
+        [goodGuysBottom addObject:new];
+    }
+    else
+    {
+        new.position = ccp(devilStartingWidth, posHeight);
+        [badGuysBottom addObject:new];
+    }
+
 }
 
 -(void) zigZagScenario
@@ -4336,6 +4288,7 @@
         goodBullet = [[Character alloc] initWithTankBombImage];
         goodBullet.position = ccp(angelX + 15, angelY + 20);
         ((Character*)goodBullet).power = ((Character*)angel).power;
+        [self tankBombAnimation:goodBullet];
     }
     
     goodBullet.anchorPoint = CGPointZero;
@@ -4375,6 +4328,7 @@
         badBullet.position = ccp(devilX - 10, devilY + 15);
         badBullet.color = ccc3(100,0,0);
         NSLog(@"shot tank bomb");
+        [self tankBombAnimation:goodBullet];
     }
 
     badBullet.anchorPoint = CGPointZero;
@@ -4473,7 +4427,46 @@
     
     //tell the bear to run the taunting action
     [devil runAction:attack];
+}
 
+-(void) tankBombAnimation:(CCSprite *)tankBomb
+{
+    //animation
+    
+    NSMutableArray *attackFrames;
+    
+    //Load the plist which tells Kobold2D how to properly parse your spritesheet. If on a retina device Kobold2D will automatically use bearframes-hd.plist
+    
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile: @"angeltankbomb.plist"];
+    
+    //Load in the spritesheet, if retina Kobold2D will automatically use bearframes-hd.png
+    
+    CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"angeltankbomb.png"];
+    
+    [self addChild:spriteSheet];
+    
+    //Define the frames based on the plist - note that for this to work, the original files must be in the format bear1, bear2, bear3 etc...
+    
+    //When it comes time to get art for your own original game, makegameswith.us will give you spritesheets that follow this convention, <spritename>1 <spritename>2 <spritename>3 etc...
+    
+    attackFrames = [NSMutableArray array];
+    
+    for(int i = 1; i <= 5; i++)
+    {
+        [attackFrames addObject:
+         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"bomb-%d", i]]];
+    }
+    
+    //Create an animation from the set of frames you created earlier
+    
+    CCAnimation *attackAnimation = [CCAnimation animationWithFrames: attackFrames delay:0.2f];
+    
+    //Create an action with the animation that can then be assigned to a sprite
+    
+    CCAction *attack = [CCRepeatForever actionWithAction:[CCAnimate actionWithDuration:0.6f animation:attackAnimation restoreOriginalFrame:NO]];
+    
+    //tell the bear to run the taunting action
+    [tankBomb runAction:attack];
 }
 
 -(void) mainCharacterIdleAnimation:(CCSprite*)mainCharacter
