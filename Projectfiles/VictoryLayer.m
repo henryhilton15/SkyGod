@@ -28,7 +28,7 @@
                                                          selectedImage: @"continue-button-d.png"
                                                                 target:self
                                                               selector:@selector(nextLevel:)];
-        continueButton.position = CGPointMake((winSize.width * .25), (winSize.height * .6));
+        continueButton.position = CGPointMake((winSize.width * .25), (winSize.height * .3));
         continueButton.scale = 0.5f;
         
         
@@ -36,7 +36,7 @@
                                                           selectedImage: @"shop-button-d.png"
                                                                  target:self
                                                                selector:@selector(shop:)];
-        shopButton.position = CGPointMake(0, (winSize.height * .6));
+        shopButton.position = CGPointMake(0, (winSize.height * .3));
         shopButton.scale = 0.5f;
         
         
@@ -44,10 +44,11 @@
                                                                  selectedImage: @"select-button-d.png"
                                                                         target:self
                                                                       selector:@selector(levelSelct:)];
-        levelSelectButton.position = CGPointMake((-winSize.width * .25), (winSize.height * .6));
+        levelSelectButton.position = CGPointMake((-winSize.width * .25), (winSize.height * .3));
         levelSelectButton.scale = 0.5f;
         
         CCMenu *victoryMenu = [CCMenu menuWithItems:continueButton, shopButton, levelSelectButton, nil];
+        victoryMenu.position = ccp(winSize.width/2, 0);
         [self addChild: victoryMenu z:1];
         
         CCLabelTTF* coinsWonLabel = [CCLabelTTF labelWithString:@" " fontName:@"Marker Felt" fontSize:35];

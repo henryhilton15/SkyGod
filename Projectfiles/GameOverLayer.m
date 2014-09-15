@@ -34,7 +34,7 @@
                                                                        target:self
                                                                      selector:@selector(levelSelect:)];
         
-        selectButton.position = CGPointMake(winSize.width * .25, winSize.height);
+        selectButton.position = CGPointMake(winSize.width * .25, winSize.height * .7);
         selectButton.scale = .5;
 
         CCMenuItemImage *restartButton = [CCMenuItemImage itemWithNormalImage:@"restart-button-n.png"
@@ -42,7 +42,7 @@
                                                                        target:self
                                                                      selector:@selector(restartLevel:)];
         
-        restartButton.position = CGPointMake(0, winSize.height);
+        restartButton.position = CGPointMake(0, winSize.height * .7);
         restartButton.scale = .5;
         
         CCMenuItemImage *endbutton = [CCMenuItemImage itemWithNormalImage:@"shop-button-n.png"
@@ -50,10 +50,11 @@
                                                                    target:self
                                                                  selector:@selector(endGame:)];
        
-        endbutton.position = CGPointMake(-winSize.width * .25, winSize.height);
+        endbutton.position = CGPointMake(-winSize.width * .25, winSize.height * .7);
         endbutton.scale=.5;
         
         CCMenu *myMenu = [CCMenu menuWithItems:endbutton, selectButton, restartButton, nil];
+        myMenu.position = ccp(winSize.width/2, 0);
         [self addChild:myMenu z:10];
         
         CCSprite *background = [CCSprite spriteWithFile:@"game-over.png"];
