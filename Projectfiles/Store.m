@@ -50,15 +50,15 @@
         coins = [NSCoins intValue];
         
         int friendlyMeleeRankInt = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"] intValue];
-        NSNumber *NSFriendlyMeleePrice = [NSNumber numberWithInt:((friendlyMeleeRankInt + 1) * 50)];
+        NSNumber *NSFriendlyMeleePrice = [NSNumber numberWithInt:((friendlyMeleeRankInt + 1) * 10)];
         [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyMeleePrice forKey:@"friendlyMeleePrice"];
         
         int friendlyRegularShooterRankInt = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"] intValue];
-        NSNumber *NSFriendlyRegularShooterPrice = [NSNumber numberWithInt:((friendlyRegularShooterRankInt + 1) * 50)];
+        NSNumber *NSFriendlyRegularShooterPrice = [NSNumber numberWithInt:(25 + (friendlyRegularShooterRankInt * 15))];
         [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyRegularShooterPrice forKey:@"friendlyRegularShooterPrice"];
         
         int friendlyFastShooterRankInt = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterRank"] intValue];
-        NSNumber *NSFriendlyFastShooterPrice = [NSNumber numberWithInt:((friendlyFastShooterRankInt + 1) * 50)];
+        NSNumber *NSFriendlyFastShooterPrice = [NSNumber numberWithInt:(60 + (friendlyFastShooterRankInt * 30))];
         [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyFastShooterPrice forKey:@"friendlyFastShooterPrice"];
         
         int friendlyTankRankInt = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankRank"];
@@ -280,7 +280,7 @@
     NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"];
     int rank = [NSRank intValue];
     int price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterPrice"] intValue];
-    if(coins > price)
+    if(coins >= price)
     {
         [GameData sharedData].friendlyRegularShooterAvailable = true;
         rank++;
@@ -294,7 +294,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
         
-        price = rank * 50 + 50;
+        price = 25 + (rank * 15);
         NSNumber* NSPrice = [NSNumber numberWithInt:price];
         [[NSUserDefaults standardUserDefaults] setObject:NSPrice forKey:@"friendlyRegularShooterPrice"];
         [shooterPrice setString:[NSString stringWithFormat:@"Price:%d", price]];
@@ -314,7 +314,7 @@
     NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"];
     int rank = [NSRank intValue];
     int price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleePrice"] intValue];
-    if(coins > price)
+    if(coins >= price)
     {
         [GameData sharedData].friendlyMeleeAvailable = true;
         rank++;
@@ -326,7 +326,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
         
-        price = rank * 50 + 50;
+        price = rank * 10;
         NSNumber* NSPrice = [NSNumber numberWithInt:price];
         [[NSUserDefaults standardUserDefaults] setObject:NSPrice forKey:@"friendlyMeleePrice"];
         [meleePrice setString:[NSString stringWithFormat:@"Price:%d", price]];
@@ -344,7 +344,7 @@
     NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterRank"];
     int rank = [NSRank intValue];
     int price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterPrice"] intValue];
-    if(coins > price)
+    if(coins >= price)
     {
         [GameData sharedData].friendlyFastShooterAvailable = true;
         rank++;
@@ -358,7 +358,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
         
-        price = rank * 50 + 50;
+        price = 60 + (rank * 30);
         NSNumber* NSPrice = [NSNumber numberWithInt:price];
         [[NSUserDefaults standardUserDefaults] setObject:NSPrice forKey:@"friendlyFastShooterPrice"];
         [fastShooterPrice setString:[NSString stringWithFormat:@"Price:%d", price]];
@@ -425,7 +425,7 @@
     NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankRank"];
     int rank = [NSRank intValue];
     int price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankPrice"] intValue];
-    if(coins > price)
+    if(coins >= price)
     {
         rank++;
         NSNumber *newRank = [NSNumber numberWithInt:rank];
@@ -479,7 +479,7 @@
 {
     int immunityPrice = [GameData sharedData].immunityPrice;
     
-    if(coins > immunityPrice)
+    if(coins >= immunityPrice)
     {
         NSNumber *NSNumAvailable = [[NSUserDefaults standardUserDefaults] objectForKey:@"immunityAvailable"];
         
@@ -508,7 +508,7 @@
 {
     int airstrikePrice = [GameData sharedData].airPrice;
     
-    if(coins > airstrikePrice)
+    if(coins >= airstrikePrice)
     {
         NSNumber *NSNumAvailable = [[NSUserDefaults standardUserDefaults] objectForKey:@"airstrikesAvailable"];
         
@@ -536,7 +536,7 @@
 {
     int reinforcementPrice = [GameData sharedData].reinforcePrice;
     
-    if(coins > reinforcementPrice)
+    if(coins >= reinforcementPrice)
     {
         NSNumber *NSNumAvailable = [[NSUserDefaults standardUserDefaults] objectForKey:@"reinforcementsAvailable"];
         

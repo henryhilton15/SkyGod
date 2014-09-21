@@ -129,18 +129,17 @@
         actualX = minX + arc4random() % rangeX;
     }
     
-    minDuration = 3.0;
-    maxDuration = 4;
+    devil1 = [[Character alloc] initWithEnemyMeleeImage];
+    devil1.scale = .5;
+    [self addChild:devil1];
+    [badGuys addObject:devil1];
+    devil1.position = ccp(actualX, winSize.height);
+    
+    minDuration = 6.0 + ((Character*)devil1).fallSpeed;
+    maxDuration = 7.0 + ((Character*)devil1).fallSpeed;
     
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
-    
-    devil1 = [[Character alloc] initWithEnemyMeleeImage];
-    devil1.scale = .5;
-    
-    devil1.position = ccp(actualX, winSize.height);
-    [self addChild:devil1];
-    [badGuys addObject:devil1];
     
     // Create the actions
     CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
@@ -2849,7 +2848,7 @@
     ((Character*)new).row = arc4random() % 5 + 1;
     new.anchorPoint = CGPointZero;
     ((Character*)new).health = ((Character*)original).health;
-    int posHeight = -5 + (5 * ((Character*)badBottom).row);
+    int posHeight = 0 + (4 * ((Character*)badBottom).row);
     [self addChild:new z:(7 - ((Character*)new).row)];
     if(friendly == YES)
     {
@@ -3363,7 +3362,7 @@
             {
                 goodBottom.position = ccp(goodBottom.position.x + .5,goodBottom.position.y);
                 
-                if (goodBottom.position.x > 480)
+                if (goodBottom.position.x > winSize.width)
                 {
                     [deadGoodGuysBottom addObject:goodBottom];
                     //[goodGuysBottom removeObjectAtIndex:q];
@@ -4275,8 +4274,11 @@
     if(((Character*)angel).bulletType == REGULAR_GOOD_BULLET)
     {
         goodBullet = [[Character alloc] initWithFriendlyRegularShooterBulletImage];
-        goodBullet.position = ccp(angelX + 10, angelY + 10);
+        goodBullet.scale = .25;
+        goodBullet.color = ccBLACK;
+        goodBullet.position = ccp(angelX + 29, angelY + 10);
         ((Character*)goodBullet).power = ((Character*)angel).power;
+        
     }
     if(((Character*)angel).bulletType == SPEAR)
     {
@@ -4317,9 +4319,12 @@
     if(((Character*)devil).bulletType == REGULAR_BAD_BULLET)
     {
         badBullet = [[Character alloc] initWithEnemyRegularShooterBulletImage];
+        badBullet.scale = .25;
+        badBullet.color = ccBLACK;
         badBullet.position = ccp(devilX - 5, devilY + 10);
         ((Character*)badBullet).power = ((Character*)devil).power;
         badBullet.color = ccc3(100,0,0);
+        
 
     }
     if(((Character*)devil).bulletType == TANK_BOMB)
@@ -4455,7 +4460,7 @@
     for(int i = 1; i <= 5; i++)
     {
         [attackFrames addObject:
-         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"bomb-%d", i]]];
+         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"bomb-%d.png", i]]];
     }
     
     //Create an animation from the set of frames you created earlier
@@ -4552,6 +4557,14 @@
 {
     //NSLog(@"inside explosion method");
     double delayInSeconds = delay;
+    CCSprite *base = [CCSprite spriteWithFile:@"badbase-3.png"];
+    if(((Character*)character).type == BAD_BASE)
+    {
+        base.position = ccp(winSize.width - 50, BASE_HEIGHT);
+        base.scale = .5;
+        [self addChild:base z:1];
+
+    }
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
  
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -4565,19 +4578,18 @@
         if(((Character*)character).type == BAD_BASE)
         {
             NSLog(@"called you win");
-            [goodGuysBottom removeObject:character];
-            CCSprite* base = [[Character alloc] initWithBadGuyBaseImage3];
-            base.position = ccp(winSize.width - 50, BASE_HEIGHT);
-            base.scale = .6;
-            [self addChild:base z:4];
-            [badGuysBottom addObject:base];
+            [badGuysBottom removeObject:character];
             [self youWin];
-            NSLog(@"here");
+            
         }
         
-        [self removeChild:character cleanup:YES];
+        if(big == NO)
+        {
+            [self removeChild:character cleanup:YES];
+        }
         
     });
+
 
     //animation
     
@@ -4592,6 +4604,7 @@
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile: @"bigExplosion.plist"];
         CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"bigExplosion.png"];
         [self addChild:spriteSheet];
+        NSLog(@"using big explosion frames");
     }
     
     
@@ -4619,16 +4632,35 @@
         }
     }
     
-    //Create an animation from the set of frames you created earlier
+    float time = 0.1f;
     
-    CCAnimation *explosionAnimation = [CCAnimation animationWithFrames: explosionFrames delay:0.1f];
+    if(big == NO)
+    {
+        time = 0.1f;
+    }
+    else
+    {
+        time = 0.1f;
+    }
+    
+    //Create an animation from the set of frames you created earlier
+
+    CCAnimation *explosionAnimation = [CCAnimation animationWithFrames: explosionFrames delay:time];
+
     
     //Create an action with the animation that can then be assigned to a sprite
     
-    CCAction *explode = [CCAnimate actionWithDuration:delayInSeconds animation:explosionAnimation restoreOriginalFrame:NO];
-    
-    //tell the bear to run the taunting action
-    [character runAction:explode];
+    if(big == NO)
+    {
+        CCAction *explode = [CCAnimate actionWithDuration:delayInSeconds animation:explosionAnimation restoreOriginalFrame:NO];
+            [character runAction:explode];
+    }
+    else
+    {
+        CCAction *explode = [CCAnimate actionWithDuration:delayInSeconds animation:explosionAnimation restoreOriginalFrame:YES];
+            [base runAction:explode];
+    }
+
 }
 
 -(void) dying:(CCSprite*)character :(double) delay
@@ -5200,8 +5232,8 @@
     badBase = [[Character alloc] initWithBadGuyBaseImage1];
     goodBase.position = ccp(50, BASE_HEIGHT);
     badBase.position = ccp(winSize.width - 50, BASE_HEIGHT);
-    goodBase.scale = .6;
-    badBase.scale = .6;
+    goodBase.scale = .5;
+    badBase.scale = .5;
     [self addChild:goodBase z:2];
     [self addChild:badBase z:2];
     [goodGuysBottom addObject:goodBase];
@@ -5470,7 +5502,7 @@
             
             goodBase = [[Character alloc] initWithGoodGuyBaseImage2];
             goodBase.position = ccp(50, BASE_HEIGHT);
-            goodBase.scale =.6;
+            goodBase.scale =.5;
             ((Character*)goodBase).health = healthCount;
             [self addChild:goodBase z:2];
             [goodGuysBottom addObject:goodBase];
@@ -5483,7 +5515,7 @@
             goodBaseImageChangeCount = 2;
             goodBase = [[Character alloc] initWithGoodGuyBaseImage3];
             goodBase.position = ccp(50, BASE_HEIGHT);
-            goodBase.scale =.6;
+            goodBase.scale =.5;
             ((Character*)goodBase).health = healthCount;
             [self addChild:goodBase z:3];
             [goodGuysBottom addObject:goodBase];
@@ -5517,7 +5549,7 @@
             badBaseImageChangeCount = 1;
             badBase = [[Character alloc] initWithBadGuyBaseImage2];
             badBase.position = ccp(winSize.width - 50, BASE_HEIGHT);
-            badBase.scale = .6;
+            badBase.scale = .5;
             ((Character*)badBase).health = healthCount;
             [self addChild:badBase z:2];
             [badGuysBottom addObject:badBase];
@@ -5530,7 +5562,7 @@
             badBaseImageChangeCount = 2;
             badBase = [[Character alloc] initWithBadGuyBaseImage3];
             badBase.position = ccp(winSize.width - 50, BASE_HEIGHT);
-            badBase.scale = .6;
+            badBase.scale = .5;
             ((Character*)badBase).health = healthCount;
             [self addChild:badBase z:3];
             [badGuysBottom addObject:badBase];
@@ -5539,7 +5571,7 @@
         if(((Character*)badBase).health <= 0 && badBaseExploded == false)
         {
             NSLog(@"called bad base explosion, goodBaseExploded = true");
-            [self explosion:badBase :1.5 :YES];
+            [self explosion:badBase :0.35 :YES];
             badBaseExploded = true;
 //            int delayInSeconds = 1.5;
 //            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -5895,7 +5927,7 @@
     NSDictionary *levelDictionary = [NSDictionary dictionaryWithContentsOfFile:path];
     
     NSMutableDictionary *enemyMeleeDict = [levelDictionary objectForKey:@"enemyMelee"];
-    enemyMeleeFramecount = 150 + [[enemyMeleeDict objectForKey:@"spawnRate"] intValue];
+    enemyMeleeFramecount = 300 + [[enemyMeleeDict objectForKey:@"spawnRate"] intValue];
     enemyMeleeAvailable = [[enemyMeleeDict objectForKey:@"available"] boolValue];
     
     NSMutableDictionary *enemyRegularShooterDict = [levelDictionary objectForKey:@"enemyRegularShooter"];
@@ -5942,7 +5974,7 @@
     
     NSMutableDictionary* coinDict = [levelDictionary objectForKey:@"coin"];
     endgameCoinFramecount = 20 + [[coinDict objectForKey:@"endgameFrequency"] intValue];
-    gameplayCoinFramecount = 500 + [[coinDict objectForKey:@"gameplayFrequency"] intValue];
+    gameplayCoinFramecount = 1500 + [[coinDict objectForKey:@"gameplayFrequency"] intValue];
     endgameCoinTotal = 10 + [[coinDict objectForKey:@"endgameCoinTotal"] intValue];
     
     scenariosAvailable = [[levelDictionary objectForKey:@"scenariosAvailable"] intValue];

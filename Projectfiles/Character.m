@@ -402,10 +402,9 @@
         
         NSMutableDictionary *enemyRegularShooterDict = [levelDictionary objectForKey:@"enemyRegularShooter"];
         
-        health = 2 + [[enemyRegularShooterDict objectForKey:@"health"] intValue];
-        attackFrequency = 100 - [[enemyRegularShooterDict objectForKey:@"attackFrequency"] intValue];
+        health = 1 + [[enemyRegularShooterDict objectForKey:@"health"] intValue];
+        attackFrequency = 50 - [[enemyRegularShooterDict objectForKey:@"attackFrequency"] intValue];
         power = 1 + [[enemyRegularShooterDict objectForKey:@"damage"] intValue];
-        
         type = BAD_KNIFE;
         unlockLevel = 0;
         attacked = false;
@@ -437,7 +436,7 @@
 }
 -(id) initWithFriendlyRegularShooterBulletImage
 {
-    if ((self = [super initWithFile:@"lighting.png"]))
+    if ((self = [super initWithFile:@"bomb-1.png"]))
     {
         power = 0;
         attacked = false;
@@ -446,7 +445,7 @@
 }
 -(id) initWithFriendlyFastShooterBulletImage
 {
-    if ((self = [super initWithFile:@"lighting.png"]))
+    if ((self = [super initWithFile:@"bomb-1.png"]))
     {
         attacked = false;
         power = 0;
@@ -455,7 +454,7 @@
 }
 -(id) initWithEnemyRegularShooterBulletImage
 {
-    if ((self = [super initWithFile:@"lighting.png"]))
+    if ((self = [super initWithFile:@"bomb-1.png"]))
     {
         power = 0;
         attacked = false;

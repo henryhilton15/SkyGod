@@ -22,15 +22,15 @@
 		<key>available</key>
 		<true/>
 		<key>health</key>
-		<integer>0</integer>
+		<integer>1</integer>
 		<key>spawnRate</key>
-		<integer>0</integer>
+		<integer>-170</integer>
 		<key>damage</key>
 		<integer>0</integer>
 		<key>fallSpeed</key>
-		<integer>0</integer>
+		<integer>-1</integer>
 		<key>attackFrequency</key>
-		<integer>-10</integer>
+		<integer>-30</integer>
 	</dict>
 	<key>Kmonster</key>
 	<dict>
@@ -121,7 +121,7 @@
 		<integer>0</integer>
 	</dict>
 	<key>scenariosAvailable</key>
-	<integer>2</integer>
+	<integer>0</integer>
 	<key>scoreCounter</key>
 	<integer>0</integer>
 	<key>coinCounter</key>
