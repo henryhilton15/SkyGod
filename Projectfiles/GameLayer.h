@@ -105,6 +105,8 @@
     int coinModifier;
     int scenarioModifier;
     int scenariosAvailable;
+    int buttonSpacing;
+    int counterSpacing;
     
     double zigZagPercentage;
     double explosionAnimationLength;
