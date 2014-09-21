@@ -57,7 +57,7 @@
         myMenu.position = ccp(winSize.width/2, 0);
         [self addChild:myMenu z:10];
         
-        CCSprite *background = [CCSprite spriteWithFile:@"game-over.png"];
+        CCSprite *background = [CCSprite spriteWithFile:@"game-over-ip5.png"];
         background.position = CGPointMake(winSize.width/2,winSize.height/2);
         [self addChild:background z:-1];
         /*

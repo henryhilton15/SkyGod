@@ -34,22 +34,36 @@
             }
         }
         
+        int width = winSize.width;
         
-        CCSprite *background = [CCSprite spriteWithFile:@"main-menu.png"];
-        background.position = CGPointMake(240,160);
-        [self addChild:background z:-1];
+        if(width == 568)
+        {
+            CCSprite *background = [CCSprite spriteWithFile:@"main-menu-ip5.png"];
+            background.position = CGPointMake(winSize.width/2,winSize.height/2);
+            [self addChild:background z:-1];
+        }
+        
+        
+        if(width == 480)
+        {
+            CCSprite *background = [CCSprite spriteWithFile:@"main-menu-hd.png"];
+            background.position = CGPointMake(winSize.width/2,winSize.height/2);
+            [self addChild:background z:-1];
+        }
+
         
         CCSprite *titleImage = [CCSprite spriteWithFile: @"game-logo.png"];
-        titleImage.position = ccp(110,110);
+        titleImage.position = ccp(winSize.width *.25,winSize.height * .35);
         titleImage.scale=.25;
         [self addChild:titleImage z:4];
+        
         
         CCMenuItemImage *startButton = [CCMenuItemImage itemWithNormalImage:@"start-button-n.png"
                                                               selectedImage: @"start-button-d.png"
                                                                      target:self
                                                                    selector:@selector(startGame:)];
         startButton.scale=0.8;
-        startButton.position = CGPointMake(-winSize.width/4,winSize.height/8);
+        startButton.position = CGPointMake(-winSize.width/4.2,winSize.height/8);
         
         
         

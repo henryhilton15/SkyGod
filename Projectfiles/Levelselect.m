@@ -48,8 +48,8 @@
         [self addChild:levelTitleImage z:4];
         
         
-        CCSprite *background = [CCSprite spriteWithFile:@"sky-hd.png"];
-        background.position = CGPointMake(240,160);
+        CCSprite *background = [CCSprite spriteWithFile:@"sky-ip5.png"];
+        background.position = CGPointMake(winSize.width/2, winSize.height/2);
         [self addChild:background z:-1];
         
         
