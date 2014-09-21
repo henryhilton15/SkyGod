@@ -65,9 +65,23 @@
         pauseMenu.position = ccp(winSize.width/2,0);
         [self addChild: pauseMenu z:1];
         
-        CCSprite *pause_background = [CCSprite spriteWithFile:@"pause-screen-hd.png"];
-        pause_background.position = CGPointMake(winSize.width/2,winSize.height/2);
-        [self addChild:pause_background z:0];
+        int width = winSize.width;
+        
+        if(width == 568)
+        {
+            CCSprite *pause_background = [CCSprite spriteWithFile:@"pause-screen-ip5.png"];
+            pause_background.position = CGPointMake(winSize.width/2,winSize.height/2);
+            [self addChild:pause_background z:0];
+        }
+        
+        
+        if(width == 480)
+        {
+            CCSprite *pause_background = [CCSprite spriteWithFile:@"pause-screen-hd.png"];
+            pause_background.position = CGPointMake(winSize.width/2,winSize.height/2);
+            [self addChild:pause_background z:0];
+        }
+
         
         redXHeight = winSize.height * .17;
         sfxRedXWidth = winSize.width/2 - winSize.width/26;

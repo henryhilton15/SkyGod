@@ -20,9 +20,9 @@
     {
         winSize = [CCDirector sharedDirector].winSize;
         
-        CCSprite *background = [CCSprite spriteWithFile:@"victory-screen.png"];
-        [self addChild:background z:-1];
+        CCSprite *background = [CCSprite spriteWithFile:@"victory-screen-ip5.png"];
         background.position = CGPointMake(winSize.width/2, winSize.height/2);
+        [self addChild:background z:-1];
         
         CCMenuItemImage *continueButton = [CCMenuItemImage itemWithNormalImage:@"continue-button-n.png"
                                                          selectedImage: @"continue-button-d.png"

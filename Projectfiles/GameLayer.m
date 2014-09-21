@@ -1096,23 +1096,47 @@
         badBaseHealthLabel.color = ccBLUE;
         [self addChild:badBaseHealthLabel z:4];
         
-        CCSprite *background = [CCSprite spriteWithFile:@"sky.png"];
-        [self addChild:background z:-1];
+    
+        
+        int width = winSize.width;
+        
+        if(width == 568)
+        {
+        CCSprite *background = [CCSprite spriteWithFile:@"sky-ip5.png"];
         background.position = ccp(winSize.width/2,winSize.height/2);
+        [self addChild:background z:-1];
         
-        CCSprite *wall = [CCSprite spriteWithFile:@"foreground.png"];
+        CCSprite *wall = [CCSprite spriteWithFile:@"foreground-ip5.png"];
+        wall.position = ccp(winSize.width/2,winSize.height/2);
         [self addChild:wall z:1];
-        wall.scale *=1;
-        wall.position = ccp(240,160);
         
-        CCSprite *mountains = [CCSprite spriteWithFile:@"mountain.png"];
-        [self addChild:mountains z:0];
-        mountains.scale *=1;
-        mountains.position = ccp(240,160);
+        CCSprite *mountains = [CCSprite spriteWithFile:@"mountain-ip5.png"];
+            mountains.scale *=1;
+            mountains.position = ccp(winSize.width/2,winSize.height/2);
+            [self addChild:mountains z:0];
+   
+        }
+    
+        
+        if(width == 480)
+        {
+            CCSprite *background = [CCSprite spriteWithFile:@"sky-hd.png"];
+            background.position = ccp(winSize.width/2,winSize.height/2);
+            [self addChild:background z:-1];
+            
+            CCSprite *wall = [CCSprite spriteWithFile:@"foreground-hd.png"];
+            wall.position = ccp(winSize.width/2,winSize.height/2);
+            [self addChild:wall z:1];
+            
+            CCSprite *mountains = [CCSprite spriteWithFile:@"mountain-hd.png"];
+            mountains.scale *=1;
+            mountains.position = ccp(winSize.width/2,winSize.height/2);
+                  [self addChild:mountains z:0];
+        }
         
         player = [CCSprite spriteWithFile:@"main-idle-1.png"];
-        [self addChild:player z:1];
         player.position = ccp(winSize.width * .5, winSize.height * .3);
+        [self addChild:player z:1];
         [self mainCharacterIdleAnimation:player];
         
         buttonSpacing = winSize.width *.08;

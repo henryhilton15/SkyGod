@@ -80,8 +80,8 @@
         //CCMenu *myMenu = [CCMenu menuWithItems:BuyButton, nil];
         //[self addChild:myMenu];
         
-        CCSprite *background = [CCSprite spriteWithFile:@"sky.png"];
-        background.position = CGPointMake(240,160);
+        CCSprite *background = [CCSprite spriteWithFile:@"sky-ip5.png"];
+        background.position = CGPointMake(winSize.width/2,winSize.height/2);
         [self addChild:background z:-1];
         
         //            StoreLabel = [CCLabelTTF labelWithString:@"Store" fontName:@"Marker Felt" fontSize:40];
