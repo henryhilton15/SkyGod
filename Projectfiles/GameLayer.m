@@ -166,15 +166,15 @@
                                       position:ccp(x + (winSize.width/6), y - (winSize.height/3))];
     
     id leftMid = [CCMoveTo actionWithDuration:actualDuration/(6.0)
-                                     position:ccp(x - (winSize.width/6), y -(winSize.height/2))];
+                                     position:ccp(x - (winSize.width/6), y - (winSize.height/2))];
     
     id rightMid = [CCMoveTo actionWithDuration:actualDuration/(6.0)
-                                      position:ccp(x + (winSize.width/6), y - winSize.height/(3/2))];
+                                      position:ccp(x + (winSize.width/6), y - (winSize.height/1.5))];
     
     
     
     id leftLow = [CCMoveTo actionWithDuration:actualDuration/(6.0)
-                                     position:ccp(x - (winSize.width/6), y - winSize.height/(6/5))];
+                                     position:ccp(x - (winSize.width/6), y - (winSize.height/1.2))];
     
     
     id rightLow = [CCMoveTo actionWithDuration:actualDuration/(6.0)
