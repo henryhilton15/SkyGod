@@ -1115,14 +1115,14 @@
         player.position = ccp(winSize.width * .5, winSize.height * .3);
         [self mainCharacterIdleAnimation:player];
         
-        int buttonSpacing = 40;
-        int farLeftX = -(winSize.width/2) + 20;
+        buttonSpacing = winSize.width *.08;
+        int farLeftX = winSize.width * .05;
         
         CCMenuItemImage *pauseButton = [CCMenuItemImage itemWithNormalImage:@"pause_btn.png"
                                                               selectedImage: @"pause_btn.png"
                                                                      target:self
                                                                    selector:@selector(pauseMenu:)];
-        pauseButton.position = CGPointMake((winSize.width * .45), winSize.height * .93);
+        pauseButton.position = CGPointMake(winSize.width * .95, winSize.height * .93);
         pauseButton.scale = .7;
         
     
@@ -1149,16 +1149,18 @@
         airstrikePowerUp.scale = 0.7f;
         
         CCMenu *myMenu = [CCMenu menuWithItems:pauseButton, airstrikePowerUp, reinforcementPowerUp, immunityPowerUp, nil];
-        myMenu.position = ccp(winSize.width/2, 0);
+        myMenu.position = ccp(0, 0);
         [self addChild: myMenu z:100];
 
         
         NSNumber* NSNumAvailable1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"airstrikesAvailable"];
         int numAvailable1 = [NSNumAvailable1 intValue];
         
+         counterSpacing = (winSize.width *.085);
+        
         airstrikeCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
         [airstrikeCount setString:[NSString stringWithFormat:@"%d", numAvailable1]];
-        airstrikeCount.position = CGPointMake(winSize.width/12, winSize.height - winSize.height/8);
+        airstrikeCount.position = CGPointMake(winSize.width *.08 + winSize.width *.005, winSize.height - winSize.height/8);
         airstrikeCount.color = ccBLACK;
         [self addChild:airstrikeCount z:5000];
         
@@ -1167,7 +1169,7 @@
         
         reinforcemtsCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
         [reinforcemtsCount setString:[NSString stringWithFormat:@"%d", numAvailable2]];
-        reinforcemtsCount.position = CGPointMake(winSize.width/6, winSize.height - winSize.height/8);
+        reinforcemtsCount.position = CGPointMake(winSize.width *.08 + counterSpacing, winSize.height - winSize.height/8);
         reinforcemtsCount.color = ccBLACK;
         [self addChild:reinforcemtsCount z:5000];
         
@@ -1176,7 +1178,7 @@
         
         immunityCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
         [immunityCount setString:[NSString stringWithFormat:@"%d", numAvailable3]];
-        immunityCount.position = CGPointMake(winSize.width/4, winSize.height - winSize.height/8);
+        immunityCount.position = CGPointMake(winSize.width *.08 + (counterSpacing * 2), winSize.height - winSize.height/8);
         immunityCount.color = ccBLACK;
         [self addChild:immunityCount z:5000];
         
@@ -4278,7 +4280,6 @@
         goodBullet.color = ccBLACK;
         goodBullet.position = ccp(angelX + 29, angelY + 10);
         ((Character*)goodBullet).power = ((Character*)angel).power;
-        
     }
     if(((Character*)angel).bulletType == SPEAR)
     {
@@ -4321,6 +4322,7 @@
         badBullet = [[Character alloc] initWithEnemyRegularShooterBulletImage];
         badBullet.scale = .25;
         badBullet.color = ccBLACK;
+
         badBullet.position = ccp(devilX - 5, devilY + 10);
         ((Character*)badBullet).power = ((Character*)devil).power;
         badBullet.color = ccc3(100,0,0);
@@ -5038,7 +5040,7 @@
         [self removeChild:airstrikeCount];
         airstrikeCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
         [airstrikeCount setString:[NSString stringWithFormat:@"%d", numAvailable]];
-        airstrikeCount.position = CGPointMake(winSize.width/12, winSize.height - winSize.height/8);
+        airstrikeCount.position = CGPointMake(winSize.width * .08 + winSize.width *.005, winSize.height - winSize.height/8);
         airstrikeCount.color = ccBLACK;
         [self addChild:airstrikeCount z:5000];
     }
@@ -5076,7 +5078,7 @@
     [self removeChild:reinforcemtsCount];
     reinforcemtsCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
     [reinforcemtsCount setString:[NSString stringWithFormat:@"%d", numAvailable]];
-    reinforcemtsCount.position = CGPointMake(winSize.width/6, winSize.height - winSize.height/8);
+    reinforcemtsCount.position = CGPointMake(winSize.width * .08 + counterSpacing, winSize.height - winSize.height/8);
     reinforcemtsCount.color = ccBLACK;
     [self addChild:reinforcemtsCount z:5000];
 }
@@ -5151,7 +5153,7 @@
     [self removeChild:immunityCount];
     immunityCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
     [immunityCount setString:[NSString stringWithFormat:@"%d", numAvailable]];
-    immunityCount.position = CGPointMake(winSize.width/4, winSize.height - winSize.height/8);
+    immunityCount.position = CGPointMake(winSize.width * .08 + counterSpacing * 2, winSize.height - winSize.height/8);
     immunityCount.color = ccBLACK;
     [self addChild:immunityCount z:5000];
 

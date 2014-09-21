@@ -10,6 +10,7 @@
 #import "GameLayer.h"
 #import "SimpleAudioEngine.h"
 #import "GameData.h"
+#import "MainMenuLayer.h"
 
 @implementation Levelselect
 -(id)init
@@ -17,6 +18,8 @@
     
     if ((self = [super init]))
     {
+        winSize = [CCDirector sharedDirector].winSize;
+        
         NSHighestLevelUnlocked = [[NSUserDefaults standardUserDefaults] objectForKey:@"highestLevelUnlocked"];
         highestLevelUnlocked = [NSHighestLevelUnlocked intValue];
         
@@ -40,31 +43,52 @@
         NSLog(@"highestLevelUnlocked = %d", highestLevelUnlocked);
         
         CCSprite *levelTitleImage = [CCSprite spriteWithFile: @"cooltext1265591974.png"];
-        levelTitleImage.position = ccp(240,280);
+        levelTitleImage.position = ccp(winSize.width/2,winSize.height * .925);
         levelTitleImage.scale =.6;
         [self addChild:levelTitleImage z:4];
         
         
-        CCSprite *background = [CCSprite spriteWithFile:@"background_grass-top.png"];
+        CCSprite *background = [CCSprite spriteWithFile:@"sky-hd.png"];
         background.position = CGPointMake(240,160);
         [self addChild:background z:-1];
         
         
     
 	// Create some menu items
+        
+        CCMenuItemImage *mainMenuButton = [CCMenuItemImage itemWithNormalImage:@"main menu-button-n.png"
+                                                                 selectedImage: @"main menu-button-d.png"
+                                                                        target:self
+                                                                      selector:@selector(mainMenu:)];
+        mainMenuButton.position = CGPointMake(winSize.width/2, winSize.height * .075);
+        mainMenuButton.scale = 0.8f;
+        
+        int row1 = winSize.height * .8;
+        int row2 = winSize.height * .65;
+        int row3 = winSize.height * .5;
+        int row4 = winSize.height * .35;
+        int row5 = winSize.height * .2;
+        
+        int col1 = winSize.width * .14;
+        int col2 = winSize.width * 2 * .14;
+        int col3 = winSize.width * 3 * .14;
+        int col4 = winSize.width * 4 * .14;
+        int col5 = winSize.width * 5 * .14;
+        int col6 = winSize.width * 6 * .14;
+        
 	CCMenuItemImage * menuItem1 = [CCMenuItemImage itemWithNormalImage:@"level1Label.png"
                                                          selectedImage: @"level1Label.png"
                                                                 target:self
                                                               selector:@selector(level1:)];
         menuItem1.scale =1.25;
-        menuItem1.position = CGPointMake(-180, 300);
+        menuItem1.position = ccp(col1, row1);
     
 	CCMenuItemImage * menuItem2 = [CCMenuItemImage itemWithNormalImage:@"level2Label.png"
                                                          selectedImage: @"level2Label.png"
                                                          target:self
                                                               selector:@selector(level2:)];
         menuItem2.scale=1.25;
-        menuItem2.position = CGPointMake(-120, 300);
+        menuItem2.position = ccp(col2, row1);
 
     
 	CCMenuItemImage * menuItem3 = [CCMenuItemImage itemWithNormalImage:@"level3Label.png"
@@ -72,7 +96,7 @@
                                                                 target:self
                                                               selector:@selector(level3:)];
         menuItem3.scale=1.25;
-        menuItem3.position = CGPointMake(-60, 300);
+        menuItem3.position = ccp(col3, row1);
 
         
     CCMenuItemImage * menuItem4 = [CCMenuItemImage itemWithNormalImage:@"level4Label.png"
@@ -80,7 +104,7 @@
                                                                     target:self
                                                                   selector:@selector(level4:)];
         menuItem4.scale=1.25;
-        menuItem4.position = CGPointMake(0, 300);
+        menuItem4.position = ccp(col4, row1);
 
     
     CCMenuItemImage * menuItem5 = [CCMenuItemImage itemWithNormalImage:@"level5Label.png"
@@ -88,14 +112,198 @@
                                                                     target:self
                                                                   selector:@selector(level5:)];
         menuItem5.scale=1.25;
-        menuItem5.position = CGPointMake(60, 300);
+        menuItem5.position = ccp(col5, row1);
+        
+        CCMenuItemImage * menuItem6 = [CCMenuItemImage itemWithNormalImage:@"level5Label.png"
+                                                             selectedImage: @"level5Label.png"
+                                                                    target:self
+                                                                  selector:@selector(level6)];
+        menuItem6.scale=1.25;
+        menuItem6.position = ccp(col6, row1);
+        
+        CCMenuItemImage * menuItem7 = [CCMenuItemImage itemWithNormalImage:@"level1Label.png"
+                                                             selectedImage: @"level1Label.png"
+                                                                    target:self
+                                                                  selector:@selector(level7:)];
+        menuItem7.scale =1.25;
+        menuItem7.position = ccp(col1, row2);
+        
+        CCMenuItemImage * menuItem8 = [CCMenuItemImage itemWithNormalImage:@"level2Label.png"
+                                                             selectedImage: @"level2Label.png"
+                                                                    target:self
+                                                                  selector:@selector(level8:)];
+        menuItem8.scale =1.25;
+        menuItem8.position = ccp(col2, row2);
+        
+        CCMenuItemImage * menuItem9 = [CCMenuItemImage itemWithNormalImage:@"level3Label.png"
+                                                             selectedImage: @"level3Label.png"
+                                                                    target:self
+                                                                  selector:@selector(level9:)];
+        menuItem9.scale=1.25;
+        menuItem9.position = ccp(col3, row2);
+        
+        CCMenuItemImage * menuItem10 = [CCMenuItemImage itemWithNormalImage:@"level4Label.png"
+                                                             selectedImage: @"level4Label.png"
+                                                                    target:self
+                                                                  selector:@selector(level10:)];
+        menuItem10.scale=1.25;
+        menuItem10.position = ccp(col4, row2);
+        
+        CCMenuItemImage * menuItem11 = [CCMenuItemImage itemWithNormalImage:@"level5Label.png"
+                                                             selectedImage: @"level5Label.png"
+                                                                    target:self
+                                                                  selector:@selector(level11:)];
+        menuItem11.scale=1.25;
+        menuItem11.position = ccp(col5, row2);
+        
+
+        CCMenuItemImage * menuItem12 = [CCMenuItemImage itemWithNormalImage:@"level5Label.png"
+                                                             selectedImage: @"level5Label.png"
+                                                                    target:self
+                                                                  selector:@selector(level12)];
+        menuItem12.scale=1.25;
+        menuItem12.position = ccp(col6, row2);
+        
+        CCMenuItemImage * menuItem13 = [CCMenuItemImage itemWithNormalImage:@"level1Label.png"
+                                                             selectedImage: @"level1Label.png"
+                                                                    target:self
+                                                                  selector:@selector(level13:)];
+        menuItem13.scale =1.25;
+        menuItem13.position = ccp(col1, row3);
+
+        CCMenuItemImage * menuItem14 = [CCMenuItemImage itemWithNormalImage:@"level2Label.png"
+                                                             selectedImage: @"level2Label.png"
+                                                                    target:self
+                                                                  selector:@selector(level14:)];
+        menuItem14.scale =1.25;
+        menuItem14.position = ccp(col2, row3);
+
+        CCMenuItemImage * menuItem15 = [CCMenuItemImage itemWithNormalImage:@"level3Label.png"
+                                                             selectedImage: @"level3Label.png"
+                                                                    target:self
+                                                                  selector:@selector(level15:)];
+        menuItem15.scale=1.25;
+        menuItem15.position = ccp(col3, row3);
+        
+        CCMenuItemImage * menuItem16 = [CCMenuItemImage itemWithNormalImage:@"level4Label.png"
+                                                              selectedImage: @"level4Label.png"
+                                                                     target:self
+                                                                   selector:@selector(level16:)];
+        menuItem16.scale=1.25;
+        menuItem16.position = ccp(col4, row3);
+
+        CCMenuItemImage * menuItem17 = [CCMenuItemImage itemWithNormalImage:@"level5Label.png"
+                                                              selectedImage: @"level5Label.png"
+                                                                     target:self
+                                                                   selector:@selector(level17:)];
+        menuItem17.scale=1.25;
+        menuItem17.position = ccp(col5, row3);
 
         
+        CCMenuItemImage * menuItem18 = [CCMenuItemImage itemWithNormalImage:@"level5Label.png"
+                                                              selectedImage: @"level5Label.png"
+                                                                     target:self
+                                                                   selector:@selector(level18)];
+        menuItem18.scale=1.25;
+        menuItem18.position = ccp(col6, row3);
         
         
-    CCMenu *myMenu = [CCMenu menuWithItems:menuItem1, menuItem2, menuItem3,menuItem4, menuItem5, nil];
+        CCMenuItemImage * menuItem19 = [CCMenuItemImage itemWithNormalImage:@"level1Label.png"
+                                                              selectedImage: @"level1Label.png"
+                                                                     target:self
+                                                                   selector:@selector(level19:)];
+
+        
+        menuItem19.scale =1.25;
+        menuItem19.position = ccp(col1, row4);
+        
+        CCMenuItemImage * menuItem20 = [CCMenuItemImage itemWithNormalImage:@"level2Label.png"
+                                                              selectedImage: @"level2Label.png"
+                                                                     target:self
+                                                                   selector:@selector(level20:)];
+        menuItem20.scale =1.25;
+        menuItem20.position = ccp(col2, row4);
+        
+        CCMenuItemImage * menuItem21 = [CCMenuItemImage itemWithNormalImage:@"level3Label.png"
+                                                              selectedImage: @"level3Label.png"
+                                                                     target:self
+                                                                   selector:@selector(level21:)];
+        menuItem21.scale=1.25;
+        menuItem21.position = ccp(col3, row4);
+        
+        CCMenuItemImage * menuItem22 = [CCMenuItemImage itemWithNormalImage:@"level4Label.png"
+                                                              selectedImage: @"level4Label.png"
+                                                                     target:self
+                                                                   selector:@selector(level22:)];
+        menuItem22.scale=1.25;
+        menuItem22.position = ccp(col4, row4);
+        
+        CCMenuItemImage * menuItem23 = [CCMenuItemImage itemWithNormalImage:@"level5Label.png"
+                                                              selectedImage: @"level5Label.png"
+                                                                     target:self
+                                                                   selector:@selector(level23:)];
+        menuItem23.scale=1.25;
+        menuItem23.position = ccp(col5, row4);
+        
+        
+        CCMenuItemImage * menuItem24 = [CCMenuItemImage itemWithNormalImage:@"level5Label.png"
+                                                              selectedImage: @"level5Label.png"
+                                                                     target:self
+                                                                   selector:@selector(level24)];
+        menuItem24.scale=1.25;
+        menuItem24.position = ccp(col6, row4);
+        
+        CCMenuItemImage * menuItem25 = [CCMenuItemImage itemWithNormalImage:@"level1Label.png"
+                                                              selectedImage: @"level1Label.png"
+                                                                     target:self
+                                                                   selector:@selector(level25:)];
+        
+        
+        menuItem25.scale =1.25;
+        menuItem25.position = ccp(col1, row5);
+        
+        CCMenuItemImage * menuItem26 = [CCMenuItemImage itemWithNormalImage:@"level2Label.png"
+                                                              selectedImage: @"level2Label.png"
+                                                                     target:self
+                                                                   selector:@selector(level26:)];
+        menuItem26.scale =1.25;
+        menuItem26.position = ccp(col2, row5);
+        
+        CCMenuItemImage * menuItem27 = [CCMenuItemImage itemWithNormalImage:@"level3Label.png"
+                                                              selectedImage: @"level3Label.png"
+                                                                     target:self
+                                                                   selector:@selector(level27:)];
+        menuItem27.scale=1.25;
+        menuItem27.position = ccp(col3, row5);
+        
+        CCMenuItemImage * menuItem28 = [CCMenuItemImage itemWithNormalImage:@"level4Label.png"
+                                                              selectedImage: @"level4Label.png"
+                                                                     target:self
+                                                                   selector:@selector(level28:)];
+        menuItem28.scale=1.25;
+        menuItem28.position = ccp(col4, row5);
+        
+        CCMenuItemImage * menuItem29 = [CCMenuItemImage itemWithNormalImage:@"level5Label.png"
+                                                              selectedImage: @"level5Label.png"
+                                                                     target:self
+                                                                   selector:@selector(level29:)];
+        menuItem29.scale=1.25;
+        menuItem29.position = ccp(col5, row5);
+        
+        
+        CCMenuItemImage * menuItem30 = [CCMenuItemImage itemWithNormalImage:@"level5Label.png"
+                                                              selectedImage: @"level5Label.png"
+                                                                     target:self
+                                                                   selector:@selector(level30)];
+        menuItem30.scale=1.25;
+        menuItem30.position = ccp(col6, row5);
+        
+
+
+        
+    CCMenu *myMenu = [CCMenu menuWithItems:mainMenuButton, menuItem1, menuItem2, menuItem3,menuItem4, menuItem5, menuItem6, menuItem7, menuItem8, menuItem9,menuItem10, menuItem11, menuItem12, menuItem13, menuItem14, menuItem15,menuItem16, menuItem17, menuItem18, menuItem19, menuItem20, menuItem21,menuItem22, menuItem23, menuItem24, menuItem25, menuItem26, menuItem27,menuItem28, menuItem29, menuItem30, nil];
     
-//	[myMenu alignItemsHorizontallyWithPadding:5.0];
+        myMenu.position = ccp(0,0);
 
 	[self addChild:myMenu];
 
@@ -152,5 +360,12 @@
         [GameData sharedData].currentLevelSelected = 5;
         [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
     }
+}
+
+- (void) mainMenu: (CCMenuItemImage *) mainMenuButton
+{
+    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+    
+    [[CCDirector sharedDirector] replaceScene: (CCScene *)[[MainMenuLayer alloc]  init]];
 }
 @end

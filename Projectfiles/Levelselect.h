@@ -12,6 +12,7 @@
 {
     NSNumber *NSHighestLevelUnlocked;
     int highestLevelUnlocked;
+    CGSize winSize;
 }
 -(void) setUpMenus;
 -(void) level1;
