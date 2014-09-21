@@ -107,8 +107,8 @@
     int scenariosAvailable;
     int buttonSpacing;
     int counterSpacing;
-    
-    double zigZagPercentage;
+    int zigZagFrequency;
+    int enemyMeleeReinforcementFramecount;
     double explosionAnimationLength;
     double dyingAnimationLength;
     double KmonsterSpeed;
@@ -246,7 +246,7 @@
 -(void) addFriendlyRegularShooter;
 -(void) addEnemyRegularShooter;
 -(void) addFriendlyMelee;
--(void) addEnemyMelee;
+-(void) addEnemyMelee:(BOOL)zigZag;
 -(void) addFriendlyFastShooter;
 -(void) addEnemyFastShooter;
 -(void) pauseMenu: (CCMenuItemImage *)pauseButton;
@@ -277,6 +277,7 @@
 -(void) spartanAttackAnimation:(CCSprite*)spartan;
 -(void) angelTankAttackAnimation:(CCSprite*)angel;
 -(void) devilTankAttackAnimation:(CCSprite*)devil;
+-(void) devil1walkAnimation:(CCSprite*)devil;
 -(void) angelShoot:(CCSprite*)angel;
 -(void) devilShoot:(CCSprite*)devil;
 -(void) mainCharacterIdleAnimation:(CCSprite*)mainCharacter;

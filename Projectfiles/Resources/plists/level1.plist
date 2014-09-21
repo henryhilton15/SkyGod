@@ -31,6 +31,10 @@
 		<integer>0</integer>
 		<key>attackFrequency</key>
 		<integer>0</integer>
+		<key>zigZagFrequency</key>
+		<integer>0</integer>
+		<key>reinforcementRate</key>
+		<real>1000</real>
 	</dict>
 	<key>Kmonster</key>
 	<dict>
@@ -126,5 +130,7 @@
 	<integer>0</integer>
 	<key>coinCounter</key>
 	<integer>0</integer>
+	<key></key>
+	<string></string>
 </dict>
 </plist>

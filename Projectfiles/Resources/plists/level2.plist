@@ -31,6 +31,10 @@
 		<integer>-1</integer>
 		<key>attackFrequency</key>
 		<integer>-20</integer>
+		<key>zigZagFrequency</key>
+		<integer>10</integer>
+		<key>reinforcementRate</key>
+		<integer>800</integer>
 	</dict>
 	<key>Kmonster</key>
 	<dict>

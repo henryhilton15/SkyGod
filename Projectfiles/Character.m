@@ -400,11 +400,11 @@
         NSString *path = [[NSBundle mainBundle] pathForResource:plistName ofType:@"plist"];
         NSDictionary *levelDictionary = [NSDictionary dictionaryWithContentsOfFile:path];
         
-        NSMutableDictionary *enemyRegularShooterDict = [levelDictionary objectForKey:@"enemyRegularShooter"];
+        NSMutableDictionary *enemyMeleeDict = [levelDictionary objectForKey:@"enemyMelee"];
         
-        health = 1 + [[enemyRegularShooterDict objectForKey:@"health"] intValue];
-        attackFrequency = 50 - [[enemyRegularShooterDict objectForKey:@"attackFrequency"] intValue];
-        power = 1 + [[enemyRegularShooterDict objectForKey:@"damage"] intValue];
+        health = 1 + [[enemyMeleeDict objectForKey:@"health"] intValue];
+        attackFrequency = 50 - [[enemyMeleeDict objectForKey:@"attackFrequency"] intValue];
+        power = 1 + [[enemyMeleeDict objectForKey:@"damage"] intValue];
         type = BAD_KNIFE;
         unlockLevel = 0;
         attacked = false;
