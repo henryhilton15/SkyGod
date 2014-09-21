@@ -240,6 +240,8 @@
 -(void) detectBananaBadGuyCollisions;
 -(void) detectBananaCoinCollisions;
 -(void) detectReachBottom;
+-(void) spawnBottom:(CCSprite*)original :(CCSprite*)new :(BOOL)friendly;
+-(void) tankBombAnimation:(CCSprite*)tankBomb;
 -(void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
 -(void) addFriendlyRegularShooter;
 -(void) addEnemyRegularShooter;
