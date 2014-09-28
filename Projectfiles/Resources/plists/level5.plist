@@ -28,9 +28,13 @@
 		<key>damage</key>
 		<integer>1</integer>
 		<key>fallSpeed</key>
-		<integer>-2</integer>
+		<integer>-3</integer>
 		<key>attackFrequency</key>
 		<integer>-50</integer>
+		<key>zigZagFrequency</key>
+		<integer>6</integer>
+		<key>reinforcementRate</key>
+		<integer>500</integer>
 	</dict>
 	<key>Kmonster</key>
 	<dict>

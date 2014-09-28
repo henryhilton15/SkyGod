@@ -116,11 +116,17 @@
     [enemy runAction:actionMove];
 }
 
--(void) addEnemyMelee
+-(void) addEnemyMelee:(BOOL)zigZag
 {
     // Determine where to spawn the monster along the X axis
     int minX = 12;
     int maxX = winSize.width - 8;
+    if(zigZag == YES)
+    {
+        minX = 60;
+        maxX = winSize.width - 60;
+    }
+    
     int rangeX = maxX - minX;
     int actualX = minX + arc4random() % rangeX;
     
@@ -144,7 +150,44 @@
     // Create the actions
     CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
                                                 position:ccp(actualX, -devil1.contentSize.height/2)];
-    [devil1 runAction:actionMove];
+    int x = devil1.position.x;
+    int y = devil1.position.y;
+    
+    //  float timeInterval = 2.0f;
+    
+    
+    //    id delay = [CCDelayTime actionWithDuration:timeInterval];
+    
+    id leftTop = [CCMoveTo actionWithDuration:actualDuration/(6.0)
+                                     position:ccp(x - (winSize.width/6), y - (winSize.height/6))];
+    
+    
+    id rightTop = [CCMoveTo actionWithDuration:actualDuration/(6.0)
+                                      position:ccp(x + (winSize.width/6), y - (winSize.height/3))];
+    
+    id leftMid = [CCMoveTo actionWithDuration:actualDuration/(6.0)
+                                     position:ccp(x - (winSize.width/6), y - (winSize.height/2))];
+    
+    id rightMid = [CCMoveTo actionWithDuration:actualDuration/(6.0)
+                                      position:ccp(x + (winSize.width/6), y - (winSize.height/1.5))];
+    
+    
+    
+    id leftLow = [CCMoveTo actionWithDuration:actualDuration/(6.0)
+                                     position:ccp(x - (winSize.width/6), y - (winSize.height/1.2))];
+    
+    
+    id rightLow = [CCMoveTo actionWithDuration:actualDuration/(6.0)
+                                      position:ccp(x + (winSize.width/6), y - winSize.height)];
+    
+    if(zigZag == YES)
+    {
+        [devil1 runAction:[CCSequence actions:leftTop, rightTop, leftMid, rightMid, leftLow, rightLow, nil]];
+    }
+    else
+    {
+        [devil1 runAction:actionMove];
+    }
     
     //animation
     
@@ -990,6 +1033,7 @@
         coinModifier = (arc4random() * baseCount);
         scenarioModifier = (arc4random() * (gameplayCoinFramecount/100));
         
+        
         [GameData sharedData].coinsGained = 0;
         currentLevelSelected = [GameData sharedData].currentLevelSelected;
         NSLog(@"level selected = %d", currentLevelSelected);
@@ -1379,6 +1423,15 @@
 //    coinModifier;
 //    scenarioModifier;
     
+    if(framecount % enemyMeleeReinforcementFramecount == 0 && waveChanging == false)
+    {
+        CCSprite *enemyMelee = [[Character alloc] initWithEnemyMeleeImage];
+        enemyMelee.scale = .5;
+        [self spawnBottom:enemyMelee :enemyMelee: NO];
+        [self devil1walkAnimation:enemyMelee];
+        NSLog(@"enemyMeleeReinforcementCount = %d", enemyMeleeReinforcementFramecount);
+    }
+    
     if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true && waveChanging == false)
     {
 //        if((firstZigZag == true || zigZagDelayCounter % 250 == 0) && (firstBigMonster == true || bigMonsterDelayCounter % 200 == 0))
@@ -1408,7 +1461,14 @@
             {
 //                NSLog(@"add enemy melee");
 //  need to make it so that zizZag spawns sometimes          arc4random()
-                [self addEnemyMelee];
+                if([GameData sharedData].currentLevelSelected > 1 && ([self generateRandomNumber:zigZagFrequency] == 1))
+                {
+                    [self addEnemyMelee:YES];
+                }
+                else
+                {
+                    [self addEnemyMelee:NO];
+                }
                 enemyMeleeModifier = (arc4random() * baseCount);
 
             }
@@ -2663,43 +2723,7 @@
                         }
                     }
                     
-                    //animation
-                    
-                    NSMutableArray *devil1moveFrames;
-                    
-                    //Load the plist which tells Kobold2D how to properly parse your spritesheet. If on a retina device Kobold2D will automatically use bearframes-hd.plist
-                    
-                    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile: @"devil1move.plist"];
-                    
-                    //Load in the spritesheet, if retina Kobold2D will automatically use bearframes-hd.png
-                    
-                    CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"devil1move.png"];
-                    
-                    [self addChild:spriteSheet];
-                    
-                    //Define the frames based on the plist - note that for this to work, the original files must be in the format bear1, bear2, bear3 etc...
-                    
-                    //When it comes time to get art for your own original game, makegameswith.us will give you spritesheets that follow this convention, <spritename>1 <spritename>2 <spritename>3 etc...
-                    
-                    devil1moveFrames = [NSMutableArray array];
-                    
-                    for(int i = 1; i <= 8; ++i)
-                    {
-                        [devil1moveFrames addObject:
-                         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"d1-%d.png", i]]];
-                    }
-                    
-                    //Create an animation from the set of frames you created earlier
-                    
-                    CCAnimation *devil1moveAnimation = [CCAnimation animationWithFrames: devil1moveFrames delay:0.25f];
-                    
-                    //Create an action with the animation that can then be assigned to a sprite
-                    
-                    CCAction *devil1move = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:devil1moveAnimation restoreOriginalFrame:NO]];
-                    
-                    //tell the bear to run the taunting action
-                    [badBottom runAction:devil1move];
-                    
+                    [self devil1walkAnimation:badBottom];
                 }
                 if(((Character*)badGuy).type == BAD_FASTSHOOTER)
                 {
@@ -4418,6 +4442,47 @@
     //NSLog(@"knife devil attack");
 }
 
+-(void)devil1walkAnimation:(CCSprite *)devil
+{
+    //animation
+    
+    NSMutableArray *devil1moveFrames;
+    
+    //Load the plist which tells Kobold2D how to properly parse your spritesheet. If on a retina device Kobold2D will automatically use bearframes-hd.plist
+    
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile: @"devil1move.plist"];
+    
+    //Load in the spritesheet, if retina Kobold2D will automatically use bearframes-hd.png
+    
+    CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"devil1move.png"];
+    
+    [self addChild:spriteSheet];
+    
+    //Define the frames based on the plist - note that for this to work, the original files must be in the format bear1, bear2, bear3 etc...
+    
+    //When it comes time to get art for your own original game, makegameswith.us will give you spritesheets that follow this convention, <spritename>1 <spritename>2 <spritename>3 etc...
+    
+    devil1moveFrames = [NSMutableArray array];
+    
+    for(int i = 1; i <= 8; ++i)
+    {
+        [devil1moveFrames addObject:
+         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"d1-%d.png", i]]];
+    }
+    
+    //Create an animation from the set of frames you created earlier
+    
+    CCAnimation *devil1moveAnimation = [CCAnimation animationWithFrames: devil1moveFrames delay:0.25f];
+    
+    //Create an action with the animation that can then be assigned to a sprite
+    
+    CCAction *devil1move = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:devil1moveAnimation restoreOriginalFrame:NO]];
+    
+    //tell the bear to run the taunting action
+    [devil runAction:devil1move];
+
+}
+
 -(void) devil2attackAnimation:(CCSprite *)devil
 {
     //animation
@@ -5951,7 +6016,10 @@
     
     NSMutableDictionary *enemyMeleeDict = [levelDictionary objectForKey:@"enemyMelee"];
     enemyMeleeFramecount = 300 + [[enemyMeleeDict objectForKey:@"spawnRate"] intValue];
+    zigZagFrequency = [[enemyMeleeDict objectForKey:@"zigZagFrequency"] intValue];
     enemyMeleeAvailable = [[enemyMeleeDict objectForKey:@"available"] boolValue];
+    enemyMeleeReinforcementFramecount = [[enemyMeleeDict objectForKey:@"reinforcementRate"] intValue];
+    
     
     NSMutableDictionary *enemyRegularShooterDict = [levelDictionary objectForKey:@"enemyRegularShooter"];
     enemyRegularShooterFramecount = 300 - [[enemyRegularShooterDict objectForKey:@"spawnRate"] intValue];
