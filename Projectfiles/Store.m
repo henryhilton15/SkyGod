@@ -84,7 +84,7 @@
         background.position = CGPointMake(winSize.width/2,winSize.height/2);
         [self addChild:background z:-1];
         
-        //            StoreLabel = [CCLabelTTF labelWithString:@"Store" fontName:@"Marker Felt" fontSize:40];
+        //            StoreLabel = [CCLabelTTF labelWithString:@"Store" fontName:@"BenguiatItcTEE-Book" fontSize:40];
         //            StoreLabel.position = ccp(240,240);
         //            StoreLabel.color = ccBLUE;
         //            [self addChild:StoreLabel z:4];
@@ -148,9 +148,9 @@
         int centerLeftX = -(winSize.width * .125);
         int centerRightX = winSize.width * .125;
         int farRightX = winSize.width * .375;
-        int topRowPriceY = winSize.height * .7;
-        int topRowAngelY = winSize.height * .57;
-        int topRowLevelY = winSize.height * .4;
+        int topRowPriceY = winSize.height * .73;
+        int topRowAngelY = winSize.height * .6;
+        int topRowLevelY = winSize.height * .43;
         int bottomRowPriceY = winSize.height * .31;
         int bottomRowLogoY = winSize.height * .19;
         int bottomRowAvailableY = winSize.height * .07;
@@ -164,8 +164,8 @@
         buyAirstrikeButton.position = CGPointMake(farLeftX, bottomRowLogoY);
         buyReinforcementButton.position = CGPointMake(centerLeftX, bottomRowLogoY);
         buyImmunityButton.position = CGPointMake(centerRightX, bottomRowLogoY);
-        mainMenuButton.position = CGPointMake(farRightX, bottomRowLogoY);
-        mainMenuButton.scale = 0.5;
+        mainMenuButton.position = CGPointMake(farRightX - winSize.height * .05, bottomRowLogoY);
+        mainMenuButton.scale = 0.65;
         
         CCMenu* storeMenu = [CCMenu menuWithItems:mainMenuButton, regularShooterButton, fastShooterButton, meleeButton, tankButton, buyAirstrikeButton, buyReinforcementButton, buyImmunityButton, nil];
 
@@ -173,95 +173,97 @@
 
         [self addChild:storeMenu];
         
-        CCLabelTTF *shopLabel = [CCLabelTTF labelWithString:@"SHOP" fontName:@"Marker Felt" fontSize: 30];
-        shopLabel.position = ccp(winSize.width * .5, winSize.height * .85);
+        CCLabelTTF *shopLabel = [CCLabelTTF labelWithString:@"SHOP" fontName:@"Algerian" fontSize: 50];
+        shopLabel.position = ccp(winSize.width * .5, winSize.height * .87);
+        shopLabel.color = ccBLACK;
         [self addChild:shopLabel z:4];
         
-        coinsLabel = [CCLabelTTF labelWithString:@"coins: " fontName:@"Marker Felt" fontSize:18];
+        coinsLabel = [CCLabelTTF labelWithString:@"coins: " fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
         coinsLabel.position = ccp(winSize.width * .8, winSize.height * .85);
+        coinsLabel.color = ccBLACK;
         [self addChild:coinsLabel z:4];
         
-        meleePrice = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        meleePrice = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [meleePrice setString:[NSString stringWithFormat:@"Price:%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleePrice"] intValue]]];
         meleePrice.position = CGPointMake(winSize.width * .125, topRowPriceY);
         meleePrice.color = ccBLACK;
         [self addChild:meleePrice z:4];
         
-        shooterPrice = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        shooterPrice = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [shooterPrice setString:[NSString stringWithFormat:@"Price:%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterPrice"] intValue]]];
         shooterPrice.position = CGPointMake(winSize.width * .375, topRowPriceY);
         shooterPrice.color = ccBLACK;
         [self addChild:shooterPrice z:4];
         
-        fastShooterPrice = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        fastShooterPrice = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [fastShooterPrice setString:[NSString stringWithFormat:@"Price:%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterPrice"] intValue]]];
         fastShooterPrice.position = CGPointMake(winSize.width * .625, topRowPriceY);
         fastShooterPrice.color = ccBLACK;
         [self addChild:fastShooterPrice z:4];
         
-        tankPrice = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        tankPrice = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [tankPrice setString:[NSString stringWithFormat:@"Price:%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankPrice"] intValue]]];
         tankPrice.position = CGPointMake(winSize.width * .875, topRowPriceY);
         tankPrice.color = ccBLACK;
         [self addChild:tankPrice z:4];
         
-        airstrikePrice = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        airstrikePrice = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [airstrikePrice setString:[NSString stringWithFormat:@"Price:%d", [GameData sharedData].airPrice]];
         airstrikePrice.position = CGPointMake(winSize.width * .125, bottomRowPriceY);
         airstrikePrice.color = ccBLACK;
         [self addChild:airstrikePrice z:4];
         
-        reinforcementsPrice = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        reinforcementsPrice = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [reinforcementsPrice setString:[NSString stringWithFormat:@"Price:%d", [GameData sharedData].reinforcePrice]];
         reinforcementsPrice.position = CGPointMake(winSize.width * .375, bottomRowPriceY);
         reinforcementsPrice.color = ccBLACK;
         [self addChild:reinforcementsPrice z:4];
         
-        immunityPrice = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        immunityPrice = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [immunityPrice setString:[NSString stringWithFormat:@"Price:%d", [GameData sharedData].immunityPrice]];
         immunityPrice.position = CGPointMake(winSize.width * .625, bottomRowPriceY);
         immunityPrice.color = ccBLACK;
         [self addChild:immunityPrice z:4];
         
-        meleeRank = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        meleeRank = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [meleeRank setString:[NSString stringWithFormat:@"Lvl:%@/5", [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"]]];
         meleeRank.position = CGPointMake(winSize.width * .125, topRowLevelY);
         meleeRank.color = ccBLACK;
         [self addChild:meleeRank z:4];
         
-        shooterRank = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        shooterRank = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [shooterRank setString:[NSString stringWithFormat:@"Lvl:%@/5", [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"]]];
         shooterRank.position = CGPointMake(winSize.width * .375, topRowLevelY);
         shooterRank.color = ccBLACK;
         [self addChild:shooterRank z:4];
         
-        fastShooterRank = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        fastShooterRank = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [fastShooterRank setString:[NSString stringWithFormat:@"Lvl:%@/5", [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterRank"]]];
         fastShooterRank.position = CGPointMake(winSize.width * .625, topRowLevelY);
         fastShooterRank.color = ccBLACK;
         [self addChild:fastShooterRank z:4];
         
-        tankRank = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        tankRank = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [tankRank setString:[NSString stringWithFormat:@"Lvl:%@/5", [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankRank"]]];
         tankRank.position = CGPointMake(winSize.width * .875, topRowLevelY);
         tankRank.color = ccBLACK;
         [self addChild:tankRank z:4];
         
         
-        immunityCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        immunityCount = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [immunityCount setString:[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"immunityAvailable"]]];
         immunityCount.position = CGPointMake(winSize.width * .625, bottomRowAvailableY);
         immunityCount.color = ccBLACK;
         [self addChild:immunityCount z:4];
         
-        reinforcemtsCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        reinforcemtsCount = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [reinforcemtsCount setString:[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"reinforcementsAvailable"]]];
         reinforcemtsCount.position = CGPointMake(winSize.width * .375, bottomRowAvailableY);
         reinforcemtsCount.color = ccBLACK;
         [self addChild:reinforcemtsCount z:4];
 
-        airstrikeCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        airstrikeCount = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [airstrikeCount setString:[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"airstrikesAvailable"]]];
         airstrikeCount.position = CGPointMake(winSize.width * .125, bottomRowAvailableY);
         airstrikeCount.color = ccBLACK;

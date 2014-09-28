@@ -52,6 +52,8 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>ALGER.TTF</string>
+		<string>BE09013T.TTF</string>
 		<string>Ubuntu-R.ttf</string>
 		<string>Ubuntu-C.ttf</string>
 		<string>Ubuntu-B.ttf</string>
