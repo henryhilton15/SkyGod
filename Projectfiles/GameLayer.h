@@ -19,8 +19,8 @@
     int framecount;
     int level;
     int numberOfEnemies;
-    int minDuration;
-    int maxDuration;
+    double minDuration;
+    double maxDuration;
     int enemiesKilled;
     int deaths;
     int bar;

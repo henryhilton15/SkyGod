@@ -49,6 +49,7 @@
 @property int attackFrequency;
 @property int bulletPower;
 @property int bulletType;
+@property int fallingHealth;
 @property double speed;
 @property int fallSpeed;
 @property bool attacked;

@@ -15,6 +15,7 @@
 
 
 @synthesize health;
+@synthesize fallingHealth;
 @synthesize worth;
 @synthesize direction;
 @synthesize type;
@@ -44,6 +45,7 @@
         NSMutableDictionary *enemyTankDict = [levelDictionary objectForKey:@"enemyTank"];
         
         health = 5 + [[enemyTankDict objectForKey:@"health"] intValue];
+        fallingHealth = 1 + [[enemyTankDict objectForKey:@"fallingHealth"] intValue];
         attackFrequency = 40 - [[enemyTankDict objectForKey:@"attackFrequency"] intValue];
         power = 3 + [[enemyTankDict objectForKey:@"damage"] intValue];
         fallSpeed = 5 - [[enemyTankDict objectForKey:@"fallSpeed"] intValue];
@@ -102,6 +104,7 @@
         power = [[d objectForKey:@"power"] intValue] + [rank intValue];
         attackFrequency = [[d objectForKey:@"attackFrequency"] intValue] - (5 * [rank intValue]);
         fallSpeed = 5 + [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
+        fallingHealth = 1 + [[d objectForKey:@"fallingHealth"] intValue];
 
         type = GOOD_GUY;
         row = 0;
@@ -123,9 +126,11 @@
         
         NSMutableDictionary *enemyRegularShooterDict = [levelDictionary objectForKey:@"enemyRegularShooter"];
         
-        health = 2 + [[enemyRegularShooterDict objectForKey:@"health"] intValue];
-        attackFrequency = 50 - [[enemyRegularShooterDict objectForKey:@"attackFrequency"] intValue];
-        power = 1 + [[enemyRegularShooterDict objectForKey:@"damage"] intValue];
+        health = [[enemyRegularShooterDict objectForKey:@"health"] intValue];
+        fallingHealth = [[enemyRegularShooterDict objectForKey:@"fallingHealth"] intValue];
+        attackFrequency = [[enemyRegularShooterDict objectForKey:@"attackFrequency"] intValue];
+        power = [[enemyRegularShooterDict objectForKey:@"damage"] intValue];
+        fallSpeed = [[enemyRegularShooterDict objectForKey:@"fallSpeed"] doubleValue];
         
         type = BAD_GUY;
         worth = 50;
@@ -279,7 +284,7 @@
 {
     if ((self = [super initWithFile: @"goodbase-1.png"]))
     {
-        health = 10;
+        health = 150;
         type = GOOD_BASE;
         melee = true;
     }
@@ -310,7 +315,7 @@
 {
     if ((self = [super initWithFile: @"badbase-1.png"]))
     {
-        health = 10;
+        health = 150;
         type = BAD_BASE;
         melee = true;
     }
@@ -383,10 +388,10 @@
         NSNumber *rank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"];
         
         unlocked = [[d objectForKey:@"available"] boolValue];
-        health = [[d objectForKey:@"health"] intValue] + [rank intValue];
-        power = [[d objectForKey:@"power"] intValue] + [rank intValue];
-        attackFrequency = [[d objectForKey:@"attackFrequency"] intValue] - (5 * [rank intValue]);
-        fallSpeed = 5 + [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
+        health = [[d objectForKey:@"health"] intValue] + (5 *[rank intValue]);
+        power = [[d objectForKey:@"power"] intValue] + (5 * [rank intValue]);
+        attackFrequency = [[d objectForKey:@"attackFrequency"] intValue] - (4 * [rank intValue]);
+        fallSpeed = [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
         type = GOOD_KNIFE;
         attacked = false;
     }
@@ -402,9 +407,11 @@
         
         NSMutableDictionary *enemyMeleeDict = [levelDictionary objectForKey:@"enemyMelee"];
         
-        health = 1 + [[enemyMeleeDict objectForKey:@"health"] intValue];
-        attackFrequency = 50 - [[enemyMeleeDict objectForKey:@"attackFrequency"] intValue];
-        power = 1 + [[enemyMeleeDict objectForKey:@"damage"] intValue];
+        health = [[enemyMeleeDict objectForKey:@"health"] intValue];
+        fallingHealth = [[enemyMeleeDict objectForKey:@"fallingHealth"] intValue];
+        attackFrequency = [[enemyMeleeDict objectForKey:@"attackFrequency"] intValue];
+        power = [[enemyMeleeDict objectForKey:@"damage"] intValue];
+        fallSpeed = [[enemyMeleeDict objectForKey:@"fallSpeed"] doubleValue];
         type = BAD_KNIFE;
         unlockLevel = 0;
         attacked = false;
@@ -499,8 +506,8 @@
         
         NSMutableDictionary *coinDict = [levelDictionary objectForKey:@"coin"];
         
-        fallSpeed = 7 - [[coinDict objectForKey:@"gameplayFallSpeed"] intValue];
-        endgameFallSpeed = 5 - [[coinDict objectForKey:@"endgameFallSpeed"] intValue];
+        fallSpeed = [[coinDict objectForKey:@"gameplayFallSpeed"] intValue];
+        endgameFallSpeed = [[coinDict objectForKey:@"endgameFallSpeed"] intValue];
         worth = 1;
         health = 1;
     }

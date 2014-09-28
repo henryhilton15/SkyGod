@@ -141,11 +141,12 @@
     [badGuys addObject:devil1];
     devil1.position = ccp(actualX, winSize.height);
     
-    minDuration = 6.0 + ((Character*)devil1).fallSpeed;
-    maxDuration = 7.0 + ((Character*)devil1).fallSpeed;
+    minDuration = ((Character*)devil1).fallSpeed - 1.0;
+    maxDuration = ((Character*)devil1).fallSpeed + 1.0;
     
-    int rangeDuration = maxDuration - minDuration;
-    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    double rangeDuration = maxDuration - minDuration;
+    double actualDuration = (((arc4random() % 100) * 1.0f) * .01 * rangeDuration) + minDuration;
+    NSLog(@"enemy melee actual duration = %f", actualDuration);
     
     // Create the actions
     CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
@@ -515,6 +516,14 @@
 
 -(void) addEnemyRegularShooter
 {
+    // Create the monster slightly off-screen along the right edge,
+    // and along a random position along the Y axis as calculated above
+    devil2 = [[Character alloc] initWithEnemyRegularShooterImage];
+   
+    devil2.scale = .5;
+    [self addChild:devil2];
+    [badGuys addObject:devil2];
+    
     // Determine where to spawn the monster along the X axis
     int minX = 10;
     int maxX = winSize.width - 10;
@@ -526,21 +535,20 @@
         actualX = minX + arc4random() % rangeX;
     }
     
+    devil2.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
+    
     // Determine speed of the monster
-    minDuration = 3.5;
-    maxDuration = 6.0;
-    int rangeDuration = maxDuration - minDuration;
-    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    minDuration = ((Character*)devil1).fallSpeed - 1.0;
+    maxDuration = ((Character*)devil1).fallSpeed + 1.0;
+    
+    double rangeDuration = maxDuration - minDuration;
+    double actualDuration = (((arc4random() % 100) * 1.0f) * .01 * rangeDuration) + minDuration;
+    NSLog(@"enemy shooter actual duration = %f", actualDuration);
+    
     
     
 
-    // Create the monster slightly off-screen along the right edge,
-    // and along a random position along the Y axis as calculated above
-    devil2 = [[Character alloc] initWithEnemyRegularShooterImage];
-    devil2.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
-    devil2.scale = .5;
-    [self addChild:devil2];
-    [badGuys addObject:devil2];
+
     
     // Create the actions
     CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
@@ -2136,31 +2144,42 @@
                     
                     if (projectile.position.y < (winSize.height - 10))
                     {
-                        //if([goodGuy isKindOfClass:[Character class]])
-                        //{
-                        [deadBananas addObject:projectile];
-                        ((Character*)goodGuy).health -= ((Character*)projectile).power;
-                        
-                        if(((Character*)goodGuy).health <= 0)
+                        [deadGoodGuys addObject:goodGuy];
+                        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
                         {
-                            [deadGoodGuys addObject:goodGuy];
-                            if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
-                            {
-                                [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
-                            }
-                            [self explosion:goodGuy :explosionAnimationLength: NO];
-                            if(((Character*)goodGuy).type == BIG_GOOD_GUY && Scenario2 == true)
-                            {
-                                Scenario2interlude = true;
-                                bigGoodGuysCounter = 0;
-                                NSLog(@"scenario 2 interlude = true");
-                            }
-                            if(((Character*)goodGuy).type == GOOD_HELICOPTER_BOMB)
-                            {
-                                NSLog(@"banana good guy collisions");
-                                NSLog(@"position = (%d,%d)", goodGuy.position.x, goodGuy.position.y);
-                            }
+                            [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
                         }
+                        [self explosion:goodGuy :explosionAnimationLength: NO];
+                        if(((Character*)goodGuy).type == BIG_GOOD_GUY && Scenario2 == true)
+                        {
+                            Scenario2interlude = true;
+                            bigGoodGuysCounter = 0;
+                            NSLog(@"scenario 2 interlude = true");
+                        }
+
+                        [deadBananas addObject:projectile];
+//                        ((Character*)goodGuy).health -= ((Character*)projectile).power;
+//                        
+//                        if(((Character*)goodGuy).health <= 0)
+//                        {
+//                            [deadGoodGuys addObject:goodGuy];
+//                            if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+//                            {
+//                                [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+//                            }
+//                            [self explosion:goodGuy :explosionAnimationLength: NO];
+//                            if(((Character*)goodGuy).type == BIG_GOOD_GUY && Scenario2 == true)
+//                            {
+//                                Scenario2interlude = true;
+//                                bigGoodGuysCounter = 0;
+//                                NSLog(@"scenario 2 interlude = true");
+//                            }
+//                            if(((Character*)goodGuy).type == GOOD_HELICOPTER_BOMB)
+//                            {
+//                                NSLog(@"banana good guy collisions");
+//                                NSLog(@"position = (%d,%d)", goodGuy.position.x, goodGuy.position.y);
+//                            }
+//                        }
                         
                         //}
                         /*
@@ -2290,10 +2309,10 @@
                 {
                     if (projectile.position.y < winSize.height - 5)
                     {
-                        ((Character*)badGuy).health -= ((Character*)projectile).power;
+                        ((Character*)badGuy).fallingHealth -= ((Character*)projectile).power;
                         [deadBananas addObject:projectile];
                         
-                        if(((Character*)badGuy).health <= 0)
+                        if(((Character*)badGuy).fallingHealth <= 0)
                         {
                             [deadBadGuys addObject:badGuy];
                             if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
@@ -6018,14 +6037,14 @@
     NSDictionary *levelDictionary = [NSDictionary dictionaryWithContentsOfFile:path];
     
     NSMutableDictionary *enemyMeleeDict = [levelDictionary objectForKey:@"enemyMelee"];
-    enemyMeleeFramecount = 300 + [[enemyMeleeDict objectForKey:@"spawnRate"] intValue];
+    enemyMeleeFramecount = [[enemyMeleeDict objectForKey:@"spawnRate"] intValue];
     zigZagFrequency = [[enemyMeleeDict objectForKey:@"zigZagFrequency"] intValue];
     enemyMeleeAvailable = [[enemyMeleeDict objectForKey:@"available"] boolValue];
     enemyMeleeReinforcementFramecount = [[enemyMeleeDict objectForKey:@"reinforcementRate"] intValue];
     
     
     NSMutableDictionary *enemyRegularShooterDict = [levelDictionary objectForKey:@"enemyRegularShooter"];
-    enemyRegularShooterFramecount = 300 - [[enemyRegularShooterDict objectForKey:@"spawnRate"] intValue];
+    enemyRegularShooterFramecount = [[enemyRegularShooterDict objectForKey:@"spawnRate"] intValue];
     enemyRegularShooterAvailable = [[enemyRegularShooterDict objectForKey:@"available"] boolValue];
     
     NSMutableDictionary *KmonsterDict = [levelDictionary objectForKey:@"Kmonster"];
