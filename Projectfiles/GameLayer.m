@@ -1075,23 +1075,23 @@
 //        [self addChild:LevelLabel z:4];
         
         
-        bonusCoinsLabel = [CCLabelTTF labelWithString:@"Bonus Coins!" fontName:@"Marker Felt" fontSize:30];
+        bonusCoinsLabel = [CCLabelTTF labelWithString:@"Bonus Coins!" fontName:@"Algerian" fontSize:30];
         bonusCoinsLabel.position = ccp(-winSize.width * .5, winSize.height * .7);
         bonusCoinsLabel.color = ccBLACK;
         [self addChild:bonusCoinsLabel z:4];
         
-        levelLabel = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        levelLabel = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [levelLabel setString:[NSString stringWithFormat:@"level:%d", currentLevelSelected]];
         levelLabel.position = ccp(380, 300);
         levelLabel.color = ccBLUE;
         [self addChild:levelLabel z:4];
         
-        goodBaseHealthLabel = [CCLabelTTF labelWithString:@"Your Base Health:10" fontName:@"Marker Felt" fontSize:18];
+        goodBaseHealthLabel = [CCLabelTTF labelWithString:@"Your Base Health:10" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         goodBaseHealthLabel.position = ccp(80, 260);
         goodBaseHealthLabel.color = ccBLUE;
         [self addChild:goodBaseHealthLabel z:4];
         
-        badBaseHealthLabel = [CCLabelTTF labelWithString:@"Enemy Base Health:10" fontName:@"Marker Felt" fontSize:18];
+        badBaseHealthLabel = [CCLabelTTF labelWithString:@"Enemy Base Health:10" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         badBaseHealthLabel.position = ccp(380, 260);
         badBaseHealthLabel.color = ccBLUE;
         [self addChild:badBaseHealthLabel z:4];
@@ -1182,7 +1182,7 @@
         
          counterSpacing = (winSize.width *.085);
         
-        airstrikeCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        airstrikeCount = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [airstrikeCount setString:[NSString stringWithFormat:@"%d", numAvailable1]];
         airstrikeCount.position = CGPointMake(winSize.width *.08 + winSize.width *.005, winSize.height - winSize.height/8);
         airstrikeCount.color = ccBLACK;
@@ -1191,7 +1191,7 @@
         NSNumber* NSNumAvailable2 = [[NSUserDefaults standardUserDefaults] objectForKey:@"reinforcementsAvailable"];
         int numAvailable2 = [NSNumAvailable2 intValue];
         
-        reinforcemtsCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        reinforcemtsCount = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [reinforcemtsCount setString:[NSString stringWithFormat:@"%d", numAvailable2]];
         reinforcemtsCount.position = CGPointMake(winSize.width *.08 + counterSpacing, winSize.height - winSize.height/8);
         reinforcemtsCount.color = ccBLACK;
@@ -1200,14 +1200,11 @@
         NSNumber* NSNumAvailable3 = [[NSUserDefaults standardUserDefaults] objectForKey:@"immunityAvailable"];
         int numAvailable3 = [NSNumAvailable3 intValue];
         
-        immunityCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        immunityCount = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [immunityCount setString:[NSString stringWithFormat:@"%d", numAvailable3]];
         immunityCount.position = CGPointMake(winSize.width *.08 + (counterSpacing * 2), winSize.height - winSize.height/8);
         immunityCount.color = ccBLACK;
         [self addChild:immunityCount z:5000];
-        
-
-        
         
         
    //     [self changeLevel];
@@ -1867,7 +1864,7 @@
     float ypos = playerY + ydiff;
     
     float length = sqrtf((xdiff*xdiff)+(ydiff*ydiff));
-    float velocity = 350/1;
+    float velocity = 750/1;
     float realMoveDuration = length/velocity;
     
     
@@ -5062,7 +5059,7 @@
         [bomber runAction:angelPlaneMove];
         
         [self removeChild:airstrikeCount];
-        airstrikeCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+        airstrikeCount = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [airstrikeCount setString:[NSString stringWithFormat:@"%d", numAvailable]];
         airstrikeCount.position = CGPointMake(winSize.width * .08 + winSize.width *.005, winSize.height - winSize.height/8);
         airstrikeCount.color = ccBLACK;
@@ -5100,7 +5097,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:NSNumAvailable forKey: @"reinforcementsAvailable"];
     
     [self removeChild:reinforcemtsCount];
-    reinforcemtsCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+    reinforcemtsCount = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
     [reinforcemtsCount setString:[NSString stringWithFormat:@"%d", numAvailable]];
     reinforcemtsCount.position = CGPointMake(winSize.width * .08 + counterSpacing, winSize.height - winSize.height/8);
     reinforcemtsCount.color = ccBLACK;
@@ -5175,7 +5172,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:NSNumAvailable forKey: @"immunityAvailable"];
     
     [self removeChild:immunityCount];
-    immunityCount = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:18];
+    immunityCount = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
     [immunityCount setString:[NSString stringWithFormat:@"%d", numAvailable]];
     immunityCount.position = CGPointMake(winSize.width * .08 + counterSpacing * 2, winSize.height - winSize.height/8);
     immunityCount.color = ccBLACK;

@@ -42,10 +42,13 @@
         }
         NSLog(@"highestLevelUnlocked = %d", highestLevelUnlocked);
         
-        CCSprite *levelTitleImage = [CCSprite spriteWithFile: @"cooltext1265591974.png"];
-        levelTitleImage.position = ccp(winSize.width/2,winSize.height * .925);
-        levelTitleImage.scale =.6;
-        [self addChild:levelTitleImage z:4];
+
+        
+        CCLabelTTF *selectLabel = [CCLabelTTF labelWithString:@"Select Level" fontName:@"Algerian" fontSize: 30];
+        selectLabel.position = ccp(winSize.width * .5, winSize.height * .925);
+        selectLabel.color = ccBLACK;
+        [self addChild:selectLabel z:4];
+
         
         
         CCSprite *background = [CCSprite spriteWithFile:@"sky-ip5.png"];

@@ -65,7 +65,7 @@
     
         [[SimpleAudioEngine sharedEngine] playEffect:@"gameOverLaugh.wav"];
         */
-        GameOverLabel = [CCLabelTTF labelWithString:@"You suck!" fontName:@"Marker Felt" fontSize:36];
+        GameOverLabel = [CCLabelTTF labelWithString:@"You suck!" fontName:@"Algerian" fontSize:36];
         GameOverLabel.position = ccp(240,300);
         [self addChild:GameOverLabel z:4];
         
@@ -73,7 +73,7 @@
         int score = data.score;
         NSString *scoreString = [NSString stringWithFormat:@"score: %d", score];
         
-        scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"Marker Felt" fontSize:40];
+        scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"BenguiatItcTEE-Book" fontSize:40];
         scoreLabel.position = ccp(240,50);
         //scoreLabel.color = ccBLUE;
         [self addChild:scoreLabel z:4];
@@ -84,7 +84,7 @@
         {
             NSNumber* newHighScore = [NSNumber numberWithInt:score];
             [[NSUserDefaults standardUserDefaults] setObject:newHighScore forKey: @"highScore"];
-            newHighScoreLabel = [CCLabelTTF labelWithString:@"New High Score!" fontName:@"Marker Felt" fontSize:36];
+            newHighScoreLabel = [CCLabelTTF labelWithString:@"New High Score!" fontName:@"BenguiatItcTEE-Book" fontSize:36];
             newHighScoreLabel.position = ccp(100,160);
             [self addChild:newHighScoreLabel z:4];
             NSLog(@"new high score!");
