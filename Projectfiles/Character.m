@@ -187,7 +187,7 @@
         
         NSMutableDictionary *enemyHeliDict = [levelDictionary objectForKey:@"enemyHelicopter"];
         
-        health = 5 + [[enemyHeliDict objectForKey:@"health"] intValue];
+        fallingHealth = 5 + [[enemyHeliDict objectForKey:@"health"] intValue];
         speed = 5 + [[enemyHeliDict objectForKey:@"speed"] intValue];
         type = BAD_HELICOPTER;
         power = 5;
@@ -210,7 +210,7 @@
         fallSpeed = [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
         
         worth = 50;
-        power = 3;
+
         type = GOOD_HELICOPTER_BOMB;
     }
     return self;
@@ -225,9 +225,9 @@
         
         NSMutableDictionary *enemyBombDict = [levelDictionary objectForKey:@"enemyBomb"];
         
-        power = 2 + [[enemyBombDict objectForKey:@"damage"] intValue];
+        power = 50 + [[enemyBombDict objectForKey:@"damage"] intValue];
         fallSpeed = 7 + [[enemyBombDict objectForKey:@"fallSpeed"] intValue];
-        health = 1 + [[enemyBombDict objectForKey:@"health"] intValue];
+        fallingHealth = 1 + [[enemyBombDict objectForKey:@"health"] intValue];
         worth = 50;
 
         type = BAD_HELICOPTER_BOMB;

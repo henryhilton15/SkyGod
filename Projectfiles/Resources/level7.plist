@@ -26,11 +26,11 @@
 		<key>fallingHealth</key>
 		<integer>1</integer>
 		<key>spawnRate</key>
-		<integer>125</integer>
+		<integer>104</integer>
 		<key>damage</key>
 		<integer>20</integer>
 		<key>fallSpeed</key>
-		<real>4.5</real>
+		<real>4</real>
 		<key>attackFrequency</key>
 		<integer>20</integer>
 		<key>zigZagFrequency</key>
@@ -58,15 +58,13 @@
 		<key>available</key>
 		<false/>
 		<key>health</key>
-		<integer>0</integer>
+		<integer>2</integer>
 		<key>spawnRate</key>
 		<integer>0</integer>
 		<key>damage</key>
 		<integer>0</integer>
 		<key>speed</key>
-		<integer>0</integer>
-		<key>attackFrequency</key>
-		<integer>0</integer>
+		<integer>-1</integer>
 	</dict>
 	<key>enemyBomb</key>
 	<dict>
@@ -75,13 +73,11 @@
 		<key>health</key>
 		<integer>0</integer>
 		<key>spawnRate</key>
-		<integer>0</integer>
+		<integer>-10</integer>
 		<key>damage</key>
 		<integer>0</integer>
 		<key>fallSpeed</key>
-		<integer>0</integer>
-		<key>attackFrequency</key>
-		<integer>0</integer>
+		<integer>-1</integer>
 	</dict>
 	<key>enemyTank</key>
 	<dict>
@@ -128,9 +124,15 @@
 	</dict>
 	<key>scenariosAvailable</key>
 	<integer>1</integer>
+	<key>scenarioDelay</key>
+	<integer>1200</integer>
 	<key>scoreCounter</key>
 	<integer>0</integer>
 	<key>coinCounter</key>
 	<integer>0</integer>
+	<key>baseFriendlyCount</key>
+	<real>4.6</real>
+	<key>friendlyMeleeReinforcementRate</key>
+	<integer>800</integer>
 </dict>
 </plist>

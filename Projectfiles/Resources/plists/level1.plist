@@ -132,5 +132,9 @@
 	<integer>0</integer>
 	<key>coinCounter</key>
 	<integer>0</integer>
+	<key>baseFriendlyCount</key>
+	<integer>6</integer>
+	<key>friendlyMeleeReinforcementRate</key>
+	<integer>800</integer>
 </dict>
 </plist>
