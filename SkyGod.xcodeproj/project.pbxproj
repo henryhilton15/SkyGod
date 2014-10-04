@@ -832,6 +832,9 @@
 		DCC1A3AE13A94F1A005BD75D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC1A39113A94F1A005BD75D /* main.m */; };
 		DCF95CD213A97EC500AE3B80 /* libcocos2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF95CC913A97EC500AE3B80 /* libcocos2d-mac.a */; };
 		DCF95CD413A97EC500AE3B80 /* libkobold2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF95CCB13A97EC500AE3B80 /* libkobold2d-mac.a */; };
+		FE3E774519DF801500FACC41 /* Box_Yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = FE3E774419DF801400FACC41 /* Box_Yellow.png */; };
+		FE3E774719DF870E00FACC41 /* box_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = FE3E774619DF870E00FACC41 /* box_grey.png */; };
+		FE3E774919DF93F000FACC41 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = FE3E774819DF93F000FACC41 /* lock.png */; };
 		FEFF3541198823EA002E668A /* VictoryLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFF3540198823EA002E668A /* VictoryLayer.m */; };
 		FEFF3598198824C7002E668A /* angel1move.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF354C198824C5002E668A /* angel1move.png */; };
 		FEFF3599198824C7002E668A /* angel2move.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEFF354D198824C5002E668A /* angel2move.plist */; };
@@ -1759,6 +1762,9 @@
 		DCF95CCB13A97EC500AE3B80 /* libkobold2d-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libkobold2d-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCFA90EF13B4F6F7009DD35A /* BuildSettings-Debug-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-Debug-iOS.xcconfig"; sourceTree = "<group>"; };
 		DCFA90F013B4F811009DD35A /* BuildSettings-Release-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-Release-iOS.xcconfig"; sourceTree = "<group>"; };
+		FE3E774419DF801400FACC41 /* Box_Yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Box_Yellow.png; sourceTree = "<group>"; };
+		FE3E774619DF870E00FACC41 /* box_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = box_grey.png; sourceTree = "<group>"; };
+		FE3E774819DF93F000FACC41 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
 		FEFF353F198823EA002E668A /* VictoryLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VictoryLayer.h; sourceTree = "<group>"; };
 		FEFF3540198823EA002E668A /* VictoryLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VictoryLayer.m; sourceTree = "<group>"; };
 		FEFF354C198824C5002E668A /* angel1move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = angel1move.png; sourceTree = "<group>"; };
@@ -2677,6 +2683,9 @@
 		2D808A7B1795F5BA006EADF5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FE3E774819DF93F000FACC41 /* lock.png */,
+				FE3E774619DF870E00FACC41 /* box_grey.png */,
+				FE3E774419DF801400FACC41 /* Box_Yellow.png */,
 				C3E2088A19AA7527007BCF23 /* Dollar-4.png */,
 				C3E2088B19AA7527007BCF23 /* Dollar-3.png */,
 				C3E2088C19AA7527007BCF23 /* Dollar-2.png */,
@@ -3831,6 +3840,7 @@
 				FEFF35C5198824C7002E668A /* deviltankattack.plist in Resources */,
 				2D808C631795F5BA006EADF5 /* sheild-hd.png in Resources */,
 				2D808C641795F5BA006EADF5 /* sidekick-hd.png in Resources */,
+				FE3E774719DF870E00FACC41 /* box_grey.png in Resources */,
 				2D808C651795F5BA006EADF5 /* sink-hd.png in Resources */,
 				2D808C661795F5BA006EADF5 /* spaceman-hd.png in Resources */,
 				2D808C671795F5BA006EADF5 /* spaceship1-hd.png in Resources */,
@@ -4144,6 +4154,7 @@
 				FEFF35E9198827C6002E668A /* d1-attack-3.png in Resources */,
 				2D6E373318E9EBC400573401 /* a2-fall-1.png in Resources */,
 				2D6E373418E9EBC400573401 /* a2-fall-2.png in Resources */,
+				FE3E774919DF93F000FACC41 /* lock.png in Resources */,
 				2D6E373518E9EBC400573401 /* a2-fall-3.png in Resources */,
 				2D6E373618E9EBC400573401 /* a2-fall-4.png in Resources */,
 				2D6E373718E9EBC400573401 /* a3-1.png in Resources */,
@@ -4392,6 +4403,7 @@
 				2D6E381318E9EBC400573401 /* 5.png in Resources */,
 				FEFF35BD198824C7002E668A /* devil2attack.plist in Resources */,
 				2D6E381418E9EBC400573401 /* 6.png in Resources */,
+				FE3E774519DF801500FACC41 /* Box_Yellow.png in Resources */,
 				FEFF35E8198827C6002E668A /* d1-attack-2.png in Resources */,
 				FEFF35E3198824C7002E668A /* level5.plist in Resources */,
 				2D6E381518E9EBC400573401 /* 7.png in Resources */,
