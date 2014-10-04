@@ -22,11 +22,11 @@
 		<key>available</key>
 		<true/>
 		<key>health</key>
-		<integer>35</integer>
+		<integer>45</integer>
 		<key>fallingHealth</key>
 		<integer>1</integer>
 		<key>spawnRate</key>
-		<integer>105</integer>
+		<integer>60</integer>
 		<key>damage</key>
 		<integer>20</integer>
 		<key>fallSpeed</key>
@@ -36,7 +36,7 @@
 		<key>zigZagFrequency</key>
 		<integer>6</integer>
 		<key>reinforcementRate</key>
-		<integer>700</integer>
+		<integer>400</integer>
 	</dict>
 	<key>Kmonster</key>
 	<dict>
@@ -114,9 +114,9 @@
 		<key>gameplayFallSpeed</key>
 		<real>5.5</real>
 		<key>gameplayFrequency</key>
-		<integer>0</integer>
+		<integer>-700</integer>
 		<key>endgameFallSpeed</key>
-		<integer>4</integer>
+		<real>3.5</real>
 		<key>endgameFrequency</key>
 		<integer>0</integer>
 		<key>endgameCoinTotal</key>
@@ -124,6 +124,8 @@
 	</dict>
 	<key>scenariosAvailable</key>
 	<integer>1</integer>
+	<key>scenarioDelay</key>
+	<integer>1200</integer>
 	<key>scoreCounter</key>
 	<integer>0</integer>
 	<key>coinCounter</key>
@@ -131,6 +133,6 @@
 	<key>baseFriendlyCount</key>
 	<real>4.5</real>
 	<key>friendlyMeleeReinforcementRate</key>
-	<integer>800</integer>
+	<integer>500</integer>
 </dict>
 </plist>

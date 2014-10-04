@@ -120,11 +120,11 @@
 {
     // Determine where to spawn the monster along the X axis
     int minX = 12;
-    int maxX = winSize.width - 8;
+    int maxX = winSize.width - 12;
     if(zigZag == YES)
     {
-        minX = 60;
-        maxX = winSize.width - 60;
+        minX = 100;
+        maxX = winSize.width - 40;
     }
     
     int rangeX = maxX - minX;
@@ -1302,6 +1302,7 @@
 
 -(void) update:(ccTime)delta
 {
+    
 //    if(framecount % 500 == 0)
 //    {
 //        for(int i = 0; i < [goodGuysBottom count]; i++)
@@ -1940,7 +1941,7 @@
     float ypos = playerY + ydiff;
     
     float length = sqrtf((xdiff*xdiff)+(ydiff*ydiff));
-    float velocity = 750/1;
+    float velocity = 450/1;
     float realMoveDuration = length/velocity;
     
     
@@ -5440,13 +5441,13 @@
 
 -(void) youWin
 {
-    NSMutableArray *eraseGoodGuys = [[NSMutableArray alloc] init];
-    NSMutableArray *eraseBadGuys = [[NSMutableArray alloc] init];
-    NSMutableArray *eraseGoodGuysBottom = [[NSMutableArray alloc] init];
-    NSMutableArray *eraseBadGuysBottom = [[NSMutableArray alloc] init];
-    NSMutableArray *eraseGoodBulletsBottom = [[NSMutableArray alloc] init];
-    NSMutableArray *eraseBadBulletsBottom = [[NSMutableArray alloc] init];
-    NSMutableArray *eraseCoins = [[NSMutableArray alloc] init];
+//    NSMutableArray *eraseGoodGuys = [[NSMutableArray alloc] init];
+//    NSMutableArray *eraseBadGuys = [[NSMutableArray alloc] init];
+//    NSMutableArray *eraseGoodGuysBottom = [[NSMutableArray alloc] init];
+//    NSMutableArray *eraseBadGuysBottom = [[NSMutableArray alloc] init];
+//    NSMutableArray *eraseGoodBulletsBottom = [[NSMutableArray alloc] init];
+//    NSMutableArray *eraseBadBulletsBottom = [[NSMutableArray alloc] init];
+//    NSMutableArray *eraseCoins = [[NSMutableArray alloc] init];
 //    NSMutableArray *eraseBases = [[NSMutableArray alloc] init];
     
     GameData *data = [GameData sharedData];
