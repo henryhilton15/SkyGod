@@ -36,7 +36,7 @@
 		<key>zigZagFrequency</key>
 		<integer>10</integer>
 		<key>reinforcementRate</key>
-		<integer>800</integer>
+		<integer>500</integer>
 	</dict>
 	<key>Kmonster</key>
 	<dict>
@@ -118,7 +118,7 @@
 		<key>gameplayFallSpeed</key>
 		<integer>7</integer>
 		<key>gameplayFrequency</key>
-		<integer>0</integer>
+		<integer>-100</integer>
 		<key>endgameFallSpeed</key>
 		<integer>5</integer>
 		<key>endgameFrequency</key>
@@ -135,6 +135,6 @@
 	<key>baseFriendlyCount</key>
 	<integer>6</integer>
 	<key>friendlyMeleeReinforcementRate</key>
-	<integer>800</integer>
+	<integer>700</integer>
 </dict>
 </plist>
