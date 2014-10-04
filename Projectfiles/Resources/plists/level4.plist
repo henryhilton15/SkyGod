@@ -22,19 +22,21 @@
 		<key>available</key>
 		<true/>
 		<key>health</key>
-		<integer>0</integer>
+		<integer>25</integer>
+		<key>fallingHealth</key>
+		<integer>1</integer>
 		<key>spawnRate</key>
-		<integer>-190</integer>
+		<integer>130</integer>
 		<key>damage</key>
-		<integer>0</integer>
+		<integer>15</integer>
 		<key>fallSpeed</key>
-		<integer>-2</integer>
+		<integer>5</integer>
 		<key>attackFrequency</key>
-		<integer>-40</integer>
+		<integer>25</integer>
 		<key>zigZagFrequency</key>
 		<integer>8</integer>
 		<key>reinforcementRate</key>
-		<integer>600</integer>
+		<integer>400</integer>
 	</dict>
 	<key>Kmonster</key>
 	<dict>
@@ -114,15 +116,15 @@
 	<key>coin</key>
 	<dict>
 		<key>gameplayFallSpeed</key>
-		<integer>0</integer>
+		<integer>7</integer>
 		<key>gameplayFrequency</key>
 		<integer>0</integer>
 		<key>endgameFallSpeed</key>
-		<integer>0</integer>
+		<integer>5</integer>
 		<key>endgameFrequency</key>
 		<integer>0</integer>
 		<key>endgameCoinTotal</key>
-		<integer>0</integer>
+		<integer>6</integer>
 	</dict>
 	<key>scenariosAvailable</key>
 	<integer>0</integer>
@@ -130,5 +132,9 @@
 	<integer>0</integer>
 	<key>coinCounter</key>
 	<integer>0</integer>
+	<key>baseFriendlyCount</key>
+	<real>5.5</real>
+	<key>friendlyMeleeReinforcementRate</key>
+	<integer>800</integer>
 </dict>
 </plist>

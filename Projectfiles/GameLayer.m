@@ -141,11 +141,12 @@
     [badGuys addObject:devil1];
     devil1.position = ccp(actualX, winSize.height);
     
-    minDuration = 6.0 + ((Character*)devil1).fallSpeed;
-    maxDuration = 7.0 + ((Character*)devil1).fallSpeed;
+    minDuration = ((Character*)devil1).fallSpeed - 1.0;
+    maxDuration = ((Character*)devil1).fallSpeed + 1.0;
     
-    int rangeDuration = maxDuration - minDuration;
-    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    double rangeDuration = maxDuration - minDuration;
+    double actualDuration = (((arc4random() % 100) * 1.0f) * .01 * rangeDuration) + minDuration;
+    NSLog(@"enemy melee actual duration = %f", actualDuration);
     
     // Create the actions
     CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
@@ -515,6 +516,14 @@
 
 -(void) addEnemyRegularShooter
 {
+    // Create the monster slightly off-screen along the right edge,
+    // and along a random position along the Y axis as calculated above
+    devil2 = [[Character alloc] initWithEnemyRegularShooterImage];
+   
+    devil2.scale = .5;
+    [self addChild:devil2];
+    [badGuys addObject:devil2];
+    
     // Determine where to spawn the monster along the X axis
     int minX = 10;
     int maxX = winSize.width - 10;
@@ -526,21 +535,20 @@
         actualX = minX + arc4random() % rangeX;
     }
     
+    devil2.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
+    
     // Determine speed of the monster
-    minDuration = 3.5;
-    maxDuration = 6.0;
-    int rangeDuration = maxDuration - minDuration;
-    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    minDuration = ((Character*)devil1).fallSpeed - 1.0;
+    maxDuration = ((Character*)devil1).fallSpeed + 1.0;
+    
+    double rangeDuration = maxDuration - minDuration;
+    double actualDuration = (((arc4random() % 100) * 1.0f) * .01 * rangeDuration) + minDuration;
+    NSLog(@"enemy shooter actual duration = %f", actualDuration);
+    
     
     
 
-    // Create the monster slightly off-screen along the right edge,
-    // and along a random position along the Y axis as calculated above
-    devil2 = [[Character alloc] initWithEnemyRegularShooterImage];
-    devil2.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
-    devil2.scale = .5;
-    [self addChild:devil2];
-    [badGuys addObject:devil2];
+
     
     // Create the actions
     CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
@@ -1015,7 +1023,6 @@
         goodBaseExploded = false;
         friendlyTankAvailable = NO;
         scenarioDelayCounter = 0;
-        scenarioDelay = 600;
         scenario2interludeCounter = 0;
         devilStartingWidth = winSize.width - 100;
         angelStartingWidth = 30;
@@ -1024,14 +1031,13 @@
         previousCoinDuration = 0;
         calledYouWin = 0;
         betweenCoinRowDelay = 0;
-        baseCount = 6;
-        friendlyRegularShooterModifier = (arc4random() * baseCount);
-        friendlyMeleeModifier = (arc4random() * baseCount);
-        friendlyFastShooterModifier = (arc4random() * baseCount);
-        enemyMeleeModifier = (arc4random() * baseCount);
-        enemyRegularShooterModifier = (arc4random() * baseCount);
-        coinModifier = (arc4random() * baseCount);
-        scenarioModifier = (arc4random() * (gameplayCoinFramecount/100));
+        friendlyRegularShooterModifier = (int)(arc4random() * baseCount);
+        friendlyMeleeModifier = (int)(arc4random() * baseCount);
+        friendlyFastShooterModifier = (int)(arc4random() * baseCount);
+        enemyMeleeModifier = (int)(arc4random() * baseCount);
+        enemyRegularShooterModifier = (int)(arc4random() * baseCount);
+        coinModifier = (int)(arc4random() * baseCount);
+        scenarioModifier = (int)(arc4random() * (gameplayCoinFramecount/100));
         
         
         [GameData sharedData].coinsGained = 0;
@@ -1401,7 +1407,7 @@
         }
     }
     
-    if(Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true && waveChanging == false)
+    if(Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true && waveChanging == false  && scenariosAvailable > 0)
     {
         scenarioDelayCounter++;
         
@@ -1432,6 +1438,14 @@
         NSLog(@"enemyMeleeReinforcementCount = %d", enemyMeleeReinforcementFramecount);
     }
     
+    if(friendlyMeleeReinforcementFramecount > 0 && framecount % friendlyMeleeReinforcementFramecount == 0 && waveChanging == false)
+    {
+        CCSprite *friendlyMelee = [[Character alloc] initWithFriendlyMeleeImage];
+        friendlyMelee.scale = .5;
+        [self spawnBottom:friendlyMelee :friendlyMelee: YES];
+        [self angel1walkAnimation:friendlyMelee];
+    }
+    
     if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true && waveChanging == false)
     {
 //        if((firstZigZag == true || zigZagDelayCounter % 250 == 0) && (firstBigMonster == true || bigMonsterDelayCounter % 200 == 0))
@@ -1443,19 +1457,19 @@
             {
 //                NSLog(@"add friendly regular shooter");
                 [self addFriendlyRegularShooter];
-                friendlyRegularShooterModifier = (arc4random() * baseCount);
+                friendlyRegularShooterModifier = (int)(arc4random() * baseCount);
             }
             if((framecount + friendlyMeleeModifier) % friendlyMeleeFramecount == 0 && [GameData sharedData].friendlyMeleeAvailable == true)
             {
 //                NSLog(@"add friendly melee");
                 [self addFriendlyMelee];
-                friendlyMeleeModifier = (arc4random() * baseCount);
+                friendlyMeleeModifier = (int)(arc4random() * baseCount);
             }
             if((framecount + friendlyFastShooterModifier) % friendlyFastShooterFramecount == 0 && [GameData sharedData].friendlyFastShooterAvailable == true)
             {
 //                NSLog(@"add friendly fast shooter");
                 [self addFriendlyFastShooter];
-                friendlyFastShooterModifier = (arc4random() * baseCount);
+                friendlyFastShooterModifier = (int)(arc4random() * baseCount);
             }
             if((framecount + enemyMeleeModifier) % enemyMeleeFramecount == 0 && enemyMeleeAvailable == true)
             {
@@ -1469,14 +1483,14 @@
                 {
                     [self addEnemyMelee:NO];
                 }
-                enemyMeleeModifier = (arc4random() * baseCount);
+                enemyMeleeModifier = (int)(arc4random() * baseCount);
 
             }
             if((framecount + enemyMeleeModifier) % enemyRegularShooterFramecount == 0 && enemyRegularShooterAvailable == true)
             {
 //                NSLog(@"add enemy regular shooter");
                 [self addEnemyRegularShooter];
-                enemyRegularShooterModifier = (arc4random() * baseCount);
+                enemyRegularShooterModifier = (int)(arc4random() * baseCount);
             }
         
             if((framecount + coinModifier) % gameplayCoinFramecount == 0)
@@ -2133,31 +2147,42 @@
                     
                     if (projectile.position.y < (winSize.height - 10))
                     {
-                        //if([goodGuy isKindOfClass:[Character class]])
-                        //{
-                        [deadBananas addObject:projectile];
-                        ((Character*)goodGuy).health -= ((Character*)projectile).power;
-                        
-                        if(((Character*)goodGuy).health <= 0)
+                        [deadGoodGuys addObject:goodGuy];
+                        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
                         {
-                            [deadGoodGuys addObject:goodGuy];
-                            if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
-                            {
-                                [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
-                            }
-                            [self explosion:goodGuy :explosionAnimationLength: NO];
-                            if(((Character*)goodGuy).type == BIG_GOOD_GUY && Scenario2 == true)
-                            {
-                                Scenario2interlude = true;
-                                bigGoodGuysCounter = 0;
-                                NSLog(@"scenario 2 interlude = true");
-                            }
-                            if(((Character*)goodGuy).type == GOOD_HELICOPTER_BOMB)
-                            {
-                                NSLog(@"banana good guy collisions");
-                                NSLog(@"position = (%d,%d)", goodGuy.position.x, goodGuy.position.y);
-                            }
+                            [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
                         }
+                        [self explosion:goodGuy :explosionAnimationLength: NO];
+                        if(((Character*)goodGuy).type == BIG_GOOD_GUY && Scenario2 == true)
+                        {
+                            Scenario2interlude = true;
+                            bigGoodGuysCounter = 0;
+                            NSLog(@"scenario 2 interlude = true");
+                        }
+
+                        [deadBananas addObject:projectile];
+//                        ((Character*)goodGuy).health -= ((Character*)projectile).power;
+//                        
+//                        if(((Character*)goodGuy).health <= 0)
+//                        {
+//                            [deadGoodGuys addObject:goodGuy];
+//                            if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+//                            {
+//                                [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+//                            }
+//                            [self explosion:goodGuy :explosionAnimationLength: NO];
+//                            if(((Character*)goodGuy).type == BIG_GOOD_GUY && Scenario2 == true)
+//                            {
+//                                Scenario2interlude = true;
+//                                bigGoodGuysCounter = 0;
+//                                NSLog(@"scenario 2 interlude = true");
+//                            }
+//                            if(((Character*)goodGuy).type == GOOD_HELICOPTER_BOMB)
+//                            {
+//                                NSLog(@"banana good guy collisions");
+//                                NSLog(@"position = (%d,%d)", goodGuy.position.x, goodGuy.position.y);
+//                            }
+//                        }
                         
                         //}
                         /*
@@ -2287,10 +2312,10 @@
                 {
                     if (projectile.position.y < winSize.height - 5)
                     {
-                        ((Character*)badGuy).health -= ((Character*)projectile).power;
+                        ((Character*)badGuy).fallingHealth -= ((Character*)projectile).power;
                         [deadBananas addObject:projectile];
                         
-                        if(((Character*)badGuy).health <= 0)
+                        if(((Character*)badGuy).fallingHealth <= 0)
                         {
                             [deadBadGuys addObject:badGuy];
                             if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
@@ -2584,43 +2609,7 @@
                 {
                     goodBottom = [[Character alloc] initWithFriendlyMeleeImage];
                     [self spawnBottom:goodGuy :goodBottom :YES];
-                    
-                    //animation
-                    
-                    NSMutableArray *angel1moveFrames;
-                    
-                    //Load the plist which tells Kobold2D how to properly parse your spritesheet. If on a retina device Kobold2D will automatically use bearframes-hd.plist
-                    
-                    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile: @"angel1move.plist"];
-                    
-                    //Load in the spritesheet, if retina Kobold2D will automatically use bearframes-hd.png
-                    
-                    CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"angel1move.png"];
-                    
-                    [self addChild:spriteSheet];
-                    
-                    //Define the frames based on the plist - note that for this to work, the original files must be in the format bear1, bear2, bear3 etc...
-                    
-                    //When it comes time to get art for your own original game, makegameswith.us will give you spritesheets that follow this convention, <spritename>1 <spritename>2 <spritename>3 etc...
-                    
-                    angel1moveFrames = [NSMutableArray array];
-                    
-                    for(int i = 1; i <= 8; ++i)
-                    {
-                        [angel1moveFrames addObject:
-                         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"a1-%d.png", i]]];
-                    }
-                    
-                    //Create an animation from the set of frames you created earlier
-                    
-                    CCAnimation *angel1moveAnimation = [CCAnimation animationWithFrames: angel1moveFrames delay:0.25f];
-                    
-                    //Create an action with the animation that can then be assigned to a sprite
-                    
-                    CCAction *angel1move = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:angel1moveAnimation restoreOriginalFrame:NO]];
-                    
-                    //tell the bear to run the taunting action
-                    [goodBottom runAction:angel1move];
+                    [self angel1walkAnimation:goodBottom];
                 }
                     
 //                ((Character*)goodBottom).health = ((Character*)goodGuy).health;
@@ -4109,6 +4098,46 @@
     //tell the bear to run the taunting action
     [angelOne runAction:attack];
     //NSLog(@"knife angel attack");
+}
+
+-(void) angel1walkAnimation: (CCSprite*) goodBottom
+{
+    //animation
+    
+    NSMutableArray *angel1moveFrames;
+    
+    //Load the plist which tells Kobold2D how to properly parse your spritesheet. If on a retina device Kobold2D will automatically use bearframes-hd.plist
+    
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile: @"angel1move.plist"];
+    
+    //Load in the spritesheet, if retina Kobold2D will automatically use bearframes-hd.png
+    
+    CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"angel1move.png"];
+    
+    [self addChild:spriteSheet];
+    
+    //Define the frames based on the plist - note that for this to work, the original files must be in the format bear1, bear2, bear3 etc...
+    
+    //When it comes time to get art for your own original game, makegameswith.us will give you spritesheets that follow this convention, <spritename>1 <spritename>2 <spritename>3 etc...
+    
+    angel1moveFrames = [NSMutableArray array];
+    
+    for(int i = 1; i <= 8; ++i)
+    {
+        [angel1moveFrames addObject:
+         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"a1-%d.png", i]]];
+    }
+    
+    //Create an animation from the set of frames you created earlier
+    
+    CCAnimation *angel1moveAnimation = [CCAnimation animationWithFrames: angel1moveFrames delay:0.25f];
+    
+    //Create an action with the animation that can then be assigned to a sprite
+    
+    CCAction *angel1move = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:angel1moveAnimation restoreOriginalFrame:NO]];
+    
+    //tell the bear to run the taunting action
+    [goodBottom runAction:angel1move];
 }
 
 -(void) angel2attackAnimation:(CCSprite*) angel
@@ -6015,14 +6044,14 @@
     NSDictionary *levelDictionary = [NSDictionary dictionaryWithContentsOfFile:path];
     
     NSMutableDictionary *enemyMeleeDict = [levelDictionary objectForKey:@"enemyMelee"];
-    enemyMeleeFramecount = 300 + [[enemyMeleeDict objectForKey:@"spawnRate"] intValue];
+    enemyMeleeFramecount = [[enemyMeleeDict objectForKey:@"spawnRate"] intValue];
     zigZagFrequency = [[enemyMeleeDict objectForKey:@"zigZagFrequency"] intValue];
     enemyMeleeAvailable = [[enemyMeleeDict objectForKey:@"available"] boolValue];
     enemyMeleeReinforcementFramecount = [[enemyMeleeDict objectForKey:@"reinforcementRate"] intValue];
     
     
     NSMutableDictionary *enemyRegularShooterDict = [levelDictionary objectForKey:@"enemyRegularShooter"];
-    enemyRegularShooterFramecount = 300 - [[enemyRegularShooterDict objectForKey:@"spawnRate"] intValue];
+    enemyRegularShooterFramecount = [[enemyRegularShooterDict objectForKey:@"spawnRate"] intValue];
     enemyRegularShooterAvailable = [[enemyRegularShooterDict objectForKey:@"available"] boolValue];
     
     NSMutableDictionary *KmonsterDict = [levelDictionary objectForKey:@"Kmonster"];
@@ -6030,6 +6059,10 @@
     
     NSMutableDictionary *enemyHeliBombDict = [levelDictionary objectForKey:@"enemyBomb"];
     enemyBombFramecount = 30 + [[enemyHeliBombDict objectForKey:@"spawnRate"] intValue];
+    
+    scenarioDelay = [[levelDictionary objectForKey:@"scenarioDelay"] intValue];
+    baseCount = [[levelDictionary objectForKey:@"baseFriendlyCount"] doubleValue];
+    friendlyMeleeReinforcementFramecount = [[levelDictionary objectForKey:@"friendlyMeleeReinforcementRate"] intValue];
 
     
     NSString *path2 = [[NSBundle mainBundle] pathForResource:@"friendlies" ofType:@"plist"];

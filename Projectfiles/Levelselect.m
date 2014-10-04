@@ -45,7 +45,7 @@
 
         
         CCLabelTTF *selectLabel = [CCLabelTTF labelWithString:@"Select Level" fontName:@"Algerian" fontSize: 30];
-        selectLabel.position = ccp(winSize.width * .5, winSize.height * .95);
+        selectLabel.position = ccp(winSize.width * .5, winSize.height * .925);
         selectLabel.color = ccBLACK;
         [self addChild:selectLabel z:4];
 
@@ -63,7 +63,7 @@
                                                                  selectedImage: @"main menu-button-d.png"
                                                                         target:self
                                                                       selector:@selector(mainMenu:)];
-        mainMenuButton.position = CGPointMake(winSize.width/2, winSize.height * .062);
+        mainMenuButton.position = CGPointMake(winSize.width/2, winSize.height * .065);
         mainMenuButton.scale = 0.7f;
         
         int row1 = winSize.height * .8;
@@ -124,6 +124,7 @@
                                                                     target:self
                                                                   selector:@selector(level6)];
         menuItem6.scale=.35;
+
         menuItem6.position = ccp(col6, row1);
         
         CCMenuItemImage * menuItem7 = [CCMenuItemImage itemWithNormalImage:@"Box_Yellow.png"
@@ -210,6 +211,7 @@
                                                                      target:self
                                                                    selector:@selector(level18)];
         menuItem18.scale=.35;
+
         menuItem18.position = ccp(col6, row3);
         
         
@@ -256,6 +258,7 @@
                                                                      target:self
                                                                    selector:@selector(level24)];
         menuItem24.scale=.35;
+
         menuItem24.position = ccp(col6, row4);
         
         CCMenuItemImage * menuItem25 = [CCMenuItemImage itemWithNormalImage:@"Box_Yellow.png"
@@ -301,6 +304,7 @@
                                                                      target:self
                                                                    selector:@selector(level30)];
         menuItem30.scale=.35;
+
         menuItem30.position = ccp(col6, row5);
         
 
@@ -685,6 +689,208 @@
     if(5 <= highestLevelUnlocked)
     {
         [GameData sharedData].currentLevelSelected = 5;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+
+-(void) level6: (CCMenuItem *)menuItem
+{
+    if(6 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 6;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level7: (CCMenuItem *)menuItem
+{
+    if(7 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 7;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level8: (CCMenuItem *)menuItem
+{
+    if(8 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 8;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level9: (CCMenuItem *)menuItem
+{
+    if(9 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 9;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level10: (CCMenuItem *)menuItem
+{
+    if(10 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 10;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level11: (CCMenuItem *)menuItem
+{
+    if(11 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 11;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level12: (CCMenuItem *)menuItem
+{
+    if(12 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 12
+        ;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level13: (CCMenuItem *)menuItem
+{
+    if(13 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 13;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level14: (CCMenuItem *)menuItem
+{
+    if(14 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 14;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level15: (CCMenuItem *)menuItem
+{
+    if(15 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 15;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level16: (CCMenuItem *)menuItem
+{
+    if(16 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 16;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level17: (CCMenuItem *)menuItem
+{
+    if(17 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 17;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level18: (CCMenuItem *)menuItem
+{
+    if(18 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 18;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level19: (CCMenuItem *)menuItem
+{
+    if(19 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 19;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level20: (CCMenuItem *)menuItem
+{
+    if(20 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 20;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level21: (CCMenuItem *)menuItem
+{
+    if(21 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 21;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level22: (CCMenuItem *)menuItem
+{
+    if(22 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 22;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level23: (CCMenuItem *)menuItem
+{
+    if(23 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 23;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level24: (CCMenuItem *)menuItem
+{
+    if(24 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 24;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level25: (CCMenuItem *)menuItem
+{
+    if(25 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 25;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level26: (CCMenuItem *)menuItem
+{
+    if(26 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 26;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level27: (CCMenuItem *)menuItem
+{
+    if(27 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 27;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level28: (CCMenuItem *)menuItem
+{
+    if(28 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 28;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level29: (CCMenuItem *)menuItem
+{
+    if(29 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 29;
+        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    }
+}
+-(void) level30: (CCMenuItem *)menuItem
+{
+    if(30 <= highestLevelUnlocked)
+    {
+        [GameData sharedData].currentLevelSelected = 30;
         [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
     }
 }

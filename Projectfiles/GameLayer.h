@@ -19,8 +19,8 @@
     int framecount;
     int level;
     int numberOfEnemies;
-    int minDuration;
-    int maxDuration;
+    double minDuration;
+    double maxDuration;
     int enemiesKilled;
     int deaths;
     int bar;
@@ -96,7 +96,7 @@
     int previousCoinDuration;
     int betweenCoinRowDelay;
     int calledYouWin;
-    int baseCount;
+    double baseCount;
     int friendlyRegularShooterModifier;
     int friendlyMeleeModifier;
     int friendlyFastShooterModifier;
@@ -109,6 +109,7 @@
     int counterSpacing;
     int zigZagFrequency;
     int enemyMeleeReinforcementFramecount;
+    int friendlyMeleeReinforcementFramecount;
     double explosionAnimationLength;
     double dyingAnimationLength;
     double KmonsterSpeed;
@@ -270,6 +271,7 @@
 -(int) generateRandomNumber;
 -(void) fight;
 -(void) angel1attackAnimation:(CCSprite*)angelOne;
+-(void) angel1walkAnimation:(CCSprite*)goodBotom;
 -(void) angel2attackAnimation:(CCSprite*)angel;
 -(void) angel3attackAnimation:(CCSprite*)angel;
 -(void) devil1attackAnimation:(CCSprite*)devil;

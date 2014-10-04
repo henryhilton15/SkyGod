@@ -13,7 +13,7 @@
 		<key>power</key>
 		<integer>1</integer>
 		<key>attackFrequency</key>
-		<integer>50</integer>
+		<integer>65</integer>
 		<key>fallSpeed</key>
 		<integer>0</integer>
 	</dict>
@@ -22,15 +22,15 @@
 		<key>available</key>
 		<true/>
 		<key>health</key>
-		<integer>1</integer>
+		<integer>20</integer>
 		<key>spawnRate</key>
 		<integer>400</integer>
 		<key>power</key>
-		<integer>1</integer>
+		<integer>10</integer>
 		<key>attackFrequency</key>
-		<integer>50</integer>
+		<integer>30</integer>
 		<key>fallSpeed</key>
-		<integer>5</integer>
+		<integer>6</integer>
 	</dict>
 	<key>friendlyFastShooter</key>
 	<dict>

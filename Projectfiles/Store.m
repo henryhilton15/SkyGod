@@ -54,7 +54,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyMeleePrice forKey:@"friendlyMeleePrice"];
         
         int friendlyRegularShooterRankInt = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"] intValue];
-        NSNumber *NSFriendlyRegularShooterPrice = [NSNumber numberWithInt:(25 + (friendlyRegularShooterRankInt * 15))];
+        NSNumber *NSFriendlyRegularShooterPrice = [NSNumber numberWithInt:(30 + (friendlyRegularShooterRankInt * 15))];
         [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyRegularShooterPrice forKey:@"friendlyRegularShooterPrice"];
         
         int friendlyFastShooterRankInt = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterRank"] intValue];
@@ -296,7 +296,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
         
-        price = 25 + (rank * 15);
+        price = 30 + (rank * 15);
         NSNumber* NSPrice = [NSNumber numberWithInt:price];
         [[NSUserDefaults standardUserDefaults] setObject:NSPrice forKey:@"friendlyRegularShooterPrice"];
         [shooterPrice setString:[NSString stringWithFormat:@"Price:%d", price]];
@@ -328,7 +328,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
         
-        price = rank * 10;
+        price = (rank + 1) * 10;
         NSNumber* NSPrice = [NSNumber numberWithInt:price];
         [[NSUserDefaults standardUserDefaults] setObject:NSPrice forKey:@"friendlyMeleePrice"];
         [meleePrice setString:[NSString stringWithFormat:@"Price:%d", price]];
