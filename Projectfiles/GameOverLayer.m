@@ -34,7 +34,7 @@
                                                                        target:self
                                                                      selector:@selector(levelSelect:)];
         
-        selectButton.position = CGPointMake(winSize.width * .25, winSize.height * .7);
+        selectButton.position = CGPointMake(winSize.width * -.3, winSize.height * .2);
         selectButton.scale = .5;
 
         CCMenuItemImage *restartButton = [CCMenuItemImage itemWithNormalImage:@"restart-button-n.png"
@@ -42,7 +42,7 @@
                                                                        target:self
                                                                      selector:@selector(restartLevel:)];
         
-        restartButton.position = CGPointMake(0, winSize.height * .7);
+        restartButton.position = CGPointMake(winSize.width * -.3, winSize.height * .1);
         restartButton.scale = .5;
         
         CCMenuItemImage *endbutton = [CCMenuItemImage itemWithNormalImage:@"shop-button-n.png"
@@ -50,8 +50,8 @@
                                                                    target:self
                                                                  selector:@selector(endGame:)];
        
-        endbutton.position = CGPointMake(-winSize.width * .25, winSize.height * .7);
-        endbutton.scale=.5;
+        endbutton.position = CGPointMake(winSize.width * -.3, winSize.height * .38);
+        endbutton.scale= 1;
         
         CCMenu *myMenu = [CCMenu menuWithItems:endbutton, selectButton, restartButton, nil];
         myMenu.position = ccp(winSize.width/2, 0);
@@ -65,37 +65,14 @@
     
         [[SimpleAudioEngine sharedEngine] playEffect:@"gameOverLaugh.wav"];
         */
-        GameOverLabel = [CCLabelTTF labelWithString:@"You suck!" fontName:@"Algerian" fontSize:36];
-        GameOverLabel.position = ccp(240,300);
+        GameOverLabel = [CCLabelTTF labelWithString:@"You Lose!" fontName:@"Algerian" fontSize:95];
+        GameOverLabel.position = ccp(winSize.width * .5, winSize.height *.8);
         [self addChild:GameOverLabel z:4];
         
-        GameData *data = [GameData sharedData];
-        int score = data.score;
-        NSString *scoreString = [NSString stringWithFormat:@"score: %d", score];
-        
-        scoreLabel = [CCLabelTTF labelWithString:scoreString fontName:@"BenguiatItcTEE-Book" fontSize:40];
-        scoreLabel.position = ccp(240,50);
-        //scoreLabel.color = ccBLUE;
-        [self addChild:scoreLabel z:4];
-        
-        NSNumber *currentHighScore = [[NSUserDefaults standardUserDefaults] objectForKey:@"highScore"];
-        
-        if(score > [currentHighScore intValue])
-        {
-            NSNumber* newHighScore = [NSNumber numberWithInt:score];
-            [[NSUserDefaults standardUserDefaults] setObject:newHighScore forKey: @"highScore"];
-            newHighScoreLabel = [CCLabelTTF labelWithString:@"New High Score!" fontName:@"BenguiatItcTEE-Book" fontSize:36];
-            newHighScoreLabel.position = ccp(100,160);
-            [self addChild:newHighScoreLabel z:4];
-            NSLog(@"new high score!");
-        }
-        else
-        {
-            
-        }
     }
     return self;
 }
+
 -(void)levelSelect: (CCMenuItem *)menuItem
 {
     [[CCDirector sharedDirector] replaceScene: (CCScene*)[[Levelselect alloc] init]];

@@ -231,6 +231,7 @@
     CCLabelTTF *airstrikeCount;
     CCLabelTTF *reinforcemtsCount;
     CCLabelTTF *immunityCount;
+    CCLabelTTF *coinslabel;
     
 
     

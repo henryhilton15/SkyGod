@@ -1129,10 +1129,16 @@
         bonusCoinsLabel.color = ccBLACK;
         [self addChild:bonusCoinsLabel z:4];
         
+        coinslabel = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
+        [coinslabel setString:[NSString stringWithFormat:@"coins:%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"coins"] intValue]]];
+        coinslabel.position = ccp(winSize.width * .7,winSize.height * .95);
+        coinslabel.color = ccBLACK;
+        [self addChild:coinslabel z:4];
+        
         levelLabel = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [levelLabel setString:[NSString stringWithFormat:@"level:%d", currentLevelSelected]];
-        levelLabel.position = ccp(380, 300);
-        levelLabel.color = ccBLUE;
+        levelLabel.position = ccp(winSize.width * .35,winSize.height * .95);
+        levelLabel.color = ccBLACK;
         [self addChild:levelLabel z:4];
         
         goodBaseHealthLabel = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
@@ -3051,7 +3057,7 @@
 -(void) subtractLevel
 {
     level--;
-    [levelLabel setString:[NSString stringWithFormat:@"Level:%d", level]];
+    [levelLabel setString:[NSString stringWithFormat:@"Lvl:%d", level]];
 }
 
 -(void)shop:(CCMenuItemImage *)shopButton
@@ -5645,8 +5651,8 @@
             goodBaseImageChangeCount = 1;
             
             goodBase = [[Character alloc] initWithGoodGuyBaseImage2];
-            goodBase.position = ccp(50, BASE_HEIGHT);
-            goodBase.scale =.5;
+            goodBase.position = ccp(40, BASE_HEIGHT);
+            goodBase.scale =.4;
             ((Character*)goodBase).health = healthCount;
             [self addChild:goodBase z:2];
             [goodGuysBottom addObject:goodBase];
@@ -5658,8 +5664,8 @@
             [self removeChild:goodBase cleanup:YES];
             goodBaseImageChangeCount = 2;
             goodBase = [[Character alloc] initWithGoodGuyBaseImage3];
-            goodBase.position = ccp(50, BASE_HEIGHT);
-            goodBase.scale =.5;
+            goodBase.position = ccp(40, BASE_HEIGHT);
+            goodBase.scale =.4;
             ((Character*)goodBase).health = healthCount;
             [self addChild:goodBase z:3];
             [goodGuysBottom addObject:goodBase];
@@ -5693,8 +5699,8 @@
             [self removeChild:badBase cleanup:YES];
             badBaseImageChangeCount = 1;
             badBase = [[Character alloc] initWithBadGuyBaseImage2];
-            badBase.position = ccp(winSize.width - 50, BASE_HEIGHT);
-            badBase.scale = .5;
+            badBase.position = ccp(winSize.width - 35, BASE_HEIGHT);
+            badBase.scale = .4;
             ((Character*)badBase).health = healthCount;
             [self addChild:badBase z:2];
             [badGuysBottom addObject:badBase];
@@ -5706,8 +5712,8 @@
             [self removeChild:badBase cleanup:YES];
             badBaseImageChangeCount = 2;
             badBase = [[Character alloc] initWithBadGuyBaseImage3];
-            badBase.position = ccp(winSize.width - 50, BASE_HEIGHT);
-            badBase.scale = .5;
+            badBase.position = ccp(winSize.width - 35, BASE_HEIGHT);
+            badBase.scale = .4;
             ((Character*)badBase).health = healthCount;
             [self addChild:badBase z:3];
             [badGuysBottom addObject:badBase];
@@ -5715,7 +5721,7 @@
         }
         if(((Character*)badBase).health <= 0 && badBaseExploded == false)
         {
-            NSLog(@"called bad base explosion, goodBaseExploded = true");
+            NSLog(@"called bad base explosion, badBaseExploded = true");
             [self explosion:badBase :0.35 :YES];
             badBaseExploded = true;
 //            int delayInSeconds = 1.5;
@@ -6144,6 +6150,13 @@
     NSLog(@"coins = %@", newNSCoins);
     
     [GameData sharedData].coinsGained += numCoins;
+    
+    [self removeChild:coinslabel];
+    coinslabel = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
+    [coinslabel setString:[NSString stringWithFormat:@"coins:%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"coins"] intValue]]];
+    coinslabel.position = ccp(winSize.width * .7,winSize.height * .95);
+    coinslabel.color = ccBLACK;
+    [self addChild:coinslabel z:4];
 }
 
 /*
