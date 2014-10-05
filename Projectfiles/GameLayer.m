@@ -27,8 +27,8 @@
     angel3 = [[Character alloc] initWithFriendlyFastShooterImage];
     
     // Determine where to spawn the monster along the X axis
-    int minX = 12;
-    int maxX = winSize.width - 8;
+    int minX = 20;
+    int maxX = winSize.width - 20;
     int rangeX = maxX - minX;
     int actualX = minX + arc4random() % rangeX;
     
@@ -118,11 +118,11 @@
     [enemy runAction:actionMove];
 }
 
--(void) addEnemyMelee:(BOOL)zigZag
+-(void) addEnemyMelee:(BOOL)zigZag :(BOOL)zigZagScenario
 {
     // Determine where to spawn the monster along the X axis
-    int minX = 12;
-    int maxX = winSize.width - 12;
+    int minX = 20;
+    int maxX = winSize.width - 20;
     if(zigZag == YES)
     {
         minX = 100;
@@ -141,6 +141,10 @@
     devil1.scale = .5;
     [self addChild:devil1];
     [badGuys addObject:devil1];
+    if(zigZagScenario = YES)
+    {
+        [zigZagScenarioEnemies addObject:devil1];
+    }
     devil1.position = ccp(actualX, winSize.height);
     
     minDuration = ((Character*)devil1).fallSpeed - 1.0;
@@ -232,8 +236,8 @@
     angel1 = [[Character alloc] initWithFriendlyMeleeImage];
     
     // Determine where to spawn the monster along the X axis
-    int minX = 12;
-    int maxX = winSize.width - 8;
+    int minX = 20;
+    int maxX = winSize.width - 20;
     int rangeX = maxX - minX;
     int actualX = minX + arc4random() % rangeX;
     
@@ -448,8 +452,8 @@
     angel2 = [[Character alloc] initWithFriendlyRegularShooterImage];
     
     // Determine where to spawn the monster along the X axis
-    int minX = 12;
-    int maxX = winSize.width - 8;
+    int minX = 20;
+    int maxX = winSize.width - 20;
     int rangeX = maxX - minX;
     int actualX = minX + arc4random() % rangeX;
     
@@ -523,8 +527,8 @@
     [badGuys addObject:devil2];
     
     // Determine where to spawn the monster along the X axis
-    int minX = 10;
-    int maxX = winSize.width - 10;
+    int minX = 20;
+    int maxX = winSize.width - 20;
     int rangeX = maxX - minX;
     int actualX = minX + arc4random() % rangeX;
     
@@ -775,7 +779,7 @@
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
-    angelTank.scale = 1;
+    angelTank.scale = 1.2;
     angelTank.position = CGPointMake(actualX, winSize.height + 30);
     [self addChild:angelTank];
     [goodGuys addObject:angelTank];
@@ -811,7 +815,7 @@
     
     // Create the monster slightly off-screen along the right edge,
     // and along a random position along the Y axis as calculated above
-    devilTank.scale= 1;
+    devilTank.scale= .8;
     devilTank.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:devilTank];
     [badGuys addObject:devilTank];
@@ -983,7 +987,6 @@
         immunityFramecount = 0;
         coinInterludeCounter = 0;
         coinDelayCounter = 0;
-        scenariosAvailable = 0;
         friendlyTankFramecount = 0;
 
         //deathFramecount = 60 * 30;
@@ -1035,6 +1038,7 @@
         friendlyFastShooterModifier = (int)(arc4random() * baseCount);
         enemyMeleeModifier = (int)(arc4random() * baseCount);
         enemyRegularShooterModifier = (int)(arc4random() * baseCount);
+        enemyTankModifier = (int)(arc4random() * baseCount);
         coinModifier = (int)(arc4random() * baseCount);
         scenarioModifier = (int)(arc4random() * (gameplayCoinFramecount/100));
         
@@ -1482,20 +1486,26 @@
 //  need to make it so that zizZag spawns sometimes          arc4random()
                 if([GameData sharedData].currentLevelSelected > 1 && ([self generateRandomNumber:zigZagFrequency] == 1))
                 {
-                    [self addEnemyMelee:YES];
+                    [self addEnemyMelee:YES:NO];
                 }
                 else
                 {
-                    [self addEnemyMelee:NO];
+                    [self addEnemyMelee:NO:NO];
                 }
                 enemyMeleeModifier = (int)(arc4random() * baseCount);
 
             }
-            if((framecount + enemyMeleeModifier) % enemyRegularShooterFramecount == 0 && enemyRegularShooterAvailable == true)
+            if((framecount + enemyRegularShooterModifier) % enemyRegularShooterFramecount == 0 && enemyRegularShooterAvailable == true)
             {
 //                NSLog(@"add enemy regular shooter");
                 [self addEnemyRegularShooter];
                 enemyRegularShooterModifier = (int)(arc4random() * baseCount);
+            }
+        
+            if((framecount + enemyTankModifier) % enemyTankFramecount == 0 && enemyTankAvailable == true)
+            {
+                [self addEnemyTank];
+                enemyTankModifier = (int)(arc4random() * baseCount);
             }
         
             if((framecount + coinModifier) % gameplayCoinFramecount == 0)
@@ -1646,13 +1656,17 @@
                 CGPoint bomberPosition = ccp(bomber.position.x, bomber.position.y);
 
                 bomb = [[Character alloc] initWithGoodHelicopterBombImage];
+                int minDuration = ((Character*)bomb).fallSpeed - 1;
+                int maxDuration = ((Character*)bomb).fallSpeed + 1;
+                int rangeDuration = maxDuration - minDuration;
+                int actualDuration = (arc4random() % rangeDuration) + minDuration;
                 bomb.scale=.6;
                 bomb.position = bomberPosition; //+ enemy.contentSize.height/2);
                 [self addChild:bomb z:2];
                 [goodBombs addObject:bomb];
 //                [goodGuys addObject:bomb];
                 
-                CCMoveTo * actionMove = [CCMoveTo actionWithDuration:3
+                CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
                                                             position:ccp(bomb.position.x, -bomb.contentSize.height/2)];
                 //        CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
                 //            [node removeFromParentAndCleanup:YES];
@@ -2179,6 +2193,10 @@
                             bigGoodGuysCounter = 0;
                             NSLog(@"scenario 2 interlude = true");
                         }
+                        if(((Character*)goodGuy).type == GOOD_REINFORCEMENT && Scenario3 == true)
+                        {
+                            Scenario3 = false;
+                        }
 
                         [deadBananas addObject:projectile];
 //                        ((Character*)goodGuy).health -= ((Character*)projectile).power;
@@ -2528,6 +2546,7 @@
 
                     //[self spawnGoodBigGuyBottom];
                     goodBottom = [[Character alloc] initWithFriendlyTankImage];
+                    goodBottom.scale = 1.2;
                     [self spawnBottom:goodGuy :goodBottom :YES];
                     
                     //animation
@@ -2631,6 +2650,14 @@
                     [self spawnBottom:goodGuy :goodBottom :YES];
                     [self angel1walkAnimation:goodBottom];
                 }
+                
+                if(((Character*)goodGuy).type == GOOD_REINFORCEMENT)
+                {
+                    goodBottom = [[Character alloc] initWithSpartanImage];
+                    [self spawnBottom:goodGuy :goodBottom :YES];
+                    [self spartanWalkAnimation:goodBottom];
+                    Scenario3 = false;
+                }
                     
 //                ((Character*)goodBottom).health = ((Character*)goodGuy).health;
 //                goodBottom.anchorPoint = CGPointZero;
@@ -2638,8 +2665,14 @@
 //                goodBottom.scale=.3;
 //                [self addChild:goodBottom z:1];
 //                [goodGuysBottom addObject:goodBottom];
-                
-                goodBottom.scale = .5;
+                if(((Character*)goodBottom).type != BIG_GOOD_GUY)
+                {
+                    goodBottom.scale = .5;
+                }
+                else
+                {
+                    goodBottom.scale = .7;
+                }
                 
                 [deadGoodGuys addObject:goodGuy];
   
@@ -2826,7 +2859,14 @@
                     //NSLog(@"good guy animation started");
                 }
                 
-                badBottom.scale = .5;
+                if(((Character*)badBottom).type != BIG_MONSTER)
+                {
+                    badBottom.scale = .5;
+                }
+                else
+                {
+                    badBottom.scale = .7;
+                }
                 
                 [deadBadGuys addObject:badGuy];
             }
@@ -2921,40 +2961,46 @@
 
 -(void) zigZagScenario
 {
-    CCSprite* zFriendly= [[Character alloc] initWithFriendlyTankImage];
-    zFriendly.scale= 1;
+    CCSprite* zFriendly= [[Character alloc] initWithSpartanImage];
+    zFriendly.scale= .6;
     zFriendly.position = CGPointMake(winSize.width/2, winSize.height + 20);
     [self addChild:zFriendly];
     [goodGuys addObject:zFriendly];
     
-    CCSprite *enemy1= [[Character alloc] initWithEnemyMeleeImage];
-    enemy1.scale=.3;
-    enemy1.position = CGPointMake(winSize.width * .125, winSize.height + 30); //+ enemy.contentSize.height/2);
-    [self addChild:enemy1];
-    [badGuys addObject:enemy1];
+    [self addEnemyMelee:NO:YES];
+    [self addEnemyMelee:NO:YES];
+    [self addEnemyMelee:NO:YES];
+    [self addEnemyMelee:NO:YES];
+ 
     
-    CCSprite *enemy2= [[Character alloc] initWithEnemyMeleeImage];
-    enemy2.scale=.3;
-    enemy2.position = CGPointMake(winSize.width * .375, winSize.height + 30); //+ enemy.contentSize.height/2);
-    [self addChild:enemy2];
-    [badGuys addObject:enemy2];
-
-    CCSprite *enemy3= [[Character alloc] initWithEnemyMeleeImage];
-    enemy3.scale=.3;
-    enemy3.position = CGPointMake(winSize.width * .625, winSize.height + 30); //+ enemy.contentSize.height/2);
-    [self addChild:enemy3];
-    [badGuys addObject:enemy3];
-
-    CCSprite *enemy4= [[Character alloc] initWithEnemyMeleeImage];
-    enemy4.scale=.3;
-    enemy4.position = CGPointMake(winSize.width * .875, winSize.height + 30); //+ enemy.contentSize.height/2);
-    [self addChild:enemy4];
-    [badGuys addObject:enemy4];
-
-     [zigZagScenarioEnemies addObject:enemy1];
-     [zigZagScenarioEnemies addObject:enemy2];
-     [zigZagScenarioEnemies addObject:enemy3];
-     [zigZagScenarioEnemies addObject:enemy4];
+//    CCSprite *enemy1= [[Character alloc] initWithEnemyMeleeImage];
+//    enemy1.scale=.3;
+//    enemy1.position = CGPointMake(winSize.width * .125, winSize.height + 30); //+ enemy.contentSize.height/2);
+//    [self addChild:enemy1];
+//    [badGuys addObject:enemy1];
+//    
+//    CCSprite *enemy2= [[Character alloc] initWithEnemyMeleeImage];
+//    enemy2.scale=.3;
+//    enemy2.position = CGPointMake(winSize.width * .375, winSize.height + 30); //+ enemy.contentSize.height/2);
+//    [self addChild:enemy2];
+//    [badGuys addObject:enemy2];
+//
+//    CCSprite *enemy3= [[Character alloc] initWithEnemyMeleeImage];
+//    enemy3.scale=.3;
+//    enemy3.position = CGPointMake(winSize.width * .625, winSize.height + 30); //+ enemy.contentSize.height/2);
+//    [self addChild:enemy3];
+//    [badGuys addObject:enemy3];
+//
+//    CCSprite *enemy4= [[Character alloc] initWithEnemyMeleeImage];
+//    enemy4.scale=.3;
+//    enemy4.position = CGPointMake(winSize.width * .875, winSize.height + 30); //+ enemy.contentSize.height/2);
+//    [self addChild:enemy4];
+//    [badGuys addObject:enemy4];
+//
+//     [zigZagScenarioEnemies addObject:enemy1];
+//     [zigZagScenarioEnemies addObject:enemy2];
+//     [zigZagScenarioEnemies addObject:enemy3];
+//     [zigZagScenarioEnemies addObject:enemy4];
     
     
 //    zFriendly2= [CCSprite spriteWithFile:@"cat1-topdown.png"];
@@ -2988,44 +3034,48 @@
 //    float timeInterval4 = 5.0f;
 //    id delay4 = [CCDelayTime actionWithDuration:timeInterval4];
 
-    minDuration = 6;
-    maxDuration = 8;
-    int rangeDuration = maxDuration - minDuration;
-    int actualDuration1 = (arc4random() % rangeDuration) + minDuration;
-    int actualDuration2 = (arc4random() % rangeDuration) + minDuration;
-    int actualDuration3 = (arc4random() % rangeDuration) + minDuration;
-    int actualDuration4 = (arc4random() % rangeDuration) + minDuration;
+//    minDuration = 6;
+//    maxDuration = 8;
+//    int rangeDuration = maxDuration - minDuration;
+//    int actualDuration1 = (arc4random() % rangeDuration) + minDuration;
+//    int actualDuration2 = (arc4random() % rangeDuration) + minDuration;
+//    int actualDuration3 = (arc4random() % rangeDuration) + minDuration;
+//    int actualDuration4 = (arc4random() % rangeDuration) + minDuration;
+//    
+//    CCMoveTo *actionMove1 = [CCMoveTo actionWithDuration:actualDuration1 position:ccp(enemy1.position.x, -20)];
+//    [enemy1 runAction:actionMove1];
+//    
+//    CCMoveTo *actionMove2 = [CCMoveTo actionWithDuration:actualDuration2 position:ccp(enemy2.position.x, -20)];
+//    [enemy2 runAction:actionMove2];
+//    
+//    CCMoveTo *actionMove3 = [CCMoveTo actionWithDuration:actualDuration3 position:ccp(enemy3.position.x, -20)];
+//    [enemy3 runAction:actionMove3];
+//    
+//    CCMoveTo *actionMove4 = [CCMoveTo actionWithDuration:actualDuration4 position:ccp(enemy4.position.x, -20)];
+//    [enemy4 runAction:actionMove4];
     
-    CCMoveTo *actionMove1 = [CCMoveTo actionWithDuration:actualDuration1 position:ccp(enemy1.position.x, -20)];
-    [enemy1 runAction:actionMove1];
+    CCSprite *mockEnemyMelee = [[Character alloc] initWithEnemyMeleeImage];
+    double enemyMeleeFallSpeed = ((Character*)mockEnemyMelee).fallSpeed;
+    double zigZagDuration = enemyMeleeFallSpeed/7.5;
     
-    CCMoveTo *actionMove2 = [CCMoveTo actionWithDuration:actualDuration2 position:ccp(enemy2.position.x, -20)];
-    [enemy2 runAction:actionMove2];
-    
-    CCMoveTo *actionMove3 = [CCMoveTo actionWithDuration:actualDuration3 position:ccp(enemy3.position.x, -20)];
-    [enemy3 runAction:actionMove3];
-    
-    CCMoveTo *actionMove4 = [CCMoveTo actionWithDuration:actualDuration4 position:ccp(enemy4.position.x, -20)];
-    [enemy4 runAction:actionMove4];
-        
-        id leftTop = [CCMoveTo actionWithDuration:1.0
+        id leftTop = [CCMoveTo actionWithDuration:zigZagDuration
                                          position:ccp (winSize.width * .1, winSize.height * .9)];
         
-        id rightTop = [CCMoveTo actionWithDuration:1.0
+        id rightTop = [CCMoveTo actionWithDuration:zigZagDuration
                                           position:ccp(winSize.width * .8, winSize.height * .75)];
         
-        id leftMid = [CCMoveTo actionWithDuration:1.0
+        id leftMid = [CCMoveTo actionWithDuration:zigZagDuration
                                          position:ccp(winSize.width * .1, winSize.height * .6)];
         
-        id rightMid = [CCMoveTo actionWithDuration:1.0
+        id rightMid = [CCMoveTo actionWithDuration:zigZagDuration
                                           position:ccp(winSize.width * .8, winSize.height * .45)];
         
-        id leftLow = [CCMoveTo actionWithDuration:1.0
+        id leftLow = [CCMoveTo actionWithDuration:zigZagDuration
                                          position:ccp(winSize.width * .1, winSize.height * .3)];
         
-        id rightLow = [CCMoveTo actionWithDuration:1.0
+        id rightLow = [CCMoveTo actionWithDuration:zigZagDuration
                                           position:ccp(winSize.width * .8, winSize.height * .15)];
-        id drop = [CCMoveTo actionWithDuration:1.0 position:ccp(winSize.width * .5, -20)];
+        id drop = [CCMoveTo actionWithDuration:zigZagDuration position:ccp(winSize.width * .5, -20)];
     
         [zFriendly runAction:[CCSequence actions: leftTop, rightTop, leftMid, rightMid, leftLow, rightLow,drop, nil]];
 
@@ -3056,6 +3106,7 @@
 
 -(void)shop:(CCMenuItemImage *)shopButton
 {
+    [self addCoins:200];
     [[CCDirector sharedDirector] pushScene: (CCScene *)[[InGameShop alloc]  init]];
 
 }
@@ -3219,9 +3270,9 @@
 
 -(int)generateRandomNumber :(int)numScenariosAvailable
 {
-    NSLog(@"scenarios available = %d", numScenariosAvailable);
     int num = (arc4random() % numScenariosAvailable) + 1;
     return num;
+    NSLog(@"scenario num returned = %d", num);
 }
 
 -(void) spawnGoodGuyBottom
@@ -3627,13 +3678,13 @@
                             [self devilTankAttackAnimation:fightingDevil];
                             NSLog(@"devil tank attack called");
                         }
-//                        //delay actual subtraction of health to allow time for animation to run
-//                        double delayInSeconds = 0.15;
-//                        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-//                        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//                            [self devilShoot:fightingDevil];
-//                        });
-//                        
+                        //delay actual subtraction of health to allow time for animation to run
+                        double delayInSeconds = 0.15;
+                        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                            [self devilShoot:fightingDevil];
+                        });
+                        
                     }
                 }
                 
@@ -4447,6 +4498,8 @@
     CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:25
                                               position:ccp(-2000, badBullet.position.y)];
     
+    [badBullet runAction:shootLeft];
+    
 //    //delay actual subtraction of health to allow time for animation to run
 //    double delayInSeconds = 0.3;
 //    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -5233,10 +5286,19 @@
     int posHeight = -8 + (8 * ((Character*)reinforcement).row);
     reinforcement.position = ccp(angelStartingWidth, posHeight);
     [self addChild:reinforcement z:(7 - ((Character*)reinforcement).row)];
+    
+    reinforcement.scale = .5;
+    
     //NSLog(@"row = %d", ((Character*)goodBottom).row);
     //NSLog(@"height = %d", posHeight);
     //NSLog(@"z = %d",7 - ((Character*)goodBottom).row);
     
+    [self spartanWalkAnimation:reinforcement];
+    
+}
+
+-(void) spartanWalkAnimation:(CCSprite *)reinforcement
+{
     //animation
     
     NSMutableArray *moveFrames;
@@ -5273,7 +5335,6 @@
     
     //tell the bear to run the taunting action
     [reinforcement runAction:move];
-    
 }
 
 -(void)immunityActivator: (CCMenuItemImage *) immunityPowerUp
@@ -6082,6 +6143,10 @@
     enemyRegularShooterFramecount = [[enemyRegularShooterDict objectForKey:@"spawnRate"] intValue];
     enemyRegularShooterAvailable = [[enemyRegularShooterDict objectForKey:@"available"] boolValue];
     
+    NSMutableDictionary *enemyTankDict = [levelDictionary objectForKey:@"enemyTank"];
+    enemyTankFramecount = [[enemyTankDict objectForKey:@"spawnRate"] intValue];
+    enemyTankAvailable = [[enemyTankDict objectForKey:@"available"] boolValue];
+    
     NSMutableDictionary *KmonsterDict = [levelDictionary objectForKey:@"Kmonster"];
     KmonsterFramecount = 30 - [[KmonsterDict objectForKey:@"spawnRate"] intValue];
     
@@ -6127,9 +6192,10 @@
     NSMutableDictionary* coinDict = [levelDictionary objectForKey:@"coin"];
     endgameCoinFramecount = 20 + [[coinDict objectForKey:@"endgameFrequency"] intValue];
     gameplayCoinFramecount = 1500 + [[coinDict objectForKey:@"gameplayFrequency"] intValue];
-    endgameCoinTotal = 10 + [[coinDict objectForKey:@"endgameCoinTotal"] intValue];
+    endgameCoinTotal = [[coinDict objectForKey:@"endgameCoinTotal"] intValue];
     
     scenariosAvailable = [[levelDictionary objectForKey:@"scenariosAvailable"] intValue];
+    NSLog(@"original scenarios available = %d", scenariosAvailable);
     
     friendlyBaseStartingHealth = [[levelDictionary objectForKey:@"friendlyBaseHealth"] intValue];
     enemyBaseStartingHealth = [[levelDictionary objectForKey:@"enemyBaseHealth"] intValue];

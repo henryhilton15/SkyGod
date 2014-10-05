@@ -8,6 +8,8 @@
 		<false/>
 		<key>health</key>
 		<integer>0</integer>
+		<key>fallingHealth</key>
+		<integer>1</integer>
 		<key>spawnRate</key>
 		<integer>0</integer>
 		<key>damage</key>
@@ -22,7 +24,7 @@
 		<key>available</key>
 		<true/>
 		<key>health</key>
-		<integer>35</integer>
+		<integer>30</integer>
 		<key>fallingHealth</key>
 		<integer>1</integer>
 		<key>spawnRate</key>
@@ -32,7 +34,7 @@
 		<key>fallSpeed</key>
 		<real>4.5</real>
 		<key>attackFrequency</key>
-		<integer>15</integer>
+		<integer>65</integer>
 		<key>zigZagFrequency</key>
 		<integer>6</integer>
 		<key>reinforcementRate</key>
@@ -58,13 +60,13 @@
 		<key>available</key>
 		<false/>
 		<key>health</key>
-		<integer>0</integer>
+		<integer>1</integer>
 		<key>spawnRate</key>
 		<integer>0</integer>
 		<key>damage</key>
 		<integer>0</integer>
 		<key>speed</key>
-		<integer>0</integer>
+		<integer>-1</integer>
 	</dict>
 	<key>enemyBomb</key>
 	<dict>
@@ -73,7 +75,7 @@
 		<key>health</key>
 		<integer>0</integer>
 		<key>spawnRate</key>
-		<integer>0</integer>
+		<integer>-5</integer>
 		<key>damage</key>
 		<integer>0</integer>
 		<key>fallSpeed</key>
@@ -112,15 +114,15 @@
 	<key>coin</key>
 	<dict>
 		<key>gameplayFallSpeed</key>
-		<integer>6</integer>
+		<integer>5</integer>
 		<key>gameplayFrequency</key>
 		<integer>-450</integer>
 		<key>endgameFallSpeed</key>
 		<real>4.5</real>
 		<key>endgameFrequency</key>
-		<integer>0</integer>
+		<integer>-2</integer>
 		<key>endgameCoinTotal</key>
-		<integer>11</integer>
+		<integer>23</integer>
 	</dict>
 	<key>scenariosAvailable</key>
 	<integer>1</integer>

@@ -59,6 +59,7 @@
     int wave;
     int friendlyFastShooterFramecount;
     int enemyFastShooterFramecount;
+    int enemyTankFramecount;
     int friendlyMeleeFramecount;
     int friendlyTankFramecount;
     int enemyMeleeFramecount;
@@ -102,6 +103,7 @@
     int friendlyFastShooterModifier;
     int enemyMeleeModifier;
     int enemyRegularShooterModifier;
+    int enemyTankModifier;
     int coinModifier;
     int scenarioModifier;
     int scenariosAvailable;
@@ -215,6 +217,7 @@
     BOOL enemyMeleeAvailable;
     BOOL enemyRegularShooterAvailable;
     BOOL enemyFastShooterAvailable;
+    BOOL enemyTankAvailable;
     BOOL badBaseExploded;
     BOOL goodBaseExploded;
     BOOL coinInterlude;
@@ -250,7 +253,7 @@
 -(void) addFriendlyRegularShooter;
 -(void) addEnemyRegularShooter;
 -(void) addFriendlyMelee;
--(void) addEnemyMelee:(BOOL)zigZag;
+-(void) addEnemyMelee:(BOOL)zigZag:(BOOL)zigZagScenario;
 -(void) addFriendlyFastShooter;
 -(void) addEnemyFastShooter;
 -(void) pauseMenu: (CCMenuItemImage *)pauseButton;
@@ -280,6 +283,7 @@
 -(void) devil1attackAnimation:(CCSprite*)devil;
 -(void) devil2attackAnimation:(CCSprite*)devil;
 -(void) spartanAttackAnimation:(CCSprite*)spartan;
+-(void) spartanWalkAnimation:(CCSprite*)reinforcement;
 -(void) angelTankAttackAnimation:(CCSprite*)angel;
 -(void) devilTankAttackAnimation:(CCSprite*)devil;
 -(void) devil1walkAnimation:(CCSprite*)devil;

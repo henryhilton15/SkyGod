@@ -44,11 +44,11 @@
         
         NSMutableDictionary *enemyTankDict = [levelDictionary objectForKey:@"enemyTank"];
         
-        health = 5 + [[enemyTankDict objectForKey:@"health"] intValue];
+        health = [[enemyTankDict objectForKey:@"health"] intValue];
         fallingHealth = 1 + [[enemyTankDict objectForKey:@"fallingHealth"] intValue];
-        attackFrequency = 40 - [[enemyTankDict objectForKey:@"attackFrequency"] intValue];
-        power = 3 + [[enemyTankDict objectForKey:@"damage"] intValue];
-        fallSpeed = 5 - [[enemyTankDict objectForKey:@"fallSpeed"] intValue];
+        attackFrequency = [[enemyTankDict objectForKey:@"attackFrequency"] intValue];
+        power = [[enemyTankDict objectForKey:@"damage"] intValue];
+        fallSpeed = [[enemyTankDict objectForKey:@"fallSpeed"] intValue];
         worth = 100;
         type = BIG_MONSTER;
         row = 0;
@@ -207,7 +207,7 @@
         
         health = [[d objectForKey:@"health"] intValue];
         power = [[d objectForKey:@"power"] intValue] + [rank intValue];
-        fallSpeed = [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
+        fallSpeed = [[d objectForKey:@"fallSpeed"] doubleValue];
         
         worth = 50;
 

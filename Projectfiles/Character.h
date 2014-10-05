@@ -51,7 +51,7 @@
 @property int bulletType;
 @property int fallingHealth;
 @property double speed;
-@property int fallSpeed;
+@property double fallSpeed;
 @property bool attacked;
 @property double endgameFallSpeed;
 
