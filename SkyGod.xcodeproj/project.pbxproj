@@ -4707,7 +4707,7 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "SkyGod-iOS";
-				PROVISIONING_PROFILE = "1fe73b7c-b722-4b29-a21f-0b6342f9fc30";
+				PROVISIONING_PROFILE = "83BB7A02-1ACC-42FF-974E-98851E6F4FCB";
 			};
 			name = Debug;
 		};
@@ -4725,7 +4725,7 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "SkyGod-iOS";
-				PROVISIONING_PROFILE = "1fe73b7c-b722-4b29-a21f-0b6342f9fc30";
+				PROVISIONING_PROFILE = "83BB7A02-1ACC-42FF-974E-98851E6F4FCB";
 			};
 			name = Release;
 		};
