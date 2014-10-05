@@ -18,7 +18,7 @@
 
 
 #define MOUNTAIN_HEIGHT 70.0f
-#define BASE_HEIGHT 65
+#define BASE_HEIGHT 50
 
 @implementation GameLayer
 
@@ -1044,9 +1044,9 @@
         NSLog(@"level selected = %d", currentLevelSelected);
         
         
-        [self addBaseBars];
+   //     [self addBaseBars];
         [self addBases];
-        [self addBadRedBar];
+    //    [self addBadRedBar];
         
         NSNumber *highScore = [NSNumber numberWithInteger:0];
         [[NSUserDefaults standardUserDefaults] setObject:highScore forKey:@"highScore"];
@@ -1135,14 +1135,16 @@
         levelLabel.color = ccBLUE;
         [self addChild:levelLabel z:4];
         
-        goodBaseHealthLabel = [CCLabelTTF labelWithString:@"Your Base Health:10" fontName:@"BenguiatItcTEE-Book" fontSize:18];
-        goodBaseHealthLabel.position = ccp(80, 260);
-        goodBaseHealthLabel.color = ccBLUE;
+        goodBaseHealthLabel = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
+        [goodBaseHealthLabel setString:[NSString stringWithFormat:@"%d",((Character*)goodBase).health]];
+        goodBaseHealthLabel.position = ccp(44, BASE_HEIGHT * 2.1);
+        goodBaseHealthLabel.color = ccBLACK;
         [self addChild:goodBaseHealthLabel z:4];
         
-        badBaseHealthLabel = [CCLabelTTF labelWithString:@"Enemy Base Health:10" fontName:@"BenguiatItcTEE-Book" fontSize:18];
-        badBaseHealthLabel.position = ccp(380, 260);
-        badBaseHealthLabel.color = ccBLUE;
+        badBaseHealthLabel = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
+        [badBaseHealthLabel setString:[NSString stringWithFormat:@"%d",((Character*)badBase).health]];
+        badBaseHealthLabel.position = ccp(winSize.width - 40, BASE_HEIGHT * 2.1);
+        badBaseHealthLabel.color = ccBLACK;
         [self addChild:badBaseHealthLabel z:4];
         
         int width = winSize.width;
@@ -5371,10 +5373,10 @@
 {
     goodBase = [[Character alloc] initWithGoodGuyBaseImage1];
     badBase = [[Character alloc] initWithBadGuyBaseImage1];
-    goodBase.position = ccp(50, BASE_HEIGHT);
-    badBase.position = ccp(winSize.width - 50, BASE_HEIGHT);
-    goodBase.scale = .5;
-    badBase.scale = .5;
+    goodBase.position = ccp(40, BASE_HEIGHT);
+    badBase.position = ccp(winSize.width - 35, BASE_HEIGHT);
+    goodBase.scale = .4;
+    badBase.scale = .4;
     [self addChild:goodBase z:2];
     [self addChild:badBase z:2];
     [goodGuysBottom addObject:goodBase];
@@ -5382,6 +5384,7 @@
     
     NSLog(@"winSize.width = %d", (int)winSize.width);
 }
+
 -(void) youLose
 {
 //    NSMutableArray *eraseGoodGuys = [[NSMutableArray alloc] init];
@@ -5628,13 +5631,13 @@
         int healthCount = (((Character*)goodBase).health);
         if(healthCount >= 0)
         {
-            [goodBaseHealthLabel setString:[NSString stringWithFormat:@"Your Base Health: %d",((Character*)goodBase).health]];
+            [goodBaseHealthLabel setString:[NSString stringWithFormat:@"%d",((Character*)goodBase).health]];
         }
         else
         {
-            [goodBaseHealthLabel setString:[NSString stringWithFormat:@"Your Base Health: 0"]];
+            [goodBaseHealthLabel setString:[NSString stringWithFormat:@"0"]];
         }
-        [self subtractGoodBarHealth:((Character*)fightingDevil).power];
+        
         if(((Character*)goodBase).health < (friendlyBaseStartingHealth/2) && ((Character*)goodBase).health > (friendlyBaseStartingHealth/4) && goodBaseImageChangeCount == 0)
         {
             [goodGuysBottom removeObject:goodBase];
@@ -5676,14 +5679,15 @@
         int healthCount = (((Character*)badBase).health);
         if(healthCount >= 0)
         {
-            [badBaseHealthLabel setString:[NSString stringWithFormat:@"Bad Base Health: %d",((Character*)badBase).health]];
+            [badBaseHealthLabel setString:[NSString stringWithFormat:@"%d",((Character*)badBase).health]];
         }
         else
         {
-            [badBaseHealthLabel setString:[NSString stringWithFormat:@"Bad Base Health: 0"]];
+            [badBaseHealthLabel setString:[NSString stringWithFormat:@"0"]];
         }
-        [self subtractBadBarHealth:((Character*)fightingAngel).power];
+
         if(((Character*)badBase).health < (enemyBaseStartingHealth/2) && ((Character*)badBase).health >= (enemyBaseStartingHealth/4) && badBaseImageChangeCount == 0)
+
         {
             [badGuysBottom removeObject:badBase];
             [self removeChild:badBase cleanup:YES];
@@ -5933,132 +5937,132 @@
 
 }
 
--(void) addBaseBars
-{
-    
-    CCSprite *goodGreen = [CCSprite spriteWithFile:@"whiteBar.png"];
-    goodGreen.color = ccc3(0, 255, 0);
-    goodGreen.anchorPoint = CGPointZero;
-    goodGreen.position = ccp(0, 80);
-    goodGreen.scale = .3;
-    [self addChild:goodGreen z:10];
-    
-    CCSprite *badGreen = [CCSprite spriteWithFile:@"whiteBar.png"];
-    badGreen.color = ccc3(0, 255, 0);
-    badGreen.anchorPoint = CGPointZero;
-    badGreen.position = ccp(410, 80);
-    badGreen.scale = .3;
-    [self addChild:badGreen z:10];
-}
-
--(void) addBadRedBar
-{
-    badRed = [CCSprite spriteWithFile:@"whiteBar.png"];
-    badRed.color = ccc3(255, 0, 0);
-    badRed.anchorPoint = CGPointZero;
-    badRed.scale = .3;
-    badRed.position = ccp(480, 80);
-    [self addChild:badRed z:11];
-}
-
--(void) subtractGoodBarHealth:(int)subtraction
-{
-    if(immunity == false)
-    {
-        CCSprite *goodRed = [CCSprite spriteWithFile:@"whiteBar.png"];
-        goodRed.color = ccc3(255, 0, 0);
-        goodRed.anchorPoint = CGPointZero;
-        goodRed.scale = .3;
-        
-        float healthcounter = (goodRed.contentSize.width * .3) / 10;
-        goodRed.position = ccp(-70,80);
-        goodRed.position = ccp(goodRed.position.x + (healthcounter*subtraction),goodRed.position.y);
-        
-        ((Character*)goodBase).health -= subtraction;
-        
-        if(((Character*)goodBase).health <= 0)
-        {
-            [self removeChild:goodRed cleanup:YES];
-        }
-    }
-}
-
--(void) subtractBadBarHealth:(int)subtraction
-{
-    float healthcounter = (badRed.contentSize.width * .3) / 10;
-    
-    if(((Character*)badBase).health == 9)
-    {
-        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter, 80)];
-        [badRed runAction:barMove];
-    }
-    
-    if(((Character*)badBase).health == 8)
-    {
-        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 2, 80)];
-        [badRed runAction:barMove];
-    }
-    
-    if(((Character*)badBase).health == 7)
-    {
-        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 3, 80)];
-        [badRed runAction:barMove];
-    }
-    
-    if(((Character*)badBase).health == 6)
-    {
-        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 4, 80)];
-        [badRed runAction:barMove];
-
-
-    }
-    if(((Character*)badBase).health == 5)
-    {
-        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 5, 80)];
-        [badRed runAction:barMove];
-
-
-    }
-    
-    if(((Character*)badBase).health == 4)
-    {
-        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 6, 80)];
-        [badRed runAction:barMove];
-
-
-    }
-    
-    if(((Character*)badBase).health == 3)
-    {
-        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 7, 80)];
-        [badRed runAction:barMove];
-    }
-
-    if(((Character*)badBase).health == 2)
-    {
-        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 8, 80)];
-        [badRed runAction:barMove];
-    }
-    
-    if(((Character*)badBase).health == 1)
-    {
-        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 9, 80)];
-        [badRed runAction:barMove];
-    }
-    
-    if(((Character*)badBase).health == 0)
-    {
-        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480, 80)];
-        [badRed runAction:barMove];
-
-    }
-    
-    if(((Character*)badBase).health == 10)
-    {
-        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480, 80)];
-        [badRed runAction:barMove];
-    }
-}
+//-(void) addBaseBars
+//{
+//    
+//    CCSprite *goodGreen = [CCSprite spriteWithFile:@"whiteBar.png"];
+//    goodGreen.color = ccc3(0, 255, 0);
+//    goodGreen.anchorPoint = CGPointZero;
+//    goodGreen.position = ccp(50, BASE_HEIGHT);
+//    goodGreen.scale = .3;
+//    [self addChild:goodGreen z:10];
+//    
+//    CCSprite *badGreen = [CCSprite spriteWithFile:@"whiteBar.png"];
+//    badGreen.color = ccc3(0, 255, 0);
+//    badGreen.anchorPoint = CGPointZero;
+//    badGreen.position = ccp(winSize.height-50, BASE_HEIGHT);
+//    badGreen.scale = .3;
+//    [self addChild:badGreen z:10];
+//}
+//
+//-(void) addBadRedBar
+//{
+//    badRed = [CCSprite spriteWithFile:@"whiteBar.png"];
+//    badRed.color = ccc3(255, 0, 0);
+//    badRed.anchorPoint = CGPointZero;
+//    badRed.scale = .3;
+//    badRed.position = ccp(480, 80);
+//    [self addChild:badRed z:11];
+//}
+//
+//-(void) subtractGoodBarHealth:(int)subtraction
+//{
+//    if(immunity == false)
+//    {
+//        CCSprite *goodRed = [CCSprite spriteWithFile:@"whiteBar.png"];
+//        goodRed.color = ccc3(255, 0, 0);
+//        goodRed.anchorPoint = CGPointZero;
+//        goodRed.scale = .3;
+//        
+//        float healthcounter = (goodRed.contentSize.width * .3) / 10;
+//        goodRed.position = ccp(-70,80);
+//        goodRed.position = ccp(goodRed.position.x + (healthcounter*subtraction),goodRed.position.y);
+//        
+//        ((Character*)goodBase).health -= subtraction;
+//        
+//        if(((Character*)goodBase).health <= 0)
+//        {
+//            [self removeChild:goodRed cleanup:YES];
+//        }
+//    }
+//}
+//
+//-(void) subtractBadBarHealth:(int)subtraction
+//{
+//    float healthcounter = (badRed.contentSize.width * .3) / 10;
+//    
+//    if(((Character*)badBase).health == 9)
+//    {
+//        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter, 80)];
+//        [badRed runAction:barMove];
+//    }
+//    
+//    if(((Character*)badBase).health == 8)
+//    {
+//        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 2, 80)];
+//        [badRed runAction:barMove];
+//    }
+//    
+//    if(((Character*)badBase).health == 7)
+//    {
+//        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 3, 80)];
+//        [badRed runAction:barMove];
+//    }
+//    
+//    if(((Character*)badBase).health == 6)
+//    {
+//        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 4, 80)];
+//        [badRed runAction:barMove];
+//
+//
+//    }
+//    if(((Character*)badBase).health == 5)
+//    {
+//        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 5, 80)];
+//        [badRed runAction:barMove];
+//
+//
+//    }
+//    
+//    if(((Character*)badBase).health == 4)
+//    {
+//        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 6, 80)];
+//        [badRed runAction:barMove];
+//
+//
+//    }
+//    
+//    if(((Character*)badBase).health == 3)
+//    {
+//        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 7, 80)];
+//        [badRed runAction:barMove];
+//    }
+//
+//    if(((Character*)badBase).health == 2)
+//    {
+//        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 8, 80)];
+//        [badRed runAction:barMove];
+//    }
+//    
+//    if(((Character*)badBase).health == 1)
+//    {
+//        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480 - healthcounter * 9, 80)];
+//        [badRed runAction:barMove];
+//    }
+//    
+//    if(((Character*)badBase).health == 0)
+//    {
+//        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480, 80)];
+//        [badRed runAction:barMove];
+//
+//    }
+//    
+//    if(((Character*)badBase).health == 10)
+//    {
+//        CCMoveTo * barMove = [CCMoveTo actionWithDuration:.1 position:ccp(480, 80)];
+//        [badRed runAction:barMove];
+//    }
+//}
 
 -(void) loadLevelSettings
 {
