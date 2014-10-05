@@ -28,26 +28,17 @@
                                                          selectedImage: @"continue-button-d.png"
                                                                 target:self
                                                               selector:@selector(nextLevel:)];
-        continueButton.position = CGPointMake((winSize.width * .25), (winSize.height * .3));
+        continueButton.position = CGPointMake(0, (winSize.height * .3));
         continueButton.scale = 0.5f;
-        
-        
-        CCMenuItemImage *shopButton = [CCMenuItemImage itemWithNormalImage:@"shop-button-n.png"
-                                                          selectedImage: @"shop-button-d.png"
-                                                                 target:self
-                                                               selector:@selector(shop:)];
-        shopButton.position = CGPointMake(0, (winSize.height * .3));
-        shopButton.scale = 0.5f;
-        
         
         CCMenuItemImage *levelSelectButton = [CCMenuItemImage itemWithNormalImage:@"select-button-n.png"
                                                                  selectedImage: @"select-button-d.png"
                                                                         target:self
                                                                       selector:@selector(levelSelct:)];
-        levelSelectButton.position = CGPointMake((-winSize.width * .25), (winSize.height * .3));
+        levelSelectButton.position = CGPointMake((-winSize.width * .15), (winSize.height * .3));
         levelSelectButton.scale = 0.5f;
         
-        CCMenu *victoryMenu = [CCMenu menuWithItems:continueButton, shopButton, levelSelectButton, nil];
+        CCMenu *victoryMenu = [CCMenu menuWithItems:continueButton, /*shopButton, levelSelectButton,*/ nil];
         victoryMenu.position = ccp(winSize.width/2, 0);
         [self addChild: victoryMenu z:1];
         
@@ -64,7 +55,7 @@
 -(void) nextLevel: (CCMenuItem *)continueButton
 {
     [GameData sharedData].currentLevelSelected++;
-    [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
+    [[CCDirector sharedDirector] replaceScene: (CCScene*)[[Store alloc] init]];
 }
 
 -(void) shop: (CCMenuItem *)shopButton

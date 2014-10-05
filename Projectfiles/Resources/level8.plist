@@ -64,7 +64,7 @@
 		<key>damage</key>
 		<integer>0</integer>
 		<key>speed</key>
-		<integer>-2</integer>
+		<integer>-1</integer>
 	</dict>
 	<key>enemyBomb</key>
 	<dict>
@@ -134,5 +134,9 @@
 	<real>4.5</real>
 	<key>friendlyMeleeReinforcementRate</key>
 	<integer>500</integer>
+	<key>friendlyBaseHealth</key>
+	<integer>1000</integer>
+	<key>enemyBaseHealth</key>
+	<integer>1000</integer>
 </dict>
 </plist>

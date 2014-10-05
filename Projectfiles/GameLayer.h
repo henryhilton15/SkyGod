@@ -110,6 +110,8 @@
     int zigZagFrequency;
     int enemyMeleeReinforcementFramecount;
     int friendlyMeleeReinforcementFramecount;
+    int friendlyBaseStartingHealth;
+    int enemyBaseStartingHealth;
     double explosionAnimationLength;
     double dyingAnimationLength;
     double KmonsterSpeed;
@@ -217,6 +219,7 @@
     BOOL goodBaseExploded;
     BOOL coinInterlude;
     BOOL friendlyTankAvailable;
+    BOOL wentToInGameShop;
     
     CCLabelTTF *waveLabel;
     CCLabelTTF *goodBaseHealthLabel;
@@ -303,5 +306,6 @@
 -(void) addBadRedBar;
 -(void) loadLevelSettings;
 -(void) addCoins:(int)numCoins;
+-(void) shop:(CCMenuItemImage*)shopButton;
 
 @end

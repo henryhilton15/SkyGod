@@ -123,7 +123,7 @@
 		<integer>12</integer>
 	</dict>
 	<key>scenariosAvailable</key>
-	<integer>2</integer>
+	<integer>1</integer>
 	<key>scenarioDelay</key>
 	<integer>1200</integer>
 	<key>scoreCounter</key>
@@ -134,5 +134,9 @@
 	<real>4.25</real>
 	<key>friendlyMeleeReinforcementRate</key>
 	<integer>500</integer>
+	<key>friendlyBaseHealth</key>
+	<integer>1000</integer>
+	<key>enemyBaseHealth</key>
+	<integer>1000</integer>
 </dict>
 </plist>

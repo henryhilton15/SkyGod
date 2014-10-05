@@ -797,6 +797,7 @@
 		C34352B519D8A1370022E502 /* level28.plist in Resources */ = {isa = PBXBuildFile; fileRef = C34352B419D8A1370022E502 /* level28.plist */; };
 		C34352B719D8A14D0022E502 /* level29.plist in Resources */ = {isa = PBXBuildFile; fileRef = C34352B619D8A14D0022E502 /* level29.plist */; };
 		C34352B919D8A16C0022E502 /* level30.plist in Resources */ = {isa = PBXBuildFile; fileRef = C34352B819D8A16C0022E502 /* level30.plist */; };
+		C3983B4219E086F60043539B /* InGameShop.m in Sources */ = {isa = PBXBuildFile; fileRef = C3983B4119E086F60043539B /* InGameShop.m */; };
 		C3E2088E19AA7527007BCF23 /* Dollar-4.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E2088A19AA7527007BCF23 /* Dollar-4.png */; };
 		C3E2088F19AA7527007BCF23 /* Dollar-3.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E2088B19AA7527007BCF23 /* Dollar-3.png */; };
 		C3E2089019AA7527007BCF23 /* Dollar-2.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E2088C19AA7527007BCF23 /* Dollar-2.png */; };
@@ -1740,6 +1741,8 @@
 		C34352B419D8A1370022E502 /* level28.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level28.plist; sourceTree = "<group>"; };
 		C34352B619D8A14D0022E502 /* level29.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level29.plist; sourceTree = "<group>"; };
 		C34352B819D8A16C0022E502 /* level30.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level30.plist; sourceTree = "<group>"; };
+		C3983B4019E086F60043539B /* InGameShop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InGameShop.h; sourceTree = "<group>"; };
+		C3983B4119E086F60043539B /* InGameShop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InGameShop.m; sourceTree = "<group>"; };
 		C3E2088A19AA7527007BCF23 /* Dollar-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dollar-4.png"; sourceTree = "<group>"; };
 		C3E2088B19AA7527007BCF23 /* Dollar-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dollar-3.png"; sourceTree = "<group>"; };
 		C3E2088C19AA7527007BCF23 /* Dollar-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dollar-2.png"; sourceTree = "<group>"; };
@@ -3623,6 +3626,8 @@
 				2D3CE3DF1826EEB200B139D3 /* Levelselect.m */,
 				2D3705981784D6DA0057EB8E /* GameLayer.h */,
 				2D3705991784D6DA0057EB8E /* GameLayer.m */,
+				C3983B4019E086F60043539B /* InGameShop.h */,
+				C3983B4119E086F60043539B /* InGameShop.m */,
 				FEFF353F198823EA002E668A /* VictoryLayer.h */,
 				FEFF3540198823EA002E668A /* VictoryLayer.m */,
 				2D808A7B1795F5BA006EADF5 /* Resources */,
@@ -4637,6 +4642,7 @@
 				2D808D0717973A58006EADF5 /* Store.m in Sources */,
 				2DAA40F617AC319B00BA014B /* GameData.m in Sources */,
 				2D13BF3F17BBF85300EF23AA /* Player.m in Sources */,
+				C3983B4219E086F60043539B /* InGameShop.m in Sources */,
 				2D3CE3E01826EEB200B139D3 /* Levelselect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4701,7 +4707,7 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "SkyGod-iOS";
-				PROVISIONING_PROFILE = "83BB7A02-1ACC-42FF-974E-98851E6F4FCB";
+				PROVISIONING_PROFILE = "1fe73b7c-b722-4b29-a21f-0b6342f9fc30";
 			};
 			name = Debug;
 		};
@@ -4719,7 +4725,7 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "SkyGod-iOS";
-				PROVISIONING_PROFILE = "83BB7A02-1ACC-42FF-974E-98851E6F4FCB";
+				PROVISIONING_PROFILE = "1fe73b7c-b722-4b29-a21f-0b6342f9fc30";
 			};
 			name = Release;
 		};

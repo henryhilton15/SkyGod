@@ -34,6 +34,9 @@
 @property (nonatomic) int airstrikeCount;
 @property (nonatomic) int reinforcementsCount;
 @property (nonatomic) int immunityCount;
+@property (nonatomic) BOOL wentToInGameStore;
+
+
 
 
 //Static (class) method:

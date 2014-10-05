@@ -28,7 +28,7 @@
 		<key>spawnRate</key>
 		<integer>200</integer>
 		<key>damage</key>
-		<integer>8</integer>
+		<integer>13</integer>
 		<key>fallSpeed</key>
 		<integer>7</integer>
 		<key>attackFrequency</key>
@@ -136,5 +136,9 @@
 	<integer>6</integer>
 	<key>friendlyMeleeReinforcementRate</key>
 	<integer>700</integer>
+	<key>friendlyBaseHealth</key>
+	<integer>300</integer>
+	<key>enemyBaseHealth</key>
+	<integer>300</integer>
 </dict>
 </plist>

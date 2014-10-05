@@ -5,17 +5,19 @@
 	<key>enemyRegularShooter</key>
 	<dict>
 		<key>available</key>
-		<false/>
+		<true/>
 		<key>health</key>
-		<integer>0</integer>
+		<integer>45</integer>
+		<key>fallingHealth</key>
+		<integer>1</integer>
 		<key>spawnRate</key>
-		<integer>0</integer>
+		<integer>150</integer>
 		<key>damage</key>
-		<integer>0</integer>
+		<integer>20</integer>
 		<key>fallSpeed</key>
-		<integer>0</integer>
+		<integer>4</integer>
 		<key>attackFrequency</key>
-		<integer>0</integer>
+		<integer>80</integer>
 	</dict>
 	<key>enemyMelee</key>
 	<dict>
@@ -26,7 +28,7 @@
 		<key>fallingHealth</key>
 		<integer>1</integer>
 		<key>spawnRate</key>
-		<integer>52</integer>
+		<integer>90</integer>
 		<key>damage</key>
 		<integer>20</integer>
 		<key>fallSpeed</key>
@@ -123,7 +125,7 @@
 		<integer>12</integer>
 	</dict>
 	<key>scenariosAvailable</key>
-	<integer>2</integer>
+	<integer>1</integer>
 	<key>scenarioDelay</key>
 	<integer>1200</integer>
 	<key>scoreCounter</key>
@@ -134,5 +136,9 @@
 	<integer>4</integer>
 	<key>friendlyMeleeReinforcementRate</key>
 	<integer>800</integer>
+	<key>friendlyBaseHealth</key>
+	<integer>1000</integer>
+	<key>enemyBaseHealth</key>
+	<integer>1000</integer>
 </dict>
 </plist>

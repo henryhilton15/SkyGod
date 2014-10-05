@@ -72,9 +72,9 @@
         NSNumber *rank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankRank"];
         
         unlocked = [[d objectForKey:@"available"] boolValue];
-        health = [[d objectForKey:@"health"] intValue] + [rank intValue];
-        power = [[d objectForKey:@"power"] intValue] + [rank intValue];
-        attackFrequency = [[d objectForKey:@"attackFrequency"] intValue] - (5 * [rank intValue]);
+        health = [[d objectForKey:@"health"] intValue] + (200 + [rank intValue]);
+        power = [[d objectForKey:@"power"] intValue];
+        attackFrequency = [[d objectForKey:@"attackFrequency"] intValue] - (10 * [rank intValue]);
         fallSpeed = [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
         
         worth = 100;
@@ -100,7 +100,7 @@
         NSNumber *rank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"];
         
         unlocked = [[d objectForKey:@"available"] boolValue];
-        health = [[d objectForKey:@"health"] intValue] + [rank intValue];
+        health = [[d objectForKey:@"health"] intValue] + [rank intValue] + (5 * [rank intValue]);
         power = [[d objectForKey:@"power"] intValue] + [rank intValue];
         attackFrequency = [[d objectForKey:@"attackFrequency"] intValue] - (5 * [rank intValue]);
         fallSpeed = 5 + [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
@@ -284,7 +284,11 @@
 {
     if ((self = [super initWithFile: @"goodbase-1.png"]))
     {
-        health = 1000;
+        NSString *plistName = [NSString stringWithFormat:@"level%d", [GameData sharedData].currentLevelSelected];
+        NSString *path = [[NSBundle mainBundle] pathForResource:plistName ofType:@"plist"];
+        NSDictionary *levelDictionary = [NSDictionary dictionaryWithContentsOfFile:path];
+        
+        health = [[levelDictionary objectForKey:@"friendlyBaseHealth"] intValue];
         type = GOOD_BASE;
         melee = true;
     }
@@ -315,7 +319,11 @@
 {
     if ((self = [super initWithFile: @"badbase-1.png"]))
     {
-        health = 1000;
+        NSString *plistName = [NSString stringWithFormat:@"level%d", [GameData sharedData].currentLevelSelected];
+        NSString *path = [[NSBundle mainBundle] pathForResource:plistName ofType:@"plist"];
+        NSDictionary *levelDictionary = [NSDictionary dictionaryWithContentsOfFile:path];
+        
+        health = [[levelDictionary objectForKey:@"enemyBaseHealth"] intValue];
         type = BAD_BASE;
         melee = true;
     }
@@ -366,8 +374,8 @@
         NSNumber *rank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterRank"];
         
         unlocked = [[d objectForKey:@"available"] boolValue];
-        health = [[d objectForKey:@"health"] intValue] + [rank intValue];
-        power = [[d objectForKey:@"power"] intValue] + [rank intValue];
+        health = [[d objectForKey:@"health"] intValue] + (3 *[rank intValue]);
+        power = [[d objectForKey:@"power"] intValue] + (3 * [rank intValue]);
         attackFrequency = [[d objectForKey:@"attackFrequency"] intValue] - (5 * [rank intValue]);
         fallSpeed = 5 + [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
         type = GOOD_FASTSHOOTER;
@@ -388,7 +396,7 @@
         NSNumber *rank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"];
         
         unlocked = [[d objectForKey:@"available"] boolValue];
-        health = [[d objectForKey:@"health"] intValue] + (5 *[rank intValue]);
+        health = [[d objectForKey:@"health"] intValue] + (5 * [rank intValue]);
         power = [[d objectForKey:@"power"] intValue] + (5 * [rank intValue]);
         attackFrequency = [[d objectForKey:@"attackFrequency"] intValue] - (4 * [rank intValue]);
         fallSpeed = [[d objectForKey:@"fallSpeed"] intValue] * 1.0;

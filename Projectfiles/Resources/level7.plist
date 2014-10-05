@@ -32,7 +32,7 @@
 		<key>fallSpeed</key>
 		<real>4</real>
 		<key>attackFrequency</key>
-		<integer>20</integer>
+		<integer>15</integer>
 		<key>zigZagFrequency</key>
 		<integer>6</integer>
 		<key>reinforcementRate</key>
@@ -134,5 +134,9 @@
 	<real>4.6</real>
 	<key>friendlyMeleeReinforcementRate</key>
 	<integer>600</integer>
+	<key>friendlyBaseHealth</key>
+	<integer>800</integer>
+	<key>enemyBaseHealth</key>
+	<integer>800</integer>
 </dict>
 </plist>

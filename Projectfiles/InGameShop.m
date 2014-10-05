@@ -1,22 +1,23 @@
 //
-//  Store.m
-//  Gorilla Game
+//  InGameShop.m
+//  SkyGod
 //
-//  Created by Ajay Shah on 7/17/13.
+//  Created by Danny Laporte on 10/4/14.
 //
 //
 
-#import "Store.h"
+#import "InGameShop.h"
 #import "MainMenuLayer.h"
 #import "Character.h"
 #import "GameData.h"
 #import "SimpleAudioEngine.h"
 #import "Levelselect.h"
+#import "GameLayer.h"
 
-@implementation Store
+@implementation InGameShop
+
 -(id)init
 {
-
     if ((self = [super init]))
     {
         if([[[NSUserDefaults standardUserDefaults] objectForKey:@"beenInStoreBefore"] boolValue] == false)
@@ -55,17 +56,17 @@
         [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyMeleePrice forKey:@"friendlyMeleePrice"];
         
         int friendlyRegularShooterRankInt = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"] intValue];
-        NSNumber *NSFriendlyRegularShooterPrice = [NSNumber numberWithInt:(40 + (friendlyRegularShooterRankInt * 15))];
+        NSNumber *NSFriendlyRegularShooterPrice = [NSNumber numberWithInt:(30 + (friendlyRegularShooterRankInt * 15))];
         [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyRegularShooterPrice forKey:@"friendlyRegularShooterPrice"];
         
         int friendlyFastShooterRankInt = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterRank"] intValue];
         NSNumber *NSFriendlyFastShooterPrice = [NSNumber numberWithInt:(60 + (friendlyFastShooterRankInt * 30))];
         [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyFastShooterPrice forKey:@"friendlyFastShooterPrice"];
         
-        int friendlyTankRankInt = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankRank"] intValue];
-        NSNumber *NSFriendlyTankPrice = [NSNumber numberWithInt:(100 + ( friendlyTankRankInt * 30))];
+        int friendlyTankRankInt = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankRank"];
+        NSNumber *NSFriendlyTankPrice = [NSNumber numberWithInt:((friendlyTankRankInt + 1) * 50)];
         [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyTankPrice forKey:@"friendlyTankPrice"];
-   
+        
         [GameData sharedData].airPrice = 40;
         [GameData sharedData].reinforcePrice = 75;
         [GameData sharedData].immunityPrice = 15;
@@ -76,7 +77,7 @@
         [self addChild:BuyButton1 z:50];
         BuyButton1.color = ccBLUE;
         
-
+        
         
         //CCMenu *myMenu = [CCMenu menuWithItems:BuyButton, nil];
         //[self addChild:myMenu];
@@ -90,15 +91,11 @@
         //            StoreLabel.color = ccBLUE;
         //            [self addChild:StoreLabel z:4];
         
-        CCMenuItemImage *mainMenuButton = [CCMenuItemImage itemWithNormalImage:@"main menu-button-n.png"
-                                                                 selectedImage: @"main menu-button-d.png"
+        CCMenuItemImage *resumeButton = [CCMenuItemImage itemWithNormalImage:@"resume-button-n.png"
+                                                                 selectedImage: @"resume-button-d.png"
                                                                         target:self
-                                                                      selector:@selector(mainMenu:)];
+                                                                    selector:@selector(resume:)];
         
-        CCMenuItemImage *continueButton = [CCMenuItemImage itemWithNormalImage:@"continue-button-n.png"
-                                                                 selectedImage: @"continue-button-d.png"
-                                                                        target:self
-                                                                      selector:@selector(levelSelect:)];
         
         
         CCMenuItemImage *regularShooterButton = [CCMenuItemImage itemWithNormalImage:@"a2-1.png"
@@ -172,15 +169,15 @@
         buyAirstrikeButton.position = CGPointMake(farLeftX, bottomRowLogoY);
         buyReinforcementButton.position = CGPointMake(centerLeftX, bottomRowLogoY);
         buyImmunityButton.position = CGPointMake(centerRightX, bottomRowLogoY);
-        mainMenuButton.position = CGPointMake(farRightX, bottomRowLogoY + winSize.height * .1);
-        mainMenuButton.scale = 0.45;
-        continueButton.position = CGPointMake(farRightX, bottomRowLogoY - winSize.height * .05);
-        continueButton.scale = 0.45;
+//        mainMenuButton.position = CGPointMake(farRightX, bottomRowLogoY + winSize.height * .1);
+//        mainMenuButton.scale = 0.45;
+        resumeButton.position = CGPointMake(farRightX, bottomRowLogoY);
+        resumeButton.scale = 0.65;
         
-        CCMenu* storeMenu = [CCMenu menuWithItems:mainMenuButton, continueButton, regularShooterButton, fastShooterButton, meleeButton, tankButton, buyAirstrikeButton, buyReinforcementButton, buyImmunityButton, nil];
-
+        CCMenu* storeMenu = [CCMenu menuWithItems: resumeButton, regularShooterButton, fastShooterButton, meleeButton, tankButton, buyAirstrikeButton, buyReinforcementButton, buyImmunityButton, nil];
+        
         storeMenu.position = ccp(winSize.width/2, 0);
-
+        
         [self addChild:storeMenu];
         
         CCLabelTTF *shopLabel = [CCLabelTTF labelWithString:@"SHOP" fontName:@"Algerian" fontSize: 50];
@@ -272,7 +269,7 @@
         reinforcemtsCount.position = CGPointMake(winSize.width * .375, bottomRowAvailableY);
         reinforcemtsCount.color = ccBLACK;
         [self addChild:reinforcemtsCount z:4];
-
+        
         airstrikeCount = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [airstrikeCount setString:[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"airstrikesAvailable"]]];
         airstrikeCount.position = CGPointMake(winSize.width * .125, bottomRowAvailableY);
@@ -282,14 +279,10 @@
     return self;
 }
 
-- (void) mainMenu: (CCMenuItemImage *) mainMenuButton
+- (void) resume: (CCMenuItemImage *) resume
 {
-    [[CCDirector sharedDirector] replaceScene: (CCScene *)[[MainMenuLayer alloc]  init]];
-}
-
-- (void) levelSelect: (CCMenuItemImage *) continueButton
-{
-    [[CCDirector sharedDirector] replaceScene: (CCScene *)[[Levelselect alloc]  init]];
+    [GameData sharedData].wentToInGameStore = true;
+    [[CCDirector sharedDirector] popScene];
 }
 
 - (void) upgradeRegularShooter: (CCMenuItemImage *) regularShooterButton
@@ -317,13 +310,13 @@
         [shooterPrice setString:[NSString stringWithFormat:@"Price:%d", price]];
         [shooterRank setString:[NSString stringWithFormat:@"Lvl:%d/5", rank]];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
-
+        
     }
     else
     {
         NSLog(@"can't afford that!");
     }
-
+    
 }
 
 - (void) upgradeMelee: (CCMenuItemImage *) meleeButton
@@ -405,7 +398,7 @@
 //        NSCoins = [NSNumber numberWithInt:coins];
 //        [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
 //        NSLog(@"coins = %@", NSCoins);
-//        
+//
 //    }
 //    else
 //    {
@@ -455,7 +448,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
         
-        price = (rank * 50) + 100;
+        price = rank * 50 + 50;
         NSNumber* NSPrice = [NSNumber numberWithInt:price];
         [[NSUserDefaults standardUserDefaults] setObject:NSPrice forKey:@"friendlyTankPrice"];
         [tankPrice setString:[NSString stringWithFormat:@"Price:%d", price]];
@@ -512,13 +505,14 @@
         
         [immunityCount setString:[NSString stringWithFormat:@"%@", newNumAvailable]];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
+
     }
     
     else
     {
         NSLog(@"can't afford that!");
     }
-
+    
 }
 
 -(void) buyAirstrike: (CCMenuItemImage *) buyAirstrikeButton
@@ -541,6 +535,7 @@
         
         [airstrikeCount setString:[NSString stringWithFormat:@"%@", newNumAvailable]];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
+
     }
     
     else
@@ -569,6 +564,7 @@
         
         [reinforcemtsCount setString:[NSString stringWithFormat:@"%@", newNumAvailable]];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
+
     }
     
     else
@@ -576,7 +572,6 @@
         NSLog(@"can't afford that!");
     }
 }
-
 
 
 @end

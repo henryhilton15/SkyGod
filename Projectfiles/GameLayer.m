@@ -14,6 +14,8 @@
 #import "GameData.h"
 #import "Player.h"
 #import "VictoryLayer.h"
+#import "InGameShop.h"
+
 
 #define MOUNTAIN_HEIGHT 70.0f
 #define BASE_HEIGHT 65
@@ -162,7 +164,6 @@
     id leftTop = [CCMoveTo actionWithDuration:actualDuration/(6.0)
                                      position:ccp(x - (winSize.width/6), y - (winSize.height/6))];
     
-    
     id rightTop = [CCMoveTo actionWithDuration:actualDuration/(6.0)
                                       position:ccp(x + (winSize.width/6), y - (winSize.height/3))];
     
@@ -172,11 +173,8 @@
     id rightMid = [CCMoveTo actionWithDuration:actualDuration/(6.0)
                                       position:ccp(x + (winSize.width/6), y - (winSize.height/1.5))];
     
-    
-    
     id leftLow = [CCMoveTo actionWithDuration:actualDuration/(6.0)
                                      position:ccp(x - (winSize.width/6), y - (winSize.height/1.2))];
-    
     
     id rightLow = [CCMoveTo actionWithDuration:actualDuration/(6.0)
                                       position:ccp(x + (winSize.width/6), y - winSize.height)];
@@ -601,9 +599,9 @@
     
     devilHeli = [[Character alloc] initWithBadHelicopterImage];
     
-    // Determine where to spawn the monster along the X axis
-    int minY = winSize.height - 70;
-    int maxY = winSize.height - 20;
+    // Determine where to spawn the monster along the Y axis
+    int minY = winSize.height - 30;
+    int maxY = winSize.height;
     int rangeY = maxY - minY;
     int actualY = (arc4random() % rangeY) + minY;
     
@@ -1008,6 +1006,7 @@
         isWalking = true;
         waveChanging = false;
         coinInterlude = false;
+        wentToInGameShop = false;
         wave=1;
         immunity = false;
         orbsDeleted = 0;
@@ -1146,8 +1145,6 @@
         badBaseHealthLabel.color = ccBLUE;
         [self addChild:badBaseHealthLabel z:4];
         
-    
-        
         int width = winSize.width;
         
         if(width == 568)
@@ -1164,9 +1161,7 @@
             mountains.scale *=1;
             mountains.position = ccp(winSize.width/2,winSize.height/2);
             [self addChild:mountains z:0];
-   
         }
-    
         
         if(width == 480)
         {
@@ -1199,6 +1194,13 @@
         pauseButton.position = CGPointMake(winSize.width * .95, winSize.height * .93);
         pauseButton.scale = .7;
         
+        CCMenuItemImage *shopButton = [CCMenuItemImage itemWithNormalImage:@"shop-button-n.png"
+                                                             selectedImage: @"shop-button-d.png"
+                                                                    target:self
+                                                                  selector:@selector(shop:)];
+        shopButton.position = CGPointMake(winSize.width * .85, winSize.height * .93);
+        shopButton.scale = .5;
+        
     
         CCMenuItemImage *immunityPowerUp = [CCMenuItemImage itemWithNormalImage:@"immunity_btn.png" selectedImage:@"immunity_btn.png"
         target: self
@@ -1222,8 +1224,8 @@
         airstrikePowerUp.position= CGPointMake (farLeftX, winSize.height * .93);
         airstrikePowerUp.scale = 0.7f;
         
-        CCMenu *myMenu = [CCMenu menuWithItems:pauseButton, airstrikePowerUp, reinforcementPowerUp, immunityPowerUp, nil];
-        myMenu.position = ccp(0, 0);
+        CCMenu *myMenu = [CCMenu menuWithItems:pauseButton, shopButton, airstrikePowerUp, reinforcementPowerUp, immunityPowerUp, nil];
+        myMenu.position = ccp(0,0);
         [self addChild: myMenu z:100];
 
         
@@ -1833,6 +1835,21 @@
             reinforcementsSpawned = 0;
             reinforcements = false;
         }
+    }
+    
+    if([GameData sharedData].wentToInGameStore == true)
+    {
+        [GameData sharedData].wentToInGameStore = false;
+        
+        int airstrikeNum = [[[NSUserDefaults standardUserDefaults] objectForKey:@"airstrikesAvailable"] intValue];
+        [airstrikeCount setString:[NSString stringWithFormat:@"%d", airstrikeNum]];
+        
+        int immunityNum = [[[NSUserDefaults standardUserDefaults] objectForKey:@"immunityAvailable"] intValue];
+        [immunityCount setString:[NSString stringWithFormat:@"%d", immunityNum]];
+        
+        int reinforcementsNum = [[[NSUserDefaults standardUserDefaults] objectForKey:@"reinforcementsAvailable"] intValue];
+        [reinforcemtsCount setString:[NSString stringWithFormat:@"%d", reinforcementsNum]];
+        
     }
 }
 
@@ -3035,6 +3052,12 @@
     [levelLabel setString:[NSString stringWithFormat:@"Level:%d", level]];
 }
 
+-(void)shop:(CCMenuItemImage *)shopButton
+{
+    [[CCDirector sharedDirector] pushScene: (CCScene *)[[InGameShop alloc]  init]];
+
+}
+
 -(void) pauseMenu: (CCMenuItemImage *)pauseButton
 {
     [[CCDirector sharedDirector] pushScene: (CCScene *)[[PauseMenuLayer alloc]  init]];
@@ -3538,7 +3561,7 @@
                         [self devil1attackAnimation:fightingDevil];
                         ((Character*)fightingDevil).attacked = true;
                         
-                        if(((Character*)fightingAngel).type == GOOD_BASE)
+                        if(((Character*)fightingAngel).type == GOOD_BASE && waveChanging == false)
                         {
 //                            NSLog(@"called subtract good base health in melee");
                             [self subtractGoodBaseHealth:fightingDevil];
@@ -4897,7 +4920,7 @@
                     {
                         ((Character*)badBullet).attacked = true;
                         
-                        if(((Character*)goodBottom).type == GOOD_BASE)
+                        if(((Character*)goodBottom).type == GOOD_BASE && waveChanging == false)
                         {
 //                            NSLog(@"called subtract good base health in bullet detection");
                             [self subtractGoodBaseHealth:badBullet];
@@ -4994,7 +5017,7 @@
     {
         for(int j = 0; j < [badBombs count]; j++)
         {
-            if([badBombs count] > 0 && [goodGuysBottom count] > 0)
+            if([badBombs count] > 0 && [goodGuysBottom count] > 0 && immunity == false)
             {
                 goodBottom = [goodGuysBottom objectAtIndex:i];
                 goodBottomRect = [goodBottom boundingBox];
@@ -5004,7 +5027,7 @@
                 
                 if(CGRectIntersectsRect(goodBottomRect,badBulletBox) && abs(goodBottom.position.y - badBullet.position.y) < 45)
                 {
-                    if(((Character*)goodBottom).type == GOOD_BASE)
+                    if(((Character*)goodBottom).type == GOOD_BASE && waveChanging == false)
                     {
                         [self subtractGoodBaseHealth:badBullet];
                         NSLog(@"bad bomb detection - subtract base health");
@@ -5612,7 +5635,7 @@
             [goodBaseHealthLabel setString:[NSString stringWithFormat:@"Your Base Health: 0"]];
         }
         [self subtractGoodBarHealth:((Character*)fightingDevil).power];
-        if(((Character*)goodBase).health < 7 && ((Character*)goodBase).health > 3 && goodBaseImageChangeCount == 0)
+        if(((Character*)goodBase).health < (friendlyBaseStartingHealth/2) && ((Character*)goodBase).health > (friendlyBaseStartingHealth/4) && goodBaseImageChangeCount == 0)
         {
             [goodGuysBottom removeObject:goodBase];
             [self removeChild: goodBase cleanup:YES];
@@ -5626,7 +5649,7 @@
             [goodGuysBottom addObject:goodBase];
             NSLog(@"good base 2");
         }
-        if(((Character*)goodBase).health < 4 && ((Character*)goodBase).health > 0 && goodBaseImageChangeCount == 1)
+        if(((Character*)goodBase).health <= (friendlyBaseStartingHealth/4) && ((Character*)goodBase).health > 0 && goodBaseImageChangeCount == 1)
         {
             [goodGuysBottom removeObject:goodBase];
             [self removeChild:goodBase cleanup:YES];
@@ -5660,7 +5683,7 @@
             [badBaseHealthLabel setString:[NSString stringWithFormat:@"Bad Base Health: 0"]];
         }
         [self subtractBadBarHealth:((Character*)fightingAngel).power];
-        if(((Character*)badBase).health < 7 && ((Character*)badBase).health > 3 && badBaseImageChangeCount == 0)
+        if(((Character*)badBase).health < (enemyBaseStartingHealth/2) && ((Character*)badBase).health >= (enemyBaseStartingHealth/4) && badBaseImageChangeCount == 0)
         {
             [badGuysBottom removeObject:badBase];
             [self removeChild:badBase cleanup:YES];
@@ -6103,7 +6126,9 @@
     endgameCoinTotal = 10 + [[coinDict objectForKey:@"endgameCoinTotal"] intValue];
     
     scenariosAvailable = [[levelDictionary objectForKey:@"scenariosAvailable"] intValue];
-    NSLog(@"scenarios available = %d", scenariosAvailable);
+    
+    friendlyBaseStartingHealth = [[levelDictionary objectForKey:@"friendlyBaseHealth"] intValue];
+    enemyBaseStartingHealth = [[levelDictionary objectForKey:@"enemyBaseHealth"] intValue];
 }
 
 -(void) addCoins:(int)numCoins

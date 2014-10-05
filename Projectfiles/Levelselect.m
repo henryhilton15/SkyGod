@@ -50,13 +50,10 @@
         [self addChild:selectLabel z:4];
 
         
-        
         CCSprite *background = [CCSprite spriteWithFile:@"sky-ip5.png"];
         background.position = CGPointMake(winSize.width/2, winSize.height/2);
         [self addChild:background z:-1];
         
-        
-    
 	// Create some menu items
         
         CCMenuItemImage *mainMenuButton = [CCMenuItemImage itemWithNormalImage:@"main menu-button-n.png"
@@ -122,7 +119,7 @@
         CCMenuItemImage * menuItem6 = [CCMenuItemImage itemWithNormalImage:@"Box_Yellow.png"
                                                              selectedImage: @"box_grey.png"
                                                                     target:self
-                                                                  selector:@selector(level6)];
+                                                                  selector:@selector(level6:)];
         menuItem6.scale=.35;
 
         menuItem6.position = ccp(col6, row1);
@@ -358,7 +355,6 @@
         [self addChild:L5 z:6];
         
         CCLabelTTF *L6 = [CCLabelTTF labelWithString:@"6" fontName:@"Algerian" fontSize: 50];
-        
         
         L6.scale=.35;
         L6.color = ccBLACK;

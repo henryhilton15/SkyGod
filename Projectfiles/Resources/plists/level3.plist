@@ -22,21 +22,21 @@
 		<key>available</key>
 		<true/>
 		<key>health</key>
-		<integer>25</integer>
+		<integer>35</integer>
 		<key>fallingHealth</key>
 		<integer>1</integer>
 		<key>spawnRate</key>
 		<integer>150</integer>
 		<key>damage</key>
-		<integer>10</integer>
+		<integer>20</integer>
 		<key>fallSpeed</key>
 		<integer>6</integer>
 		<key>attackFrequency</key>
-		<integer>25</integer>
+		<integer>15</integer>
 		<key>zigZagFrequency</key>
 		<integer>10</integer>
 		<key>reinforcementRate</key>
-		<integer>550</integer>
+		<integer>500</integer>
 	</dict>
 	<key>Kmonster</key>
 	<dict>
@@ -135,6 +135,10 @@
 	<key>baseFriendlyCount</key>
 	<real>5.5</real>
 	<key>friendlyMeleeReinforcementRate</key>
-	<integer>700</integer>
+	<integer>800</integer>
+	<key>friendlyBaseHealth</key>
+	<integer>400</integer>
+	<key>enemyBaseHealth</key>
+	<integer>400</integer>
 </dict>
 </plist>
