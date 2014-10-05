@@ -58,7 +58,7 @@
 	<key>enemyHelicopter</key>
 	<dict>
 		<key>available</key>
-		<false/>
+		<true/>
 		<key>health</key>
 		<integer>2</integer>
 		<key>spawnRate</key>
