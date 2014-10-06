@@ -771,6 +771,7 @@
 		C3038A0E198AC90800A81E0E /* explo2.wav in Resources */ = {isa = PBXBuildFile; fileRef = C3038A0D198AC90800A81E0E /* explo2.wav */; };
 		C3297C0517975CC600A09343 /* knightFramesFlipped.png in Resources */ = {isa = PBXBuildFile; fileRef = C3297C0417975CC600A09343 /* knightFramesFlipped.png */; };
 		C3297C0717975CDA00A09343 /* knightframesflipped.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3297C0617975CDA00A09343 /* knightframesflipped.plist */; };
+		C3359B2619E26F6300C08D87 /* TutorialLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C3359B2519E26F6300C08D87 /* TutorialLayer.m */; };
 		C3367E14179862CA00D321C5 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = C3367E13179862CA00D321C5 /* Character.m */; };
 		C343528919D89FE80022E502 /* level6.plist in Resources */ = {isa = PBXBuildFile; fileRef = C343528819D89FE70022E502 /* level6.plist */; };
 		C343528B19D8A00F0022E502 /* level7.plist in Resources */ = {isa = PBXBuildFile; fileRef = C343528A19D8A00F0022E502 /* level7.plist */; };
@@ -1714,6 +1715,8 @@
 		C3038A0D198AC90800A81E0E /* explo2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explo2.wav; sourceTree = "<group>"; };
 		C3297C0417975CC600A09343 /* knightFramesFlipped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knightFramesFlipped.png; sourceTree = "<group>"; };
 		C3297C0617975CDA00A09343 /* knightframesflipped.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = knightframesflipped.plist; sourceTree = "<group>"; };
+		C3359B2419E26F6200C08D87 /* TutorialLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialLayer.h; path = Resources/TutorialLayer.h; sourceTree = "<group>"; };
+		C3359B2519E26F6300C08D87 /* TutorialLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialLayer.m; path = Resources/TutorialLayer.m; sourceTree = "<group>"; };
 		C3367E12179862CA00D321C5 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
 		C3367E13179862CA00D321C5 /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Character.m; sourceTree = "<group>"; };
 		C343528819D89FE70022E502 /* level6.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level6.plist; sourceTree = "<group>"; };
@@ -3628,6 +3631,8 @@
 				2D3705991784D6DA0057EB8E /* GameLayer.m */,
 				C3983B4019E086F60043539B /* InGameShop.h */,
 				C3983B4119E086F60043539B /* InGameShop.m */,
+				C3359B2419E26F6200C08D87 /* TutorialLayer.h */,
+				C3359B2519E26F6300C08D87 /* TutorialLayer.m */,
 				FEFF353F198823EA002E668A /* VictoryLayer.h */,
 				FEFF3540198823EA002E668A /* VictoryLayer.m */,
 				2D808A7B1795F5BA006EADF5 /* Resources */,
@@ -4637,6 +4642,7 @@
 				FEFF3541198823EA002E668A /* VictoryLayer.m in Sources */,
 				2D37059A1784D6DA0057EB8E /* GameLayer.m in Sources */,
 				2D37059D1784D99D0057EB8E /* GameOverLayer.m in Sources */,
+				C3359B2619E26F6300C08D87 /* TutorialLayer.m in Sources */,
 				2D13AA88178F406500945F54 /* PauseMenuLayer.m in Sources */,
 				C3367E14179862CA00D321C5 /* Character.m in Sources */,
 				2D808D0717973A58006EADF5 /* Store.m in Sources */,
@@ -4707,7 +4713,7 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "SkyGod-iOS";
-				PROVISIONING_PROFILE = "83BB7A02-1ACC-42FF-974E-98851E6F4FCB";
+				PROVISIONING_PROFILE = "1fe73b7c-b722-4b29-a21f-0b6342f9fc30";
 			};
 			name = Debug;
 		};
@@ -4725,7 +4731,7 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "SkyGod-iOS";
-				PROVISIONING_PROFILE = "83BB7A02-1ACC-42FF-974E-98851E6F4FCB";
+				PROVISIONING_PROFILE = "1fe73b7c-b722-4b29-a21f-0b6342f9fc30";
 			};
 			name = Release;
 		};

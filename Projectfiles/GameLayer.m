@@ -15,6 +15,7 @@
 #import "Player.h"
 #import "VictoryLayer.h"
 #import "InGameShop.h"
+#import "TutorialLayer.h"
 
 
 #define MOUNTAIN_HEIGHT 70.0f
@@ -1024,6 +1025,7 @@
         badBaseExploded = false;
         goodBaseExploded = false;
         friendlyTankAvailable = NO;
+        addedImmunityCounter = false;
         scenarioDelayCounter = 0;
         scenario2interludeCounter = 0;
         devilStartingWidth = winSize.width - 100;
@@ -1157,6 +1159,11 @@
         badBaseHealthLabel.color = ccBLACK;
         [self addChild:badBaseHealthLabel z:4];
         
+        immunityCounterLabel = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
+        immunityCounterLabel.position = ccp(winSize.width/2, winSize.height * .7);
+        immunityCounterLabel.color = ccBLUE;
+        
+        
         int width = winSize.width;
         
         if(width == 568)
@@ -1244,7 +1251,7 @@
         NSNumber* NSNumAvailable1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"airstrikesAvailable"];
         int numAvailable1 = [NSNumAvailable1 intValue];
         
-         counterSpacing = (winSize.width *.085);
+        counterSpacing = (winSize.width *.085);
         
         airstrikeCount = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [airstrikeCount setString:[NSString stringWithFormat:@"%d", numAvailable1]];
@@ -1307,6 +1314,7 @@
             }
         }
         
+        
         [self scheduleUpdate];
     }
     return self;
@@ -1314,6 +1322,18 @@
 
 -(void) update:(ccTime)delta
 {
+    //determine whether to push to tutorial layer
+    
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue] == 0 && [GameData sharedData].currentLevelSelected == 1)
+    {
+        [[CCDirector sharedDirector] pushScene: (CCScene *)[[TutorialLayer alloc]  init]];
+    }
+    
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue] == 1 && [GameData sharedData].currentLevelSelected == 2)
+    {
+        [[CCDirector sharedDirector] pushScene:(CCScene *)[[TutorialLayer alloc] init]];
+    }
+
     
 //    if(framecount % 500 == 0)
 //    {
@@ -1837,11 +1857,23 @@
     if(immunity == true)
     {
         immunityFramecount++;
+        
+        int immunityLeft = immunityLength - immunityFramecount;
+        [immunityCounterLabel setString:[NSString stringWithFormat:@"immunity: %d", (immunityLeft/60)]];
+        
+        if(addedImmunityCounter == false)
+        {
+            [self addChild:immunityCounterLabel];
+            addedImmunityCounter = true;
+        }
+        
         if (immunityFramecount >= immunityLength)
         {
             immunity = false;
             immunityFramecount = 0;
             NSLog(@"immunity ended");
+            [self removeChild:immunityCounterLabel];
+            addedImmunityCounter = false;
         }
     }
     if(reinforcements == true)
@@ -3112,9 +3144,7 @@
 
 -(void)shop:(CCMenuItemImage *)shopButton
 {
-    [self addCoins:200];
     [[CCDirector sharedDirector] pushScene: (CCScene *)[[InGameShop alloc]  init]];
-
 }
 
 -(void) pauseMenu: (CCMenuItemImage *)pauseButton

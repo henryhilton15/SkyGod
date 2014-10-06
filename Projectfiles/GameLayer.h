@@ -223,6 +223,7 @@
     BOOL coinInterlude;
     BOOL friendlyTankAvailable;
     BOOL wentToInGameShop;
+    BOOL addedImmunityCounter;
     
     CCLabelTTF *waveLabel;
     CCLabelTTF *goodBaseHealthLabel;
@@ -235,6 +236,8 @@
     CCLabelTTF *reinforcemtsCount;
     CCLabelTTF *immunityCount;
     CCLabelTTF *coinslabel;
+    CCLabelTTF *immunityCounterLabel;
+
     
 
     
