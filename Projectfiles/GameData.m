@@ -33,7 +33,6 @@
 
 
 
-
 //static variable - this stores our singleton instance
 static GameData *sharedData = nil;
 
@@ -54,6 +53,7 @@ static GameData *sharedData = nil;
         
         sharedData.currentLevelSelected = 1;
         sharedData.wentToInGameStore = false;
+
         
         
     }

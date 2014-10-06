@@ -124,10 +124,10 @@
 
         
         //level 1 labels
-        introLabel1 = [CCLabelTTF labelWithString:@"tap to shoot devils" fontName:@"BenguiatItcTEE-Book" fontSize:18];
-        introLabel2 = [CCLabelTTF labelWithString:@"don't shoot angels" fontName:@"BenguiatItcTEE-Book" fontSize:18];
+        introLabel1 = [CCLabelTTF labelWithString:@"tap to shoot devils!" fontName:@"BenguiatItcTEE-Book" fontSize:18];
+        introLabel2 = [CCLabelTTF labelWithString:@"don't shoot angels!" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         introLabel1.position = ccp(winSize.width/2, winSize.height * .7);
-        introLabel2.position = ccp(winSize.width/2, winSize.height * .55);
+        introLabel2.position = ccp(winSize.width/2, winSize.height * .58);
         introLabel1.color = ccBLACK;
         introLabel2.color = ccBLACK;
         
@@ -135,6 +135,11 @@
         level2Label = [CCLabelTTF labelWithString:@"check out the power-up buttons in the corner!" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         level2Label.position = ccp(winSize.width/2, winSize.height * .7);
         level2Label.color = ccBLACK;
+        
+        level3Label = [CCLabelTTF labelWithString:@"check out the shop in the upper right if you get stuck!" fontName:@"BenguiatItcTEE-Book" fontSize:18];
+        level3Label.position = ccp(winSize.width/2, winSize.height * .7);
+        level3Label.color = ccBLACK;
+        
         
         if([[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue] == 0)
         {
@@ -148,9 +153,20 @@
             NSLog(@"new tutorial count = %@", newTutorialCount);
         }
         
-        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue] == 1)
+        else if([[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue] == 1)
         {
+           
             [self addChild:level2Label];
+            int tutorialCount = [[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue];
+            tutorialCount++;
+            NSNumber *newTutorialCount = [NSNumber numberWithInt:tutorialCount];
+            [[NSUserDefaults standardUserDefaults] setObject:newTutorialCount forKey:@"tutorialCount"];
+            NSLog(@"new tutorial count = %@", newTutorialCount);
+        }
+        
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue] == 2)
+        {
+            [self addChild:level3Label];
             int tutorialCount = [[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue];
             tutorialCount++;
             NSNumber *newTutorialCount = [NSNumber numberWithInt:tutorialCount];

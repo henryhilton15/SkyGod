@@ -116,7 +116,7 @@
 		<key>power</key>
 		<integer>50</integer>
 		<key>fallSpeed</key>
-		<integer>5</integer>
+		<real>4.5</real>
 	</dict>
 </dict>
 </plist>

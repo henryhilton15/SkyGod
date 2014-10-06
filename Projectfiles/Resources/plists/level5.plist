@@ -127,7 +127,9 @@
 		<integer>20</integer>
 	</dict>
 	<key>scenariosAvailable</key>
-	<integer>0</integer>
+	<integer>1</integer>
+	<key>scenarioDelay</key>
+	<string>1400</string>
 	<key>scoreCounter</key>
 	<integer>0</integer>
 	<key>coinCounter</key>

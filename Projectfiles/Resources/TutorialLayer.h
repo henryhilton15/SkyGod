@@ -13,6 +13,7 @@
     CCLabelTTF *introLabel1;
     CCLabelTTF *introLabel2;
     CCLabelTTF *level2Label;
+    CCLabelTTF *level3Label;
     
     CGSize winSize;
 }

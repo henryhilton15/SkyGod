@@ -2739,6 +2739,7 @@
 		2D808A7B1795F5BA006EADF5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2D808A8A1795F5BA006EADF5 /* config.lua */,
 				FE3E774819DF93F000FACC41 /* lock.png */,
 				FE3E774619DF870E00FACC41 /* box_grey.png */,
 				FE3E774419DF801400FACC41 /* Box_Yellow.png */,
@@ -2877,7 +2878,6 @@
 				2D808A871795F5BA006EADF5 /* cat4.png */,
 				2D808A881795F5BA006EADF5 /* city-back.png */,
 				2D808A891795F5BA006EADF5 /* city-front.png */,
-				2D808A8A1795F5BA006EADF5 /* config.lua */,
 				2D808A8B1795F5BA006EADF5 /* monster1.png */,
 				2D808A8C1795F5BA006EADF5 /* monster2.png */,
 				2D808A8D1795F5BA006EADF5 /* monster4.png */,
