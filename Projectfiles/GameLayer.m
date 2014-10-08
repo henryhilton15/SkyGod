@@ -937,6 +937,7 @@
 {
 	if ((self = [super init]))
 	{
+        
 //        self.isAccelerometerEnabled = YES;
 //        [[UIAccelerometer sharedAccelerometer] setUpdateInterval:
 //         (1.0 / 60)];
@@ -1241,7 +1242,7 @@
         [self addChild: myMenu z:100];
 
         
-        NSNumber* NSNumAvailable1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"airstrikesAvailable"];
+        NSNumber *NSNumAvailable1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"airstrikesAvailable"];
         int numAvailable1 = [NSNumAvailable1 intValue];
         
          counterSpacing = (winSize.width *.085);
@@ -1252,7 +1253,7 @@
         airstrikeCount.color = ccBLACK;
         [self addChild:airstrikeCount z:5000];
         
-        NSNumber* NSNumAvailable2 = [[NSUserDefaults standardUserDefaults] objectForKey:@"reinforcementsAvailable"];
+         NSNumber *NSNumAvailable2 = [[NSUserDefaults standardUserDefaults] objectForKey:@"reinforcementsAvailable"];
         int numAvailable2 = [NSNumAvailable2 intValue];
         
         reinforcemtsCount = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
