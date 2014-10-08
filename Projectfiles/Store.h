@@ -29,6 +29,19 @@
     int coins;
     NSNumber *NSCoins;
     CGSize winSize;
+    
+    CCLabelTTF *cantAffordThat;
+    CCLabelTTF *upgraded;
+    CCLabelTTF *purchased;
+    CCLabelTTF *shopInstructions;
+
+    int failedUpgradeCounter;
+    int successfulUpgradeCounter;
+    int successfulPurchaseCounter;
+    BOOL displayingSuccessfulUpgrade;
+    BOOL displayingSuccessfulPurchase;
+    BOOL displayingFailedUpgrade;
+    BOOL shopInstructionsRemoved;
 
 }
 
@@ -41,4 +54,8 @@
 -(void) upgradeFriendlyHelicopter;
 -(void) upgradeFriendlyTank;
 -(void) upgradeImmunity;
+-(void) successfulUpgrade;
+-(void) successfulPurchase;
+-(void) failedUpgrade;
+-(void) update:(ccTime)delta;
 @end

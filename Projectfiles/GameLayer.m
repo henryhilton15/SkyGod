@@ -848,9 +848,9 @@
     CCSprite *coin = [[Character alloc] initWithCoinImage];
     
     // Determine where to spawn the monster along the X axis
-    int actualX = 0;
-    int actualDuration = 0;
-    int rangeDuration = 0;
+    int actualX;
+    int actualDuration;
+    int rangeDuration;
     if(sameSpot == NO)
     {
         int minX = 50;
@@ -1788,7 +1788,7 @@
     {
         [self detectReachBottom];
     }
-    if([bananaArray count] > 0 && [goodGuys count] > 0)
+    if([bananaArray count] > 0 && [goodGuys count] > 0 && immunity == false)
     {
         [self detectBananaGoodGuyCollisions];
     }
@@ -1932,6 +1932,8 @@
         
         int reinforcementsNum = [[[NSUserDefaults standardUserDefaults] objectForKey:@"reinforcementsAvailable"] intValue];
         [reinforcemtsCount setString:[NSString stringWithFormat:@"%d", reinforcementsNum]];
+        
+        [coinslabel setString:[NSString stringWithFormat:@"coins:%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"coins"] intValue]]];
         
     }
 }
@@ -3173,6 +3175,7 @@
 
 -(void)shop:(CCMenuItemImage *)shopButton
 {
+//    [self addCoins:200];
     [[CCDirector sharedDirector] pushScene: (CCScene *)[[InGameShop alloc]  init]];
 }
 

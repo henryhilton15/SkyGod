@@ -27,9 +27,22 @@
     CCLabelTTF *airstrikeCount;
     CCLabelTTF *reinforcemtsCount;
     CCLabelTTF *coinsLabel;
-    int coins;
+    CCLabelTTF *shopInstructions;
+    
     NSNumber *NSCoins;
     CGSize winSize;
+    
+    CCLabelTTF *cantAffordThat;
+    CCLabelTTF *upgraded;
+    CCLabelTTF *purchased;
+    int coins;
+    int failedUpgradeCounter;
+    int successfulUpgradeCounter;
+    int successfulPurchaseCounter;
+    BOOL displayingSuccessfulUpgrade;
+    BOOL displayingSuccessfulPurchase;
+    BOOL displayingFailedUpgrade;
+    BOOL shopInstructionsRemoved;
     
 }
 
@@ -42,5 +55,9 @@
 -(void) upgradeFriendlyHelicopter;
 -(void) upgradeFriendlyTank;
 -(void) upgradeImmunity;
+-(void) successfulUpgrade;
+-(void) successfulPurchase;
+-(void) failedUpgrade;
+-(void) update:(ccTime)delta;
 @end
 

@@ -66,10 +66,10 @@
         [self addChild:goodBase z:2];
         [self addChild:badBase z:2];
         
+        int counterSpacing = (winSize.width *.085);
+        
         NSNumber* NSNumAvailable1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"airstrikesAvailable"];
         int numAvailable1 = [NSNumAvailable1 intValue];
-        
-        int counterSpacing = (winSize.width *.085);
         
         CCLabelTTF* airstrikeCount = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [airstrikeCount setString:[NSString stringWithFormat:@"%d", numAvailable1]];
@@ -94,6 +94,8 @@
         immunityCount.position = CGPointMake(winSize.width *.08 + (counterSpacing * 2), winSize.height - winSize.height/8);
         immunityCount.color = ccBLACK;
         [self addChild:immunityCount z:5000];
+        
+        
 
         int buttonSpacing = winSize.width *.08;
         int farLeftX = winSize.width * .05;
@@ -136,7 +138,8 @@
         level2Label.position = ccp(winSize.width/2, winSize.height * .7);
         level2Label.color = ccBLACK;
         
-        level3Label = [CCLabelTTF labelWithString:@"check out the shop in the upper right if you get stuck!" fontName:@"BenguiatItcTEE-Book" fontSize:18];
+        //level 3 label
+        level3Label = [CCLabelTTF labelWithString:@"check out the shop for in the upper right if you get stuck!" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         level3Label.position = ccp(winSize.width/2, winSize.height * .7);
         level3Label.color = ccBLACK;
         
@@ -183,7 +186,6 @@
 -(void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
-    NSLog(@"called ccTouchesEnded in tutorial layer");
 }
 
 -(void) mainCharacterIdleAnimation:(CCSprite *)mainCharacter

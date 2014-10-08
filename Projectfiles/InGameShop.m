@@ -13,6 +13,9 @@
 #import "SimpleAudioEngine.h"
 #import "Levelselect.h"
 #import "GameLayer.h"
+#import "TutorialLayer.h"
+
+#define displayLength 200
 
 @implementation InGameShop
 
@@ -22,6 +25,8 @@
     {
         if([[[NSUserDefaults standardUserDefaults] objectForKey:@"beenInStoreBefore"] boolValue] == false)
         {
+            [[CCDirector sharedDirector] pushScene: (CCScene *)[[TutorialLayer alloc]  init]];
+            
             NSLog(@"first time");
             NSNumber *trueBool = [NSNumber numberWithBool:true];
             [[NSUserDefaults standardUserDefaults] setObject:trueBool forKey:@"beenInStoreBefore"];
@@ -35,9 +40,18 @@
             [[NSUserDefaults standardUserDefaults] setObject:zero forKey:@"immunityAvailable"];
             [[NSUserDefaults standardUserDefaults] setObject:zero forKey:@"airstrikesAvailable"];
             [[NSUserDefaults standardUserDefaults] setObject:zero forKey:@"reinforcementsAvailable"];
+            
         }
         
         winSize = [CCDirector sharedDirector].winSize;
+        successfulUpgradeCounter = 0;
+        successfulPurchaseCounter = 0;
+        failedUpgradeCounter = 0;
+        displayingSuccessfulPurchase = false;
+        displayingSuccessfulUpgrade = false;
+        displayingFailedUpgrade = false;
+        
+        
         
         if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
         {
@@ -71,13 +85,34 @@
         [GameData sharedData].reinforcePrice = 75;
         [GameData sharedData].immunityPrice = 15;
         
-        CCMenuItemImage *BuyButton1 = [CCMenuItemImage itemWithNormalImage:@"upgrades-button.png" selectedImage:@"upgrades-button.png"];
-        BuyButton1.position= CGPointMake (100, 300);
-        BuyButton1.scale = 0.1f;
-        [self addChild:BuyButton1 z:50];
-        BuyButton1.color = ccBLUE;
+//       CCMenuItemImage *BuyButton1 = [CCMenuItemImage itemWithNormalImage:@"upgrades-button.png" selectedImage:@"upgrades-button.png"];
+//        BuyButton1.position= CGPointMake (100, 300);
+//        BuyButton1.scale = 0.1f;
+//        [self addChild:BuyButton1 z:50];
+//        BuyButton1.color = ccBLUE; 
+        
+        int upperLeftX = winSize.width * .2;
+        int upperLeftY = winSize.height * .85;
+        
+        cantAffordThat = [CCLabelTTF labelWithString:@"Can't afford that!" fontName:@"BenguiatItcTEE-Book" fontSize:18];
+        cantAffordThat.position = ccp(upperLeftX, upperLeftY);
+        cantAffordThat.color = ccRED;
+
         
         
+        upgraded = [CCLabelTTF labelWithString:@"Upgraded!" fontName:@"BenguiatItcTEE-Book" fontSize:18];
+        upgraded.position = ccp(upperLeftX, upperLeftY);
+        upgraded.color = ccBLUE;
+        
+        purchased = [CCLabelTTF labelWithString:@"Purchased!" fontName:@"BenguiatItcTEE-Book" fontSize:18];
+        purchased.position = ccp(upperLeftX, upperLeftY);
+        purchased.color = ccBLUE;
+        
+        //shop label
+        shopInstructions = [CCLabelTTF labelWithString:@"tap to buy/upgrade!" fontName:@"BenguiatItcTEE-Book" fontSize:18];
+        shopInstructions.position = ccp(upperLeftX, upperLeftY);
+        shopInstructions.color = ccBLUE;
+        [self addChild:shopInstructions];
         
         //CCMenu *myMenu = [CCMenu menuWithItems:BuyButton, nil];
         //[self addChild:myMenu];
@@ -275,8 +310,61 @@
         airstrikeCount.position = CGPointMake(winSize.width * .125, bottomRowAvailableY);
         airstrikeCount.color = ccBLACK;
         [self addChild:airstrikeCount z:4];
+        
+        [self scheduleUpdate];
     }
     return self;
+}
+
+-(void) update:(ccTime)delta
+{
+    if((displayingSuccessfulUpgrade == true || displayingSuccessfulPurchase == true || displayingFailedUpgrade == true) && shopInstructionsRemoved == false)
+    {
+        [self removeChild:shopInstructions];
+    }
+    
+    if(displayingFailedUpgrade == true)
+    {
+        if(failedUpgradeCounter == 0)
+        {
+            [self addChild:cantAffordThat];
+        }
+        failedUpgradeCounter++;
+        if(failedUpgradeCounter == displayLength)
+        {
+            failedUpgradeCounter = 0;
+            displayingFailedUpgrade = false;
+            [self removeChild:cantAffordThat];
+        }
+    }
+    if(displayingSuccessfulPurchase == true)
+    {
+        if(successfulPurchaseCounter == 0)
+        {
+            [self addChild:purchased];
+        }
+        successfulPurchaseCounter++;
+        if(successfulPurchaseCounter == displayLength)
+        {
+            successfulPurchaseCounter = 0;
+            displayingSuccessfulPurchase = false;
+            [self removeChild:purchased];
+        }
+    }
+    if(displayingSuccessfulUpgrade == true)
+    {
+        if(successfulUpgradeCounter == 0)
+        {
+            [self addChild:upgraded];
+        }
+        successfulUpgradeCounter++;
+        if(successfulUpgradeCounter == displayLength)
+        {
+            successfulUpgradeCounter= 0;
+            displayingSuccessfulUpgrade = false;
+            [self removeChild:upgraded];
+        }
+    }
 }
 
 - (void) resume: (CCMenuItemImage *) resume
@@ -311,10 +399,13 @@
         [shooterRank setString:[NSString stringWithFormat:@"Lvl:%d/5", rank]];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
         
+        
+        [self successfulUpgrade];
     }
     else
     {
         NSLog(@"can't afford that!");
+        [self failedUpgrade];
     }
     
 }
@@ -342,10 +433,13 @@
         [meleePrice setString:[NSString stringWithFormat:@"Price:%d", price]];
         [meleeRank setString:[NSString stringWithFormat:@"Lvl:%d/5", rank]];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
+        
+        [self successfulUpgrade];
     }
     else
     {
         NSLog(@"can't afford that!");
+        [self failedUpgrade];
     }
 }
 
@@ -374,10 +468,13 @@
         [fastShooterPrice setString:[NSString stringWithFormat:@"Price:%d", price]];
         [fastShooterRank setString:[NSString stringWithFormat:@"Lvl:%d/5", rank]];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
+        
+        [self successfulUpgrade];
     }
     else
     {
         NSLog(@"can't afford that!");
+        [self failedUpgrade];
     }
 }
 
@@ -454,10 +551,13 @@
         [tankPrice setString:[NSString stringWithFormat:@"Price:%d", price]];
         [tankRank setString:[NSString stringWithFormat:@"Lvl:%d/5", rank]];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
+        
+        [self successfulUpgrade];
     }
     else
     {
         NSLog(@"can't afford that!");
+        [self failedUpgrade];
     }
 }
 
@@ -506,11 +606,13 @@
         [immunityCount setString:[NSString stringWithFormat:@"%@", newNumAvailable]];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
 
+        [self successfulPurchase];
     }
     
     else
     {
         NSLog(@"can't afford that!");
+        [self failedUpgrade];
     }
     
 }
@@ -536,11 +638,13 @@
         [airstrikeCount setString:[NSString stringWithFormat:@"%@", newNumAvailable]];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
 
+        [self successfulPurchase];
     }
     
     else
     {
         NSLog(@"can't afford that!");
+        [self failedUpgrade];
     }
 }
 
@@ -564,12 +668,74 @@
         
         [reinforcemtsCount setString:[NSString stringWithFormat:@"%@", newNumAvailable]];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
-
+        
+        [self successfulPurchase];
     }
     
     else
     {
         NSLog(@"can't afford that!");
+        [self failedUpgrade];
+    }
+}
+
+-(void) successfulUpgrade
+{
+    if(displayingSuccessfulUpgrade == false)
+    {
+        displayingSuccessfulUpgrade = true;
+    }
+    if(displayingSuccessfulPurchase == true)
+    {
+        displayingSuccessfulPurchase = false;
+        successfulPurchaseCounter = 0;
+        [self removeChild:purchased];
+    }
+    if(displayingFailedUpgrade == true)
+    {
+        displayingFailedUpgrade = false;
+        failedUpgradeCounter = 0;
+        [self removeChild:cantAffordThat];
+    }
+}
+
+-(void) successfulPurchase
+{
+    if(displayingSuccessfulPurchase == false)
+    {
+        displayingSuccessfulPurchase = true;
+    }
+    if(displayingFailedUpgrade == true)
+    {
+        displayingFailedUpgrade = false;
+        failedUpgradeCounter = 0;
+        [self removeChild:cantAffordThat];
+    }
+    if(displayingSuccessfulUpgrade == true)
+    {
+        displayingSuccessfulUpgrade = false;
+        successfulUpgradeCounter = 0;
+        [self removeChild:upgraded];
+    }
+}
+
+-(void) failedUpgrade
+{
+    if(displayingFailedUpgrade == false)
+    {
+        displayingFailedUpgrade = true;
+    }
+    if(displayingSuccessfulPurchase == true)
+    {
+        displayingSuccessfulPurchase = false;
+        successfulPurchaseCounter = 0;
+        [self removeChild:purchased];
+    }
+    if(displayingSuccessfulUpgrade == true)
+    {
+        displayingSuccessfulUpgrade = false;
+        successfulUpgradeCounter = 0;
+        [self removeChild:upgraded];
     }
 }
 
