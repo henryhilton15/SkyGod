@@ -124,7 +124,7 @@
 		<key>endgameFrequency</key>
 		<integer>0</integer>
 		<key>endgameCoinTotal</key>
-		<integer>10</integer>
+		<integer>13</integer>
 	</dict>
 	<key>scenariosAvailable</key>
 	<integer>0</integer>

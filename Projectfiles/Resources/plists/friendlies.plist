@@ -97,7 +97,7 @@
 		<key>available</key>
 		<true/>
 		<key>health</key>
-		<integer>65</integer>
+		<integer>55</integer>
 		<key>fallingHealth</key>
 		<integer>1</integer>
 		<key>spawnRate</key>
@@ -116,7 +116,7 @@
 		<key>power</key>
 		<integer>50</integer>
 		<key>fallSpeed</key>
-		<integer>5</integer>
+		<real>4.5</real>
 	</dict>
 </dict>
 </plist>

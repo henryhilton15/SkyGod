@@ -63,8 +63,8 @@
         NSNumber *NSFriendlyFastShooterPrice = [NSNumber numberWithInt:(60 + (friendlyFastShooterRankInt * 30))];
         [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyFastShooterPrice forKey:@"friendlyFastShooterPrice"];
         
-        int friendlyTankRankInt = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankRank"];
-        NSNumber *NSFriendlyTankPrice = [NSNumber numberWithInt:((friendlyTankRankInt + 1) * 50)];
+        int friendlyTankRankInt = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankRank"] intValue];
+        NSNumber *NSFriendlyTankPrice = [NSNumber numberWithInt:(50 + (friendlyTankRankInt + 1) * 50)];
         [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyTankPrice forKey:@"friendlyTankPrice"];
         
         [GameData sharedData].airPrice = 40;

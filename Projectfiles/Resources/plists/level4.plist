@@ -128,6 +128,8 @@
 	</dict>
 	<key>scenariosAvailable</key>
 	<integer>1</integer>
+	<key>scenarioDelay</key>
+	<string>1500</string>
 	<key>scoreCounter</key>
 	<integer>0</integer>
 	<key>coinCounter</key>

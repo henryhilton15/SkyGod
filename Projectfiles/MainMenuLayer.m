@@ -134,8 +134,6 @@
 
 -(void) startGame: (CCMenuItem *)menuItem
 {
-
-    
     [[CCDirector sharedDirector] replaceScene: (CCScene*)[[Levelselect alloc] init]];
 }
 

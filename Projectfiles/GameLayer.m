@@ -15,6 +15,7 @@
 #import "Player.h"
 #import "VictoryLayer.h"
 #import "InGameShop.h"
+#import "TutorialLayer.h"
 
 
 #define MOUNTAIN_HEIGHT 70.0f
@@ -1025,6 +1026,7 @@
         badBaseExploded = false;
         goodBaseExploded = false;
         friendlyTankAvailable = NO;
+        addedImmunityCounter = false;
         scenarioDelayCounter = 0;
         scenario2interludeCounter = 0;
         devilStartingWidth = winSize.width - 100;
@@ -1158,6 +1160,11 @@
         badBaseHealthLabel.color = ccBLACK;
         [self addChild:badBaseHealthLabel z:4];
         
+        immunityCounterLabel = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
+        immunityCounterLabel.position = ccp(winSize.width/2, winSize.height * .7);
+        immunityCounterLabel.color = ccBLUE;
+        
+        
         int width = winSize.width;
         
         if(width == 568)
@@ -1245,7 +1252,7 @@
         NSNumber *NSNumAvailable1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"airstrikesAvailable"];
         int numAvailable1 = [NSNumAvailable1 intValue];
         
-         counterSpacing = (winSize.width *.085);
+        counterSpacing = (winSize.width *.085);
         
         airstrikeCount = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [airstrikeCount setString:[NSString stringWithFormat:@"%d", numAvailable1]];
@@ -1308,6 +1315,7 @@
             }
         }
         
+        
         [self scheduleUpdate];
     }
     return self;
@@ -1315,6 +1323,47 @@
 
 -(void) update:(ccTime)delta
 {
+    //determine whether to push to tutorial layer
+    
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue] == 0 && [GameData sharedData].currentLevelSelected == 1)
+    {
+        [[CCDirector sharedDirector] pushScene: (CCScene *)[[TutorialLayer alloc]  init]];
+    }
+    
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue] == 1 && [GameData sharedData].currentLevelSelected == 2)
+    {
+        //give player 1 airstrike
+        NSNumber *NSNumAvailable = [[NSUserDefaults standardUserDefaults] objectForKey:@"airstrikesAvailable"];
+        int numAvailable1 = [NSNumAvailable intValue];
+        numAvailable1++;
+        NSNumber *newNumAvailable1 = [NSNumber numberWithInt:numAvailable1];
+        [[NSUserDefaults standardUserDefaults] setObject:newNumAvailable1 forKey: @"airstrikesAvailable"];
+        [airstrikeCount setString:[NSString stringWithFormat:@"%@", newNumAvailable1]];
+        
+        //give player 1 immunity
+        NSNumber *NSNumAvailable2 = [[NSUserDefaults standardUserDefaults] objectForKey:@"immunityAvailable"];
+        int numAvailable2 = [NSNumAvailable2 intValue];
+        numAvailable2++;
+        NSNumber *newNumAvailable2 = [NSNumber numberWithInt:numAvailable2];
+        [[NSUserDefaults standardUserDefaults] setObject:newNumAvailable2 forKey: @"immunityAvailable"];
+        [airstrikeCount setString:[NSString stringWithFormat:@"%@", newNumAvailable2]];
+        
+        //give player 1 reinforcements
+        NSNumber *NSNumAvailable3 = [[NSUserDefaults standardUserDefaults] objectForKey:@"reinforcementsAvailable"];
+        int numAvailable3 = [NSNumAvailable3 intValue];
+        numAvailable3++;
+        NSNumber *newNumAvailable3 = [NSNumber numberWithInt:numAvailable3];
+        [[NSUserDefaults standardUserDefaults] setObject:newNumAvailable3 forKey: @"reinforcementsAvailable"];
+        [airstrikeCount setString:[NSString stringWithFormat:@"%@", newNumAvailable3]];
+        
+        [[CCDirector sharedDirector] pushScene:(CCScene *)[[TutorialLayer alloc] init]];
+    }
+    
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue] == 2 && [GameData sharedData].currentLevelSelected == 3)
+    {
+        [[CCDirector sharedDirector] pushScene: (CCScene *)[[TutorialLayer alloc]  init]];
+    }
+
     
 //    if(framecount % 500 == 0)
 //    {
@@ -1660,7 +1709,7 @@
             bomber = [bombers objectAtIndex:i];
             if(framecount % ((Character*)bomber).attackFrequency == 0 && bomber.position.x > 20 && bomber.position.x < winSize.width)
             {
-                CGPoint bomberPosition = ccp(bomber.position.x, bomber.position.y);
+                CGPoint bomberPosition = ccp(bomber.position.x - 10, bomber.position.y);
 
                 bomb = [[Character alloc] initWithGoodHelicopterBombImage];
                 int minDuration = ((Character*)bomb).fallSpeed - 1;
@@ -1838,11 +1887,23 @@
     if(immunity == true)
     {
         immunityFramecount++;
+        
+        int immunityLeft = immunityLength - immunityFramecount;
+        [immunityCounterLabel setString:[NSString stringWithFormat:@"immunity: %d", (immunityLeft/60)]];
+        
+        if(addedImmunityCounter == false)
+        {
+            [self addChild:immunityCounterLabel];
+            addedImmunityCounter = true;
+        }
+        
         if (immunityFramecount >= immunityLength)
         {
             immunity = false;
             immunityFramecount = 0;
             NSLog(@"immunity ended");
+            [self removeChild:immunityCounterLabel];
+            addedImmunityCounter = false;
         }
     }
     if(reinforcements == true)
@@ -3113,9 +3174,7 @@
 
 -(void)shop:(CCMenuItemImage *)shopButton
 {
-    [self addCoins:200];
     [[CCDirector sharedDirector] pushScene: (CCScene *)[[InGameShop alloc]  init]];
-
 }
 
 -(void) pauseMenu: (CCMenuItemImage *)pauseButton
