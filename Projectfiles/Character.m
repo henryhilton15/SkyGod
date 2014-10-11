@@ -187,7 +187,7 @@
         
         NSMutableDictionary *enemyHeliDict = [levelDictionary objectForKey:@"enemyHelicopter"];
         
-        fallingHealth = 5 + [[enemyHeliDict objectForKey:@"health"] intValue];
+        fallingHealth = 2 + [[enemyHeliDict objectForKey:@"health"] intValue];
         speed = 5 + [[enemyHeliDict objectForKey:@"speed"] intValue];
         type = BAD_HELICOPTER;
         power = 5;
@@ -393,12 +393,16 @@
         
         NSMutableDictionary* d = [friendlies objectForKey:@"friendlyMelee"];
         
-        NSNumber *rank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"];
+        int rank = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"] intValue];
+        if(rank <= 0)
+        {
+            rank = 1;
+        }
         
         unlocked = [[d objectForKey:@"available"] boolValue];
-        health = [[d objectForKey:@"health"] intValue] + (5 * [rank intValue]);
-        power = [[d objectForKey:@"power"] intValue] + (5 * [rank intValue]);
-        attackFrequency = [[d objectForKey:@"attackFrequency"] intValue] - (4 * [rank intValue]);
+        health = [[d objectForKey:@"health"] intValue] + (5 * (rank -1));
+        power = [[d objectForKey:@"power"] intValue] + (5 * (rank -1));
+        attackFrequency = [[d objectForKey:@"attackFrequency"] intValue] - (4 * (rank -1));
         fallSpeed = [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
         type = GOOD_KNIFE;
         attacked = false;

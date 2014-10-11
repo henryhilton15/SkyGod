@@ -139,7 +139,7 @@
         level2Label.color = ccBLACK;
         
         //level 3 label
-        level3Label = [CCLabelTTF labelWithString:@"check out the shop for in the upper right if you get stuck!" fontName:@"BenguiatItcTEE-Book" fontSize:18];
+        level3Label = [CCLabelTTF labelWithString:@"check out the shop in the upper right if you get stuck!" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         level3Label.position = ccp(winSize.width/2, winSize.height * .7);
         level3Label.color = ccBLACK;
         

@@ -28,7 +28,7 @@
 		<key>fallingHealth</key>
 		<integer>1</integer>
 		<key>spawnRate</key>
-		<integer>60</integer>
+		<integer>95</integer>
 		<key>damage</key>
 		<integer>20</integer>
 		<key>fallSpeed</key>
@@ -38,7 +38,7 @@
 		<key>zigZagFrequency</key>
 		<integer>6</integer>
 		<key>reinforcementRate</key>
-		<integer>450</integer>
+		<integer>500</integer>
 	</dict>
 	<key>Kmonster</key>
 	<dict>
@@ -116,7 +116,7 @@
 		<key>gameplayFallSpeed</key>
 		<real>4.5</real>
 		<key>gameplayFrequency</key>
-		<integer>-550</integer>
+		<integer>-750</integer>
 		<key>endgameFallSpeed</key>
 		<real>3.5</real>
 		<key>endgameFrequency</key>

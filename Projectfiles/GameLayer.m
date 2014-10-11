@@ -129,6 +129,26 @@
         minX = 100;
         maxX = winSize.width - 40;
     }
+    if(zigZagScenario == YES && [zigZagScenarioEnemies count] == 0)
+    {
+        minX = winSize.width * .05;
+        maxX = winSize.width * .2;
+    }
+    if(zigZagScenario == YES && [zigZagScenarioEnemies count] == 1)
+    {
+        minX = winSize.width * .3;
+        maxX = winSize.width * .45;
+    }
+    if(zigZagScenario == YES && [zigZagScenarioEnemies count] == 2)
+    {
+        minX = winSize.width * .55;
+        maxX = winSize.width * .6;
+    }
+    if(zigZagScenario == YES && [zigZagScenarioEnemies count] == 3)
+    {
+        minX = winSize.width * .8;
+        maxX = winSize.width * .95;
+    }
     
     int rangeX = maxX - minX;
     int actualX = minX + arc4random() % rangeX;
@@ -142,7 +162,7 @@
     devil1.scale = .5;
     [self addChild:devil1];
     [badGuys addObject:devil1];
-    if(zigZagScenario = YES)
+    if(zigZagScenario == YES)
     {
         [zigZagScenarioEnemies addObject:devil1];
     }
@@ -153,7 +173,6 @@
     
     double rangeDuration = maxDuration - minDuration;
     double actualDuration = (((arc4random() % 100) * 1.0f) * .01 * rangeDuration) + minDuration;
-    NSLog(@"enemy melee actual duration = %f", actualDuration);
     
     // Create the actions
     CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
@@ -546,12 +565,6 @@
     
     double rangeDuration = maxDuration - minDuration;
     double actualDuration = (((arc4random() % 100) * 1.0f) * .01 * rangeDuration) + minDuration;
-    NSLog(@"enemy shooter actual duration = %f", actualDuration);
-    
-    
-    
-
-
     
     // Create the actions
     CCMoveTo * actionMove = [CCMoveTo actionWithDuration:actualDuration
@@ -616,8 +629,6 @@
     
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
-    
-    NSLog(@"bad heli actual duration = %d", actualDuration);
     
     
     [self addChild:devilHeli z:1];
@@ -2446,7 +2457,7 @@
                                 if([zigZagScenarioEnemies count] == 0)
                                 {
                                     Scenario3 = false;
-                                    NSLog(@"scenario 3 = false");
+                                    NSLog(@"scenario 3 = false 1");
                                 }
                             }
                             if(Scenario4 == true && ((Character*)badGuy).type == BIG_MONSTER)
@@ -2666,7 +2677,7 @@
                     if(Scenario3 == true)
                     {
                         Scenario3 = false;
-                        NSLog(@"scenario 3 = false");
+                        NSLog(@"scenario 3 = false 2");
                     }
                 }
                 
@@ -2830,7 +2841,7 @@
                         if([zigZagScenarioEnemies count] == 0)
                         {
                             Scenario3 = false;
-                            NSLog(@"scenario 3 = false");
+                            NSLog(@"scenario 3 = false 3");
                         }
                     }
                     
@@ -3031,15 +3042,12 @@
 -(void) zigZagScenario
 {
     CCSprite* zFriendly= [[Character alloc] initWithSpartanImage];
-    zFriendly.scale= .6;
+    zFriendly.scale = .6;
     zFriendly.position = CGPointMake(winSize.width/2, winSize.height + 20);
     [self addChild:zFriendly];
     [goodGuys addObject:zFriendly];
     
-    [self addEnemyMelee:NO:YES];
-    [self addEnemyMelee:NO:YES];
-    [self addEnemyMelee:NO:YES];
-    [self addEnemyMelee:NO:YES];
+   
  
     
 //    CCSprite *enemy1= [[Character alloc] initWithEnemyMeleeImage];
@@ -3128,25 +3136,34 @@
     double zigZagDuration = enemyMeleeFallSpeed/7.5;
     
         id leftTop = [CCMoveTo actionWithDuration:zigZagDuration
-                                         position:ccp (winSize.width * .1, winSize.height * .9)];
+                                         position:ccp (winSize.width * .2, winSize.height * .9)];
         
         id rightTop = [CCMoveTo actionWithDuration:zigZagDuration
-                                          position:ccp(winSize.width * .8, winSize.height * .75)];
+                                          position:ccp(winSize.width * .8, winSize.height * .7)];
         
         id leftMid = [CCMoveTo actionWithDuration:zigZagDuration
-                                         position:ccp(winSize.width * .1, winSize.height * .6)];
+                                         position:ccp(winSize.width * .2, winSize.height * .5)];
         
         id rightMid = [CCMoveTo actionWithDuration:zigZagDuration
-                                          position:ccp(winSize.width * .8, winSize.height * .45)];
+                                          position:ccp(winSize.width * .8, winSize.height * .3)];
         
         id leftLow = [CCMoveTo actionWithDuration:zigZagDuration
-                                         position:ccp(winSize.width * .1, winSize.height * .3)];
+                                         position:ccp(winSize.width * .2, winSize.height * .1)];
         
-        id rightLow = [CCMoveTo actionWithDuration:zigZagDuration
-                                          position:ccp(winSize.width * .8, winSize.height * .15)];
+
         id drop = [CCMoveTo actionWithDuration:zigZagDuration position:ccp(winSize.width * .5, -20)];
     
-        [zFriendly runAction:[CCSequence actions: leftTop, rightTop, leftMid, rightMid, leftLow, rightLow,drop, nil]];
+    //delay actual subtraction of health to allow time for animation to run
+    double delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [zFriendly runAction:[CCSequence actions: leftTop, rightTop, leftMid, rightMid, leftLow, drop, nil]];
+        [self addEnemyMelee:NO:YES];
+        [self addEnemyMelee:NO:YES];
+        [self addEnemyMelee:NO:YES];
+        [self addEnemyMelee:NO:YES];
+    });
+    
 
 //            [zFriendly2 runAction:[CCSequence actions:delay2, leftTop, rightTop, leftMid, rightMid, leftLow, rightLow, nil]];
 //    
@@ -4497,7 +4514,7 @@
         goodBullet = [[Character alloc] initWithFriendlyRegularShooterBulletImage];
         goodBullet.scale = .25;
         goodBullet.color = ccBLACK;
-        goodBullet.position = ccp(angelX + 29, angelY + 10);
+        goodBullet.position = ccp(angelX + 40, angelY + 15);
         ((Character*)goodBullet).power = ((Character*)angel).power;
     }
     if(((Character*)angel).bulletType == SPEAR)
@@ -4509,7 +4526,7 @@
     if(((Character*)angel).bulletType == TANK_BOMB)
     {
         goodBullet = [[Character alloc] initWithTankBombImage];
-        goodBullet.position = ccp(angelX + 15, angelY + 20);
+        goodBullet.position = ccp(angelX + 20, angelY + 20);
         ((Character*)goodBullet).power = ((Character*)angel).power;
         [self tankBombAnimation:goodBullet];
     }
@@ -4898,15 +4915,6 @@
     
     float time = 0.1f;
     
-    if(big == NO)
-    {
-        time = 0.1f;
-    }
-    else
-    {
-        time = 0.1f;
-    }
-    
     //Create an animation from the set of frames you created earlier
 
     CCAnimation *explosionAnimation = [CCAnimation animationWithFrames: explosionFrames delay:time];
@@ -4916,12 +4924,13 @@
     
     if(big == NO)
     {
-        CCAction *explode = [CCAnimate actionWithDuration:delayInSeconds animation:explosionAnimation restoreOriginalFrame:NO];
+        CCAction *explode = [CCAnimate actionWithDuration:delayInSeconds  animation:explosionAnimation restoreOriginalFrame:NO];
             [character runAction:explode];
     }
     else
     {
-        CCAction *explode = [CCAnimate actionWithDuration:delayInSeconds animation:explosionAnimation restoreOriginalFrame:YES];
+        // just added the + .1
+        CCAction *explode = [CCAnimate actionWithDuration:(delayInSeconds + .1) animation:explosionAnimation restoreOriginalFrame:YES];
             [base runAction:explode];
     }
 

@@ -22,7 +22,7 @@
 		<key>available</key>
 		<true/>
 		<key>health</key>
-		<integer>35</integer>
+		<integer>30</integer>
 		<key>fallingHealth</key>
 		<integer>1</integer>
 		<key>spawnRate</key>
