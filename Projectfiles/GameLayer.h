@@ -114,6 +114,7 @@
     int friendlyMeleeReinforcementFramecount;
     int friendlyBaseStartingHealth;
     int enemyBaseStartingHealth;
+
     double explosionAnimationLength;
     double dyingAnimationLength;
     double KmonsterSpeed;

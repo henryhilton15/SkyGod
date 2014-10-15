@@ -36,7 +36,7 @@
 		<key>zigZagFrequency</key>
 		<integer>8</integer>
 		<key>reinforcementRate</key>
-		<integer>500</integer>
+		<integer>450</integer>
 	</dict>
 	<key>Kmonster</key>
 	<dict>

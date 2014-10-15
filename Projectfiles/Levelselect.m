@@ -61,7 +61,7 @@
                                                                         target:self
                                                                       selector:@selector(mainMenu:)];
         mainMenuButton.position = CGPointMake(winSize.width/2, winSize.height * .065);
-        mainMenuButton.scale = 0.7f;
+        mainMenuButton.scale = 0.6f;
         
         int row1 = winSize.height * .8;
         int row2 = winSize.height * .65;
@@ -163,7 +163,7 @@
         CCMenuItemImage * menuItem12 = [CCMenuItemImage itemWithNormalImage:@"Box_Yellow.png"
                                                              selectedImage: @"box_grey.png"
                                                                     target:self
-                                                                  selector:@selector(level12)];
+                                                                   selector:@selector(level12:)];
         menuItem12.scale=.35;
         menuItem12.position = ccp(col6, row2);
         
@@ -206,7 +206,7 @@
         CCMenuItemImage * menuItem18 = [CCMenuItemImage itemWithNormalImage:@"Box_Yellow.png"
                                                               selectedImage: @"box_grey.png"
                                                                      target:self
-                                                                   selector:@selector(level18)];
+                                                                   selector:@selector(level18:)];
         menuItem18.scale=.35;
 
         menuItem18.position = ccp(col6, row3);
@@ -253,7 +253,7 @@
         CCMenuItemImage * menuItem24 = [CCMenuItemImage itemWithNormalImage:@"Box_Yellow.png"
                                                               selectedImage: @"box_grey.png"
                                                                      target:self
-                                                                   selector:@selector(level24)];
+                                                                   selector:@selector(level24:)];
         menuItem24.scale=.35;
 
         menuItem24.position = ccp(col6, row4);
@@ -299,7 +299,7 @@
         CCMenuItemImage * menuItem30 = [CCMenuItemImage itemWithNormalImage:@"Box_Yellow.png"
                                                               selectedImage: @"box_grey.png"
                                                                      target:self
-                                                                   selector:@selector(level30)];
+                                                                   selector:@selector(level30:)];
         menuItem30.scale=.35;
 
         menuItem30.position = ccp(col6, row5);

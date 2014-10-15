@@ -28,13 +28,13 @@
 		<key>fallingHealth</key>
 		<integer>1</integer>
 		<key>spawnRate</key>
-		<integer>130</integer>
+		<integer>120</integer>
 		<key>damage</key>
 		<integer>20</integer>
 		<key>fallSpeed</key>
 		<real>4</real>
 		<key>attackFrequency</key>
-		<integer>20</integer>
+		<integer>15</integer>
 		<key>zigZagFrequency</key>
 		<integer>6</integer>
 		<key>reinforcementRate</key>
@@ -116,7 +116,7 @@
 		<key>gameplayFallSpeed</key>
 		<real>4.5</real>
 		<key>gameplayFrequency</key>
-		<integer>-500</integer>
+		<integer>-600</integer>
 		<key>endgameFallSpeed</key>
 		<integer>4</integer>
 		<key>endgameFrequency</key>

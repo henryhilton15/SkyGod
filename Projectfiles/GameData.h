@@ -39,6 +39,7 @@
 
 
 
+
 //Static (class) method:
 +(GameData*) sharedData;
 @end
