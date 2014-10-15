@@ -2026,7 +2026,9 @@
     }
     
     // Ok to add now - we've double checked position
+    projectile.position = ccp(-20,-20);
     [self addChild:projectile z:2];
+    
     
     int playerX = player.position.x;
     int playerY = player.position.y;

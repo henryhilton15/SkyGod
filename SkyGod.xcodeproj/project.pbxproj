@@ -860,9 +860,10 @@
 		FE3E774519DF801500FACC41 /* Box_Yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = FE3E774419DF801400FACC41 /* Box_Yellow.png */; };
 		FE3E774719DF870E00FACC41 /* box_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = FE3E774619DF870E00FACC41 /* box_grey.png */; };
 		FE3E774919DF93F000FACC41 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = FE3E774819DF93F000FACC41 /* lock.png */; };
+		FE54D29B19E8C6FC00A3A32C /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE54D29A19E8C6FC00A3A32C /* Icon-60@2x.png */; };
 		FEE19C8319E51D640042BC7E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEE19C8219E51D640042BC7E /* Images.xcassets */; };
-		FEE19C8519E51EC90042BC7E /* main-menu-banner-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = FEE19C8419E51EC90042BC7E /* main-menu-banner-hd.png */; };
-		FEE19C8719E51ECF0042BC7E /* main-menu-banner-ip5.png in Resources */ = {isa = PBXBuildFile; fileRef = FEE19C8619E51ECF0042BC7E /* main-menu-banner-ip5.png */; };
+		FEE19C8519E51EC90042BC7E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FEE19C8419E51EC90042BC7E /* Default@2x.png */; };
+		FEE19C8719E51ECF0042BC7E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FEE19C8619E51ECF0042BC7E /* Default-568h@2x.png */; };
 		FEFF3541198823EA002E668A /* VictoryLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFF3540198823EA002E668A /* VictoryLayer.m */; };
 		FEFF3598198824C7002E668A /* angel1move.png in Resources */ = {isa = PBXBuildFile; fileRef = FEFF354C198824C5002E668A /* angel1move.png */; };
 		FEFF3599198824C7002E668A /* angel2move.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEFF354D198824C5002E668A /* angel2move.plist */; };
@@ -1820,9 +1821,10 @@
 		FE3E774419DF801400FACC41 /* Box_Yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Box_Yellow.png; sourceTree = "<group>"; };
 		FE3E774619DF870E00FACC41 /* box_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = box_grey.png; sourceTree = "<group>"; };
 		FE3E774819DF93F000FACC41 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
+		FE54D29A19E8C6FC00A3A32C /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
 		FEE19C8219E51D640042BC7E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "SkyGod-iOS/Images.xcassets"; sourceTree = "<group>"; };
-		FEE19C8419E51EC90042BC7E /* main-menu-banner-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-menu-banner-hd.png"; sourceTree = "<group>"; };
-		FEE19C8619E51ECF0042BC7E /* main-menu-banner-ip5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-menu-banner-ip5.png"; sourceTree = "<group>"; };
+		FEE19C8419E51EC90042BC7E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		FEE19C8619E51ECF0042BC7E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		FEFF353F198823EA002E668A /* VictoryLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VictoryLayer.h; sourceTree = "<group>"; };
 		FEFF3540198823EA002E668A /* VictoryLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VictoryLayer.m; sourceTree = "<group>"; };
 		FEFF354C198824C5002E668A /* angel1move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = angel1move.png; sourceTree = "<group>"; };
@@ -1974,6 +1976,7 @@
 			children = (
 				2D6E355818E9EBC400573401 /* app icon.ai */,
 				2D6E355918E9EBC400573401 /* game-icon.png */,
+				FE54D29A19E8C6FC00A3A32C /* Icon-60@2x.png */,
 			);
 			path = "App icon - AVD";
 			sourceTree = "<group>";
@@ -2612,8 +2615,8 @@
 		2D6E36A718E9EBC400573401 /* Main Menu Screen - AVD */ = {
 			isa = PBXGroup;
 			children = (
-				FEE19C8619E51ECF0042BC7E /* main-menu-banner-ip5.png */,
-				FEE19C8419E51EC90042BC7E /* main-menu-banner-hd.png */,
+				FEE19C8619E51ECF0042BC7E /* Default-568h@2x.png */,
+				FEE19C8419E51EC90042BC7E /* Default@2x.png */,
 				2D6E36A818E9EBC400573401 /* game-logo.png */,
 				2D6E36AB18E9EBC400573401 /* main-menu-banner-ipad.png */,
 				2D6E36AC18E9EBC400573401 /* main-menu-banner-retina.png */,
@@ -3845,7 +3848,7 @@
 				2D808C121795F5BA006EADF5 /* shop-button.png in Resources */,
 				2D808C131795F5BA006EADF5 /* upgrades-button.png in Resources */,
 				2D808C141795F5BA006EADF5 /* view.png in Resources */,
-				FEE19C8519E51EC90042BC7E /* main-menu-banner-hd.png in Resources */,
+				FEE19C8519E51EC90042BC7E /* Default@2x.png in Resources */,
 				2D808C151795F5BA006EADF5 /* barrell-hd.png in Resources */,
 				FEFF35D8198824C7002E668A /* devilplanemove.png in Resources */,
 				2D808C161795F5BA006EADF5 /* basicbarrell-hd.png in Resources */,
@@ -4036,7 +4039,7 @@
 				2D808CBD1795F5BA006EADF5 /* animation_knight-4.png in Resources */,
 				2D808CBE1795F5BA006EADF5 /* animation_knight-5.png in Resources */,
 				2D808CBF1795F5BA006EADF5 /* animation_sword-1.png in Resources */,
-				FEE19C8719E51ECF0042BC7E /* main-menu-banner-ip5.png in Resources */,
+				FEE19C8719E51ECF0042BC7E /* Default-568h@2x.png in Resources */,
 				2D808CC01795F5BA006EADF5 /* animation_sword-2.png in Resources */,
 				2D808CC11795F5BA006EADF5 /* animation_sword-3.png in Resources */,
 				2D808CC21795F5BA006EADF5 /* dragon-side-hd.png in Resources */,
@@ -4202,6 +4205,7 @@
 				2D6E36FD18E9EBC400573401 /* app icon.ai in Resources */,
 				2D6E36FE18E9EBC400573401 /* game-icon.png in Resources */,
 				2D6E36FF18E9EBC400573401 /* ALGER.TTF in Resources */,
+				FE54D29B19E8C6FC00A3A32C /* Icon-60@2x.png in Resources */,
 				2D6E370018E9EBC400573401 /* BE09013T.TTF in Resources */,
 				2D6E370118E9EBC400573401 /* BE09016T.TTF in Resources */,
 				2D6E370218E9EBC400573401 /* BE09033T.TTF in Resources */,
@@ -4707,12 +4711,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DCFA90EF13B4F6F7009DD35A /* BuildSettings-Debug-iOS.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/mgwuSDK.embeddedframework\"",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"$(KKFRAMEWORKS_IOS)",
@@ -4720,6 +4723,7 @@
 				);
 				PRODUCT_NAME = "SkyGod-iOS";
 				PROVISIONING_PROFILE = "83BB7A02-1ACC-42FF-974E-98851E6F4FCB";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -4727,12 +4731,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DCFA90F013B4F811009DD35A /* BuildSettings-Release-iOS.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/mgwuSDK.embeddedframework\"",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"$(KKFRAMEWORKS_IOS)",
@@ -4740,6 +4743,7 @@
 				);
 				PRODUCT_NAME = "SkyGod-iOS";
 				PROVISIONING_PROFILE = "83BB7A02-1ACC-42FF-974E-98851E6F4FCB";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
