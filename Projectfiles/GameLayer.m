@@ -81,7 +81,7 @@
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *angel3fallAnimation = [CCAnimation animationWithFrames: angel3fallFrames delay:0.5f];
+    CCAnimation *angel3fallAnimation = [CCAnimation animationWithFrames: angel3fallFrames delay:0.2f];
     
     //Create an action with the animation that can then be assigned to a sprite
     
@@ -240,7 +240,7 @@
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *devil1fallAnimation = [CCAnimation animationWithFrames: devil1fallFrames delay:0.5f];
+    CCAnimation *devil1fallAnimation = [CCAnimation animationWithFrames: devil1fallFrames delay:0.25f];
     
     //Create an action with the animation that can then be assigned to a sprite
     
@@ -312,7 +312,7 @@
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *angel1fallAnimation = [CCAnimation animationWithFrames: angel1fallFrames delay:0.5f];
+    CCAnimation *angel1fallAnimation = [CCAnimation animationWithFrames: angel1fallFrames delay:0.15f];
     
     //Create an action with the animation that can then be assigned to a sprite
     
@@ -4295,7 +4295,7 @@
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *angel1moveAnimation = [CCAnimation animationWithFrames: angel1moveFrames delay:0.25f];
+    CCAnimation *angel1moveAnimation = [CCAnimation animationWithFrames: angel1moveFrames delay:0.15f];
     
     //Create an action with the animation that can then be assigned to a sprite
     
@@ -4668,7 +4668,7 @@
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *devil1moveAnimation = [CCAnimation animationWithFrames: devil1moveFrames delay:0.25f];
+    CCAnimation *devil1moveAnimation = [CCAnimation animationWithFrames: devil1moveFrames delay:0.15f];
     
     //Create an action with the animation that can then be assigned to a sprite
     
@@ -5407,7 +5407,7 @@
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *moveAnimation = [CCAnimation animationWithFrames: moveFrames delay:0.25f];
+    CCAnimation *moveAnimation = [CCAnimation animationWithFrames: moveFrames delay:0.2f];
     
     //Create an action with the animation that can then be assigned to a sprite
     
