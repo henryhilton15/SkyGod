@@ -158,7 +158,7 @@
         
         else if([[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue] == 1)
         {
-           
+            NSLog(@"tutorialCount now equals 2");
             [self addChild:level2Label];
             int tutorialCount = [[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue];
             tutorialCount++;

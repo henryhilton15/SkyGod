@@ -75,7 +75,7 @@
         health = [[d objectForKey:@"health"] intValue] + (200 + [rank intValue]);
         power = [[d objectForKey:@"power"] intValue];
         attackFrequency = [[d objectForKey:@"attackFrequency"] intValue] - (10 * [rank intValue]);
-        fallSpeed = [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
+        fallSpeed = [[d objectForKey:@"fallSpeed"] doubleValue];
         
         worth = 100;
         type = BIG_GOOD_GUY;
@@ -402,7 +402,7 @@
         unlocked = [[d objectForKey:@"available"] boolValue];
         health = [[d objectForKey:@"health"] intValue] + (5 * (rank -1));
         power = [[d objectForKey:@"power"] intValue] + (5 * (rank -1));
-        attackFrequency = [[d objectForKey:@"attackFrequency"] intValue] - (4 * (rank -1));
+        attackFrequency = [[d objectForKey:@"attackFrequency"] intValue];
         fallSpeed = [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
         type = GOOD_KNIFE;
         attacked = false;

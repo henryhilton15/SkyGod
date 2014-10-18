@@ -114,6 +114,7 @@
     int friendlyMeleeReinforcementFramecount;
     int friendlyBaseStartingHealth;
     int enemyBaseStartingHealth;
+    int scenario3InterludeCounter;
 
     double explosionAnimationLength;
     double dyingAnimationLength;
@@ -225,6 +226,7 @@
     BOOL friendlyTankAvailable;
     BOOL wentToInGameShop;
     BOOL addedImmunityCounter;
+    BOOL scenario3Interlude;
     
     CCLabelTTF *waveLabel;
     CCLabelTTF *goodBaseHealthLabel;
@@ -281,6 +283,8 @@
 -(void) createScenario;
 -(int) generateRandomNumber;
 -(void) fight;
+-(void) subtractHealthFromDevil:(CCSprite*)angel :(CCSprite*)devil;
+-(void) subtractHealthFromAngel:(CCSprite*)devil :(CCSprite*)angel;
 -(void) angel1attackAnimation:(CCSprite*)angelOne;
 -(void) angel1walkAnimation:(CCSprite*)goodBotom;
 -(void) angel2attackAnimation:(CCSprite*)angel;

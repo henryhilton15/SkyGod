@@ -24,8 +24,6 @@
     {
         if([[[NSUserDefaults standardUserDefaults] objectForKey:@"beenInStoreBefore"] boolValue] == false)
         {
-            [[CCDirector sharedDirector] pushScene: (CCScene *)[[TutorialLayer alloc]  init]];
-            
             NSLog(@"first time");
             NSNumber *trueBool = [NSNumber numberWithBool:true];
             [[NSUserDefaults standardUserDefaults] setObject:trueBool forKey:@"beenInStoreBefore"];

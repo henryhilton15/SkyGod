@@ -122,8 +122,8 @@
 -(void) addEnemyMelee:(BOOL)zigZag :(BOOL)zigZagScenario
 {
     // Determine where to spawn the monster along the X axis
-    int minX = 20;
-    int maxX = winSize.width - 20;
+    int minX = 80;
+    int maxX = winSize.width - 80;
     if(zigZag == YES)
     {
         minX = 100;
@@ -312,7 +312,7 @@
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *angel1fallAnimation = [CCAnimation animationWithFrames: angel1fallFrames delay:0.5f];
+    CCAnimation *angel1fallAnimation = [CCAnimation animationWithFrames: angel1fallFrames delay:0.25f];
     
     //Create an action with the animation that can then be assigned to a sprite
     
@@ -326,7 +326,10 @@
 {
     if(bigGoodGuysCounter > 0)
     {
+        NSLog(@"said to add Kamikaze");
         CCSprite *Kmonster = [[Character alloc] initWithKamikazeImage];
+        CCSprite *friendlyTankDummy = [[Character alloc] initWithFriendlyTankImage];
+        ((Character*)Kmonster).speed = ((Character*)friendlyTankDummy).fallSpeed;
         Kmonster.scale=.3;
         
         // Determine where to spawn the monster along the Y axis
@@ -340,7 +343,14 @@
                 }
             }
         }
-        int KmonsterMaxY = goodGuy.position.y - (((Character*)Kmonster).speed * 12) - 25;
+        
+        // Determine speed of the monster
+        int minDuration2 = ((Character*)Kmonster).speed - 3.5;
+        int maxDuration2 = ((Character*)Kmonster).speed - 2.5;
+        int rangeDuration2 = maxDuration2 - minDuration2;
+        int actualDuration2 = (arc4random() % rangeDuration2) + minDuration2;
+       
+        int KmonsterMaxY = goodGuy.position.y - (actualDuration2 * 25) - 10;
         int KmonsterMinY = KmonsterMaxY - 10;
         int rangeY = KmonsterMaxY - KmonsterMinY;
         int actualY = arc4random() % rangeY + KmonsterMinY;
@@ -348,11 +358,6 @@
         {
             return;
         }
-        // Determine speed of the monster
-        int minDuration2 = ((Character*)Kmonster).speed - 1;
-        int maxDuration2 = ((Character*)Kmonster).speed + 1;
-        int rangeDuration2 = maxDuration2 - minDuration2;
-        int actualDuration2 = (arc4random() % rangeDuration2) + minDuration2;
         
         [self addChild:Kmonster];
         [Kmonsters addObject:Kmonster];
@@ -418,7 +423,7 @@
         
         //Create an animation from the set of frames you created earlier
         
-        CCAnimation *devilHeliAnimation = [CCAnimation animationWithFrames: devilHeliFrames delay:0.25f];
+        CCAnimation *devilHeliAnimation = [CCAnimation animationWithFrames: devilHeliFrames delay:0.1f];
         
         //Create an action with the animation that can then be assigned to a sprite
         
@@ -786,12 +791,12 @@
     int rangeX = bigGoodGuyMaxX - bigGoodGuyMinX;
     int actualX = arc4random() % rangeX + bigGoodGuyMinX;
     
-    minDuration = 9.0;
-    maxDuration = 11.0;
-    int rangeDuration = maxDuration - minDuration;
-    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    minDuration = ((Character*)angelTank).fallSpeed - .3;
+    maxDuration = ((Character*)angelTank).fallSpeed + .3;
+    double rangeDuration = maxDuration - minDuration;
+    double actualDuration = (((arc4random() % 100) * 1.0f) * .01 * rangeDuration) + minDuration;
     
-    angelTank.scale = 1.2;
+    angelTank.scale = 1;
     angelTank.position = CGPointMake(actualX, winSize.height + 30);
     [self addChild:angelTank];
     [goodGuys addObject:angelTank];
@@ -821,13 +826,13 @@
     // Determine speed of the monster2
     minDuration = ((Character*)devilTank).fallSpeed - 1;
     maxDuration = ((Character*)devilTank).fallSpeed + 1;
-    int rangeDuration = maxDuration - minDuration;
-    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    double rangeDuration = maxDuration - minDuration;
+    double actualDuration = (((arc4random() % 100) * 1.0f) * .01 * rangeDuration) + minDuration;
     
     
     // Create the monster slightly off-screen along the right edge,
     // and along a random position along the Y axis as calculated above
-    devilTank.scale= .8;
+    devilTank.scale = .8;
     devilTank.position = CGPointMake(actualX, winSize.height); //+ enemy.contentSize.height/2);
     [self addChild:devilTank];
     [badGuys addObject:devilTank];
@@ -1340,8 +1345,9 @@
         [[CCDirector sharedDirector] pushScene: (CCScene *)[[TutorialLayer alloc]  init]];
     }
     
-    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue] == 1 && [GameData sharedData].currentLevelSelected == 2)
+    else if([[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue] == 1 && [GameData sharedData].currentLevelSelected == 2)
     {
+        NSLog(@"aqui");
         //give player 1 airstrike
         NSNumber *NSNumAvailable = [[NSUserDefaults standardUserDefaults] objectForKey:@"airstrikesAvailable"];
         int numAvailable1 = [NSNumAvailable intValue];
@@ -1369,9 +1375,10 @@
         [[CCDirector sharedDirector] pushScene:(CCScene *)[[TutorialLayer alloc] init]];
     }
     
-    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue] == 2 && [GameData sharedData].currentLevelSelected == 3)
+    else if([[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue] == 2 && [GameData sharedData].currentLevelSelected == 3)
     {
-        [[CCDirector sharedDirector] pushScene: (CCScene *)[[TutorialLayer alloc]  init]];
+        NSLog(@"alla");
+        [[CCDirector sharedDirector] pushScene:(CCScene *)[[TutorialLayer alloc]  init]];
     }
 
     
@@ -1521,7 +1528,7 @@
         [self angel1walkAnimation:friendlyMelee];
     }
     
-    if (Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true && waveChanging == false)
+    if (Scenario1 != true && Scenario2 != true && Scenario3 != true && scenario3Interlude != true && Scenario4 != true && waveChanging == false)
     {
 //        if((firstZigZag == true || zigZagDelayCounter % 250 == 0) && (firstBigMonster == true || bigMonsterDelayCounter % 200 == 0))
 //        {
@@ -1593,6 +1600,18 @@
 //        [self youWin];
 //        calledYouWin++;
 //    }
+    if(scenario3Interlude == true)
+    {
+        scenario3InterludeCounter++;
+        if(scenario3InterludeCounter == 80)
+        {
+            scenario3InterludeCounter = 0;
+            scenario3Interlude = false;
+            Scenario3 = true;
+            [self zigZagScenario];
+            NSLog(@"switched to scenario 3");
+        }
+    }
     
     if(waveChanging == true)
     {
@@ -2363,33 +2382,24 @@
                 if(CGRectIntersectsRect(goodGuyRect, KamikazeBox))
                 {
                    // NSLog(@"intersect");
-                    if (Kamikaze.position.y < 315)
-                    {
-                        ((Character*)goodGuy).health -= ((Character*)Kmonster).power;
-                        [deadKmonsters addObject:Kmonster];
-                    
-                        if(((Character*)goodGuy).health <= 0)
-                        {
 
-                            [deadGoodGuys addObject:goodGuy];
-                            [self enemiesKilledTotal];
-                            [self explosion:goodGuy :explosionAnimationLength :NO];
-                            Scenario2interlude = true;
-                            bigGoodGuysCounter = 0;
-                            NSLog(@"scenario 2 interlude = true");
-                            
-                            if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
-                            {
-                                [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
-                            }
-                            if(((Character*)goodGuy).type == GOOD_HELICOPTER_BOMB)
-                            {
-                                NSLog(@"good guy Kmonster collisions");
-                            }
-                            
-                            //enemiesKilledCounter ++;
+                        [deadKmonsters addObject:Kmonster];
+                        [deadGoodGuys addObject:goodGuy];
+                        [self enemiesKilledTotal];
+                        [self explosion:goodGuy :explosionAnimationLength :NO];
+                        Scenario2interlude = true;
+                        bigGoodGuysCounter = 0;
+                        NSLog(@"scenario 2 interlude = true");
+                        
+                        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+                        {
+                            [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
                         }
-                    }
+                        if(((Character*)goodGuy).type == GOOD_HELICOPTER_BOMB)
+                        {
+                            NSLog(@"good guy Kmonster collisions");
+                        }
+                        //enemiesKilledCounter ++;
                 }
             }
         }
@@ -2451,7 +2461,7 @@
                                 Scenario1 = false;
                                 NSLog(@"scenario 1 = false");
                             }
-                            if(Scenario3 == true && ((Character*)badGuy).type == BAD_KNIFE)
+                            if(Scenario3 == true && ((Character*)badGuy).type == BAD_KNIFE && [zigZagScenarioEnemies containsObject:badGuy] == true)
                             {
                                 [zigZagScenarioEnemies removeObject:badGuy];
                                 if([zigZagScenarioEnemies count] == 0)
@@ -2835,7 +2845,7 @@
                     badBottom = [[Character alloc] initWithEnemyMeleeImage];
                     [self spawnBottom:badGuy :badBottom :NO];
                     
-                    if(Scenario3 == true)
+                    if(Scenario3 == true && [zigZagScenarioEnemies containsObject:badGuy] == true)
                     {
                         [zigZagScenarioEnemies removeObject:badGuy];
                         if([zigZagScenarioEnemies count] == 0)
@@ -3133,31 +3143,31 @@
     
     CCSprite *mockEnemyMelee = [[Character alloc] initWithEnemyMeleeImage];
     double enemyMeleeFallSpeed = ((Character*)mockEnemyMelee).fallSpeed;
-    double zigZagDuration = enemyMeleeFallSpeed/7.5;
+    double zigZagDuration = enemyMeleeFallSpeed/4.8;
     
         id leftTop = [CCMoveTo actionWithDuration:zigZagDuration
                                          position:ccp (winSize.width * .2, winSize.height * .9)];
         
         id rightTop = [CCMoveTo actionWithDuration:zigZagDuration
-                                          position:ccp(winSize.width * .8, winSize.height * .7)];
+                                          position:ccp(winSize.width * .8, winSize.height * .6)];
         
         id leftMid = [CCMoveTo actionWithDuration:zigZagDuration
-                                         position:ccp(winSize.width * .2, winSize.height * .5)];
+                                         position:ccp(winSize.width * .2, winSize.height * .3)];
         
         id rightMid = [CCMoveTo actionWithDuration:zigZagDuration
-                                          position:ccp(winSize.width * .8, winSize.height * .3)];
-        
-        id leftLow = [CCMoveTo actionWithDuration:zigZagDuration
-                                         position:ccp(winSize.width * .2, winSize.height * .1)];
-        
-
-        id drop = [CCMoveTo actionWithDuration:zigZagDuration position:ccp(winSize.width * .5, -20)];
+                                          position:ccp(winSize.width * .8, winSize.height * .0)];
+//        
+//        id leftLow = [CCMoveTo actionWithDuration:zigZagDuration
+//                                         position:ccp(winSize.width * .2, winSize.height * .1)];
     
+
+//        id drop = [CCMoveTo actionWithDuration:zigZagDuration position:ccp(winSize.width * .5, -20)];
+//    
     //delay actual subtraction of health to allow time for animation to run
     double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [zFriendly runAction:[CCSequence actions: leftTop, rightTop, leftMid, rightMid, leftLow, drop, nil]];
+        [zFriendly runAction:[CCSequence actions: leftTop, rightTop, leftMid, rightMid, nil]];
         [self addEnemyMelee:NO:YES];
         [self addEnemyMelee:NO:YES];
         [self addEnemyMelee:NO:YES];
@@ -3311,8 +3321,7 @@
     if (scenarioNumber == 3)
     {
         NSLog(@"scenario 3 begins");
-        Scenario3 = true;
-        [self zigZagScenario];
+        scenario3Interlude = true;
     }
     if (scenarioNumber == 4)
     {
@@ -3689,7 +3698,7 @@
                             double delayInSeconds = 0.3;
                             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
                             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                                ((Character*)fightingDevil).health -= (int)((Character*)fightingAngel).power;
+                                [self subtractHealthFromDevil:fightingAngel :fightingDevil];
                             });
                         }
                     }
@@ -3710,7 +3719,7 @@
                             double delayInSeconds = 0.3;
                             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
                             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                                ((Character*)fightingAngel).health -= (int)((Character*)fightingDevil).power;
+                                [self subtractHealthFromAngel:fightingDevil :fightingAngel];
                             });
                         }
                     }
@@ -4218,8 +4227,22 @@
         }
     }
     */
-    
 
+-(void)subtractHealthFromDevil:(CCSprite *)angel :(CCSprite *)devil
+{
+    if([goodGuysBottom containsObject:angel] == true)
+    {
+        ((Character*)devil).health -= (int)((Character*)angel).power;
+    }
+}
+
+-(void)subtractHealthFromAngel:(CCSprite *)devil :(CCSprite *)angel
+{
+    if([badGuysBottom containsObject:devil] == true)
+    {
+        ((Character*)angel).health -= (int)((Character*)devil).power;
+    }
+}
 
 -(void) angel1attackAnimation:(CCSprite*) angelOne
 {
@@ -4506,92 +4529,100 @@
 
 -(void) angelShoot:(CCSprite*) angel
 {
-    float angelX = angel.position.x;
-    float angelY = angel.position.y;
-    
-    if(((Character*)angel).bulletType == REGULAR_GOOD_BULLET)
+    if([goodGuysBottom containsObject:angel] == true)
     {
-        goodBullet = [[Character alloc] initWithFriendlyRegularShooterBulletImage];
-        goodBullet.scale = .25;
-        goodBullet.color = ccBLACK;
-        goodBullet.position = ccp(angelX + 40, angelY + 15);
-        ((Character*)goodBullet).power = ((Character*)angel).power;
-    }
-    if(((Character*)angel).bulletType == SPEAR)
-    {
-        goodBullet = [[Character alloc] initWithSpearImage];
-        goodBullet.position = ccp(angelX + 10, angelY + 10);
-        ((Character*)goodBullet).power = ((Character*)angel).power;
-    }
-    if(((Character*)angel).bulletType == TANK_BOMB)
-    {
-        goodBullet = [[Character alloc] initWithTankBombImage];
-        goodBullet.position = ccp(angelX + 20, angelY + 20);
-        ((Character*)goodBullet).power = ((Character*)angel).power;
-        [self tankBombAnimation:goodBullet];
-    }
-    
-    goodBullet.anchorPoint = CGPointZero;
-    
-    [self addChild:goodBullet z:3];
-    [goodBulletArray addObject:goodBullet];
-    
-    CCMoveTo *shootRight = [CCMoveTo actionWithDuration:25
-                                              position:ccp(2000, goodBullet.position.y)];
-    
-//    //delay actual subtraction of health to allow time for animation to run
-//    double delayInSeconds = 0.3;
-//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        float angelX = angel.position.x;
+        float angelY = angel.position.y;
+        
+        if(((Character*)angel).bulletType == REGULAR_GOOD_BULLET)
+        {
+            goodBullet = [[Character alloc] initWithFriendlyRegularShooterBulletImage];
+            goodBullet.scale = .25;
+            goodBullet.color = ccBLACK;
+            goodBullet.position = ccp(angelX + 20, angelY + 15);
+            ((Character*)goodBullet).power = ((Character*)angel).power;
+        }
+        if(((Character*)angel).bulletType == SPEAR)
+        {
+            goodBullet = [[Character alloc] initWithSpearImage];
+            goodBullet.position = ccp(angelX + 10, angelY + 10);
+            ((Character*)goodBullet).power = ((Character*)angel).power;
+        }
+        if(((Character*)angel).bulletType == TANK_BOMB)
+        {
+            goodBullet = [[Character alloc] initWithTankBombImage];
+            goodBullet.position = ccp(angelX + 80, angelY + 15);
+            ((Character*)goodBullet).power = ((Character*)angel).power;
+            [self tankBombAnimation:goodBullet];
+        }
+        
+        goodBullet.anchorPoint = CGPointZero;
+        
+        [self addChild:goodBullet z:3];
+        [goodBulletArray addObject:goodBullet];
+        
+        CCMoveTo *shootRight = [CCMoveTo actionWithDuration:25
+                                                   position:ccp(2000, goodBullet.position.y)];
+        
+        //    //delay actual subtraction of health to allow time for animation to run
+        //    double delayInSeconds = 0.3;
+        //    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        //    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [goodBullet runAction:shootRight];
-//    });
+        //    });
+
+    }
 }
 
 -(void) devilShoot:(CCSprite*) devil
 {
-    //NSLog(@"bad fast guy shooting");
-    float devilX = devil.position.x;
-    float devilY = devil.position.y;
-    
-    if(((Character*)devil).bulletType == REGULAR_BAD_BULLET)
+    if([badGuysBottom containsObject:devil] == true)
     {
-        badBullet = [[Character alloc] initWithEnemyRegularShooterBulletImage];
-        badBullet.scale = .25;
-        badBullet.color = ccBLACK;
-
-        badBullet.position = ccp(devilX - 5, devilY + 10);
-        ((Character*)badBullet).power = ((Character*)devil).power;
-        badBullet.color = ccc3(100,0,0);
+        //NSLog(@"bad fast guy shooting");
+        float devilX = devil.position.x;
+        float devilY = devil.position.y;
         
+        if(((Character*)devil).bulletType == REGULAR_BAD_BULLET)
+        {
+            badBullet = [[Character alloc] initWithEnemyRegularShooterBulletImage];
+            badBullet.scale = .25;
+            badBullet.color = ccBLACK;
+            
+            badBullet.position = ccp(devilX - 5, devilY + 10);
+            ((Character*)badBullet).power = ((Character*)devil).power;
+            badBullet.color = ccc3(100,0,0);
+            
+            
+        }
+        if(((Character*)devil).bulletType == TANK_BOMB)
+        {
+            badBullet = [[Character alloc] initWithTankBombImage];
+            ((Character*)badBullet).power = ((Character*)devil).power;
+            badBullet.position = ccp(devilX - 10, devilY + 15);
+            badBullet.color = ccc3(100,0,0);
+            NSLog(@"shot tank bomb");
+            [self tankBombAnimation:goodBullet];
+        }
+        
+        badBullet.anchorPoint = CGPointZero;
+        
+        [self addChild:badBullet z:3];
+        [badBulletArray addObject:badBullet];
+        
+        CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:25
+                                                  position:ccp(-2000, badBullet.position.y)];
+        
+        [badBullet runAction:shootLeft];
+        
+        //    //delay actual subtraction of health to allow time for animation to run
+        //    double delayInSeconds = 0.3;
+        //    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        //    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        //        [badBullet runAction:shootLeft];
+        //    });
 
     }
-    if(((Character*)devil).bulletType == TANK_BOMB)
-    {
-        badBullet = [[Character alloc] initWithTankBombImage];
-        ((Character*)badBullet).power = ((Character*)devil).power;
-        badBullet.position = ccp(devilX - 10, devilY + 15);
-        badBullet.color = ccc3(100,0,0);
-        NSLog(@"shot tank bomb");
-        [self tankBombAnimation:goodBullet];
-    }
-
-    badBullet.anchorPoint = CGPointZero;
-    
-    [self addChild:badBullet z:3];
-    [badBulletArray addObject:badBullet];
-    
-    CCMoveTo *shootLeft = [CCMoveTo actionWithDuration:25
-                                              position:ccp(-2000, badBullet.position.y)];
-    
-    [badBullet runAction:shootLeft];
-    
-//    //delay actual subtraction of health to allow time for animation to run
-//    double delayInSeconds = 0.3;
-//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//        [badBullet runAction:shootLeft];
-//    });
-    
+        
 }
 
 -(void) devil1attackAnimation:(CCSprite*) devil

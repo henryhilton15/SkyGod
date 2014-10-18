@@ -60,7 +60,7 @@
 		<key>attackFrequency</key>
 		<integer>100</integer>
 		<key>fallSpeed</key>
-		<integer>5</integer>
+		<integer>6</integer>
 	</dict>
 	<key>friendlyZigZag</key>
 	<dict>
