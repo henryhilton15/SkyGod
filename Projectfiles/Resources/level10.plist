@@ -34,7 +34,7 @@
 		<key>fallSpeed</key>
 		<real>3.5</real>
 		<key>attackFrequency</key>
-		<integer>20</integer>
+		<integer>15</integer>
 		<key>zigZagFrequency</key>
 		<integer>6</integer>
 		<key>reinforcementRate</key>

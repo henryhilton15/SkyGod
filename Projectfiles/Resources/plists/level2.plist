@@ -32,7 +32,7 @@
 		<key>fallSpeed</key>
 		<integer>7</integer>
 		<key>attackFrequency</key>
-		<integer>30</integer>
+		<integer>15</integer>
 		<key>zigZagFrequency</key>
 		<integer>10</integer>
 		<key>reinforcementRate</key>

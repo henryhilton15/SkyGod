@@ -81,7 +81,7 @@
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *angel3fallAnimation = [CCAnimation animationWithFrames: angel3fallFrames delay:0.5f];
+    CCAnimation *angel3fallAnimation = [CCAnimation animationWithFrames: angel3fallFrames delay:0.2f];
     
     //Create an action with the animation that can then be assigned to a sprite
     
@@ -240,7 +240,7 @@
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *devil1fallAnimation = [CCAnimation animationWithFrames: devil1fallFrames delay:0.5f];
+    CCAnimation *devil1fallAnimation = [CCAnimation animationWithFrames: devil1fallFrames delay:0.25f];
     
     //Create an action with the animation that can then be assigned to a sprite
     
@@ -312,7 +312,9 @@
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *angel1fallAnimation = [CCAnimation animationWithFrames: angel1fallFrames delay:0.25f];
+
+    CCAnimation *angel1fallAnimation = [CCAnimation animationWithFrames: angel1fallFrames delay:0.15f];
+
     
     //Create an action with the animation that can then be assigned to a sprite
     
@@ -954,6 +956,7 @@
 {
 	if ((self = [super init]))
 	{
+        
 //        self.isAccelerometerEnabled = YES;
 //        [[UIAccelerometer sharedAccelerometer] setUpdateInterval:
 //         (1.0 / 60)];
@@ -1264,7 +1267,7 @@
         [self addChild: myMenu z:100];
 
         
-        NSNumber* NSNumAvailable1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"airstrikesAvailable"];
+        NSNumber *NSNumAvailable1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"airstrikesAvailable"];
         int numAvailable1 = [NSNumAvailable1 intValue];
         
         counterSpacing = (winSize.width *.085);
@@ -1275,7 +1278,7 @@
         airstrikeCount.color = ccBLACK;
         [self addChild:airstrikeCount z:5000];
         
-        NSNumber* NSNumAvailable2 = [[NSUserDefaults standardUserDefaults] objectForKey:@"reinforcementsAvailable"];
+         NSNumber *NSNumAvailable2 = [[NSUserDefaults standardUserDefaults] objectForKey:@"reinforcementsAvailable"];
         int numAvailable2 = [NSNumAvailable2 intValue];
         
         reinforcemtsCount = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
@@ -2057,7 +2060,9 @@
     }
     
     // Ok to add now - we've double checked position
+    projectile.position = ccp(-20,-20);
     [self addChild:projectile z:2];
+    
     
     int playerX = player.position.x;
     int playerY = player.position.y;
@@ -4315,7 +4320,7 @@
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *angel1moveAnimation = [CCAnimation animationWithFrames: angel1moveFrames delay:0.25f];
+    CCAnimation *angel1moveAnimation = [CCAnimation animationWithFrames: angel1moveFrames delay:0.15f];
     
     //Create an action with the animation that can then be assigned to a sprite
     
@@ -4696,7 +4701,7 @@
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *devil1moveAnimation = [CCAnimation animationWithFrames: devil1moveFrames delay:0.25f];
+    CCAnimation *devil1moveAnimation = [CCAnimation animationWithFrames: devil1moveFrames delay:0.15f];
     
     //Create an action with the animation that can then be assigned to a sprite
     
@@ -5435,7 +5440,7 @@
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *moveAnimation = [CCAnimation animationWithFrames: moveFrames delay:0.25f];
+    CCAnimation *moveAnimation = [CCAnimation animationWithFrames: moveFrames delay:0.2f];
     
     //Create an action with the animation that can then be assigned to a sprite
     

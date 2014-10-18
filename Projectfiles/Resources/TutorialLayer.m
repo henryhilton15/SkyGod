@@ -125,21 +125,25 @@
         [self addChild:airstrikePowerUp];
 
         
-        //level 1 labels
-        introLabel1 = [CCLabelTTF labelWithString:@"tap to shoot devils!" fontName:@"BenguiatItcTEE-Book" fontSize:18];
-        introLabel2 = [CCLabelTTF labelWithString:@"don't shoot angels!" fontName:@"BenguiatItcTEE-Book" fontSize:18];
+        //level 1 labe
+        introLabel1 = [CCLabelTTF labelWithString:@"tap to shoot DEVILS" fontName:@"Algerian" fontSize:30];
+        introLabel2 = [CCLabelTTF labelWithString:@"don't shoot ANGELS" fontName:@"Algerian" fontSize:30];
         introLabel1.position = ccp(winSize.width/2, winSize.height * .7);
         introLabel2.position = ccp(winSize.width/2, winSize.height * .58);
         introLabel1.color = ccBLACK;
         introLabel2.color = ccBLACK;
         
         //level 2 labels
-        level2Label = [CCLabelTTF labelWithString:@"check out the power-up buttons in the corner!" fontName:@"BenguiatItcTEE-Book" fontSize:18];
+        level2Label = [CCLabelTTF labelWithString:@"Tap AIRSTRIKE, REINFORCEMENTS," fontName:@"Algerian" fontSize:25];
         level2Label.position = ccp(winSize.width/2, winSize.height * .7);
         level2Label.color = ccBLACK;
         
-        //level 3 label
-        level3Label = [CCLabelTTF labelWithString:@"check out the shop in the upper right if you get stuck!" fontName:@"BenguiatItcTEE-Book" fontSize:18];
+        level2XLabel = [CCLabelTTF labelWithString:@"or IMMUNITY buttons for a boost!" fontName:@"Algerian" fontSize:25];
+        level2XLabel.position = ccp(winSize.width/2, winSize.height * .58);
+        level2XLabel.color = ccBLACK;
+        
+        level3Label = [CCLabelTTF labelWithString:@"Get Stuck? Go to the SHOP!" fontName:@"Algerian" fontSize:30];
+
         level3Label.position = ccp(winSize.width/2, winSize.height * .7);
         level3Label.color = ccBLACK;
         
@@ -160,6 +164,7 @@
         {
             NSLog(@"tutorialCount now equals 2");
             [self addChild:level2Label];
+            [self addChild: level2XLabel];
             int tutorialCount = [[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue];
             tutorialCount++;
             NSNumber *newTutorialCount = [NSNumber numberWithInt:tutorialCount];
