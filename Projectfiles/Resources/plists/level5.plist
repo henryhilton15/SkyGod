@@ -22,13 +22,13 @@
 		<key>available</key>
 		<true/>
 		<key>health</key>
-		<integer>25</integer>
+		<integer>40</integer>
 		<key>fallingHealth</key>
 		<integer>1</integer>
 		<key>spawnRate</key>
 		<integer>115</integer>
 		<key>damage</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>fallSpeed</key>
 		<real>4.5</real>
 		<key>attackFrequency</key>

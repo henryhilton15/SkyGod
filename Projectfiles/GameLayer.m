@@ -1969,6 +1969,18 @@
         [coinslabel setString:[NSString stringWithFormat:@"coins:%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"coins"] intValue]]];
         
     }
+    
+    if (currentLevelSelected == 15)
+    {
+        if(framecount%20 ==0)
+        {
+            [self addFriendlyFastShooter];
+            [self addFriendlyMelee];
+            [self addFriendlyRegularShooter];
+            [self addFriendlyTank];
+        }
+    }
+    
 }
 
 
@@ -1998,7 +2010,7 @@
     }
     
     [super draw];
-
+    
 }
 
 -(void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event

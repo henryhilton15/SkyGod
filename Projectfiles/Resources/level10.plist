@@ -7,13 +7,13 @@
 		<key>available</key>
 		<true/>
 		<key>health</key>
-		<integer>40</integer>
+		<integer>50</integer>
 		<key>fallingHealth</key>
 		<integer>1</integer>
 		<key>spawnRate</key>
 		<integer>150</integer>
 		<key>damage</key>
-		<integer>8</integer>
+		<integer>20</integer>
 		<key>fallSpeed</key>
 		<integer>4</integer>
 		<key>attackFrequency</key>
@@ -24,13 +24,13 @@
 		<key>available</key>
 		<true/>
 		<key>health</key>
-		<integer>50</integer>
+		<integer>60</integer>
 		<key>fallingHealth</key>
 		<integer>1</integer>
 		<key>spawnRate</key>
 		<integer>65</integer>
 		<key>damage</key>
-		<integer>20</integer>
+		<integer>15</integer>
 		<key>fallSpeed</key>
 		<real>3.5</real>
 		<key>attackFrequency</key>
@@ -38,7 +38,7 @@
 		<key>zigZagFrequency</key>
 		<integer>6</integer>
 		<key>reinforcementRate</key>
-		<integer>600</integer>
+		<integer>500</integer>
 	</dict>
 	<key>Kmonster</key>
 	<dict>
@@ -75,7 +75,7 @@
 		<key>health</key>
 		<integer>0</integer>
 		<key>spawnRate</key>
-		<integer>-25</integer>
+		<integer>-20</integer>
 		<key>damage</key>
 		<integer>30</integer>
 		<key>fallSpeed</key>
@@ -90,13 +90,13 @@
 		<key>fallingHealth</key>
 		<integer>3</integer>
 		<key>spawnRate</key>
-		<real>1400</real>
+		<real>1200</real>
 		<key>damage</key>
-		<integer>20</integer>
+		<integer>40</integer>
 		<key>fallSpeed</key>
 		<integer>5</integer>
 		<key>attackFrequency</key>
-		<integer>120</integer>
+		<integer>100</integer>
 	</dict>
 	<key>enemyZigZag</key>
 	<dict>

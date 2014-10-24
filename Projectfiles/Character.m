@@ -85,6 +85,20 @@
         right = false;
         bulletType = TANK_BOMB;
         attacked = false;
+        
+        if (rank == 2)
+        {
+            health+= 50;
+            power+= 15;
+        }
+        
+        if (rank == 3)
+        {
+            health += 100;
+            power+= 30;
+        }
+
+        
     }
     return self;
 }
@@ -112,6 +126,19 @@
         bulletType = REGULAR_GOOD_BULLET;
         worth = 50;
         attacked = false;
+        
+        if (rank == 2)
+        {
+            health+= 15;
+            power+= 10;
+        }
+        
+        if (rank == 3)
+        {
+            health += 30;
+            power+= 20;
+        }
+        
     }
     return self;
 }
@@ -381,6 +408,20 @@
         type = GOOD_FASTSHOOTER;
         bulletType = REGULAR_GOOD_BULLET;
         attacked = false;
+        
+        if (rank == 2)
+        {
+            health+= 10;
+            power+= 10;
+        }
+        
+        if (rank == 3)
+        {
+            health += 20;
+            power+= 20;
+        }
+
+        
     }
     return self;
 }
@@ -394,18 +435,29 @@
         NSMutableDictionary* d = [friendlies objectForKey:@"friendlyMelee"];
         
         int rank = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"] intValue];
-        if(rank <= 0)
-        {
-            rank = 1;
-        }
         
         unlocked = [[d objectForKey:@"available"] boolValue];
-        health = [[d objectForKey:@"health"] intValue] + (5 * (rank -1));
-        power = [[d objectForKey:@"power"] intValue] + (5 * (rank -1));
+        health = [[d objectForKey:@"health"] intValue];
+        power = [[d objectForKey:@"power"] intValue];
         attackFrequency = [[d objectForKey:@"attackFrequency"] intValue];
         fallSpeed = [[d objectForKey:@"fallSpeed"] intValue] * 1.0;
         type = GOOD_KNIFE;
         attacked = false;
+        
+        if(rank == 2)
+        {
+            health += 10;
+            power += 5;
+            
+        }
+        
+        if(rank == 3)
+        {
+            health += 20;
+            power += 10;
+            
+        }
+        
     }
     return self;
 }
