@@ -643,7 +643,7 @@
     {
 //        NSNumber* NSCoins = [[NSUserDefaults standardUserDefaults] objectForKey:@"coins"];
 //        int coins = [NSCoins intValue];
-//        coins += 120;
+//        coins += 500;
 //        NSNumber* newCoins = [NSNumber numberWithInt:coins];
 //        [[NSUserDefaults standardUserDefaults] setObject:newCoins forKey:@"coins"];
 //        NSLog(@"coins = %@", newCoins);

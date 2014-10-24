@@ -389,10 +389,8 @@
 		2D808BD81795F5BA006EADF5 /* cat1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808A851795F5BA006EADF5 /* cat1.png */; };
 		2D808BD91795F5BA006EADF5 /* cat3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808A861795F5BA006EADF5 /* cat3.png */; };
 		2D808BDA1795F5BA006EADF5 /* cat4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808A871795F5BA006EADF5 /* cat4.png */; };
-		2D808BDB1795F5BA006EADF5 /* city-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808A881795F5BA006EADF5 /* city-back.png */; };
 		2D808BDC1795F5BA006EADF5 /* city-front.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808A891795F5BA006EADF5 /* city-front.png */; };
 		2D808BDD1795F5BA006EADF5 /* config.lua in Resources */ = {isa = PBXBuildFile; fileRef = 2D808A8A1795F5BA006EADF5 /* config.lua */; };
-		2D808BDE1795F5BA006EADF5 /* monster1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808A8B1795F5BA006EADF5 /* monster1.png */; };
 		2D808BDF1795F5BA006EADF5 /* monster2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808A8C1795F5BA006EADF5 /* monster2.png */; };
 		2D808BE01795F5BA006EADF5 /* monster4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808A8D1795F5BA006EADF5 /* monster4.png */; };
 		2D808BE11795F5BA006EADF5 /* monster8.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D808A8E1795F5BA006EADF5 /* monster8.png */; };
@@ -1331,10 +1329,8 @@
 		2D808A851795F5BA006EADF5 /* cat1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat1.png; sourceTree = "<group>"; };
 		2D808A861795F5BA006EADF5 /* cat3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat3.png; sourceTree = "<group>"; };
 		2D808A871795F5BA006EADF5 /* cat4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat4.png; sourceTree = "<group>"; };
-		2D808A881795F5BA006EADF5 /* city-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "city-back.png"; sourceTree = "<group>"; };
 		2D808A891795F5BA006EADF5 /* city-front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "city-front.png"; sourceTree = "<group>"; };
 		2D808A8A1795F5BA006EADF5 /* config.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.lua; sourceTree = "<group>"; };
-		2D808A8B1795F5BA006EADF5 /* monster1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster1.png; sourceTree = "<group>"; };
 		2D808A8C1795F5BA006EADF5 /* monster2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster2.png; sourceTree = "<group>"; };
 		2D808A8D1795F5BA006EADF5 /* monster4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster4.png; sourceTree = "<group>"; };
 		2D808A8E1795F5BA006EADF5 /* monster8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster8.png; sourceTree = "<group>"; };
@@ -2876,9 +2872,7 @@
 				2D808A851795F5BA006EADF5 /* cat1.png */,
 				2D808A861795F5BA006EADF5 /* cat3.png */,
 				2D808A871795F5BA006EADF5 /* cat4.png */,
-				2D808A881795F5BA006EADF5 /* city-back.png */,
 				2D808A891795F5BA006EADF5 /* city-front.png */,
-				2D808A8B1795F5BA006EADF5 /* monster1.png */,
 				2D808A8C1795F5BA006EADF5 /* monster2.png */,
 				2D808A8D1795F5BA006EADF5 /* monster4.png */,
 				2D808AF31795F5BA006EADF5 /* planet.png */,
@@ -3777,10 +3771,8 @@
 				C343529F19D8A0C80022E502 /* level17.plist in Resources */,
 				2D808BD91795F5BA006EADF5 /* cat3.png in Resources */,
 				2D808BDA1795F5BA006EADF5 /* cat4.png in Resources */,
-				2D808BDB1795F5BA006EADF5 /* city-back.png in Resources */,
 				2D808BDC1795F5BA006EADF5 /* city-front.png in Resources */,
 				2D808BDD1795F5BA006EADF5 /* config.lua in Resources */,
-				2D808BDE1795F5BA006EADF5 /* monster1.png in Resources */,
 				2D808BDF1795F5BA006EADF5 /* monster2.png in Resources */,
 				FEFF35D3198824C7002E668A /* bigExplosion.plist in Resources */,
 				2D808BE01795F5BA006EADF5 /* monster4.png in Resources */,

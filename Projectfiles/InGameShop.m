@@ -227,25 +227,57 @@
         [self addChild:coinsLabel z:4];
         
         meleePrice = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
-        [meleePrice setString:[NSString stringWithFormat:@"Price:%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleePrice"] intValue]]];
+        int meleeLevel = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"] intValue];
+        if(meleeLevel == 3)
+        {
+            [meleePrice setString:[NSString stringWithFormat:@"MAX"]];
+        }
+        else
+        {
+            [meleePrice setString:[NSString stringWithFormat:@"Price:%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleePrice"] intValue]]];
+        }
         meleePrice.position = CGPointMake(winSize.width * .125, topRowPriceY);
         meleePrice.color = ccBLACK;
         [self addChild:meleePrice z:4];
         
         shooterPrice = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
-        [shooterPrice setString:[NSString stringWithFormat:@"Price:%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterPrice"] intValue]]];
+        int shooterLevel = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"] intValue];
+        if(shooterLevel == 3)
+        {
+            [shooterPrice setString:[NSString stringWithFormat:@"MAX"]];
+        }
+        else
+        {
+            [shooterPrice setString:[NSString stringWithFormat:@"Price:%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyShooterPrice"] intValue]]];
+        }
         shooterPrice.position = CGPointMake(winSize.width * .375, topRowPriceY);
         shooterPrice.color = ccBLACK;
         [self addChild:shooterPrice z:4];
         
         fastShooterPrice = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
-        [fastShooterPrice setString:[NSString stringWithFormat:@"Price:%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterPrice"] intValue]]];
+        int fastShooterLevel = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterRank"] intValue];
+        if(fastShooterLevel == 3)
+        {
+            [fastShooterPrice setString:[NSString stringWithFormat:@"MAX"]];
+        }
+        else
+        {
+            [fastShooterPrice setString:[NSString stringWithFormat:@"Price:%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterPrice"] intValue]]];
+        }
         fastShooterPrice.position = CGPointMake(winSize.width * .625, topRowPriceY);
         fastShooterPrice.color = ccBLACK;
         [self addChild:fastShooterPrice z:4];
         
         tankPrice = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
-        [tankPrice setString:[NSString stringWithFormat:@"Price:%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankPrice"] intValue]]];
+        int tankLevel = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankRank"] intValue];
+        if(tankLevel == 3)
+        {
+            [tankPrice setString:[NSString stringWithFormat:@"MAX"]];
+        }
+        else
+        {
+            [tankPrice setString:[NSString stringWithFormat:@"Price:%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankPrice"] intValue]]];
+        }
         tankPrice.position = CGPointMake(winSize.width * .875, topRowPriceY);
         tankPrice.color = ccBLACK;
         [self addChild:tankPrice z:4];
@@ -378,7 +410,7 @@
     NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"];
     int rank = [NSRank intValue];
     int price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterPrice"] intValue];
-    if(coins >= price)
+    if(coins >= price && rank < 3)
     {
         [GameData sharedData].friendlyRegularShooterAvailable = true;
         rank++;
@@ -395,12 +427,20 @@
         price = 30 + (rank * 15);
         NSNumber* NSPrice = [NSNumber numberWithInt:price];
         [[NSUserDefaults standardUserDefaults] setObject:NSPrice forKey:@"friendlyRegularShooterPrice"];
-        [shooterPrice setString:[NSString stringWithFormat:@"Price:%d", price]];
-        [shooterRank setString:[NSString stringWithFormat:@"Lvl:%d/5", rank]];
+        if(rank == 3)
+        {
+            [shooterPrice setString:[NSString stringWithFormat:@"MAX"]];
+        }
+        else
+        {
+            [shooterPrice setString:[NSString stringWithFormat:@"Price:%d", price]];
+        }
+        
+        [shooterRank setString:[NSString stringWithFormat:@"Lvl:%d/3", rank]];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
         
-        
         [self successfulUpgrade];
+        
     }
     else
     {
@@ -415,7 +455,7 @@
     NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"];
     int rank = [NSRank intValue];
     int price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleePrice"] intValue];
-    if(coins >= price)
+    if(coins >= price && rank < 3)
     {
         [GameData sharedData].friendlyMeleeAvailable = true;
         rank++;
@@ -430,8 +470,16 @@
         price = (rank + 1) * 10;
         NSNumber* NSPrice = [NSNumber numberWithInt:price];
         [[NSUserDefaults standardUserDefaults] setObject:NSPrice forKey:@"friendlyMeleePrice"];
-        [meleePrice setString:[NSString stringWithFormat:@"Price:%d", price]];
-        [meleeRank setString:[NSString stringWithFormat:@"Lvl:%d/5", rank]];
+        if(rank == 3)
+        {
+            [meleePrice setString:[NSString stringWithFormat:@"MAX"]];
+        }
+        else
+        {
+            [meleePrice setString:[NSString stringWithFormat:@"Price:%d", price]];
+        }
+        
+        [meleeRank setString:[NSString stringWithFormat:@"Lvl:%d/3", rank]];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
         
         [self successfulUpgrade];
@@ -448,7 +496,7 @@
     NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterRank"];
     int rank = [NSRank intValue];
     int price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterPrice"] intValue];
-    if(coins >= price)
+    if(coins >= price && rank < 3)
     {
         [GameData sharedData].friendlyFastShooterAvailable = true;
         rank++;
@@ -465,8 +513,15 @@
         price = 60 + (rank * 30);
         NSNumber* NSPrice = [NSNumber numberWithInt:price];
         [[NSUserDefaults standardUserDefaults] setObject:NSPrice forKey:@"friendlyFastShooterPrice"];
-        [fastShooterPrice setString:[NSString stringWithFormat:@"Price:%d", price]];
-        [fastShooterRank setString:[NSString stringWithFormat:@"Lvl:%d/5", rank]];
+        if(rank == 3)
+        {
+            [fastShooterPrice setString:[NSString stringWithFormat:@"MAX"]];
+        }
+        else
+        {
+            [fastShooterPrice setString:[NSString stringWithFormat:@"Price:%d", price]];
+        }
+        [fastShooterRank setString:[NSString stringWithFormat:@"Lvl:%d/3", rank]];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
         
         [self successfulUpgrade];
@@ -478,61 +533,12 @@
     }
 }
 
-//-(void) upgradeSpartan: (CCMenuItemImage *) spartanButton
-//{
-//    CGSize winSize = [CCDirector sharedDirector].winSize;
-//
-//    NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"spartanRank"];
-//    int rank = [NSRank intValue];
-//    int price = [GameData sharedData].reinforcePrice;
-//    if(coins > price)
-//    {
-//        rank++;
-//        NSNumber *newRank = [NSNumber numberWithInt:rank];
-//        [[NSUserDefaults standardUserDefaults] setObject:newRank forKey: @"spartanRank"];
-//        NSLog(@"friendly spartan rank = %@", newRank);
-//        coins -= price;
-//        NSCoins = [NSNumber numberWithInt:coins];
-//        [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
-//        NSLog(@"coins = %@", NSCoins);
-//
-//    }
-//    else
-//    {
-//        NSLog(@"can't afford that!");
-//    }
-//}
-//
-//-(void) upgradeHelicopter: (CCMenuItemImage *) helicopterButton
-//{
-//    CGSize winSize = [CCDirector sharedDirector].winSize;
-//
-//    NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyHelicopterRank"];
-//    int rank = [NSRank intValue];
-//    int price = [GameData sharedData].airPrice;
-//    if(coins > price)
-//    {
-//        rank++;
-//        NSNumber *newRank = [NSNumber numberWithInt:rank];
-//        [[NSUserDefaults standardUserDefaults] setObject:newRank forKey: @"friendlyHelicopterRank"];
-//        NSLog(@"friendly helicopter rank = %@", newRank);
-//        coins -= price;
-//        NSCoins = [NSNumber numberWithInt:coins];
-//        [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
-//        NSLog(@"coins = %@", NSCoins);
-//    }
-//    else
-//    {
-//        NSLog(@"can't afford that!");
-//    }
-//}
-
 -(void) upgradeTank: (CCMenuItemImage *) tankButton
 {
     NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankRank"];
     int rank = [NSRank intValue];
     int price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankPrice"] intValue];
-    if(coins >= price)
+    if(coins >= price && rank < 3)
     {
         rank++;
         NSNumber *newRank = [NSNumber numberWithInt:rank];
@@ -545,11 +551,18 @@
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
         
-        price = rank * 50 + 50;
+        price = (rank * 50) + 100;
         NSNumber* NSPrice = [NSNumber numberWithInt:price];
         [[NSUserDefaults standardUserDefaults] setObject:NSPrice forKey:@"friendlyTankPrice"];
-        [tankPrice setString:[NSString stringWithFormat:@"Price:%d", price]];
-        [tankRank setString:[NSString stringWithFormat:@"Lvl:%d/5", rank]];
+        if(rank == 3)
+        {
+            [tankPrice setString:[NSString stringWithFormat:@"MAX"]];
+        }
+        else
+        {
+            [tankPrice setString:[NSString stringWithFormat:@"Price:%d", price]];
+        }
+        [tankRank setString:[NSString stringWithFormat:@"Lvl:%d/3", rank]];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
         
         [self successfulUpgrade];
@@ -560,6 +573,7 @@
         [self failedUpgrade];
     }
 }
+
 
 //-(void) upgradeImmunity: (CCMenuItemImage *) immunityButton
 //{
