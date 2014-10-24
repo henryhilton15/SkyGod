@@ -4815,7 +4815,7 @@
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *idleAnimation = [CCAnimation animationWithFrames: idleFrames delay:0.2f];
+    CCAnimation *idleAnimation = [CCAnimation animationWithFrames: idleFrames delay:0.12f];
     
     //Create an action with the animation that can then be assigned to a sprite
     
@@ -4869,13 +4869,25 @@
 {
     //NSLog(@"inside explosion method");
     double delayInSeconds = delay;
-    CCSprite *base = [CCSprite spriteWithFile:@"badbase-3.png"];
+    CCSprite *enemyBase = [CCSprite spriteWithFile:@"badbase-3.png"];
+    CCSprite *friendlyBase = [CCSprite spriteWithFile:@"goodbase-3.png"];
+    BOOL friendlyBaseExplosion = false;
+    BOOL enemyBaseExplosion = false;
     if(((Character*)character).type == BAD_BASE)
     {
-        base.position = ccp(winSize.width - 50, BASE_HEIGHT);
-        base.scale = .5;
-        [self addChild:base z:1];
-
+        enemyBase.position = ccp(winSize.width - 50, BASE_HEIGHT);
+        enemyBase.scale = .5;
+        [self addChild:enemyBase z:1];
+        enemyBaseExplosion = true;
+    }
+    
+    if(((Character*)character).type == GOOD_BASE)
+    {
+        friendlyBase.position = ccp(50, BASE_HEIGHT);
+        friendlyBase.scale = .5;
+        [self addChild:friendlyBase z:1];
+        friendlyBaseExplosion = true;
+        
     }
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
  
@@ -4884,6 +4896,7 @@
         
         if(((Character*)character).type == GOOD_BASE)
         {
+            [goodGuysBottom removeObject:character];
             [self youLose];
             NSLog(@"called you lose");
         }
@@ -4892,7 +4905,6 @@
             NSLog(@"called you win");
             [badGuysBottom removeObject:character];
             [self youWin];
-            
         }
         
         if(big == NO)
@@ -4960,11 +4972,16 @@
     }
     else
     {
-        // just added the + .1
-        CCAction *explode = [CCAnimate actionWithDuration:(delayInSeconds + .1) animation:explosionAnimation restoreOriginalFrame:YES];
-            [base runAction:explode];
+        CCAction *explode = [CCAnimate actionWithDuration:delayInSeconds animation:explosionAnimation restoreOriginalFrame:YES];
+        if(friendlyBaseExplosion == true)
+        {
+            [friendlyBase runAction:explode];
+        }
+        if(enemyBaseExplosion == true)
+        {
+            [enemyBase runAction:explode];
+        }
     }
-
 }
 
 -(void) dying:(CCSprite*)character :(double) delay

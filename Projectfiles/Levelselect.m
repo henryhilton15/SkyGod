@@ -624,8 +624,7 @@
                 }
 
                 lock.position = ccp(posX,posY);
-                
-                
+
             }
 
         }
