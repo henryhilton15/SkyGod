@@ -640,12 +640,12 @@
 {
     if(1 <= highestLevelUnlocked)
     {
-//        NSNumber* NSCoins = [[NSUserDefaults standardUserDefaults] objectForKey:@"coins"];
-//        int coins = [NSCoins intValue];
-//        coins += 500;
-//        NSNumber* newCoins = [NSNumber numberWithInt:coins];
-//        [[NSUserDefaults standardUserDefaults] setObject:newCoins forKey:@"coins"];
-//        NSLog(@"coins = %@", newCoins);
+        NSNumber* NSCoins = [[NSUserDefaults standardUserDefaults] objectForKey:@"coins"];
+        int coins = [NSCoins intValue];
+        coins += 5000;
+        NSNumber* newCoins = [NSNumber numberWithInt:coins];
+        [[NSUserDefaults standardUserDefaults] setObject:newCoins forKey:@"coins"];
+        NSLog(@"coins = %@", newCoins);
         [GameData sharedData].currentLevelSelected = 1;
         [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
     }

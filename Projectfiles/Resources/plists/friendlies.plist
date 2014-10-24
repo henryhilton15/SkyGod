@@ -114,7 +114,7 @@
 		<key>health</key>
 		<integer>1</integer>
 		<key>power</key>
-		<integer>200</integer>
+		<integer>300</integer>
 		<key>fallSpeed</key>
 		<real>4.5</real>
 	</dict>

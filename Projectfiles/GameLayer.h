@@ -115,6 +115,7 @@
     int friendlyBaseStartingHealth;
     int enemyBaseStartingHealth;
     int scenario3InterludeCounter;
+    int startSpawnDelay;
 
     double explosionAnimationLength;
     double dyingAnimationLength;

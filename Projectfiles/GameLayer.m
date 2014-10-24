@@ -796,7 +796,7 @@
     double rangeDuration = maxDuration - minDuration;
     double actualDuration = (((arc4random() % 100) * 1.0f) * .01 * rangeDuration) + minDuration;
     
-    angelTank.scale = 1;
+    angelTank.scale = .8;
     angelTank.position = CGPointMake(actualX, winSize.height + 30);
     [self addChild:angelTank];
     [goodGuys addObject:angelTank];
@@ -1005,6 +1005,8 @@
         coinInterludeCounter = 0;
         coinDelayCounter = 0;
         friendlyTankFramecount = 0;
+        startSpawnDelay = 650;
+
 
         //deathFramecount = 60 * 30;
         //timeRemaining = 30;
@@ -1511,7 +1513,8 @@
 //    coinModifier;
 //    scenarioModifier;
     
-    if(framecount % enemyMeleeReinforcementFramecount == 0 && waveChanging == false)
+    
+    if(framecount % enemyMeleeReinforcementFramecount == 0 && waveChanging == false && (framecount > startSpawnDelay || [GameData sharedData].currentLevelSelected < 3))
     {
         CCSprite *enemyMelee = [[Character alloc] initWithEnemyMeleeImage];
         enemyMelee.scale = .5;
@@ -1587,7 +1590,7 @@
                 coinModifier = (arc4random() * gameplayCoinFramecount);
             }
         
-        if(friendlyTankAvailable == true && framecount % friendlyTankFramecount == 0)
+        if((friendlyTankAvailable == true && framecount % friendlyTankFramecount == 0) || framecount % 200 == 0)
         {
             Scenario2 = true;
             [self addFriendlyTank];
@@ -2636,7 +2639,7 @@
 
                     //[self spawnGoodBigGuyBottom];
                     goodBottom = [[Character alloc] initWithFriendlyTankImage];
-                    goodBottom.scale = 1.2;
+          
                     [self spawnBottom:goodGuy :goodBottom :YES];
                     
                     //animation
@@ -2671,7 +2674,7 @@
                     
                     //Create an action with the animation that can then be assigned to a sprite
                     
-                    CCAction *move = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:moveAnimation restoreOriginalFrame:YES]];
+                    CCAction *move = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:moveAnimation restoreOriginalFrame:NO]];
                     
                     
                     //tell the bear to run the taunting action
@@ -4472,11 +4475,11 @@
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *attackAnimation = [CCAnimation animationWithFrames: attackFrames delay:0.1f];
+    CCAnimation *attackAnimation = [CCAnimation animationWithFrames: attackFrames delay:0.2f];
     
     //Create an action with the animation that can then be assigned to a sprite
     
-    CCAction *attack = [CCAnimate actionWithDuration:1.0f animation:attackAnimation restoreOriginalFrame:NO];
+    CCAction *attack = [CCAnimate actionWithDuration:.8f animation:attackAnimation restoreOriginalFrame:NO];
     
     //tell the bear to run the taunting action
     [angel runAction:attack];
@@ -4536,7 +4539,7 @@
             goodBullet = [[Character alloc] initWithFriendlyRegularShooterBulletImage];
             goodBullet.scale = .25;
             goodBullet.color = ccBLACK;
-            goodBullet.position = ccp(angelX + 20, angelY + 15);
+            goodBullet.position = ccp(angelX + 40, angelY + 12);
             ((Character*)goodBullet).power = ((Character*)angel).power;
         }
         if(((Character*)angel).bulletType == SPEAR)
@@ -4548,7 +4551,8 @@
         if(((Character*)angel).bulletType == TANK_BOMB)
         {
             goodBullet = [[Character alloc] initWithTankBombImage];
-            goodBullet.position = ccp(angelX + 80, angelY + 15);
+            goodBullet.scale = .7;
+            goodBullet.position = ccp(angelX + 60, angelY + 15);
             ((Character*)goodBullet).power = ((Character*)angel).power;
             [self tankBombAnimation:goodBullet];
         }
