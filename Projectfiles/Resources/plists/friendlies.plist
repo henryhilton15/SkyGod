@@ -26,7 +26,7 @@
 		<key>spawnRate</key>
 		<integer>400</integer>
 		<key>power</key>
-		<integer>10</integer>
+		<integer>7</integer>
 		<key>attackFrequency</key>
 		<integer>15</integer>
 		<key>fallSpeed</key>
