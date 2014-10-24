@@ -798,7 +798,7 @@
     double rangeDuration = maxDuration - minDuration;
     double actualDuration = (((arc4random() % 100) * 1.0f) * .01 * rangeDuration) + minDuration;
     
-    angelTank.scale = 1;
+    angelTank.scale = .8;
     angelTank.position = CGPointMake(actualX, winSize.height + 30);
     [self addChild:angelTank];
     [goodGuys addObject:angelTank];
@@ -1008,6 +1008,8 @@
         coinInterludeCounter = 0;
         coinDelayCounter = 0;
         friendlyTankFramecount = 0;
+        startSpawnDelay = 650;
+
 
         //deathFramecount = 60 * 30;
         //timeRemaining = 30;
@@ -1514,7 +1516,8 @@
 //    coinModifier;
 //    scenarioModifier;
     
-    if(framecount % enemyMeleeReinforcementFramecount == 0 && waveChanging == false)
+    
+    if(framecount % enemyMeleeReinforcementFramecount == 0 && waveChanging == false && (framecount > startSpawnDelay || [GameData sharedData].currentLevelSelected < 3))
     {
         CCSprite *enemyMelee = [[Character alloc] initWithEnemyMeleeImage];
         enemyMelee.scale = .5;
@@ -1590,7 +1593,7 @@
                 coinModifier = (arc4random() * gameplayCoinFramecount);
             }
         
-        if(friendlyTankAvailable == true && framecount % friendlyTankFramecount == 0)
+        if((friendlyTankAvailable == true && framecount % friendlyTankFramecount == 0) || framecount % 200 == 0)
         {
             Scenario2 = true;
             [self addFriendlyTank];
@@ -2653,7 +2656,7 @@
 
                     //[self spawnGoodBigGuyBottom];
                     goodBottom = [[Character alloc] initWithFriendlyTankImage];
-                    goodBottom.scale = 1.2;
+          
                     [self spawnBottom:goodGuy :goodBottom :YES];
                     
                     //animation
@@ -2688,7 +2691,7 @@
                     
                     //Create an action with the animation that can then be assigned to a sprite
                     
-                    CCAction *move = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:moveAnimation restoreOriginalFrame:YES]];
+                    CCAction *move = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:moveAnimation restoreOriginalFrame:NO]];
                     
                     
                     //tell the bear to run the taunting action
@@ -3070,12 +3073,9 @@
 {
     CCSprite* zFriendly= [[Character alloc] initWithSpartanImage];
     zFriendly.scale = .6;
-    zFriendly.position = CGPointMake(winSize.width/2, winSize.height + 20);
+    zFriendly.position = CGPointMake(winSize.width/2, winSize.height * 1.15);
     [self addChild:zFriendly];
     [goodGuys addObject:zFriendly];
-    
-   
- 
     
 //    CCSprite *enemy1= [[Character alloc] initWithEnemyMeleeImage];
 //    enemy1.scale=.3;
@@ -4492,11 +4492,11 @@
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *attackAnimation = [CCAnimation animationWithFrames: attackFrames delay:0.1f];
+    CCAnimation *attackAnimation = [CCAnimation animationWithFrames: attackFrames delay:0.2f];
     
     //Create an action with the animation that can then be assigned to a sprite
     
-    CCAction *attack = [CCAnimate actionWithDuration:1.0f animation:attackAnimation restoreOriginalFrame:NO];
+    CCAction *attack = [CCAnimate actionWithDuration:.8f animation:attackAnimation restoreOriginalFrame:NO];
     
     //tell the bear to run the taunting action
     [angel runAction:attack];
@@ -4556,7 +4556,7 @@
             goodBullet = [[Character alloc] initWithFriendlyRegularShooterBulletImage];
             goodBullet.scale = .25;
             goodBullet.color = ccBLACK;
-            goodBullet.position = ccp(angelX + 20, angelY + 15);
+            goodBullet.position = ccp(angelX + 40, angelY + 12);
             ((Character*)goodBullet).power = ((Character*)angel).power;
         }
         if(((Character*)angel).bulletType == SPEAR)
@@ -4568,7 +4568,8 @@
         if(((Character*)angel).bulletType == TANK_BOMB)
         {
             goodBullet = [[Character alloc] initWithTankBombImage];
-            goodBullet.position = ccp(angelX + 80, angelY + 15);
+            goodBullet.scale = .7;
+            goodBullet.position = ccp(angelX + 60, angelY + 15);
             ((Character*)goodBullet).power = ((Character*)angel).power;
             [self tankBombAnimation:goodBullet];
         }
@@ -4832,7 +4833,7 @@
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *idleAnimation = [CCAnimation animationWithFrames: idleFrames delay:0.2f];
+    CCAnimation *idleAnimation = [CCAnimation animationWithFrames: idleFrames delay:0.12f];
     
     //Create an action with the animation that can then be assigned to a sprite
     
@@ -4886,13 +4887,25 @@
 {
     //NSLog(@"inside explosion method");
     double delayInSeconds = delay;
-    CCSprite *base = [CCSprite spriteWithFile:@"badbase-3.png"];
+    CCSprite *enemyBase = [CCSprite spriteWithFile:@"badbase-3.png"];
+    CCSprite *friendlyBase = [CCSprite spriteWithFile:@"goodbase-3.png"];
+    BOOL friendlyBaseExplosion = false;
+    BOOL enemyBaseExplosion = false;
     if(((Character*)character).type == BAD_BASE)
     {
-        base.position = ccp(winSize.width - 50, BASE_HEIGHT);
-        base.scale = .5;
-        [self addChild:base z:1];
-
+        enemyBase.position = ccp(winSize.width - 50, BASE_HEIGHT);
+        enemyBase.scale = .5;
+        [self addChild:enemyBase z:1];
+        enemyBaseExplosion = true;
+    }
+    
+    if(((Character*)character).type == GOOD_BASE)
+    {
+        friendlyBase.position = ccp(50, BASE_HEIGHT);
+        friendlyBase.scale = .5;
+        [self addChild:friendlyBase z:1];
+        friendlyBaseExplosion = true;
+        
     }
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
  
@@ -4901,6 +4914,7 @@
         
         if(((Character*)character).type == GOOD_BASE)
         {
+            [goodGuysBottom removeObject:character];
             [self youLose];
             NSLog(@"called you lose");
         }
@@ -4909,7 +4923,6 @@
             NSLog(@"called you win");
             [badGuysBottom removeObject:character];
             [self youWin];
-            
         }
         
         if(big == NO)
@@ -4977,11 +4990,16 @@
     }
     else
     {
-        // just added the + .1
-        CCAction *explode = [CCAnimate actionWithDuration:(delayInSeconds + .1) animation:explosionAnimation restoreOriginalFrame:YES];
-            [base runAction:explode];
+        CCAction *explode = [CCAnimate actionWithDuration:delayInSeconds animation:explosionAnimation restoreOriginalFrame:YES];
+        if(friendlyBaseExplosion == true)
+        {
+            [friendlyBase runAction:explode];
+        }
+        if(enemyBaseExplosion == true)
+        {
+            [enemyBase runAction:explode];
+        }
     }
-
 }
 
 -(void) dying:(CCSprite*)character :(double) delay
