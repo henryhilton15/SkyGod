@@ -68,7 +68,7 @@
         purchased.color = ccBLUE;
         
         //shop label
-        shopInstructions = [CCLabelTTF labelWithString:@"tap to buy/upgrade!" fontName:@"BenguiatItcTEE-Book" fontSize:18];
+        shopInstructions = [CCLabelTTF labelWithString:@"tap to buy!" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         shopInstructions.position = ccp(upperLeftX, upperLeftY);
         shopInstructions.color = ccBLUE;
         [self addChild:shopInstructions];

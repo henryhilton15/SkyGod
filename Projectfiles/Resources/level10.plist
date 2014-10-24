@@ -17,7 +17,7 @@
 		<key>fallSpeed</key>
 		<integer>4</integer>
 		<key>attackFrequency</key>
-		<integer>75</integer>
+		<integer>60</integer>
 	</dict>
 	<key>enemyMelee</key>
 	<dict>
@@ -96,7 +96,7 @@
 		<key>fallSpeed</key>
 		<integer>5</integer>
 		<key>attackFrequency</key>
-		<integer>150</integer>
+		<integer>120</integer>
 	</dict>
 	<key>enemyZigZag</key>
 	<dict>

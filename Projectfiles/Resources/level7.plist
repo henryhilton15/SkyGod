@@ -17,12 +17,16 @@
 		<key>fallSpeed</key>
 		<integer>4</integer>
 		<key>attackFrequency</key>
-		<integer>80</integer>
+		<integer>60</integer>
+		<key>New item</key>
+		<string></string>
 	</dict>
 	<key>enemyMelee</key>
 	<dict>
 		<key>available</key>
 		<true/>
+		<key>New item</key>
+		<string></string>
 		<key>health</key>
 		<integer>30</integer>
 		<key>fallingHealth</key>
