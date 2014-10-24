@@ -3053,12 +3053,9 @@
 {
     CCSprite* zFriendly= [[Character alloc] initWithSpartanImage];
     zFriendly.scale = .6;
-    zFriendly.position = CGPointMake(winSize.width/2, winSize.height + 20);
+    zFriendly.position = CGPointMake(winSize.width/2, winSize.height * 1.15);
     [self addChild:zFriendly];
     [goodGuys addObject:zFriendly];
-    
-   
- 
     
 //    CCSprite *enemy1= [[Character alloc] initWithEnemyMeleeImage];
 //    enemy1.scale=.3;
