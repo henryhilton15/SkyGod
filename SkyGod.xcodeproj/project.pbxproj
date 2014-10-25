@@ -865,6 +865,8 @@
 		FE87BE3D19FB695000DCC208 /* melee.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE87BE3C19FB695000DCC208 /* melee.wav */; };
 		FE87BE3F19FB695400DCC208 /* tank.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE87BE3E19FB695400DCC208 /* tank.wav */; };
 		FE87BE4119FB695A00DCC208 /* friendly.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE87BE4019FB695A00DCC208 /* friendly.wav */; };
+		FE87BE4319FB82BC00DCC208 /* Xplode.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE87BE4219FB82BC00DCC208 /* Xplode.wav */; };
+		FE87BE4519FB83B100DCC208 /* thud.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE87BE4419FB83B100DCC208 /* thud.wav */; };
 		FEE19C8319E51D640042BC7E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEE19C8219E51D640042BC7E /* Images.xcassets */; };
 		FEE19C8519E51EC90042BC7E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FEE19C8419E51EC90042BC7E /* Default@2x.png */; };
 		FEE19C8719E51ECF0042BC7E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FEE19C8619E51ECF0042BC7E /* Default-568h@2x.png */; };
@@ -1828,6 +1830,8 @@
 		FE87BE3C19FB695000DCC208 /* melee.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = melee.wav; sourceTree = "<group>"; };
 		FE87BE3E19FB695400DCC208 /* tank.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tank.wav; sourceTree = "<group>"; };
 		FE87BE4019FB695A00DCC208 /* friendly.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = friendly.wav; sourceTree = "<group>"; };
+		FE87BE4219FB82BC00DCC208 /* Xplode.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Xplode.wav; sourceTree = "<group>"; };
+		FE87BE4419FB83B100DCC208 /* thud.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = thud.wav; sourceTree = "<group>"; };
 		FEE19C8219E51D640042BC7E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "SkyGod-iOS/Images.xcassets"; sourceTree = "<group>"; };
 		FEE19C8419E51EC90042BC7E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		FEE19C8619E51ECF0042BC7E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -2748,6 +2752,8 @@
 		2D808A7B1795F5BA006EADF5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FE87BE4419FB83B100DCC208 /* thud.wav */,
+				FE87BE4219FB82BC00DCC208 /* Xplode.wav */,
 				FE87BE4019FB695A00DCC208 /* friendly.wav */,
 				FE87BE3E19FB695400DCC208 /* tank.wav */,
 				FE87BE3C19FB695000DCC208 /* melee.wav */,
@@ -4194,6 +4200,7 @@
 				2DAA40ED17AC271B00BA014B /* operator.available.png in Resources */,
 				2DAA40EE17AC271B00BA014B /* operator.connecting.png in Resources */,
 				FEFF35AF198824C7002E668A /* angelplanemove.plist in Resources */,
+				FE87BE4519FB83B100DCC208 /* thud.wav in Resources */,
 				2DAA40EF17AC271B00BA014B /* operator.unavailable.png in Resources */,
 				2DAA40F017AC271B00BA014B /* send-button-active.png in Resources */,
 				2DAA40F117AC271B00BA014B /* send-button-inactive.png in Resources */,
@@ -4543,6 +4550,7 @@
 				2D6E382018E9EBC400573401 /* game-logo.png in Resources */,
 				2D6E382318E9EBC400573401 /* main-menu-banner-ipad.png in Resources */,
 				2D6E382418E9EBC400573401 /* main-menu-banner-retina.png in Resources */,
+				FE87BE4319FB82BC00DCC208 /* Xplode.wav in Resources */,
 				2D6E382518E9EBC400573401 /* main-menu-banner.png in Resources */,
 				2D6E382618E9EBC400573401 /* main-menu-hd.png in Resources */,
 				2D6E382718E9EBC400573401 /* main-menu-ip5.png in Resources */,
@@ -4730,7 +4738,7 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "SkyGod-iOS";
-				PROVISIONING_PROFILE = "1fe73b7c-b722-4b29-a21f-0b6342f9fc30";
+				PROVISIONING_PROFILE = "83BB7A02-1ACC-42FF-974E-98851E6F4FCB";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -4750,7 +4758,7 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "SkyGod-iOS";
-				PROVISIONING_PROFILE = "1fe73b7c-b722-4b29-a21f-0b6342f9fc30";
+				PROVISIONING_PROFILE = "83BB7A02-1ACC-42FF-974E-98851E6F4FCB";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

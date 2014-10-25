@@ -16,10 +16,11 @@
 #import "TutorialLayer.h"
 
 #define displayLength 200
-#define meleePrice1 15
-#define meleePrice2 90
-#define meleePrice3 250
-#define shooterPrice0 40
+#define meleePrice1 5
+#define meleePrice2 15
+#define meleePrice3 90
+#define meleePrice4 250
+#define shooterPrice0 30
 #define shooterPrice1 150
 #define shooterPrice2 300
 #define fastShooterPrice0 75
@@ -92,6 +93,11 @@
         if (friendlyMeleeRankInt == 3)
         {
             NSNumber *NSFriendlyMeleePrice = [NSNumber numberWithInt:meleePrice3];
+            [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyMeleePrice forKey:@"friendlyMeleePrice"];
+        }
+        if(friendlyMeleeRankInt == 4)
+        {
+            NSNumber *NSFriendlyMeleePrice = [NSNumber numberWithInt:meleePrice4];
             [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyMeleePrice forKey:@"friendlyMeleePrice"];
         }
         
@@ -321,7 +327,7 @@
         
         meleePrice = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         int meleeLevel = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"] intValue];
-        if(meleeLevel == 3)
+        if(meleeLevel == 5)
         {
             [meleePrice setString:[NSString stringWithFormat:@"MAX"]];
         }
@@ -394,7 +400,7 @@
         [self addChild:immunityPrice z:4];
         
         meleeRank = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
-        [meleeRank setString:[NSString stringWithFormat:@"Lvl:%@/4", [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"]]];
+        [meleeRank setString:[NSString stringWithFormat:@"Lvl:%@/5", [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"]]];
         meleeRank.position = CGPointMake(winSize.width * .125, topRowLevelY);
         meleeRank.color = ccBLACK;
         [self addChild:meleeRank z:4];
@@ -546,7 +552,7 @@
             [shooterPrice setString:[NSString stringWithFormat:@"Price:%d", price]];
         }
         
-        [shooterRank setString:[NSString stringWithFormat:@"Lvl:%d/4", rank]];
+        [shooterRank setString:[NSString stringWithFormat:@"Lvl:%d/3", rank]];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
         
         [self successfulUpgrade];
@@ -565,7 +571,7 @@
     NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"];
     int rank = [NSRank intValue];
     int price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleePrice"] intValue];
-    if(coins >= price && rank < 4)
+    if(coins >= price && rank < 5)
     {
         coins -= price;
         [GameData sharedData].friendlyMeleeAvailable = true;
@@ -582,6 +588,11 @@
         if (rank == 2)
         {
             NSNumber *NSFriendlyMeleePrice = [NSNumber numberWithInt:meleePrice3];
+            [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyMeleePrice forKey:@"friendlyMeleePrice"];
+        }
+        if (rank == 3)
+        {
+            NSNumber *NSFriendlyMeleePrice = [NSNumber numberWithInt:meleePrice4];
             [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyMeleePrice forKey:@"friendlyMeleePrice"];
         }
         
@@ -602,7 +613,7 @@
         
         NSNumber* NSPrice = [NSNumber numberWithInt:price];
         [[NSUserDefaults standardUserDefaults] setObject:NSPrice forKey:@"friendlyMeleePrice"];
-        if(rank == 4)
+        if(rank == 5)
         {
             [meleePrice setString:[NSString stringWithFormat:@"MAX"]];
         }
@@ -611,7 +622,7 @@
             [meleePrice setString:[NSString stringWithFormat:@"Price:%d", price]];
         }
         
-        [meleeRank setString:[NSString stringWithFormat:@"Lvl:%d/4", rank]];
+        [meleeRank setString:[NSString stringWithFormat:@"Lvl:%d/5", rank]];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
         
         [self successfulUpgrade];

@@ -444,18 +444,23 @@
         type = GOOD_KNIFE;
         attacked = false;
         
-        if(rank == 2)
+        if(rank == 3)
         {
             health += 10;
             power += 5;
             
         }
         
-        if(rank == 3)
+        if(rank == 4)
         {
             health += 20;
             power += 10;
-            
+        }
+        
+        if(rank == 5)
+        {
+            health +=30;
+            power +=15;
         }
         
     }

@@ -347,12 +347,12 @@
         }
         
         // Determine speed of the monster
-        int minDuration2 = ((Character*)Kmonster).speed - 3.5;
-        int maxDuration2 = ((Character*)Kmonster).speed - 2.5;
+        int minDuration2 = ((Character*)Kmonster).speed - 2.5;
+        int maxDuration2 = ((Character*)Kmonster).speed - 1.5;
         int rangeDuration2 = maxDuration2 - minDuration2;
         int actualDuration2 = (arc4random() % rangeDuration2) + minDuration2;
        
-        int KmonsterMaxY = goodGuy.position.y - (actualDuration2 * 25) - 10;
+        int KmonsterMaxY = goodGuy.position.y - (actualDuration2 * 25) - 50;
         int KmonsterMinY = KmonsterMaxY - 10;
         int rangeY = KmonsterMaxY - KmonsterMinY;
         int actualY = arc4random() % rangeY + KmonsterMinY;
@@ -1673,6 +1673,14 @@
                 coinInterlude = false;
                 coinInterludeCounter = 0;
                 waveChanging = false;
+                if([GameData sharedData].coinsGained < 10 && [GameData sharedData].currentLevelSelected == 1)
+                {
+                    [self addCoins:(10 - [GameData sharedData].coinsGained)];
+                }
+                if([GameData sharedData].coinsGained < 10 && [GameData sharedData].currentLevelSelected == 2)
+                {
+                    [self addCoins:(12 - [GameData sharedData].coinsGained)];
+                }
                 [[CCDirector sharedDirector] replaceScene: (CCScene*)[[VictoryLayer alloc] init]];
             }
         }
@@ -2312,7 +2320,14 @@
                         [deadGoodGuys addObject:goodGuy];
                         if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
                         {
-                            [[SimpleAudioEngine sharedEngine] playEffect:@"friendly.wav"];
+                            if(((Character*)goodGuy).type == BIG_GOOD_GUY)
+                            {
+                                [[SimpleAudioEngine sharedEngine] playEffect:@"Xplosion.wav"];
+                            }
+                            else
+                            {
+                                [[SimpleAudioEngine sharedEngine] playEffect:@"friendly.wav"];
+                            }
                         }
                         [self explosion:goodGuy :explosionAnimationLength: NO];
                         if(((Character*)goodGuy).type == BIG_GOOD_GUY && Scenario2 == true)
@@ -2479,19 +2494,29 @@
                             {
                                 if ((((Character*)badGuy).type) == BAD_KNIFE)
                                 {
-                                    [[SimpleAudioEngine sharedEngine] playEffect:@"melee.wav"];
+                                    [[SimpleAudioEngine sharedEngine] playEffect:@"thud.wav"];
                                 }
                                 
-                                if ((((Character*)badGuy).type) == BAD_GUY)
+                                else if ((((Character*)badGuy).type) == BAD_GUY)
                                 {
-                                    [[SimpleAudioEngine sharedEngine] playEffect:@"shooter.wav"];
+                                    [[SimpleAudioEngine sharedEngine] playEffect:@"thud.wav"];
                                 }
                                 
-                                if ((((Character*)badGuy).type) == BIG_MONSTER)
+                                else if ((((Character*)badGuy).type) == BIG_MONSTER)
                                 {
-                                    [[SimpleAudioEngine sharedEngine] playEffect:@"tank.wav"];
+                                    [[SimpleAudioEngine sharedEngine] playEffect:@"Xplosion.wav"];
                                 }
-
+                                
+                                else if ((((Character*)badGuy).type) == BAD_HELICOPTER)
+                                {
+                                    [[SimpleAudioEngine sharedEngine] playEffect:@"Xplosion.wav"];
+                                }
+                                
+                                else
+                                {
+                                    [[SimpleAudioEngine sharedEngine] playEffect:@"thud.wav"];
+                                }
+                                
                                 
                             }
                             [self enemiesKilledTotal];
@@ -4316,11 +4341,11 @@
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *attackAnimation = [CCAnimation animationWithFrames: attackFrames delay:0.2f];
+    CCAnimation *attackAnimation = [CCAnimation animationWithFrames: attackFrames delay:0.1f];
     
     //Create an action with the animation that can then be assigned to a sprite
     
-    CCAction *attack = [CCAnimate actionWithDuration:0.2f animation:attackAnimation restoreOriginalFrame:NO];
+    CCAction *attack = [CCAnimate actionWithDuration:0.25f animation:attackAnimation restoreOriginalFrame:NO];
     
     //tell the bear to run the taunting action
     [angelOne runAction:attack];
@@ -5217,6 +5242,11 @@
                 
                 if(CGRectIntersectsRect(badBottomRect,goodBulletBox) && abs(goodBullet.position.y - badBottom.position.y) < 45)
                 {
+                    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+                    {
+                        [[SimpleAudioEngine sharedEngine] playEffect:@"Xplosion.wav"];
+                    }
+                    
                     if(((Character*)badBottom).type == BAD_BASE)
                     {
                         [self subtractBadBaseHealth:goodBullet];
@@ -5250,6 +5280,11 @@
                 
                 if(CGRectIntersectsRect(goodBottomRect,badBulletBox) && abs(goodBottom.position.y - badBullet.position.y) < 45)
                 {
+                    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+                    {
+                        [[SimpleAudioEngine sharedEngine] playEffect:@"friendly.wav"];
+                    }
+                    
                     if(((Character*)goodBottom).type == GOOD_BASE && waveChanging == false)
                     {
                         [self subtractGoodBaseHealth:badBullet];
@@ -5886,6 +5921,11 @@
 {
     if(immunity == false && waveChanging == false)
     {
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+        {
+            [[SimpleAudioEngine sharedEngine] playEffect:@"Xplosion.wav"];
+        }
+        
         (((Character*)goodBase).health) -= ((Character*)fightingDevil).power;
         int healthCount = (((Character*)goodBase).health);
         if(healthCount >= 0)
@@ -5935,6 +5975,8 @@
 -(void) subtractBadBaseHealth:(CCSprite*)fightingAngel
 {
         (((Character*)badBase).health) -= ((Character*)fightingAngel).power;
+    
+    
         int healthCount = (((Character*)badBase).health);
         if(healthCount >= 0)
         {
@@ -5945,6 +5987,11 @@
             [badBaseHealthLabel setString:[NSString stringWithFormat:@"0"]];
         }
 
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+        {
+            [[SimpleAudioEngine sharedEngine] playEffect:@"Xplosion.wav"];
+        }
+    
         if(((Character*)badBase).health < (enemyBaseStartingHealth/2) && ((Character*)badBase).health >= (enemyBaseStartingHealth/4) && badBaseImageChangeCount == 0)
 
         {
@@ -6405,14 +6452,14 @@
     int currentCoins = [[MGWU objectForKey:@"coins"] intValue];
     int newCoins = currentCoins + numCoins;
     NSNumber *newNSCoins = [NSNumber numberWithInt:newCoins];
-    [[NSUserDefaults standardUserDefaults] setObject:newNSCoins forKey:@"coins"];
+    [MGWU setObject:newNSCoins forKey:@"coins"];
     NSLog(@"coins = %@", newNSCoins);
     
     [GameData sharedData].coinsGained += numCoins;
     
     [self removeChild:coinslabel];
     coinslabel = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
-    [coinslabel setString:[NSString stringWithFormat:@"coins:%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"coins"] intValue]]];
+    [coinslabel setString:[NSString stringWithFormat:@"coins:%d", [[MGWU objectForKey:@"coins"] intValue]]];
     coinslabel.position = ccp(winSize.width * .7,winSize.height * .95);
     coinslabel.color = ccBLACK;
     [self addChild:coinslabel z:4];
