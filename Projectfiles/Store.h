@@ -38,6 +38,7 @@
     int failedUpgradeCounter;
     int successfulUpgradeCounter;
     int successfulPurchaseCounter;
+    int highestLevelUnlocked;
     BOOL displayingSuccessfulUpgrade;
     BOOL displayingSuccessfulPurchase;
     BOOL displayingFailedUpgrade;

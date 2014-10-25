@@ -34,6 +34,8 @@
             }
         }
         
+        [MGWU setReminderMessage:@"The devils are invading! We need your help!"];
+        
         int width = winSize.width;
         
         if(width == 568)

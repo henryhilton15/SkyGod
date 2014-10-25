@@ -63,7 +63,7 @@
         displayingSuccessfulUpgrade = false;
         displayingFailedUpgrade = false;
         
-        
+        highestLevelUnlocked = [[[NSUserDefaults standardUserDefaults] objectForKey:@"highestLevelUnlocked"] intValue];
         
         if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
         {
@@ -74,7 +74,7 @@
             }
         }
         
-        NSCoins = [[NSUserDefaults standardUserDefaults] objectForKey:@"coins"];
+        NSCoins = [MGWU objectForKey:@"coins"];
         coins = [NSCoins intValue];
         
         int friendlyMeleeRankInt = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleeRank"] intValue];
@@ -498,6 +498,7 @@
     [[CCDirector sharedDirector] popScene];
 }
 
+
 - (void) upgradeRegularShooter: (CCMenuItemImage *) regularShooterButton
 {
     NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"];
@@ -505,9 +506,8 @@
     int price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterPrice"] intValue];
     if(coins >= price && rank < 3)
     {
-         coins -= price;
         [GameData sharedData].friendlyRegularShooterAvailable = true;
-        
+        coins -= price;
         if(rank == 0)
         {
             NSNumber *NSFriendlyRegularShooterPrice = [NSNumber numberWithInt:shooterPrice1];
@@ -525,10 +525,15 @@
         NSLog(@"friendly regular shooter rank = %@", newRank);
         NSNumber *unlocked = [NSNumber numberWithBool:true];
         [[NSUserDefaults standardUserDefaults] setObject:unlocked forKey:@"friendlyRegularShooterAvailable"];
-       
+        
         NSCoins = [NSNumber numberWithInt:coins];
-        [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
+        [MGWU setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
+        
+        NSNumber* levelnumber = [NSNumber numberWithInt:highestLevelUnlocked];
+        NSNumber* friendlyRank = [NSNumber numberWithInt:rank];
+        NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys: friendlyRank, @"rank", levelnumber, @"level_number", nil];
+        [MGWU logEvent:@"friendlyRegularShooterUpgrade" withParams:params];
         
         NSNumber* NSPrice = [NSNumber numberWithInt:price];
         [[NSUserDefaults standardUserDefaults] setObject:NSPrice forKey:@"friendlyRegularShooterPrice"];
@@ -579,6 +584,7 @@
             NSNumber *NSFriendlyMeleePrice = [NSNumber numberWithInt:meleePrice3];
             [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyMeleePrice forKey:@"friendlyMeleePrice"];
         }
+        
         price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleePrice"] intValue];
         rank++;
         NSNumber *newRank = [NSNumber numberWithInt:rank];
@@ -586,9 +592,13 @@
         NSLog(@"friendly melee rank = %@", newRank);
         
         NSCoins = [NSNumber numberWithInt:coins];
-        [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
+        [MGWU setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
         
+        NSNumber* levelnumber = [NSNumber numberWithInt:highestLevelUnlocked];
+        NSNumber* friendlyRank = [NSNumber numberWithInt:rank];
+        NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys: friendlyRank, @"rank", levelnumber, @"level_number", nil];
+        [MGWU logEvent:@"friendlyMeleeUpgrade" withParams:params];
         
         NSNumber* NSPrice = [NSNumber numberWithInt:price];
         [[NSUserDefaults standardUserDefaults] setObject:NSPrice forKey:@"friendlyMeleePrice"];
@@ -632,6 +642,7 @@
             NSNumber *NSFriendlyFastShooterPrice = [NSNumber numberWithInt:fastShooterPrice2];
             [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyFastShooterPrice forKey:@"friendlyFastShooterPrice"];
         }
+        
         price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterPrice"] intValue];
         rank++;
         NSNumber *newRank = [NSNumber numberWithInt:rank];
@@ -641,8 +652,13 @@
         [[NSUserDefaults standardUserDefaults] setObject:unlocked forKey:@"friendlyFastShooterAvailable"];
         
         NSCoins = [NSNumber numberWithInt:coins];
-        [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
+        [MGWU setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
+        
+        NSNumber* levelnumber = [NSNumber numberWithInt:highestLevelUnlocked];
+        NSNumber* friendlyRank = [NSNumber numberWithInt:rank];
+        NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys: friendlyRank, @"rank", levelnumber, @"level_number", nil];
+        [MGWU logEvent:@"friendlyFastShooterUpgrade" withParams:params];
         
         NSNumber* NSPrice = [NSNumber numberWithInt:price];
         [[NSUserDefaults standardUserDefaults] setObject:NSPrice forKey:@"friendlyFastShooterPrice"];
@@ -691,10 +707,15 @@
         NSLog(@"friendly tank rank = %@", newRank);
         NSNumber *unlocked = [NSNumber numberWithBool:true];
         [[NSUserDefaults standardUserDefaults] setObject:unlocked forKey:@"friendlyTankAvailable"];
-       
+        
         NSCoins = [NSNumber numberWithInt:coins];
-        [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
+        [MGWU setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
+        
+        NSNumber* levelnumber = [NSNumber numberWithInt:highestLevelUnlocked];
+        NSNumber* friendlyRank = [NSNumber numberWithInt:rank];
+        NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys: friendlyRank, @"rank", levelnumber, @"level_number", nil];
+        [MGWU logEvent:@"friendlyTankUpgrade" withParams:params];
         
         NSNumber* NSPrice = [NSNumber numberWithInt:price];
         [[NSUserDefaults standardUserDefaults] setObject:NSPrice forKey:@"friendlyTankPrice"];
@@ -717,7 +738,6 @@
         [self failedUpgrade];
     }
 }
-
 
 //-(void) upgradeImmunity: (CCMenuItemImage *) immunityButton
 //{
@@ -758,7 +778,7 @@
         NSLog(@"immunity available = %@", newNumAvailable);
         coins -= immunityPrice;
         NSCoins = [NSNumber numberWithInt:coins];
-        [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
+        [MGWU setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
         
         [immunityCount setString:[NSString stringWithFormat:@"%@", newNumAvailable]];
@@ -789,7 +809,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:newNumAvailable forKey: @"airstrikesAvailable"];
         coins -= airstrikePrice;
         NSCoins = [NSNumber numberWithInt:coins];
-        [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
+        [MGWU setObject:NSCoins forKey:@"coins"];
         NSLog(@"airstrike available = %@", newNumAvailable);
         NSLog(@"coins = %@", NSCoins);
         
@@ -820,7 +840,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:newNumAvailable forKey: @"reinforcementsAvailable"];
         coins -= reinforcementPrice;
         NSCoins = [NSNumber numberWithInt:coins];
-        [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
+        [MGWU setObject:NSCoins forKey:@"coins"];
         NSLog(@"reinforcement available = %@", newNumAvailable);
         NSLog(@"coins = %@", NSCoins);
         

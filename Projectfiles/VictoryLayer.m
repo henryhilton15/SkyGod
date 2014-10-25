@@ -20,6 +20,8 @@
     {
         winSize = [CCDirector sharedDirector].winSize;
         
+        int currentLevel = [GameData sharedData].currentLevelSelected;
+        
         CCSprite *background = [CCSprite spriteWithFile:@"victory-screen-ip5.png"];
         background.position = CGPointMake(winSize.width/2, winSize.height/2);
         [self addChild:background z:-1];
