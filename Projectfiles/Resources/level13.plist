@@ -116,7 +116,7 @@
 	<key>coin</key>
 	<dict>
 		<key>gameplayFallSpeed</key>
-		<integer>4</integer>
+		<integer>3</integer>
 		<key>gameplayFrequency</key>
 		<integer>-1000</integer>
 		<key>endgameFallSpeed</key>
@@ -124,8 +124,10 @@
 		<key>endgameFrequency</key>
 		<integer>-7</integer>
 		<key>endgameCoinTotal</key>
-		<integer>35</integer>
+		<integer>75</integer>
 	</dict>
+	<key>coinMultiplier</key>
+	<integer>10</integer>
 	<key>scenariosAvailable</key>
 	<integer>2</integer>
 	<key>scenarioDelay</key>

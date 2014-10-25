@@ -116,6 +116,7 @@
     int enemyBaseStartingHealth;
     int scenario3InterludeCounter;
     int startSpawnDelay;
+    int coinMultiplier;
 
     double explosionAnimationLength;
     double dyingAnimationLength;
@@ -228,6 +229,7 @@
     BOOL wentToInGameShop;
     BOOL addedImmunityCounter;
     BOOL scenario3Interlude;
+
     
     CCLabelTTF *waveLabel;
     CCLabelTTF *goodBaseHealthLabel;

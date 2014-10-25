@@ -12,9 +12,13 @@
 {
     CCLabelTTF *introLabel1;
     CCLabelTTF *introLabel2;
-    CCLabelTTF *level2Label;
+    CCLabelTTF *airstrikeWords;
     CCLabelTTF *level3Label;
-    CCLabelTTF *level2XLabel;
+    CCLabelTTF *immunityWords;
+    CCLabelTTF *reinforcementWords;
+    CCSprite *immunityIcon;
+    CCSprite *airstrikeIcon;
+    CCSprite *reinforcementsIcon;
     
     CGSize winSize;
 }

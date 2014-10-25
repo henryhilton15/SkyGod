@@ -96,7 +96,7 @@
 		<key>fallSpeed</key>
 		<integer>5</integer>
 		<key>attackFrequency</key>
-		<integer>100</integer>
+		<integer>50</integer>
 	</dict>
 	<key>enemyZigZag</key>
 	<dict>
@@ -126,6 +126,8 @@
 		<key>endgameCoinTotal</key>
 		<integer>35</integer>
 	</dict>
+	<key>coinMultiplier</key>
+	<integer>10</integer>
 	<key>scenariosAvailable</key>
 	<integer>2</integer>
 	<key>scenarioDelay</key>

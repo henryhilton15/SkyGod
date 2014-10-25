@@ -126,8 +126,10 @@
 		<key>endgameFrequency</key>
 		<integer>-2</integer>
 		<key>endgameCoinTotal</key>
-		<integer>25</integer>
+		<integer>40</integer>
 	</dict>
+	<key>coinMultiplier</key>
+	<integer>2</integer>
 	<key>scenariosAvailable</key>
 	<integer>2</integer>
 	<key>scenarioDelay</key>
