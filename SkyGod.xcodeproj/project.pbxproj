@@ -861,6 +861,10 @@
 		FE3E774719DF870E00FACC41 /* box_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = FE3E774619DF870E00FACC41 /* box_grey.png */; };
 		FE3E774919DF93F000FACC41 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = FE3E774819DF93F000FACC41 /* lock.png */; };
 		FE54D29B19E8C6FC00A3A32C /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE54D29A19E8C6FC00A3A32C /* Icon-60@2x.png */; };
+		FE87BE3B19FB694A00DCC208 /* shooter.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE87BE3A19FB694A00DCC208 /* shooter.wav */; };
+		FE87BE3D19FB695000DCC208 /* melee.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE87BE3C19FB695000DCC208 /* melee.wav */; };
+		FE87BE3F19FB695400DCC208 /* tank.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE87BE3E19FB695400DCC208 /* tank.wav */; };
+		FE87BE4119FB695A00DCC208 /* friendly.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE87BE4019FB695A00DCC208 /* friendly.wav */; };
 		FEE19C8319E51D640042BC7E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEE19C8219E51D640042BC7E /* Images.xcassets */; };
 		FEE19C8519E51EC90042BC7E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FEE19C8419E51EC90042BC7E /* Default@2x.png */; };
 		FEE19C8719E51ECF0042BC7E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FEE19C8619E51ECF0042BC7E /* Default-568h@2x.png */; };
@@ -1820,6 +1824,10 @@
 		FE3E774619DF870E00FACC41 /* box_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = box_grey.png; sourceTree = "<group>"; };
 		FE3E774819DF93F000FACC41 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
 		FE54D29A19E8C6FC00A3A32C /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
+		FE87BE3A19FB694A00DCC208 /* shooter.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shooter.wav; sourceTree = "<group>"; };
+		FE87BE3C19FB695000DCC208 /* melee.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = melee.wav; sourceTree = "<group>"; };
+		FE87BE3E19FB695400DCC208 /* tank.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tank.wav; sourceTree = "<group>"; };
+		FE87BE4019FB695A00DCC208 /* friendly.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = friendly.wav; sourceTree = "<group>"; };
 		FEE19C8219E51D640042BC7E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "SkyGod-iOS/Images.xcassets"; sourceTree = "<group>"; };
 		FEE19C8419E51EC90042BC7E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		FEE19C8619E51ECF0042BC7E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -2740,6 +2748,10 @@
 		2D808A7B1795F5BA006EADF5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FE87BE4019FB695A00DCC208 /* friendly.wav */,
+				FE87BE3E19FB695400DCC208 /* tank.wav */,
+				FE87BE3C19FB695000DCC208 /* melee.wav */,
+				FE87BE3A19FB694A00DCC208 /* shooter.wav */,
 				2D808A8A1795F5BA006EADF5 /* config.lua */,
 				FE3E774819DF93F000FACC41 /* lock.png */,
 				FE3E774619DF870E00FACC41 /* box_grey.png */,
@@ -3762,6 +3774,7 @@
 				2DD0C661178F783F008AE39F /* disasteralert_icon_114x114.png in Resources */,
 				FEFF35B7198824C7002E668A /* devil1attack.plist in Resources */,
 				C34352B319D8A12C0022E502 /* level27.plist in Resources */,
+				FE87BE4119FB695A00DCC208 /* friendly.wav in Resources */,
 				2D808BCF1795F5BA006EADF5 /* animation_knight-1.png in Resources */,
 				2D808BD01795F5BA006EADF5 /* background_desert-topdown.png in Resources */,
 				2D808BD11795F5BA006EADF5 /* background_grass-top.png in Resources */,
@@ -3887,6 +3900,7 @@
 				2D808C3A1795F5BA006EADF5 /* palmtree.png in Resources */,
 				2D808C3B1795F5BA006EADF5 /* planet.png in Resources */,
 				2D808C3C1795F5BA006EADF5 /* platform.png in Resources */,
+				FE87BE3B19FB694A00DCC208 /* shooter.wav in Resources */,
 				2D808C3D1795F5BA006EADF5 /* ramp.png in Resources */,
 				2D808C3E1795F5BA006EADF5 /* rocks.png in Resources */,
 				2D808C3F1795F5BA006EADF5 /* sign.png in Resources */,
@@ -4065,6 +4079,7 @@
 				2D808CDA1795F5BA006EADF5 /* monster3.png in Resources */,
 				2D808CDB1795F5BA006EADF5 /* monster4-topdown.png in Resources */,
 				2D808CDC1795F5BA006EADF5 /* monster5.png in Resources */,
+				FE87BE3D19FB695000DCC208 /* melee.wav in Resources */,
 				2D808CDD1795F5BA006EADF5 /* monster7.png in Resources */,
 				2D808CDE1795F5BA006EADF5 /* tall-monster-top.png in Resources */,
 				2D808CDF1795F5BA006EADF5 /* tall-monster.png in Resources */,
@@ -4105,6 +4120,7 @@
 				2D808CFD1795F5BA006EADF5 /* monster1.png in Resources */,
 				2D808CFE1795F5BA006EADF5 /* monster2.png in Resources */,
 				2D808CFF1795F5BA006EADF5 /* monster4.png in Resources */,
+				FE87BE3F19FB695400DCC208 /* tank.wav in Resources */,
 				2D808D001795F5BA006EADF5 /* monster8.png in Resources */,
 				2D808D011795F5BA006EADF5 /* monster9.png in Resources */,
 				2D808D021795F5BA006EADF5 /* Pow.caf in Resources */,

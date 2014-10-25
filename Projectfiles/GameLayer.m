@@ -1324,8 +1324,12 @@
 
 
         [[SimpleAudioEngine sharedEngine] preloadEffect:@"explo2.wav"];
-        
-    
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"friendly.wav"];
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"shooter.wav"];
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"melee.wav"];
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"tank.wav"];
+
+            
         if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
         {
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == true)
@@ -2308,7 +2312,7 @@
                         [deadGoodGuys addObject:goodGuy];
                         if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
                         {
-                            [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                            [[SimpleAudioEngine sharedEngine] playEffect:@"friendly.wav"];
                         }
                         [self explosion:goodGuy :explosionAnimationLength: NO];
                         if(((Character*)goodGuy).type == BIG_GOOD_GUY && Scenario2 == true)
@@ -2418,7 +2422,7 @@
                         
                         if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
                         {
-                            [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                            [[SimpleAudioEngine sharedEngine] playEffect:@"friendly.wav"];
                         }
                         if(((Character*)goodGuy).type == GOOD_HELICOPTER_BOMB)
                         {
@@ -2473,7 +2477,22 @@
                             [deadBadGuys addObject:badGuy];
                             if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
                             {
-                                [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                                if ((((Character*)badGuy).type) == BAD_KNIFE)
+                                {
+                                    [[SimpleAudioEngine sharedEngine] playEffect:@"melee.wav"];
+                                }
+                                
+                                if ((((Character*)badGuy).type) == BAD_GUY)
+                                {
+                                    [[SimpleAudioEngine sharedEngine] playEffect:@"shooter.wav"];
+                                }
+                                
+                                if ((((Character*)badGuy).type) == BIG_MONSTER)
+                                {
+                                    [[SimpleAudioEngine sharedEngine] playEffect:@"tank.wav"];
+                                }
+
+                                
                             }
                             [self enemiesKilledTotal];
                             [self explosion:badGuy :explosionAnimationLength: NO];
