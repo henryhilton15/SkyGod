@@ -1157,7 +1157,7 @@
         [self addChild:bonusCoinsLabel z:4];
         
         coinslabel = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
-        [coinslabel setString:[NSString stringWithFormat:@"coins:%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"coins"] intValue]]];
+        [coinslabel setString:[NSString stringWithFormat:@"coins:%d", [[MGWU objectForKey:@"coins"] intValue]]];
         coinslabel.position = ccp(winSize.width * .7,winSize.height * .95);
         coinslabel.color = ccBLACK;
         [self addChild:coinslabel z:4];
@@ -1974,7 +1974,7 @@
         int reinforcementsNum = [[[NSUserDefaults standardUserDefaults] objectForKey:@"reinforcementsAvailable"] intValue];
         [reinforcemtsCount setString:[NSString stringWithFormat:@"%d", reinforcementsNum]];
         
-        [coinslabel setString:[NSString stringWithFormat:@"coins:%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"coins"] intValue]]];
+        [coinslabel setString:[NSString stringWithFormat:@"coins:%d", [[MGWU objectForKey:@"coins"] intValue]]];
         
     }
     
@@ -5331,6 +5331,10 @@
     
     if(numAvailable > 0 && waveChanging == false)
     {
+        NSNumber* levelnumber = [NSNumber numberWithInt:currentLevelSelected];
+        NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys: levelnumber, @"level_number", nil];
+        [MGWU logEvent:@"airstrikeUsed" withParams:params];
+        
         bomber = [[Character alloc] initWithGoodHelicopterImage];
         bomber.scale=.5;
         
@@ -5406,11 +5410,16 @@
 //    
 //    [truck runAction:[CCSequence  actions: DriveIn, NoMove, DriveOut, nil]];
     
+   
+    
     NSNumber* NSNumAvailable = [[NSUserDefaults standardUserDefaults] objectForKey:@"reinforcementsAvailable"];
     int numAvailable = [NSNumAvailable intValue];
     
     if(numAvailable > 0 && waveChanging == false)
     {
+        NSNumber* levelnumber = [NSNumber numberWithInt:currentLevelSelected];
+        NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys: levelnumber, @"level_number", nil];
+        [MGWU logEvent:@"reinforcementsUsed" withParams:params];
         reinforcements = true;
         numAvailable--;
     }
@@ -5493,6 +5502,9 @@
     
     if(numAvailable > 0 && immunity == false && waveChanging == false)
     {
+        NSNumber* levelnumber = [NSNumber numberWithInt:currentLevelSelected];
+        NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys: levelnumber, @"level_number", nil];
+        [MGWU logEvent:@"immunityUsed" withParams:params];
         immunity = true;
         NSLog(@"immunity activated");
         numAvailable--;
@@ -5666,6 +5678,14 @@
 //    (((Character*)badBase).health) = 10;
 //    [badBaseHealthLabel setString:[NSString stringWithFormat:@"Enemy Base Health: %d",((Character*) badBase).health]];
     //Scenario4 = true;
+    int totalCoins = [[MGWU objectForKey:@"coins"] intValue];
+    
+    NSNumber* levelnumber = [NSNumber numberWithInt:currentLevelSelected];
+    NSNumber* time = [NSNumber numberWithInt:(framecount/60)];
+    NSNumber* coinsInTotal = [NSNumber numberWithInt:totalCoins];
+    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys: time, @"time", levelnumber, @"level_number", coinsInTotal, @"coinsInTotal", nil];
+    [MGWU logEvent:@"lostLevel" withParams:params];
+    
     
     waveChanging = true;
 
@@ -5685,6 +5705,8 @@
     
     GameData *data = [GameData sharedData];
     data.score = wave;
+    
+    
     
 //    for(int x = 0; x < [deadBases count]; x++)
 //    {
@@ -5808,6 +5830,14 @@
 //    ((Character*)badBase).health = 10;
 //    [badBaseHealthLabel setString:[NSString stringWithFormat:@"Enemy Base Health: %d",((Character*) badBase).health]];
     //Scenario4 = true;
+    int totalCoins = [[MGWU objectForKey:@"coins"] intValue];
+    
+    NSNumber* levelnumber = [NSNumber numberWithInt:currentLevelSelected];
+    NSNumber* time = [NSNumber numberWithInt:(framecount/60)];
+    NSNumber* coinsWon = [NSNumber numberWithInt:[GameData sharedData].coinsGained];
+    NSNumber* coinsInTotal = [NSNumber numberWithInt:totalCoins];
+    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys: time, @"time", levelnumber, @"level_number", coinsWon, @"coinsWon", coinsInTotal, @"coinsInTotal", nil];
+    [MGWU logEvent:@"beatLevel" withParams:params];
     
     waveChanging = true;
     
@@ -6353,7 +6383,7 @@
 
 -(void) addCoins:(int)numCoins
 {
-    int currentCoins = [[[NSUserDefaults standardUserDefaults] objectForKey:@"coins"] intValue];
+    int currentCoins = [[MGWU objectForKey:@"coins"] intValue];
     int newCoins = currentCoins + numCoins;
     NSNumber *newNSCoins = [NSNumber numberWithInt:newCoins];
     [[NSUserDefaults standardUserDefaults] setObject:newNSCoins forKey:@"coins"];
