@@ -1534,6 +1534,11 @@
         [self angel1walkAnimation:friendlyMelee];
     }
     
+    if(framecount == 30)
+    {
+        [self addEnemyMelee:NO :NO];
+    }
+    
     if (Scenario1 != true && Scenario2 != true && Scenario3 != true && scenario3Interlude != true && Scenario4 != true && waveChanging == false)
     {
 //        if((firstZigZag == true || zigZagDelayCounter % 250 == 0) && (firstBigMonster == true || bigMonsterDelayCounter % 200 == 0))

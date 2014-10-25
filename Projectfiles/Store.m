@@ -513,7 +513,7 @@
     if(coins >= price && rank < 3)
     {
         [GameData sharedData].friendlyRegularShooterAvailable = true;
-
+        coins -= price;
         if(rank == 0)
         {
             NSNumber *NSFriendlyRegularShooterPrice = [NSNumber numberWithInt:shooterPrice1];
@@ -531,7 +531,7 @@
         NSLog(@"friendly regular shooter rank = %@", newRank);
         NSNumber *unlocked = [NSNumber numberWithBool:true];
         [[NSUserDefaults standardUserDefaults] setObject:unlocked forKey:@"friendlyRegularShooterAvailable"];
-        coins -= price;
+        
         NSCoins = [NSNumber numberWithInt:coins];
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
@@ -568,6 +568,7 @@
     int price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleePrice"] intValue];
     if(coins >= price && rank < 4)
     {
+         coins -= price;
         [GameData sharedData].friendlyMeleeAvailable = true;
         if (rank == 0)
         {
@@ -584,12 +585,13 @@
             NSNumber *NSFriendlyMeleePrice = [NSNumber numberWithInt:meleePrice3];
             [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyMeleePrice forKey:@"friendlyMeleePrice"];
         }
+       
         price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyMeleePrice"] intValue];
         rank++;
         NSNumber *newRank = [NSNumber numberWithInt:rank];
         [[NSUserDefaults standardUserDefaults] setObject:newRank forKey: @"friendlyMeleeRank"];
         NSLog(@"friendly melee rank = %@", newRank);
-        coins -= price;
+        
         NSCoins = [NSNumber numberWithInt:coins];
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
@@ -625,6 +627,7 @@
     int price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterPrice"] intValue];
     if(coins >= price && rank < 3)
     {
+         coins -= price;
         [GameData sharedData].friendlyFastShooterAvailable = true;
         if(rank == 0)
         {
@@ -636,6 +639,7 @@
             NSNumber *NSFriendlyFastShooterPrice = [NSNumber numberWithInt:fastShooterPrice2];
             [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyFastShooterPrice forKey:@"friendlyFastShooterPrice"];
         }
+        
         price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterPrice"] intValue];
         rank++;
         NSNumber *newRank = [NSNumber numberWithInt:rank];
@@ -643,7 +647,7 @@
         NSLog(@"friendly fast shooter rank = %@", newRank);
         NSNumber *unlocked = [NSNumber numberWithBool:true];
         [[NSUserDefaults standardUserDefaults] setObject:unlocked forKey:@"friendlyFastShooterAvailable"];
-        coins -= price;
+       
         NSCoins = [NSNumber numberWithInt:coins];
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);
@@ -677,6 +681,7 @@
     int price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankPrice"] intValue];
     if(coins >= price && rank < 3)
     {
+        coins -= price;
         if(rank == 0)
         {
             NSNumber *NSFriendlyTankPrice = [NSNumber numberWithInt:tankPrice1];
@@ -694,7 +699,7 @@
         NSLog(@"friendly tank rank = %@", newRank);
         NSNumber *unlocked = [NSNumber numberWithBool:true];
         [[NSUserDefaults standardUserDefaults] setObject:unlocked forKey:@"friendlyTankAvailable"];
-        coins -= price;
+        
         NSCoins = [NSNumber numberWithInt:coins];
         [[NSUserDefaults standardUserDefaults] setObject:NSCoins forKey:@"coins"];
         NSLog(@"coins = %@", NSCoins);

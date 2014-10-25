@@ -134,13 +134,31 @@
         introLabel2.color = ccBLACK;
         
         //level 2 labels
-        level2Label = [CCLabelTTF labelWithString:@"Tap AIRSTRIKE, REINFORCEMENTS," fontName:@"Algerian" fontSize:25];
-        level2Label.position = ccp(winSize.width/2, winSize.height * .7);
-        level2Label.color = ccBLACK;
+        airstrikeWords = [CCLabelTTF labelWithString:@"Tap             for AIRSTRIKE" fontName:@"Algerian" fontSize:20];
+        airstrikeWords.position = ccp(winSize.width/2, winSize.height * .8);
+        airstrikeWords.color = ccBLACK;
         
-        level2XLabel = [CCLabelTTF labelWithString:@"or IMMUNITY buttons for a boost!" fontName:@"Algerian" fontSize:25];
-        level2XLabel.position = ccp(winSize.width/2, winSize.height * .58);
-        level2XLabel.color = ccBLACK;
+        airstrikeIcon = [CCSprite spriteWithFile:@"airstrike_btn.png"];
+        airstrikeIcon.position = ccp(winSize.width * .39, winSize.height * .8);
+        
+        immunityWords = [CCLabelTTF labelWithString:@"Tap             for IMMUNITY" fontName:@"Algerian" fontSize:20];
+        immunityWords.position = ccp(winSize.width/2, winSize.height * .65);
+        immunityWords.color = ccBLACK;
+        
+        immunityIcon = [CCSprite spriteWithFile:@"immunity_btn.png"];
+        immunityIcon.position = ccp(winSize.width * .4, winSize.height * .65);
+        
+        reinforcementWords = [CCLabelTTF labelWithString:@"Tap             for REINFORCEMENTS" fontName:@"Algerian" fontSize:20];
+        reinforcementWords.position = ccp(winSize.width/2, winSize.height * .5);
+        reinforcementWords.color = ccBLACK;
+        
+        reinforcementsIcon = [CCSprite spriteWithFile:@"reinforcement_btn.png"];
+        reinforcementsIcon.position = ccp(winSize.width * .325, winSize.height * .5);
+        
+        airstrikeIcon.scale = .8;
+        reinforcementsIcon.scale = .8;
+        immunityIcon.scale = .8;
+        
         
         level3Label = [CCLabelTTF labelWithString:@"Get Stuck? Go to the SHOP!" fontName:@"Algerian" fontSize:30];
 
@@ -160,11 +178,15 @@
             NSLog(@"new tutorial count = %@", newTutorialCount);
         }
         
-        else if([[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue] == 1)
+        else if([[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue] == 1 && [GameData sharedData].currentLevelSelected == 2)
         {
             NSLog(@"tutorialCount now equals 2");
-            [self addChild:level2Label];
-            [self addChild: level2XLabel];
+            [self addChild: immunityWords];
+            [self addChild: immunityIcon];
+            [self addChild: airstrikeWords];
+            [self addChild: airstrikeIcon];
+            [self addChild: reinforcementWords];
+            [self addChild: reinforcementsIcon];
             int tutorialCount = [[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialCount"] intValue];
             tutorialCount++;
             NSNumber *newTutorialCount = [NSNumber numberWithInt:tutorialCount];
