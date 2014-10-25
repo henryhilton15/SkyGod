@@ -1032,7 +1032,7 @@
         waveChanging = false;
         coinInterlude = false;
         wentToInGameShop = false;
-        wave=1;
+        wave = 1;
         immunity = false;
         orbsDeleted = 0;
         winSize = [CCDirector sharedDirector].winSize;
