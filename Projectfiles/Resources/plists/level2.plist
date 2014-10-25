@@ -124,8 +124,12 @@
 		<key>endgameFrequency</key>
 		<integer>0</integer>
 		<key>endgameCoinTotal</key>
-		<integer>13</integer>
+		<integer>8</integer>
 	</dict>
+	<key>doubleCoins</key>
+	<false/>
+	<key>coinMultiplier</key>
+	<integer>1</integer>
 	<key>scenariosAvailable</key>
 	<integer>0</integer>
 	<key>scoreCounter</key>

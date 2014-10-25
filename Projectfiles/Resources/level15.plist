@@ -126,6 +126,8 @@
 		<key>endgameCoinTotal</key>
 		<integer>35</integer>
 	</dict>
+	<key>coinMultiplier</key>
+	<integer>1</integer>
 	<key>scenariosAvailable</key>
 	<integer>0</integer>
 	<key>scenarioDelay</key>

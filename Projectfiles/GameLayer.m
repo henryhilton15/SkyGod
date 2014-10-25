@@ -1593,7 +1593,7 @@
                 coinModifier = (arc4random() * gameplayCoinFramecount);
             }
         
-        if((friendlyTankAvailable == true && framecount % friendlyTankFramecount == 0) || framecount % 200 == 0)
+        if(friendlyTankAvailable == true && framecount % friendlyTankFramecount == 0 && framecount % 1200 == 0)
         {
             Scenario2 = true;
             [self addFriendlyTank];
@@ -2553,7 +2553,8 @@
                                 [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
                             }
                             [deadCoins addObject:coin];
-                            [self addCoins:((Character*)coin).worth];
+                            [self addCoins:coinMultiplier];
+                            
                         }
                     }
                 }
@@ -6299,7 +6300,8 @@
     scenarioDelay = [[levelDictionary objectForKey:@"scenarioDelay"] intValue];
     baseCount = [[levelDictionary objectForKey:@"baseFriendlyCount"] doubleValue];
     friendlyMeleeReinforcementFramecount = [[levelDictionary objectForKey:@"friendlyMeleeReinforcementRate"] intValue];
-
+    
+    coinMultiplier = [[levelDictionary objectForKey:@"coinMultiplier"] intValue];
     
     NSString *path2 = [[NSBundle mainBundle] pathForResource:@"friendlies" ofType:@"plist"];
     NSDictionary *friendlies = [NSDictionary dictionaryWithContentsOfFile:path2];
