@@ -6403,6 +6403,16 @@
     friendlyMeleeReinforcementFramecount = [[levelDictionary objectForKey:@"friendlyMeleeReinforcementRate"] intValue];
     
     coinMultiplier = [[levelDictionary objectForKey:@"coinMultiplier"] intValue];
+    friendlyFallSpeed = 6;
+    if([GameData sharedData].currentLevelSelected > 5)
+    {
+        friendlyFallSpeed = 6 - (([GameData sharedData].currentLevelSelected - 5) * .25);
+    }
+    if(friendlyFallSpeed < 4)
+    {
+        friendlyFallSpeed = 4;
+    }
+    
     
     NSString *path2 = [[NSBundle mainBundle] pathForResource:@"friendlies" ofType:@"plist"];
     NSDictionary *friendlies = [NSDictionary dictionaryWithContentsOfFile:path2];

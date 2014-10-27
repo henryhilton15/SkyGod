@@ -117,6 +117,7 @@
     int scenario3InterludeCounter;
     int startSpawnDelay;
     int coinMultiplier;
+    double friendlyFallSpeed;
 
     double explosionAnimationLength;
     double dyingAnimationLength;
