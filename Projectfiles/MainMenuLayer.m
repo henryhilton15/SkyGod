@@ -13,6 +13,7 @@
 #import "Levelselect.h"
 #import "SimpleAudioEngine.h"
 #import "GameData.h"
+#import "AboutLayer.h"
 
 
 @implementation MainMenuLayer
@@ -96,12 +97,7 @@
         StoreButton.position = CGPointMake(-winSize.width/30, winSize.height/8);
         
        
-        CCMenuItemImage *LevelButton = [CCMenuItemImage itemWithNormalImage:@"select-button-n.png"
-                                                              selectedImage: @"select-button-d.png"
-                                                                     target:self
-                                                                   selector:@selector(selectLevel:)];
-        LevelButton.scale=0.3;
-        LevelButton.position = CGPointMake(-1000,-1000);
+
         
         
         
@@ -115,9 +111,23 @@
         
 
         
-        myMenu = [CCMenu menuWithItems:StoreButton, startButton, LevelButton, nil];
+        myMenu = [CCMenu menuWithItems:StoreButton, startButton, nil];
         myMenu.position = ccp(winSize.width/2,0);
         [self addChild:myMenu z:2];
+        
+        CCMenuItemImage *DevButton = [CCMenuItemImage itemWithNormalImage:@"Developer.png"
+                                                              selectedImage: @"Developer.png"
+                                                                     target:self
+                                                                   selector:@selector(aboutLayer:)];
+        DevButton.scale=0.25;
+        DevButton.position = CGPointMake(winSize.width - 40, 35);
+        
+        myMenu1 = [CCMenu menuWithItems:DevButton, nil];
+        myMenu1.position = ccp(0,0);
+        [self addChild:myMenu1 z:2];
+        
+        
+        
         
         [self scheduleUpdate];
 
@@ -143,9 +153,9 @@
 {
     [[CCDirector sharedDirector] replaceScene: (CCScene*)[[Store alloc] init]];
 }
--(void) selectLevel: (CCMenuItemImage *) menuItem
+-(void) aboutLayer: (CCMenuItemImage *) menuItem
 {
-    [[CCDirector sharedDirector] replaceScene: (CCScene*)[[Levelselect alloc] init]];
+    [[CCDirector sharedDirector] replaceScene: (CCScene*)[[AboutLayer alloc] init]];
 }
 
 -(void) moreGames: (CCMenuItem *)menuItem

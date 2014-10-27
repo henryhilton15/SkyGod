@@ -13,11 +13,12 @@
     CCLabelTTF *TitleLabel;
     CCMenu *myMenu;
     CGSize winSize;
+    CCMenu *myMenu1;
 }
 
 -(id) init;
 -(void) startGame;
 -(void) enterStore;
--(void) selectLevel;
+-(void) aboutLayer;
 -(void) update:(ccTime)delta;
 @end

@@ -1325,9 +1325,9 @@
 
         [[SimpleAudioEngine sharedEngine] preloadEffect:@"explo2.wav"];
         [[SimpleAudioEngine sharedEngine] preloadEffect:@"friendly.wav"];
-        [[SimpleAudioEngine sharedEngine] preloadEffect:@"shooter.wav"];
-        [[SimpleAudioEngine sharedEngine] preloadEffect:@"melee.wav"];
-        [[SimpleAudioEngine sharedEngine] preloadEffect:@"tank.wav"];
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"coin.wav"];
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"Xplode.wav"];
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"thud.wav"];
 
             
         if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
@@ -2094,7 +2094,7 @@
     // Ok to add now - we've double checked position
     projectile.position = ccp(-20,-20);
     [self addChild:projectile z:2];
-    
+    [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
     
     int playerX = player.position.x;
     int playerY = player.position.y;
@@ -2599,7 +2599,7 @@
                         {
                             if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
                             {
-                                [[SimpleAudioEngine sharedEngine] playEffect:@"explo2.wav"];
+                                [[SimpleAudioEngine sharedEngine] playEffect:@"coin.wav"];
                             }
                             [deadCoins addObject:coin];
                             [self addCoins:coinMultiplier];

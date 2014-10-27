@@ -867,6 +867,9 @@
 		FE87BE4119FB695A00DCC208 /* friendly.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE87BE4019FB695A00DCC208 /* friendly.wav */; };
 		FE87BE4319FB82BC00DCC208 /* Xplode.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE87BE4219FB82BC00DCC208 /* Xplode.wav */; };
 		FE87BE4519FB83B100DCC208 /* thud.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE87BE4419FB83B100DCC208 /* thud.wav */; };
+		FE87BE4719FCE4CD00DCC208 /* coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE87BE4619FCE4CD00DCC208 /* coin.wav */; };
+		FE87BE4B19FE3D7E00DCC208 /* AboutLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FE87BE4A19FE3D7E00DCC208 /* AboutLayer.m */; };
+		FE87BE4D19FE407500DCC208 /* Developer.png in Resources */ = {isa = PBXBuildFile; fileRef = FE87BE4C19FE407500DCC208 /* Developer.png */; };
 		FEE19C8319E51D640042BC7E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEE19C8219E51D640042BC7E /* Images.xcassets */; };
 		FEE19C8519E51EC90042BC7E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FEE19C8419E51EC90042BC7E /* Default@2x.png */; };
 		FEE19C8719E51ECF0042BC7E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FEE19C8619E51ECF0042BC7E /* Default-568h@2x.png */; };
@@ -1832,6 +1835,10 @@
 		FE87BE4019FB695A00DCC208 /* friendly.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = friendly.wav; sourceTree = "<group>"; };
 		FE87BE4219FB82BC00DCC208 /* Xplode.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Xplode.wav; sourceTree = "<group>"; };
 		FE87BE4419FB83B100DCC208 /* thud.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = thud.wav; sourceTree = "<group>"; };
+		FE87BE4619FCE4CD00DCC208 /* coin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coin.wav; sourceTree = "<group>"; };
+		FE87BE4919FE3D7E00DCC208 /* AboutLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutLayer.h; sourceTree = "<group>"; };
+		FE87BE4A19FE3D7E00DCC208 /* AboutLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutLayer.m; sourceTree = "<group>"; };
+		FE87BE4C19FE407500DCC208 /* Developer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Developer.png; sourceTree = "<group>"; };
 		FEE19C8219E51D640042BC7E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "SkyGod-iOS/Images.xcassets"; sourceTree = "<group>"; };
 		FEE19C8419E51EC90042BC7E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		FEE19C8619E51ECF0042BC7E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -2752,6 +2759,8 @@
 		2D808A7B1795F5BA006EADF5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FE87BE4C19FE407500DCC208 /* Developer.png */,
+				FE87BE4619FCE4CD00DCC208 /* coin.wav */,
 				FE87BE4419FB83B100DCC208 /* thud.wav */,
 				FE87BE4219FB82BC00DCC208 /* Xplode.wav */,
 				FE87BE4019FB695A00DCC208 /* friendly.wav */,
@@ -3625,6 +3634,8 @@
 		DCC1A38C13A94F1A005BD75D /* Projectfiles */ = {
 			isa = PBXGroup;
 			children = (
+				FE87BE4919FE3D7E00DCC208 /* AboutLayer.h */,
+				FE87BE4A19FE3D7E00DCC208 /* AboutLayer.m */,
 				DCC1A38F13A94F1A005BD75D /* HelloWorldLayer.h */,
 				DCC1A39013A94F1A005BD75D /* HelloWorldLayer.m */,
 				2DAA40F417AC319B00BA014B /* GameData.h */,
@@ -3757,6 +3768,7 @@
 				DCC1A10213A94ED5005BD75D /* Icon-Small.png in Resources */,
 				DCC1A10413A94ED5005BD75D /* Icon-Small@2x.png in Resources */,
 				DCC1A10613A94ED5005BD75D /* Icon.png in Resources */,
+				FE87BE4D19FE407500DCC208 /* Developer.png in Resources */,
 				FEFF35BB198824C7002E668A /* devil1move.plist in Resources */,
 				DCC1A10813A94ED5005BD75D /* Icon@2x.png in Resources */,
 				DC1BE6A014F417CC00F49D25 /* Ubuntu-B.ttf in Resources */,
@@ -3954,6 +3966,7 @@
 				2D808C661795F5BA006EADF5 /* spaceman-hd.png in Resources */,
 				2D808C671795F5BA006EADF5 /* spaceship1-hd.png in Resources */,
 				FEFF35B9198824C7002E668A /* devil1fall.plist in Resources */,
+				FE87BE4719FCE4CD00DCC208 /* coin.wav in Resources */,
 				2D808C681795F5BA006EADF5 /* spaceship2-hd.png in Resources */,
 				2D808C691795F5BA006EADF5 /* spaceship3-hd.png in Resources */,
 				2D808C6A1795F5BA006EADF5 /* spider-hd.png in Resources */,
@@ -4674,6 +4687,7 @@
 				2D13BF3F17BBF85300EF23AA /* Player.m in Sources */,
 				C3983B4219E086F60043539B /* InGameShop.m in Sources */,
 				2D3CE3E01826EEB200B139D3 /* Levelselect.m in Sources */,
+				FE87BE4B19FE3D7E00DCC208 /* AboutLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
