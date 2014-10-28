@@ -34,7 +34,7 @@
 		<key>spawnRate</key>
 		<integer>120</integer>
 		<key>damage</key>
-		<integer>10</integer>
+		<integer>12</integer>
 		<key>fallSpeed</key>
 		<real>4</real>
 		<key>attackFrequency</key>

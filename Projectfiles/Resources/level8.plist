@@ -137,7 +137,7 @@
 	<key>baseFriendlyCount</key>
 	<real>4.5</real>
 	<key>friendlyMeleeReinforcementRate</key>
-	<integer>500</integer>
+	<integer>600</integer>
 	<key>friendlyBaseHealth</key>
 	<integer>1000</integer>
 	<key>enemyBaseHealth</key>

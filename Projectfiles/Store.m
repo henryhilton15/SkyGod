@@ -19,9 +19,10 @@
 #define meleePrice2 15
 #define meleePrice3 90
 #define meleePrice4 250
-#define shooterPrice0 30
-#define shooterPrice1 150
-#define shooterPrice2 300
+#define shooterPrice0 25
+#define shooterPrice1 50
+#define shooterPrice2 150
+#define shooterPrice3 300
 #define fastShooterPrice0 75
 #define fastShooterPrice1 400
 #define fastShooterPrice2 900
@@ -135,6 +136,12 @@
             NSNumber *NSFriendlyRegularShooterPrice = [NSNumber numberWithInt:shooterPrice2];
             [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyRegularShooterPrice forKey:@"friendlyRegularShooterPrice"];
         }
+        if(friendlyRegularShooterRankInt == 3)
+        {
+            NSNumber *NSFriendlyRegularShooterPrice = [NSNumber numberWithInt:shooterPrice3];
+            [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyRegularShooterPrice forKey:@"friendlyRegularShooterPrice"];
+        }
+        
         
         int friendlyFastShooterRankInt = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyFastShooterRank"] intValue];
         if(friendlyFastShooterRankInt == 0)
@@ -409,7 +416,7 @@
         [self addChild:meleeRank z:4];
         
         shooterRank = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
-        [shooterRank setString:[NSString stringWithFormat:@"Lvl:%@/3", [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"]]];
+        [shooterRank setString:[NSString stringWithFormat:@"Lvl:%@/4", [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"]]];
         shooterRank.position = CGPointMake(winSize.width * .375, topRowLevelY);
         shooterRank.color = ccBLACK;
         [self addChild:shooterRank z:4];
@@ -532,6 +539,11 @@
             NSNumber *NSFriendlyRegularShooterPrice = [NSNumber numberWithInt:shooterPrice2];
             [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyRegularShooterPrice forKey:@"friendlyRegularShooterPrice"];
         }
+        if(rank == 2)
+        {
+            NSNumber *NSFriendlyRegularShooterPrice = [NSNumber numberWithInt:shooterPrice3];
+            [[NSUserDefaults standardUserDefaults] setObject:NSFriendlyRegularShooterPrice forKey:@"friendlyRegularShooterPrice"];
+        }
         price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterPrice"] intValue];
         rank++;
         NSNumber *newRank = [NSNumber numberWithInt:rank];
@@ -551,7 +563,7 @@
         
         NSNumber* NSPrice = [NSNumber numberWithInt:price];
         [[NSUserDefaults standardUserDefaults] setObject:NSPrice forKey:@"friendlyRegularShooterPrice"];
-        if(rank == 3)
+        if(rank == 4)
         {
             [shooterPrice setString:[NSString stringWithFormat:@"MAX"]];
         }
@@ -560,7 +572,7 @@
             [shooterPrice setString:[NSString stringWithFormat:@"Price:%d", price]];
         }
         
-        [shooterRank setString:[NSString stringWithFormat:@"Lvl:%d/3", rank]];
+        [shooterRank setString:[NSString stringWithFormat:@"Lvl:%d/4", rank]];
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
         
         [self successfulUpgrade];

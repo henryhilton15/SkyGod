@@ -38,8 +38,8 @@
         actualX = minX + arc4random() % rangeX;
     }
     
-    int minDuration = ((Character*)angel3).fallSpeed - 1;
-    int maxDuration = ((Character*)angel3).fallSpeed + 1;
+    int minDuration = friendlyFallSpeed - 1;
+    int maxDuration = friendlyFallSpeed + 1;
     
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
@@ -266,8 +266,8 @@
         actualX = minX + arc4random() % rangeX;
     }
     
-    int minDuration = ((Character*)angel1).fallSpeed - 1;
-    int maxDuration = ((Character*)angel1).fallSpeed + 1;
+    int minDuration = friendlyFallSpeed - 1;
+    int maxDuration = friendlyFallSpeed + 1;
     
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
@@ -489,8 +489,8 @@
         actualX = minX + arc4random() % rangeX;
     }
     
-    int minDuration = ((Character*)angel2).fallSpeed - 1;
-    int maxDuration = ((Character*)angel2).fallSpeed + 1;
+    int minDuration = friendlyFallSpeed - 1;
+    int maxDuration = friendlyFallSpeed + 1;
     
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
@@ -1677,9 +1677,13 @@
                 {
                     [self addCoins:(10 - [GameData sharedData].coinsGained)];
                 }
-                if([GameData sharedData].coinsGained < 10 && [GameData sharedData].currentLevelSelected == 2)
+                if([GameData sharedData].coinsGained < 15 && [GameData sharedData].currentLevelSelected == 2)
                 {
-                    [self addCoins:(12 - [GameData sharedData].coinsGained)];
+                    [self addCoins:(15 - [GameData sharedData].coinsGained)];
+                }
+                if([GameData sharedData].coinsGained < 22 && [GameData sharedData].currentLevelSelected == 3)
+                {
+                    [self addCoins:(22 - [GameData sharedData].coinsGained)];
                 }
                 [[CCDirector sharedDirector] replaceScene: (CCScene*)[[VictoryLayer alloc] init]];
             }
@@ -6406,11 +6410,11 @@
     friendlyFallSpeed = 6;
     if([GameData sharedData].currentLevelSelected > 5)
     {
-        friendlyFallSpeed = 6 - (([GameData sharedData].currentLevelSelected - 5) * .25);
+        friendlyFallSpeed = 6 - (([GameData sharedData].currentLevelSelected - 5) * .2);
     }
-    if(friendlyFallSpeed < 4)
+    if(friendlyFallSpeed < 4.6)
     {
-        friendlyFallSpeed = 4;
+        friendlyFallSpeed = 4.6;
     }
     
     

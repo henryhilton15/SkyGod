@@ -26,11 +26,11 @@
 		<key>fallingHealth</key>
 		<integer>1</integer>
 		<key>spawnRate</key>
-		<integer>115</integer>
+		<integer>110</integer>
 		<key>damage</key>
-		<integer>10</integer>
+		<integer>12</integer>
 		<key>fallSpeed</key>
-		<real>4.5</real>
+		<real>4.2</real>
 		<key>attackFrequency</key>
 		<integer>15</integer>
 		<key>zigZagFrequency</key>
@@ -124,7 +124,7 @@
 		<key>endgameFrequency</key>
 		<integer>0</integer>
 		<key>endgameCoinTotal</key>
-		<integer>25</integer>
+		<integer>30</integer>
 	</dict>
 	<key>coinMultiplier</key>
 	<integer>1</integer>

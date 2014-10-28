@@ -32,9 +32,9 @@
 		<key>spawnRate</key>
 		<integer>105</integer>
 		<key>damage</key>
-		<integer>10</integer>
+		<integer>12</integer>
 		<key>fallSpeed</key>
-		<real>4.5</real>
+		<real>4</real>
 		<key>attackFrequency</key>
 		<integer>15</integer>
 		<key>zigZagFrequency</key>

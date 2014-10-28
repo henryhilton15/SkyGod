@@ -111,7 +111,7 @@
         
         NSDictionary* d = [friendlies objectForKey:@"friendlyRegularShooter"];
         
-        NSNumber *rank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"];
+        NSNumber* rank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"];
         
         unlocked = [[d objectForKey:@"available"] boolValue];
         health = [[d objectForKey:@"health"] intValue] + [rank intValue] + (5 * [rank intValue]);
@@ -127,13 +127,13 @@
         worth = 50;
         attacked = false;
         
-        if (rank == 2)
+        if (rank == 3)
         {
             health+= 15;
             power+= 10;
         }
         
-        if (rank == 3)
+        if (rank == 4)
         {
             health += 30;
             power+= 20;
@@ -444,6 +444,12 @@
         type = GOOD_KNIFE;
         attacked = false;
         
+        if(rank == 2)
+        {
+            health += 5;
+            power += 2.5;
+        }
+        
         if(rank == 3)
         {
             health += 10;
@@ -453,14 +459,14 @@
         
         if(rank == 4)
         {
-            health += 20;
-            power += 10;
+            health += 15;
+            power += 7.5;
         }
         
         if(rank == 5)
         {
-            health +=30;
-            power +=15;
+            health +=20;
+            power +=10;
         }
         
     }
