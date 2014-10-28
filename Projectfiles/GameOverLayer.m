@@ -69,6 +69,11 @@
         GameOverLabel.position = ccp(winSize.width * .5, winSize.height *.8);
         [self addChild:GameOverLabel z:4];
         
+        CCLabelTTF* MadeIt = [CCLabelTTF labelWithString:@"STEP yo game up!" fontName:@"BenguiatItcTEE-Book" fontSize:20];
+        MadeIt.position = CGPointMake(winSize.width * .41, winSize.height * .65);
+        MadeIt.color = ccBLACK;
+        [self addChild:MadeIt];
+        
     }
     return self;
 }
