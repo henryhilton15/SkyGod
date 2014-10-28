@@ -1992,12 +1992,17 @@
     
     if (currentLevelSelected == 15)
     {
-        if(framecount%20 ==0)
+        if(framecount%60 ==0)
         {
             [self addFriendlyFastShooter];
             [self addFriendlyMelee];
             [self addFriendlyRegularShooter];
             [self addFriendlyTank];
+            
+            if (waveChanging == true)
+            {
+                [[CCDirector sharedDirector] replaceScene: (CCScene*)[[VictoryLayer alloc] init]];
+            }
         }
     }
     

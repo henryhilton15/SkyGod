@@ -44,11 +44,33 @@
         victoryMenu.position = ccp(winSize.width/2, 0);
         [self addChild: victoryMenu z:1];
         
-        CCLabelTTF* coinsWonLabel = [CCLabelTTF labelWithString:@" " fontName:@"BenguiatItcTEE-Book" fontSize:35];
-        [coinsWonLabel setString:[NSString stringWithFormat:@"coins won: %d", [GameData sharedData].coinsGained]];
-        coinsWonLabel.position = CGPointMake(winSize.width * .5, winSize.height * .75);
-        coinsWonLabel.color = ccBLACK;
-        [self addChild:coinsWonLabel];
+        NSNumber* NSHighestLevelUnlocked = [[NSUserDefaults standardUserDefaults] objectForKey:@"highestLevelUnlocked"];
+        int highestLevelUnlocked = [NSHighestLevelUnlocked intValue];
+        
+        highestLevelUnlocked = 15;
+
+        
+        if(highestLevelUnlocked == 15)
+        {
+            CCLabelTTF* NiggaWe = [CCLabelTTF labelWithString:@"Congrats! You beat the game you fiend." fontName:@"BenguiatItcTEE-Book" fontSize:20];
+            NiggaWe.position = CGPointMake(winSize.width * .5, winSize.height * .85);
+            NiggaWe.color = ccBLACK;
+            [self addChild:NiggaWe];
+            
+            CCLabelTTF* MadeIt = [CCLabelTTF labelWithString:@"Watch out for the next 15 levels dropping soon!" fontName:@"BenguiatItcTEE-Book" fontSize:20];
+            MadeIt.position = CGPointMake(winSize.width * .5, winSize.height * .75);
+            MadeIt.color = ccBLACK;
+            [self addChild:MadeIt];
+        }
+        
+        else
+        {
+            CCLabelTTF* coinsWonLabel = [CCLabelTTF labelWithString:@" " fontName:@"BenguiatItcTEE-Book" fontSize:35];
+            [coinsWonLabel setString:[NSString stringWithFormat:@"coins won: %d", [GameData sharedData].coinsGained]];
+            coinsWonLabel.position = CGPointMake(winSize.width * .5, winSize.height * .75);
+            coinsWonLabel.color = ccBLACK;
+            [self addChild:coinsWonLabel];
+        }
         
     }
     return self;
