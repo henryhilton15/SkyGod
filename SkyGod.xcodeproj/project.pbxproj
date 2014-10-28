@@ -870,6 +870,7 @@
 		FE87BE4719FCE4CD00DCC208 /* coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = FE87BE4619FCE4CD00DCC208 /* coin.wav */; };
 		FE87BE4B19FE3D7E00DCC208 /* AboutLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FE87BE4A19FE3D7E00DCC208 /* AboutLayer.m */; };
 		FE87BE4D19FE407500DCC208 /* Developer.png in Resources */ = {isa = PBXBuildFile; fileRef = FE87BE4C19FE407500DCC208 /* Developer.png */; };
+		FE87BE4F19FF2C1800DCC208 /* HenryDannyDevBioPhoto.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FE87BE4E19FF2C1800DCC208 /* HenryDannyDevBioPhoto.jpg */; };
 		FEE19C8319E51D640042BC7E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEE19C8219E51D640042BC7E /* Images.xcassets */; };
 		FEE19C8519E51EC90042BC7E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FEE19C8419E51EC90042BC7E /* Default@2x.png */; };
 		FEE19C8719E51ECF0042BC7E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FEE19C8619E51ECF0042BC7E /* Default-568h@2x.png */; };
@@ -1839,6 +1840,7 @@
 		FE87BE4919FE3D7E00DCC208 /* AboutLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutLayer.h; sourceTree = "<group>"; };
 		FE87BE4A19FE3D7E00DCC208 /* AboutLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutLayer.m; sourceTree = "<group>"; };
 		FE87BE4C19FE407500DCC208 /* Developer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Developer.png; sourceTree = "<group>"; };
+		FE87BE4E19FF2C1800DCC208 /* HenryDannyDevBioPhoto.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HenryDannyDevBioPhoto.jpg; sourceTree = "<group>"; };
 		FEE19C8219E51D640042BC7E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "SkyGod-iOS/Images.xcassets"; sourceTree = "<group>"; };
 		FEE19C8419E51EC90042BC7E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		FEE19C8619E51ECF0042BC7E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -2759,6 +2761,7 @@
 		2D808A7B1795F5BA006EADF5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FE87BE4E19FF2C1800DCC208 /* HenryDannyDevBioPhoto.jpg */,
 				C3E4B22419FF0F4B004FF47A /* explo2.wav */,
 				FE87BE4C19FE407500DCC208 /* Developer.png */,
 				FE87BE4619FCE4CD00DCC208 /* coin.wav */,
@@ -4462,6 +4465,7 @@
 				2D6E37C818E9EBC400573401 /* pause_btn.png in Resources */,
 				2D6E37C918E9EBC400573401 /* reinforcement_btn-hd.png in Resources */,
 				2D6E37CA18E9EBC400573401 /* reinforcement_btn.png in Resources */,
+				FE87BE4F19FF2C1800DCC208 /* HenryDannyDevBioPhoto.jpg in Resources */,
 				FEFF35DB198824C7002E668A /* main-idle.png in Resources */,
 				2D6E37CB18E9EBC400573401 /* sound_btn.png in Resources */,
 				2D6E37CC18E9EBC400573401 /* sound_button-hd.png in Resources */,

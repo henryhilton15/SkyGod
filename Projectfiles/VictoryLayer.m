@@ -44,15 +44,9 @@
         victoryMenu.position = ccp(winSize.width/2, 0);
         [self addChild: victoryMenu z:1];
         
-        NSNumber* NSHighestLevelUnlocked = [[NSUserDefaults standardUserDefaults] objectForKey:@"highestLevelUnlocked"];
-        int highestLevelUnlocked = [NSHighestLevelUnlocked intValue];
-        
-        highestLevelUnlocked = 15;
-
-        
-        if(highestLevelUnlocked == 15)
+        if([GameData sharedData].currentLevelSelected == 15)
         {
-            CCLabelTTF* NiggaWe = [CCLabelTTF labelWithString:@"Congrats! You beat the game you fiend." fontName:@"BenguiatItcTEE-Book" fontSize:20];
+            CCLabelTTF* NiggaWe = [CCLabelTTF labelWithString:@"Congrats! You beat the game, you fiend." fontName:@"BenguiatItcTEE-Book" fontSize:20];
             NiggaWe.position = CGPointMake(winSize.width * .5, winSize.height * .85);
             NiggaWe.color = ccBLACK;
             [self addChild:NiggaWe];

@@ -12,4 +12,7 @@
 {
     CGSize winSize;
 }
+
+- (void) mainMenu: (CCMenuItemImage *) mainMenuButton;
+
 @end
