@@ -17,6 +17,7 @@ local config =
 	KKStartupConfig = 
 	{
 		-- load first scene from a class with this name, or from a Lua script with this name with .lua appended
+
 		FirstSceneClassName = "MainMenuLayer",
 
 		MaxFrameRate = 60,
