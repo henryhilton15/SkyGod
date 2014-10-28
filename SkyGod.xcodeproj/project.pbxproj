@@ -764,7 +764,6 @@
 		2DFC0F521842A10900EF09C8 /* level1Label.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DFC0F4F1842A10900EF09C8 /* level1Label.png */; };
 		2DFC0F541842A26600EF09C8 /* level4Label.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DFC0F531842A26600EF09C8 /* level4Label.png */; };
 		2DFC0F561842A26C00EF09C8 /* level5Label.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DFC0F551842A26C00EF09C8 /* level5Label.png */; };
-		C3038A0E198AC90800A81E0E /* explo2.wav in Resources */ = {isa = PBXBuildFile; fileRef = C3038A0D198AC90800A81E0E /* explo2.wav */; };
 		C3297C0517975CC600A09343 /* knightFramesFlipped.png in Resources */ = {isa = PBXBuildFile; fileRef = C3297C0417975CC600A09343 /* knightFramesFlipped.png */; };
 		C3297C0717975CDA00A09343 /* knightframesflipped.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3297C0617975CDA00A09343 /* knightframesflipped.plist */; };
 		C3359B2619E26F6300C08D87 /* TutorialLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C3359B2519E26F6300C08D87 /* TutorialLayer.m */; };
@@ -803,6 +802,7 @@
 		C3E2089119AA7527007BCF23 /* Dollar-1.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E2088D19AA7527007BCF23 /* Dollar-1.png */; };
 		C3E2089719ADA385007BCF23 /* coinDrop.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E2089619ADA385007BCF23 /* coinDrop.png */; };
 		C3E2089919ADA394007BCF23 /* coinDrop.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3E2089819ADA394007BCF23 /* coinDrop.plist */; };
+		C3E4B22519FF0F4B004FF47A /* explo2.wav in Resources */ = {isa = PBXBuildFile; fileRef = C3E4B22419FF0F4B004FF47A /* explo2.wav */; };
 		C3E69B7A17A2F8FE006C0912 /* wall.png in Resources */ = {isa = PBXBuildFile; fileRef = C3E69B7917A2F8FE006C0912 /* wall.png */; };
 		C3EFA0A317974B64000E23A6 /* bearFrames.png in Resources */ = {isa = PBXBuildFile; fileRef = C3EFA0A217974B61000E23A6 /* bearFrames.png */; };
 		C3EFA0A517974B70000E23A6 /* bearFrames.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3EFA0A417974B6F000E23A6 /* bearFrames.plist */; };
@@ -1717,7 +1717,6 @@
 		2DFC0F4F1842A10900EF09C8 /* level1Label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level1Label.png; sourceTree = "<group>"; };
 		2DFC0F531842A26600EF09C8 /* level4Label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level4Label.png; sourceTree = "<group>"; };
 		2DFC0F551842A26C00EF09C8 /* level5Label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level5Label.png; sourceTree = "<group>"; };
-		C3038A0D198AC90800A81E0E /* explo2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explo2.wav; sourceTree = "<group>"; };
 		C3297C0417975CC600A09343 /* knightFramesFlipped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knightFramesFlipped.png; sourceTree = "<group>"; };
 		C3297C0617975CDA00A09343 /* knightframesflipped.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = knightframesflipped.plist; sourceTree = "<group>"; };
 		C3359B2419E26F6200C08D87 /* TutorialLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialLayer.h; path = Resources/TutorialLayer.h; sourceTree = "<group>"; };
@@ -1759,6 +1758,7 @@
 		C3E2088D19AA7527007BCF23 /* Dollar-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dollar-1.png"; sourceTree = "<group>"; };
 		C3E2089619ADA385007BCF23 /* coinDrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coinDrop.png; sourceTree = "<group>"; };
 		C3E2089819ADA394007BCF23 /* coinDrop.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = coinDrop.plist; sourceTree = "<group>"; };
+		C3E4B22419FF0F4B004FF47A /* explo2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explo2.wav; sourceTree = "<group>"; };
 		C3E69B7917A2F8FE006C0912 /* wall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wall.png; sourceTree = "<group>"; };
 		C3EFA0A217974B61000E23A6 /* bearFrames.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bearFrames.png; sourceTree = "<group>"; };
 		C3EFA0A417974B6F000E23A6 /* bearFrames.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bearFrames.plist; sourceTree = "<group>"; };
@@ -2759,6 +2759,7 @@
 		2D808A7B1795F5BA006EADF5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C3E4B22419FF0F4B004FF47A /* explo2.wav */,
 				FE87BE4C19FE407500DCC208 /* Developer.png */,
 				FE87BE4619FCE4CD00DCC208 /* coin.wav */,
 				FE87BE4419FB83B100DCC208 /* thud.wav */,
@@ -2810,7 +2811,6 @@
 				C3E2089619ADA385007BCF23 /* coinDrop.png */,
 				FEFF360519898A4B002E668A /* Undaunted.wav */,
 				FEFF360319898A44002E668A /* The Descent.wav */,
-				C3038A0D198AC90800A81E0E /* explo2.wav */,
 				FEFF3601198989F2002E668A /* redX.png */,
 				FEFF35EE1988B221002E668A /* spartanattack.png */,
 				FEFF35EF1988B221002E668A /* spartanfall.png */,
@@ -4111,7 +4111,6 @@
 				2D808CE61795F5BA006EADF5 /* title_shop.png in Resources */,
 				FEFF35A4198824C7002E668A /* angel2attack.png in Resources */,
 				2D808CE71795F5BA006EADF5 /* title_upgrades.png in Resources */,
-				C3038A0E198AC90800A81E0E /* explo2.wav in Resources */,
 				2D808CE81795F5BA006EADF5 /* animation_knight-1-hd.png in Resources */,
 				C3E2089919ADA394007BCF23 /* coinDrop.plist in Resources */,
 				2D808CE91795F5BA006EADF5 /* background_desert-topdown-hd.png in Resources */,
@@ -4435,6 +4434,7 @@
 				2D6E37B218E9EBC400573401 /* d3-attack-3.png in Resources */,
 				2D6E37B318E9EBC400573401 /* d3-attack-4.png in Resources */,
 				C343528F19D8A0620022E502 /* level9.plist in Resources */,
+				C3E4B22519FF0F4B004FF47A /* explo2.wav in Resources */,
 				2D6E37B418E9EBC400573401 /* d3-1.png in Resources */,
 				2D6E37B518E9EBC400573401 /* d3-2.png in Resources */,
 				2D6E37B618E9EBC400573401 /* d3-3.png in Resources */,
