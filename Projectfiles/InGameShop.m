@@ -517,7 +517,7 @@
     NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"];
     int rank = [NSRank intValue];
     int price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterPrice"] intValue];
-    if(coins >= price && rank < 3)
+    if(coins >= price && rank < 4)
     {
         [GameData sharedData].friendlyRegularShooterAvailable = true;
         coins -= price;
