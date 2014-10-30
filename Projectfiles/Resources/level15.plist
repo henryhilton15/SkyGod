@@ -11,7 +11,7 @@
 		<key>fallingHealth</key>
 		<integer>1</integer>
 		<key>spawnRate</key>
-		<real>1000000</real>
+		<integer>90</integer>
 		<key>damage</key>
 		<integer>50</integer>
 		<key>fallSpeed</key>
@@ -24,11 +24,11 @@
 		<key>available</key>
 		<true/>
 		<key>health</key>
-		<integer>100</integer>
+		<integer>80</integer>
 		<key>fallingHealth</key>
 		<integer>1</integer>
 		<key>spawnRate</key>
-		<integer>1000000</integer>
+		<integer>40</integer>
 		<key>damage</key>
 		<integer>40</integer>
 		<key>fallSpeed</key>
@@ -38,7 +38,7 @@
 		<key>zigZagFrequency</key>
 		<integer>6</integer>
 		<key>reinforcementRate</key>
-		<integer>50</integer>
+		<integer>300</integer>
 	</dict>
 	<key>Kmonster</key>
 	<dict>
@@ -75,7 +75,7 @@
 		<key>health</key>
 		<integer>0</integer>
 		<key>spawnRate</key>
-		<integer>-25</integer>
+		<integer>-20</integer>
 		<key>damage</key>
 		<integer>30</integer>
 		<key>fallSpeed</key>
@@ -90,7 +90,7 @@
 		<key>fallingHealth</key>
 		<integer>5</integer>
 		<key>spawnRate</key>
-		<integer>1000000</integer>
+		<integer>700</integer>
 		<key>damage</key>
 		<integer>80</integer>
 		<key>fallSpeed</key>
@@ -116,20 +116,20 @@
 	<key>coin</key>
 	<dict>
 		<key>gameplayFallSpeed</key>
-		<integer>4</integer>
+		<integer>6</integer>
 		<key>gameplayFrequency</key>
-		<integer>-1000</integer>
+		<integer>10000</integer>
 		<key>endgameFallSpeed</key>
-		<integer>3</integer>
+		<integer>4</integer>
 		<key>endgameFrequency</key>
 		<integer>-7</integer>
 		<key>endgameCoinTotal</key>
-		<integer>35</integer>
+		<integer>1</integer>
 	</dict>
 	<key>coinMultiplier</key>
-	<integer>1</integer>
+	<integer>1000</integer>
 	<key>scenariosAvailable</key>
-	<integer>0</integer>
+	<integer>2</integer>
 	<key>scenarioDelay</key>
 	<real>1000</real>
 	<key>scoreCounter</key>
@@ -139,10 +139,10 @@
 	<key>baseFriendlyCount</key>
 	<integer>4</integer>
 	<key>friendlyMeleeReinforcementRate</key>
-	<integer>0</integer>
+	<integer>900</integer>
 	<key>friendlyBaseHealth</key>
-	<integer>1000000</integer>
+	<real>1200</real>
 	<key>enemyBaseHealth</key>
-	<integer>10000</integer>
+	<real>1200</real>
 </dict>
 </plist>

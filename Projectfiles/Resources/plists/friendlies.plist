@@ -54,7 +54,7 @@
 		<key>health</key>
 		<integer>150</integer>
 		<key>spawnRate</key>
-		<integer>1000</integer>
+		<integer>500</integer>
 		<key>power</key>
 		<integer>70</integer>
 		<key>attackFrequency</key>

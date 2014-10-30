@@ -44,7 +44,7 @@
         victoryMenu.position = ccp(winSize.width/2, 0);
         [self addChild: victoryMenu z:1];
         
-        if([GameData sharedData].currentLevelSelected == 15)
+        if([GameData sharedData].currentLevelSelected == 16)
         {
             CCLabelTTF* NiggaWe = [CCLabelTTF labelWithString:@"Congrats! You beat the game, you fiend." fontName:@"BenguiatItcTEE-Book" fontSize:20];
             NiggaWe.position = CGPointMake(winSize.width * .5, winSize.height * .85);
@@ -55,6 +55,8 @@
             MadeIt.position = CGPointMake(winSize.width * .5, winSize.height * .75);
             MadeIt.color = ccBLACK;
             [self addChild:MadeIt];
+            
+            
         }
         
         else
