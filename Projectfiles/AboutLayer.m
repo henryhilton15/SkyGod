@@ -22,7 +22,7 @@
         [self addChild:background z:-1];
         
         CCSprite *photo = [CCSprite spriteWithFile:@"HenryDannyDevBioPhoto.jpg"];
-        photo.position = ccp(winSize.width * .21, winSize.height * .45);
+        photo.position = ccp(winSize.width * .19, winSize.height * .45);
         photo.scale = 0.5;
         [self addChild:photo];
         
@@ -31,31 +31,37 @@
         aboutLabel.color = ccBLACK;
         [self addChild:aboutLabel];
         
-        int textX = winSize.width * .71;
+        int textX = winSize.width * .69;
         
-        CCLabelTTF* dannyBio1 = [CCLabelTTF labelWithString:@"Danny Laporte (right) and Henry Hilton" fontName:@"BenguiatItcTEE-Book" fontSize:14];
-        CCLabelTTF* dannyBio2= [CCLabelTTF labelWithString:@"are seniors at M-A high school in" fontName:@"BenguiatItcTEE-Book" fontSize:14];
-        CCLabelTTF* dannyBio3 = [CCLabelTTF labelWithString:@"Menlo Park, CA. In addition to coding" fontName:@"BenguiatItcTEE-Book" fontSize:14];
-        CCLabelTTF* dannyBio4 = [CCLabelTTF labelWithString:@"Danny loves all kinds of sports." fontName:@"BenguiatItcTEE-Book" fontSize:14];
-        CCLabelTTF* henryBio1 = [CCLabelTTF labelWithString:@"Hank  " fontName:@"BenguiatItcTEE-Book" fontSize:14];
-        CCLabelTTF* henryBio2 = [CCLabelTTF labelWithString:@"Deezy " fontName:@"BenguiatItcTEE-Book" fontSize:14];
-        CCLabelTTF* henryBio3 = [CCLabelTTF labelWithString:@"Dirty " fontName:@"BenguiatItcTEE-Book" fontSize:14];
-        CCLabelTTF* henryBio4 = [CCLabelTTF labelWithString:@"Money " fontName:@"BenguiatItcTEE-Book" fontSize:14];
-        
-        
-        
+        CCLabelTTF* dannyBio1 = [CCLabelTTF labelWithString:@"Danny Laporte (right) and Henry Hilton     " fontName:@"BenguiatItcTEE-Book" fontSize:13];
+        CCLabelTTF* dannyBio2=  [CCLabelTTF labelWithString:@"are seniors at Menlo-Atherton HS in Menlo  " fontName:@"BenguiatItcTEE-Book" fontSize:14];
+        CCLabelTTF* dannyBio3 = [CCLabelTTF labelWithString:@"Park, CA. In addition to coding, Danny     " fontName:@"BenguiatItcTEE-Book" fontSize:13];
+        CCLabelTTF* dannyBio4 = [CCLabelTTF labelWithString:@"drains 3's on the basketball court.        " fontName:@"BenguiatItcTEE-Book" fontSize:13];
+        CCLabelTTF* henryBio1 = [CCLabelTTF labelWithString:@"He plays hard and works even harder.       " fontName:@"BenguiatItcTEE-Book" fontSize:13];
+        CCLabelTTF* henryBio2 = [CCLabelTTF labelWithString:@"Henry is an Eagle Scout and rows crew.     " fontName:@"BenguiatItcTEE-Book" fontSize:13];
+        CCLabelTTF* henryBio3 = [CCLabelTTF labelWithString:@"He stands 8'8'' with purple skin and" fontName:@"BenguiatItcTEE-Book" fontSize:13];
+        CCLabelTTF* henryBio4 = [CCLabelTTF labelWithString:@"bowling-ball biceps. In their spare time,  "  fontName:@"BenguiatItcTEE-Book" fontSize:13];
+        CCLabelTTF* henryBio5 = [CCLabelTTF labelWithString:@"Henry and Danny strike smoldering poses and"  fontName:@"BenguiatItcTEE-Book" fontSize:13];
+        CCLabelTTF* henryBio6 = [CCLabelTTF labelWithString:@"write about themselves in the third person."  fontName:@"BenguiatItcTEE-Book" fontSize:13];
+    
         henryBio1.position = ccp(textX, winSize.height * .51);
         henryBio2.position = ccp(textX, winSize.height * .45);
         henryBio3.position = ccp(textX, winSize.height * .39);
         henryBio4.position = ccp(textX, winSize.height * .33);
+        henryBio5.position = ccp(textX, winSize.height * .27);
+        henryBio6.position = ccp(textX, winSize.height * .21);
         henryBio1.color = ccBLACK;
         henryBio2.color = ccBLACK;
         henryBio3.color = ccBLACK;
         henryBio4.color = ccBLACK;
+        henryBio5.color = ccBLACK;
+        henryBio6.color = ccBLACK;
         [self addChild:henryBio1];
         [self addChild:henryBio2];
         [self addChild:henryBio3];
         [self addChild:henryBio4];
+        [self addChild:henryBio5];
+        [self addChild:henryBio6];
         
         dannyBio1.position = ccp(textX, winSize.height * .75);
         dannyBio2.position = ccp(textX, winSize.height * .69);

@@ -1602,7 +1602,7 @@
                 coinModifier = (arc4random() * gameplayCoinFramecount);
             }
         
-        if(friendlyTankAvailable == true && framecount % friendlyTankFramecount == 0 && framecount % 1200 == 0)
+        if(friendlyTankAvailable == true && framecount % friendlyTankFramecount == 0)
         {
             Scenario2 = true;
             [self addFriendlyTank];
@@ -6452,7 +6452,7 @@
     NSLog(@"friendly fast shooter available = %d", [GameData sharedData].friendlyFastShooterAvailable);
     
     friendlyTankAvailable = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankAvailable"] boolValue];
-    friendlyTankFramecount = 2000;
+    friendlyTankFramecount = 200;
     
     NSMutableDictionary* coinDict = [levelDictionary objectForKey:@"coin"];
     endgameCoinFramecount = 20 + [[coinDict objectForKey:@"endgameFrequency"] intValue];
