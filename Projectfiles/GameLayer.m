@@ -625,8 +625,8 @@
     devilHeli = [[Character alloc] initWithBadHelicopterImage];
     
     // Determine where to spawn the monster along the Y axis
-    int minY = winSize.height - 30;
-    int maxY = winSize.height;
+    int minY = winSize.height * .85;
+    int maxY = winSize.height * .93;
     int rangeY = maxY - minY;
     int actualY = (arc4random() % rangeY) + minY;
     
@@ -871,10 +871,10 @@
     int rangeDuration;
     if(sameSpot == NO)
     {
-        int minX = 50;
-        int maxX = winSize.width - 50;
+        int minX = winSize.width * .05;
+        int maxX = winSize.width * .95;
         int rangeX = maxX - minX;
-        actualX = arc4random() % rangeX + minX;
+        actualX = (arc4random() % rangeX) + minX;
         previousCoinX = actualX;
     }
     else
@@ -910,6 +910,9 @@
     
     
     coin.position = CGPointMake(actualX, winSize.height - 10);
+    NSLog(@"coin x = %d", actualX);
+    NSNumber *repeatingSpot = [NSNumber numberWithBool:sameSpot];
+    NSLog(@"same spot? = %@", repeatingSpot);
     coin.scale = .3;
     [self addChild:coin];
     [coinsArray addObject:coin];
@@ -986,6 +989,7 @@
         deadBases = [[NSMutableArray alloc] init];
 //        badHelicopters = [[NSMutableArray alloc] init];
 
+        previousCoinX = 200;
         framecount = 0;
         //monstercount = 0;
         //numberOfEnemies = 10;
@@ -1034,12 +1038,13 @@
         wentToInGameShop = false;
         wave = 1;
         immunity = false;
+        firstTimeCoin = true;
         orbsDeleted = 0;
         winSize = [CCDirector sharedDirector].winSize;
         explosionAnimationLength = .2;
         dyingAnimationLength = .2;
         immunityLength = 400;
-        numReinforcments = 5;
+        numReinforcments = 4;
         reinforcementFramecount = 50;
         reinforcementsSpawned = 0;
         reinforcements = false;
@@ -1047,18 +1052,19 @@
         goodBaseExploded = false;
         friendlyTankAvailable = NO;
         addedImmunityCounter = false;
+        scenario2Prelude = false;
+        scenario2PreludeCounter = 0;
         scenarioDelayCounter = 0;
         scenario2interludeCounter = 0;
         devilStartingWidth = winSize.width - 100;
         angelStartingWidth = 30;
         coinsInARow = 0;
-        previousCoinX = 0;
         previousCoinDuration = 0;
         calledYouWin = 0;
         betweenCoinRowDelay = 0;
         friendlyRegularShooterModifier = (int)(arc4random() * baseCount);
         friendlyMeleeModifier = (int)(arc4random() * baseCount);
-        friendlyFastShooterModifier = (int)(arc4random() * baseCount);
+        friendlyFastShooterModifier = (int)(arc4random() * baseCount) + 100;
         enemyMeleeModifier = (int)(arc4random() * baseCount);
         enemyRegularShooterModifier = (int)(arc4random() * baseCount);
         enemyTankModifier = (int)(arc4random() * baseCount);
@@ -1498,7 +1504,20 @@
         }
     }
     
-    if(Scenario1 != true && Scenario2 != true && Scenario3 != true && Scenario4 != true && waveChanging == false  && scenariosAvailable > 0)
+    if(scenario2Prelude == true)
+    {
+        scenario2PreludeCounter++;
+        if(scenario2PreludeCounter == 100)
+        {
+            Scenario2 = true;
+            [self addFriendlyTank];
+            scenario2Prelude = false;
+            NSLog(@"scenario2 Prelude = false");
+            scenario2PreludeCounter = 0;
+        }
+    }
+    
+    if(Scenario1 != true && scenario2Prelude != true && Scenario2 != true && Scenario3 != true && Scenario4 != true && waveChanging == false  && scenariosAvailable > 0)
     {
         scenarioDelayCounter++;
         
@@ -1543,7 +1562,7 @@
         [self addEnemyMelee:NO :NO];
     }
     
-    if (Scenario1 != true && Scenario2 != true && Scenario3 != true && scenario3Interlude != true && Scenario4 != true && waveChanging == false)
+    if (Scenario1 != true && scenario2Prelude !=true && Scenario2 != true && Scenario3 != true && scenario3Interlude != true && Scenario4 != true && waveChanging == false)
     {
 //        if((firstZigZag == true || zigZagDelayCounter % 250 == 0) && (firstBigMonster == true || bigMonsterDelayCounter % 200 == 0))
 //        {
@@ -1604,8 +1623,8 @@
         
         if(friendlyTankAvailable == true && framecount % friendlyTankFramecount == 0)
         {
-            Scenario2 = true;
-            [self addFriendlyTank];
+            scenario2Prelude = true;
+            NSLog(@"scenario2 prelude called");
         }
 //        }
     }
@@ -1639,7 +1658,7 @@
         {
 //            NSLog(@"should add coin");
             endgameCoinCount++;
-            if(coinsInARow < 4)
+            if(coinsInARow < 4 && firstTimeCoin == false)
             {
                 [self addCoin:YES];
                 coinsInARow++;
@@ -1649,6 +1668,7 @@
                 if(betweenCoinRowDelay == 1)
                 {
                     [self addCoin:NO];
+                    firstTimeCoin = false;
                     coinsInARow = 1;
                     betweenCoinRowDelay = 0;
                 }
@@ -1765,7 +1785,7 @@
             bomber = [bombers objectAtIndex:i];
             if(framecount % ((Character*)bomber).attackFrequency == 0 && bomber.position.x > 20 && bomber.position.x < winSize.width)
             {
-                CGPoint bomberPosition = ccp(bomber.position.x - 10, bomber.position.y);
+                CGPoint bomberPosition = ccp(bomber.position.x, bomber.position.y - 12);
 
                 bomb = [[Character alloc] initWithGoodHelicopterBombImage];
                 int minDuration = ((Character*)bomb).fallSpeed - 1;
@@ -1996,7 +2016,7 @@
     
     if (currentLevelSelected == 16)
     {
-        if(framecount%60 == 0)
+        if(framecount% 80 == 0)
         {
             [self addFriendlyFastShooter];
             [self addFriendlyMelee];
@@ -3041,7 +3061,7 @@
         {
             bomb = [goodBombs objectAtIndex:i];
             
-            if(bomb.position.y <= 20)
+            if(bomb.position.y <= 25)
             {
                 [deadGoodBombs addObject:bomb];
             }
@@ -3809,7 +3829,7 @@
                         }
                         if(((Character*)fightingAngel).type == BIG_GOOD_GUY)
                         {
-                            [self angelTankAttackAnimation:fightingAngel];
+//                            [self angelTankAttackAnimation:fightingAngel];
                         }
                         
                         //delay actual subtraction of health to allow time for animation to run
@@ -3839,7 +3859,7 @@
                         }
                         if(((Character*)fightingDevil).type == BIG_MONSTER)
                         {
-                            [self devilTankAttackAnimation:fightingDevil];
+//                            [self devilTankAttackAnimation:fightingDevil];
                             NSLog(@"devil tank attack called");
                         }
                         //delay actual subtraction of health to allow time for animation to run
@@ -4509,7 +4529,7 @@
     
     //Create an action with the animation that can then be assigned to a sprite
     
-    CCAction *attack = [CCAnimate actionWithDuration:2.0f animation:attackAnimation restoreOriginalFrame:NO];
+    CCAction *attack = [CCAnimate actionWithDuration:.8f animation:attackAnimation restoreOriginalFrame:NO];
     
     //tell the bear to run the taunting action
     [spartan runAction:attack];
@@ -4549,7 +4569,7 @@
     
     //Create an action with the animation that can then be assigned to a sprite
     
-    CCAction *attack = [CCAnimate actionWithDuration:.8f animation:attackAnimation restoreOriginalFrame:NO];
+    CCAction *attack = [CCAnimate actionWithDuration:.6f animation:attackAnimation restoreOriginalFrame:NO];
     
     //tell the bear to run the taunting action
     [angel runAction:attack];
@@ -4578,11 +4598,10 @@
     
     attackFrames = [NSMutableArray array];
     
-    for(int i = 5; i <= 8; ++i)
+    for(int i = 1; i <= 4; ++i)
     {
-        int j = i - 4;
         [attackFrames addObject:
-         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"d3-attack-%d.png", j]]];
+         [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"d3-attack-%d.png", i]]];
     }
     
     //Create an animation from the set of frames you created earlier
@@ -4591,7 +4610,7 @@
     
     //Create an action with the animation that can then be assigned to a sprite
     
-    CCAction *attack = [CCAnimate actionWithDuration:2.0f animation:attackAnimation restoreOriginalFrame:NO];
+    CCAction *attack = [CCAnimate actionWithDuration:.6f animation:attackAnimation restoreOriginalFrame:NO];
     
     //tell the bear to run the taunting action
     [devil runAction:attack];
@@ -4615,13 +4634,14 @@
         if(((Character*)angel).bulletType == SPEAR)
         {
             goodBullet = [[Character alloc] initWithSpearImage];
+            goodBullet.scale = .7;
             goodBullet.position = ccp(angelX + 10, angelY + 10);
             ((Character*)goodBullet).power = ((Character*)angel).power;
         }
         if(((Character*)angel).bulletType == TANK_BOMB)
         {
             goodBullet = [[Character alloc] initWithTankBombImage];
-            goodBullet.scale = .7;
+            goodBullet.scale = .75;
             goodBullet.position = ccp(angelX + 60, angelY + 15);
             ((Character*)goodBullet).power = ((Character*)angel).power;
             [self tankBombAnimation:goodBullet];
@@ -4662,17 +4682,17 @@
             badBullet.position = ccp(devilX - 5, devilY + 10);
             ((Character*)badBullet).power = ((Character*)devil).power;
             badBullet.color = ccc3(100,0,0);
-            
+            NSLog(@"shot enemy regular bullet");
             
         }
         if(((Character*)devil).bulletType == TANK_BOMB)
         {
             badBullet = [[Character alloc] initWithTankBombImage];
+            badBullet.scale = .75;
             ((Character*)badBullet).power = ((Character*)devil).power;
             badBullet.position = ccp(devilX - 10, devilY + 15);
-            badBullet.color = ccc3(100,0,0);
-            NSLog(@"shot tank bomb");
-            [self tankBombAnimation:goodBullet];
+            NSLog(@"shot enemy tank bomb");
+            [self tankBombAnimation:badBullet];
         }
         
         badBullet.anchorPoint = CGPointZero;
@@ -4939,7 +4959,7 @@
 -(void) explosion:(CCSprite *)character :(double)delay :(BOOL)big
 {
     //NSLog(@"inside explosion method");
-    double delayInSeconds = delay;
+    double delayInSeconds = delay - .1;
     CCSprite *enemyBase = [CCSprite spriteWithFile:@"badbase-3.png"];
     CCSprite *friendlyBase = [CCSprite spriteWithFile:@"goodbase-3.png"];
     BOOL friendlyBaseExplosion = false;
@@ -5091,15 +5111,19 @@
     {
         [dyingFrames addObject:
          [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName: [NSString stringWithFormat:@"poof-%d.png", i]]];
+//        if(i == 3 && waveChanging == true)
+//        {
+//            
+//        }
     }
     
     //Create an animation from the set of frames you created earlier
     
-    CCAnimation *dyingAnimation = [CCAnimation animationWithFrames: dyingFrames delay:0.1f];
+    CCAnimation *dyingAnimation = [CCAnimation animationWithFrames: dyingFrames delay:0.15f];
     
     //Create an action with the animation that can then be assigned to a sprite
     
-    CCAction *dying = [CCAnimate actionWithDuration:dyingAnimationLength animation:dyingAnimation restoreOriginalFrame:NO];
+    CCAction *dying = [CCAnimate actionWithDuration:(dyingAnimationLength + .1) animation:dyingAnimation restoreOriginalFrame:NO];
     
     //tell the bear to run the taunting action
     [character runAction:dying];
@@ -5116,6 +5140,9 @@
     NSMutableArray *deadBadBullets = [[NSMutableArray alloc] init];
     NSMutableArray *deadGoodBombs = [[NSMutableArray alloc] init];
     NSMutableArray *deadBadBombs = [[NSMutableArray alloc] init];
+    NSMutableArray *deadBadGuysKilledByBombs = [[NSMutableArray alloc] init];
+    NSMutableArray *deadGoodGuysKilledByBombs = [[NSMutableArray alloc] init];
+    
 
     for (int b = 0; b < [goodBulletArray count]; b++)
     {
@@ -5257,7 +5284,7 @@
                         ((Character*)badBottom).health -= ((Character*)goodBullet).power;
                         if(((Character*)badBottom).health <= 0)
                         {
-                            [deadBadGuys addObject:badBottom];
+                            [deadBadGuysKilledByBombs addObject:badBottom];
                         }
                     }
                     [deadGoodBombs addObject:goodBullet];
@@ -5295,7 +5322,7 @@
                         ((Character*)goodBottom).health -= ((Character*)badBullet).power;
                         if(((Character*)goodBottom).health <= 0)
                         {
-                            [deadGoodGuys addObject:goodBottom];
+                            [deadGoodGuysKilledByBombs addObject:goodBottom];
                         }
                     }
                     [deadBadBombs addObject:badBullet];
@@ -5376,6 +5403,23 @@
         }
         [deadBadBombs removeAllObjects];
     }
+    if([deadBadGuysKilledByBombs count] > 0)
+    {
+        for (CCSprite *s in deadBadGuysKilledByBombs)
+        {
+            [deadBadGuys removeObject:s];
+            [self removeChild:s];
+        }
+        [deadBadGuysKilledByBombs removeAllObjects];
+    }
+    if([deadGoodGuysKilledByBombs count] > 0)
+    {
+        for (CCSprite *s in deadGoodGuysKilledByBombs)
+        {
+            [deadGoodGuys removeObject:s];
+        }
+        [deadGoodGuysKilledByBombs removeAllObjects];
+    }
 }
 
 -(void) airstrike: (CCMenuItemImage *)airstrikePowerUp
@@ -5390,7 +5434,7 @@
         [MGWU logEvent:@"airstrikeUsed" withParams:params];
         
         bomber = [[Character alloc] initWithGoodHelicopterImage];
-        bomber.scale=.5;
+        bomber.scale=.6;
         
         bomber.position = ccp(-20, winSize.height * .85); //+ enemy.contentSize.height/2);
         [self addChild:bomber];
@@ -6443,7 +6487,7 @@
     NSLog(@"friendly fast shooter available = %d", [GameData sharedData].friendlyFastShooterAvailable);
     
     friendlyTankAvailable = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankAvailable"] boolValue];
-    friendlyTankFramecount = 1200;
+    friendlyTankFramecount = 1300;
     
     NSMutableDictionary* coinDict = [levelDictionary objectForKey:@"coin"];
     endgameCoinFramecount = 20 + [[coinDict objectForKey:@"endgameFrequency"] intValue];

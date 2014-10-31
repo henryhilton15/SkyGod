@@ -117,6 +117,8 @@
     int scenario3InterludeCounter;
     int startSpawnDelay;
     int coinMultiplier;
+    int scenario2PreludeCounter;
+    
     double friendlyFallSpeed;
 
     double explosionAnimationLength;
@@ -230,6 +232,8 @@
     BOOL wentToInGameShop;
     BOOL addedImmunityCounter;
     BOOL scenario3Interlude;
+    BOOL scenario2Prelude;
+    BOOL firstTimeCoin;
 
     
     CCLabelTTF *waveLabel;

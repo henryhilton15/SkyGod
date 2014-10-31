@@ -4745,6 +4745,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DCFA90EF13B4F6F7009DD35A /* BuildSettings-Debug-iOS.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/mgwuSDK.embeddedframework\"",
@@ -4757,7 +4758,7 @@
 				);
 				PRODUCT_NAME = "SkyGod-iOS";
 				PROVISIONING_PROFILE = "83BB7A02-1ACC-42FF-974E-98851E6F4FCB";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -4777,7 +4778,7 @@
 				);
 				PRODUCT_NAME = "SkyGod-iOS";
 				PROVISIONING_PROFILE = "83BB7A02-1ACC-42FF-974E-98851E6F4FCB";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

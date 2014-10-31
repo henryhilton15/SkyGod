@@ -650,7 +650,7 @@
         
         NSNumber* NSCoins = [[NSUserDefaults standardUserDefaults] objectForKey:@"coins"];
         int coins = [NSCoins intValue];
-        coins += 50000;
+        coins += 1000;
         NSNumber* newCoins = [NSNumber numberWithInt:coins];
         [MGWU setObject:newCoins forKey:@"coins"];
         NSLog(@"coins = %@", newCoins);

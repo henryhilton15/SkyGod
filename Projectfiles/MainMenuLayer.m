@@ -22,6 +22,7 @@
 {
 	if ((self = [super init]))
 	{
+        [[CCDirector sharedDirector] setDisplayStats:NO];
         
         winSize = [CCDirector sharedDirector].winSize;
 
