@@ -6488,6 +6488,7 @@
     
     friendlyTankAvailable = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankAvailable"] boolValue];
     friendlyTankFramecount = 1300;
+
     
     NSMutableDictionary* coinDict = [levelDictionary objectForKey:@"coin"];
     endgameCoinFramecount = 20 + [[coinDict objectForKey:@"endgameFrequency"] intValue];

@@ -66,7 +66,7 @@
 		<key>damage</key>
 		<integer>0</integer>
 		<key>speed</key>
-		<integer>-3</integer>
+		<integer>-2</integer>
 	</dict>
 	<key>enemyBomb</key>
 	<dict>

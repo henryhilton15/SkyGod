@@ -101,19 +101,17 @@
 	<key>enemyTank</key>
 	<dict>
 		<key>available</key>
-		<true/>
+		<false/>
 		<key>health</key>
-		<integer>150</integer>
-		<key>fallingHealth</key>
-		<integer>3</integer>
+		<integer>0</integer>
 		<key>spawnRate</key>
-		<integer>900</integer>
+		<integer>0</integer>
 		<key>damage</key>
-		<integer>60</integer>
+		<integer>0</integer>
 		<key>fallSpeed</key>
-		<integer>5</integer>
+		<integer>0</integer>
 		<key>attackFrequency</key>
-		<integer>50</integer>
+		<integer>0</integer>
 	</dict>
 	<key>coin</key>
 	<dict>
