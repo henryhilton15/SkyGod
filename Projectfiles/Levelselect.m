@@ -624,9 +624,16 @@
                 }
 
                 lock.position = ccp(posX,posY);
+                }
 
             }
-
+        
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"highestLevelUnlocked"] intValue] == 16)
+        {
+            CCSprite *lock17 = [CCSprite spriteWithFile:@"lock.png"];
+            [self addChild:lock17 z:5];
+            lock17.scale = .15;
+            lock17.position = ccp(col5, row3);
         }
 
     }
@@ -648,7 +655,6 @@
         [MGWU setObject:newCoins forKey:@"coins"];
         NSLog(@"coins = %@", newCoins);
         
-//
         [GameData sharedData].currentLevelSelected = 1;
         [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
     }
@@ -782,11 +788,13 @@
 }
 -(void) level17: (CCMenuItem *)menuItem
 {
-    if(17 <= highestLevelUnlocked)
-    {
-        [GameData sharedData].currentLevelSelected = 17;
-        [[CCDirector sharedDirector] replaceScene: (CCScene*)[[GameLayer alloc] init]];
-    }
+
+    
+    
+    
+    
+    
+    
 }
 -(void) level18: (CCMenuItem *)menuItem
 {

@@ -1158,7 +1158,7 @@
         
         coinslabel = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [coinslabel setString:[NSString stringWithFormat:@"coins:%d", [[MGWU objectForKey:@"coins"] intValue]]];
-        coinslabel.position = ccp(winSize.width * .7,winSize.height * .95);
+        coinslabel.position = ccp(winSize.width * .67,winSize.height * .95);
         coinslabel.color = ccBLACK;
         [self addChild:coinslabel z:4];
         
@@ -1231,14 +1231,14 @@
                                                               selectedImage: @"pause_btn.png"
                                                                      target:self
                                                                    selector:@selector(pauseMenu:)];
-        pauseButton.position = CGPointMake(winSize.width * .95, winSize.height * .93);
+        pauseButton.position = CGPointMake(winSize.width * .96, winSize.height * .93);
         pauseButton.scale = .7;
         
         CCMenuItemImage *shopButton = [CCMenuItemImage itemWithNormalImage:@"shop-button-n.png"
                                                              selectedImage: @"shop-button-d.png"
                                                                     target:self
                                                                   selector:@selector(shop:)];
-        shopButton.position = CGPointMake(winSize.width * .85, winSize.height * .93);
+        shopButton.position = CGPointMake(winSize.width * .85, winSize.height * .94);
         shopButton.scale = .5;
         
     
@@ -1994,9 +1994,9 @@
         
     }
     
-    if (currentLevelSelected == 15)
+    if (currentLevelSelected == 16)
     {
-        if(framecount%60 ==0)
+        if(framecount%60 == 0)
         {
             [self addFriendlyFastShooter];
             [self addFriendlyMelee];
@@ -2329,14 +2329,8 @@
                         [deadGoodGuys addObject:goodGuy];
                         if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
                         {
-                            if(((Character*)goodGuy).type == BIG_GOOD_GUY)
-                            {
-                                [[SimpleAudioEngine sharedEngine] playEffect:@"Xplosion.wav"];
-                            }
-                            else
-                            {
                                 [[SimpleAudioEngine sharedEngine] playEffect:@"friendly.wav"];
-                            }
+                    
                         }
                         [self explosion:goodGuy :explosionAnimationLength: NO];
                         if(((Character*)goodGuy).type == BIG_GOOD_GUY && Scenario2 == true)
@@ -2513,12 +2507,12 @@
                                 
                                 else if ((((Character*)badGuy).type) == BIG_MONSTER)
                                 {
-                                    [[SimpleAudioEngine sharedEngine] playEffect:@"Xplosion.wav"];
+                                    [[SimpleAudioEngine sharedEngine] playEffect:@"Xplode.wav"];
                                 }
                                 
                                 else if ((((Character*)badGuy).type) == BAD_HELICOPTER)
                                 {
-                                    [[SimpleAudioEngine sharedEngine] playEffect:@"Xplosion.wav"];
+                                    [[SimpleAudioEngine sharedEngine] playEffect:@"Xplode.wav"];
                                 }
                                 
                                 else
@@ -5251,15 +5245,12 @@
                 
                 if(CGRectIntersectsRect(badBottomRect,goodBulletBox) && abs(goodBullet.position.y - badBottom.position.y) < 45)
                 {
-                    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
-                    {
-                        [[SimpleAudioEngine sharedEngine] playEffect:@"Xplosion.wav"];
-                    }
-                    
+
                     if(((Character*)badBottom).type == BAD_BASE)
                     {
                         [self subtractBadBaseHealth:goodBullet];
                         NSLog(@"good bomb detection - subtract base health");
+
                     }
                     else
                     {
@@ -5914,7 +5905,7 @@
     
     NSNumber* NSHighestLevelUnlocked = [[NSUserDefaults standardUserDefaults] objectForKey:@"highestLevelUnlocked"];
     int highestLevelUnlocked = [NSHighestLevelUnlocked intValue];
-    if(currentLevelSelected == highestLevelUnlocked)
+    if(currentLevelSelected == highestLevelUnlocked && highestLevelUnlocked < 16)
     {
         highestLevelUnlocked++;
         NSNumber *newHighestLevelUnlocked = [NSNumber numberWithInt:highestLevelUnlocked];
@@ -5930,10 +5921,6 @@
 {
     if(immunity == false && waveChanging == false)
     {
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
-        {
-            [[SimpleAudioEngine sharedEngine] playEffect:@"Xplosion.wav"];
-        }
         
         (((Character*)goodBase).health) -= ((Character*)fightingDevil).power;
         int healthCount = (((Character*)goodBase).health);
@@ -5978,6 +5965,10 @@
             NSLog(@"called good base explosion, goodBaseExploded = true");
             [self explosion:goodBase :1.5 :YES];
             goodBaseExploded = true;
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+            {
+                [[SimpleAudioEngine sharedEngine] playEffect:@"Xplode.wav"];
+            }
         }
     }
 }
@@ -5994,11 +5985,7 @@
         else
         {
             [badBaseHealthLabel setString:[NSString stringWithFormat:@"0"]];
-        }
-
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
-        {
-            [[SimpleAudioEngine sharedEngine] playEffect:@"Xplosion.wav"];
+            
         }
     
         if(((Character*)badBase).health < (enemyBaseStartingHealth/2) && ((Character*)badBase).health >= (enemyBaseStartingHealth/4) && badBaseImageChangeCount == 0)
@@ -6033,6 +6020,10 @@
             NSLog(@"called bad base explosion, badBaseExploded = true");
             [self explosion:badBase :0.35 :YES];
             badBaseExploded = true;
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+            {
+                [[SimpleAudioEngine sharedEngine] playEffect:@"Xplode.wav"];
+            }
 //            int delayInSeconds = 1.5;
 //            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
 //                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -6452,7 +6443,8 @@
     NSLog(@"friendly fast shooter available = %d", [GameData sharedData].friendlyFastShooterAvailable);
     
     friendlyTankAvailable = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyTankAvailable"] boolValue];
-    friendlyTankFramecount = 200;
+
+    friendlyTankFramecount = 1200;
     
     NSMutableDictionary* coinDict = [levelDictionary objectForKey:@"coin"];
     endgameCoinFramecount = 20 + [[coinDict objectForKey:@"endgameFrequency"] intValue];
@@ -6479,7 +6471,7 @@
     [self removeChild:coinslabel];
     coinslabel = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
     [coinslabel setString:[NSString stringWithFormat:@"coins:%d", [[MGWU objectForKey:@"coins"] intValue]]];
-    coinslabel.position = ccp(winSize.width * .7,winSize.height * .95);
+    coinslabel.position = ccp(winSize.width * .67,winSize.height * .95);
     coinslabel.color = ccBLACK;
     [self addChild:coinslabel z:4];
 }

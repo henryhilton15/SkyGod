@@ -350,7 +350,7 @@
         
         shooterPrice = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         int shooterLevel = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"] intValue];
-        if(shooterLevel == 3)
+        if(shooterLevel == 4)
         {
             [shooterPrice setString:[NSString stringWithFormat:@"MAX"]];
         }

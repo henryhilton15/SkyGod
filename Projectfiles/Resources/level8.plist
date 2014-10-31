@@ -118,7 +118,7 @@
 		<key>gameplayFrequency</key>
 		<integer>-750</integer>
 		<key>endgameFallSpeed</key>
-		<real>3.5</real>
+		<integer>4</integer>
 		<key>endgameFrequency</key>
 		<integer>-5</integer>
 		<key>endgameCoinTotal</key>
