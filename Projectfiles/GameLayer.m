@@ -1158,7 +1158,7 @@
         
         coinslabel = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         [coinslabel setString:[NSString stringWithFormat:@"coins:%d", [[MGWU objectForKey:@"coins"] intValue]]];
-        coinslabel.position = ccp(winSize.width * .7,winSize.height * .95);
+        coinslabel.position = ccp(winSize.width * .67,winSize.height * .95);
         coinslabel.color = ccBLACK;
         [self addChild:coinslabel z:4];
         
@@ -1231,14 +1231,14 @@
                                                               selectedImage: @"pause_btn.png"
                                                                      target:self
                                                                    selector:@selector(pauseMenu:)];
-        pauseButton.position = CGPointMake(winSize.width * .95, winSize.height * .93);
+        pauseButton.position = CGPointMake(winSize.width * .96, winSize.height * .93);
         pauseButton.scale = .7;
         
         CCMenuItemImage *shopButton = [CCMenuItemImage itemWithNormalImage:@"shop-button-n.png"
                                                              selectedImage: @"shop-button-d.png"
                                                                     target:self
                                                                   selector:@selector(shop:)];
-        shopButton.position = CGPointMake(winSize.width * .85, winSize.height * .93);
+        shopButton.position = CGPointMake(winSize.width * .85, winSize.height * .94);
         shopButton.scale = .5;
         
     
@@ -6470,7 +6470,7 @@
     [self removeChild:coinslabel];
     coinslabel = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
     [coinslabel setString:[NSString stringWithFormat:@"coins:%d", [[MGWU objectForKey:@"coins"] intValue]]];
-    coinslabel.position = ccp(winSize.width * .7,winSize.height * .95);
+    coinslabel.position = ccp(winSize.width * .67,winSize.height * .95);
     coinslabel.color = ccBLACK;
     [self addChild:coinslabel z:4];
 }

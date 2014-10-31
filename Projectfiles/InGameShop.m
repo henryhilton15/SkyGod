@@ -215,7 +215,7 @@
         purchased.color = ccBLUE;
         
         //shop label
-        shopInstructions = [CCLabelTTF labelWithString:@"tap to buy/upgrade!" fontName:@"BenguiatItcTEE-Book" fontSize:18];
+        shopInstructions = [CCLabelTTF labelWithString:@"tap to buy!" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         shopInstructions.position = ccp(upperLeftX, upperLeftY);
         shopInstructions.color = ccBLUE;
         [self addChild:shopInstructions];
@@ -348,7 +348,7 @@
         
         shooterPrice = [CCLabelTTF labelWithString:@"" fontName:@"BenguiatItcTEE-Book" fontSize:18];
         int shooterLevel = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"] intValue];
-        if(shooterLevel == 3)
+        if(shooterLevel == 4)
         {
             [shooterPrice setString:[NSString stringWithFormat:@"MAX"]];
         }
@@ -517,7 +517,7 @@
     NSNumber *NSRank = [[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterRank"];
     int rank = [NSRank intValue];
     int price = [[[NSUserDefaults standardUserDefaults] objectForKey:@"friendlyRegularShooterPrice"] intValue];
-    if(coins >= price && rank < 3)
+    if(coins >= price && rank < 4)
     {
         [GameData sharedData].friendlyRegularShooterAvailable = true;
         coins -= price;
