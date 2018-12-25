@@ -27,8 +27,8 @@
         {
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == true)
             {
-                [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"Undaunted.wav"];
-                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Undaunted.wav" loop:YES];
+                [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"Undaunted.mp3"];
+                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Undaunted.mp3" loop:YES];
             }
         }
 

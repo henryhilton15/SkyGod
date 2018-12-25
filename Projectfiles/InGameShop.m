@@ -67,15 +67,6 @@
         
         highestLevelUnlocked = [[[NSUserDefaults standardUserDefaults] objectForKey:@"highestLevelUnlocked"] intValue];
         
-        if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying])
-        {
-            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == true)
-            {
-                [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"Undaunted.wav"];
-                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Undaunted.wav" loop:YES];
-            }
-        }
-        
         NSCoins = [MGWU objectForKey:@"coins"];
         coins = [NSCoins intValue];
         

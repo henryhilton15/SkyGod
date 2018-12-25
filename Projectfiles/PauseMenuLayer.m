@@ -187,8 +187,8 @@
     
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == true)
     {
-        [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:(@"The Descent.wav")];
-        [[SimpleAudioEngine sharedEngine] playBackgroundMusic:(@"The Descent.wav") loop:YES];
+        [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:(@"The Descent.mp3")];
+        [[SimpleAudioEngine sharedEngine] playBackgroundMusic:(@"The Descent.mp3") loop:YES];
     }
     
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == false)

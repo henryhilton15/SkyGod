@@ -89,8 +89,8 @@
         {
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == true)
             {
-                [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"Undaunted.wav"];
-                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Undaunted.wav" loop:YES];
+                [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"Undaunted.mp3"];
+                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Undaunted.mp3" loop:YES];
             }
         }
         
@@ -817,6 +817,11 @@
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
         
         [self successfulPurchase];
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+        {
+            [[SimpleAudioEngine sharedEngine] playEffect:@"chaChing.wav"];
+            
+        }
     }
     
     else
@@ -849,6 +854,11 @@
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
         
         [self successfulPurchase];
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+        {
+            [[SimpleAudioEngine sharedEngine] playEffect:@"chaChing.wav"];
+            
+        }
     }
     
     else
@@ -880,6 +890,11 @@
         [coinsLabel setString:[NSString stringWithFormat:@"coins:%d", coins]];
         
         [self successfulPurchase];
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+        {
+            [[SimpleAudioEngine sharedEngine] playEffect:@"chaChing.wav"];
+            
+        }
     }
     
     else
@@ -907,6 +922,13 @@
         failedUpgradeCounter = 0;
         [self removeChild:cantAffordThat];
     }
+    
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+    {
+        [[SimpleAudioEngine sharedEngine] playEffect:@"chaChing.wav"];
+        
+    }
+
 }
 
 -(void) successfulPurchase
@@ -927,6 +949,12 @@
         successfulUpgradeCounter = 0;
         [self removeChild:upgraded];
     }
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+    {
+        [[SimpleAudioEngine sharedEngine] playEffect:@"chaChing.wav"];
+        
+    }
+
 }
 
 -(void) failedUpgrade
@@ -946,6 +974,11 @@
         displayingSuccessfulUpgrade = false;
         successfulUpgradeCounter = 0;
         [self removeChild:upgraded];
+    }
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"sfx"] boolValue] == true)
+    {
+        [[SimpleAudioEngine sharedEngine] playEffect:@"deny.wav"];
+        
     }
 }
 

@@ -31,8 +31,8 @@
         {
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"music"] boolValue] == true || [[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimeMusic"] boolValue] == false)
             {
-                [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"Undaunted.wav"];
-                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Undaunted.wav" loop:YES];
+                [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic:@"Undaunted.mp3"];
+                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Undaunted.mp3" loop:YES];
             }
         }
         
@@ -116,12 +116,12 @@
         myMenu.position = ccp(winSize.width/2,0);
         [self addChild:myMenu z:2];
         
-        CCMenuItemImage *DevButton = [CCMenuItemImage itemWithNormalImage:@"Developer.png"
-                                                              selectedImage: @"Developer.png"
+        CCMenuItemImage *DevButton = [CCMenuItemImage itemWithNormalImage:@"devButton.png"
+                                                              selectedImage: @"devButton.png"
                                                                      target:self
                                                                    selector:@selector(aboutLayer:)];
-        DevButton.scale=0.25;
-        DevButton.position = CGPointMake(winSize.width - 40, 35);
+        DevButton.scale=.8;
+        DevButton.position = CGPointMake(winSize.width - 50, 30);
         
         myMenu1 = [CCMenu menuWithItems:DevButton, nil];
         myMenu1.position = ccp(0,0);
